@@ -53,6 +53,21 @@
           "target": "aarch64-unknown-linux-gnu",
           "ownership": "generated"
         }
+      ],
+      "commands": [
+        {
+          "id": "Decode",
+          "inputs": [
+            {
+              "name": "raw",
+              "type": "example.sensor/RawSample"
+            }
+          ],
+          "resultType": "example.sensor/Measurement",
+          "errorType": "example.sensor/DecodeError",
+          "effects": [],
+          "domain": "io-worker"
+        }
       ]
     }
   ],
@@ -84,6 +99,16 @@
         {
           "name": "valid",
           "type": "Bool"
+        }
+      ]
+    },
+    {
+      "typeId": "example.sensor/DecodeError",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "code",
+          "type": "U32"
         }
       ]
     }
