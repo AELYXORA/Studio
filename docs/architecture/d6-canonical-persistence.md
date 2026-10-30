@@ -31,20 +31,19 @@ The initial **candidate** canonical representation is deterministic UTF-8 JSON, 
 
 A standalone **reference-fixture-only** canonical input and expected digest is specified in [Canonical Vectors](../../examples/architecture-sensor/d2-canonical-vectors.json). The semantic projection's retiredIdentity tuples are sorted by (kind,scopeId,id), included even when the ledger is empty; general source label and ViewRevision are excluded. Test vectors are design artifacts: independent hash implementations and native parser agreement will be required later. Until reference vectors are reviewed, the above algorithm is a **candidate**, not an accepted wire format.
 
-## P2. Package and file identity
+## P2. Package identity, snapshot index and head checksum (proposal)
 
-An exact package content identity is not merely packageId/version. The package digest covers canonical manifest representation and all declared content files in an explicit inventory. The proposed file-set frame is:
+The precise candidate package file-set framing and portable path policy are owned by [D6 Package Integrity](d6-package-integrity.md). Package content is one canonical manifest at component.auipkg.json plus exactly declared source files, sorted by path UTF-8 bytes. The package digest is SHA-256 over the domain-separated length-framed stream. The package lock binds exact packageId, packageVersion, sourceRoot locator, digest, dependency closure and target metadata; no fake sensor lock exists while source files are absent. SHA-256 is an integrity mechanism relative to a trusted value, not publisher authenticity.
 
-    domain: AELYXORA/package-files/v1 + NUL
-    for each sorted path:
-      u64-be(pathUtf8ByteCount) || pathUtf8 ||
-      u64-be(fileByteCount) || sha256(rawFileBytes)
+A *snapshot* contains a canonical project manifest, committed lock, source bytes, view bytes and a canonical immutable index. Source file hash is SHA-256 over **exact bytes**, including whitespace. The index is canonical UTF-8 JSON conforming to the candidate [Snapshot Index Schema](../../schemas/project-snapshot-index.schema.json). It records semanticGraphDigest, graphRevision, projectManifestDigest, lockDigest, per-file source/view byte digests and a retiredIdentityDigest. Proposed retiredIdentityDigest is SHA-256 over the canonical JSON byte encoding of the retiredIdentities array, including the empty array. No native pointer or runtime ticket is serialized.
 
-The package manifest participates as the canonical file inventory entry with the **exact canonical manifest bytes**, not a recursive digest field. Paths are relative UTF-8, separated by forward slash, cannot be empty/absolute/dot-dot, cannot traverse a symlink or case-fold collide on the target filesystem. The hash of an empty collection is well-defined but an empty executable package is rejected if required sources are absent. The lockfile records packageId, exact packageVersion, contentDigest, supported targets, sourceRoot and dependency closure. **Verify package content before semantic graph hashing.**
+**Candidate snapshotDigest = SHA-256 of ASCII AELYXORA/snapshot-index/v1, one NUL, and exact P1-canonical index.json bytes.** The index must not contain its own snapshotDigest field, preventing self-reference. All referenced bytes MUST be present and verified before a HEAD may be used. SnapshotDigest is different from semanticGraphDigest and packageContentDigest. The index's viewFiles lists *committed immutable* view file bytes; a mutable top-level views/ cache can never supersede the index.
 
-For each project source, store exact SHA-256 of its bytes. The snapshot includes the immutable source inventory, package lock hash, canonical graph hash and target metadata. Full snapshot identity is a different digest from semanticGraphDigest; a formatting change to ASM or AUI source changes source digest and snapshot identity even if architecture semantics are unchanged.
+**Candidate HEAD checksum = SHA-256 of ASCII AELYXORA/head-record/v1, one NUL, and the P1-canonical HEAD object omitting only checksum.** The HEAD includes projectId, headFormat, epoch, graphRevision, semanticGraphDigest, snapshotDigest and predecessorEpoch, while its checksum property stores that lowercase hex value. A HEAD checksum is only an accidental/tamper-evident integrity check when compared against a trusted root, not a signature or proof of durability. Independent HEAD records can be coherent by internal checksum yet point to missing/corrupted snapshots; recovery must verify *both*.
 
-**Known outstanding choices:** exact manifest canonicalization profile, binary framing test vectors, source-file inclusion/exclusion, platform path casefold model and package-signing authenticity. SHA-256 supplies integrity relative to a trusted expected digest, not proof of publisher authenticity.
+[Exact package/snapshot/HEAD codec vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) include a synthetic codec-only miniature whose project manifest and lock intentionally lack complete graph semantics, and a non-runnable source byte sequence. They verify representation and hashing **only**. The full sensor project is not valid as a locked build without its absent source files. The next gate must add full end-to-end valid snapshot vectors and externally verified digest compatibility.
+
+**Open:** complete snapshot inventory normalization, source-root security, package export contract digest and signing, graph/source/view revision tracking, lock canonicalization, full persistence schema and verified host filesystem capability.
 
 ## P3. Semantic GraphRevision versus ViewRevision
 
@@ -65,11 +64,11 @@ For each project source, store exact SHA-256 of its bytes. The snapshot includes
       snapshots/<snapshotDigest>/project.auiproj.json
       snapshots/<snapshotDigest>/sources/...
       snapshots/<snapshotDigest>/package-lock.json
-      views/ (optional independently versioned presentation material)
+      views/ (optional derived working-view cache; NOT authoritative)
       staging/<uniqueOperationId>/...
       .aui/ (derived caches, never authoritative)
 
-A HEAD record contains projectId, headFormat, epoch (monotonic), graphRevision, semanticGraphDigest, snapshotDigest, predecessorEpoch and a SHA-256 **checksum of all other canonical head fields**. Proposed checksum input: ASCII **AELYXORA/head-record/v1**, one zero byte, followed by the P1-canonical UTF-8 JSON object formed by omitting only the checksum property. Proposed [HEAD structural schema](../../schemas/project-head.schema.json) validates shape, not checksum, filesystem durability or snapshot trust. The exact domain and checksum procedure remain Proposed until independent vector agreement. The record itself is canonical JSON; any torn/truncated/mismatched record is invalid. Current valid HEAD is the highest-epoch record whose snapshot inventory and content hashes verify, unless a separate explicit rollback decision is required.
+A HEAD record contains projectId, headFormat, epoch (monotonic), graphRevision, semanticGraphDigest, snapshotDigest, predecessorEpoch and a SHA-256 checksum of all other canonical head fields; see the exact P2 candidate frame and [integrity vectors](../../examples/architecture-sensor/d6-integrity-vectors.json). Proposed [HEAD structural schema](../../schemas/project-head.schema.json) validates shape, not checksum, filesystem durability or snapshot trust. The exact domain and checksum procedure remain Proposed until independent vector agreement. The record itself is canonical JSON; any torn/truncated/mismatched record is invalid. Current valid HEAD is the highest-epoch record whose snapshot inventory and content hashes verify, unless a separate explicit rollback decision is required.
 
 **Commit protocol from revision N to N+1:**
 1. Hold one local project writer lease. Capture expectedGraphRevision, expectedSemanticDigest and expected source hashes; validate the full change set against immutable N and locked package content. A stale condition fails without writing a HEAD.
@@ -113,13 +112,15 @@ See [30 designed crash and recovery scenarios](../../examples/architecture-senso
 ## P6. Cross-gate acceptance blockers
 
 Before declaring D6 design accepted:
-1. Freeze exact JSON scalar constraints and unknown-field/extension rules for all semantic model fields.
+1. Freeze exact JSON scalar constraints, Unicode/escape form, integer limits, unknown fields and extension rules for all semantic model fields.
 2. Freeze the list of semantically unordered arrays and decide how nested types, hardware constraints and generic extensions are canonicalized.
 3. Produce externally independently verified canonical JSON, SHA-256 and package-framing reference vectors with positive **and** negative cases.
 4. Finalize the complete project manifest/index/HEAD schemas, source inventory and tombstone persistence rules.
-5. Prove a portable implementation strategy for selected first host filesystem and atomic/flush semantics; define concurrent writers and OS crash behavior.
+5. Qualify the selected host's filesystem adapter per [D6 Filesystem Adapters](d6-filesystem-adapters.md), including atomic/flush semantics, concurrent writers and recovery behavior; actual crash proof remains Phase III.
 6. Define migration/rollback/incomplete commit recovery through explicit state-machine fixtures; provide crash cut-points.
 7. Review source ownership, permission paths, symlink/case collisions, lockfile signing/authenticity and secrets exclusion.
 8. Record architect approval. Native crash testing and power-loss evidence remain **Phase III**, not a fabricated design-stage pass.
 
 D2 graph CAS cannot claim durable atomicity until these conditions are satisfied. This document deliberately distinguishes **a precise proposal** from **an implemented and verified guarantee**.
+
+**Filesystem boundary:** [Windows/Linux adapter capability matrix](d6-filesystem-adapters.md) explains why file rename/flush documentation alone cannot prove cross-platform power-loss durability. [D6 Package Integrity](d6-package-integrity.md) owns package path and hash rules; no executable package or confirmed durable save exists.
