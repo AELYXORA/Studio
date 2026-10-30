@@ -13,7 +13,7 @@ Every definition declares canonical type ID `aui.core/<Name>`, semantic version,
 | VStack | spacing: Length >= 0, alignment: CrossAlignment, padding: Insets | children: View[0..N] | pure layout |
 | HStack | spacing, alignment, padding | children: View[0..N] | pure layout |
 | Text | value: String, style: TextStyle, maxLines: Optional<U32> | no children; semantic text value | layout + text renderer |
-| Button | title: String, enabled: Bool=true, accessibilityLabel: String | activated: Event<Unit>; no children in v0.1 | input -> typed command |
+| Button | title: String, enabled: Bool=true, accessibilityLabel: String | activated: Event<Unit>; no children in the current draft | input -> typed command |
 | Toggle | value: Bool, enabled: Bool=true, label: String | editRequested: Event<Bool>; no children | intent, then authorized state update |
 | TextField | value: String, placeholder: String, enabled: Bool=true | editRequested: Event<String>, commitRequested: Event<String> | IME/text capability gated |
 | ArchitectureNode | nodeId: GraphNodeID, selected: Bool, status: DiagnosticStatus | selected: Event<GraphNodeID> | Studio-only map adapter |
