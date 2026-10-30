@@ -42,7 +42,7 @@ These rows document corrections in the proposal. **Do not mark them Accepted sol
 | P0-06 | Package lock export registry and dependency-version conflict | Exact digest-verified package files; one version per packageId for first slice; sorted unique export identities | 'ResolvedType' may select ambiguous or stale bytes |
 | P0-07 | HEAD/index operationId and duplicate save reconciliation | HEAD and index bind the same last commit operationId; genesis null | A crash after commit but before acknowledgement can trigger duplicate publication |
 | P0-08 | Durable idempotency history across more than last two HEAD slots | Choose bounded persistent operation ledger or explicitly unsupported historical replay; do not promise unlimited idempotency | OperationId replay semantics currently incomplete |
-| P0-09 | Exact on-disk schema and HEAD/index canonical bytes | Formalize required fields, checksum frame, snapshot manifest/lock inventory, source/view revisions and retention rules | A crash-safe snapshot cannot be declared design-complete |
+| P0-09 | Exact on-disk schema and HEAD/index canonical bytes | Formalize required fields, checksum frame, snapshot manifest/lock inventory, immutable packageObjects, source/view revisions and retention rules | A crash-safe snapshot cannot be declared design-complete |
 | P0-10 | First host/FS durable publication profile | Candidate: Windows x64 Studio with qualified local NTFS; Linux x86-64 separate bootstrap adapter. **Actual durability unverified** | Atomic/durable save strategy not anchored to one real host |
 | P0-11 | Reparse/symlink/TOCTOU, case collisions and writer lease | Handle-relative safe path access + sourceRoot containment; reject unsafe storage classes | Package and snapshot path escape risks |
 | P0-12 | Recovery degradation and retention | Two HEAD slots, retain prior verified snapshots, never silently roll back corruption; stop on two invalid slots | Ambiguous data-loss and garbage collection behavior |
@@ -57,7 +57,7 @@ These rows document corrections in the proposal. **Do not mark them Accepted sol
 **Gaps still requiring specification decisions and concrete examples:**
 - Complete field-by-field semantic graph projection for real sensor graph (not just tiny shape-only vectors) with nominal type dependencies, capability sets, hardware resource maps, and target exactness.
 - Core type registry version, field/enum/generic layout/recursion; target-compatible export projection and ABI bridge. D3/D4 ownership of those rules must be explicit.
-- Real package fixture with **existing** declared ASM source bytes, a valid lockfile and full snapshot index/HEAD, for design-time byte/hash conformance. Current sensor package declares absent ASM files and cannot be locked or executed.
+- Real package fixture with **existing** declared ASM source bytes, a valid lockfile, immutable pinned packageObjects and full snapshot index/HEAD, for design-time byte/hash conformance. Current sensor package declares absent ASM files and cannot be locked or executed.
 - JSON parser canonical unicode escape policy, numeric bounds and maximum input/entity limits per first host, with false/negative vectors; package extra resources/fixtures handling.
 - Exact source ownership, atomic workspace writer lease, operationId persistence beyond two HEAD slots, duplicate operation replay policy.
 - HEAD crash/recovery proofs per selected platform filesystem, including directory durability on Linux and NTFS replacement/write-through on Windows. This is Phase III runtime evidence and cannot be accepted as already run during documentation.
@@ -91,3 +91,7 @@ These rows document corrections in the proposal. **Do not mark them Accepted sol
                before any new product implementation
 
 This review must never be presented as a D2/D6 approval or a production guarantee.
+
+## BR7 — Additional recoverability consistency finding (proposed)
+
+**R-09:** A lock digest and package content digest are not a durable copy of package source bytes. The candidate snapshot index now lists packageObjects (exact packageId/contentDigest), retained in a verified immutable object store; any package object referenced by committed HEAD ancestry or a pinned runtime execution is protected from garbage collection. An index with packageObjects=[] is valid only for a codec-only or genuinely no-dependency project, not for the sensor package. This fixes a **documentation-level recoverability gap**, but actual store/publishing, garbage collection and OS durability remain P0 and Phase III proof obligations.
