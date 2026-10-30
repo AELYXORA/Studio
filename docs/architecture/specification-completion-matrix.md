@@ -45,7 +45,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 
 ## D2 — Canonical Project Graph, workflows and data flows
 
-**Authority:** [Project Graph](project-graph.md), [Graph Behavior — Workflows and Data Flows](graph-behavior-contract.md), [Project Graph ↔ AUI](project-graph-aui-contract.md), [Graph Validation](graph-validation-and-migration.md), [Project Format](project-and-package-format.md). **Current status: Proposed/Open.**
+**Authority:** [Project Graph](project-graph.md), [Graph Behavior — Workflows and Data Flows](graph-behavior-contract.md), [D2 Execution and Consistency](d2-execution-consistency.md), [Project Graph ↔ AUI](project-graph-aui-contract.md), [Graph Validation](graph-validation-and-migration.md), [Project Format](project-and-package-format.md). **Current status: Proposed/Open.**
 
 | ID | Required design closure | Evidence fixture |
 | --- | --- | --- |
@@ -60,7 +60,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 | D2-09 | Deterministic diagnostics with code, graph ID, target, source/path, actual/expected values | Compare expected failures and diagnostic ordering |
 | D2-10 | Package resolution and exact type/export identity across source and graph | Correctly pinned export; missing lock; duplicate export |
    
-**P0 open:** 'hosts' is now a *proposed* physical-topology relation with explicit scope, not architect-accepted; workflow/data-flow JSON *candidate* and negative fixtures exist, but formal event/command linkage, stable identity normalization, runtime arbitration, persistence/hashed representation and native semantic verification are unresolved. No D2 gate is accepted.
+**P0 open:** 'hosts' and stable IDs remain architect-unaccepted; candidate JSON now includes bounded per-instance FIFO, typed signals and staged cancellation semantics. D2 Execution and Consistency proposes dispatch/ownership and CAS rules, but exact native ABI atomics, target resource budgets, canonical hashes, durable journal and full provider linkage remain unresolved. No D2 gate is accepted; no native semantic or runtime verification is claimed.
 
 ## D3 — AUI source language and user-facing declarative semantics
 
@@ -198,3 +198,5 @@ No sign-off is recorded yet. Until the user accepts the relevant baseline, the p
 ## D2 documentation pass (proposal, not gate completion)
 
 The [Graph Behavior Contract](graph-behavior-contract.md) now gives proposed definitions of workflow state machines, typed channel bindings, ownership, overflow, diagnostic precedence, graph revision isolation and topology edge kinds. The example sensor project/package and JSON Schemas were extended with draft `workflows`, `dataFlows` and `commands`; [D2 invalid cases](../../examples/architecture-sensor/d2-invalid-cases.json) specify expected diagnostics. **These are not accepted or native-validated.** Pending architecture decisions and later phase-dependent tests remain listed under D2 and the owning specifications.
+
+**D2 pass update (2026-10-30):** [Execution and Consistency](d2-execution-consistency.md) proposes ordering, bounded admission, command tickets, cancellation, ownership and graph CAS. The [sensor runtime test design](../../examples/architecture-sensor/d2-runtime-scenarios.md) contains 18 expected scenarios, all **NOT-RUN**. These are design artifacts, not sign-off.
