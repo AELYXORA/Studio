@@ -72,3 +72,8 @@ Visual definitions are static descriptions, not necessarily heap widget objects.
 ## Open before acceptance
 
 Exact Length/TextStyle types, command-handler AUI syntax, generic constraint grammar, event gesture normalization, Timer monotonic clock details, accessibility adapter API, widget-specific implementation status and canonical binary descriptors. This is a **design contract**, not a feature list marked as available.
+
+
+## Event attachment contract (design candidate)
+
+`Button` exports `activated: Event<Unit>`. A parent may attach `.on(activated: inspect)` where `inspect` is its declared `Event<Unit>`; the AUI AST resolves both symbols and checks payload identity. A `Toggle` exposes `editRequested: Event<Bool>`, and a `TextField` exposes typed edit and commit events; neither mutates bound state directly. See [Event and Binding Semantics](aui-event-binding-semantics.md). This syntax is proposed; it is not a running widget API.
