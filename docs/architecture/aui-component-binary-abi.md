@@ -21,6 +21,10 @@ Every descriptor has explicit bounds and version validation before dereference. 
 
 Allocator capability supports allocate(size, alignment, region) and release(handle, generation); allocation failures return typed errors, never unwinding over Assembly boundaries. Borrowed input is valid only during the call unless a lease is explicitly negotiated. Owned-input transfer happens only upon accepted invocation. Owned outputs carry a matching allocator/release rule. Shared buffers need synchronization; DMA and MMIO are separate hardware capabilities, not ordinary byte spans. Invalid or stale generation handles fail without accessing resources.
 
+## Concurrency / resource contract linkage
+
+The logical [D2 Execution and Consistency](d2-execution-consistency.md) defines owner retention on rejected move, copy cleanup, generation checks, cancellation as request, and pinned graph snapshots. The native ABI must later prove exact descriptor offsets, atomic terminal publication, allocator compatibility, and no callback-after-release on every target. Do not infer that an architecture model commit can atomically commit network/device effects. The `cancelling` state in the sensor *workflow* is not automatically a new ABI TaskTicket terminal state.
+
 ## Async and cancellation
 
 Task states are created, queued, running, completed, failed or cancelled. Cancellation-requested is a **flag**, not an automatic terminal state. Completion and cancellation race for one terminal outcome; publish at most once. Device work that cannot be physically stopped must retain ownership of its buffers until completion/cleanup. Completion for a former view/component generation must not mutate its replacement. Subscriptions require unsubscribe and drain semantics to prevent callback-after-destroy.
