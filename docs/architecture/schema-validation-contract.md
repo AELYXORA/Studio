@@ -24,3 +24,6 @@ The [sensor project](../../examples/architecture-sensor/project.auiproj.json) an
 The fixtures still contain placeholder `schemaVersion: "0.1-draft"` and package/contract version `"0.1.0"`; these are example compatibility tokens, **not product or document releases**. Decide actual schema revision rules and dependency identity before freezing the format. Source paths in the package currently point to files not present, so it is deliberately not buildable.
 
 Missing formal checks include schema size limits, JSON duplicate keys, canonical JSON/hash algorithm, identifier normalization, package graph cycles, type aliasing, source path/symlink escape, duplicate resource ownership, migration and crash-safe multi-file commit. Mark them **open**, not verified.
+
+
+[Package Resolution and Reproducible Build Contract](package-resolution-build.md) defines offline locked dependency resolution, digest design, target checks and reproducibility gates. [Proposed lockfile schema](../../schemas/package-lock.schema.json). No fabricated lockfile or verified build.
