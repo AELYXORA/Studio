@@ -1,0 +1,18 @@
+{
+  "format": "aui.project-view",
+  "schemaVersion": "0.1-draft",
+  "viewId": "main",
+  "viewRevision": 0,
+  "positions": [
+    {
+      "nodeId": "source",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "nodeId": "consumer",
+      "x": 240,
+      "y": 0
+    }
+  ]
+}
