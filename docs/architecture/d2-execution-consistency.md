@@ -125,6 +125,8 @@ Diagnostics include target, graph/workflow/execution identity, event/ticket orig
 **Unresolved P0 dependencies:** exact signal export format and operation provider schema; runtime scheduler/admission and atomics; ABI buffer layouts and platform allocator; resource budgets per target; D6 canonical digest and durable journal; target isolation and permission token semantics. The design is proposed but does not close D2 or D4/D5/D6 by itself.
 
 
+**Open persistence dependency:** [D2/D6 Baseline Review](d2-d6-baseline-review.md) identifies operationId idempotency outside retained HEAD slots as unresolved. Runtime CommandTicket IDs are never the same thing as durable graph-save operation IDs; neither snapshot nor HEAD replays hardware/OS effects after a crash. Exact locked package implementation identity is separate from [logical exported contract identity](d2-export-contract-identity.md).
+
 ## E8 — Canonical identity and durable boundary (cross-gate proposal)
 
 [D2 Identity](d2-identity-and-type-resolution.md) separates GraphRevision, TypeID, SourceSpan, ExecutionID and ViewRevision. [D6 Canonical Persistence](d6-canonical-persistence.md) proposes immutable snapshots and two validated HEAD slots. A valid in-memory CAS is **not** evidence that a multi-file save survived power loss. Running commands pin an old validated graph/lock, but their transient tickets are **not persisted or replayed** by the D6 snapshot protocol. On reopen, the newest verified committed graph definition may be loaded; the fate of an external operation that was in-flight before crash stays **unknown**, requiring explicit user/operator reconciliation.
