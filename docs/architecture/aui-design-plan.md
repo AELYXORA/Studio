@@ -60,3 +60,6 @@ These remain **proposed**. Before freezing them, define precise binary layouts, 
 
 
 Component catalog design: [AUI Component Framework](component-framework.md) (proposed).
+
+
+[AUI Syntax and Semantics v0.1](aui-syntax-v0.1.md) defines the current proposed extended grammar and rules for state, events, commands, bindings, tasks and modifiers. Syntax is not frozen or implemented.
