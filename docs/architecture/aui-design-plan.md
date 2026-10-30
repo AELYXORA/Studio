@@ -95,3 +95,7 @@ Component catalog design: [AUI Component Framework](component-framework.md) (pro
 
 
 [Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
+
+## D3 first-slice documentation pass (proposed)
+
+[D3 First Language Profile](d3-first-language-profile.md) defines a bounded L0/L1 grammar and lexical contract; [D3 Type/Binding Profile](d3-type-and-binding-profile.md) defines the minimal core registry; [D3 Event Delivery](d3-event-delivery-and-command-linkage.md) specifies one-handler typed event routing and the explicit graph link-map. [Pure View L0](../../examples/aui-language/status-panel-l0.aui), [Typed Intent L1](../../examples/aui-language/linked-consumer-panel.aui) and [28 negative diagnostic scenarios](../../examples/aui-language/d3-first-profile-negative-cases.json) are design-only. Full broader D3 grammar, production core types, ABI, D5 renderer and native tests remain OPEN.
