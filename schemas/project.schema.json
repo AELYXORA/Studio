@@ -721,6 +721,41 @@
           }
         }
       }
+    },
+    "retiredIdentities": {
+      "type": "array",
+      "description": "D2 candidate tombstone ledger; unique tuple (kind,scopeId,id) enforced by semantic validator",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "scopeId",
+          "id"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "node",
+              "edge",
+              "port",
+              "workflow",
+              "state",
+              "transition",
+              "signal",
+              "data-flow"
+            ]
+          },
+          "scopeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          }
+        }
+      }
     }
   },
   "additionalProperties": false
