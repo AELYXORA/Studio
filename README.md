@@ -34,3 +34,5 @@ Only an experimental Linux x86-64 Assembly UI-tree validator with manual local t
 - [Assembly-first toolchain](docs/architecture/assembly-first.md)
 
 **Documentation policy:** architecture README is canonical, roadmap contains observable milestones, other documents support implementation. No GitHub Actions / CI before release preparation.
+
+- [Complete Studio platform contract — roles, workflows, palettes, events, tasks, data flow, zero-cost goals](docs/architecture/studio-platform-contract.md)
