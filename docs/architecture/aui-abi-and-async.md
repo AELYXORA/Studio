@@ -1,6 +1,6 @@
 # AUI Component ABI and Async Commands
 
-**Status: proposed contract; no stable binary ABI released.** The existing `ax_ui_validate` is an isolated draft probe, not a frozen ABI for all components.
+**Status: proposed contract; no stable binary ABI released.** No component ABI implementation or released binary contract exists.
 
 ## Design goals
 
