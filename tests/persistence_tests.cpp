@@ -6,8 +6,13 @@ static void check(bool value){if(!value)std::abort();}
 int main(){
  const std::string source=R"({"schemaVersion":"0.1-draft","projectId":"app.test","name":"Test","targets":[{"id":"desktop","backend":"qt-qml"}],"modules":[{"id":"m","components":[{"id":"a","type":"ui.label"}]}]})";
  auto p=parse_project(source);check(p.has_value());
+ p->modules[0].components[0].property_definitions.push_back({"title",PropertyKind::Text,std::string("Default"),true});
+ p->modules[0].components[0].properties.emplace("title",std::string("Saved"));
  auto encoded=serialize_project(*p);check(encoded.has_value());
  auto roundtrip=parse_project(*encoded);check(roundtrip.has_value()&&roundtrip->id==p->id);
+ check(roundtrip->modules[0].components[0].property_definitions.size()==1);
+ check(std::get<std::string>(roundtrip->modules[0].components[0].properties.at("title"))=="Saved");
+ check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"x","name":"x","targets":[],"modules":[{"id":"m","components":[{"id":"a","type":"ui.label","propertyDefinitions":[{"name":"title","kind":"text","default":"ok"}],"properties":{"title":false}}]}]})").has_value());
  check(!parse_project("not json").has_value());
  check(!parse_project(R"({"schemaVersion":"future"})").has_value());
  check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"x","name":"x","targets":[],"modules":[],"unexpected":1})").has_value());
