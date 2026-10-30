@@ -53,3 +53,62 @@ Semantic role, label, focus, keyboard action and accessibility value are first-c
 ## Still open
 
 Final grammar, generic constraints, string interpolation, async syntax, immutable collection representation, source maps, binary module packaging and component version resolution. Freeze syntax only after parser + type-checker fixture comparisons.
+
+## Grammar draft (proposed, normative for examples only)
+
+This EBNF defines a **restricted design subset**. It is not yet a frozen compiler grammar. Identifiers are UTF-8 but normalization, reserved words and escaping need an explicit lexical decision.
+
+```ebnf
+module        = { importDecl }, { declaration } ;
+importDecl    = "import", qualifiedName, [ "@", version ], ";" ;
+declaration   = componentDecl | recordDecl | enumDecl ;
+componentDecl = "component", identifier, "(", [ parameters ], ")", "{",
+                { stateDecl | derivedDecl | actionDecl }, viewExpr, "}" ;
+parameters    = parameter, { ",", parameter } ;
+parameter     = ("input" | "output"), identifier, ":", type ;
+stateDecl     = "state", identifier, ":", type, "=", literal, ";" ;
+derivedDecl   = "derived", identifier, ":", type, "=", pureExpr, ";" ;
+actionDecl    = "action", identifier, "(", [ parameters ], ")", "->", type, ";" ;
+viewExpr      = qualifiedName, "(", [ arguments ], ")", "{", { viewExpr }, "}" ;
+arguments     = argument, { ",", argument } ;
+argument      = [ identifier, ":" ], pureExpr ;
+type          = qualifiedName, [ "<", type, { ",", type }, ">" ] ;
+pureExpr      = literal | identifier | memberPath | callPure ;
+```
+
+A trailing view expression defines a component's visual result. Nonvisual components may have no view expression; the exact declaration keyword is still open. Event handlers are deliberately excluded until the effect grammar is defined. The earlier illustrative `Button { send ... }` is **not yet valid under this subset**.
+
+### Static semantics
+
+- Lexical scope resolves local state/input before explicit imports. Unresolved and ambiguous names fail compilation.
+- `derived` is pure, deterministic given its typed inputs, and cannot initiate device I/O or mutate state.
+- `state` is instance-owned; only a typed authorized command can write it.
+- Construction checks named argument compatibility, required inputs and child-slot cardinality.
+- A dynamic collection needs explicit stable keys; duplicate keys within one sibling scope are rejected.
+- Diagnostics must identify source span, component identity and violated contract.
+
+### Example: canonical static view
+
+```aui
+component SensorSummary(input label: String) {
+  VStack(spacing: 12) {
+    Text(value: label) {}
+    Button(title: "Inspect") {}
+  }
+}
+```
+
+The example uses only the restricted grammar; semantic availability of each builtin component remains a library-contract requirement. Empty child braces are permitted by this draft but may be eliminated in a later syntax decision.
+
+### Acceptance cases
+
+| Fixture | Expected outcome |
+| --- | --- |
+| Two typed children with unique static identities | Accept |
+| Unknown component symbol | Error: unresolved component |
+| `Text(value: 42)` when value requires String | Error: type mismatch |
+| `derived` reads an undeclared name | Error: unresolved reference |
+| `derived` invokes hardware I/O | Error: prohibited effect |
+| Dynamic sibling collection with duplicate stable keys | Error: duplicate identity |
+
+**Open:** lexical tokenization, operator precedence, generics, collections and dynamic child syntax.
