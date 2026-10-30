@@ -4,7 +4,7 @@
 
 ## Context
 
-Third-party UI runtimes and the C++ prototype constrain our goal of an Assembly-first, human-architected, AI-component-built RAD Studio.
+Third-party UI runtimes do not meet the Assembly-first goals of this human-architected, AI-component-built Studio.
 
 ## Decision
 
@@ -12,4 +12,4 @@ Develop our own declarative UI language, AST, runtime and platform renderer adap
 
 ## Consequences
 
-Significant increase in scope: font shaping, text editing, accessibility, input, performance, debugging, windows, packaging and security become our responsibility. Prior prototypes are retained only in Git history. The first native validator is not evidence of a functioning UI engine.
+Significant increase in scope: font shaping, text editing, accessibility, input, performance, debugging, windows, packaging and security become our responsibility. The active tree contains specifications and examples only; no functioning native UI engine exists.
