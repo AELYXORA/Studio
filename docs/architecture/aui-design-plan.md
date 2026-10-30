@@ -57,3 +57,6 @@ These remain **proposed**. Before freezing them, define precise binary layouts, 
 ## Project and package design pass
 
 [Project and Package Format](project-and-package-format.md) now has illustrative machine-readable sensor project, package and map-view fixtures. Next: formal schema, deterministic normalization, dependency lockfile and negative fixtures. No parser or target code exists yet for these files.
+
+
+Component catalog design: [AUI Component Framework](component-framework.md) (proposed).
