@@ -80,3 +80,7 @@ Decisions move from proposed to accepted only after an explicit ADR and correspo
 - The in-memory model and schema are **not yet integrated through a JSON parser**. Persistence, migration, typed property bindings and generation remain unimplemented.
 
 - [Experimental JSON Persistence Adapter](persistence-adapter.md) — C++23 JSON load/save, opt-in Boost.JSON, revision checks, known durability limitations.
+
+## Typed property foundation
+
+- [Typed Component Properties](typed-properties.md): experimental C++23 property declarations, validation and candidate-copy mutation. The property module is not yet part of persisted Project JSON or the designer.
