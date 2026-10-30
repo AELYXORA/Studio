@@ -27,7 +27,7 @@ AUI internal view nodes do not automatically become graph nodes. Promote to cano
 | containment | acyclic parent graph, allowed child kind and cardinality | organization, not automatic UI hierarchy |
 | hardware access | resource/address-space ranges, privilege, target/device capability, exclusive/shared policy | only platform adapter may perform authorized I/O |
 
-A Graph edge never silently creates an AUI source-level event handler. Source wiring must be expressible in explicit AUI syntax and checked against the same graph contract. Until that syntax is finalized, examples remain pseudocode.
+A Graph edge never silently creates an AUI source-level event handler. Source wiring must be expressible in explicit AUI syntax and checked against the same graph contract. The proposed `.on(activated: inspect)` attachment is documented in [AUI Event/Binding Semantics](aui-event-binding-semantics.md); it remains unimplemented and the standalone golden module/linking grammar is still open.
 
 ## 4. Data, state and transactions
 
@@ -69,3 +69,7 @@ Common envelope: stable code, severity, source span, GraphNodeID/EdgeID, expecte
 ## Open decisions
 
 Exact public port export syntax; AUI event connection grammar; dynamic key syntax and identity; typed value lifetime across scheduler domains; canonical graph/source hashes; package lock canonicalization; actual ABI layouts; transaction journal states. Remain Proposed until reviewed by the human architect.
+
+## D2 behavior integration (proposal)
+
+The [Graph Behavior Contract](graph-behavior-contract.md) defines workflow identity, state transitions, data-flow binding references, capacity, overflow, ownership and the event-to-command authorization boundary. AUI source declarations and view identities must resolve to **those same canonical GraphNodeID/EdgeID references**, never to duplicate mutable flow diagrams. Changes to binding mode, capacity, transfer or workflow action require an approved graph revision. UI binding propagation cannot authorize hardware effects. The sensor behavior fixture is illustrative only, not runnable.
