@@ -85,3 +85,7 @@ The [Graph Behavior Contract](graph-behavior-contract.md) proposes an exact inte
 ## D6 package/snapshot consistency (proposed)
 
 [D6 Package Integrity](d6-package-integrity.md) defines length-framed content address for declared manifest/source bytes and strict portable source paths. [D6 Canonical Persistence](d6-canonical-persistence.md) distinguishes snapshot-index and HEAD hash domains, with [codec-only vectors](../../examples/architecture-sensor/d6-integrity-vectors.json). [Filesystem Adapters](d6-filesystem-adapters.md) forbids cross-host durability claims without qualification. Remaining gaps: complete native-build package inventory, contract digest, full snapshot schemas, Windows/NTFS durable HEAD feasibility, and fault-injection evidence. No accepted gate.
+
+## Baseline contradiction register and exported type identity (proposed)
+
+[D2/D6 Baseline Review](d2-d6-baseline-review.md) records the conflict between nominal logical type identity and package source byte digests and its correction in [Export Contract Identity](d2-export-contract-identity.md). The [Export Vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json) have reference SHA-256 arithmetic, while a real graph/package/ABI source linkage remains absent. The HEAD/index now expose an operationId candidate, but two HEAD slots do NOT constitute unlimited durable deduplication; recovered operation history and selected filesystem safety remain unapproved P0 decisions. No gate is Accepted.
