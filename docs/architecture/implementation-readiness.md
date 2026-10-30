@@ -29,7 +29,7 @@ The first milestone is **G1: a working, locally invoked Project Graph validator 
 
 ### S0 — executable graph foundation (first implementation)
 
-- Confirm chosen host and implementation language/tool for a minimal validator; this bootstrap choice must be explicit and may be replaced later.
+- Implement a native Assembly JSON tokenizer/parser and semantic validator. Python and other unapproved bootstrap languages are prohibited by [Implementation Language Policy](language-policy.md).
 - Read project/package JSON safely with size limits, duplicate-key rejection and strict schema validation.
 - Resolve stable graph, port and qualified type IDs; check endpoint existence, direction, compatibility, duplicates and target IDs.
 - Round-trip persisted project and map layout separately. Validate revision conflict and no changes on rejection.
@@ -69,7 +69,7 @@ The first milestone is **G1: a working, locally invoked Project Graph validator 
 
 ## Prioritized blocking decisions
 
-1. **Host choice** and acceptable temporary implementation tooling for S0.
+1. **Host/target contract:** Linux x86-64 Assembly is available for a local bootstrap experiment; Windows x64 is a proposed Studio host and needs a separate Win64 ABI implementation.
 2. **Canonical schema semantics:** duplicate-key/identifier normalization, exact type registry, dependency lock format and integrity vectors.
 3. **First source grammar subset:** particularly event-to-command wiring.
 4. **Safe persistent transactions:** single-file atomicity vs multi-file recovery journal, lock/revision semantics.
@@ -88,4 +88,4 @@ Every local run stores: `fixtureId`, `command`, `host`, `target`, `inputDigest`,
 
 ## Next concrete repository work
 
-Implement the **S0 CLI validator** after selecting first host/tooling. Keep work on focused graph-model and validation modules, adopt the existing schemas as candidate input contracts, add negative fixtures, and perform local tests manually. Preserve clear distinction between design agreement and implemented correctness.
+Implement the **S0 native Assembly CLI validator** after the already committed Linux lexical preflight, without claiming that preflight is a parser. Keep work on focused graph-model and validation modules, adopt the existing schemas as candidate input contracts, add negative fixtures, and perform local tests manually. Preserve clear distinction between design agreement and implemented correctness.
