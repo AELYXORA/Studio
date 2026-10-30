@@ -25,3 +25,15 @@ Universal language/compiler tooling, all OS targets simultaneously, component ma
 ## Success definition
 
 A developer can visually construct a small but useful standalone data-driven application, inspect and modify generated and custom source safely, build/package it reproducibly, and optionally use AI to modify it without corrupting the project.
+
+## Architecture hardening prerequisites
+
+Before implementing a broad component palette, prove the following in order:
+
+1. **Core correctness:** canonical schema, revisioned commands, invalid-state prevention, migrations and crash-safe persistence.
+2. **Source safety:** generator manifest, path ownership, stable interfaces and external edit conflict handling.
+3. **Runtime semantics:** typed one-way/two-way bindings, cancellation, scheduling and SQLite transactions.
+4. **Tooling boundaries:** capability matrix, isolated preview/build workers, logging and credentials.
+5. **Evidence:** automated gate G0–G7 reporting from the [verification plan](../architecture/verification-plan.md).
+
+A broad AI agent, plugin marketplace and multi-platform parity remain out of scope until the vertical slice passes these gates.
