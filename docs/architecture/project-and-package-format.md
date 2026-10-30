@@ -51,7 +51,7 @@ This is a **candidate on-disk protocol**, not an accepted stable format or proof
 
 ## Versions and resolution
 
-Project schema, package schema, component contract version, AUI source grammar, native ABI and compiler/toolchain version are distinct. A dependency is resolved by package ID, an explicit version constraint and artifact content hash in a separate lockfile. No implicit network update during offline builds. Reject missing packages, incompatible required capabilities, duplicate exported component IDs and unsupported target/ABI combinations.
+Project schema, package schema, component contract version, AUI source grammar, native ABI and compiler/toolchain version are distinct. A dependency is resolved by package ID, an **exact opaque version string** and artifact content hash in a separate lockfile; version ranges and automatic SemVer selection are unsupported in the first slice. No implicit network update during offline builds. Reject missing packages, incompatible required capabilities, duplicate exported component IDs and unsupported target/ABI combinations.
 
 ## Integrity, ownership and changes
 
