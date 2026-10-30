@@ -108,3 +108,7 @@ An additional **viewDigest** covers presentation-only view bytes. No artifact is
 All rows are *expected*, not outcomes measured by an AELYXORA implementation. D2 cannot pass until exact collision/retirement encoding, contract digest and lockfile rules align with D6 and receive explicit architect approval.
 
 **Normative cross-link (proposed):** [Export Contract Identity](d2-export-contract-identity.md) resolves the prior contradiction between source-only edits and semantic type identity. [Computed export contract vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json) remain design fixtures, not native test results.
+
+## I8. Hardware resource claim identity — separate stable namespace (PROPOSED)
+
+[Hardware Resource Contract](d2-hardware-resource-contract.md) introduces ResourceClaimID under ProjectID (case-sensitive stable ASCII), distinct from GraphNodeID, resource-access EdgeID, physical address and runtime hardware handle. A 0.2-hw-draft resourceModel claim must reference existing stable nodes/edges and target; changing an address does **not** silently create or reuse a different claim ID. The [project schema](../../schemas/project.schema.json) now recognizes kind resource-claim tombstones in retiredIdentities with scopeId=project, and the canonical projection includes these tuples. Pure 0.1-draft graphs have no resource claims; they cannot use a resource-claim tombstone to fabricate hardware permission. Import/retirement and durable compaction proof remain D6 P0 until expressly accepted.
