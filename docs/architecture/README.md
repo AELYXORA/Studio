@@ -102,3 +102,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [AUI AST and Semantic Analysis](aui-ast-semantic-analysis.md) defines compiler tree nodes, scopes, type/effect checking, bindings and TypedHIR output. Proposed and not implemented.
+
+
+[OwnershipIR and Compile-Time Safety](aui-ownership-ir.md) defines ownership CFG, borrow conflicts, async transfer and cleanup checks. Proposed, not implemented.
