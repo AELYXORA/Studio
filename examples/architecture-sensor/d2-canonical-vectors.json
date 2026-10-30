@@ -1,0 +1,157 @@
+{
+  "format": "aui.canonicalization-vectors",
+  "status": "design candidate, locally computed by an independent offline helper; NOT run by AELYXORA; not architect accepted",
+  "digest": {
+    "algorithm": "sha256",
+    "domainAscii": "AELYXORA/semantic-graph/v1",
+    "separatorHex": "00",
+    "encoding": "UTF-8",
+    "hexCase": "lower"
+  },
+  "note": "These tiny semantically unlinked projections are CANONICAL ENCODING vectors only, not valid linked/ABI verified application graphs. Project display labels are excluded from the semantic projection by construction.",
+  "positive": [
+    {
+      "id": "unordered-base",
+      "input": {
+        "format": "aui.semantic-graph",
+        "schemaVersion": "0.1-draft",
+        "projectId": "demo",
+        "targets": [],
+        "nodes": [
+          {
+            "id": "b",
+            "kind": "component"
+          },
+          {
+            "id": "a",
+            "kind": "component"
+          }
+        ],
+        "edges": [],
+        "workflows": [],
+        "dataFlows": [],
+        "packageDependencies": [],
+        "resolvedPackages": []
+      },
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedPackages\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "7bf8d38fafe3f6c5cdfd08bc3701263a5299b3b0a97bc36a66d8c3492b7fedd5"
+    },
+    {
+      "id": "unordered-equivalent",
+      "input": {
+        "resolvedPackages": [],
+        "packageDependencies": [],
+        "dataFlows": [],
+        "workflows": [],
+        "edges": [],
+        "nodes": [
+          {
+            "kind": "component",
+            "id": "a"
+          },
+          {
+            "kind": "component",
+            "id": "b"
+          }
+        ],
+        "targets": [],
+        "projectId": "demo",
+        "schemaVersion": "0.1-draft",
+        "format": "aui.semantic-graph"
+      },
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedPackages\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "7bf8d38fafe3f6c5cdfd08bc3701263a5299b3b0a97bc36a66d8c3492b7fedd5"
+    },
+    {
+      "id": "changed-semantic-kind",
+      "input": {
+        "format": "aui.semantic-graph",
+        "schemaVersion": "0.1-draft",
+        "projectId": "demo",
+        "targets": [],
+        "nodes": [
+          {
+            "id": "b",
+            "kind": "component"
+          },
+          {
+            "id": "a",
+            "kind": "service"
+          }
+        ],
+        "edges": [],
+        "workflows": [],
+        "dataFlows": [],
+        "packageDependencies": [],
+        "resolvedPackages": []
+      },
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"service\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedPackages\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "2d8e44e9fcb904871078e0a9de9a04be0bc226dd111ae6751444c2f144b25724"
+    },
+    {
+      "id": "unicode-project-id",
+      "input": {
+        "format": "aui.semantic-graph",
+        "schemaVersion": "0.1-draft",
+        "projectId": "démo",
+        "targets": [],
+        "nodes": [
+          {
+            "id": "b",
+            "kind": "component"
+          },
+          {
+            "id": "a",
+            "kind": "component"
+          }
+        ],
+        "edges": [],
+        "workflows": [],
+        "dataFlows": [],
+        "packageDependencies": [],
+        "resolvedPackages": []
+      },
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"démo\",\"resolvedPackages\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "d6cba54461ad80916ef5e35c0e593e8d0055da1a799a2daa9adc50a8e20304ae"
+    }
+  ],
+  "negative": [
+    {
+      "id": "duplicate-after-json-escape",
+      "inputUtf8Ascii": "{\"a\":1,\"\\u0061\":2}",
+      "expected": "JSON_DUPLICATE_KEY"
+    },
+    {
+      "id": "fractional-json-number",
+      "inputUtf8Ascii": "{\"revision\":1.5}",
+      "expected": "CANONICAL_NUMBER_UNSUPPORTED",
+      "note": "Only for canonical semantic integer fields; general future typed decimals may use a new profile"
+    },
+    {
+      "id": "negative-zero",
+      "inputUtf8Ascii": "{\"revision\":-0}",
+      "expected": "CANONICAL_NUMBER_UNSUPPORTED"
+    },
+    {
+      "id": "beyond-safe-integer",
+      "inputUtf8Ascii": "{\"revision\":9007199254740992}",
+      "expected": "CANONICAL_NUMBER_UNSUPPORTED"
+    },
+    {
+      "id": "unpaired-surrogate",
+      "inputUtf8Ascii": "{\"projectId\":\"\\uD800\"}",
+      "expected": "JSON_INVALID_UNICODE"
+    },
+    {
+      "id": "utf8-bom",
+      "inputHex": "efbbbf7b7d",
+      "expected": "JSON_INVALID_ENCODING"
+    },
+    {
+      "id": "truncated-utf8",
+      "inputHex": "7b2261223a22c3227d",
+      "expected": "JSON_INVALID_UNICODE"
+    }
+  ],
+  "acceptance": "Future native canonicalizer must reproduce exact bytes and SHA256 vectors, reject negatives at specified stage, and independently validate a fully linked sensor graph; all currently not-run."
+}
