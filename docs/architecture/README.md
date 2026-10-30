@@ -82,3 +82,7 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 ### Binary component contract
 
 [AUI Component Binary ABI](aui-component-binary-abi.md) specifies proposed descriptors, ownership transfer, allocation, asynchronous completion, version negotiation and target conformance tests. It is not a verified or released ABI.
+
+## Project and component persistence
+
+[Project and Package Format](project-and-package-format.md) documents the proposed versioned graph and package manifests, with illustrative [sensor project](../../examples/architecture-sensor/project.auiproj.json), [component package](../../examples/architecture-sensor/component.auipkg.json) and [map view](../../examples/architecture-sensor/views/main.auiview.json). Fixtures are design examples, not tested builds.
