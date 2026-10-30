@@ -48,3 +48,8 @@ Build identity binds project semantic graph digest, exact source/package digests
 ## Open
 
 Canonical JSON serialization, exact framed digest test vectors, dependency version conflict strategy, executable tool hashes and sysroot capture, package signing, deterministic linker configuration and release-policy compatibility. All remain design-stage until independent local validation.
+
+
+## Canonical package identity (cross-gate proposal)
+
+[D2 Identity](d2-identity-and-type-resolution.md) treats nominal TypeID spelling as only a first-stage lookup; resolved equality requires the exact locked package digest and exported contract digest. [D6 Canonical Persistence](d6-canonical-persistence.md) proposes SHA-256 framing for a sorted declared file-set and canonical package manifest. These are not accepted algorithms until full test vectors and independent implementations agree. A text release version cannot substitute for a verified package digest or source inventory; the sensor sample's missing Assembly files therefore prohibit a real locked/native build.
