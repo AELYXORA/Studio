@@ -41,7 +41,7 @@ Hardware constraints are **optional typed capabilities**, not clutter on every n
 
 A native AELYXORA window containing **architecture map plus contextual AI chat area**; load a hardware-aware project graph, select a component, inspect its contracts, create an approved change, and see local build/test evidence. Chat can be a clearly marked non-connected UI placeholder until official authorization is available.
 
-**Reality:** currently there is only an x86-64 Linux Assembly UI-tree validator. The map, renderer, chat, graph schema and hardware integrations do not yet run.
+**Reality:** design specifications and illustrative fixtures exist, but no executable AUI compiler, runtime, map, renderer, AI integration or hardware support is implemented.
 
 ## Documentation policy
 
