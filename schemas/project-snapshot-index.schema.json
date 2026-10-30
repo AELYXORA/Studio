@@ -15,7 +15,8 @@
     "sourceFiles",
     "viewFiles",
     "operationId",
-    "retiredIdentityDigest"
+    "retiredIdentityDigest",
+    "packageObjects"
   ],
   "properties": {
     "format": {
@@ -119,6 +120,28 @@
           "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
         }
       ]
+    },
+    "packageObjects": {
+      "type": "array",
+      "description": "Immutable content-addressed package objects referenced by committed lock and snapshot; full semantic lock equality is checked separately",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "packageId",
+          "contentDigest"
+        ],
+        "properties": {
+          "packageId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
     }
   }
 }
