@@ -54,3 +54,6 @@ Schema stabilization, lockfile hashing canonicalization, package signing, migrat
 ## Formal validation and migration contract
 
 See [Graph Validation and Migration](graph-validation-and-migration.md) for ordered checks, diagnostic codes, dependency resolution, revision-safe saves and recovery. Illustrative [negative fixtures](../../examples/architecture-sensor/invalid-cases.json) define expected failures; no validator has executed them.
+
+
+[Manifest Schema and Validation Contract](schema-validation-contract.md) documents the proposed JSON schemas, semantic rules, observed fixture checks and unresolved lockfile requirements. Structural schemas: [project](../../schemas/project.schema.json), [component package](../../schemas/component-package.schema.json).
