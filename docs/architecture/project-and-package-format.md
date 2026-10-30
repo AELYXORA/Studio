@@ -39,6 +39,10 @@ The structural [Project JSON Schema](../../schemas/project.schema.json) and [Pac
 
 Fields: `format`, `schemaVersion`, `packageId`, `packageVersion`, `components`, `dependencies`, `targets`, `sources`, `capabilities`, `testFixtures`. Components specify exported stable type IDs, contract versions, typed ports, effects and owned source paths. Each source maps to a target triple or an explicitly shared declarative source. Platform-specific Assembly source is not assumed reusable across ISAs.
 
+## D2 execution and model transaction semantics
+
+[D2 Execution and Consistency](d2-execution-consistency.md) specifies the in-memory instance ordering, command-ticket scope and approved project CAS at the **semantic** level. Project persistence must bind expectedRevision, expectedSemanticDigest, operationId, source hashes, staged complete outputs, durable commit and recovery. View-only layout changes use a separate ViewRevision and cannot invalidate the semantic graph hash. Exact journal states and canonical fingerprint vectors remain a D6 P0 blocker. No transactional promise includes physical hardware effects or unsent/late external commands.
+
 ## Versions and resolution
 
 Project schema, package schema, component contract version, AUI source grammar, native ABI and compiler/toolchain version are distinct. A dependency is resolved by package ID, an explicit version constraint and artifact content hash in a separate lockfile. No implicit network update during offline builds. Reject missing packages, incompatible required capabilities, duplicate exported component IDs and unsupported target/ABI combinations.
