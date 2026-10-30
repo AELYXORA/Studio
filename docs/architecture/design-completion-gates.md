@@ -30,3 +30,6 @@ Close D7 ChatGPT role and integration now, followed by D2 graph/serialization an
 ## Version policy
 
 Do not assign pretend release versions to documents. Serialized schemas/packages/ABIs may have actual compatibility revisions, separately documented and frozen only when defined. No Python, no CI.
+
+
+[AI Role and Human-in-the-Loop Contract](ai-role-contract.md) separates human decisions, AI proposals and deterministic local validation. Proposed for review.
