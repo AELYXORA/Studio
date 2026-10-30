@@ -37,7 +37,7 @@ Reject unsupported major ABI, unknown required features, wrong target ISA/OS or 
 - macOS arm64: Apple ABI, Mach-O, unwind and runtime integration.
 - Bare-metal: explicit board ABI, startup, memory map, linker script and privileges.
 
-No target is yet verified for this new ABI. The current UI validator is a separate experimental interface.
+No target is yet verified for this ABI; no executable ABI probe is retained.
 
 ## Acceptance fixtures
 
