@@ -1,0 +1,61 @@
+{
+  "format": "aui.component-package",
+  "schemaVersion": "0.1-draft",
+  "packageId": "example.sensor",
+  "packageVersion": "0.1.0",
+  "targets": [
+    {
+      "triple": "aarch64-unknown-linux-gnu",
+      "status": "planned"
+    }
+  ],
+  "components": [
+    {
+      "typeId": "example.sensor/driver",
+      "contractVersion": "0.1.0",
+      "ports": [
+        {
+          "id": "sample",
+          "direction": "out",
+          "type": "RawSample"
+        }
+      ],
+      "capabilities": [
+        "i2c.transfer"
+      ],
+      "sources": [
+        {
+          "path": "src/aarch64/driver.S",
+          "target": "aarch64-unknown-linux-gnu",
+          "ownership": "human"
+        }
+      ]
+    },
+    {
+      "typeId": "example.sensor/decoder",
+      "contractVersion": "0.1.0",
+      "ports": [
+        {
+          "id": "raw",
+          "direction": "in",
+          "type": "RawSample"
+        },
+        {
+          "id": "reading",
+          "direction": "out",
+          "type": "Measurement"
+        }
+      ],
+      "capabilities": [],
+      "sources": [
+        {
+          "path": "src/aarch64/decoder.S",
+          "target": "aarch64-unknown-linux-gnu",
+          "ownership": "generated"
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "testFixtures": []
+}
