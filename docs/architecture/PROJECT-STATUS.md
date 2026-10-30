@@ -1,6 +1,10 @@
 # AELYXORA Studio — Current Technical Status
 
-**As of 2026-10-30. This is the authoritative implementation-status summary.** The architecture documents describe intended behavior unless a concrete committed artifact and observed test are cited. No global architecture freeze or product release is claimed.
+**As of 2026-10-31. This is the authoritative implementation-status summary.** The architecture documents describe intended behavior unless a concrete committed artifact and observed test are cited. No global architecture freeze or product release is claimed.
+
+## D3 language design pass (documentation only)
+
+[D3 First Language Profile](d3-first-language-profile.md), [D3 Type/Binding Profile](d3-type-and-binding-profile.md), [D3 Event Delivery](d3-event-delivery-and-command-linkage.md) and [D3 Review](d3-language-review.md) now provide proposed minimal source grammar, typed UI intent, an explicit graph command-link schema, L0/L1 example files and future negative diagnostics. Existing older AUI source is still illustrative. **No AUI compiler, semantic analyzer, native ABI provider, renderer, linked runtime or observed tests have been added.** D3 remains Proposed/Open; full State/Derived/Bind/Task/await and other D3+ features still require design completion.
 
 ## D2 documentation update (design-only)
 
