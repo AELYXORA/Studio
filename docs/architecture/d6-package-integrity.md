@@ -41,7 +41,7 @@ Candidate lock schema: [package lock](../../schemas/package-lock.schema.json). R
 6. Check dependency closure, duplicate exports, target/ABI compatibility, capabilities and actual platform support. Target status planned does not establish executable support.
 7. Freeze the input set; no project or lock mutation during a build.
 
-sourceRoot is a *locator* and not part of package content digest. Relocation may retain content identity after safe path validation. Human-owned source changes require approval. An unchanged semantic contract may keep the same public contract digest after a formatting-only source edit, while its package digest changes.
+sourceRoot is a *locator* and not part of package content digest. For an empty relative root, the lock may use the special sourceRoot value '.' (only as a root locator, never as a file inventory path); its containment must still be verified. Relocation may retain content identity after safe path validation. Human-owned source changes require approval. An unchanged semantic contract may keep the same public contract digest after a formatting-only source edit, while its package digest changes.
 
 ## K6. Acceptance cases (all future tests NOT-RUN)
 
