@@ -152,18 +152,9 @@
             "minLength": 1
           },
           "kind": {
-            "enum": [
-              "containment",
-              "hosts",
-              "dependency",
-              "call",
-              "event",
-              "data-flow",
-              "interrupt",
-              "protocol",
-              "resource-access",
-              "ownership"
-            ]
+            "type": "string",
+            "minLength": 1,
+            "description": "Structural format accepts nonempty edge-kind tokens; D2 semantic registry validates known kinds and emits GRAPH_EDGE_KIND_UNKNOWN."
           },
           "from": {
             "type": "object",
