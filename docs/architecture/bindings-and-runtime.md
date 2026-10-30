@@ -1,31 +1,21 @@
-# Data Binding and Runtime Semantics
+# Declarative State and Binding Semantics
 
-**Status:** proposed; semantic rules must be implemented before broad component expansion.
+**Status:** design only; no live binding engine in the active Assembly code.
 
-## Binding kinds
+The declarative AST owns stable node keys and typed property metadata. Runtime state belongs to instances and is reconciled across tree updates by identity and compatible type. Rendering is a side effect of validated state updates; mutating drawn pixels is not the source of truth.
 
-1. **One-time:** evaluate on activation or explicit refresh.
-2. **One-way:** source updates propagate to destination.
-3. **Two-way:** user edits propagate back through validated conversion and commit; cycles are prevented by transaction origin/version checks.
-4. **Command/event:** discrete actions with input, result and failure.
-5. **Stream:** bounded asynchronous delivery with explicit backpressure.
+## Binding rules
 
-Each connection declares source and destination typed paths, binding mode, converter identity, null policy, error handling and scheduling domain. No implicit lossy numeric conversions.
+One-way dependencies form a typed directed graph. Reject ambiguous writers, unresolved endpoints and cycles unless a declared delayed-state primitive makes the cycle intentional. Schedule changes deterministically and batch updates into coherent revisions. UI updates run through the platform event loop and must not block on I/O.
 
-## State and scheduling
+Actions and events carry typed payloads, explicit errors and cancellation; async scheduling is an isolated runtime service. No arbitrary process entry points from untrusted declaration files.
 
-Properties have explicit ownership and persistence scope. Runtime recomputations use a consistent transaction snapshot. Dependency order is deterministic for acyclic reactive graphs; cycles are rejected unless a named state/delay operator breaks them. No arbitrary synchronous reentrant event dispatch.
+## Implementation plan
 
-Visual properties update on their UI thread via marshalled notifications. Background actions declare cancellation, completion, error and concurrency rules. Avoid blocking the UI thread with I/O.
+1. Declarative parser and immutable AST.
+2. Registry of typed properties with stable IDs and defaults.
+3. Binding graph validator and deterministic evaluator in Assembly.
+4. State reconciliation and change-triggered invalidation.
+5. Platform rendering and event dispatch.
 
-## Data access
-
-Repositories expose typed queries, filtering, pagination, mutations and transactional operations. SQLite is the first adapter; database schema migrations are versioned separately from project schema. Validation runs before persistence; DB constraints remain authoritative. Secrets and credentials are not saved in visual model files.
-
-## Error semantics
-
-Bindings surface errors with component ID, path, error code, recoverability and causal operation. Missing paths, invalid converters and unsupported target capabilities fail validation or produce explicit runtime diagnostics, never silent default values.
-
-## MVP acceptance
-
-A list selection populates an edit form; save validates and persists a customer; reload preserves data; errors show clearly; invalid binding does not compile into a silently broken app; undo in the designer does not pretend to undo a committed database action.
+No C++, Qt, QML, FMX, or imported third-party UI runtime is part of the target design.
