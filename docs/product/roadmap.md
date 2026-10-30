@@ -19,7 +19,7 @@
 
 Each gate must provide a locally runnable acceptance fixture, exact command, observed pass/fail/not-run result and limitations. G1 uses a sensor/driver/protocol/application graph with invalid-port, resource-conflict and target-mismatch negative tests. G2 demonstrates map selection, contextual contract inspection, docked disconnected chat and save/reopen fidelity. G3 demonstrates rejected stale writes, rejected AI proposals without mutation and reversible graph edits. G4 compares component behavior with target ABI fixtures and keeps generated source ownership distinct from user-edited files.
 
-**Next implementation task:** define the first persisted Project Graph fixture and its validation contract, before building a decorative canvas.
+**Next implementation task:** implement a native parser and semantic Project Graph validator against the existing sensor fixtures; the fixtures and candidate schemas already exist.
 
 
 [Architecture Freeze Readiness and Implementation Strategy](../architecture/implementation-readiness.md) concludes global freeze is premature and orders S0 graph validation, S1 architecture workspace, S2 minimal AUI native build, S3 controlled AI workflow and S4 on-target hardware verification. **All implementation gates remain not-run; CI disabled.**
