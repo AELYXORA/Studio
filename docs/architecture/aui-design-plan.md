@@ -89,3 +89,6 @@ Component catalog design: [AUI Component Framework](component-framework.md) (pro
 ## Architecture consistency review
 
 [Architecture Consistency and Completeness Audit](consistency-audit.md) records confirmed invariants, unresolved incompatibilities, authoritative documents and prioritized closure criteria. Findings are design-review results, not verified implementation.
+
+
+[Local Build System and Verification Architecture](local-build-verification.md) defines the local build DAG, tool execution permissions, incremental cache, cancellation/recovery and per-artifact verification evidence. Proposed only; CI stays disabled.
