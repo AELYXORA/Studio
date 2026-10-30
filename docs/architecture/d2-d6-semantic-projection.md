@@ -12,12 +12,12 @@ GraphRevision, display-only labels, source file hashes, packageContentDigest, lo
 
 ## SP2. Exact top-level object (first profile)
 
-Exactly these required fields; arrays are present even when empty:
+For the existing PURE 0.1-draft profile, exactly these required fields apply; arrays are present even when empty. A new, explicitly versioned 0.2-hw-draft proposal adds a resourceModel field as described in SP11; never confuse it with the pure hash projection:
 
 | Field | Exact projection and ordering |
 | --- | --- |
 | format | Constant aui.semantic-graph |
-| schemaVersion | Constant 0.1-draft (projection profile, not authored project revision) |
+| schemaVersion | 0.1-draft for pure first slice; 0.2-hw-draft only when the separately specified resourceModel is fully validated (not a product release version) |
 | projectId | The project's stable authored opaque ID |
 | targets | Array from SP3, sorted by id |
 | packageDependencies | Objects with exact keys packageId and version; sorted by packageId,version, unique packageId in first slice |
@@ -32,7 +32,7 @@ No permissive unknown fields. Unknown required semantic extensions need a new re
 
 ## SP3. Targets
 
-Each target includes exactly id, triple, execution (as authored), sorted by id. The execution value is a constraint, **not** a runtime privilege grant. The current minimal schema cannot express ISA features, MMIO/IRQ/DMA ranges or OS permission scopes. A target or hardware node requiring those details is **GRAPH_PROFILE_UNSUPPORTED**, not a valid digest with silently omitted safety semantics. D2 hardware approval remains blocked until the schema/projection supports them.
+Each target includes exactly id, triple, execution (as authored), sorted by id. The execution value is a constraint, **not** a runtime privilege grant. The **0.1-draft pure profile** cannot express ISA features, MMIO/IRQ/DMA ranges or OS permission scopes, and must reject hardware requirements with GRAPH_PROFILE_UNSUPPORTED. The proposed [0.2-hw-draft resourceModel](d2-hardware-resource-contract.md) adds explicit meaning-bearing constraints **in the same canonical graph**, but has no accepted target registry/adapter and cannot yet produce executable support evidence.
 
 ## SP4. Logical exports and primitive registry
 
@@ -79,6 +79,12 @@ Runtime instance state, in-flight tickets and mailbox content are **never** arch
 
 ## SP10. Explicit first-slice limitations
 
-The first profile does not yet capture target hardware resource claims, user-defined units, extension semantics, the complete primitive registry, generic/recursive type layouts or ABI binary offsets. They are **unresolved design blockers**, not details to defer invisibly to implementation. No D2/D6 gate is accepted merely by writing this candidate.
+The pure 0.1-draft profile does not capture target hardware resource claims. A separate, proposed 0.2-hw-draft extension models typed requirements, but still lacks verified adapters/feature registries. User-defined units, extension semantics beyond this scoped profile, complete primitives, generic/recursive type layouts and ABI binary offsets remain open. They are **unresolved design blockers**, not details to defer invisibly to implementation. No D2/D6 gate is accepted merely by writing this candidate.
 
 [Project Format](project-and-package-format.md) and [D2/D6 Baseline Review](d2-d6-baseline-review.md) track the remaining cross-document and implementation-readiness checks.
+
+## SP11. Hardware resource profile — versioned semantic extension (PROPOSED)
+
+The [D2 Hardware Resource Contract](d2-hardware-resource-contract.md) defines schemaVersion 0.2-hw-draft and a **required** resourceModel field; [project.schema.json](../../schemas/project.schema.json) gates that field to the hardware version. Under the unchanged AELYXORA/semantic-graph/v1 digest domain, the canonical projection contains all the same fields as 0.1-draft PLUS exactly resourceModel with profile aui.hardware-resources/v1, targetRequirements sorted by targetId and claims sorted by immutable claim id. Each target requirement includes addressBits, endian, privilege, featureRegistryId, adapterContractId and sorted unique isaFeatures. Each claim includes id, kind, targetId, ownerNodeId, resourceNodeId, edgeId, addressSpaceId, sharing, sorted unique requiredCapabilities and exactly one complete mmio/irq/dma/memory typed object. All numeric ranges are canonical lowercase hexadecimal strings; no target address-space alias or permission is inferred from spelling.
+
+Pure 0.1-draft inputs, semantic projections, stored hashes and reference fixtures MUST remain byte-identical to their prior definition. An attempted hardware claim in 0.1-draft fails schema/profile validation, never silently gains an un-hashed privilege. Conversely, 0.2-hw-draft resourceModel is mandatory and every meaningful claim field participates in its graph hash; no partial projection is an authoritative digest. A changed resource range, owner, IRQ/DMA binding, privilege, ISA feature or required capability changes the hardware semantic graph projection. The extension is a **candidate compatibility profile** and cannot be declared accepted until D2/D6 target adapter, claim-ID retirement, canonical test vectors and physical proof decisions close.
