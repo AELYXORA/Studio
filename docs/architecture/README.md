@@ -152,3 +152,6 @@ The earlier Python validator and tests have been removed. S0 has a limited Linux
 
 
 **Implementation restriction:** Python is prohibited in the Studio codebase, build tooling and tests. [Policy](language-policy.md).
+
+
+[AI Role and Human-in-the-Loop Contract](ai-role-contract.md) separates human decisions, AI proposals and deterministic local validation. Proposed for review.
