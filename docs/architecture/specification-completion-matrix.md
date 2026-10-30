@@ -45,7 +45,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 
 ## D2 — Canonical Project Graph, workflows and data flows
 
-**Authority:** [Project Graph](project-graph.md), [Project Graph ↔ AUI](project-graph-aui-contract.md), [Graph Validation](graph-validation-and-migration.md), [Project Format](project-and-package-format.md). **Current status: Proposed/Open.**
+**Authority:** [Project Graph](project-graph.md), [Graph Behavior — Workflows and Data Flows](graph-behavior-contract.md), [Project Graph ↔ AUI](project-graph-aui-contract.md), [Graph Validation](graph-validation-and-migration.md), [Project Format](project-and-package-format.md). **Current status: Proposed/Open.**
 
 | ID | Required design closure | Evidence fixture |
 | --- | --- | --- |
@@ -60,7 +60,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 | D2-09 | Deterministic diagnostics with code, graph ID, target, source/path, actual/expected values | Compare expected failures and diagnostic ordering |
 | D2-10 | Package resolution and exact type/export identity across source and graph | Correctly pinned export; missing lock; duplicate export |
    
-**P0 open:** exact 'hosts' relation; workflow/data-flow serialization; canonical JSON or alternative; required normalization rules; no runnable semantic validation.
+**P0 open:** 'hosts' is now a *proposed* physical-topology relation with explicit scope, not architect-accepted; workflow/data-flow JSON *candidate* and negative fixtures exist, but formal event/command linkage, stable identity normalization, runtime arbitration, persistence/hashed representation and native semantic verification are unresolved. No D2 gate is accepted.
 
 ## D3 — AUI source language and user-facing declarative semantics
 
@@ -160,7 +160,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 
 These are review findings, not silently resolved decisions:
 
-1. **Graph edge taxonomy:** the illustrative sensor project uses the relation kind **hosts**; the normative graph taxonomy lists containment and other edges without specifying 'hosts'. Resolve meaning and validation in Project Graph, schema and fixtures together.
+1. **Graph edge taxonomy:** the sensor's **hosts** now has proposed physical-topology semantics in the Project Graph and the candidate schema/fixtures. Verify all consumers and architect-approve the definition; no implementation evidence exists.
 2. **Milestone label collision:** product roadmap G0–G7 and verification plan G0–G7 denote different activities. Use distinct namespaces (recommended product milestones **M0–M7**, test layers **V0–V7**); edit owning files and links consistently.
 3. **Documentation versus implementation status:** roadmap/implementation-readiness may call S0 the "next implementation task" while design-gate policy forbids advancing before accepted specs. Present S0 as the **first planned implementation** *after* PHASE I.
 4. **JSON example versus canonical representation:** structural JSON Schemas exist, while Project Graph persistence encoding is still an open decision. Avoid calling illustrative format final.
@@ -194,3 +194,7 @@ Architect acceptance (explicit) and date:
 ~~~
 
 No sign-off is recorded yet. Until the user accepts the relevant baseline, the project remains PHASE I — DESIGN.
+
+## D2 documentation pass (proposal, not gate completion)
+
+The [Graph Behavior Contract](graph-behavior-contract.md) now gives proposed definitions of workflow state machines, typed channel bindings, ownership, overflow, diagnostic precedence, graph revision isolation and topology edge kinds. The example sensor project/package and JSON Schemas were extended with draft `workflows`, `dataFlows` and `commands`; [D2 invalid cases](../../examples/architecture-sensor/d2-invalid-cases.json) specify expected diagnostics. **These are not accepted or native-validated.** Pending architecture decisions and later phase-dependent tests remain listed under D2 and the owning specifications.
