@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Cross-Specification Audit — 2026-10-31
+
+[Full D1–D8 consistency audit](cross-specification-audit-2026-10-31.md) records ten confirmed documentation conflicts addressed in main and fourteen still-open design risks. It covers contract owners, runtime/ABI, dependency resolution, D2 channel borrow lifetimes, D3 source examples and Phase I–IV gating. Corrected text is **not architect sign-off** or native verification.
+
 ## D3 — AUI language first profile (PROPOSED)
 
 [D3 Source Grammar L0/L1](d3-first-language-profile.md) defines a deliberately bounded static view and typed intent syntax. [Type and Binding Profile](d3-type-and-binding-profile.md), [Event and Graph Command Linkage](d3-event-delivery-and-command-linkage.md) and the [D3 Review Register](d3-language-review.md) specify unapproved type, queue, effect and explicit provider linkage rules. [L0](../../examples/aui-language/status-panel-l0.aui), [L1](../../examples/aui-language/linked-consumer-panel.aui) and [28 negative examples](../../examples/aui-language/d3-first-profile-negative-cases.json) are documentation fixtures; no compiler or renderer was built.
