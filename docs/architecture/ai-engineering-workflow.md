@@ -4,6 +4,9 @@
 
 ## Roles and authority
 
+For concrete ChatGPT Plus account connection and official eligibility rules, defer to [ChatGPT Connection](chatgpt-connection.md). The model's role is architecture analysis, documentation and change proposals during design phase; implementation/tool access begins only after explicit authorization and design-gate acceptance.
+
+
 The human architect owns interfaces, target profiles, acceptance criteria and approvals. AI may analyze, draft, implement and suggest tests within a disclosed scope. Local build/test tools report observations, not architectural authority. No natural-language message or successful test alone grants write, network or hardware permissions.
 
 ## End-to-end task lifecycle
