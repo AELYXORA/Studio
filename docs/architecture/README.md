@@ -72,3 +72,8 @@ The canonical project graph remains the heart of Studio; AUI is its implementati
 ## AUI language/compiler/runtime design package
 
 The [theoretical design plan](aui-design-plan.md) tracks the design's completeness and unresolved decisions. Its dedicated contracts are [AUI language](aui-language.md), [compiler and target lowering](aui-compiler.md) and [state/runtime/rendering](aui-runtime.md). These are **proposed technical specifications**, not running implementations. They remain subordinate to the canonical Project Graph and this architecture's human-led, map-centric product invariants.
+
+## AUI low-level semantic contracts
+
+- [Types, memory and ownership](aui-types-and-ownership.md) — lifetime, borrowed/owned values, device memory capabilities and concurrency.
+- [Component ABI and asynchronous commands](aui-abi-and-async.md) — effect boundaries, target-specific calling contracts, task outcomes and cancellation races.
