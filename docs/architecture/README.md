@@ -1,47 +1,47 @@
 # AELYXORA Architecture
 
-**Direction:** own Assembly-first declarative RAD environment. **Status:** experimental architecture and minimal native validator. No working graphical IDE.
+**Product center: Project Architecture Map.** Not a form designer, source editor, or AI chat window. A mind-map-friendly spatial overview with UML-grade typed component relations.
 
-## Non-negotiable foundations
+## Core experience
 
-1. **Human-led architecture:** human architect owns types, layout semantics, component boundaries, decisions, security and acceptance criteria.
-2. **AI as component engineer:** proposes and implements code under reviewable contracts; does not silently redesign the system.
-3. **Our own declarative language and UI runtime:** no Qt/QML, C++ or FMX dependency in the Studio implementation.
-4. **Portable contract, target-specific code:** LLVM/Clang integrated assembler; x86-64 and AArch64 need separate ISA and OS ABI implementations.
-5. **Deterministic core:** validated typed state, immutable declarative trees, revisioned edits, generator ownership and repeatable tests.
-6. **Replaceable platform boundary:** window system, GPU, text, accessibility and input implemented through explicitly scoped OS adapters.
-7. **Local-first, auditable changes:** reproducible artifacts, source control, no implicit cloud execution.
+- **Map:** nodes represent components, modules, data and external systems. Typed edges represent interfaces, calls, events, data flow and dependencies. Subgraphs provide zoomable scope and architectural grouping.
+- **Architect (human):** defines component boundaries, ports, contracts, responsibilities and constraints. Approves changes.
+- **AI Component Engineer:** uses the selected node/subgraph and its dependencies as bounded context; proposes implementations, tests and structured edits. It cannot silently modify the architecture.
+- **Evidence:** each node exposes source ownership, target support, diagnostics, build/test status and generated artifacts. Unverified is different from passing.
+- **Detail editors:** declarative UI, code, properties and tests open from the selected node. They are views of the same model.
 
-## Planned layering
+## Canonical model
 
 ```text
-   Studio (own declarative UI, editor, preview, visual RAD)
-                       |
-     Declarative UI AST + typed Application Model
-                       |
-       Assembly core: state, diff, layout, events
-                       |
-          Platform ABI + renderer adapters
-             /                  \
-          x86-64               AArch64
+Project
+  Modules / groups / components / instances
+  Stable IDs + typed ports + properties + capabilities
+  Directed typed connections (dependency, call, event, data flow)
+  Contracts + revisions + ownership + verification records
+  Views: architecture map | declarative UI | source | diagnostics
 ```
 
-There is **no universal native Assembly syntax** for all CPUs; consistent semantics live in contracts and shared tests. LLVM IR is an optional compiler intermediate, not a substitute for human-readable portable declarations.
+The map is a projection of the canonical graph, not an image. Visual positions and collapsible groups are presentation metadata; architecture correctness must not depend on coordinates.
 
-## Executable baseline
+## Implementation boundaries
 
-`src/ui/validate_x86_64_sysv.S` validates a small UI node array using the x86-64 System V calling convention; `tests/ui_abi_x86_64_sysv.S` exercises it from Assembly. Run `sh build.sh` on Linux x86-64 with Clang. There is no renderer, declarative parser, live state system, app generator or IDE yet.
+- **Core:** own Assembly-first implementation, LLVM/Clang integrated assembler.
+- **UI:** own declarative language and rendering runtime. Qt/QML, C++, FMX and Slint runtime are not target dependencies.
+- **Portability:** typed contracts are CPU-neutral; machine Assembly and OS adapters are per-target.
+- **AI authentication:** target official Sign in with ChatGPT / eligible subscription authorization. Do not scrape ChatGPT browser sessions, request passwords, or assume automatic API rights. Authentication capability remains unimplemented and depends on supported provider onboarding.
+- **Safety:** propose → validate → preview graph/source diff → human approval → apply → local verification. AI never replaces architecture ownership.
+- **Offline:** projects and architecture remain readable/editable without AI; new AI tasks require connectivity.
 
-## Primary specifications
+## Minimal end-to-end milestone
 
-- [Declarative UI model](declarative-ui.md)
-- [Assembly contracts, targets and AI role](assembly-first.md)
-- [Component contract](component-contract.md)
-- [Bindings and runtime semantics](bindings-and-runtime.md) — design only
-- [Source ownership](source-ownership.md)
-- [Security boundaries](extension-and-security.md)
-- [Local verification](verification-plan.md)
-- [Roadmap](../product/roadmap.md)
-- [ADRs](../adr/README.md)
+Open a local project → display a real architecture graph → edit a component contract → ask AI (when authorized) to implement that component → review graph/source changes → run local verification. The first renderable window is a technical prerequisite, not the product milestone.
 
-No Architecture version number: version only persisted formats, component APIs and public ABIs.
+## Current evidence
+
+Only the Linux x86-64 native Assembly UI-node validator and local test harness exist. The map UI, schema, persisted project graph, renderer, AI authorization and generation are not built.
+
+## Documentation discipline
+
+This README is the **single source of truth** for product architecture. [Roadmap](../product/roadmap.md) defines only the next observable gates. [ADRs](../adr/README.md) record consequential decisions. Other documents are subordinate technical references; if they disagree, update or retire them, not add another speculative layer. No automatic CI before release.
+
+Useful references: [declarative UI](declarative-ui.md), [Assembly ABI](assembly-first.md), [component contracts](component-contract.md), [runtime bindings](bindings-and-runtime.md), [source ownership](source-ownership.md), [security](extension-and-security.md).
