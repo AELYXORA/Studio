@@ -349,7 +349,13 @@
           "trigger",
           "initialState",
           "states",
-          "transitions"
+          "transitions",
+          "signals",
+          "scheduling",
+          "maxConcurrentInstances",
+          "onLimit",
+          "mailboxCapacity",
+          "mailboxOverflow"
         ],
         "properties": {
           "id": {
@@ -446,7 +452,8 @@
                       "enum": [
                         "none",
                         "dispatch",
-                        "publish"
+                        "publish",
+                        "request-cancel"
                       ]
                     },
                     "nodeId": {
@@ -530,10 +537,186 @@
                           ]
                         }
                       }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "request-cancel"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "nodeId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "operationId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "edgeId"
+                              ]
+                            }
+                          ]
+                        }
+                      }
                     }
                   ]
                 }
               }
+            }
+          },
+          "scheduling": {
+            "const": "per-instance-fifo"
+          },
+          "maxConcurrentInstances": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "onLimit": {
+            "const": "reject-and-report"
+          },
+          "mailboxCapacity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "mailboxOverflow": {
+            "const": "reject-and-report"
+          },
+          "signals": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "source"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "source": {
+                  "enum": [
+                    "trigger",
+                    "command-success",
+                    "command-failure",
+                    "control"
+                  ]
+                },
+                "payloadType": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "nodeId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "operationId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "source": {
+                        "enum": [
+                          "command-success",
+                          "command-failure"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "source"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "payloadType",
+                      "nodeId",
+                      "operationId"
+                    ]
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "source": {
+                        "const": "trigger"
+                      }
+                    },
+                    "required": [
+                      "source"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "payloadType"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "nodeId"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "operationId"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "source": {
+                        "const": "control"
+                      }
+                    },
+                    "required": [
+                      "source"
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "payloadType"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "nodeId"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "operationId"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
             }
           }
         }
