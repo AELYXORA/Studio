@@ -27,7 +27,9 @@ Recommend **Windows x64** as the first Studio host only as a planning choice, no
 
 The first milestone is **G1: a working, locally invoked Project Graph validator and persistent CLI round-trip**, not a decorative architecture canvas and not a full AUI compiler. It must use real project/package inputs, report diagnostics and never silently mutate source. A tiny CLI is an implementation tool, not a replacement for the long-term Assembly-first AUI and native Studio design.
 
-## Sequenced vertical slices
+## Sequenced vertical slices — FUTURE PHASE II ONLY
+
+These describe **conditional implementation order after the full in-scope D1–D8 design is accepted**. They are not instructions to implement anything during the current Phase I. Later Phase III tests and Phase IV fixes are separate.
 
 ### S0 — executable graph foundation (first implementation)
 
@@ -49,7 +51,7 @@ The first milestone is **G1: a working, locally invoked Project Graph validator 
 
 ### S2 — AUI language and local build seed
 
-- Freeze only the subset required to produce the first UI: module, component, input/state, basic view calls, binding and event dispatch.
+- Implement only the **approved** AUI first-slice profile after D1–D8 design approval; current [L0/L1 candidate](d3-first-language-profile.md) excludes mutable state and bind. State/Derived/Bind/Task/await remain D3+ P0 and cannot be silently introduced during S2.
 - Implement parser + semantic validation, then the smallest sound TypedHIR/OwnershipIR/TargetMIR path for the chosen host.
 - Generate and locally assemble/link one working UI path, keeping toolchain and ABI evidence.
 
