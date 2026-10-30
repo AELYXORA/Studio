@@ -219,10 +219,31 @@
       }
     },
     "dependencies": {
-      "type": "array"
+      "type": "array",
+      "description": "First-slice exact offline transitive dependencies; no ranges or implicit upgrades",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "packageId",
+          "packageVersion"
+        ],
+        "properties": {
+          "packageId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "packageVersion": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     },
     "testFixtures": {
-      "type": "array"
+      "type": "array",
+      "maxItems": 0,
+      "description": "Nonempty fixture/resources inventory is unsupported by the first locked-build digest profile until a typed inventory is designed."
     },
     "types": {
       "type": "array",
