@@ -55,3 +55,8 @@ No target is yet verified for this ABI; no executable ABI probe is retained.
 8. Compare dispatch latency, allocations and emitted machine code against direct native baseline.
 
 **Open:** actual binary offsets, opaque handle representation, allocator ABI signatures, memory atomics, module linking/loading, hot reload, debugger/unwind details and privilege handshake. Freeze only after runnable tests.
+
+
+## D2 logical type to D4 physical ABI separation
+
+[D2 Identity and Type Resolution](d2-identity-and-type-resolution.md) defines logical export identities and resolved package contracts. [Graph/AUI Integration](project-graph-aui-contract.md) defines source-to-graph mappings. A resolved TypeID may have **different physical representation on distinct targets**. Actual register assignment, stack offsets, alignment, aggregate return classification, ownership descriptors, symbol/relocation naming and calling conventions remain D4 ABI obligations. A logical graph node ID is never a pointer or exported symbol address. Package revision or contract-digest changes must invalidate linked artifacts, not be silently papered over by AUI preview.
