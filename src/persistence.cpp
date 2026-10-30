@@ -2,6 +2,7 @@
 #include <boost/json.hpp>
 #include <boost/json/src.hpp>
 #include <fstream>
+#include <iterator>
 #include <limits>
 #include <system_error>
 #include <unordered_set>
