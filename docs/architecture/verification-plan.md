@@ -27,4 +27,4 @@ Create a CustomerDesk app using visual form/table composition and SQLite; genera
 
 ## Continuous architecture checks
 
-Documentation links, schema fixtures, ADR consistency, build dependency direction, generation manifest drift and target capability validation should be machine-checkable in CI once implementation exists.
+Documentation links, schema fixtures, ADR consistency, build dependency direction, generation manifest drift and target capability validation should be machine-checkable locally during development; local verification remains disabled until release preparation.
