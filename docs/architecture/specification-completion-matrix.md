@@ -45,7 +45,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 
 ## D2 — Canonical Project Graph, workflows and data flows
 
-**Authority:** [Project Graph](project-graph.md), [Graph Behavior — Workflows and Data Flows](graph-behavior-contract.md), [D2 Execution and Consistency](d2-execution-consistency.md), [Project Graph ↔ AUI](project-graph-aui-contract.md), [Graph Validation](graph-validation-and-migration.md), [Project Format](project-and-package-format.md). **Current status: Proposed/Open.**
+**Authority:** [Project Graph](project-graph.md), [D2 Identity and Type Resolution](d2-identity-and-type-resolution.md), [Graph Behavior — Workflows and Data Flows](graph-behavior-contract.md), [D2 Execution and Consistency](d2-execution-consistency.md), [Project Graph ↔ AUI](project-graph-aui-contract.md), [Graph Validation](graph-validation-and-migration.md), [Project Format](project-and-package-format.md). **Current status: Proposed/Open.**
 
 | ID | Required design closure | Evidence fixture |
 | --- | --- | --- |
@@ -111,7 +111,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 
 ## D6 — Formats, package resolution, local build and persistence
 
-**Authority:** [Project Format](project-and-package-format.md), [Package Resolution](package-resolution-build.md), [Local Build](local-build-verification.md), [Graph Validation](graph-validation-and-migration.md). **Current status: Proposed/Open.**
+**Authority:** [Project Format](project-and-package-format.md), [D6 Canonical Persistence](d6-canonical-persistence.md), [Package Resolution](package-resolution-build.md), [Local Build](local-build-verification.md), [Graph Validation](graph-validation-and-migration.md). **Current status: Proposed/Open.**
 
 | ID | Required design closure | Evidence fixture |
 | --- | --- | --- |
@@ -200,3 +200,7 @@ No sign-off is recorded yet. Until the user accepts the relevant baseline, the p
 The [Graph Behavior Contract](graph-behavior-contract.md) now gives proposed definitions of workflow state machines, typed channel bindings, ownership, overflow, diagnostic precedence, graph revision isolation and topology edge kinds. The example sensor project/package and JSON Schemas were extended with draft `workflows`, `dataFlows` and `commands`; [D2 invalid cases](../../examples/architecture-sensor/d2-invalid-cases.json) specify expected diagnostics. **These are not accepted or native-validated.** Pending architecture decisions and later phase-dependent tests remain listed under D2 and the owning specifications.
 
 **D2 pass update (2026-10-30):** [Execution and Consistency](d2-execution-consistency.md) proposes ordering, bounded admission, command tickets, cancellation, ownership and graph CAS. The [sensor runtime test design](../../examples/architecture-sensor/d2-runtime-scenarios.md) contains 18 expected scenarios, all **NOT-RUN**. These are design artifacts, not sign-off.
+
+## D2/D6 identity-and-persistence design pass (proposed, not accepted)
+
+[D2 Identity and Type Resolution](d2-identity-and-type-resolution.md) now proposes persistent ASCII graph IDs, a retired-identity ledger, exact nominal TypeID resolution through pinned package exports and explicit source/graph/ABI identity separation. [D6 Canonical Persistence](d6-canonical-persistence.md) proposes deterministic UTF-8 semantic encoding, separate graph/source/package/snapshot digests and immutable snapshots with two HEAD records. Draft [canonical vectors](../../examples/architecture-sensor/d2-canonical-vectors.json) contain four expected SHA-256 values; [HEAD](../../schemas/project-head.schema.json) and [snapshot-index](../../schemas/project-snapshot-index.schema.json) schemas describe candidate structures; [30 recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md) define future fault injection. **No D2/D6 gate accepted; no native codec, recovery or ABI proof.** Remaining P0: complete semantic projection field coverage, canonical package framing and digests, full retired-ID migration, first host filesystem durability, conflict handling and target ABI layouts.
