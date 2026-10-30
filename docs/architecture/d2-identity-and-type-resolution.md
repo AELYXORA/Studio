@@ -98,7 +98,7 @@ An additional **viewDigest** covers presentation-only view bytes. No artifact is
 | ID-04 | Delete GraphNodeID and create same ID for different instance | IDENTITY_REUSE_REJECTED |
 | ID-05 | Two nodes use identical ID within one project | GRAPH_DUPLICATE_ID |
 | ID-06 | Two packages export same canonical TypeID under one resolved namespace | PKG_DUPLICATE_EXPORT |
-| ID-07 | Same spelling TypeID from changed pinned package content | Different resolved type identity; require compatibility decision |
+| ID-07 | Same spelling TypeID from changed pinned package source bytes | Different implementation identity; logical export identity stays the same only when independently recomputed public contract digest is unchanged. Rebuild and reverify required |
 | ID-08 | Change command error type without changing graph action | AUI_CONTRACT_DRIFT or WORKFLOW_SIGNAL_TYPE (according to validation stage) |
 | ID-09 | Rename AUI symbol/source span while retaining explicit graph mapping | No GraphNodeID reassignment; source index refresh |
 | ID-10 | Missing package source file declared in the example | Link/build failure, not silently provided code |
