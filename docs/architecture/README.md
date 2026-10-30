@@ -158,3 +158,6 @@ The earlier Python validator and tests have been removed. S0 has a limited Linux
 
 
 [Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
+
+
+[Event, Command and Binding Semantics](aui-event-binding-semantics.md) proposes explicit AUI event wiring and diagnostics; the design gate remains open.
