@@ -31,7 +31,8 @@
           "contentDigest",
           "sourceRoot",
           "dependencies",
-          "targets"
+          "targets",
+          "exports"
         ],
         "properties": {
           "packageId": {
@@ -89,6 +90,35 @@
             "items": {
               "type": "string",
               "minLength": 1
+            }
+          },
+          "exports": {
+            "type": "array",
+            "description": "Exact verified logical export digest registry, sorted by kind+typeId, not proof of source linkage",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind",
+                "typeId",
+                "contractDigest"
+              ],
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "type",
+                    "component"
+                  ]
+                },
+                "typeId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "contractDigest": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              }
             }
           }
         },
