@@ -98,7 +98,7 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 [AUI.Core library](aui-core-library.md): draft APIs for visual and nonvisual components, unimplemented.
 
 
-[AUI Syntax and Semantics v0.1](aui-syntax-v0.1.md) defines the current proposed extended grammar and rules for state, events, commands, bindings, tasks and modifiers. Syntax is not frozen or implemented.
+[AUI Syntax and Semantics](aui-syntax.md) defines the current proposed extended grammar and rules for state, events, commands, bindings, tasks and modifiers. Syntax is not frozen or implemented.
 
 
 [AUI AST and Semantic Analysis](aui-ast-semantic-analysis.md) defines compiler tree nodes, scopes, type/effect checking, bindings and TypedHIR output. Proposed and not implemented.
