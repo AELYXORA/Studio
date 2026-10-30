@@ -108,3 +108,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [AUI TargetMIR and Native Code Generation](aui-targetmir-native-codegen.md) specifies ISA-aware lowering, registers, stack, ABI, optimization limits and target-specific verification. Proposed; not implemented.
+
+
+[AUI Platform Abstraction and Native Runtime Services](aui-platform-runtime-services.md) specifies OS adapters for windows, graphics, text, input, accessibility, memory, concurrency, timers, filesystem and hardware capabilities. Proposed; not implemented.
