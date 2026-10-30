@@ -59,12 +59,12 @@ component SensorSummary(input reading: String) {
   on inspect(payload) { send Inspect(); }
   VStack(spacing: 12) {
     Text(value: reading).accessibilityLabel("Sensor reading")
-    Button(title: "Inspect").accessibilityLabel("Inspect sensor")
+    Button(title: "Inspect").on(activated: inspect).accessibilityLabel("Inspect sensor")
   }
 }
 ```
 
-This example still needs explicit syntax for wiring `Button.activated` to the declared `inspect` event; no automatic event dispatch is implied. It is not yet a fully executable program.
+Event attachment `.on(activated: inspect)` is proposed in [Event and Binding Semantics](aui-event-binding-semantics.md). Imported definitions and a linked command implementation are still required; no executable compiler exists.
 
 ## 5. Concurrency and ownership
 
