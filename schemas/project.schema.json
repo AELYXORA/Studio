@@ -40,7 +40,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
           },
           "triple": {
             "type": "string",
@@ -87,7 +88,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
           },
           "kind": {
             "type": "string",
@@ -116,7 +118,8 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "minLength": 1
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
                 },
                 "direction": {
                   "enum": [
@@ -149,7 +152,8 @@
         "properties": {
           "id": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
           },
           "kind": {
             "type": "string",
