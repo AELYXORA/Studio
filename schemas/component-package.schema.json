@@ -137,6 +137,67 @@
               },
               "additionalProperties": false
             }
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "inputs",
+                "resultType",
+                "errorType",
+                "effects",
+                "domain"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "inputs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "type"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "type": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "resultType": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "errorType": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "effects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "domain": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
           }
         },
         "additionalProperties": false
