@@ -167,6 +167,9 @@
           "id": "decoding"
         },
         {
+          "id": "cancelling"
+        },
+        {
           "id": "done",
           "terminal": "success"
         },
@@ -222,11 +225,73 @@
         {
           "id": "cancel-running",
           "from": "decoding",
-          "to": "cancelled",
+          "to": "cancelling",
           "signal": "cancel",
+          "action": {
+            "kind": "request-cancel"
+          }
+        },
+        {
+          "id": "cancel-confirmed",
+          "from": "cancelling",
+          "to": "cancelled",
+          "signal": "cancel-confirmed",
           "action": {
             "kind": "none"
           }
+        },
+        {
+          "id": "completed-after-cancel",
+          "from": "cancelling",
+          "to": "done",
+          "signal": "decoded",
+          "action": {
+            "kind": "publish",
+            "edgeId": "e4"
+          }
+        },
+        {
+          "id": "failed-after-cancel",
+          "from": "cancelling",
+          "to": "failed",
+          "signal": "decode-error",
+          "action": {
+            "kind": "none"
+          }
+        }
+      ],
+      "scheduling": "per-instance-fifo",
+      "maxConcurrentInstances": 32,
+      "onLimit": "reject-and-report",
+      "mailboxCapacity": 8,
+      "mailboxOverflow": "reject-and-report",
+      "signals": [
+        {
+          "id": "sample-arrived",
+          "source": "trigger",
+          "payloadType": "example.sensor/RawSample"
+        },
+        {
+          "id": "decoded",
+          "source": "command-success",
+          "nodeId": "decoder",
+          "operationId": "Decode",
+          "payloadType": "example.sensor/Measurement"
+        },
+        {
+          "id": "decode-error",
+          "source": "command-failure",
+          "nodeId": "decoder",
+          "operationId": "Decode",
+          "payloadType": "example.sensor/DecodeError"
+        },
+        {
+          "id": "cancel",
+          "source": "control"
+        },
+        {
+          "id": "cancel-confirmed",
+          "source": "control"
         }
       ]
     }
