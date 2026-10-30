@@ -1,5 +1,7 @@
 #include "aelyxora/model.hpp"
 #include <functional>
+#include <cmath>
+#include <set>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
@@ -35,6 +37,24 @@ std::vector<Diagnostic> validate(const Project& p) {
         if(!ids.insert("module:"+m.id).second)
             add(ErrorCode::DuplicateId,"modules","duplicate module ID");
         for(const auto& c:m.components) {
+            std::set<std::string> property_names;
+            for(const auto& def:c.property_definitions) {
+                if(def.name.empty() || !property_names.insert(def.name).second)
+                    add(ErrorCode::DuplicateId,c.id,"duplicate or empty property name");
+                if(def.default_value.index()!=static_cast<std::size_t>(def.kind))
+                    add(ErrorCode::MissingField,c.id,"property default type mismatch");
+                if(const auto* d=std::get_if<double>(&def.default_value);d && !std::isfinite(*d))
+                    add(ErrorCode::MissingField,c.id,"nonfinite property default");
+            }
+            for(const auto& [name,value]:c.properties) {
+                const PropertyDefinition* def=nullptr;
+                for(const auto& candidate:c.property_definitions)
+                    if(candidate.name==name) {def=&candidate;break;}
+                if(!def || value.index()!=static_cast<std::size_t>(def->kind))
+                    add(ErrorCode::MissingField,c.id,"undeclared property or type mismatch: "+name);
+                if(const auto* d=std::get_if<double>(&value);d && !std::isfinite(*d))
+                    add(ErrorCode::MissingField,c.id,"nonfinite property override");
+            }
             if(!valid_id(c.id)) add(ErrorCode::InvalidId,"components","invalid component ID");
             if(c.type.empty()) add(ErrorCode::MissingField,c.id,"component type required");
             if(!components.emplace(c.id,&c).second)
