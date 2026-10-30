@@ -219,6 +219,24 @@
       },
       "expected": "GRAPH_EXPORT_UNRESOLVED",
       "note": "Exact package export resolution required; example package is only a design fixture"
+    },
+    {
+      "id": "same-domain-borrow-in-queued-stream",
+      "mutation": {
+        "path": "/dataFlows/0/channels/0/transfer",
+        "value": "borrow"
+      },
+      "expected": "FLOW_BORROW_REQUIRES_SYNC",
+      "note": "e3 is a bounded asynchronous stream; sender/receiver both io-worker does not establish call-scoped lifetime. Structural schema permits borrow token for future synchronous profile, semantic validator must reject."
+    },
+    {
+      "id": "cross-domain-borrow-in-snapshot",
+      "mutation": {
+        "path": "/dataFlows/0/channels/1/transfer",
+        "value": "borrow"
+      },
+      "expected": "FLOW_CROSS_DOMAIN_BORROW",
+      "note": "e4 snapshot crosses io-worker->ui; cross-domain borrow diagnostic takes precedence over same-domain sync-lifetime failure."
     }
   ],
   "mutationSemantics": "Each case is independently applied to a deep copy of baseProject. A `mutation` object is one JSON Pointer replace/add; `mutations` is an ordered sequence of replacements applied atomically to one candidate. Expected diagnostics are specification, NOT observed tests.",
