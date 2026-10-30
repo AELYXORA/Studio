@@ -1,7 +1,5 @@
-# ADR-0006 — Assembly-first components
+# ADR-0006 — Assembly-first component contracts
 
-**Status:** proposed
+**Status:** superseded by [ADR-0007](0007-native-assembly-ui.md).
 
-Human architects own application structure and interface contracts. AI primarily implements components. LLVM/Clang is the preferred multi-target toolchain. Native Assembly is architecture-specific, so component behavior is portable through typed contracts, verified implementations and ABI adapters, not through a single shared instruction syntax. LLVM IR is an optional low-level intermediate representation, distinct from CPU assembly.
-
-Existing C++23 implementations stay as reference behavior until verified Assembly replacements run on x86-64 and AArch64. Qt 6.12/QML remains available for the IDE interface. Acceptance requires ABI documentation, tests, build evidence and cross-target equivalence.
+The former transitional direction allowed C++/Qt bridges in the Studio. ADR-0007 replaces it: the active implementation and declarative UI runtime are owned by AELYXORA, with native Assembly modules and separate platform adapters. This file remains only to preserve decision history; it is not normative.
