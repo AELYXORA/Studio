@@ -42,3 +42,7 @@ Precise generics, escaping rules, compile-time borrow analysis strength, shared 
 
 
 [OwnershipIR and Compile-Time Safety](aui-ownership-ir.md) specifies CFG-based moves, borrows, async boundaries, cleanup and rejection fixtures. Proposed; not implemented.
+
+## First-slice D3 clarification
+
+The [D3 Type and Binding Profile](d3-type-and-binding-profile.md) restricts L0/L1 to Unit/Bool/U32/String, Event<T>, Result<T,E>, and imported verified nominal record values; generic user value construction, mutating state, bind and async lifetime syntax remain D3+ proposals. L0/L1 does not permit hidden text conversions or accessing device handles. Core registry and ABI layouts are unapproved. This avoids treating broad aspirational type tables as already supported implementation.
