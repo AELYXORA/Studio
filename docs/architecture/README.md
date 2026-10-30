@@ -77,3 +77,8 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 - [Types, memory and ownership](aui-types-and-ownership.md) — lifetime, borrowed/owned values, device memory capabilities and concurrency.
 - [Component ABI and asynchronous commands](aui-abi-and-async.md) — effect boundaries, target-specific calling contracts, task outcomes and cancellation races.
+
+
+### Binary component contract
+
+[AUI Component Binary ABI](aui-component-binary-abi.md) specifies proposed descriptors, ownership transfer, allocation, asynchronous completion, version negotiation and target conformance tests. It is not a verified or released ABI.
