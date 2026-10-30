@@ -31,3 +31,7 @@ Missing formal checks include schema size limits, JSON duplicate keys, canonical
 ## D2 behavior fixture schema boundary
 
 The draft project schema now exposes `dataFlows` and `workflows`. The package schema exposes declared `commands`. These fields are a structural interchange **proposal**. Structural checks cannot prove the referenced edge exists, a workflow state is reachable, a provider operation is actually linked, or device access is authorized. [Graph Behavior](graph-behavior-contract.md) defines semantic requirements. Schema files may reject invalid shape before semantic validation; fixtures identify expected first diagnostic by stage.
+
+## D2 execution and provider extension
+
+The draft schema now includes workflow signals (trigger, command-success, command-failure, control), per-instance-fifo scheduling, maxConcurrentInstances, mailboxCapacity and explicit admission/overflow rejection. Component command exports add sideEffectClass and retryPolicy with first-profile retryPolicy 'never'. These are **structural fixture contracts only**. Matching a signal to a locked operation's success/error TypeID, proving capability authorization, bounded scheduler memory, ownership safety, terminal-state race and mult-file crash recovery all require separate semantic/runtime verification. See [D2 Execution and Consistency](d2-execution-consistency.md) and [D2 runtime scenarios](../../examples/architecture-sensor/d2-runtime-scenarios.md). Schema acceptance is not execution evidence.
