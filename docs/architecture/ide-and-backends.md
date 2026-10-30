@@ -4,7 +4,7 @@
 
 ## IDE
 
-C++ and Qt 6.12/QML host project explorer, visual designer, object inspector, architecture view, data/logic editors, code editor, diagnostics and build console. Workspaces are configurable rather than four permanently fixed panes.
+C++23 and Qt 6.12/QML host project explorer, visual designer, object inspector, architecture view, data/logic editors, code editor, diagnostics and build console. Workspaces are configurable rather than four permanently fixed panes.
 
 The UI sends typed commands to headless application services; the core owns validation, undo/redo semantics, project persistence and derived dependency graphs.
 
