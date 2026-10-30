@@ -1,6 +1,6 @@
-# AUI AST and Semantic Analysis v0.1
+# AUI AST and Semantic Analysis
 
-**Status: proposed design contract, not implemented.** This document owns source-tree shape, symbol resolution, type/effect analysis and TypedHIR output. [AUI Syntax v0.1](aui-syntax-v0.1.md) owns surface grammar, [IR/Layout](aui-ir-layout.md) owns ownership lowering, and [Component Framework](component-framework.md) owns component definitions.
+**Status: proposed design contract, not implemented.** This document owns source-tree shape, symbol resolution, type/effect analysis and TypedHIR output. [AUI Syntax](aui-syntax.md) owns surface grammar, [IR/Layout](aui-ir-layout.md) owns ownership lowering, and [Component Framework](component-framework.md) owns component definitions.
 
 ## Compiler boundary
 
@@ -66,4 +66,4 @@ Diagnostic envelope: stable error code, severity, span, graph ID if known, expec
 
 ## Design caveats
 
-The v0.1 source grammar still lacks fully defined event wiring, generic constraint syntax, operators and dynamic collections; AST variants for these are **provisional**. Finalize exact syntax and golden fixture outputs before declaring grammar or semantic analyzer stable. No parser, type checker or AST producer is running.
+The source grammar still lacks fully defined event wiring, generic constraint syntax, operators and dynamic collections; AST variants for these are **provisional**. Finalize exact syntax and golden fixture outputs before declaring grammar or semantic analyzer stable. No parser, type checker or AST producer is running.
