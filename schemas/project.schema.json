@@ -729,7 +729,7 @@
     },
     "retiredIdentities": {
       "type": "array",
-      "description": "D2 candidate tombstone ledger; unique tuple (kind,scopeId,id) enforced by semantic validator",
+      "description": "D2 candidate tombstone ledger; unique tuple (kind,scopeId,id) enforced by semantic validator In the hardware profile, resource-claim tombstones (scopeId=project) preserve non-reuse; pure profile cannot claim hardware IDs.",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -748,7 +748,8 @@
               "state",
               "transition",
               "signal",
-              "data-flow"
+              "data-flow",
+              "resource-claim"
             ]
           },
           "scopeId": {
