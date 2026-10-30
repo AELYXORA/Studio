@@ -6,7 +6,7 @@
 
 **Imagine. Design. Engineer.**
 
-**AI-driven architecture studio for software close to hardware.** Its primary interface is an **interactive Project Architecture Map with an integrated, context-aware AI chat**. The center is neither a form designer nor a source editor: it is the live system graph. Humans own architectural decisions, AI primarily implements and tests components within approved contracts.
+**Architecture-first, AI-native RAD for native systems software.** Its primary interface is an **interactive Project Architecture Map with an integrated, context-aware AI chat**. The center is neither a form designer nor a source editor: it is the live system graph. **Architecture, workflows and data flows come first; AI implements approved component contracts primarily in target-native Assembly.** Declarative AUI preview and UX are downstream projections. Humans own architectural decisions and approvals. The design goal is rapid translation from an idea to a verified native result, not manual widget-driven RAD.
 
 ## Main workspace
 
@@ -27,6 +27,9 @@ Preferred user experience: authorize ChatGPT through an officially supported pro
 Current repository contains architecture specifications, illustrative JSON fixtures, and an experimental Linux x86-64 Assembly JSON lexical preflight. It is not a complete JSON parser or Project Graph validator. There is no runnable AUI compiler, runtime, architecture map, chat integration, renderer or released Studio.
 
 ## Working documents
+
+**Design-first work program (proposed for review):** [Architecture-to-Execution Contract](docs/architecture/architecture-to-execution-contract.md) and [Specification Completion Matrix](docs/architecture/specification-completion-matrix.md). Project sequence: complete/approve design -> implementation -> testing -> correction/re-verification. None of these proposed documents constitutes a design freeze.
+
 
 - [Architecture — source of truth](docs/architecture/README.md)
 - [Interactive map workspace](docs/architecture/workspace.md)
