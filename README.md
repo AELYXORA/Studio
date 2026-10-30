@@ -20,7 +20,7 @@ Preferred user experience: authorize ChatGPT through an officially supported pro
 
 ## Current status
 
-Only an experimental Linux x86-64 Assembly UI-tree validator with manual local test runner (`sh build.sh`) exists. There is no graphical architecture map, chat integration, native renderer or released Studio.
+Current repository contains architecture specifications and illustrative JSON fixtures only. There is no runnable AUI compiler, runtime, architecture map, chat integration, renderer or released Studio.
 
 ## Working documents
 
