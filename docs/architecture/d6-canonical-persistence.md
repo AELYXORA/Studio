@@ -45,6 +45,8 @@ A *snapshot* contains a canonical project manifest, committed lock, source bytes
 
 **Open:** complete snapshot inventory normalization, source-root security, independent verification and architect approval of the proposed [export-contract digest](d2-export-contract-identity.md), package signing, graph/source/view revision tracking, lock canonicalization, full persistence schema and verified host filesystem capability.
 
+**Operation provenance for ambiguous saves:** HEAD and snapshot index contain the same committed operationId (null only for genesis). The HEAD checksum and snapshot index hash cover it, and recovery compares them. This proves correlation for the **retained committed records only**. With two HEAD slots there is NO unlimited durable operationId replay memory: older repeated IDs require an accepted persistent operation ledger, or must be rejected as unresolvable rather than advertised as deduplicated. [D2/D6 Baseline Review](d2-d6-baseline-review.md) tracks this as P0.
+
 ## P3. Semantic GraphRevision versus ViewRevision
 
 - GraphRevision N is a monotonic document revision advanced by each **accepted semantic mutation**. An explicitly accepted semantic no-op does not increment N and yields no new graph snapshot. Use separate ViewRevision for map-only changes.
