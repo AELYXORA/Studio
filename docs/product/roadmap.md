@@ -1,5 +1,7 @@
 # AELYXORA Delivery Roadmap
 
+**Current implementation status:** [verified artifacts, missing components and authoritative milestones](../architecture/PROJECT-STATUS.md).
+
 **Product:** Assembly-first AI-driven systems development; main workspace is the interactive Architecture Map plus contextual AI Chat. The target is software close to hardware.
 
 1. **G0 Design baseline:** resolve canonical graph and AUI contracts, supply inspectable fixtures and specified acceptance checks; no CI.
