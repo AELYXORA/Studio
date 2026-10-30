@@ -1,13 +1,25 @@
 #pragma once
 #include <cstdint>
+#include <map>
+#include <variant>
 #include <string>
 #include <string_view>
 #include <vector>
 namespace aelyxora {
+using PropertyValue = std::variant<bool, std::int64_t, double, std::string>;
+enum class PropertyKind { Boolean, Integer, Real, Text };
+struct PropertyDefinition {
+    std::string name;
+    PropertyKind kind;
+    PropertyValue default_value;
+    bool writable = true;
+};
 struct Target { std::string id, backend; };
 struct Component {
     std::string id, type;
     std::vector<std::string> dependencies;
+    std::vector<PropertyDefinition> property_definitions;
+    std::map<std::string, PropertyValue> properties;
 };
 struct Module { std::string id; std::vector<Component> components; };
 struct Project {
