@@ -17,7 +17,8 @@
       "path": "/resolved/0/packageVersion",
       "replacement": "2.0.0",
       "expected": "PKG_VERSION_CONFLICT",
-      "note": "Exact project dependency requires 1.0.0"
+      "note": "For resolver-stage isolation, treat the modified lock as a candidate, not an already published snapshot; otherwise changed lock bytes invalidate the snapshot index first.",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "alter-lock-export-contract-digest",
@@ -25,13 +26,15 @@
       "path": "/resolved/0/exports/0/contractDigest",
       "replacement": "0000000000000000000000000000000000000000000000000000000000000000",
       "expected": "PKG_EXPORT_DIGEST_MISMATCH",
-      "note": "Require actual recomputation from verified canonical package manifest"
+      "note": "Run the verified package/export resolver on a candidate lock. Raw snapshot verification with unchanged index must fail lock checksum first.",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "delete-locked-source",
       "target": "package-objects",
       "deletePath": "src/consumer.S",
-      "expected": "PKG_MISSING"
+      "expected": "PKG_MISSING",
+      "validationScope": "raw-recovery-or-file-integrity"
     },
     {
       "id": "source-byte-mutation",
@@ -40,7 +43,8 @@
       "replaceBytes": "xor %eax, %eax",
       "withBytes": "mov %eax, %eax",
       "expected": "PKG_DIGEST_MISMATCH",
-      "note": "A change to raw ASM bytes invalidates locked package hash without necessarily changing the public contract digest"
+      "note": "A change to raw ASM bytes invalidates locked package hash without necessarily changing the public contract digest",
+      "validationScope": "raw-recovery-or-file-integrity"
     },
     {
       "id": "extra-lock-entry",
@@ -59,7 +63,8 @@
         "exports": []
       },
       "expected": "PKG_LOCK_EXTRANEOUS",
-      "note": "Project has only example.locked dependency"
+      "note": "Candidate-lock resolver-stage fixture; if treated as committed unchanged snapshot, the lock byte hash would fail first.",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "dependency-drift",
@@ -72,27 +77,31 @@
         }
       ],
       "expected": "PKG_LOCK_DEPENDENCY_DRIFT",
-      "note": "Recompute package digest/lock coherently for this semantic resolver test; otherwise earlier PKG_DIGEST_MISMATCH takes precedence"
+      "note": "First recompute packageContentDigest and update lock.contentDigest to the edited manifest while leaving lock.dependencies unchanged. Run the isolated resolver to obtain PKG_LOCK_DEPENDENCY_DRIFT; otherwise the earlier package hash mismatch is expected.",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "missing-immutable-object",
       "target": "package-objects",
       "deletePath": "objects/packages/<packageContentDigest>",
-      "expected": "PERSIST_SNAPSHOT_CORRUPT"
+      "expected": "PERSIST_SNAPSHOT_CORRUPT",
+      "validationScope": "raw-recovery-or-file-integrity"
     },
     {
       "id": "wrong-channel-capacity",
       "target": "project",
       "path": "/dataFlows/0/channels/0/capacity",
       "replacement": 0,
-      "expected": "SCHEMA_INVALID"
+      "expected": "SCHEMA_INVALID",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "unknown-operation",
       "target": "project",
       "path": "/workflows/0/transitions/0/action/operationId",
       "replacement": "MissingOperation",
-      "expected": "WORKFLOW_PROVIDER_UNRESOLVED"
+      "expected": "WORKFLOW_PROVIDER_UNRESOLVED",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "bad-public-command-type",
@@ -100,14 +109,16 @@
       "path": "/components/1/commands/0/errorType",
       "replacement": "example.locked/Tick",
       "expected": "PKG_EXPORT_DIGEST_MISMATCH",
-      "note": "At verified package stage with unchanged lock exports; after coherent lock update, project workflow signal must fail WORKFLOW_SIGNAL_TYPE"
+      "note": "First recompute the edited packageContentDigest, update the exact lock contentDigest and package object pointer, and keep the **old** exported contract digest in lock.exports. Then the isolated resolver must fail PKG_EXPORT_DIGEST_MISMATCH. If no hashes are repaired, PKG_DIGEST_MISMATCH is the correct earlier failure.",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "corrupt-head-checksum",
       "target": "head",
       "path": "/checksum",
       "replacement": "0000000000000000000000000000000000000000000000000000000000000000",
-      "expected": "PERSIST_HEAD_CHECKSUM"
+      "expected": "PERSIST_HEAD_CHECKSUM",
+      "validationScope": "raw-recovery-or-file-integrity"
     },
     {
       "id": "corrupt-index-package-reference",
@@ -115,14 +126,16 @@
       "path": "/packageObjects/0/contentDigest",
       "replacement": "0000000000000000000000000000000000000000000000000000000000000000",
       "expected": "PERSIST_SNAPSHOT_CORRUPT",
-      "note": "First digest error may be snapshot hash mismatch unless index/head hashes are consistently regenerated"
+      "note": "First digest error may be snapshot hash mismatch unless index/head hashes are consistently regenerated",
+      "validationScope": "raw-recovery-or-file-integrity"
     },
     {
       "id": "duplicate-project-id",
       "target": "project",
       "path": "/nodes/1/id",
       "replacement": "source",
-      "expected": "GRAPH_DUPLICATE_ID"
+      "expected": "GRAPH_DUPLICATE_ID",
+      "validationScope": "isolated-resolver-or-design-candidate"
     },
     {
       "id": "view-only-translation",
@@ -130,14 +143,16 @@
       "path": "/positions/1/x",
       "replacement": 480,
       "expected": "SEMANTIC_GRAPH_UNCHANGED",
-      "note": "View-only change causes a new view/snapshot byte digest but no changed semanticGraphDigest or native build input"
+      "note": "View-only change causes a new view/snapshot byte digest but no changed semanticGraphDigest or native build input",
+      "validationScope": "revision-digest-comparison"
     },
     {
       "id": "stale-save",
       "target": "save-command",
       "expectedRevision": 0,
       "actualRevision": 1,
-      "expected": "PROJECT_STALE_REVISION"
+      "expected": "PROJECT_STALE_REVISION",
+      "validationScope": "raw-recovery-or-file-integrity"
     },
     {
       "id": "diamond-conflict",
@@ -154,8 +169,10 @@
           "C@2.0"
         ]
       },
-      "expected": "PKG_VERSION_CONFLICT"
+      "expected": "PKG_VERSION_CONFLICT",
+      "validationScope": "isolated-resolver-or-design-candidate"
     }
   ],
-  "expectedResultSchema": "Stable primary diagnostic, selected stage, file/ID path, actual/expected, sorted dependency provenance, no guessed successful runtime behavior."
+  "expectedResultSchema": "Stable primary diagnostic, selected stage, file/ID path, actual/expected, sorted dependency provenance, no guessed successful runtime behavior.",
+  "validationMode": "Each case names its intended validation layer. For isolated resolver/graph cases, recompute containing snapshot/HEAD hashes if the harness reaches them first; for raw recovery cases, DO NOT repair hashes. Earliest pipeline stage has priority. Mutation-only fixture edits are not observed test results."
 }
