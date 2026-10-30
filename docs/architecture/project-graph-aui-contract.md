@@ -73,3 +73,38 @@ Exact public port export syntax; AUI event connection grammar; dynamic key synta
 ## D2 behavior integration (proposal)
 
 The [Graph Behavior Contract](graph-behavior-contract.md) defines workflow identity, state transitions, data-flow binding references, capacity, overflow, ownership and the event-to-command authorization boundary. AUI source declarations and view identities must resolve to **those same canonical GraphNodeID/EdgeID references**, never to duplicate mutable flow diagrams. Changes to binding mode, capacity, transfer or workflow action require an approved graph revision. UI binding propagation cannot authorize hardware effects. The sensor behavior fixture is illustrative only, not runnable.
+
+## 9. D2 identity, contract resolution and ABI boundary (design proposal)
+
+[D2 Identity and Type Resolution](d2-identity-and-type-resolution.md) owns canonical identity semantics. In particular, GraphNodeID = one persistent **instance**; exported TypeID = package-bound **declaration**; AUI SymbolID = **source symbol**; ViewIdentity = **runtime view instance**. A SourceSpan is only a byte-range diagnostic hint, not any of these IDs.
+
+**Resolved binding index (disposable, never a second authority)** conceptually contains:
+
+    {
+      graphRevision, semanticGraphDigest, GraphNodeID, PortID/OperationID,
+      packageId, lockedPackageContentDigest, exportedTypeID,
+      exportedContractDigest, AUI SymbolID?,
+      sourcePath, exactSourceDigest, sourceSpan?,
+      targetTriple, targetABIRevision
+    }
+
+Index validation MUST check source hash, locked package digest, graph revision and export contract digest before using an origin mapping. An AUI rewrite changing formatting can change source hash/span without changing GraphNodeID; re-create index instead of generating new architecture IDs. A visual relocation only changes ViewRevision.
+
+**Authority/flow across stages:**
+
+| Boundary | Authoritative input | Output or permitted action | Forbidden inference |
+| --- | --- | --- | --- |
+| Graph -> AUI | validated node/edge/port/export and target contracts | named typed component/command declarations or reconciliation proposal | Diagram line auto-creates executable handler |
+| AUI -> Graph | parsed source export change + exact source digest | proposed typed graph diff requiring human review | Human source overwritten or graph implicitly mutated |
+| Graph/AUI -> TypedHIR | locked export types, effects, source declarations | deterministic typed IR + origin mapping | Type equal by display spelling only |
+| TypedHIR -> OwnershipIR | exact lifetime, transfer, scheduler rules | borrow/move/error proofs | Cross-domain pointer borrow silently accepted |
+| OwnershipIR -> TargetMIR | target triple, native ABI, effects and layout contract | target-specific machine-level plan | Generic logical type implies same ABI bytes on Windows and ARM |
+| TargetMIR -> native module | approved linked exports, capabilities and source ownership | actual object/link artifact after later implementation | A missing source/provider becomes an implicit AI stub |
+
+**Export contract digest** must include public port and command identities, canonical input/output/error TypeIDs, ownership, effect set, execution domain and target compatibility. Internal source reformatting must not change it, whereas any public contract mutation must trigger explicit source/graph reconciliation and build invalidation. Exact binary descriptor layout belongs to D4 and is not frozen here.
+
+**Operation fulfillment:** The example sensor Decode export is **declared but unimplemented**. Structural JSON accepting its declaration does not make it callable. A semantic validator may report the export as declared, while an implementation readiness gate must prove source presence, ABI linkage and target support. User-visible diagnostics must distinguish DECLARED, LINKED, BUILT, TESTED and UNSUPPORTED.
+
+**AI boundary:** model-generated source and graph diffs are untrusted proposals. Their types, dependencies, capabilities and source ownership must match the frozen graph/lock before review; accepting a proposal does not authorize executing code or external effects.
+
+**Open dependencies:** approved source-level import/export grammar, canonical resolved package contract digest, full TypeID resolution, AUI property and event identity, native ABI byte layout, target-specific compiler errors and source mapping verification. This section is Proposed, not a D2/D3/D4 sign-off.
