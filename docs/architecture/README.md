@@ -144,7 +144,7 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 ## S0 implementation status
 
-The earlier Python validator and tests have been removed. S0 currently has **no executable implementation**. See [Implementation Language Policy](language-policy.md) and [S0 status](s0-graph-implementation.md).
+The earlier Python validator and tests have been removed. S0 has a limited Linux x86-64 Assembly lexical preflight but **no complete JSON parser or Project Graph validator**. See [Implementation Language Policy](language-policy.md) and [S0 status](s0-graph-implementation.md).
 
 
 **Implementation restriction:** Python is prohibited in the Studio codebase, build tooling and tests. [Policy](language-policy.md).
