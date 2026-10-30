@@ -43,3 +43,5 @@ Current repository contains architecture specifications, illustrative JSON fixtu
 **Documentation policy:** architecture README is canonical, roadmap contains observable milestones, other documents support implementation. No GitHub Actions / CI before release preparation.
 
 - [Complete Studio platform contract — roles, workflows, palettes, events, tasks, data flow, zero-cost goals](docs/architecture/studio-platform-contract.md)
+
+**Architecture review status:** [D2/D6 integrated baseline review](docs/architecture/d2-d6-baseline-review.md) tracks open P0 decisions and distinguishes proposals from accepted contracts. No product implementation is authorized until the full D1–D8 design baseline is explicitly approved. All documentation changes are committed directly to main.
