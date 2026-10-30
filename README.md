@@ -25,3 +25,7 @@ Start at **[Architecture](docs/architecture/README.md)**, then read the [Applica
 **Design visually. Engineer precisely. Own your code.**
 
 This repository currently captures design decisions and requirements. The roadmap describes intended capabilities rather than completed functionality.
+
+## Headless foundation
+
+The repository now contains an **experimental C++20 model library**, a [draft JSON Schema](schemas/project.schema.json), a [CustomerDesk fixture](examples/customerdesk/project.aelyxora.json), and [model contract tests](tests/model_tests.cpp). These are an initial prototype, **not a complete IDE**. See [Formal Schema](docs/architecture/formal-schema.md) for limitations and build instructions.
