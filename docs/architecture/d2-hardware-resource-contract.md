@@ -45,7 +45,7 @@ All owner/resource nodes and the referenced edge must exist and be on a validate
 
 An exclusive claim has one owner for the overlapping physical resource/IRQ/DMA channel in a given resolved namespace; conflicting owners reject RESOURCE_EXCLUSIVE_CONFLICT. shared-read is allowed **only** for read-only MMIO or read-only memory when the target adapter independently proves safe sharing. It is not a shortcut to share DMA, interrupt acknowledge or writable registers. A resourceKind not supported by the target adapter -> RESOURCE_KIND_UNSUPPORTED.
 
-ResourceClaimID is separate from GraphNodeID, exported TypeID, address, pointer and device handle. Retiring a claim must record non-reuse across revisions. The existing retiredIdentities ledger does not yet admit resource-claim; a future accepted migration must extend its kind enum and preserve past claim IDs. Until then, **hardware-profile deletion/reuse protection is an explicit D2/D6 blocker** and no general release-grade claim is made.
+ResourceClaimID is separate from GraphNodeID, exported TypeID, address, pointer and device handle. Retiring a claim must record non-reuse across revisions. The draft retiredIdentities schema **now admits resource-claim tombstones** with scopeId=project. The graph semantic validator must reject reuse of any retired claim ID and preserve tombstones across valid migration/import; the full history-retention, merge and compaction guarantees are still a D2/D6 blocker. This is proposed schema shape, not an implemented migration engine.
 
 ## H3. Kind-specific semantics
 
@@ -99,7 +99,7 @@ The 0.1-draft pure projection remains EXACTLY as documented and byte-for-byte un
 For 0.2-hw-draft, the [Semantic Projection](d2-d6-semantic-projection.md) extends the SAME top-level projection with:
 - schemaVersion = 0.2-hw-draft;
 - one **required** resourceModel field equal to the strictly validated object, with profile and both arrays;
-- targetRequirements sorted by targetId, iso isaFeatures sorted case-sensitive ASCII (duplicates rejected);
+- targetRequirements sorted by targetId, with isaFeatures sorted case-sensitive ASCII (duplicates rejected);
 - claims sorted by id, requiredCapabilities sorted bytewise unique;
 - all claim objects contain exactly the schema-declared base fields plus exactly their one kind-specific object, with their full field set including base/length, widths/alignment, access/ordering, IRQ/DMA semantics, exact target and graph references;
 - all other existing first-profile fields and their normalization rules unchanged.
@@ -111,7 +111,7 @@ Canonicalize keys by the same D6 P1 UTF-8 key sort and strings without case norm
 ## H7. Architecture review blockers
 
 1. Define and pin actual target feature registry, address-space alias resolution and target adapter contracts per supported OS/board.
-2. Extend retired identity kind set with resource-claim, define migrate/delete/rename and import safety; preserve graph history and exact IDs.
+2. Verify the newly added resource-claim tombstone kind end to end; define migrate/delete/rename and import safety; preserve graph history and exact IDs.
 3. Prove native ABI register widths, memory ordering, IRQ acknowledgement, DMA fences/buffer ownership and quiescence/cancel.
 4. Pin hardware-specific capability/effect grammar, actual user/kernel/bare-metal privilege isolation, device simulator versus real hardware evidence.
 5. Independent standards-compliant JSON schema/semantic fixture tests and exact canonical hardware digest vectors; Phase III fault injection and target verification.
