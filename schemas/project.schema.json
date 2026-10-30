@@ -1,16 +1,146 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "AELYXORA project draft",
+  "title": "AELYXORA Project Schema - draft",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "projectId", "name", "targets", "modules"],
+  "required": [
+    "schemaVersion",
+    "projectId",
+    "name",
+    "targets",
+    "modules"
+  ],
   "properties": {
-    "schemaVersion": {"const": "0.1-draft"},
-    "projectId": {"$ref": "#/$defs/id"},
-    "name": {"type": "string", "minLength": 1},
-    "revision": {"type": "integer", "minimum": 0},
-    "targets": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "backend"], "properties": {"id": {"$ref": "#/$defs/id"}, "backend": {"type": "string", "minLength": 1}}}},
-    "modules": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "components"], "properties": {"id": {"$ref": "#/$defs/id"}, "components": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["id", "type"], "properties": {"id": {"$ref": "#/$defs/id"}, "type": {"type": "string", "minLength": 1}, "dependencies": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}}}}}}}}
+    "schemaVersion": {
+      "const": "0.1-draft"
+    },
+    "projectId": {
+      "$ref": "#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "backend"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "backend": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "components"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "$ref": "#/$defs/id"
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "dependencies": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "$ref": "#/$defs/id"
+                  }
+                },
+                "propertyDefinitions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "kind",
+                      "default"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "kind": {
+                        "enum": [
+                          "boolean",
+                          "integer",
+                          "real",
+                          "text"
+                        ]
+                      },
+                      "default": {
+                        "type": [
+                          "boolean",
+                          "integer",
+                          "number",
+                          "string"
+                        ]
+                      },
+                      "writable": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": [
+                      "boolean",
+                      "integer",
+                      "number",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
-  "$defs": {"id": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,128}$"}}
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]{1,128}$"
+    }
+  }
 }
