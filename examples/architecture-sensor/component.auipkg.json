@@ -17,7 +17,7 @@
         {
           "id": "sample",
           "direction": "out",
-          "type": "RawSample"
+          "type": "example.sensor/RawSample"
         }
       ],
       "capabilities": [
@@ -38,12 +38,12 @@
         {
           "id": "raw",
           "direction": "in",
-          "type": "RawSample"
+          "type": "example.sensor/RawSample"
         },
         {
           "id": "reading",
           "direction": "out",
-          "type": "Measurement"
+          "type": "example.sensor/Measurement"
         }
       ],
       "capabilities": [],
@@ -57,5 +57,35 @@
     }
   ],
   "dependencies": [],
-  "testFixtures": []
+  "testFixtures": [],
+  "types": [
+    {
+      "typeId": "example.sensor/RawSample",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "bytes",
+          "type": "Bytes"
+        },
+        {
+          "name": "capturedAt",
+          "type": "U64"
+        }
+      ]
+    },
+    {
+      "typeId": "example.sensor/Measurement",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "value",
+          "type": "F64"
+        },
+        {
+          "name": "valid",
+          "type": "Bool"
+        }
+      ]
+    }
+  ]
 }
