@@ -1,39 +1,14 @@
-# Product Scope and Roadmap
+# AELYXORA Studio Roadmap
 
-**Status:** planned.
+**Target:** human-architected, AI-implemented Assembly-first RAD environment with our own declarative UI.
 
-## Positioning
+1. **Assembly baseline:** LLVM/Clang assembler, native ABI contract, tests, CI on supported targets.
+2. **Declarative AST:** specify source grammar, parser, type validation, stable keys and diagnostics.
+3. **Minimal runtime:** state, deterministic diff, layout, events and a platform adapter.
+4. **First window:** run a real native window built with AELYXORA UI; support text/button interaction.
+5. **Visual RAD:** scene tree, drag/drop, inspector, property editing and architecture view.
+6. **AI component engineer:** contract-scoped generation, reviewable diffs, ABI and runtime tests.
+7. **Projects:** versioned persistence, safe regeneration, source ownership and packaging.
+8. **Cross-target expansion:** AArch64 and further OS targets, verified individually.
 
-AELYXORA Studio is a professional open-source, AI-native RAD development environment inspired by Delphi/WinDev's visual productivity, but designed around typed contracts, explicit source ownership and modern toolchains.
-
-## Milestones (capability-gated, not date promises)
-
-**Foundation:** core project schema, typed graph, stable IDs, serialization, validation, migrations, test fixtures.
-
-**IDE Shell:** open/save/create projects, architecture navigation, inspector and source editor, core command/undo layer.
-
-**Vertical Slice:** visual form, data binding and SQLite CRUD; generate and build one real desktop application on Windows and Linux.
-
-**AI Architect:** scoped project understanding; diff-first model/source proposals, approval, verification and rollback.
-
-**Developer Experience:** debugging, visual quality, imports, packaging, documentation and component SDK boundary.
-
-## Not MVP
-
-Universal language/compiler tooling, all OS targets simultaneously, component marketplace, collaborative SaaS backend, freeform code reverse engineering and guaranteed automatic optimization.
-
-## Success definition
-
-A developer can visually construct a small but useful standalone data-driven application, inspect and modify generated and custom source safely, build/package it reproducibly, and optionally use AI to modify it without corrupting the project.
-
-## Architecture hardening prerequisites
-
-Before implementing a broad component palette, prove the following in order:
-
-1. **Core correctness:** canonical schema, revisioned commands, invalid-state prevention, migrations and crash-safe persistence.
-2. **Source safety:** generator manifest, path ownership, stable interfaces and external edit conflict handling.
-3. **Runtime semantics:** typed one-way/two-way bindings, cancellation, scheduling and SQLite transactions.
-4. **Tooling boundaries:** capability matrix, isolated preview/build workers, logging and credentials.
-5. **Evidence:** automated gate G0–G7 reporting from the [verification plan](../architecture/verification-plan.md).
-
-A broad AI agent, plugin marketplace and multi-platform parity remain out of scope until the vertical slice passes these gates.
+**Not yet implemented:** renderers, IDE, parser, AI integration, multi-target code generation, production persistence. No release date or unsupported platform guarantees.
