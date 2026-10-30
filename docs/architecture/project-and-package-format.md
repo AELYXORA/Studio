@@ -1,6 +1,6 @@
 # Project Graph and Component Package Format
 
-**Status: proposed schema draft, not implemented.** JSON is selected for the **first inspectable interchange prototype only**; final storage encoding is not frozen. This document owns persistence, package discovery and integrity semantics. The Project Graph owns node/edge meaning; the ABI document owns native calling conventions.
+**Status: proposed schema draft, not implemented.** JSON is selected for the **current inspectable interchange fixtures**; final storage encoding is not frozen. This document owns persistence, package discovery and integrity semantics. The Project Graph owns node/edge meaning; the ABI document owns native calling conventions.
 
 ## Repository layout
 
