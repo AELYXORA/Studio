@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AUI Package Lock — proposed structural shape",
+  "type": "object",
+  "required": [
+    "format",
+    "lockFormat",
+    "projectId",
+    "resolved",
+    "toolchain"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.lock"
+    },
+    "lockFormat": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resolved": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "packageId",
+          "packageVersion",
+          "contentDigest",
+          "sourceRoot",
+          "dependencies",
+          "targets"
+        ],
+        "properties": {
+          "packageId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "packageVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contentDigest": {
+            "type": "object",
+            "required": [
+              "algorithm",
+              "value"
+            ],
+            "properties": {
+              "algorithm": {
+                "const": "sha256"
+              },
+              "value": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "additionalProperties": false
+          },
+          "sourceRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "packageId",
+                "packageVersion"
+              ],
+              "properties": {
+                "packageId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "packageVersion": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "required": [
+        "compiler",
+        "assembler",
+        "linker",
+        "runtimeAbi"
+      ],
+      "properties": {
+        "compiler": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assembler": {
+          "type": "string",
+          "minLength": 1
+        },
+        "linker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtimeAbi": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
