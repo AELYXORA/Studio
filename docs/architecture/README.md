@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D2/D6 exact projection and linked reference — proposed
+
+[Exact Semantic Graph Projection](d2-d6-semantic-projection.md) and [Offline Dependency Closure](d6-offline-dependency-resolution.md) now govern the candidate digest/lock pipeline. The [Locked Pure Reference](../../examples/locked-pure-reference/README.md) supplies real reference ASM bytes and an internally cross-linked project, lock and immutable snapshot for future validation tests. Its source bytes are **not** a compiled AELYXORA component ABI or runtime success.
+
 ## D2/D6 baseline consistency review — proposed
 
 [Contradiction and decision register](d2-d6-baseline-review.md) now tracks the integrated architecture-to-storage boundary, remaining P0 choices and acceptance criteria. [Logical Export Contract Identity](d2-export-contract-identity.md) explains why changing ASM source bytes can invalidate a package/build without changing semantic architecture. [Export Reference Vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json) distinguish those digests. D2/D6 have NOT been approved or implemented.
