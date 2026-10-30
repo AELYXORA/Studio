@@ -35,7 +35,7 @@ Use **accepted**, **proposed**, **open** and **verified** labels with explicit e
 
 ## Immediate next design pass
 
-Specify a versioned canonical Project Graph sample, formal AUI grammar draft, and one complete flow: sensor IRQ -> bounded task channel -> typed state -> architecture map visualization -> AI-proposed ASM driver change -> approval and local verification. Keep user-facing map central; AUI supports it.
+Maintain the existing illustrative Project Graph sample and proposed AUI grammar; specify and eventually verify one complete flow: sensor IRQ -> bounded task channel -> typed state -> architecture map visualization -> AI-proposed ASM driver change -> approval and local verification. Keep user-facing map central; AUI supports it.
 
 ## Design pass: grammar, compiler IR and runtime ownership
 
