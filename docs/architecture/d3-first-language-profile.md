@@ -41,7 +41,7 @@ Notation: braces mean repetition, square brackets optional, bar alternative, ID/
                        "(", [ namedArgs ], ")", ";", "}" ;
     viewExpr         = viewName, "(", [ namedArgs ], ")",
                        [ "{", viewExpr, { viewExpr }, "}" ], { modifier } ;
-    modifier         = ".", ID, "(", namedArgs, ")" ;
+    modifier         = ".", ( ID | "on" ), "(", namedArgs, ")" ;
     namedArgs        = namedArg, { ",", namedArg } ;
     namedArg         = ID, ":", pureAtom ;
     pureAtom         = STR | INT | "true" | "false" | memberPath ;
@@ -55,7 +55,7 @@ Notation: braces mean repetition, square brackets optional, bar alternative, ID/
 Static restrictions beyond grammar:
 1. Exactly one top-level view expression; VStack/HStack require one or more children, Text/Button require none. The four built-ins must be imported from a pinned core registry. No arbitrary unknown view call is accepted for linked output.
 2. All arguments are named, no positional shorthand, and duplicate argument labels fail. Static named property signatures: VStack/HStack(spacing: U32); Text(value: String); Button(title: String); optional accessibilityLabel(value: String) visual modifier; optional Button-only .on(activated: localEventID).
-3. Constructor and child expression parse before any chained modifiers, which apply left-to-right to the immediately preceding view. No general expression operator precedence in this first profile. Member paths are pure property reads, never function calls.
+3. Constructor and child expression parse before any chained modifiers, which apply left-to-right to the immediately preceding view. The reserved keyword on is intentionally legal only after dot in the recognized event-attachment modifier, not as a general declaration ID. No general expression operator precedence in this first profile. Member paths are pure property reads, never function calls.
 4. L1 command declaration requires Result<Success,Error> and explicit on domain. Omitted effects(...) means empty set; no implicit effects. Handler has exactly one send; no await, return or in-handler state mutation.
 5. Event attachment connects typed Button.activated Event<Unit> to a declared local Event<Unit>, not directly to a graph edge or physical operation. A handler dispatches a *declared* command. The actual graph provider is linked separately by an approved D3 link map.
 6. Integer literal is only used in exact compatible numeric property context. String/Bool/U32 conversions must be explicit in later profile; Text(value: 12) is invalid.
