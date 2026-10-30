@@ -120,3 +120,8 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [AI Engineering Workflow and Tool Integration](ai-engineering-workflow.md) defines scoped context disclosure, structured proposals, human approval, controlled tool execution and verification evidence. Proposed, not implemented.
+
+
+## Architecture consistency review
+
+[Architecture Consistency and Completeness Audit](consistency-audit.md) records confirmed invariants, unresolved incompatibilities, authoritative documents and prioritized closure criteria. Findings are design-review results, not verified implementation.
