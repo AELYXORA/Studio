@@ -42,7 +42,7 @@
         {
           "id": "sample",
           "direction": "out",
-          "type": "RawSample"
+          "type": "example.sensor/RawSample"
         }
       ]
     },
@@ -55,12 +55,12 @@
         {
           "id": "raw",
           "direction": "in",
-          "type": "RawSample"
+          "type": "example.sensor/RawSample"
         },
         {
           "id": "reading",
           "direction": "out",
-          "type": "Measurement"
+          "type": "example.sensor/Measurement"
         }
       ]
     },
@@ -72,7 +72,7 @@
         {
           "id": "reading",
           "direction": "in",
-          "type": "Measurement"
+          "type": "example.sensor/Measurement"
         }
       ]
     }
