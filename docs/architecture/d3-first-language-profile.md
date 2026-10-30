@@ -12,7 +12,7 @@
 
 - Strict UTF-8 without BOM. Byte spans [start,end) are zero-based, half-open positions into exact original file bytes. Preserve source trivia in lossless CST.
 - Identifiers are Unicode XID_Start followed by XID_Continue, compared under NFC. Same-scope NFC collisions -> AUI_DUPLICATE_SYMBOL; preserve original spellings and byte spans.
-- Reserved ASCII keywords are import, component, input, event, command, effects, on, send, true, false; case-sensitive. ui, io-worker and state-write are contextual domain/effect atoms, never automatically privileged operations.
+- Active ASCII keywords are import, component, input, event, command, effects, on, send, true, false; case-sensitive. The lexer also recognizes the future-profile tokens state, derived, bind, task, await, service and the version marker @ specifically to report AUI_PROFILE_UNSUPPORTED when those constructions are attempted in L0/L1; recognition is **not permission** to use them. ui, io-worker and state-write are contextual domain/effect atoms, never automatically privileged operations.
 - Whitespace outside strings and // line comments are insignificant; block comments are not supported. No comments in string literals.
 - Double-quoted strings accept JSON escapes for quote, backslash, slash, newline, carriage return, tab, backspace, form feed, and four-hex-digit Unicode escapes with required surrogate pairs. Reject invalid escapes, unpaired surrogates and raw controls. String values preserve scalar sequences, without implicit display normalization.
 - Unsigned decimal integers are 0 or [1-9][0-9]*. No negatives, separators, exponents, fractions or numeric units in first slice. Integer must fit exact expected type and 2^53-1 literal bound; otherwise AUI_NUMBER_RANGE. true/false are Bool.
@@ -63,7 +63,7 @@ Static restrictions beyond grammar:
 
 ## L3. Error recovery
 
-Lexical errors block parse-stage success. Parser may recover after a semicolon or balanced brace for editor diagnostics, but cannot emit valid TypedHIR or executable output from an error-recovered tree. Unknown package, ambiguous imported component, invalid event source, wrong payload, missing command provider and target permissions are separately diagnosed by stage. Do not report successful linkage on a syntax-only fixture.
+Lexical errors block parse-stage success. Parser may recover after a semicolon or balanced brace for editor diagnostics, but cannot emit valid TypedHIR or executable output from an error-recovered tree. Future-profile keywords/constructions such as state or await and import @versions produce AUI_PROFILE_UNSUPPORTED under the first-profile gate rather than being executed. Unknown package, ambiguous imported component, invalid event source, wrong payload, missing command provider and target permissions are separately diagnosed by stage. Do not report successful linkage on a syntax-only fixture.
 
 No source statement can fetch dependencies, execute a native command, instantiate a privileged service or change Project Graph. The file is an untrusted declaration until exact import/export resolution and human approval of relevant graph mutations.
 
