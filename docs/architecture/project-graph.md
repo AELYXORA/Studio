@@ -1,6 +1,6 @@
 # Project Graph — Canonical Model
 
-**Status:** normative design specification; implementation not started.
+**Status:** authoritative graph topology design **candidate**, pending explicit D2 architect acceptance. No implementation started. [Graph Behavior Contract](graph-behavior-contract.md) owns detailed workflows/data-flow semantics; this document owns canonical node/edge identities and graph structure.
 
 ## 1. Purpose and ownership
 
@@ -22,13 +22,36 @@ The **Project Graph** is the canonical, typed architecture model. The interactiv
 
 All references use IDs, not screen labels, coordinates or file paths. Renaming does not regenerate identity.
 
-## 3. Typed graph and rules
+## 3. Typed graph and rules — D2 design candidate
 
-Node kinds: module, component, interface, CPU/SoC, bus, device, driver, firmware interface, protocol, storage, service and external system. A node may carry typed extension data; unknown kinds are preserved on disk but unavailable for execution until understood.
+**Identity:** ProjectID, GraphNodeID, EdgeID, and GraphNodeID/PortID are stable under rename, source formatting and map rearrangement. A TypeID resolves to an exact locked package export. WorkflowID, WorkflowID/StateID, WorkflowID/TransitionID and DataFlowID reference this same canonical graph, never a detached diagram. Identifier normalization and canonical digest/encoding remain P0 design questions; do not confuse AUI Unicode source names with persistent graph IDs.
 
-Edge kinds: dependency, call, data flow, event, interrupt, protocol, resource access, containment and ownership. Each edge has direction and a compatibility rule. Containment must be acyclic. Call and data dependency cycles require explicit design review; no blanket ban because some bidirectional protocols and state machines legitimately cycle. A data-flow binding graph without a declared delayed-state boundary must be acyclic.
+**Node kinds (first proposed profile):** module, component, interface, cpu, bus, device, driver, firmware-interface, protocol, storage, service, external-system. Unknown extension kinds may be imported/preserved only under an explicit compatible extension policy; they are not executable by default.
 
-Ports declare direction (input/output/bidirectional), value type, optionality, multiplicity, synchronization, and effect domain. Validate endpoint existence and kind, type compatibility, target compatibility, fan-in policy, capability authorization and resource exclusivity. Different edge kinds have different validation requirements.
+**Edge kinds (proposed exact interchange spelling):**
+
+| Kind | Rule |
+| --- | --- |
+| containment | Organizational hierarchy only, acyclic and independent from runtime ownership |
+| hosts | Physical topology for initial profile: cpu -> bus, bus -> device; no OS/privileged access or execution-host inference |
+| dependency | Build or package dependency requiring exact resolution |
+| call | Explicit typed command/call relationship and target/effect contract |
+| event | Declared typed event source/listener relationship |
+| data-flow | Typed output port -> typed input port with one authoritative DataFlow binding |
+| interrupt | Hardware IRQ source to authorized handler, validated against target |
+| protocol | Compatible declared interfaces and versioned protocol |
+| resource-access | Scoped resource/address-space claim with permission and exclusivity |
+| ownership | Explicit owner of a resource/handle, lifetime rules and sharing policy |
+
+This resolves the *documentation candidate* for the sensor example's 'hosts' edges: they represent hardware topology, not containment, platform access, execution deployment or privilege. The enum and semantics are **Proposed** until architect review and schema/fixture reconciliation. Unrecognized kinds must not be assigned implicit behavior. Portless topology edges are valid; data-flow/call/event require exported typed endpoints or operations. The [Graph Behavior Contract](graph-behavior-contract.md) owns detailed channel/workflow behavior and diagnostics.
+
+**Port constraints:** direction and cardinality, exact qualified value type, units, mutability, declared event/command/data role, owner/lifetime, execution domain, required capability and target must all agree. Validate endpoint existence, fan-in policy, exclusivity, type conversion (explicit pure adapter only), scheduler/ownership transfer and unsupported target. An attractive connection line does not grant execution rights.
+
+**Cycle policy:** organizational containment and first-profile physical 'hosts' must be acyclic; synchronous computed/binding edges are acyclic unless an explicit state/delay boundary is declared. Runtime event loops and state-machine cycles may be legitimate, with explicit scheduling/queue/backpressure semantics; do not globally prohibit cycles.
+
+**Model versus projections:** a workflow timeline, data-flow canvas, architecture map, AUI design view and diagnostic overlay reference canonical graph IDs. Editing any of them creates a proposed graph transaction; only an approved, validated revision changes semantic truth. A diagram's screen coordinates are never semantic edges.
+
+**Required design evidence:** the sensor fixture must show a correct graph, exact typed channel bindings, one workflow state machine, valid and invalid references, forbidden effects, queue limits, and separate positive/negative target assumptions. These are designed fixtures, not executed tests.
 
 ## 4. Hardware profile
 
@@ -49,11 +72,11 @@ Canvas supports pan/zoom, groups, folding, search, filtering by target, keyboard
 
 The map may render several views (logical, deployment, hardware, runtime, data flow) of the **same model**, rather than storing contradictory diagrams.
 
-## 6. Persistence and transactions
+## 6. Persistence and transactions (D2 model; D6 encoding and durability)
 
 Use a versioned, deterministic, human-inspectable format. Exact serialization syntax is undecided; do not claim JSON or custom binary is final. Record schemaVersion separately from architecture concept. Normalize ordering for stable diffs. Never infer edges from proximity.
 
-Atomic command transaction contract: expected revision, command list, validation diagnostics, new revision or no change. Commands include add/remove/rename node, set contract, connect/disconnect ports, set target requirements and edit presentation. Remove operations must surface affected references, with an explicit deletion policy. Undo/redo must preserve invariant validation.
+Atomic command transaction contract: expected revision, stable operation ID, candidate graph/workflow/data-flow changes, declared capabilities, validation diagnostics, new revision or no change. Referenced edge deletion must either co-delete/rebind all dependent flow/workflow references in the same transaction or be rejected. Semantic changes to queue capacity, transfer policy, target or workflow transition invalidate relevant build artifacts and evidence; layout-only operations do not. Commands include add/remove/rename node, set contract, connect/disconnect ports, set target requirements and edit presentation. Remove operations must surface affected references, with an explicit deletion policy. Undo/redo must preserve invariant validation.
 
 ## 7. Example acceptance fixture
 
@@ -75,3 +98,5 @@ Live device discovery, automatic reverse engineering of binaries, full UML cover
 
 
 [Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
+
+**D2 review tracking:** [Specification Completion Matrix](specification-completion-matrix.md), requirements D2-01 through D2-10. No human acceptance or runtime verification is claimed.
