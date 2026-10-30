@@ -93,3 +93,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [AUI Component Framework](component-framework.md) defines visual/nonvisual palette categories, component lifecycle, properties, events, commands, bindings, layout and design-time behavior. Proposed and not implemented.
+
+
+[AUI.Core library](aui-core-library.md): draft APIs for visual and nonvisual components, unimplemented.
