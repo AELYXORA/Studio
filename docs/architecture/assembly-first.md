@@ -10,10 +10,10 @@ The portable part is the component/API contract and declarative representation, 
 
 ## Current baseline
 
-`include/aelyxora/ui.h` defines the 16-byte ABI node descriptor. `src/ui/validate_x86_64_sysv.S` validates a restricted tree. `tests/ui_abi_x86_64_sysv.S` exercises it. Run `sh build.sh` locally on Linux x86-64 with Clang.
+No executable Assembly prototype is retained in the active tree. Target-specific implementations will follow the design and acceptance criteria.
 
 The first real milestone is a visible native window using our own UI AST and renderer. No CI runs until release preparation.
 
 ## Risks
 
-Text input and shaping, accessibility, input methods, GPU rendering, memory safety, platform integrations and debugging are significant development efforts. Keep platform APIs isolated. Do not claim production readiness from the validator prototype.
+Text input and shaping, accessibility, input methods, GPU rendering, memory safety, platform integrations and debugging are significant development efforts. Keep platform APIs isolated. Do not claim production readiness without executable end-to-end evidence.
