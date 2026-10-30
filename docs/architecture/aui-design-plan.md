@@ -78,3 +78,6 @@ Component catalog design: [AUI Component Framework](component-framework.md) (pro
 
 
 [AUI Rendering and Layout Engine](aui-rendering-layout.md) specifies constraints, scene graph, display lists, text, accessibility, hit testing, animations and CPU/GPU backends. Proposed, not implemented.
+
+
+[Design-Time Engine and Studio Workspace](design-time-engine.md) specifies map interactions, palette, inspector, data-flow editor, AI proposal review, transactions, undo/redo and source synchronization. Proposed; not implemented.
