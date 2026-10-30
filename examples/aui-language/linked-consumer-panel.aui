@@ -1,0 +1,16 @@
+// D3 L1 design fixture: exact source-to-graph binding is a separate proposed link map.
+// This is not an ABI-linked or runnable component.
+import aui.core;
+import example.locked;
+
+component ConsumerPanel(input tick: Tick) {
+  event submit: Event<Unit>;
+  command Accept(tick: Tick) -> Result<Tick, Failure> on io-worker;
+  on submit(payload) {
+    send Accept(tick: tick);
+  }
+  VStack(spacing: 12) {
+    Text(value: "Tick ready").accessibilityLabel(value: "Tick value available")
+    Button(title: "Accept").on(activated: submit).accessibilityLabel(value: "Accept tick")
+  }
+}
