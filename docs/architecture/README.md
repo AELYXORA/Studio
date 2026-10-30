@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D6 package integrity and filesystem guarantees — proposed
+
+[Package Integrity](d6-package-integrity.md) defines exact first-profile package inventory, path safety, digest framing and lock boundary. [Filesystem Adapters](d6-filesystem-adapters.md) identifies unsupported and unverified host durability claims on Windows and Linux. [Integrity vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) are codec-only, not a native build or proven crash recovery. No additional implementation has begun.
+
 ## D2 identity and D6 persistence — proposed
 
 [Persistent identities and nominal TypeID resolution](d2-identity-and-type-resolution.md) establishes the candidate first-slice ID/type policies and explicit Graph/AUI/native ABI identity boundaries. [Canonical snapshot and crash recovery design](d6-canonical-persistence.md) specifies candidate UTF-8 encoding, semantic/source/package digests, immutable revision publication and recovery checks. [Byte/hash vectors](../../examples/architecture-sensor/d2-canonical-vectors.json) and [recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md) are documentation artifacts only; no native implementation/tests exist.
