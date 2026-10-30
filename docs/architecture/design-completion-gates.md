@@ -1,10 +1,21 @@
 # Architecture Design Completion and Review Gates
 
-**Status: accepted process policy, design work ongoing.** AELYXORA is in **documentation-first / design-closure** mode. No further runtime, parser, compiler, renderer, UI, or AI integration source code until the relevant gate is reviewed and accepted. Existing Linux Assembly lexical preflight remains an experiment, not an implementation baseline. This policy does not prohibit explicitly requested review-only technical experiments; experiments never imply a frozen architecture.
+**Status: accepted documentation-first process; design baseline still open.** The architect requires **complete, detailed design before implementation, then implementation, then execution of tests and measurement, then correction/re-verification**. No further product parser, compiler, runtime, renderer, UI or AI source implementation before the complete **in-scope D1–D8 baseline** is reviewed and explicitly accepted. The existing Linux Assembly lexical preflight is historical research, not accepted implementation evidence. Any review-only technical experiment needs explicit, bounded authorization and must never be described as a passed gate.
 
 ## Responsibility and decision control
 
 Human architect owns system requirements, graph semantics, platform targets, data disclosure decisions and acceptance. Documentation is the design deliverable. AI assistant is **architecture analyst and specification author first**, optional implementation engineer later; it may draft proposals but never own architectural authority. Design decisions are classified: Accepted (user-approved), Proposed, Open, Rejected, Verified (with observed evidence). A design contract cannot become accepted merely because a document was written.
+
+## Mandatory sequential phase protocol
+
+1. **I — Documentation & architectural closure.** Define the purpose, formal model, complete component/ABI/AI/UX contracts, constraints, behavior, error paths, trust boundaries, positive/negative design fixtures, and expected verification procedures. Resolve cross-document contradictions. The architect signs off on the baseline of all in-scope D1–D8 gates; status is otherwise Proposed/Open. No implementation work is started from an unapproved partial baseline.
+2. **II — Implementation.** Only after the above baseline is accepted, build ordered native vertical slices (planned S0 through S4). Treat the accepted specs as the contract. Any material architecture deviation is written into the owning document and re-approved before code is based on it.
+3. **III — Tests and measurements.** Execute the already-designed acceptance procedures against actual artifacts/targets. Record pass/fail/not-run/unsupported honestly, plus toolchain, host, target, input/output digests, commands and diagnostics.
+4. **IV — Corrections and regression verification.** Fix defects under the same contract and re-run affected tests; if a requirement itself was wrong, explicitly reopen its owning design gate before implementing the changed contract. No unobserved green claims.
+
+Documenting test plans and expected results belongs to Phase I; **running tests and accepting observed behavior** belongs to Phase III. A research prototype may answer an isolated feasibility question during Phase I only if clearly labeled, explicitly scoped and excluded from implementation-status claims.
+
+[Specification Completion Matrix](specification-completion-matrix.md) lists concrete requirements, owners, unresolved conflicts and required design fixtures. [Architecture-to-Execution Contract](architecture-to-execution-contract.md) describes the intended architecture/workflow/data-flow/AI/native trace. They support the owning documents; neither overrides accepted semantics.
 
 ## Required gates
 
@@ -21,11 +32,11 @@ Human architect owns system requirements, graph semantics, platform targets, dat
 
 ## Closure rule
 
-No claim of design completion unless each mandatory requirement has one authoritative owning spec, at least one valid and invalid example, clearly identified capabilities and error paths, and explicit acceptance by the human architect. 'Proposed' is not accepted and 'verified' requires evidence. If a design needs implementation experiments to settle unknowns, isolate them as research and record output.
+No claim of design completion unless each mandatory in-scope requirement has one authoritative owning spec, at least one valid and invalid example, clearly identified capabilities and error paths, a future executable test specification, and explicit acceptance by the human architect. 'Proposed' is not accepted and 'verified' requires evidence. If a design needs implementation experiments to settle unknowns, isolate them as research and record output.
 
 ## Scope priorities
 
-Close D7 ChatGPT role and integration now, followed by D2 graph/serialization and D3 grammar, then D4/D5 ABI/runtime and D6 build. Maintain human-friendly architecture index and avoid multiplying overlapping specs.
+Close D1 product doctrine and the in-scope vertical example first; then D2 graph/workflow/data-flow semantics and D6 persistence primitives needed by the graph; D3 AUI grammar, D4 compiler/ABI, D5 runtime/renderer, and D7 AI authorization and proposal governance. D8 reconciles all dependencies and records explicit architect acceptance. This is a **documentation order**, not permission to implement a passed partial gate while other in-scope P0 contracts remain open. Keep one owning spec per topic and avoid duplicate normative documents.
 
 ## Version policy
 
