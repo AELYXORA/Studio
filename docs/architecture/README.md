@@ -73,3 +73,8 @@ The initial overview is elaborated by the following **proposed** contracts. They
 - Minimum support policy and licenses for each target backend.
 
 Decisions move from proposed to accepted only after an explicit ADR and corresponding verification criteria; a design document alone is not implementation evidence.
+
+## Initial executable foundation
+
+- [Formal Project Schema](formal-schema.md) — draft JSON Schema, fixture, C++20 headless model, test scope and gaps.
+- The in-memory model and schema are **not yet integrated through a JSON parser**. Persistence, migration, typed property bindings and generation remain unimplemented.
