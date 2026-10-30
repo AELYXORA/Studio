@@ -42,3 +42,10 @@ Specify a versioned canonical Project Graph sample, formal AUI grammar draft, an
 Detailed proposals now exist for restricted [AUI grammar and static diagnostics](aui-language.md), [typed compiler IR and target lowering](aui-compiler.md), [state identity, event-to-frame ordering and bounded channels](aui-runtime.md), plus the [sensor telemetry end-to-end design fixture](sensor-vertical-slice.md).
 
 **Still open before design freeze:** final parser grammar; precise value/memory ownership and ABI representation; serialized graph format; effect-handler syntax; UI identity for dynamic loops; hardware device choice; target-specific layout/rendering. The fixture is illustrative and cannot be advertised as an executed program.
+
+## Types and ABI design pass
+
+- [Types and ownership](aui-types-and-ownership.md): explicit value/resource types, borrow/transfer rules, effect capabilities and concurrency classifications.
+- [Component ABI and async commands](aui-abi-and-async.md): conceptual boundary categories, terminal-state semantics and per-target conformance.
+
+These remain **proposed**. Before freezing them, define precise binary layouts, allocator API, address-space typing, borrow escape rules and cancellation race fixtures.
