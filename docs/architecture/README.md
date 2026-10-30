@@ -56,3 +56,7 @@ Read in order: [Workspace and first-screen UX](workspace.md) → [Canonical Proj
 Supporting documents: [Component ABI](component-contract.md), [Declarative UI](declarative-ui.md), [Assembly-first implementation](assembly-first.md), [Binding semantics](bindings-and-runtime.md), [Source ownership](source-ownership.md), [Security boundaries](extension-and-security.md), [Local verification](verification-plan.md).
 
 **Documentation authority:** this index defines product invariants; Project Graph specifies graph semantics; Workspace specifies interaction; Hardware and Targets specifies device constraints; AI Engineer specifies AI permissions and workflow. The [Roadmap](../product/roadmap.md) orders work but does not override technical contracts. When conflicts appear, update the owning document rather than duplicating rules.
+
+## Complete platform contract
+
+[Studio platform contract](studio-platform-contract.md) defines user roles, end-to-end workflows, visual/nonvisual component palette, task and event lifecycle, threading, data flow and binding semantics, accessibility and measurable zero-cost abstraction goals. It is the authoritative specification for these topics; the graph, hardware and AI documents define their specialized constraints.
