@@ -26,6 +26,12 @@ Follow the single-owner [Graph Behavior Contract](graph-behavior-contract.md). T
 
 Diagnostic fields: code, severity, JSON pointer or source span, graph node/edge ID, expected, observed and explanation. Diagnostics are deterministic on the same graph and target profile.
 
+## D2 nominal identity and D6 canonicalization checks (design proposal)
+
+[D2 Identity and Type Resolution](d2-identity-and-type-resolution.md) requires stable namespace-qualified identities; a logical TypeID resolves through an **exact locked package content digest and exported contract identity**, never a display name alone. Decode/export names in illustrative fixtures are declarations, not proof of callable native code. Duplicated/retired IDs, missing provider linkage, target or contract drift fail at their respective semantic or build stage.
+
+[D6 Canonical Persistence](d6-canonical-persistence.md) owns strict UTF-8 parsing, decoded duplicate-key rejection, canonical semantic projection and content digest, source-hash CAS, crash-consistent HEAD-slot selection and immutable source snapshot recovery. These are D6 design proposals. Diagnostic ordering: parse/encoding -> structural schema -> duplicate/retired identities -> locked package/export resolution -> typed edges/workflow -> permission/target -> snapshot validation and publication. A stale source hash must produce SOURCE_STALE_REVISION, not force a silent graph rebase. A torn or unverifiable snapshot must be rejected, never executed.
+
 ## Version and dependency rules
 
 Version namespaces are separate: project schema, package schema, component API, compiler grammar, native ABI and target profile. For the draft, dependency versions are exact SemVer-style strings. Resolve each dependency to a local artifact and verify a SHA-256 content digest recorded in an explicit lockfile **before** compilation. Offline mode must not silently fetch or upgrade packages. Missing hash, conflict, incompatible ABI or unsupported target is a deterministic error.
