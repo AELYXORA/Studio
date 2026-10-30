@@ -1,0 +1,233 @@
+{
+  "format": "aui.d3-first-profile-negative-cases",
+  "profile": "D3-L0/L1-0.1-draft",
+  "status": "DESIGN ONLY — no AELYXORA lexer/parser/typechecker/linker/renderer/runtime tests run",
+  "baselineSources": [
+    "status-panel-l0.aui",
+    "linked-consumer-panel.aui"
+  ],
+  "mutationSemantics": "Each case starts from a fresh complete baseline source. Replace the unique exact match indicated by search/replace before checking. For link-map cases apply the change to an independent link candidate; do not mutate an already published immutable D2/D6 snapshot. First failing stage takes precedence.",
+  "cases": [
+    {
+      "id": "syntax-unclosed-brace",
+      "base": "status-panel-l0.aui",
+      "search": "  }\n}\n",
+      "replace": "  }\n",
+      "expected": "AUI_SYNTAX",
+      "stage": "parser"
+    },
+    {
+      "id": "syntax-positional-modifier",
+      "base": "status-panel-l0.aui",
+      "search": ".accessibilityLabel(value: \"Inspect\")",
+      "replace": ".accessibilityLabel(\"Inspect\")",
+      "expected": "AUI_SYNTAX",
+      "stage": "parser"
+    },
+    {
+      "id": "syntax-await-in-profile",
+      "base": "linked-consumer-panel.aui",
+      "search": "    send Accept(tick: tick);",
+      "replace": "    let result = await Accept(tick: tick);",
+      "expected": "AUI_PROFILE_UNSUPPORTED",
+      "stage": "profile"
+    },
+    {
+      "id": "source-invalid-number",
+      "base": "status-panel-l0.aui",
+      "search": "VStack(spacing: 12)",
+      "replace": "VStack(spacing: 4294967296)",
+      "expected": "AUI_NUMBER_RANGE",
+      "stage": "type"
+    },
+    {
+      "id": "source-wrong-text-type",
+      "base": "status-panel-l0.aui",
+      "search": "Text(value: title)",
+      "replace": "Text(value: 12)",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "type"
+    },
+    {
+      "id": "source-accessibility-missing",
+      "base": "status-panel-l0.aui",
+      "search": "Button(title: \"Inspect\").accessibilityLabel(value: \"Inspect\")",
+      "replace": "Button(title: \"Inspect\")",
+      "expected": "AUI_ACCESSIBILITY_LABEL",
+      "stage": "accessibility-static"
+    },
+    {
+      "id": "source-unknown-modifier",
+      "base": "status-panel-l0.aui",
+      "search": "accessibilityLabel(value:",
+      "replace": "unknownLabel(value:",
+      "expected": "AUI_MODIFIER_UNKNOWN",
+      "stage": "core-component"
+    },
+    {
+      "id": "source-duplicate-property",
+      "base": "status-panel-l0.aui",
+      "search": "VStack(spacing: 12)",
+      "replace": "VStack(spacing: 12, spacing: 4)",
+      "expected": "AUI_ARG_DUPLICATE",
+      "stage": "named-arguments"
+    },
+    {
+      "id": "source-unknown-property",
+      "base": "status-panel-l0.aui",
+      "search": "VStack(spacing: 12)",
+      "replace": "VStack(gap: 12)",
+      "expected": "AUI_ARG_NAME",
+      "stage": "named-arguments"
+    },
+    {
+      "id": "source-import-version-unsupported",
+      "base": "status-panel-l0.aui",
+      "search": "import aui.core;",
+      "replace": "import aui.core @ 1.2;",
+      "expected": "AUI_PROFILE_UNSUPPORTED",
+      "stage": "profile"
+    },
+    {
+      "id": "source-unresolved-import",
+      "base": "status-panel-l0.aui",
+      "search": "import aui.core;",
+      "replace": "import unknown.core;",
+      "expected": "AUI_UNRESOLVED_IMPORT",
+      "stage": "import"
+    },
+    {
+      "id": "source-event-type-mismatch",
+      "base": "linked-consumer-panel.aui",
+      "search": "event submit: Event<Unit>;",
+      "replace": "event submit: Event<Bool>;",
+      "expected": "AUI_EVENT_TYPE",
+      "stage": "event-type"
+    },
+    {
+      "id": "source-event-name-unknown",
+      "base": "linked-consumer-panel.aui",
+      "search": ".on(activated: submit)",
+      "replace": ".on(otherEvent: submit)",
+      "expected": "AUI_EVENT_UNRESOLVED",
+      "stage": "event-attachment"
+    },
+    {
+      "id": "source-handler-unknown",
+      "base": "linked-consumer-panel.aui",
+      "search": "on submit(payload)",
+      "replace": "on unknown(payload)",
+      "expected": "AUI_UNRESOLVED",
+      "stage": "symbol"
+    },
+    {
+      "id": "source-command-unknown",
+      "base": "linked-consumer-panel.aui",
+      "search": "send Accept(tick: tick);",
+      "replace": "send Missing(tick: tick);",
+      "expected": "AUI_UNRESOLVED",
+      "stage": "symbol"
+    },
+    {
+      "id": "source-double-send",
+      "base": "linked-consumer-panel.aui",
+      "search": "send Accept(tick: tick);",
+      "replace": "send Accept(tick: tick); send Accept(tick: tick);",
+      "expected": "AUI_PROFILE_UNSUPPORTED",
+      "stage": "profile"
+    },
+    {
+      "id": "source-command-wrong-type",
+      "base": "linked-consumer-panel.aui",
+      "search": "send Accept(tick: tick);",
+      "replace": "send Accept(tick: \"wrong\");",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "type"
+    },
+    {
+      "id": "source-command-domain-mismatch",
+      "base": "linked-consumer-panel.aui",
+      "search": "on io-worker;",
+      "replace": "on ui;",
+      "expected": "AUI_COMMAND_CONTRACT",
+      "stage": "graph-link"
+    },
+    {
+      "id": "source-command-result-mismatch",
+      "base": "linked-consumer-panel.aui",
+      "search": "Result<Tick, Failure>",
+      "replace": "Result<Tick, Tick>",
+      "expected": "AUI_COMMAND_CONTRACT",
+      "stage": "graph-link"
+    },
+    {
+      "id": "source-two-handlers",
+      "base": "linked-consumer-panel.aui",
+      "search": "  VStack(spacing: 12) {",
+      "replace": "  on submit(extra) { send Accept(tick: tick); }\n  VStack(spacing: 12) {",
+      "expected": "AUI_EVENT_HANDLER_DUPLICATE",
+      "stage": "event-handler"
+    },
+    {
+      "id": "source-duplicate-event-output",
+      "base": "linked-consumer-panel.aui",
+      "search": ".on(activated: submit).accessibilityLabel",
+      "replace": ".on(activated: submit).on(activated: submit).accessibilityLabel",
+      "expected": "AUI_EVENT_CONNECTION_DUPLICATE",
+      "stage": "event-attachment"
+    },
+    {
+      "id": "source-unhandled-event",
+      "base": "linked-consumer-panel.aui",
+      "search": "  on submit(payload) {\n    send Accept(tick: tick);\n  }\n",
+      "replace": "",
+      "expected": "AUI_EVENT_UNHANDLED",
+      "stage": "event-handler"
+    },
+    {
+      "id": "source-command-link-missing",
+      "base": "linked-consumer-panel.aui",
+      "mutation": "remove commandBindings entry from derived link map",
+      "expected": "AUI_COMMAND_UNLINKED",
+      "stage": "graph-link"
+    },
+    {
+      "id": "source-stale-link-hash",
+      "base": "linked-consumer-panel.aui",
+      "mutation": "change source bytes without regenerating sourceSha256 in derived link map",
+      "expected": "AUI_LINK_STALE",
+      "stage": "graph-link"
+    },
+    {
+      "id": "link-changed-contract-hash",
+      "base": "linked-consumer-panel.aui",
+      "mutation": "replace declared exportedContractDigest with all zeros in link map",
+      "expected": "AUI_COMMAND_CONTRACT",
+      "stage": "graph-link"
+    },
+    {
+      "id": "link-unknown-target",
+      "base": "linked-consumer-panel.aui",
+      "mutation": "change targetTriple in link map to unsupported-aarch64-example",
+      "expected": "AUI_TARGET_UNSUPPORTED",
+      "stage": "target"
+    },
+    {
+      "id": "source-implicit-unit-conversion",
+      "base": "status-panel-l0.aui",
+      "search": "VStack(spacing: 12)",
+      "replace": "VStack(spacing: \"12px\")",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "type"
+    },
+    {
+      "id": "source-dynamic-feature-unsupported",
+      "base": "status-panel-l0.aui",
+      "search": "  VStack(spacing: 12) {",
+      "replace": "  state expanded: Bool = true;\n  VStack(spacing: 12) {",
+      "expected": "AUI_PROFILE_UNSUPPORTED",
+      "stage": "profile"
+    }
+  ],
+  "acceptance": "Phase III native parser must emit matching stable diagnostic category/source span and reject TypedHIR emission for hard errors. Future OS/compiler/proof evidence required. These are NOT-RUN design fixtures."
+}
