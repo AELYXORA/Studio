@@ -1,0 +1,60 @@
+{
+  "format": "aui.fixture-integrity",
+  "status": "documentation-only: verified digest arithmetic; Assembly ABI, compiler, native validator and durable FS tests NOT-RUN",
+  "projectId": "example.locked-pure",
+  "packageContentDigest": "c866ac50e9c8bda04caff8cc83480c663645fa0a521d2e50a05dcb1e82a7f510",
+  "semanticGraphDigest": "34a7480186b2b1eec8e7bb9453ef2d8e2883538cd17d288ec1e573271eaba965",
+  "snapshotDigest": "4c605d23d4ac1d4146e6189724ddf660516ebe12765bdf771993641f8fcc3f2f",
+  "headChecksum": "8705e1860c098187cedfbf9be93df62173f66a0ae88aa0c8f07af3bb65e699b4",
+  "logicalExports": [
+    {
+      "kind": "component",
+      "typeId": "example.locked/consumer",
+      "contractDigest": "830105ea82052eedde6dd562750a5d4795f523ef1f39f7cc4d1d59585f685836"
+    },
+    {
+      "kind": "component",
+      "typeId": "example.locked/source",
+      "contractDigest": "ba60dfe973c04f7473b2eacb766ba5b7f40128820876feb0c2f4a0aeec6a5744"
+    },
+    {
+      "kind": "type",
+      "typeId": "example.locked/Failure",
+      "contractDigest": "53fa8500b206e4c45b500cb86e3079cd25d48142e5f44b639e4bf0d44aacfecb"
+    },
+    {
+      "kind": "type",
+      "typeId": "example.locked/Tick",
+      "contractDigest": "ddabf9b99812fcfcddba9d7f5a31d48b55210419fb8e374850d57b1165633f8f"
+    }
+  ],
+  "rawFiles": [
+    {
+      "path": "project.auiproj.json",
+      "sha256": "bdfff22a858d2cca619356bbfca2fe47e1db7bf443cb2153323e5a530ebf0a20"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "c80c7c6fc46e562563e530c2881e1cf603cdd1b96f93e19087b9af309b6b4769"
+    },
+    {
+      "path": "views/main.auiview.json",
+      "sha256": "0de691479ed42c6d31be57cfe9e02d54eaf773476252d17b2892e20a0870af36"
+    },
+    {
+      "path": "objects/packages/c866ac50e9c8bda04caff8cc83480c663645fa0a521d2e50a05dcb1e82a7f510/component.auipkg.json",
+      "sha256": "6c7321226ba98a5d8ed6383ce9e66336ffc90f616f2f9fd5e6d59aea59dfcc36"
+    },
+    {
+      "path": "objects/packages/c866ac50e9c8bda04caff8cc83480c663645fa0a521d2e50a05dcb1e82a7f510/src/consumer.S",
+      "sha256": "f39275304687d8b52dc348caf9bab07cc131958f4ce8bd5a469ad7e6722db6d1"
+    },
+    {
+      "path": "objects/packages/c866ac50e9c8bda04caff8cc83480c663645fa0a521d2e50a05dcb1e82a7f510/src/source.S",
+      "sha256": "fcc493209277622d44ff9b43d5ca1a8fd1f022d5c1d04626583fe67c4729f021"
+    }
+  ],
+  "expectedCanonicalSemanticProjection": "{\"dataFlows\":[{\"channels\":[{\"capacity\":4,\"edgeId\":\"e1\",\"errorPolicy\":\"propagate\",\"mode\":\"stream\",\"ordering\":\"fifo\",\"overflow\":\"reject\",\"receiverDomain\":\"io-worker\",\"senderDomain\":\"io-worker\",\"transfer\":\"copy\"}],\"id\":\"ticks\"}],\"edges\":[{\"from\":{\"node\":\"source\",\"port\":\"tick\"},\"id\":\"e1\",\"kind\":\"data-flow\",\"to\":{\"node\":\"consumer\",\"port\":\"tick\"}}],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"consumer\",\"kind\":\"component\",\"ports\":[{\"direction\":\"in\",\"id\":\"tick\",\"type\":\"example.locked/Tick\"}],\"target\":\"linux-x64\",\"typeRef\":\"example.locked/consumer\"},{\"id\":\"source\",\"kind\":\"component\",\"ports\":[{\"direction\":\"out\",\"id\":\"tick\",\"type\":\"example.locked/Tick\"}],\"target\":\"linux-x64\",\"typeRef\":\"example.locked/source\"}],\"packageDependencies\":[{\"packageId\":\"example.locked\",\"version\":\"1.0.0\"}],\"projectId\":\"example.locked-pure\",\"resolvedExports\":[{\"contractDigest\":\"830105ea82052eedde6dd562750a5d4795f523ef1f39f7cc4d1d59585f685836\",\"kind\":\"component\",\"typeId\":\"example.locked/consumer\"},{\"contractDigest\":\"ba60dfe973c04f7473b2eacb766ba5b7f40128820876feb0c2f4a0aeec6a5744\",\"kind\":\"component\",\"typeId\":\"example.locked/source\"},{\"contractDigest\":\"53fa8500b206e4c45b500cb86e3079cd25d48142e5f44b639e4bf0d44aacfecb\",\"kind\":\"type\",\"typeId\":\"example.locked/Failure\"},{\"contractDigest\":\"ddabf9b99812fcfcddba9d7f5a31d48b55210419fb8e374850d57b1165633f8f\",\"kind\":\"type\",\"typeId\":\"example.locked/Tick\"}],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[{\"execution\":\"user\",\"id\":\"linux-x64\",\"triple\":\"x86_64-unknown-linux-gnu\"}],\"workflows\":[{\"id\":\"accept-tick\",\"initialState\":\"waiting\",\"mailboxCapacity\":2,\"mailboxOverflow\":\"reject-and-report\",\"maxConcurrentInstances\":4,\"onLimit\":\"reject-and-report\",\"ownerNodeId\":\"consumer\",\"scheduling\":\"per-instance-fifo\",\"signals\":[{\"id\":\"accept-error\",\"nodeId\":\"consumer\",\"operationId\":\"Accept\",\"payloadType\":\"example.locked/Failure\",\"source\":\"command-failure\"},{\"id\":\"accepted\",\"nodeId\":\"consumer\",\"operationId\":\"Accept\",\"payloadType\":\"example.locked/Tick\",\"source\":\"command-success\"},{\"id\":\"cancel\",\"source\":\"control\"},{\"id\":\"cancel-confirmed\",\"source\":\"control\"},{\"id\":\"tick-arrived\",\"payloadType\":\"example.locked/Tick\",\"source\":\"trigger\"}],\"states\":[{\"id\":\"cancelled\",\"terminal\":\"cancelled\"},{\"id\":\"cancelling\"},{\"id\":\"done\",\"terminal\":\"success\"},{\"id\":\"failed\",\"terminal\":\"failure\"},{\"id\":\"running\"},{\"id\":\"waiting\"}],\"transitions\":[{\"action\":{\"kind\":\"none\"},\"from\":\"cancelling\",\"id\":\"cancel-ack\",\"signal\":\"cancel-confirmed\",\"to\":\"cancelled\"},{\"action\":{\"kind\":\"request-cancel\"},\"from\":\"running\",\"id\":\"cancel-active\",\"signal\":\"cancel\",\"to\":\"cancelling\"},{\"action\":{\"kind\":\"none\"},\"from\":\"waiting\",\"id\":\"cancel-idle\",\"signal\":\"cancel\",\"to\":\"cancelled\"},{\"action\":{\"kind\":\"none\"},\"from\":\"running\",\"id\":\"failure\",\"signal\":\"accept-error\",\"to\":\"failed\"},{\"action\":{\"kind\":\"none\"},\"from\":\"cancelling\",\"id\":\"late-failure\",\"signal\":\"accept-error\",\"to\":\"failed\"},{\"action\":{\"kind\":\"none\"},\"from\":\"cancelling\",\"id\":\"late-success\",\"signal\":\"accepted\",\"to\":\"done\"},{\"action\":{\"kind\":\"dispatch\",\"nodeId\":\"consumer\",\"operationId\":\"Accept\"},\"from\":\"waiting\",\"id\":\"start\",\"signal\":\"tick-arrived\",\"to\":\"running\"},{\"action\":{\"kind\":\"none\"},\"from\":\"running\",\"id\":\"success\",\"signal\":\"accepted\",\"to\":\"done\"}],\"trigger\":{\"edgeId\":\"e1\",\"kind\":\"data-arrival\"}}]}",
+  "expectedCanonicalSnapshotIndex": "{\"format\":\"aui.snapshot-index\",\"graphRevision\":0,\"indexFormat\":\"0.1-draft\",\"lockDigest\":\"c80c7c6fc46e562563e530c2881e1cf603cdd1b96f93e19087b9af309b6b4769\",\"operationId\":null,\"packageObjects\":[{\"contentDigest\":\"c866ac50e9c8bda04caff8cc83480c663645fa0a521d2e50a05dcb1e82a7f510\",\"packageId\":\"example.locked\"}],\"projectId\":\"example.locked-pure\",\"projectManifestDigest\":\"bdfff22a858d2cca619356bbfca2fe47e1db7bf443cb2153323e5a530ebf0a20\",\"retiredIdentityDigest\":\"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\",\"semanticGraphDigest\":\"34a7480186b2b1eec8e7bb9453ef2d8e2883538cd17d288ec1e573271eaba965\",\"sourceFiles\":[],\"viewFiles\":[{\"ownership\":\"view\",\"path\":\"views/main.auiview.json\",\"sha256\":\"0de691479ed42c6d31be57cfe9e02d54eaf773476252d17b2892e20a0870af36\"}]}",
+  "expectedCanonicalHeadWithoutChecksum": "{\"epoch\":0,\"format\":\"aui.head-record\",\"graphRevision\":0,\"headFormat\":\"0.1-draft\",\"operationId\":null,\"predecessorEpoch\":null,\"projectId\":\"example.locked-pure\",\"semanticGraphDigest\":\"34a7480186b2b1eec8e7bb9453ef2d8e2883538cd17d288ec1e573271eaba965\",\"snapshotDigest\":\"4c605d23d4ac1d4146e6189724ddf660516ebe12765bdf771993641f8fcc3f2f\"}"
+}
