@@ -52,7 +52,7 @@ Semantic role, label, focus, keyboard action and accessibility value are first-c
 
 ## Still open
 
-Final grammar, generic constraints, string interpolation, async syntax, immutable collection representation, source maps, binary module packaging and component version resolution. Freeze syntax only after parser + type-checker fixture comparisons. See [AUI v0.1 Syntax and Semantics](aui-syntax-v0.1.md) for the current extended language candidate.
+Final grammar, generic constraints, string interpolation, async syntax, immutable collection representation, source maps, binary module packaging and component version resolution. Freeze syntax only after parser + type-checker fixture comparisons. See [AUI v0.1 Syntax and Semantics](aui-syntax.md) for the current extended language candidate.
 
 ## Early restricted grammar draft (historical subset; see the current v0.1 candidate)
 
