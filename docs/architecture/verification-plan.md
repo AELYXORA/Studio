@@ -1,30 +1,20 @@
-# Architecture Verification Plan
+# Local Verification and Release Gates
 
-**Status:** planned, with no passing implementation evidence.
+**Policy:** GitHub Actions and automated CI are disabled until release preparation. All checks are local, manual invocations. No CI workflow is permitted on the active branch before that decision changes.
 
-## Traceability
+## Present baseline
 
-Each normative contract should have stable requirement IDs, linked tests and observable evidence. Requirements and test results are maintained separately. A test marked N/A requires a technical rationale.
+Run `sh build.sh` on Linux x86-64 with Clang. It assembles `src/ui/validate_x86_64_sysv.S`, links the Assembly test harness and runs validator assertions. No window is rendered. Until actually run on a specified system, document results as **not run**.
 
-## Gate sequence
+## Planned gates
 
-| Gate | Required evidence |
-| --- | --- |
-| G0 Model integrity | parsing, deterministic save/load, stable IDs, malformed-input rejection |
-| G1 Transactions | stale-revision conflict, undo/redo, interrupted-write recovery |
-| G2 Generation safety | ownership enforcement, external edit preservation, reproducible file manifest |
-| G3 Bindings | type checks, update ordering, cycles, validation and errors |
-| G4 Runtime | real SQLite CRUD persistence, restart/reload, lifecycle and cancellation |
-| G5 AI changes | scoped diff, security denial, schema validation, rollback |
-| G6 Toolchain | clean builds, platform matrix, packaged standalone runtime |
-| G7 Security | path escaping, plugin isolation claims tested, secret scanning, dependency audit |
+- G0: target triple, ABI layout and error-code conformance.
+- G1: declarative parser, malformed-input rejection and stable identity.
+- G2: deterministic tree diff, state preservation and binding validation.
+- G3: layout and display-list contracts.
+- G4: real window creation, rendering, input and accessibility.
+- G5: source ownership and regeneration safety.
+- G6: component permission boundaries and isolation.
+- G7: end-to-end IDE functionality, packaging and cross-target tests.
 
-A gate is **not run**, **pass**, **fail** or **not applicable with rationale**. Tests never pass by documentation assertion.
-
-## End-to-end demonstration
-
-Create a CustomerDesk app using visual form/table composition and SQLite; generate code; add a custom business-rule source module; regenerate without losing the module; reject a broken typed binding; use AI to propose and roll back a change; build and run on Windows and Linux; install/export independently of the IDE.
-
-## Continuous architecture checks
-
-Documentation links, schema fixtures, ADR consistency, build dependency direction, generation manifest drift and target capability validation should be machine-checkable locally during development; local verification remains disabled until release preparation.
+Record pass/fail/not-run with evidence. No mock or unexecuted test counts as a pass. Cross-platform claims require executing tests on each target.
