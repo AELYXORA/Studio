@@ -1,6 +1,6 @@
 # AUI Syntax and Semantics — Design Candidate
 
-**Status: proposed language draft, not implemented or frozen.** This document refines [AUI Language](aui-language.md). The existing restricted EBNF is a smaller subset; examples here supersede its syntax illustrations **for design review**, not for an existing parser.
+**Status: proposed language draft, not implemented or frozen.** This document is the current proposed syntax authority; [AUI Language](aui-language.md) describes principles and retains an explicitly superseded illustrative subset. No parser exists.
 
 ## 1. Lexical contract
 
