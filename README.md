@@ -45,3 +45,5 @@ Current repository contains architecture specifications, illustrative JSON fixtu
 - [Complete Studio platform contract — roles, workflows, palettes, events, tasks, data flow, zero-cost goals](docs/architecture/studio-platform-contract.md)
 
 **Architecture review status:** [D2/D6 integrated baseline review](docs/architecture/d2-d6-baseline-review.md) tracks open P0 decisions and distinguishes proposals from accepted contracts. No product implementation is authorized until the full D1–D8 design baseline is explicitly approved. All documentation changes are committed directly to main.
+
+**Documentation-only integration fixture:** [Locked Pure Reference](examples/locked-pure-reference/README.md) demonstrates exact graph/package/lock/snapshot byte relationships with two illustrative Assembly source files. The source files are test inputs, not a Studio compiler/runtime or a verified ABI implementation. [Semantic projection contract](docs/architecture/d2-d6-semantic-projection.md) and [offline dependency resolution](docs/architecture/d6-offline-dependency-resolution.md) remain Proposed.
