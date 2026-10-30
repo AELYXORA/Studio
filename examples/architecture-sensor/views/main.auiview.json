@@ -1,0 +1,39 @@
+{
+  "format": "aui.map-view",
+  "schemaVersion": "0.1-draft",
+  "viewId": "main",
+  "projectId": "example.sensor-telemetry",
+  "positions": [
+    {
+      "nodeId": "soc",
+      "x": 0,
+      "y": 0
+    },
+    {
+      "nodeId": "bus",
+      "x": 0,
+      "y": 100
+    },
+    {
+      "nodeId": "sensor",
+      "x": 0,
+      "y": 200
+    },
+    {
+      "nodeId": "driver",
+      "x": 240,
+      "y": 200
+    },
+    {
+      "nodeId": "decoder",
+      "x": 480,
+      "y": 200
+    },
+    {
+      "nodeId": "app",
+      "x": 720,
+      "y": 200
+    }
+  ],
+  "zoom": 1
+}
