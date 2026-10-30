@@ -29,7 +29,7 @@ The initial **candidate** canonical representation is deterministic UTF-8 JSON, 
 7. Semantic projection includes format marker, schema compatibility marker, ProjectID, all validated meaning-bearing targets/nodes/edges/workflows/dataFlows/package dependencies , retained identity tombstones, and exact locked package digests/export contracts. Source file byte hashes are recorded separately in the snapshot index. This is a projection over a resolved project, not identical to project.auiproj.json.
 8. Digest is lowercase hex SHA-256 over UTF-8 bytes of ASCII domain string **AELYXORA/semantic-graph/v1** followed by a single zero byte, then the exact canonical semantic projection bytes. Record algorithm and profile ID; never hash a pretty-printed source manifest as if it were semanticGraphDigest.
 
-A standalone **reference-fixture-only** canonical input and expected digest is specified in [Canonical Vectors](../../examples/architecture-sensor/d2-canonical-vectors.json). Test vectors are design artifacts: independent hash implementations and native parser agreement will be required later. Until reference vectors are reviewed, the above algorithm is a **candidate**, not an accepted wire format.
+A standalone **reference-fixture-only** canonical input and expected digest is specified in [Canonical Vectors](../../examples/architecture-sensor/d2-canonical-vectors.json). The semantic projection's retiredIdentity tuples are sorted by (kind,scopeId,id), included even when the ledger is empty; general source label and ViewRevision are excluded. Test vectors are design artifacts: independent hash implementations and native parser agreement will be required later. Until reference vectors are reviewed, the above algorithm is a **candidate**, not an accepted wire format.
 
 ## P2. Package and file identity
 
@@ -56,7 +56,7 @@ For each project source, store exact SHA-256 of its bytes. The snapshot includes
 
 ## P4. Crash-consistent immutable snapshots and two HEAD slots
 
-**Proposed design** (requires actual per-target feasibility review): a project uses immutable, content-addressed snapshot directories plus two short head records at fixed paths. Files never change after their snapshot hash has been published.
+**Proposed design** (requires actual per-target feasibility review): a project uses immutable, content-addressed snapshot directories plus two short head records at fixed paths. Files never change after their snapshot hash has been published. The proposed [immutable snapshot index schema](../../schemas/project-snapshot-index.schema.json) enumerates project manifest, exact source bytes, package lock and view attachments, with per-file checksums; the final complete schema, package content identity and snapshotDigest framing still require D6 freeze.
 
     project-root/
       HEAD.0.json
@@ -69,7 +69,7 @@ For each project source, store exact SHA-256 of its bytes. The snapshot includes
       staging/<uniqueOperationId>/...
       .aui/ (derived caches, never authoritative)
 
-A HEAD record contains projectId, epoch (monotonic), graphRevision, semanticGraphDigest, snapshotDigest, predecessorEpoch and a SHA-256 **checksum of all preceding canonical head fields** under a distinct head-record domain separator. The record itself is canonical JSON; any torn/truncated/mismatched record is invalid. Current valid HEAD is the highest-epoch record whose snapshot inventory and content hashes verify, unless a separate explicit rollback decision is required.
+A HEAD record contains projectId, headFormat, epoch (monotonic), graphRevision, semanticGraphDigest, snapshotDigest, predecessorEpoch and a SHA-256 **checksum of all other canonical head fields**. Proposed checksum input: ASCII **AELYXORA/head-record/v1**, one zero byte, followed by the P1-canonical UTF-8 JSON object formed by omitting only the checksum property. Proposed [HEAD structural schema](../../schemas/project-head.schema.json) validates shape, not checksum, filesystem durability or snapshot trust. The exact domain and checksum procedure remain Proposed until independent vector agreement. The record itself is canonical JSON; any torn/truncated/mismatched record is invalid. Current valid HEAD is the highest-epoch record whose snapshot inventory and content hashes verify, unless a separate explicit rollback decision is required.
 
 **Commit protocol from revision N to N+1:**
 1. Hold one local project writer lease. Capture expectedGraphRevision, expectedSemanticDigest and expected source hashes; validate the full change set against immutable N and locked package content. A stale condition fails without writing a HEAD.
@@ -107,6 +107,8 @@ This gives a **candidate** all-or-nothing multi-file published snapshot model. I
 | Both HEAD slots invalid | PERSIST_RECOVERY_REQUIRED; never guess |
 | Power-loss on adapter with unproven flush/rename durability | PERSIST_DURABILITY_UNSUPPORTED; no validated crash-safe guarantee |
 | Graph/lock/index hash disagreement | PERSIST_SNAPSHOT_CORRUPT, refuse to execute |
+
+See [30 designed crash and recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md) for future OS fault injection; all remain NOT-RUN.
 
 ## P6. Cross-gate acceptance blockers
 
