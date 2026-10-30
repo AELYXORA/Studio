@@ -14,6 +14,11 @@ Strict JSON tokenizer/parser; semantic Project Graph engine; complete schema val
 
 ## Binding architectural decisions
 
+**Current process:** documentation-first; major implementation resumes only after [Design Completion Gates](design-completion-gates.md). The existing Linux Assembly preflight is an exploratory artifact, not a completed design gate.
+
+**ChatGPT Plus:** OpenAI documents official Sign in with ChatGPT plan usage for eligible participating/open-source clients. AELYXORA-specific eligibility and authorization are unverified; see [ChatGPT Connection](chatgpt-connection.md).
+
+
 1. Architecture Map + contextual AI Chat are the primary intended Studio UX. Project Graph is canonical; source/UI/AI views do not replace it.
 2. Human architect approves graph/source changes; AI output alone grants no write, execution, network or device rights.
 3. Core and Studio runtime are **Assembly-first**, target-native; AUI is our own declarative language. LLVM/Clang may assemble and link target-dependent code.
