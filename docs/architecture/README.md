@@ -45,7 +45,7 @@ A native AELYXORA window containing **architecture map plus contextual AI chat a
 
 ## Documentation policy
 
-This document is the **canonical architectural source**. [Roadmap](../product/roadmap.md) defines a small set of proof-oriented gates. Technical contracts are supporting references; don't generate parallel strategy documents that contradict this one. Review consequential design shifts through ADRs only.
+This document is the **canonical architectural source**. [Roadmap](../product/roadmap.md) defines a small set of proof-oriented gates. Technical contracts are supporting references; don't generate parallel strategy documents that contradict this one. Record consequential decisions in the owning current specification; historical ADR files are not maintained.
 
 References: [Declarative UI](declarative-ui.md), [Assembly ABI](assembly-first.md), [Component contracts](component-contract.md), [State and bindings](bindings-and-runtime.md), [Security](extension-and-security.md).
 
