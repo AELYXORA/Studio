@@ -27,6 +27,40 @@ bool keys(const j::object& o,std::initializer_list<std::string_view> allowed){
  for(const auto& kv:o){bool ok=false;for(auto k:allowed)if(kv.key()==k)ok=true;if(!ok)return false;}return true;
 }
 }
+std::expected<PropertyValue,E> decode_value(const j::value& v,PropertyKind kind) {
+ switch(kind) {
+ case PropertyKind::Boolean: if(v.is_bool())return PropertyValue(v.as_bool());break;
+ case PropertyKind::Integer:
+  if(v.is_int64())return PropertyValue(v.as_int64());
+  if(v.is_uint64()&&v.as_uint64()<=static_cast<std::uint64_t>(std::numeric_limits<std::int64_t>::max()))
+   return PropertyValue(static_cast<std::int64_t>(v.as_uint64()));
+  break;
+ case PropertyKind::Real: if(v.is_double())return PropertyValue(v.as_double());break;
+ case PropertyKind::Text: if(v.is_string())return PropertyValue(std::string(v.as_string()));break;
+ }
+ return std::unexpected(error(ErrorCode::MissingField,"properties","property value type mismatch"));
+}
+j::value encode_value(const PropertyValue& v) {
+ return std::visit([](const auto& value)->j::value{return j::value(value);},v);
+}
+std::expected<PropertyKind,E> decode_kind(const j::value& v){
+ if(!v.is_string())return std::unexpected(error(ErrorCode::MissingField,"kind","expected string"));
+ const auto k=std::string(v.as_string());
+ if(k=="boolean")return PropertyKind::Boolean;
+ if(k=="integer")return PropertyKind::Integer;
+ if(k=="real")return PropertyKind::Real;
+ if(k=="text")return PropertyKind::Text;
+ return std::unexpected(error(ErrorCode::MissingField,"kind","unsupported property kind"));
+}
+const char* kind_name(PropertyKind kind){
+ switch(kind){
+ case PropertyKind::Boolean:return "boolean";
+ case PropertyKind::Integer:return "integer";
+ case PropertyKind::Real:return "real";
+ case PropertyKind::Text:return "text";
+ }
+ return "unknown";
+}
 LoadResult parse_project(std::string_view text){
  if(text.size()>4*1024*1024)return std::unexpected(error(ErrorCode::MissingField,"/","project too large"));
  boost::system::error_code ec;j::parse_options options;options.max_depth=64;
@@ -62,7 +96,7 @@ LoadResult parse_project(std::string_view text){
   auto components=arr(**m,"components");if(!components)return std::unexpected(components.error());
   for(const auto& w:**components){
    auto c=object(w,"components");if(!c)return std::unexpected(c.error());
-   if(!keys(**c,{"id","type","dependencies"}))return std::unexpected(error(ErrorCode::MissingField,"components","unknown key"));
+   if(!keys(**c,{"id","type","dependencies","propertyDefinitions","properties"}))return std::unexpected(error(ErrorCode::MissingField,"components","unknown key"));
    auto cid=str(**c,"id"),type=str(**c,"type");
    if(!cid)return std::unexpected(cid.error());if(!type)return std::unexpected(type.error());
    Component component;component.id=*cid;component.type=*type;
@@ -74,6 +108,35 @@ LoadResult parse_project(std::string_view text){
      std::string d(dep.as_string().data(),dep.as_string().size());
      if(!seen.insert(d).second)return std::unexpected(error(ErrorCode::DuplicateId,"dependencies","duplicate dependency"));
      component.dependencies.push_back(std::move(d));
+    }
+   }
+   if(auto defs=(**c).if_contains("propertyDefinitions")) {
+    if(!defs->is_array())return std::unexpected(error(ErrorCode::MissingField,"propertyDefinitions","expected array"));
+    for(const auto& entry:defs->as_array()) {
+     auto d=object(entry,"propertyDefinitions");if(!d)return std::unexpected(d.error());
+     if(!keys(**d,{"name","kind","default","writable"}))return std::unexpected(error(ErrorCode::MissingField,"propertyDefinitions","unknown key"));
+     auto dn=str(**d,"name");if(!dn)return std::unexpected(dn.error());
+     auto k=(*d)->if_contains("kind");if(!k)return std::unexpected(error(ErrorCode::MissingField,"kind","missing kind"));
+     auto kind=decode_kind(*k);if(!kind)return std::unexpected(kind.error());
+     auto val=(*d)->if_contains("default");if(!val)return std::unexpected(error(ErrorCode::MissingField,"default","missing default"));
+     auto pv=decode_value(*val,*kind);if(!pv)return std::unexpected(pv.error());
+     bool writable=true;
+     if(auto w=(*d)->if_contains("writable")) {
+      if(!w->is_bool())return std::unexpected(error(ErrorCode::MissingField,"writable","expected boolean"));
+      writable=w->as_bool();
+     }
+     component.property_definitions.push_back({*dn,*kind,*pv,writable});
+    }
+   }
+   if(auto props=(**c).if_contains("properties")) {
+    if(!props->is_object())return std::unexpected(error(ErrorCode::MissingField,"properties","expected object"));
+    for(const auto& entry:props->as_object()) {
+     const std::string name(entry.key());
+     const PropertyDefinition* def=nullptr;
+     for(const auto& d:component.property_definitions)if(d.name==name){def=&d;break;}
+     if(!def)return std::unexpected(error(ErrorCode::UnresolvedDependency,name,"undeclared property"));
+     auto v=decode_value(entry.value(),def->kind);if(!v)return std::unexpected(v.error());
+     component.properties.emplace(name,*v);
     }
    }
    module.components.push_back(std::move(component));
@@ -96,7 +159,18 @@ std::expected<std::string,E> serialize_project(const Project& p){
   for(const auto& c:m.components){
    j::object co;co["id"]=c.id;co["type"]=c.type;j::array deps;
    for(const auto& d:c.dependencies)deps.emplace_back(j::string(d));
-   co["dependencies"]=std::move(deps);components.push_back(std::move(co));
+   co["dependencies"]=std::move(deps);
+   j::array definitions;
+   for(const auto& d:c.property_definitions){
+    j::object entry;entry["name"]=d.name;entry["kind"]=kind_name(d.kind);
+    entry["default"]=encode_value(d.default_value);entry["writable"]=d.writable;
+    definitions.push_back(std::move(entry));
+   }
+   co["propertyDefinitions"]=std::move(definitions);
+   j::object properties;
+   for(const auto& [name,value]:c.properties)properties[name]=encode_value(value);
+   co["properties"]=std::move(properties);
+   components.push_back(std::move(co));
   }
   mo["components"]=std::move(components);modules.push_back(std::move(mo));
  }
