@@ -1,0 +1,56 @@
+{
+  "format": "aui.validation-fixtures",
+  "schemaVersion": "0.1-draft",
+  "baseProject": "project.auiproj.json",
+  "cases": [
+    {
+      "id": "duplicate-node",
+      "mutation": {
+        "path": "/nodes/1/id",
+        "value": "soc"
+      },
+      "expected": "GRAPH_DUPLICATE_ID"
+    },
+    {
+      "id": "missing-endpoint",
+      "mutation": {
+        "path": "/edges/3/to/node",
+        "value": "missing"
+      },
+      "expected": "GRAPH_MISSING_NODE"
+    },
+    {
+      "id": "bad-direction",
+      "mutation": {
+        "path": "/edges/2/to/port",
+        "value": "reading"
+      },
+      "expected": "GRAPH_PORT_DIRECTION"
+    },
+    {
+      "id": "wrong-data-type",
+      "mutation": {
+        "path": "/nodes/4/ports/0/type",
+        "value": "Measurement"
+      },
+      "expected": "GRAPH_TYPE_MISMATCH"
+    },
+    {
+      "id": "unknown-target",
+      "mutation": {
+        "path": "/nodes/3/target",
+        "value": "unknown-target"
+      },
+      "expected": "GRAPH_UNKNOWN_TARGET"
+    },
+    {
+      "id": "unsupported-schema",
+      "mutation": {
+        "path": "/schemaVersion",
+        "value": "99-required"
+      },
+      "expected": "SCHEMA_UNSUPPORTED_VERSION"
+    }
+  ],
+  "notes": "Patch paths use JSON Pointer. Cases are specifications, not tested assertions. The bad-direction case targets decoder.reading, which is an output port."
+}
