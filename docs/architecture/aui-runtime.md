@@ -1,6 +1,6 @@
 # AUI Runtime, State and Rendering — Design Specification
 
-**Status: proposed.** The current x86-64 node validator is not this runtime.
+**Status: proposed.** No AUI runtime implementation currently exists.
 
 ## Runtime services
 
