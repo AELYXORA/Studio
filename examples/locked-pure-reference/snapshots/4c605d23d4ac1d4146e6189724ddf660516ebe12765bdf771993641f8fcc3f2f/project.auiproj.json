@@ -1,0 +1,226 @@
+{
+  "format": "aui.project",
+  "schemaVersion": "0.1-draft",
+  "projectId": "example.locked-pure",
+  "revision": 0,
+  "targets": [
+    {
+      "id": "linux-x64",
+      "triple": "x86_64-unknown-linux-gnu",
+      "execution": "user"
+    }
+  ],
+  "packageDependencies": [
+    {
+      "packageId": "example.locked",
+      "version": "1.0.0"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "source",
+      "kind": "component",
+      "label": "Pure Source",
+      "typeRef": "example.locked/source",
+      "target": "linux-x64",
+      "ports": [
+        {
+          "id": "tick",
+          "direction": "out",
+          "type": "example.locked/Tick"
+        }
+      ]
+    },
+    {
+      "id": "consumer",
+      "kind": "component",
+      "label": "Pure Consumer",
+      "typeRef": "example.locked/consumer",
+      "target": "linux-x64",
+      "ports": [
+        {
+          "id": "tick",
+          "direction": "in",
+          "type": "example.locked/Tick"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "data-flow",
+      "from": {
+        "node": "source",
+        "port": "tick"
+      },
+      "to": {
+        "node": "consumer",
+        "port": "tick"
+      }
+    }
+  ],
+  "dataFlows": [
+    {
+      "id": "ticks",
+      "channels": [
+        {
+          "edgeId": "e1",
+          "mode": "stream",
+          "senderDomain": "io-worker",
+          "receiverDomain": "io-worker",
+          "transfer": "copy",
+          "ordering": "fifo",
+          "errorPolicy": "propagate",
+          "capacity": 4,
+          "overflow": "reject"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "accept-tick",
+      "ownerNodeId": "consumer",
+      "trigger": {
+        "kind": "data-arrival",
+        "edgeId": "e1"
+      },
+      "initialState": "waiting",
+      "states": [
+        {
+          "id": "waiting"
+        },
+        {
+          "id": "running"
+        },
+        {
+          "id": "cancelling"
+        },
+        {
+          "id": "done",
+          "terminal": "success"
+        },
+        {
+          "id": "failed",
+          "terminal": "failure"
+        },
+        {
+          "id": "cancelled",
+          "terminal": "cancelled"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "start",
+          "from": "waiting",
+          "to": "running",
+          "signal": "tick-arrived",
+          "action": {
+            "kind": "dispatch",
+            "nodeId": "consumer",
+            "operationId": "Accept"
+          }
+        },
+        {
+          "id": "success",
+          "from": "running",
+          "to": "done",
+          "signal": "accepted",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "failure",
+          "from": "running",
+          "to": "failed",
+          "signal": "accept-error",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "cancel-idle",
+          "from": "waiting",
+          "to": "cancelled",
+          "signal": "cancel",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "cancel-active",
+          "from": "running",
+          "to": "cancelling",
+          "signal": "cancel",
+          "action": {
+            "kind": "request-cancel"
+          }
+        },
+        {
+          "id": "cancel-ack",
+          "from": "cancelling",
+          "to": "cancelled",
+          "signal": "cancel-confirmed",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "late-success",
+          "from": "cancelling",
+          "to": "done",
+          "signal": "accepted",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "late-failure",
+          "from": "cancelling",
+          "to": "failed",
+          "signal": "accept-error",
+          "action": {
+            "kind": "none"
+          }
+        }
+      ],
+      "signals": [
+        {
+          "id": "tick-arrived",
+          "source": "trigger",
+          "payloadType": "example.locked/Tick"
+        },
+        {
+          "id": "accepted",
+          "source": "command-success",
+          "nodeId": "consumer",
+          "operationId": "Accept",
+          "payloadType": "example.locked/Tick"
+        },
+        {
+          "id": "accept-error",
+          "source": "command-failure",
+          "nodeId": "consumer",
+          "operationId": "Accept",
+          "payloadType": "example.locked/Failure"
+        },
+        {
+          "id": "cancel",
+          "source": "control"
+        },
+        {
+          "id": "cancel-confirmed",
+          "source": "control"
+        }
+      ],
+      "scheduling": "per-instance-fifo",
+      "maxConcurrentInstances": 4,
+      "onLimit": "reject-and-report",
+      "mailboxCapacity": 2,
+      "mailboxOverflow": "reject-and-report"
+    }
+  ],
+  "retiredIdentities": []
+}
