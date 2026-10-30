@@ -149,7 +149,9 @@
                 "resultType",
                 "errorType",
                 "effects",
-                "domain"
+                "domain",
+                "sideEffectClass",
+                "retryPolicy"
               ],
               "properties": {
                 "id": {
@@ -195,6 +197,18 @@
                 "domain": {
                   "type": "string",
                   "minLength": 1
+                },
+                "sideEffectClass": {
+                  "enum": [
+                    "none",
+                    "local-reversible",
+                    "external-nonreversible"
+                  ],
+                  "description": "Conservative classification for review; not permission to execute effects"
+                },
+                "retryPolicy": {
+                  "const": "never",
+                  "description": "First-profile non-replay policy; idempotent retry needs later versioned contract"
                 }
               }
             }
