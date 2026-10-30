@@ -41,10 +41,13 @@ No newly created element may reuse an ID already used by a different element in 
 
 The spelling **example.sensor/Measurement** is a package-qualified logical TypeID, not a complete proof of identity. For a compiled project the actual type registry key is:
 
-    ResolvedType = (packageId, lockedPackageContentDigest,
-                    exportedTypeID, exportedTypeContractDigest)
+    LogicalExportIdentity = (packageId, exportedTypeID, exportedContractDigest)
+    ResolvedImplementationIdentity = (LogicalExportIdentity,
+                                      lockedPackageContentDigest,
+                                      targetABI, sourceContentDigests)
 
-- An exact package lock binds package bytes and exported declarations; a version label alone does not pin a type. Two packages exporting the same display spelling but different digests are not interchangeable.
+- [Export Contract Identity](d2-export-contract-identity.md) owns the proposed public export canonical projection and its domain-separated SHA-256. A logical contract does not change merely because an Assembly implementation's whitespace changes; exact implementation identity **does**. Both levels require an exact independently verified package lock.
+- Identical export spelling with a **different exportedContractDigest** is not compatible by default. A different packageContentDigest with the same exact verified export contract retains logical type identity but requires a fresh build/evidence/permission assessment; do not mistake logical identity for equivalent executable behavior.
 - Each exported type definition has exactly one owner in the resolved dependency graph. Duplicate export at the same namespace/TypeID -> PKG_DUPLICATE_EXPORT.
 - A change in structure, units, field IDs, ownership, serialization or effect contract must change its exported contract digest. Compatibility is a separately checked relation; identical spelling is not compatibility.
 - No structural duck-typing, implicit lossy conversions, silent unit conversion or implicit network fetch at graph boundaries. An explicit approved converter component or pure adapter is mandatory for distinct resolved types.
@@ -78,7 +81,7 @@ Operation compatibility includes input/output/error TypeIDs, effects, execution 
 
 There are at least four independent, noninterchangeable digests:
 
-1. **semanticGraphDigest**: meaning-bearing project graph, workflow/data-flow definitions and resolved package export identities. Excludes map coordinates and runtime observations.
+1. **semanticGraphDigest**: meaning-bearing project graph, workflow/data-flow definitions and **logical exported contract identities** (not implementation-file digests). Excludes map coordinates and runtime observations.
 2. **sourceContentDigest**: exact bytes of a source file, including whitespace, which change independently of graph semantics.
 3. **packageContentDigest**: exact declared package file set and manifest, pinned in a lockfile.
 4. **buildArtifactDigest**: final compiled artifact bytes plus an evidence record tying toolchain/target and inputs to their origin.
@@ -103,3 +106,5 @@ An additional **viewDigest** covers presentation-only view bytes. No artifact is
 | ID-12 | Migration drops an unknown required graph extension | MIGRATION_INCOMPATIBLE, prior revision untouched |
 
 All rows are *expected*, not outcomes measured by an AELYXORA implementation. D2 cannot pass until exact collision/retirement encoding, contract digest and lockfile rules align with D6 and receive explicit architect approval.
+
+**Normative cross-link (proposed):** [Export Contract Identity](d2-export-contract-identity.md) resolves the prior contradiction between source-only edits and semantic type identity. [Computed export contract vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json) remain design fixtures, not native test results.
