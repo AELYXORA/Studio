@@ -86,3 +86,7 @@ The [Locked Pure Reference](../../examples/locked-pure-reference/README.md) is *
 A final D3 gate needs: approved stable ViewIdentity generation contract, event queue budget and scheduler fairness, exact link-map approval lifecycle, target capability tokens, error visibility and accessible focus/input behavior, state/Result propagation in later D3 profile, AST/OwnershipIR proof and verified future native tests. L1 rules deliberately avoid claiming full application interaction, dynamic UI, or an implemented command runtime.
 
 No code generation or UI execution is authorized by this document alone.
+
+## E8. Hardware authority is never inferred from AUI commands
+
+[D2 Hardware Resource Contract](d2-hardware-resource-contract.md) models typed MMIO, IRQ, DMA and memory claims in a versioned hardware project profile; [D2↔D3 Command Boundary](d2-d3-hardware-command-boundary.md) specifies how a future command request must match exact graph owner, resource-access edge, claim, component OperationID, target adapter, declared effects and **live capability** before any hardware provider can run. L0/L1 source contains no direct device operations; a successful button event or source-to-graph link map does not grant permission. A view replacement cannot release in-flight DMA ownership. All targets and ABI checks remain NOT-RUN.
