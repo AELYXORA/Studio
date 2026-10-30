@@ -1,6 +1,6 @@
-// D3 positive design fixture. Requires imported AUI.Core names,
-// InspectError definition and Project Graph-linked Inspect provider.
-// This is not yet a complete standalone executable module.
+// Historical illustrative D3+ source, NOT parser-ready in the strict L0/L1 profile.
+// Uses positional .accessibilityLabel shorthand and unresolved AUI.Core imports,
+// InspectError and Graph-linked Inspect provider. No compiler/run test has passed.
 component SensorSummary(input reading: String) {
   event inspect: Event<Unit>;
   command Inspect() -> Result<Unit, InspectError> effects(state-write) on ui;
