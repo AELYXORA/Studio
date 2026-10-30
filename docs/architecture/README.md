@@ -84,3 +84,5 @@ Decisions move from proposed to accepted only after an explicit ADR and correspo
 ## Typed property foundation
 
 - [Typed Component Properties](typed-properties.md): experimental C++23 property declarations, validation and candidate-copy mutation. The property module is not yet part of persisted Project JSON or the designer.
+
+- [Component Registry](component-registry.md) — reusable type contracts, resolved defaults, and static binding compatibility checks. No runtime data propagation yet.
