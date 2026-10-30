@@ -137,3 +137,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [Local Build System and Verification Architecture](local-build-verification.md) defines the local build DAG, tool execution permissions, incremental cache, cancellation/recovery and per-artifact verification evidence. Proposed only; CI stays disabled.
+
+
+[Architecture Freeze Readiness and Implementation Strategy](implementation-readiness.md) concludes global freeze is premature and orders S0 graph validation, S1 architecture workspace, S2 minimal AUI native build, S3 controlled AI workflow and S4 on-target hardware verification. **All implementation gates remain not-run; CI disabled.**
