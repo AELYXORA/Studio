@@ -1,0 +1,161 @@
+{
+  "format": "aui.locked-fixture-negative-cases",
+  "status": "DESIGN ONLY; all native AELYXORA validation tests NOT-RUN",
+  "root": "examples/locked-pure-reference",
+  "base": {
+    "project": "project.auiproj.json",
+    "lock": "package-lock.json",
+    "index": "snapshots/<snapshotDigest>/index.json",
+    "head": "HEAD.0.json",
+    "package": "objects/packages/<packageContentDigest>/component.auipkg.json"
+  },
+  "mutationPolicy": "Every case starts from an independent copy of the known-good immutable reference fixture; apply only the specified edit, recompute checksum only where explicitly instructed, do not silently repair related references.",
+  "cases": [
+    {
+      "id": "wrong-lock-package-version",
+      "target": "lock",
+      "path": "/resolved/0/packageVersion",
+      "replacement": "2.0.0",
+      "expected": "PKG_VERSION_CONFLICT",
+      "note": "Exact project dependency requires 1.0.0"
+    },
+    {
+      "id": "alter-lock-export-contract-digest",
+      "target": "lock",
+      "path": "/resolved/0/exports/0/contractDigest",
+      "replacement": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected": "PKG_EXPORT_DIGEST_MISMATCH",
+      "note": "Require actual recomputation from verified canonical package manifest"
+    },
+    {
+      "id": "delete-locked-source",
+      "target": "package-objects",
+      "deletePath": "src/consumer.S",
+      "expected": "PKG_MISSING"
+    },
+    {
+      "id": "source-byte-mutation",
+      "target": "package-objects",
+      "path": "src/consumer.S",
+      "replaceBytes": "xor %eax, %eax",
+      "withBytes": "mov %eax, %eax",
+      "expected": "PKG_DIGEST_MISMATCH",
+      "note": "A change to raw ASM bytes invalidates locked package hash without necessarily changing the public contract digest"
+    },
+    {
+      "id": "extra-lock-entry",
+      "target": "lock",
+      "path": "/resolved/1",
+      "replacement": {
+        "packageId": "other",
+        "packageVersion": "1.0.0",
+        "contentDigest": {
+          "algorithm": "sha256",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "sourceRoot": "objects/packages/other",
+        "dependencies": [],
+        "targets": [],
+        "exports": []
+      },
+      "expected": "PKG_LOCK_EXTRANEOUS",
+      "note": "Project has only example.locked dependency"
+    },
+    {
+      "id": "dependency-drift",
+      "target": "package",
+      "path": "/dependencies",
+      "replacement": [
+        {
+          "packageId": "another.pkg",
+          "packageVersion": "1.0.0"
+        }
+      ],
+      "expected": "PKG_LOCK_DEPENDENCY_DRIFT",
+      "note": "Recompute package digest/lock coherently for this semantic resolver test; otherwise earlier PKG_DIGEST_MISMATCH takes precedence"
+    },
+    {
+      "id": "missing-immutable-object",
+      "target": "package-objects",
+      "deletePath": "objects/packages/<packageContentDigest>",
+      "expected": "PERSIST_SNAPSHOT_CORRUPT"
+    },
+    {
+      "id": "wrong-channel-capacity",
+      "target": "project",
+      "path": "/dataFlows/0/channels/0/capacity",
+      "replacement": 0,
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "unknown-operation",
+      "target": "project",
+      "path": "/workflows/0/transitions/0/action/operationId",
+      "replacement": "MissingOperation",
+      "expected": "WORKFLOW_PROVIDER_UNRESOLVED"
+    },
+    {
+      "id": "bad-public-command-type",
+      "target": "package",
+      "path": "/components/1/commands/0/errorType",
+      "replacement": "example.locked/Tick",
+      "expected": "PKG_EXPORT_DIGEST_MISMATCH",
+      "note": "At verified package stage with unchanged lock exports; after coherent lock update, project workflow signal must fail WORKFLOW_SIGNAL_TYPE"
+    },
+    {
+      "id": "corrupt-head-checksum",
+      "target": "head",
+      "path": "/checksum",
+      "replacement": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected": "PERSIST_HEAD_CHECKSUM"
+    },
+    {
+      "id": "corrupt-index-package-reference",
+      "target": "index",
+      "path": "/packageObjects/0/contentDigest",
+      "replacement": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected": "PERSIST_SNAPSHOT_CORRUPT",
+      "note": "First digest error may be snapshot hash mismatch unless index/head hashes are consistently regenerated"
+    },
+    {
+      "id": "duplicate-project-id",
+      "target": "project",
+      "path": "/nodes/1/id",
+      "replacement": "source",
+      "expected": "GRAPH_DUPLICATE_ID"
+    },
+    {
+      "id": "view-only-translation",
+      "target": "view",
+      "path": "/positions/1/x",
+      "replacement": 480,
+      "expected": "SEMANTIC_GRAPH_UNCHANGED",
+      "note": "View-only change causes a new view/snapshot byte digest but no changed semanticGraphDigest or native build input"
+    },
+    {
+      "id": "stale-save",
+      "target": "save-command",
+      "expectedRevision": 0,
+      "actualRevision": 1,
+      "expected": "PROJECT_STALE_REVISION"
+    },
+    {
+      "id": "diamond-conflict",
+      "target": "dependency-graph",
+      "graph": {
+        "project": [
+          "A@1.0",
+          "B@1.0"
+        ],
+        "A@1.0": [
+          "C@1.0"
+        ],
+        "B@1.0": [
+          "C@2.0"
+        ]
+      },
+      "expected": "PKG_VERSION_CONFLICT"
+    }
+  ],
+  "expectedResultSchema": "Stable primary diagnostic, selected stage, file/ID path, actual/expected, sorted dependency provenance, no guessed successful runtime behavior."
+}
