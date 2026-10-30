@@ -166,6 +166,59 @@
       },
       "expected": "WORKFLOW_NONDETERMINISTIC",
       "note": "When the declaration now duplicates the cancelling+decoded transition; no terminal cancellation proof"
+    },
+    {
+      "id": "invalid-ascii-graph-id",
+      "mutation": {
+        "path": "/nodes/3/id",
+        "value": "driver / test"
+      },
+      "expected": "SCHEMA_INVALID",
+      "note": "Structural schema identifier restriction applies before graph semantic resolution"
+    },
+    {
+      "id": "retired-live-node-id",
+      "mutation": {
+        "path": "/retiredIdentities",
+        "value": [
+          {
+            "kind": "node",
+            "scopeId": "project",
+            "id": "decoder"
+          }
+        ]
+      },
+      "expected": "IDENTITY_REUSE_REJECTED",
+      "note": "Live decoder ID conflicts with a retired node identity"
+    },
+    {
+      "id": "duplicate-retired-identity",
+      "mutation": {
+        "path": "/retiredIdentities",
+        "value": [
+          {
+            "kind": "edge",
+            "scopeId": "project",
+            "id": "old-edge"
+          },
+          {
+            "kind": "edge",
+            "scopeId": "project",
+            "id": "old-edge"
+          }
+        ]
+      },
+      "expected": "IDENTITY_DUPLICATE_TOMBSTONE",
+      "note": "A duplicate tombstone has identical kind,scopeId,id"
+    },
+    {
+      "id": "unresolved-component-export",
+      "mutation": {
+        "path": "/nodes/3/typeRef",
+        "value": "example.sensor/not-exported"
+      },
+      "expected": "GRAPH_EXPORT_UNRESOLVED",
+      "note": "Exact package export resolution required; example package is only a design fixture"
     }
   ],
   "mutationSemantics": "Each case is independently applied to a deep copy of baseProject. A `mutation` object is one JSON Pointer replace/add; `mutations` is an ordered sequence of replacements applied atomically to one candidate. Expected diagnostics are specification, NOT observed tests.",
