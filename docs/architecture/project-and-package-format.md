@@ -50,3 +50,7 @@ See the machine-readable **illustrative** fixtures under `examples/architecture-
 ## Open
 
 Schema stabilization, lockfile hashing canonicalization, package signing, migration syntax, recovery journal, partial package loading and workspace-level dependencies.
+
+## Formal validation and migration contract
+
+See [Graph Validation and Migration](graph-validation-and-migration.md) for ordered checks, diagnostic codes, dependency resolution, revision-safe saves and recovery. Illustrative [negative fixtures](../../examples/architecture-sensor/invalid-cases.json) define expected failures; no validator has executed them.
