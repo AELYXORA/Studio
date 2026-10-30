@@ -67,3 +67,6 @@ Architecture can be considered coherent when there is one authority for each con
 [Architecture Design Closure — Sensor Slice](architecture-closure.md) defines canonical type IDs, package exports and the end-to-end graph-to-code contract. The sensor fixtures use qualified types. This is a proposed design and has not been run.
 
 **Audit update:** C-04 has a concrete proposed resolution in the closure document and sensor fixtures; it remains unverified until formal schema validation. Other findings remain open unless individually evidenced.
+
+
+[Manifest Schema and Validation Contract](schema-validation-contract.md) documents the proposed JSON schemas, semantic rules, observed fixture checks and unresolved lockfile requirements. Structural schemas: [project](../../schemas/project.schema.json), [component package](../../schemas/component-package.schema.json).
