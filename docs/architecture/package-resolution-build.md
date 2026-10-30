@@ -14,6 +14,9 @@ Proposed `aui.lock.json` has: `format: "aui.lock"`, `lockFormat` compatibility t
 
 ## Package digest procedure (design proposal)
 
+**Detailed owner:** [D6 Package Integrity](d6-package-integrity.md) freezes a *candidate* domain-separated BE64 length-framed manifest+source file-set, portable ASCII path restrictions, and source ownership rules. The [integrity vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) specify expected hashes. Earlier generic descriptions in this file are summaries, not alternative algorithms. All native tests remain NOT-RUN.
+
+
 Produce a logical file-set digest rather than hash ambient directory bytes: enumerate manifest-listed files, normalize relative UTF-8 paths with '/' separators, reject absolute/traversal/symlink escapes and case-fold collisions on relevant filesystems, sort by UTF-8 bytes, then frame each entry with unambiguous length-prefixed path, byte count and SHA-256 file digest; hash the framed stream using SHA-256 and an explicit domain separator. Include manifest bytes with a prescribed canonical JSON serialization (still to be frozen). Generated caches, timestamps and workspace-only view positions never enter package content identity unless explicitly declared as package inputs.
 
 No digest algorithm is finalized until reference test vectors and independent implementations agree. A manifest hash cannot certify files absent from the package.
