@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D2 execution and consistency — proposed
+
+[Concurrency, Command Dispatch, Resource Ownership and Transaction Semantics](d2-execution-consistency.md) defines the bounded single-process execution policy, typed signals, cancellation/completion races, safe ownership transfer and separated graph/runtime/external-effect transaction boundaries. [Sensor D2 runtime scenarios](../../examples/architecture-sensor/d2-runtime-scenarios.md) cover 18 designed future tests, all NOT-RUN. The Studio runtime and graph validator do not yet exist.
+
 ## D2 architecture behavior design — proposed
 
 [Workflow and Data Flow Semantics](graph-behavior-contract.md) formalizes the D2 design candidate: explicit state-machine workflows, bounded typed channels, source/target ownership, event-to-command boundaries, and invariant-preserving graph revisions. Draft [sensor fixtures](../../examples/architecture-sensor/project.auiproj.json) and [negative behavior cases](../../examples/architecture-sensor/d2-invalid-cases.json) are **documentation-stage artifacts, not a runnable graph engine**. Owning contracts remain proposed pending architect sign-off.
