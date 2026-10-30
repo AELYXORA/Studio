@@ -122,5 +122,113 @@
         "port": "reading"
       }
     }
+  ],
+  "dataFlows": [
+    {
+      "id": "sensor-telemetry",
+      "channels": [
+        {
+          "edgeId": "e3",
+          "mode": "stream",
+          "senderDomain": "io-worker",
+          "receiverDomain": "io-worker",
+          "transfer": "copy",
+          "ordering": "fifo",
+          "errorPolicy": "propagate",
+          "capacity": 32,
+          "overflow": "reject"
+        },
+        {
+          "edgeId": "e4",
+          "mode": "snapshot",
+          "senderDomain": "io-worker",
+          "receiverDomain": "ui",
+          "transfer": "copy",
+          "ordering": "latest",
+          "errorPolicy": "propagate"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "sample-to-measurement",
+      "ownerNodeId": "decoder",
+      "trigger": {
+        "kind": "data-arrival",
+        "edgeId": "e3"
+      },
+      "initialState": "waiting",
+      "states": [
+        {
+          "id": "waiting"
+        },
+        {
+          "id": "decoding"
+        },
+        {
+          "id": "done",
+          "terminal": "success"
+        },
+        {
+          "id": "failed",
+          "terminal": "failure"
+        },
+        {
+          "id": "cancelled",
+          "terminal": "cancelled"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "rx",
+          "from": "waiting",
+          "to": "decoding",
+          "signal": "sample-arrived",
+          "action": {
+            "kind": "dispatch",
+            "nodeId": "decoder",
+            "operationId": "Decode"
+          }
+        },
+        {
+          "id": "ok",
+          "from": "decoding",
+          "to": "done",
+          "signal": "decoded",
+          "action": {
+            "kind": "publish",
+            "edgeId": "e4"
+          }
+        },
+        {
+          "id": "error",
+          "from": "decoding",
+          "to": "failed",
+          "signal": "decode-error",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "cancel-wait",
+          "from": "waiting",
+          "to": "cancelled",
+          "signal": "cancel",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "cancel-running",
+          "from": "decoding",
+          "to": "cancelled",
+          "signal": "cancel",
+          "action": {
+            "kind": "none"
+          }
+        }
+      ]
+    }
   ]
 }
