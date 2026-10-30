@@ -38,4 +38,7 @@ Borrow-after-owner-free; use-after-move; mismatched address spaces; forbidden im
 
 ## Open decisions
 
-Precise generics, escaping rules, compile-time borrow analysis strength, shared ownership policy, allocator API, pinning and async frame layout. None of these is verified in the current ASM validator.
+Precise generics, escaping rules, compile-time borrow analysis strength, shared ownership policy, allocator API, pinning and async frame layout. No ownership checker or Assembly runtime is implemented or verified.
+
+
+[OwnershipIR and Compile-Time Safety](aui-ownership-ir.md) specifies CFG-based moves, borrows, async boundaries, cleanup and rejection fixtures. Proposed; not implemented.
