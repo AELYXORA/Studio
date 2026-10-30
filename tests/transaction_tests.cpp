@@ -18,5 +18,18 @@ int main() {
     require(!apply(p,{1,{RenameComponent{"missing","x"}}}).has_value());
     require(!apply(p,{1,{SetProjectName{""}}}).has_value());
     require(apply(p,{1,{SetProjectName{"Updated"}}}).has_value());
+    // Typed properties participate in model transactions and revision control.
+    Project typed;typed.id="app.typed";typed.name="Typed";
+    Component button{"submit","ui.button",{}};
+    button.property_definitions.push_back({"title",PropertyKind::Text,std::string("Submit"),true});
+    button.property_definitions.push_back({"locked",PropertyKind::Boolean,true,false});
+    typed.modules.push_back({"ui",{button}});
+    require(validate(typed).empty());
+    require(apply(typed,{0,{SetComponentProperty{"submit","title",std::string("Save")}}}).has_value());
+    require(typed.revision==1);
+    require(std::get<std::string>(typed.modules[0].components[0].properties.at("title"))=="Save");
+    require(!apply(typed,{1,{SetComponentProperty{"submit","title",true}}}).has_value());
+    require(!apply(typed,{1,{SetComponentProperty{"submit","locked",false}}}).has_value());
+    require(typed.revision==1);
     std::cout<<"transaction tests passed\n";
 }
