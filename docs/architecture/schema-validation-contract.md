@@ -13,7 +13,7 @@ Canonical type identity is `packageId/typeName`; display labels and short type n
 
 Parse JSON -> validate structural schema -> validate unique identifiers -> resolve exact local package dependencies -> verify package content hashes and exported types -> resolve graph references -> enforce type/direction, target and hardware constraints -> build candidate snapshot. No partial publish on failure.
 
-Package resolving is **offline and explicit**. A future lockfile must record package ID, exact release/content identity, hash algorithm+digest, source origin and target coverage. No network access, silent dependency upgrade or inferred trust is permitted during resolution. The current example is **not locked**; a trustworthy package hash cannot be fabricated from absent source files.
+Package resolving is **offline and explicit**. A future lockfile must record package ID, exact release/content identity, hash algorithm+digest, source origin and target coverage. No network access, silent dependency upgrade or inferred trust is permitted during resolution. The **original sensor example** is not locked and its declared ASM sources are absent; its hash cannot be fabricated. A separate [locked pure reference fixture](../../examples/locked-pure-reference/README.md) now carries actual source bytes, a lock and hash vectors, but is not a native ABI-linked executable.
 
 ## Fixture review and limitations
 
