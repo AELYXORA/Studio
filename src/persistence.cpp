@@ -36,7 +36,7 @@ std::expected<PropertyValue,E> decode_value(const j::value& v,PropertyKind kind)
    return PropertyValue(static_cast<std::int64_t>(v.as_uint64()));
   break;
  case PropertyKind::Real: if(v.is_double())return PropertyValue(v.as_double());break;
- case PropertyKind::Text: if(v.is_string())return PropertyValue(std::string(v.as_string()));break;
+ case PropertyKind::Text: if(v.is_string())return PropertyValue(std::string(v.as_string().data(),v.as_string().size()));break;
  }
  return std::unexpected(error(ErrorCode::MissingField,"properties","property value type mismatch"));
 }
@@ -131,7 +131,7 @@ LoadResult parse_project(std::string_view text){
    if(auto props=(**c).if_contains("properties")) {
     if(!props->is_object())return std::unexpected(error(ErrorCode::MissingField,"properties","expected object"));
     for(const auto& entry:props->as_object()) {
-     const std::string name(entry.key());
+     const std::string name(entry.key().data(),entry.key().size());
      const PropertyDefinition* def=nullptr;
      for(const auto& d:component.property_definitions)if(d.name==name){def=&d;break;}
      if(!def)return std::unexpected(error(ErrorCode::UnresolvedDependency,name,"undeclared property"));
