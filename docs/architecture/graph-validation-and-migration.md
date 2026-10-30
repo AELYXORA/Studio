@@ -63,8 +63,8 @@ A durable save requires writing a staged snapshot, flushing data and directory m
 | RawSample output to Measurement input | GRAPH_TYPE_MISMATCH | Reject |
 | Reference to undeclared target | GRAPH_UNKNOWN_TARGET | Reject |
 | Duplicate ownership of exclusive MMIO region | HARDWARE_RESOURCE_CONFLICT | Reject |
-| Package version missing from local lock | PACKAGE_UNRESOLVED | Reject |
-| Path traverses above package root | PACKAGE_PATH_ESCAPE | Reject |
+| Required package has no lock entry | PKG_LOCK_MISSING | Reject |
+| Package inventory path traverses outside package root | PKG_PATH_ESCAPE | Reject |
 | Stale expected revision | PROJECT_STALE_REVISION | Reject without mutation |
 | Unsupported required schema | SCHEMA_UNSUPPORTED_VERSION | Reject |
 
@@ -79,3 +79,5 @@ A valid sensor example parses into stable graph identity, checks port directions
 **D6 source and recovery details:** [Package Integrity](d6-package-integrity.md) requires validated portable path inventory before computing lock digests. [Filesystem Adapters](d6-filesystem-adapters.md) keeps crash-durable publication conditional on the actual host/filesystem. [Integrity vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) are reference bytes, not runtime verification. Missing declared sources block a locked build; no implicit stubs or offline network retrieval.
 
 **D2/D6 canonical validation boundary:** [Semantic Projection](d2-d6-semantic-projection.md) must be produced only after exact [offline dependency resolution](d6-offline-dependency-resolution.md). The [locked pure fixture](../../examples/locked-pure-reference/README.md) includes known-good reference bytes and [future negative cases](../../examples/locked-pure-reference/negative-cases.json). An invalid lock, missing source, divergent public export or unknown provider prevents an authoritative graph digest even if the JSON shape is valid.
+
+**Diagnostic-code reconciliation (audit):** The older shorthand PACKAGE_UNRESOLVED and PACKAGE_PATH_ESCAPE have been replaced in this first-slice table with the precise [D6 Resolver](d6-offline-dependency-resolution.md) and [Package Integrity](d6-package-integrity.md) codes PKG_LOCK_MISSING and PKG_PATH_ESCAPE. A wrong-version **existing** lock entry instead yields PKG_VERSION_CONFLICT. Preserve source stage and provenance path when reporting these errors; do not unify distinct causes under an ambiguous legacy PACKAGE_* category.
