@@ -33,3 +33,6 @@ Do not assign pretend release versions to documents. Serialized schemas/packages
 
 
 [AI Role and Human-in-the-Loop Contract](ai-role-contract.md) separates human decisions, AI proposals and deterministic local validation. Proposed for review.
+
+
+[Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
