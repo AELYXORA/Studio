@@ -13,7 +13,8 @@
     "semanticGraphDigest",
     "snapshotDigest",
     "predecessorEpoch",
-    "checksum"
+    "checksum",
+    "operationId"
   ],
   "properties": {
     "format": {
@@ -56,6 +57,17 @@
     "checksum": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
+    },
+    "operationId": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+        }
+      ]
     }
   }
 }
