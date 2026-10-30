@@ -90,3 +90,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 ## Project-format verification
 
 [Graph Validation and Migration](graph-validation-and-migration.md) specifies integrity, schema evolution, lockfile resolution, crash recovery and diagnostics. The [negative sensor fixture matrix](../../examples/architecture-sensor/invalid-cases.json) is proposed, not executed.
+
+
+[AUI Component Framework](component-framework.md) defines visual/nonvisual palette categories, component lifecycle, properties, events, commands, bindings, layout and design-time behavior. Proposed and not implemented.
