@@ -66,7 +66,9 @@
           "resultType": "example.sensor/Measurement",
           "errorType": "example.sensor/DecodeError",
           "effects": [],
-          "domain": "io-worker"
+          "domain": "io-worker",
+          "sideEffectClass": "none",
+          "retryPolicy": "never"
         }
       ]
     }
