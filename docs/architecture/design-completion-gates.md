@@ -2,6 +2,10 @@
 
 **Status: accepted documentation-first process; design baseline still open.** The architect requires **complete, detailed design before implementation, then implementation, then execution of tests and measurement, then correction/re-verification**. No further product parser, compiler, runtime, renderer, UI or AI source implementation before the complete **in-scope D1–D8 baseline** is reviewed and explicitly accepted. The existing Linux Assembly lexical preflight is historical research, not accepted implementation evidence. Any review-only technical experiment needs explicit, bounded authorization and must never be described as a passed gate.
 
+## Repository workflow — direct main only
+
+**Architect instruction:** Make all AELYXORA documentation and future authorized implementation changes directly in the existing `main` branch. **Do not create feature branches or pull requests.** This applies to documentation, design closure, implementation, corrections and tests. Respect any actual repository protection rule; if direct `main` writing is unavailable, report the restriction rather than creating a branch as a workaround. Do not alter pre-existing unrelated branches. This workflow rule does not by itself approve any design or code change.
+
 ## Responsibility and decision control
 
 Human architect owns system requirements, graph semantics, platform targets, data disclosure decisions and acceptance. Documentation is the design deliverable. AI assistant is **architecture analyst and specification author first**, optional implementation engineer later; it may draft proposals but never own architectural authority. Design decisions are classified: Accepted (user-approved), Proposed, Open, Rejected, Verified (with observed evidence). A design contract cannot become accepted merely because a document was written.
