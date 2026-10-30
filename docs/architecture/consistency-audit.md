@@ -15,17 +15,17 @@
 
 | ID | Severity | Issue | Resolution / owner |
 | --- | --- | --- | --- |
-| C-01 | High | Language principles included a superseded restricted grammar and a second newer grammar, creating competing examples | Current syntax authority is [AUI Syntax](aui-syntax.md). Earlier grammar in [AUI Language](aui-language.md) is explicitly non-normative; still should be removed or consolidated at design freeze |
+| C-01 | High | Language principles included a superseded restricted grammar and a second newer grammar, creating competing examples | [D3 First Language Profile](d3-first-language-profile.md) now owns bounded L0/L1 syntax; [AUI Syntax](aui-syntax.md) is a broader D3+ proposal. Earlier illustrative grammar remains non-normative; all require eventual design approval |
 | C-02 | Medium | Artificial v0.1 labels persisted after decision to keep architectural specs unversioned | Removed found draft wording in language, library and validation docs. Schema and actual package revisions in fixtures are **compatibility fields**, not product releases; their concrete placeholder values still need a later schema decision |
 | C-03 | High | Example package declares Assembly files that do not exist; JSON source manifests therefore cannot be built | Retain as **illustrative design fixtures only**, never runnable demos. Authoritative note: [Project Format](project-and-package-format.md) |
 | C-04 | High | Project JSON stores string type names such as RawSample without a canonical type-definition registry; package metadata cannot yet prove type resolution | Define canonical type IDs, package export table, type compatibility and import resolution before calling format accepted |
-| C-05 | High | Version resolution calls for lockfile/hash but examples contain no lockfile, standardized hash algorithm or package bytes | Add lockfile grammar and digest canonicalization; no reproducible build claim beforehand |
+| C-05 | High | Version resolution calls for lockfile/hash but original sensor example has no lockfile or source bytes, although a separate [locked pure fixture](../../examples/locked-pure-reference/README.md) now includes actual byte-linked package/lock/snapshot references | Add lockfile grammar and digest canonicalization; no reproducible build claim beforehand |
 | C-06 | High | Formal structural schemas were originally absent; draft schemas now exist | [Project](../../schemas/project.schema.json) and [package](../../schemas/component-package.schema.json) draft schemas now exist; independent full-schema and semantic validation remain pending |
 | C-07 | High | Compiler backend is described as either LLVM IR generation or target Assembly; no chosen bootstrap approach | Resolve explicit compiler implementation language, backend ownership and first OS/ISA using feasibility evidence |
 | C-08 | High | Public component ABI descriptor offsets, allocator contract and cancellation atomics remain open | Resolve ABI layouts per target, allocation rules and task race model before binary compatibility claims |
 | C-09 | High | UI input/text shaping/accessibility platform dependencies and renderer choices are still open | Specify first host platform and minimal text/graphics strategy with testable acceptance |
 | C-10 | High | ChatGPT sign-in via Plus is an experience goal, not a validated authorization method | Keep AI provider boundary independent. Do not treat Plus subscription as arbitrary API access |
-| C-11 | Medium | Binding/event handler syntax is incomplete; design example does not wire Button.activated to command | Add complete legal source fixture and exact semantic wiring grammar before freezing AUI language |
+| C-11 | Medium | Legacy source remains illustrative; D3 L0/L1 now has an explicit typed event/command design fixture and derived [link-map](../../examples/aui-language/linked-consumer-panel.link.json), but no compiler/runtime proof | Add complete legal source fixture and exact semantic wiring grammar before freezing AUI language |
 | C-12 | Medium | Detailed documents overlap on ownership, tasks and platform rules, which risks divergence | Authority map below governs edits; other documents link instead of redefining conflicting semantics |
 | C-13 | Medium | Design has no measurable end-to-end UX and performance budget for the map workspace | Define scenario fixtures, acceptance thresholds and source-linked diagnostics before implementation claims |
 | C-14 | High | Multi-file project changes have a conceptual journal but no failure/recovery protocol | Specify durable commit state machine, torn-write and migration test cases before persistence implementation |
@@ -72,7 +72,7 @@ Architecture can be considered coherent when there is one authority for each con
 [Manifest Schema and Validation Contract](schema-validation-contract.md) documents the proposed JSON schemas, semantic rules, observed fixture checks and unresolved lockfile requirements. Structural schemas: [project](../../schemas/project.schema.json), [component package](../../schemas/component-package.schema.json).
 
 
-[Package Resolution and Reproducible Build Contract](package-resolution-build.md) defines offline locked dependency resolution, digest design, target checks and reproducibility gates. [Proposed lockfile schema](../../schemas/package-lock.schema.json). No fabricated lockfile or verified build.
+[Package Resolution and Reproducible Build Contract](package-resolution-build.md) defines offline locked dependency resolution and reproducibility gates. [Lock schema](../../schemas/package-lock.schema.json) and [actual byte-linked documentation fixture](../../examples/locked-pure-reference/README.md) now exist. No runnable native build has been verified.
 
 ## D2 design-pass update (proposed)
 
