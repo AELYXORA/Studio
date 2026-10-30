@@ -1,0 +1,31 @@
+{
+  "format": "aui.command-link",
+  "linkFormat": "0.1-draft",
+  "projectId": "example.locked-pure",
+  "graphRevision": 0,
+  "semanticGraphDigest": "34a7480186b2b1eec8e7bb9453ef2d8e2883538cd17d288ec1e573271eaba965",
+  "sourcePath": "examples/aui-language/linked-consumer-panel.aui",
+  "sourceSha256": "5ad8e28281f0c5c8a4587305ad1f329ecac41478a8adbd5e59e5598e6f273a5d",
+  "coreRegistry": "aui.core/0.1-draft",
+  "approvalStatus": "proposed",
+  "commandBindings": [
+    {
+      "sourceSymbol": "ConsumerPanel.Accept",
+      "graphNodeId": "consumer",
+      "exportedComponentTypeId": "example.locked/consumer",
+      "exportedContractDigest": "830105ea82052eedde6dd562750a5d4795f523ef1f39f7cc4d1d59585f685836",
+      "operationId": "Accept",
+      "targetTriple": "x86_64-unknown-linux-gnu",
+      "domain": "io-worker",
+      "effects": [],
+      "inputs": [
+        {
+          "name": "tick",
+          "typeId": "example.locked/Tick"
+        }
+      ],
+      "resultTypeId": "example.locked/Tick",
+      "errorTypeId": "example.locked/Failure"
+    }
+  ]
+}
