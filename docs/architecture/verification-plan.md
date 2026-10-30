@@ -18,3 +18,6 @@ There is currently no executable baseline or build script. For every future veri
 - G7: end-to-end IDE functionality, packaging and cross-target tests.
 
 Record pass/fail/not-run with evidence. No mock or unexecuted test counts as a pass. Cross-platform claims require executing tests on each target.
+
+
+[Local Build System and Verification Architecture](local-build-verification.md) defines the local build DAG, tool execution permissions, incremental cache, cancellation/recovery and per-artifact verification evidence. Proposed only; CI stays disabled.
