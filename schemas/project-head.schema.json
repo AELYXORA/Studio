@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA Two-Slot HEAD Record - proposed D6 structural candidate",
+  "description": "D6 design-only. Checksum and snapshot integrity are semantic/cryptographic, not JSON Schema assertions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "headFormat",
+    "projectId",
+    "epoch",
+    "graphRevision",
+    "semanticGraphDigest",
+    "snapshotDigest",
+    "predecessorEpoch",
+    "checksum"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.head-record"
+    },
+    "headFormat": {
+      "const": "0.1-draft"
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "graphRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "semanticGraphDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "snapshotDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "predecessorEpoch": {
+      "oneOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
