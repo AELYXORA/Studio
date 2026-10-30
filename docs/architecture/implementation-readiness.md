@@ -4,6 +4,8 @@
 
 ## Readiness decision
 
+**Design-first decision supersedes the earlier recommendation to immediately implement S0.** Until design gates are accepted, prioritize complete specifications and review. See [Design Completion Gates](design-completion-gates.md).
+
 **Not ready for global architecture freeze. Ready for a narrowly scoped first implementation slice after explicit host selection and fixture semantics.** Keep the architecture-first Project Graph and human-approval principles stable while treating storage encoding, compiler backend, runtime ABI and platform renderer as changeable.
 
 | Area | Readiness | Evidence / blocker |
