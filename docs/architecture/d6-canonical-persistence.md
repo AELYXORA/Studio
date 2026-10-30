@@ -47,6 +47,21 @@ A *snapshot* contains a canonical project manifest, committed lock, source bytes
 
 **Operation provenance for ambiguous saves:** HEAD and snapshot index contain the same committed operationId (null only for genesis). The HEAD checksum and snapshot index hash cover it, and recovery compares them. This proves correlation for the **retained committed records only**. With two HEAD slots there is NO unlimited durable operationId replay memory: older repeated IDs require an accepted persistent operation ledger, or must be rejected as unresolvable rather than advertised as deduplicated. [D2/D6 Baseline Review](d2-d6-baseline-review.md) tracks this as P0.
 
+## P2.1 — Canonical snapshot verification and array ordering (design candidate)
+
+Before treating a HEAD as a fully verified project:
+1. Strictly parse HEAD, reject non-canonical bytes, unknown/duplicate keys or invalid checksum; observe its epoch and operationId.
+2. Read immutable index.json for the referenced snapshotDigest; verify exact SHA-256 with the snapshot-index/v1 domain. Index must be canonical bytes; an index is not its own signature.
+3. Assert HEAD and index agree on projectId, graphRevision, semanticGraphDigest and operationId; no field may be silently overwritten from the other record.
+4. Verify exact project manifest, lock and each listed source/view byte digest; reject undeclared, duplicate or conflicting paths in canonical inventory.
+5. Require index.packageObjects to equal the committed lock's resolved exact (packageId, contentDigest) set. Verify all referenced immutable objects and manifest/source inventories before claiming a fully recoverable package-locked project. A missing object is a recovery integrity error, not a reason to download a substitute.
+6. Validate the restored semantic graph, retired-identity ledger and all locked exported contracts; recompute semanticGraphDigest using logical export identities, not implementation file hashes. Reject any mismatch before loading executable code.
+7. Select highest fully valid HEAD epoch, reporting degraded recovery whenever a newer record exists but fails. If no trusted slot remains, stop with PERSIST_RECOVERY_REQUIRED.
+
+The canonical index stores sourceFiles and viewFiles **sorted by path UTF-8 bytes** and packageObjects **sorted by (packageId,contentDigest)**; duplicates, case-fold path collisions, aliased/reserved paths and cross-array path collisions are invalid. An index list is not allowed to change order merely due to filesystem enumeration. This affects snapshotDigest while leaving unrelated semanticGraphDigest unchanged.
+
+**Commit provenance limitation:** operationId is immutable in the new HEAD and index, but TWO HEAD slots preserve at most the latest limited set of committed operation IDs. They cannot provide unlimited cross-crash replay detection; old-operation retries require an explicit durable operation-history design or a conservative conflict error. No hidden idempotency guarantee.
+
 ## P3. Semantic GraphRevision versus ViewRevision
 
 - GraphRevision N is a monotonic document revision advanced by each **accepted semantic mutation**. An explicitly accepted semantic no-op does not increment N and yields no new graph snapshot. Use separate ViewRevision for map-only changes.
