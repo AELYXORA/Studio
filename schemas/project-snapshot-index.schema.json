@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA Immutable Snapshot Index - proposed D6 structural candidate",
+  "description": "The index contains digest claims for bytes; a validator must verify actual file presence, path normalization, package locks, ownership and content. This is not a crash durability guarantee.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "indexFormat",
+    "projectId",
+    "graphRevision",
+    "semanticGraphDigest",
+    "projectManifestDigest",
+    "lockDigest",
+    "sourceFiles",
+    "viewFiles"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.snapshot-index"
+    },
+    "indexFormat": {
+      "const": "0.1-draft"
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "graphRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "semanticGraphDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "projectManifestDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "lockDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourceFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ownership": {
+            "enum": [
+              "human",
+              "generated",
+              "vendored",
+              "view"
+            ]
+          }
+        }
+      }
+    },
+    "viewFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "ownership": {
+            "enum": [
+              "human",
+              "generated",
+              "vendored",
+              "view"
+            ]
+          }
+        }
+      }
+    },
+    "retiredIdentityDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
