@@ -1,0 +1,83 @@
+{
+  "format": "aui.component-package",
+  "schemaVersion": "0.1-draft",
+  "packageId": "example.locked",
+  "packageVersion": "1.0.0",
+  "targets": [
+    {
+      "triple": "x86_64-unknown-linux-gnu",
+      "status": "planned"
+    }
+  ],
+  "components": [
+    {
+      "typeId": "example.locked/source",
+      "contractVersion": "1.0.0",
+      "ports": [
+        {
+          "id": "tick",
+          "direction": "out",
+          "type": "example.locked/Tick"
+        }
+      ],
+      "capabilities": [],
+      "sources": [
+        {
+          "path": "src/source.S",
+          "target": "x86_64-unknown-linux-gnu",
+          "ownership": "human"
+        }
+      ]
+    },
+    {
+      "typeId": "example.locked/consumer",
+      "contractVersion": "1.0.0",
+      "ports": [
+        {
+          "id": "tick",
+          "direction": "in",
+          "type": "example.locked/Tick"
+        }
+      ],
+      "capabilities": [],
+      "sources": [
+        {
+          "path": "src/consumer.S",
+          "target": "x86_64-unknown-linux-gnu",
+          "ownership": "human"
+        }
+      ],
+      "commands": [
+        {
+          "id": "Accept",
+          "inputs": [
+            {
+              "name": "tick",
+              "type": "example.locked/Tick"
+            }
+          ],
+          "resultType": "example.locked/Tick",
+          "errorType": "example.locked/Failure",
+          "effects": [],
+          "domain": "io-worker",
+          "sideEffectClass": "none",
+          "retryPolicy": "never"
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "testFixtures": [],
+  "types": [
+    {
+      "typeId": "example.locked/Tick",
+      "kind": "record",
+      "fields": []
+    },
+    {
+      "typeId": "example.locked/Failure",
+      "kind": "record",
+      "fields": []
+    }
+  ]
+}
