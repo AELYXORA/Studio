@@ -125,3 +125,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 ## Architecture consistency review
 
 [Architecture Consistency and Completeness Audit](consistency-audit.md) records confirmed invariants, unresolved incompatibilities, authoritative documents and prioritized closure criteria. Findings are design-review results, not verified implementation.
+
+
+[Architecture Design Closure — Sensor Slice](architecture-closure.md) defines canonical type IDs, package exports and the end-to-end graph-to-code contract. The sensor fixtures use qualified types. This is a proposed design and has not been run.
