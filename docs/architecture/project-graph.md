@@ -1,6 +1,6 @@
 # Project Graph — Canonical Model
 
-**Status:** authoritative graph topology design **candidate**, pending explicit D2 architect acceptance. No implementation started. [Graph Behavior Contract](graph-behavior-contract.md) owns detailed workflows/data-flow semantics; this document owns canonical node/edge identities and graph structure.
+**Status:** authoritative graph topology design **candidate**, pending explicit D2 architect acceptance. [D2 Execution and Consistency](d2-execution-consistency.md) specifies the separate instance execution and model-transaction boundary. No implementation started. [Graph Behavior Contract](graph-behavior-contract.md) owns detailed workflows/data-flow semantics; this document owns canonical node/edge identities and graph structure.
 
 ## 1. Purpose and ownership
 
