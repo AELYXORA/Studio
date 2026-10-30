@@ -68,3 +68,7 @@ The complete architecture and user workflows may be specified **before** broad i
 Every normative design decision must explicitly describe: invariants, API/data contracts, target-specific ABI assumptions, failure behavior, dependencies, examples, tradeoffs and acceptance criteria. Mark items **accepted**, **proposed**, **open**, or **verified**; only actual test evidence may justify verified status.
 
 The canonical project graph remains the heart of Studio; AUI is its implementation technology, not a competing source of architectural truth. Documentation-first is not documentation-only: proofs and prototypes validate uncertain ABI, compiler, rendering and runtime assumptions before irreversible commitments. No GitHub Actions until release preparation.
+
+## AUI language/compiler/runtime design package
+
+The [theoretical design plan](aui-design-plan.md) tracks the design's completeness and unresolved decisions. Its dedicated contracts are [AUI language](aui-language.md), [compiler and target lowering](aui-compiler.md) and [state/runtime/rendering](aui-runtime.md). These are **proposed technical specifications**, not running implementations. They remain subordinate to the canonical Project Graph and this architecture's human-led, map-centric product invariants.
