@@ -6,6 +6,16 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Product doctrine — architecture-first RAD
+
+**Confirmed product intent:** AELYXORA is RAD for an AI-native development workflow: the human architects the system; AI primarily implements the components and their native code. Success means the shortest **architectural idea -> approved contracts -> native implementation -> verified result** loop, not faster manual coding or visual placement of widgets.
+
+**Priority is Architecture -> Workflows -> Data Flows -> AI implementation -> Verification -> UX/declarative UI.** Workflow/data-flow diagrams must be typed semantic projections of one canonical Project Graph, not independently authoritative pictures. Declarative AUI and interactive preview matter for software that needs UI, but are secondary to the architecture. Headless applications, services, libraries and hardware-oriented systems must remain first-class.
+
+**Implementation constraints remain Assembly-first and framework-free at runtime**, with platform-native APIs and target-specific adapters explicitly declared; the Clang/LLVM build toolchain is not a required target-application runtime framework. No claim of binary portability, zero-cost abstraction or total absence of OS dependencies is permitted without per-target verification.
+
+**Process is sequential:** complete and approve the full in-scope specification baseline; then implement; then execute the prescribed tests and measurements; then correct and re-verify. Design fixtures and expected diagnostic outcomes are authored in the documentation phase but not presented as executed tests. The [Architecture-to-Execution Contract](architecture-to-execution-contract.md) is a proposed end-to-end design trace and the [Specification Completion Matrix](specification-completion-matrix.md) tracks remaining D1–D8 closure work. Neither document automatically closes a gate.
+
 ## Experience
 
 - **Center: live architecture graph.** Modules, components, interfaces, devices and runtime services are typed nodes; dependencies, data/control flows and resource ownership are typed edges. Mind-map ergonomics, UML-level precision. Zoom, groups, navigation and selection are map affordances, not architecture truth.
