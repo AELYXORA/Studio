@@ -37,11 +37,10 @@ There is **no universal native Assembly syntax** for all CPUs; consistent semant
 - [Declarative UI model](declarative-ui.md)
 - [Assembly contracts, targets and AI role](assembly-first.md)
 - [Component contract](component-contract.md)
-- [Application Model](application-model.md)
-- [Bindings and runtime](bindings-and-runtime.md)
+- [Bindings and runtime semantics](bindings-and-runtime.md) — design only
 - [Source ownership](source-ownership.md)
 - [Security boundaries](extension-and-security.md)
-- [Verification](verification-plan.md)
+- [Local verification](verification-plan.md)
 - [Roadmap](../product/roadmap.md)
 - [ADRs](../adr/README.md)
 
