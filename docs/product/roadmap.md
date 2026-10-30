@@ -2,7 +2,7 @@
 
 **Product:** Assembly-first AI-driven systems development; main workspace is the interactive Architecture Map plus contextual AI Chat. The target is software close to hardware.
 
-1. **G0 Native baseline:** execute local ASM validator tests; no CI.
+1. **G0 Design baseline:** resolve canonical graph and AUI contracts, supply inspectable fixtures and specified acceptance checks; no CI.
 2. **G1 Hardware-aware graph:** typed components, ports, devices, buses, target ISA/ABI, resource relations and persistence. Verify a device-driver-protocol-app example.
 3. **G2 First Studio screen:** own declarative UI displays an interactive architecture graph with a docked AI-chat panel (clearly marked disconnected until authorized). View contracts from map nodes.
 4. **G3 Safe editing:** graph transactions, revisioned diff, approval, undo and hardware constraint validation.
@@ -11,7 +11,7 @@
 7. **G6 Hardware tools:** ISA/ABI checks, register and interrupt models, DMA ownership rules, optional local target debugging.
 8. **G7 Target expansion:** AArch64 and further target platforms only after on-target verification.
 
-**Current implementation:** isolated Linux x86-64 UI-node validator; no visual IDE, graph, renderer, live AI or hardware debugging.
+**Current implementation:** documentation and illustrative fixtures only; no running IDE, compiler, renderer, live AI or hardware debugging.
 
 **Rules:** short documents, proof-oriented gates, manual local tests, no GitHub Actions until release preparation.
 
