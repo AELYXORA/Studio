@@ -58,9 +58,13 @@ external input / completed worker message
 
 A committed state revision must be internally consistent even if a later rendering operation fails. Failed drawing must preserve the last valid state and surface a renderer diagnostic. Cross-thread messages carry immutable values or explicitly synchronized owned buffers.
 
+## D2 first-profile execution mapping (design proposal)
+
+[D2 Execution and Consistency](d2-execution-consistency.md) defines the proposed architecture-level per-instance FIFO ordering, bounded workflow admission, typed command-success/failure signals, cancellation-request vs confirmed-stop, terminal publication, ownership and graph CAS boundaries. The AUI runtime must **not** treat a cancellation request or a deadline as physical device quiescence. Follow-up events enqueue instead of recursive transition processing; a committed instance transition must not be rolled back by renderer failure. Running instances pin their previous validated graph snapshot; view generation does not grant lifetime of device buffers. D4/D5 still owe exact scheduler algorithm, native memory atomics, thread-safety and cancellation correctness proof; this cross-reference is not implementation evidence.
+
 ## Task and channel semantics
 
-- Channel capacity is explicit; policies are `wait`, `drop-oldest`, `drop-newest`, or `error` with observable drop counts.
+- Channel capacity is explicit. D2 graph interchange uses **block** (runtime wait), **drop-oldest**, **drop-newest**, or **reject** (runtime error). The older runtime terms `wait` and `error` are descriptive aliases, **not separate serialized policies**. UI/IRQ/nonblocking domains cannot use `block`. Observable drop/rejection counts and ownership cleanup are mandatory.
 - Delivery order is FIFO **within one channel**; cross-channel ordering is unspecified unless a sequence/merge contract defines it.
 - An interrupt handler may only perform operations declared safe for its context; heavyweight parsing/rendering is deferred to worker tasks.
 - Task cancellation requests cannot revoke a physical hardware operation already in progress unless the device contract supports it.
