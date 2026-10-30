@@ -10,7 +10,7 @@ The portable part is the component/API contract and declarative representation, 
 
 ## Current baseline
 
-No executable Assembly prototype is retained in the active tree. Target-specific implementations will follow the design and acceptance criteria.
+An experimental Linux x86-64 Assembly JSON lexical preflight exists at [src/bootstrap/linux-x86_64/json_preflight.S](../../src/bootstrap/linux-x86_64/json_preflight.S). It checks delimiter balance and string termination only; it does not parse JSON or validate the Project Graph. No native Studio runtime/compiler exists.
 
 The first implementation milestone is a native Project Graph foundation. A visible native window using our own AUI AST and renderer follows after validated graph semantics. No CI runs until release preparation.
 
