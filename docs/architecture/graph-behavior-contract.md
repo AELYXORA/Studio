@@ -87,7 +87,7 @@ A workflow has a stable id, ownerNodeId, trigger, exactly one initialState, a no
 | Noncanonical unknown edge kind | GRAPH_EDGE_KIND_UNKNOWN |
 | Missing referenced binding EdgeID | GRAPH_MISSING_EDGE |
 | Topology 'hosts' used as transport | FLOW_EDGE_KIND |
-| Stream capacity 0 | FLOW_CAPACITY_INVALID |
+| Stream capacity 0 | SCHEMA_INVALID (structural layer first; FLOW_CAPACITY_INVALID only if bypassed) |
 | Borrow from worker to UI | FLOW_CROSS_DOMAIN_BORROW |
 | Duplicate exclusive writer | FLOW_WRITER_CONFLICT |
 | Transition destination unknown | WORKFLOW_STATE_UNKNOWN |
@@ -108,6 +108,8 @@ Migration must preserve stable IDs and exact semantic meaning or declare an inco
 ## B7. Acceptance and known open points
 
 Illustrative artifacts: [Project fixture](../../examples/architecture-sensor/project.auiproj.json), [Package fixture](../../examples/architecture-sensor/component.auipkg.json), [Existing negative cases](../../examples/architecture-sensor/invalid-cases.json), [D2 negative cases](../../examples/architecture-sensor/d2-invalid-cases.json), [Project schema](../../schemas/project.schema.json).
+
+Additional D2 design artifacts: [D2 Execution and Consistency](d2-execution-consistency.md) specifies bounded execution, cancellation races, ownership and model CAS. [D2 runtime acceptance scenarios](../../examples/architecture-sensor/d2-runtime-scenarios.md) specify 18 future acceptance sequences; all outcomes remain NOT-RUN.
 
 **No D2 gate is accepted merely by committing documents.** Before acceptance the architect reviews graph edge taxonomy, stable ID format, workflow and channel policies, normative format integration, provider linkage, deterministic diagnostics, and semantic/transaction compatibility. The full design trace must enumerate positive and negative paths and specify future exact tests. Until the first native validator and runtime exist, all proposed tests are **not-run**.
 
