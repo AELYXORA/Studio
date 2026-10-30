@@ -8,7 +8,7 @@
     "encoding": "UTF-8",
     "hexCase": "lower"
   },
-  "note": "These tiny semantically unlinked projections are CANONICAL ENCODING vectors only, not valid linked/ABI verified application graphs. Project display labels are excluded from the semantic projection by construction. Retired-ID ledger is always included in the semantic projection (empty for these vectors).",
+  "note": "These tiny semantically unlinked projections are CANONICAL ENCODING vectors only, not valid linked/ABI verified application graphs. Project display labels are excluded from the semantic projection by construction. Retired-ID ledger is always included in the semantic projection (empty for these vectors). Vocabulary reconciled: semantic projection uses resolvedExports (public logical identities), not resolvedPackages (implementation byte identities).",
   "positive": [
     {
       "id": "unordered-base",
@@ -31,16 +31,15 @@
         "workflows": [],
         "dataFlows": [],
         "packageDependencies": [],
-        "resolvedPackages": [],
-        "retiredIdentities": []
+        "retiredIdentities": [],
+        "resolvedExports": []
       },
-      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedPackages\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
-      "expectedSha256": "9a74581606cd1672a471fce763577c9f0869ba034a13601861721b8a8ea087e1"
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedExports\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "2f989ca9974ddfc2f4719b2ea8af05bc3a754eca12866b13504523d1847876ed"
     },
     {
       "id": "unordered-equivalent",
       "input": {
-        "resolvedPackages": [],
         "packageDependencies": [],
         "dataFlows": [],
         "workflows": [],
@@ -59,10 +58,11 @@
         "projectId": "demo",
         "schemaVersion": "0.1-draft",
         "format": "aui.semantic-graph",
-        "retiredIdentities": []
+        "retiredIdentities": [],
+        "resolvedExports": []
       },
-      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedPackages\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
-      "expectedSha256": "9a74581606cd1672a471fce763577c9f0869ba034a13601861721b8a8ea087e1"
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedExports\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "2f989ca9974ddfc2f4719b2ea8af05bc3a754eca12866b13504523d1847876ed"
     },
     {
       "id": "changed-semantic-kind",
@@ -85,11 +85,11 @@
         "workflows": [],
         "dataFlows": [],
         "packageDependencies": [],
-        "resolvedPackages": [],
-        "retiredIdentities": []
+        "retiredIdentities": [],
+        "resolvedExports": []
       },
-      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"service\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedPackages\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
-      "expectedSha256": "af268c40f2dc4cdab1b124facf407bee9a0ee6c152c0314f0513ea1d45e6d2e4"
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"service\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"demo\",\"resolvedExports\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "492fb941af747a7d5d79e5cc4da8f57607d3e20973376a189d19cbdc3863b0eb"
     },
     {
       "id": "unicode-project-id",
@@ -112,11 +112,11 @@
         "workflows": [],
         "dataFlows": [],
         "packageDependencies": [],
-        "resolvedPackages": [],
-        "retiredIdentities": []
+        "retiredIdentities": [],
+        "resolvedExports": []
       },
-      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"démo\",\"resolvedPackages\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
-      "expectedSha256": "850140b3a4e0644f4545c55f0642bf5382ff54597d124b716dce18173443785e"
+      "expectedCanonical": "{\"dataFlows\":[],\"edges\":[],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"id\":\"a\",\"kind\":\"component\"},{\"id\":\"b\",\"kind\":\"component\"}],\"packageDependencies\":[],\"projectId\":\"démo\",\"resolvedExports\":[],\"retiredIdentities\":[],\"schemaVersion\":\"0.1-draft\",\"targets\":[],\"workflows\":[]}",
+      "expectedSha256": "922ceeb019099edc055bd4d90f2a9205dceaa91c488b07ff95d4c18af1f560e4"
     }
   ],
   "negative": [
