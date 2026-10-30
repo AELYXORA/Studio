@@ -13,7 +13,9 @@
     "projectManifestDigest",
     "lockDigest",
     "sourceFiles",
-    "viewFiles"
+    "viewFiles",
+    "operationId",
+    "retiredIdentityDigest"
   ],
   "properties": {
     "format": {
@@ -49,7 +51,8 @@
         "additionalProperties": false,
         "required": [
           "path",
-          "sha256"
+          "sha256",
+          "ownership"
         ],
         "properties": {
           "path": {
@@ -78,7 +81,8 @@
         "additionalProperties": false,
         "required": [
           "path",
-          "sha256"
+          "sha256",
+          "ownership"
         ],
         "properties": {
           "path": {
@@ -103,6 +107,17 @@
     "retiredIdentityDigest": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
+    },
+    "operationId": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+        }
+      ]
     }
   }
 }
