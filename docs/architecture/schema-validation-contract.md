@@ -17,7 +17,7 @@ Package resolving is **offline and explicit**. A future lockfile must record pac
 
 ## Fixture review and limitations
 
-The [sensor project](../../examples/architecture-sensor/project.auiproj.json) and [package](../../examples/architecture-sensor/component.auipkg.json) were inspected against a minimal local structural checker that enforces the subset of JSON Schema keywords these files use. Both passed. The six [negative fixture mutations](../../examples/architecture-sensor/invalid-cases.json) were checked using a local, noncommitted semantic reference checker and returned their expected codes: duplicate ID, missing node, wrong port direction, type mismatch, unknown target and unsupported schema. **These checks were not executed by AUI or an independent full JSON Schema validator.**
+Earlier versions of the [sensor project](../../examples/architecture-sensor/project.auiproj.json) and [package](../../examples/architecture-sensor/component.auipkg.json) were inspected with a minimal, noncommitted structural checker. Six [original negative fixture mutations](../../examples/architecture-sensor/invalid-cases.json) had expected codes under a noncommitted semantic reference checker. **Those observations applied to an earlier fixture revision; they are not current-schema results, native validator results or independent full JSON Schema evidence.** The new D2 behavior extension and [D2 negative fixtures](../../examples/architecture-sensor/d2-invalid-cases.json) have not been executed by a native validator. All D2 behavioral acceptance outcomes remain **not-run**.
 
 ## Design risks and open items
 
@@ -27,3 +27,7 @@ Missing formal checks include schema size limits, JSON duplicate keys, canonical
 
 
 [Package Resolution and Reproducible Build Contract](package-resolution-build.md) defines offline locked dependency resolution, digest design, target checks and reproducibility gates. [Proposed lockfile schema](../../schemas/package-lock.schema.json). No fabricated lockfile or verified build.
+
+## D2 behavior fixture schema boundary
+
+The draft project schema now exposes `dataFlows` and `workflows`. The package schema exposes declared `commands`. These fields are a structural interchange **proposal**. Structural checks cannot prove the referenced edge exists, a workflow state is reachable, a provider operation is actually linked, or device access is authorized. [Graph Behavior](graph-behavior-contract.md) defines semantic requirements. Schema files may reject invalid shape before semantic validation; fixtures identify expected first diagnostic by stage.
