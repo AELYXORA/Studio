@@ -66,3 +66,6 @@ Component catalog design: [AUI Component Framework](component-framework.md) (pro
 
 
 [AUI AST and Semantic Analysis](aui-ast-semantic-analysis.md) defines compiler tree nodes, scopes, type/effect checking, bindings and TypedHIR output. Proposed and not implemented.
+
+
+[OwnershipIR and Compile-Time Safety](aui-ownership-ir.md) specifies CFG-based moves, borrows, async boundaries, cleanup and rejection fixtures. Proposed; not implemented.
