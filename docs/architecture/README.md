@@ -48,3 +48,11 @@ A native AELYXORA window containing **architecture map plus contextual AI chat a
 This document is the **canonical architectural source**. [Roadmap](../product/roadmap.md) defines a small set of proof-oriented gates. Technical contracts are supporting references; don't generate parallel strategy documents that contradict this one. Review consequential design shifts through ADRs only.
 
 References: [Declarative UI](declarative-ui.md), [Assembly ABI](assembly-first.md), [Component contracts](component-contract.md), [State and bindings](bindings-and-runtime.md), [Security](extension-and-security.md).
+
+## Normative implementation contracts
+
+Read in order: [Workspace and first-screen UX](workspace.md) → [Canonical Project Graph](project-graph.md) → [Hardware and target contracts](hardware-and-targets.md) → [AI Engineer and ChatGPT access](ai-engineer.md).
+
+Supporting documents: [Component ABI](component-contract.md), [Declarative UI](declarative-ui.md), [Assembly-first implementation](assembly-first.md), [Binding semantics](bindings-and-runtime.md), [Source ownership](source-ownership.md), [Security boundaries](extension-and-security.md), [Local verification](verification-plan.md).
+
+**Documentation authority:** this index defines product invariants; Project Graph specifies graph semantics; Workspace specifies interaction; Hardware and Targets specifies device constraints; AI Engineer specifies AI permissions and workflow. The [Roadmap](../product/roadmap.md) orders work but does not override technical contracts. When conflicts appear, update the owning document rather than duplicating rules.
