@@ -1,0 +1,225 @@
+{
+  "format": "aui.hardware-resource-negative-cases",
+  "profile": "0.2-hw-draft",
+  "status": "PROPOSED design-only mutation cases. No native AELYXORA schema, lock, adapter, hardware or ABI tests have run.",
+  "base": "hardware-resource-profile-project.auiproj.json",
+  "scope": "Structural cases may be evaluated against JSON Schema without locked packages. Semantic cases assume a separately verified and explicitly mocked sensor package+target adapter/feature registry; original sensor package is missing sources, so a normal full pipeline must stop at lock resolution before resource validation.",
+  "precedence": "Strict JSON parse -> schema/profile -> stable IDs -> exact lock/export -> graph references -> target/resource semantics -> canonical projection -> publication. Never silently repair unrelated fields. For a semantic mutation whose earlier gate would fail, use a coherent design-stage mock input and mark not-run.",
+  "cases": [
+    {
+      "id": "missing-resource-model",
+      "scope": "shape",
+      "path": "/resourceModel",
+      "operation": "remove",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "wrong-profile-token",
+      "scope": "shape",
+      "path": "/resourceModel/profile",
+      "replacement": "aui.hardware-resources/unknown",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "wrong-resource-kind-payload",
+      "scope": "shape",
+      "path": "/resourceModel/claims/2/kind",
+      "replacement": "irq",
+      "expected": "SCHEMA_INVALID",
+      "note": "MMIO object remains, irq object required."
+    },
+    {
+      "id": "upper-hex-prefix",
+      "scope": "shape",
+      "path": "/resourceModel/claims/2/mmio/base",
+      "replacement": "0X10000000",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "leading-zero-hex",
+      "scope": "shape",
+      "path": "/resourceModel/claims/2/mmio/length",
+      "replacement": "0x0100",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "width-unsupported",
+      "scope": "shape",
+      "path": "/resourceModel/claims/2/mmio/registerWidthBits",
+      "replacement": 24,
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "invalid-address-bits",
+      "scope": "shape",
+      "path": "/resourceModel/targetRequirements/0/addressBits",
+      "replacement": 128,
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "negative-dma-budget",
+      "scope": "shape",
+      "path": "/resourceModel/claims/0/dma/maxInFlight",
+      "replacement": 0,
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "resource-model-on-pure-schema",
+      "scope": "shape",
+      "path": "/schemaVersion",
+      "replacement": "0.1-draft",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "resource-id-duplicate",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/3/id",
+      "replacement": "claim_dma",
+      "expected": "GRAPH_DUPLICATE_ID"
+    },
+    {
+      "id": "missing-resource-edge",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/edgeId",
+      "replacement": "missing_edge",
+      "expected": "RESOURCE_EDGE_INVALID"
+    },
+    {
+      "id": "wrong-edge-type",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/edgeId",
+      "replacement": "e3",
+      "expected": "RESOURCE_EDGE_INVALID",
+      "note": "e3 data-flow is not a resource-access edge."
+    },
+    {
+      "id": "owner-node-mismatch",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/ownerNodeId",
+      "replacement": "decoder",
+      "expected": "RESOURCE_EDGE_INVALID",
+      "note": "Canonical e5 from driver, not decoder."
+    },
+    {
+      "id": "target-mismatch",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/targetId",
+      "replacement": "missing-target",
+      "expected": "RESOURCE_TARGET_MISMATCH"
+    },
+    {
+      "id": "privilege-insufficient",
+      "scope": "semantic",
+      "path": "/resourceModel/targetRequirements/0/privilege",
+      "replacement": "user",
+      "expected": "TARGET_PRIVILEGE_UNSUPPORTED",
+      "note": "Candidate target execution kernel; actual privileged capability still requires adapter."
+    },
+    {
+      "id": "range-zero-size",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/mmio/length",
+      "replacement": "0x0",
+      "expected": "RESOURCE_RANGE_INVALID"
+    },
+    {
+      "id": "range-overflows-address-bits",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/mmio/base",
+      "replacement": "0xfffffffffffffff0",
+      "expected": "RESOURCE_RANGE_INVALID"
+    },
+    {
+      "id": "mmio-misaligned",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/mmio/base",
+      "replacement": "0x10000001",
+      "expected": "RESOURCE_ALIGNMENT_INVALID"
+    },
+    {
+      "id": "sharing-writable-mmio",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/sharing",
+      "replacement": "shared-read",
+      "expected": "RESOURCE_SHARING_UNSAFE"
+    },
+    {
+      "id": "exclusive-overlap",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/mmio/base",
+      "replacement": "0x40000000",
+      "expected": "RESOURCE_EXCLUSIVE_CONFLICT",
+      "note": "Overlaps RAM region declared in same target physical namespace; exclusive overlap precedence after exact adapter address-space resolution."
+    },
+    {
+      "id": "dma-buffer-not-a-memory-claim",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/0/dma/bufferClaimId",
+      "replacement": "claim_mmio",
+      "expected": "DMA_BUFFER_CLAIM_INVALID"
+    },
+    {
+      "id": "dma-buffer-owner-mismatch",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/3/ownerNodeId",
+      "replacement": "decoder",
+      "expected": "DMA_BUFFER_CLAIM_INVALID",
+      "note": "Only after edge coherence and owner-context validation; if not rebinding e6, earlier RESOURCE_EDGE_INVALID takes precedence."
+    },
+    {
+      "id": "unknown-isa-feature",
+      "scope": "semantic",
+      "path": "/resourceModel/targetRequirements/0/isaFeatures/0",
+      "replacement": "fictional-isa-extension",
+      "expected": "TARGET_ISA_UNSUPPORTED",
+      "note": "Requires a pinned feature registry mock."
+    },
+    {
+      "id": "missing-adapter-contract",
+      "scope": "target",
+      "path": "/resourceModel/targetRequirements/0/adapterContractId",
+      "replacement": "example.missing/adapter",
+      "expected": "TARGET_ADAPTER_UNRESOLVED"
+    },
+    {
+      "id": "capability-underdeclared",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/2/requiredCapabilities",
+      "replacement": [
+        "mmio.read"
+      ],
+      "expected": "GRAPH_CAPABILITY_UNDECLARED",
+      "note": "MMIO access read-write requires read and write declarations and matching exported operation effects."
+    },
+    {
+      "id": "display-only-label-edit",
+      "scope": "projection",
+      "path": "/nodes/2/label",
+      "replacement": "Renamed Display Sensor",
+      "expected": "SEMANTIC_GRAPH_UNCHANGED",
+      "note": "Only after all lock/target requirements are verified, no canonical resource field changes."
+    },
+    {
+      "id": "change-irq-line",
+      "scope": "projection",
+      "path": "/resourceModel/claims/1/irq/line",
+      "replacement": "0x3",
+      "expected": "SEMANTIC_GRAPH_CHANGED",
+      "note": "Requires successful verified semantic graph and a different digest; this is only a design expectation."
+    },
+    {
+      "id": "same-region-shared-irq-rejected",
+      "scope": "semantic",
+      "path": "/resourceModel/claims/1/sharing",
+      "replacement": "shared-read",
+      "expected": "RESOURCE_SHARING_UNSAFE"
+    },
+    {
+      "id": "kernel-target-with-user-execution",
+      "scope": "semantic",
+      "path": "/targets/0/execution",
+      "replacement": "user",
+      "expected": "TARGET_PRIVILEGE_UNSUPPORTED"
+    }
+  ]
+}
