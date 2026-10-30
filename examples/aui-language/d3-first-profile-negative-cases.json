@@ -59,8 +59,8 @@
     {
       "id": "source-unknown-modifier",
       "base": "status-panel-l0.aui",
-      "search": "accessibilityLabel(value:",
-      "replace": "unknownLabel(value:",
+      "search": "Text(value: title).accessibilityLabel(value: \"Status title\")",
+      "replace": "Text(value: title).unknownLabel(value: \"Status title\")",
       "expected": "AUI_MODIFIER_UNKNOWN",
       "stage": "core-component"
     },
