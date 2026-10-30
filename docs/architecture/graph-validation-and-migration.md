@@ -68,3 +68,5 @@ A durable save requires writing a staged snapshot, flushing data and directory m
 A valid sensor example parses into stable graph identity, checks port directions and types, and retains positions across save/reload without changing architecture. Each invalid fixture is rejected with its expected code. A failed migration cannot damage the previously committed project.
 
 **Known limitations:** the existing sensor package declares Assembly source paths that are not present; it is a **design fixture**, not a buildable package. No parser, schema validator, lockfile resolver, migration engine or durable save implementation exists.
+
+**Deterministic negative D6 scenarios:** [Canonical vectors](../../examples/architecture-sensor/d2-canonical-vectors.json) propose exact byte/encoding rejection; [Recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md) cover torn records, stale writers, and crash points. No native parser, journal or crash injection has run these scenarios.
