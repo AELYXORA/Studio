@@ -171,6 +171,10 @@ These are review findings, not silently resolved decisions:
 9. **Hardware promises:** graph capabilities and example device nodes do not prove access to devices, interrupts, MMIO or DMA on a physical target.
 10. **Runtime dependency promise:** distinguish external runtime frameworks, required OS APIs, system libraries, toolchain inputs and optional explicitly approved libraries.
 
+## D2/D6 baseline review register — explicit sign-off pending
+
+[Baseline Review](d2-d6-baseline-review.md) separates resolved *documentation contradictions* from fifteen remaining first-slice decisions. [Export Contract Identity](d2-export-contract-identity.md) corrects semantic graph identity to ignore implementation-only source-byte changes. [Export Contract Vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json) and updated [D6 Integrity Vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) are reference calculations, **not native test results**. Both D2 and D6 remain Proposed/Open pending full fixture coverage, architect approval, and later native verification.
+
 ## How to close a requirement
 
 For each ID: write/update the **owning existing document**, add fixtures, reconcile all consumers, fill expected diagnostics and future test cases, then request architect acceptance. Mark tracker status only after the owning spec records approval. Never treat a Git commit, AI review or design checklist as automatic approval.
