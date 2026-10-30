@@ -6,7 +6,7 @@
 
 **Design-first decision supersedes the earlier recommendation to immediately implement S0.** Until design gates are accepted, prioritize complete specifications and review. See [Design Completion Gates](design-completion-gates.md).
 
-**Not ready for global architecture freeze. Ready for a narrowly scoped first implementation slice after explicit host selection and fixture semantics.** Keep the architecture-first Project Graph and human-approval principles stable while treating storage encoding, compiler backend, runtime ABI and platform renderer as changeable.
+**Not ready for global architecture freeze OR product implementation.** A narrowly scoped first implementation slice becomes eligible only AFTER the entire in-scope D1–D8 baseline is accepted by the architect, with explicit host and fixture semantics. Keep the architecture-first Project Graph and human-approval principles stable while treating storage encoding, compiler backend, runtime ABI and platform renderer as changeable.
 
 | Area | Readiness | Evidence / blocker |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ The first milestone is **G1: a working, locally invoked Project Graph validator 
 5. **AUI runtime bootstrapping strategy:** exact assembler/compiler path and ABI on first host.
 6. **Native window/text/graphics dependencies** for S1/S2 with accessibility requirements.
 
-Decide only those needed by the next slice. Avoid freezing speculative ABI and ARM64 device details in advance of experiments.
+Decide every material D1–D8 contract required by the complete in-scope baseline before Phase II. Bound speculative future device/ABI extensions explicitly; do not silently waive P0 design decisions in the name of a narrow slice.
 
 ## Non-goals and enforcement
 
@@ -88,6 +88,6 @@ No generic component marketplace, multi-target claims, speculative AI login hack
 
 Every local run stores: `fixtureId`, `command`, `host`, `target`, `inputDigest`, `toolDigest`, `expected`, `observed` (`pass/fail/not-run`), `diagnostics` and `limitations`. A test remains `not-run` until actually executed. **Current S0–S4 implementation gates: not-run.** The Linux x86-64 Assembly lexical preflight has limited separate smoke observations, but does not satisfy S0.
 
-## Next concrete repository work
+## Next concrete repository work — CURRENT PHASE I
 
-Implement the **S0 native Assembly CLI validator** after the already committed Linux lexical preflight, without claiming that preflight is a parser. Keep work on focused graph-model and validation modules, adopt the existing schemas as candidate input contracts, add negative fixtures, and perform local tests manually. Preserve clear distinction between design agreement and implemented correctness.
+Continue the D1–D8 documentation closure, cross-specification contradiction audit, and architect review. **Do not implement S0, the compiler, runtime, Studio UI or tests yet.** Once the complete in-scope baseline is explicitly accepted, Phase II may start with an approved S0 native Assembly validator; the old Linux lexical preflight is not a parser. Phase III runs actual fixtures; Phase IV corrects and re-verifies. The previous instruction to implement S0 immediately is superseded by [Design Completion Gates](design-completion-gates.md).
