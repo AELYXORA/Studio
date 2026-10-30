@@ -64,3 +64,7 @@
 ## Evidence limits
 
 This is a **design/documentation audit**, not a full JSON Schema standard-suite run, formally proven type system, on-host native build, compiler test, device benchmark, UI accessibility test or power-loss simulation. The counted links assert file-path existence, not URL fragment correctness. Native AELYXORA test observations remain **NOT-RUN**.
+
+## O-01 design work — typed hardware resources (still P0)
+
+The [D2 Hardware Resource Contract](d2-hardware-resource-contract.md) and [0.2-hw-draft structural schema](../../schemas/project.schema.json) now propose typed target requirements and MMIO/IRQ/DMA/memory claims **inside the canonical Project Graph**. The existing pure 0.1-draft fixtures and hashes are explicitly unchanged. [D2↔D3 hardware command authority](d2-d3-hardware-command-boundary.md) prevents direct AUI hardware access. [Hardware sensor fixture](../../examples/architecture-sensor/hardware-resource-profile-project.auiproj.json) and [29 design rejection cases](../../examples/architecture-sensor/hardware-resource-negative-cases.json) are not a verified linked native driver. Update to O-01 status: **MODEL PROPOSED, P0 OPEN** pending target feature/adapter registries, claim identity retention, real package resolution, exact byte hashes, native ABI, operator authorization and Phase III tests. No implied architect approval.
