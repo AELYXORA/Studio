@@ -1,6 +1,6 @@
 # AUI Syntax and Semantics — Design Candidate
 
-**Status: proposed language draft, not implemented or frozen.** This document is the current proposed syntax authority; [AUI Language](aui-language.md) describes principles and retains an explicitly superseded illustrative subset. No parser exists.
+**Status: proposed broad D3 language draft, not implemented or frozen.** The narrowed [D3 First Language Profile L0/L1](d3-first-language-profile.md) is the **specific first-slice grammar authority**, including exact lexing, limited expressions and named-only modifiers; the extended grammar below is a **later D3+ proposal**, not an alternate rule for L0/L1. [AUI Language](aui-language.md) describes principles and retains illustrative earlier syntax. No parser exists.
 
 ## 1. Lexical contract
 
@@ -90,3 +90,7 @@ Tasks require an execution domain and transferable input values. `await` preserv
 ## 7. Syntax freeze gates
 
 Before acceptance: finish lexer/expressions and generic constraints; define event-to-handler wiring and command implementation linkage; precise `Result` propagation and cancellation; dynamic lists/keys; modifier evaluation; source-level borrow forms; golden legal/illegal fixtures; compiler-produced diagnostics and per-target output evidence. No part of this document claims a working compiler.
+
+## L0/L1 candidate precedence over this extended syntax
+
+The [first-slice source profile](d3-first-language-profile.md) deliberately excludes service/state/derived/bind/task/await and positional modifier calls while D3+ design remains open. [First-slice type rules](d3-type-and-binding-profile.md) and [event/link semantics](d3-event-delivery-and-command-linkage.md) define exact candidate core signatures, Event<Unit>, Result<T,E>, UI admission and graph binding. The [linked AUI fixture](../../examples/aui-language/linked-consumer-panel.aui) and [link map](../../examples/aui-language/linked-consumer-panel.link.json) are **design-only**. The example in section 4 is *illustrative broad grammar*, not L0/L1 parser-ready because it uses positional accessibilityLabel syntax and unresolved provider contracts. Do not claim D3 language acceptance or compiler tests.
