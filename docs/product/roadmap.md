@@ -1,5 +1,7 @@
 # AELYXORA Delivery Roadmap
 
+**Current mode: design-first.** Do not begin more implementation until [design completion gates](../architecture/design-completion-gates.md) are accepted. This supersedes any immediate implementation task phrasing below. ChatGPT Plus connection is designed in [official integration contract](../architecture/chatgpt-connection.md); AELYXORA eligibility remains unverified.
+
 **Current implementation status:** [verified artifacts, missing components and authoritative milestones](../architecture/PROJECT-STATUS.md).
 
 **Product:** Assembly-first AI-driven systems development; main workspace is the interactive Architecture Map plus contextual AI Chat. The target is software close to hardware.
