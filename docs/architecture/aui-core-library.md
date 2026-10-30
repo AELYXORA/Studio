@@ -1,4 +1,4 @@
-# AUI.Core — Standard Library Contract v0.1 Draft
+# AUI.Core — Standard Library Contract — Draft
 
 **Status: proposed, no implementation.** This document specifies the minimal coherent standard library, not every palette widget. It is subordinate to [Component Framework](component-framework.md), [AUI Language](aui-language.md), [Types and Ownership](aui-types-and-ownership.md) and [Runtime](aui-runtime.md). Examples are semantic pseudocode, **not** valid under the current restricted EBNF.
 
