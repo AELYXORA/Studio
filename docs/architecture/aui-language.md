@@ -1,6 +1,6 @@
 # AUI Declarative Language — Design Specification
 
-**Status: proposed.** AUI is an independent, typed, human-readable declarative language inspired by SwiftUI composition; it is neither Swift source nor tied to a particular CPU.
+**Status: proposed, no implementation or acceptance.** [D3 First Language Profile](d3-first-language-profile.md) now owns the exact L0/L1 grammar candidate. This document continues describing the broader direction and legacy examples; it is not a competing parser grammar. AUI is an independent, typed, human-readable declarative language inspired by SwiftUI composition; it is neither Swift source nor tied to a particular CPU.
 
 ## Semantic principles
 
@@ -112,3 +112,7 @@ The example uses only the restricted grammar; semantic availability of each buil
 | Dynamic sibling collection with duplicate stable keys | Error: duplicate identity |
 
 **Open:** lexical tokenization, operator precedence, generics, collections and dynamic child syntax.
+
+## Bounded first language profile
+
+[D3 First Language Profile](d3-first-language-profile.md), [D3 Types/Bindings](d3-type-and-binding-profile.md) and [D3 Events and Graph Linkage](d3-event-delivery-and-command-linkage.md) define a deliberately minimal first slice: pure static view descriptions and typed intent dispatch, with no direct native effects. AUI.Core imports and target renderer must still be reviewed. The broader state/task/derived syntax in this file is **not** valid L0/L1 input until separately accepted. [Future negative diagnostics](../../examples/aui-language/d3-first-profile-negative-cases.json) are NOT-RUN.
