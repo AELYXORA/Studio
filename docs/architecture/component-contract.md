@@ -1,6 +1,6 @@
 # Assembly Component Contract
 
-**Status:** architecture specification; only the UI tree validator ABI has an implementation.
+**Status:** architecture specification; component ABI implementation has not started.
 
 Every component is identified by a stable type ID and interface version. A contract declares typed inputs/outputs, property defaults, events, errors, lifetime, ownership, alignment, threading, privileges and supported target triples. Implementation is native Assembly for a target CPU/OS ABI. Portability is verified by equivalent behavior, not by pretending that x86-64 and AArch64 share instruction syntax.
 
@@ -19,4 +19,4 @@ Human architect approves interfaces and acceptance tests. AI produces Assembly i
 
 ## First contract
 
-See `include/aelyxora/ui.h`: `ax_ui_validate` with a 16-byte node descriptor and x86-64 System V implementation. This is an ABI probe, not a complete component runtime.
+See [AUI Component Binary ABI](aui-component-binary-abi.md) for the proposed contract. No binary component ABI is implemented or verified.
