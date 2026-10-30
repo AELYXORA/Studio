@@ -72,3 +72,6 @@ Test: invalid address range, conflicting exclusive bus claim, wrong-width regist
 ## 8. Out of scope for first implementation
 
 Live device discovery, automatic reverse engineering of binaries, full UML coverage, remote multiplayer graph editing, universal hardware knowledge, and auto-generated drivers without human review.
+
+
+[Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
