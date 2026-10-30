@@ -19,7 +19,18 @@ int main(){
  auto loaded=load_project(file);check(loaded.has_value()&&loaded->revision==0);
  loaded->revision=1;check(save_project(file,*loaded,0).has_value());
  check(!save_project(file,*p,0).has_value());
- auto after=load_project(file);check(after.has_value()&&after->revision==1);
+ // Non-monotonic revision and cooperative lock are rejected without modifying the file.
+ check(!save_project(file,*loaded,1).has_value());
+ auto lock=file;lock+=".aelyxora-lock";
+ std::filesystem::create_directory(lock);
+ auto updated=*loaded;updated.revision=2;
+ check(!save_project(file,updated,1).has_value());
+ std::filesystem::remove(lock);
+ // Modified content with unchanged revision is still conflict-detected only during a save,
+ // not across independent writers that ignore the cooperative lock.
+ check(save_project(file,updated,1).has_value());
+ check(!save_project(file,updated,1).has_value());
+ auto after=load_project(file);check(after.has_value()&&after->revision==2);
  std::filesystem::remove(file);std::filesystem::remove(dir);
  std::cout<<"persistence tests passed\n";
 }
