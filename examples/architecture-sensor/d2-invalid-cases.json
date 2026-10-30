@@ -1,0 +1,108 @@
+{
+  "format": "aui.validation-fixtures",
+  "schemaVersion": "0.1-draft",
+  "baseProject": "project.auiproj.json",
+  "scope": "D2 graph behavior design candidate, expected semantic diagnostics; NOT executed",
+  "cases": [
+    {
+      "id": "unknown-edge-kind",
+      "mutation": {
+        "path": "/edges/0/kind",
+        "value": "connects"
+      },
+      "expected": "GRAPH_EDGE_KIND_UNKNOWN"
+    },
+    {
+      "id": "wrong-channel-edge-kind",
+      "mutation": {
+        "path": "/dataFlows/0/channels/0/edgeId",
+        "value": "e1"
+      },
+      "expected": "FLOW_EDGE_KIND"
+    },
+    {
+      "id": "missing-channel-edge",
+      "mutation": {
+        "path": "/dataFlows/0/channels/0/edgeId",
+        "value": "missing-edge"
+      },
+      "expected": "GRAPH_MISSING_EDGE"
+    },
+    {
+      "id": "invalid-stream-capacity",
+      "mutation": {
+        "path": "/dataFlows/0/channels/0/capacity",
+        "value": 0
+      },
+      "expected": "SCHEMA_INVALID",
+      "note": "Structural schema rejects first; semantic FLOW_CAPACITY_INVALID applies to an unvalidated raw object, not the first validator output"
+    },
+    {
+      "id": "cross-domain-borrow",
+      "mutation": {
+        "path": "/dataFlows/0/channels/1/transfer",
+        "value": "borrow"
+      },
+      "expected": "FLOW_CROSS_DOMAIN_BORROW"
+    },
+    {
+      "id": "workflow-bad-trigger-kind",
+      "mutation": {
+        "path": "/workflows/0/trigger/edgeId",
+        "value": "e1"
+      },
+      "expected": "WORKFLOW_TRIGGER_KIND"
+    },
+    {
+      "id": "workflow-missing-state",
+      "mutation": {
+        "path": "/workflows/0/transitions/1/to",
+        "value": "unknown"
+      },
+      "expected": "WORKFLOW_STATE_UNKNOWN"
+    },
+    {
+      "id": "workflow-missing-dispatch-node",
+      "mutation": {
+        "path": "/workflows/0/transitions/0/action/nodeId",
+        "value": "missing"
+      },
+      "expected": "WORKFLOW_NODE_UNKNOWN"
+    },
+    {
+      "id": "workflow-missing-provider",
+      "mutation": {
+        "path": "/workflows/0/transitions/0/action/operationId",
+        "value": "Nonexistent"
+      },
+      "expected": "WORKFLOW_PROVIDER_UNRESOLVED"
+    },
+    {
+      "id": "workflow-invalid-publish-edge",
+      "mutation": {
+        "path": "/workflows/0/transitions/1/action/edgeId",
+        "value": "e3"
+      },
+      "expected": "WORKFLOW_PUBLISH_INVALID"
+    },
+    {
+      "id": "workflow-missing-owner",
+      "mutation": {
+        "path": "/workflows/0/ownerNodeId",
+        "value": "removed"
+      },
+      "expected": "WORKFLOW_NODE_UNKNOWN"
+    },
+    {
+      "id": "snapshot-overflow-forbidden",
+      "mutation": {
+        "path": "/dataFlows/0/channels/1/overflow",
+        "value": "reject"
+      },
+      "expected": "SCHEMA_INVALID",
+      "note": "Structurally rejected because snapshot forbids overflow; not a runtime outcome"
+    }
+  ],
+  "mutationSemantics": "Each case is independently applied as a single JSON Pointer replacement or addition to a deep copy of baseProject. Cases are specifications; actual schema/parser/semantic validator tests are not-run.",
+  "diagnosticPriority": "Structural JSON Schema errors before reference/semantic errors; then identities and references -> edge compatibility -> DataFlow policies -> Workflow checks -> capabilities. No runtime success claimed."
+}
