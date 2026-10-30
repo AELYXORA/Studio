@@ -35,6 +35,10 @@ Do not publish this as a C layout yet: alignment, pointer width, descriptor pack
 
 Outcomes: `ok`, `invalid-argument`, `invalid-state`, `unsupported-target`, `permission-denied`, `out-of-memory`, `resource-busy`, `deadline-exceeded`, `cancelled`, `device-failure`, `internal-error`. Semantic error identifiers are stable; platform error integers are supplementary evidence.
 
+## D2 first-profile control-plane refinement
+
+[Execution and Consistency](d2-execution-consistency.md) proposes command-ticket reservation, instance-generation checks, per-instance FIFO and the explicit nonterminal `cancelling` workflow state. Command **requestCancel()** marks a cancellation request and asks the provider to stop if supported; only provider-confirmed quiescence may emit `cancel-confirmed`. Success or failure may win the race while cancellation is pending. At most one terminal result is published via an actual D4/D5 atomic mechanism; no double release, and a device buffer stays owned until physical cleanup. This is a design policy, not a verified ABI layout or native guarantee.
+
 ## Async state machine
 
 ```text
