@@ -22,7 +22,7 @@ Each gate must provide a locally runnable acceptance fixture, exact command, obs
 **Next implementation task:** implement a native parser and semantic Project Graph validator against the existing sensor fixtures; the fixtures and candidate schemas already exist.
 
 
-[Architecture Freeze Readiness and Implementation Strategy](../architecture/implementation-readiness.md) concludes global freeze is premature and orders S0 graph validation, S1 architecture workspace, S2 minimal AUI native build, S3 controlled AI workflow and S4 on-target hardware verification. **All implementation gates remain not-run; CI disabled.**
+[Architecture Freeze Readiness and Implementation Strategy](../architecture/implementation-readiness.md) concludes global freeze is premature and orders S0 graph validation, S1 architecture workspace, S2 minimal AUI native build, S3 controlled AI workflow and S4 on-target hardware verification. **S0 lexical preflight has limited smoke evidence; full S0–S4 acceptance gates remain not-run. CI disabled.**
 
 
 ## S0 implementation status
