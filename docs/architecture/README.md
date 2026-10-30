@@ -142,6 +142,9 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 [Architecture Freeze Readiness and Implementation Strategy](implementation-readiness.md) concludes global freeze is premature and orders S0 graph validation, S1 architecture workspace, S2 minimal AUI native build, S3 controlled AI workflow and S4 on-target hardware verification. **All implementation gates remain not-run; CI disabled.**
 
 
-## First executable S0 foundation
+## S0 implementation status
 
-[Project Graph implementation baseline](s0-graph-implementation.md) provides a Python standard-library CLI, manual fixture tests and exact local commands. Code is committed, but tests have **not** been executed on the developer host; full schema/lockfile/transaction validation remains open. CI remains off.
+The earlier Python validator and tests have been removed. S0 currently has **no executable implementation**. See [Implementation Language Policy](language-policy.md) and [S0 status](s0-graph-implementation.md).
+
+
+**Implementation restriction:** Python is prohibited in the Studio codebase, build tooling and tests. [Policy](language-policy.md).
