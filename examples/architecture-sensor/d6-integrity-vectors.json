@@ -1,0 +1,163 @@
+{
+  "format": "aui.d6-integrity-vectors",
+  "status": "Design-only independently computed via offline helper, NOT executed by AELYXORA and not accepted as permanent codec.",
+  "profile": "D6-P1-K4-0.1-draft",
+  "codecOnly": true,
+  "package": {
+    "manifestPath": "component.auipkg.json",
+    "manifest": {
+      "format": "aui.component-package",
+      "schemaVersion": "0.1-draft",
+      "packageId": "example.codec",
+      "packageVersion": "1.0.0",
+      "targets": [
+        {
+          "triple": "x86_64-unknown-linux-gnu",
+          "status": "planned"
+        }
+      ],
+      "components": [
+        {
+          "typeId": "example.codec/echo",
+          "contractVersion": "1.0.0",
+          "ports": [],
+          "capabilities": [],
+          "sources": [
+            {
+              "path": "src/echo.S",
+              "target": "x86_64-unknown-linux-gnu",
+              "ownership": "human"
+            }
+          ]
+        }
+      ],
+      "dependencies": [],
+      "testFixtures": [],
+      "types": []
+    },
+    "expectedCanonicalManifest": "{\"components\":[{\"capabilities\":[],\"contractVersion\":\"1.0.0\",\"ports\":[],\"sources\":[{\"ownership\":\"human\",\"path\":\"src/echo.S\",\"target\":\"x86_64-unknown-linux-gnu\"}],\"typeId\":\"example.codec/echo\"}],\"dependencies\":[],\"format\":\"aui.component-package\",\"packageId\":\"example.codec\",\"packageVersion\":\"1.0.0\",\"schemaVersion\":\"0.1-draft\",\"targets\":[{\"status\":\"planned\",\"triple\":\"x86_64-unknown-linux-gnu\"}],\"testFixtures\":[],\"types\":[]}",
+    "files": [
+      {
+        "path": "component.auipkg.json",
+        "expectedPathByteLength": 21,
+        "expectedContentByteLength": 423,
+        "expectedSha256": "950b455581678295a937e5b9ab95f3a90dbf36d6d3f793b845a240b4c1c19f8d"
+      },
+      {
+        "path": "src/echo.S",
+        "expectedPathByteLength": 10,
+        "contentUtf8": "ret\n",
+        "expectedContentByteLength": 4,
+        "expectedSha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9"
+      }
+    ],
+    "domainAscii": "AELYXORA/package-files/v1",
+    "separatorHex": "00",
+    "lengthEncoding": "BE64",
+    "fileDigestEncoding": "raw 32-byte SHA-256",
+    "expectedPackageDigest": "3e52a78a24a4cf139f9d0a327aab5a300f2e26c1c64a85b339831ee3f10e5b23",
+    "mutantOneByte": {
+      "path": "src/echo.S",
+      "contentUtf8": "rex\n",
+      "expectedFileDigest": "aa9d86848a76905eecdbad91b19cd392cc2f358dd74df1513ec03be27eb34cba",
+      "expectedPackageDigest": "d74feedfff3061cd1a8c2b14af10192610c975eb39d38bdca34c3d7e15a2d572"
+    }
+  },
+  "snapshot": {
+    "warning": "Codec-only: tiny project/lock source payloads below are deliberately NOT full semantically valid AELYXORA project or lock; zero semanticGraphDigest is a placeholder. These verify hashing and schema shape, not package resolution, graph completeness or committed snapshot recovery.",
+    "rawFiles": [
+      {
+        "path": "project.auiproj.json",
+        "contentUtf8": "{\"format\":\"aui.project\"}",
+        "expectedSha256": "cc713eba0709e70117d69f99e8edff1345225ab63c496977048bdbe867affce0"
+      },
+      {
+        "path": "package-lock.json",
+        "contentUtf8": "{\"format\":\"aui.lock\"}",
+        "expectedSha256": "69de3fca3d12d0105b035fe40e6512048c28fdeda649695def8f298dbd55235c"
+      },
+      {
+        "path": "sources/echo.S",
+        "contentUtf8": "ret\n",
+        "expectedSha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9"
+      },
+      {
+        "path": "views/main.auiview.json",
+        "contentUtf8": "{\"zoom\":1}",
+        "expectedSha256": "b13b83a775e517237e30a05a9648560f364be2470b5fb9c48d51e1becf3fe2e0"
+      }
+    ],
+    "index": {
+      "format": "aui.snapshot-index",
+      "indexFormat": "0.1-draft",
+      "projectId": "example.codec-project",
+      "graphRevision": 0,
+      "semanticGraphDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+      "projectManifestDigest": "cc713eba0709e70117d69f99e8edff1345225ab63c496977048bdbe867affce0",
+      "lockDigest": "69de3fca3d12d0105b035fe40e6512048c28fdeda649695def8f298dbd55235c",
+      "sourceFiles": [
+        {
+          "path": "sources/echo.S",
+          "sha256": "23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9",
+          "ownership": "human"
+        }
+      ],
+      "viewFiles": [
+        {
+          "path": "views/main.auiview.json",
+          "sha256": "b13b83a775e517237e30a05a9648560f364be2470b5fb9c48d51e1becf3fe2e0",
+          "ownership": "view"
+        }
+      ],
+      "retiredIdentityDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "expectedCanonicalIndex": "{\"format\":\"aui.snapshot-index\",\"graphRevision\":0,\"indexFormat\":\"0.1-draft\",\"lockDigest\":\"69de3fca3d12d0105b035fe40e6512048c28fdeda649695def8f298dbd55235c\",\"projectId\":\"example.codec-project\",\"projectManifestDigest\":\"cc713eba0709e70117d69f99e8edff1345225ab63c496977048bdbe867affce0\",\"retiredIdentityDigest\":\"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\",\"semanticGraphDigest\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"sourceFiles\":[{\"ownership\":\"human\",\"path\":\"sources/echo.S\",\"sha256\":\"23869126c936d164613894a062f0f6b7b5b12f61102ed582b303990d7eb90df9\"}],\"viewFiles\":[{\"ownership\":\"view\",\"path\":\"views/main.auiview.json\",\"sha256\":\"b13b83a775e517237e30a05a9648560f364be2470b5fb9c48d51e1becf3fe2e0\"}]}",
+    "indexDigestDomainAscii": "AELYXORA/snapshot-index/v1",
+    "expectedSnapshotDigest": "95a2f827dbbde13a97daa8ace01225119bcc0bc54fe439769e9e8348d6c9306a",
+    "headWithoutChecksum": {
+      "format": "aui.head-record",
+      "headFormat": "0.1-draft",
+      "projectId": "example.codec-project",
+      "epoch": 0,
+      "graphRevision": 0,
+      "semanticGraphDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+      "snapshotDigest": "95a2f827dbbde13a97daa8ace01225119bcc0bc54fe439769e9e8348d6c9306a",
+      "predecessorEpoch": null
+    },
+    "expectedCanonicalHeadWithoutChecksum": "{\"epoch\":0,\"format\":\"aui.head-record\",\"graphRevision\":0,\"headFormat\":\"0.1-draft\",\"predecessorEpoch\":null,\"projectId\":\"example.codec-project\",\"semanticGraphDigest\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"snapshotDigest\":\"95a2f827dbbde13a97daa8ace01225119bcc0bc54fe439769e9e8348d6c9306a\"}",
+    "headDigestDomainAscii": "AELYXORA/head-record/v1",
+    "expectedHeadChecksum": "6f647d5421ffa1626bba4a0667965c0a8fadd1c76184391be61e7008a183c7b1"
+  },
+  "negative": [
+    {
+      "id": "package-source-case-collision",
+      "paths": [
+        "src/A.S",
+        "src/a.s"
+      ],
+      "expected": "PKG_PATH_COLLISION"
+    },
+    {
+      "id": "source-escape",
+      "path": "src/../secret.S",
+      "expected": "PKG_PATH_ESCAPE"
+    },
+    {
+      "id": "lock-old-hash-after-source-mutation",
+      "expected": "PKG_DIGEST_MISMATCH"
+    },
+    {
+      "id": "head-checksum-flipped",
+      "expected": "PERSIST_HEAD_CHECKSUM"
+    },
+    {
+      "id": "snapshot-index-source-missing",
+      "expected": "PERSIST_SNAPSHOT_CORRUPT"
+    },
+    {
+      "id": "recovery-with-both-head-invalid",
+      "expected": "PERSIST_RECOVERY_REQUIRED"
+    }
+  ],
+  "acceptance": "Reference digests computed offline from explicit bytes; independent implementation must reproduce and review before acceptance; AELYXORA native tests NOT-RUN."
+}
