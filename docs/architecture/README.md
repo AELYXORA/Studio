@@ -60,3 +60,11 @@ Supporting documents: [Component ABI](component-contract.md), [Declarative UI](d
 ## Complete platform contract
 
 [Studio platform contract](studio-platform-contract.md) defines user roles, end-to-end workflows, visual/nonvisual component palette, task and event lifecycle, threading, data flow and binding semantics, accessibility and measurable zero-cost abstraction goals. It is the authoritative specification for these topics; the graph, hardware and AI documents define their specialized constraints.
+
+## Design-first engineering policy
+
+The complete architecture and user workflows may be specified **before** broad implementation. The aim is a coherent, implementable AUI language, compiler, Assembly runtime, rendering/OS adapters, component SDK, hardware-aware Project Graph and AI Engineering workflow. Detailed design is not the same as demonstrated portability.
+
+Every normative design decision must explicitly describe: invariants, API/data contracts, target-specific ABI assumptions, failure behavior, dependencies, examples, tradeoffs and acceptance criteria. Mark items **accepted**, **proposed**, **open**, or **verified**; only actual test evidence may justify verified status.
+
+The canonical project graph remains the heart of Studio; AUI is its implementation technology, not a competing source of architectural truth. Documentation-first is not documentation-only: proofs and prototypes validate uncertain ABI, compiler, rendering and runtime assumptions before irreversible commitments. No GitHub Actions until release preparation.
