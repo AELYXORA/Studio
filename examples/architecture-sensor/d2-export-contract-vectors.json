@@ -1,0 +1,88 @@
+{
+  "format": "aui.export-contract-vectors",
+  "status": "DESIGN vectors computed by independent offline SHA-256 reference and canonical JSON writer; not tested by AELYXORA or architect approved.",
+  "profile": "aui.export-contract/v1",
+  "hash": "SHA256(UTF8('AELYXORA/export-contract/v1') || 00 || canonicalUTF8(normalizedExport))",
+  "positive": [
+    {
+      "id": "zero-field-type",
+      "input": {
+        "profile": "aui.export-contract/v1",
+        "exportKind": "type",
+        "packageId": "example.codec",
+        "typeId": "example.codec/Empty",
+        "kind": "record",
+        "fields": []
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"fields\":[],\"kind\":\"record\",\"packageId\":\"example.codec\",\"profile\":\"aui.export-contract/v1\",\"typeId\":\"example.codec/Empty\"}",
+      "expectedSha256": "d7f982d910df695eba9ca49cc230b60ec4c2651718e6c66c5cb627a848d0946f"
+    },
+    {
+      "id": "empty-component-contract",
+      "input": {
+        "profile": "aui.export-contract/v1",
+        "exportKind": "component",
+        "packageId": "example.codec",
+        "typeId": "example.codec/echo",
+        "contractVersion": "1.0.0",
+        "declaredTargets": [
+          "x86_64-unknown-linux-gnu"
+        ],
+        "ports": [],
+        "capabilities": [],
+        "commands": []
+      },
+      "expectedCanonical": "{\"capabilities\":[],\"commands\":[],\"contractVersion\":\"1.0.0\",\"declaredTargets\":[\"x86_64-unknown-linux-gnu\"],\"exportKind\":\"component\",\"packageId\":\"example.codec\",\"ports\":[],\"profile\":\"aui.export-contract/v1\",\"typeId\":\"example.codec/echo\"}",
+      "expectedSha256": "b4bb79d566d4e5bac7a043b0914bf9ceeecafd9fe46aec32002ed9c8150570ff"
+    },
+    {
+      "id": "added-required-capability",
+      "input": {
+        "profile": "aui.export-contract/v1",
+        "exportKind": "component",
+        "packageId": "example.codec",
+        "typeId": "example.codec/echo",
+        "contractVersion": "1.0.0",
+        "declaredTargets": [
+          "x86_64-unknown-linux-gnu"
+        ],
+        "ports": [],
+        "capabilities": [
+          "net.send"
+        ],
+        "commands": []
+      },
+      "expectedCanonical": "{\"capabilities\":[\"net.send\"],\"commands\":[],\"contractVersion\":\"1.0.0\",\"declaredTargets\":[\"x86_64-unknown-linux-gnu\"],\"exportKind\":\"component\",\"packageId\":\"example.codec\",\"ports\":[],\"profile\":\"aui.export-contract/v1\",\"typeId\":\"example.codec/echo\"}",
+      "expectedSha256": "ea72dcebd64e6b5f447e3eab0ee31b09df2b88afed4225b16ba7114c5b0c5df8"
+    }
+  ],
+  "crossArtifactObservation": {
+    "packageBefore": "3e52a78a24a4cf139f9d0a327aab5a300f2e26c1c64a85b339831ee3f10e5b23",
+    "packageAfterAsmOneByte": "d74feedfff3061cd1a8c2b14af10192610c975eb39d38bdca34c3d7e15a2d572",
+    "exportDigestBeforeAndAfter": "b4bb79d566d4e5bac7a043b0914bf9ceeecafd9fe46aec32002ed9c8150570ff",
+    "note": "The synthetic echo package and echo component export do not declare public change when one source byte changes; this is a logical identity fixture, NOT a claim that modified executable behavior is safe or linked."
+  },
+  "negative": [
+    {
+      "id": "duplicate-port-id",
+      "expected": "GRAPH_DUPLICATE_ID"
+    },
+    {
+      "id": "unresolved-field-type",
+      "expected": "GRAPH_EXPORT_UNRESOLVED"
+    },
+    {
+      "id": "duplicate-operation-id",
+      "expected": "PKG_DUPLICATE_EXPORT"
+    },
+    {
+      "id": "unsupported-recursive-type",
+      "expected": "TYPE_RECURSION_UNSUPPORTED"
+    },
+    {
+      "id": "wrong-primitive-core-version",
+      "expected": "GRAPH_EXPORT_UNRESOLVED"
+    }
+  ],
+  "acceptance": "Native D2/D6 verifier and a separately reviewed reference must match canonical bytes/hash framing. All real AELYXORA build/runtime test outcomes: NOT-RUN."
+}
