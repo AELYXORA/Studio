@@ -7,7 +7,8 @@
 namespace aelyxora {
 struct RenameComponent { std::string from, to; };
 struct SetProjectName { std::string name; };
-using Command = std::variant<RenameComponent, SetProjectName>;
+struct SetComponentProperty { std::string component_id, property; PropertyValue value; };
+using Command = std::variant<RenameComponent, SetProjectName, SetComponentProperty>;
 struct Transaction {
     std::uint64_t expected_revision;
     std::vector<Command> commands;
