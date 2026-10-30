@@ -34,3 +34,38 @@ Separate UI, render, I/O, worker and real-time/interrupt domains. Bounded queues
 ## Open decisions
 
 Canonical state store format, diff algorithm, event loop, graphic backend, text stack, exact frame timing, device telemetry ingestion and leak/resource instrumentation. No platform support is declared before end-to-end rendering and input tests.
+
+## State identity and ownership contract
+
+A state slot is addressed conceptually by `(project, component instance, stable view key, state declaration ID)`, not by a transient pointer or current canvas position. Reconciliation preserves a slot only when identity, component type and declared state type remain compatible. Removing an instance invalidates its state handles and cancels only tasks whose explicit lifetime is attached to that instance.
+
+Resource-bearing state uses move/borrow/owned contracts defined at the component boundary. No borrowed pointer may outlive its declared owner, cross a task boundary without an explicit lifetime guarantee, or be retained across a reconciliation invalidation.
+
+## Event-to-frame ordering
+
+```text
+external input / completed worker message
+ -> typed event envelope (origin, sequence, target)
+ -> select command handler and check capability
+ -> produce candidate state revision
+ -> validate data-flow writes and effects
+ -> evaluate affected pure bindings
+ -> reconcile identities and dependencies
+ -> compute invalidated layout/render regions
+ -> publish committed revision
+ -> schedule frame and effectful follow-up tasks
+```
+
+A committed state revision must be internally consistent even if a later rendering operation fails. Failed drawing must preserve the last valid state and surface a renderer diagnostic. Cross-thread messages carry immutable values or explicitly synchronized owned buffers.
+
+## Task and channel semantics
+
+- Channel capacity is explicit; policies are `wait`, `drop-oldest`, `drop-newest`, or `error` with observable drop counts.
+- Delivery order is FIFO **within one channel**; cross-channel ordering is unspecified unless a sequence/merge contract defines it.
+- An interrupt handler may only perform operations declared safe for its context; heavyweight parsing/rendering is deferred to worker tasks.
+- Task cancellation requests cannot revoke a physical hardware operation already in progress unless the device contract supports it.
+- Shutdown must quiesce queues, revoke subscriptions, and release owned memory and OS handles without use-after-free.
+
+## Runtime acceptance scenarios
+
+A 1,000-event burst into a bounded sensor queue must remain bounded; event loss and latency must be measurable. A stale view instance may not receive a late completion as if it were a new instance. An invalid binding transaction cannot partially publish state. A renderer failure cannot cause an approved driver operation to silently rerun.
