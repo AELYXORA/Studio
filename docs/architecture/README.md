@@ -111,3 +111,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [AUI Platform Abstraction and Native Runtime Services](aui-platform-runtime-services.md) specifies OS adapters for windows, graphics, text, input, accessibility, memory, concurrency, timers, filesystem and hardware capabilities. Proposed; not implemented.
+
+
+[AUI Rendering and Layout Engine](aui-rendering-layout.md) specifies constraints, scene graph, display lists, text, accessibility, hit testing, animations and CPU/GPU backends. Proposed, not implemented.
