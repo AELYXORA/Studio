@@ -24,7 +24,7 @@ All references use IDs, not screen labels, coordinates or file paths. Renaming d
 
 ## 3. Typed graph and rules — D2 design candidate
 
-**Identity:** ProjectID, GraphNodeID, EdgeID, and GraphNodeID/PortID are stable under rename, source formatting and map rearrangement. A TypeID resolves to an exact locked package export. WorkflowID, WorkflowID/StateID, WorkflowID/TransitionID and DataFlowID reference this same canonical graph, never a detached diagram. Identifier normalization and canonical digest/encoding remain P0 design questions; do not confuse AUI Unicode source names with persistent graph IDs.
+**Identity:** ProjectID, GraphNodeID, EdgeID, and GraphNodeID/PortID are stable under rename, source formatting and map rearrangement. A TypeID resolves to an exact locked package export. WorkflowID, WorkflowID/StateID, WorkflowID/TransitionID and DataFlowID reference this same canonical graph, never a detached diagram. The first-profile ASCII stable-ID policy and separate resolved TypeID proposal are defined in [D2 Identity and Type Resolution](d2-identity-and-type-resolution.md); their acceptance and complete encoding remain P0; do not confuse AUI Unicode source names with persistent graph IDs.
 
 **Node kinds (first proposed profile):** module, component, interface, cpu, bus, device, driver, firmware-interface, protocol, storage, service, external-system. Unknown extension kinds may be imported/preserved only under an explicit compatible extension policy; they are not executable by default.
 
@@ -100,3 +100,5 @@ Live device discovery, automatic reverse engineering of binaries, full UML cover
 [Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
 
 **D2 review tracking:** [Specification Completion Matrix](specification-completion-matrix.md), requirements D2-01 through D2-10. No human acceptance or runtime verification is claimed.
+
+**Identity ownership:** [D2 Identity and Type Resolution](d2-identity-and-type-resolution.md) distinguishes persistent instance IDs, exported logical types, pinned content identities, ephemeral workflow executions and source symbol origins. All graph edits reference the immutable identities rather than on-screen labels. [D6 Canonical Persistence](d6-canonical-persistence.md) owns the proposed semantic digest and durable snapshot format.
