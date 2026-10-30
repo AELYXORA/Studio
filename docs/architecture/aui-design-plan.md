@@ -49,3 +49,7 @@ Detailed proposals now exist for restricted [AUI grammar and static diagnostics]
 - [Component ABI and async commands](aui-abi-and-async.md): conceptual boundary categories, terminal-state semantics and per-target conformance.
 
 These remain **proposed**. Before freezing them, define precise binary layouts, allocator API, address-space typing, borrow escape rules and cancellation race fixtures.
+
+## Compiler backend and component execution
+
+[Backend and execution design](aui-backend-and-execution.md) specifies graph-based linking, static/dynamic call selection, safe binding fusion, effect barriers and runtime scheduling boundaries. **Proposed, unverified.** Pending decisions include symbol mangling, MIR instruction set and platform scheduling.
