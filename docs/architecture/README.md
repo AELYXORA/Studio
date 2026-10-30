@@ -88,3 +88,7 @@ Decisions move from proposed to accepted only after an explicit ADR and correspo
 - [Component Registry](component-registry.md) — reusable type contracts, resolved defaults, and static binding compatibility checks. No runtime data propagation yet.
 
 - [Data Binding Engine prototype](binding-prototype.md) — synchronous one-way graph evaluation, cycle and multi-writer rejection, candidate-based atomic publication. Binding persistence and reactive runtime remain unimplemented.
+
+## Assembly-first direction
+
+[Assembly-first and human-architected development](assembly-first.md) specifies the proposed toolchain, human/AI responsibilities, ABI boundaries and experimental acceptance criteria. Current C++23 code remains the reference prototype until validated ASM alternatives exist.
