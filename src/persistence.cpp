@@ -2,6 +2,8 @@
 #include <boost/json.hpp>
 #include <boost/json/src.hpp>
 #include <fstream>
+#include <limits>
+#include <system_error>
 #include <unordered_set>
 namespace aelyxora {
 namespace {
@@ -109,25 +111,65 @@ LoadResult load_project(const std::filesystem::path& path){
  return parse_project(text);
 }
 SaveResult save_project(const std::filesystem::path& path,const Project& p,std::optional<std::uint64_t> expected){
+ namespace fs=std::filesystem;
  auto text=serialize_project(p);if(!text)return std::unexpected(text.error());
  if(expected){
-  auto previous=load_project(path);if(!previous)return std::unexpected(previous.error());
-  if(previous->revision!=*expected)return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"revision conflict"));
- }else if(std::filesystem::exists(path))return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"overwrite requires expected revision"));
- auto tmp=path;tmp+=".tmp";
- if(std::filesystem::exists(tmp))return std::unexpected(error(ErrorCode::StaleRevision,tmp.string(),"staging exists"));
- {
-  std::ofstream out(tmp,std::ios::binary);
-  if(!out)return std::unexpected(error(ErrorCode::MissingField,tmp.string(),"write open failed"));
-  out.write(text->data(),static_cast<std::streamsize>(text->size()));out.flush();
-  if(!out){out.close();std::filesystem::remove(tmp);return std::unexpected(error(ErrorCode::MissingField,tmp.string(),"write failed"));}
- }
+  if(*expected==std::numeric_limits<std::uint64_t>::max()||p.revision!=*expected+1)
+   return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"new revision must equal expected + 1"));
+ }else if(p.revision!=0)
+  return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"new project revision must be zero"));
+ // Cooperative writer lock. A stale lock requires explicit recovery by the user.
+ auto lock=path;lock+=".aelyxora-lock";
+ std::error_code ec;
+ if(!fs::create_directory(lock,ec))
+  return std::unexpected(error(ErrorCode::StaleRevision,lock.string(),ec ? ec.message() : "project locked"));
+ struct Guard {
+  fs::path p;
+  ~Guard(){std::error_code e;fs::remove(p,e);}
+ } guard{lock};
+ auto read_bytes=[&]()->std::expected<std::string,E> {
+  std::ifstream in(path,std::ios::binary);
+  if(!in)return std::unexpected(error(ErrorCode::MissingField,path.string(),"open failed"));
+  std::string bytes((std::istreambuf_iterator<char>(in)),std::istreambuf_iterator<char>());
+  if(in.bad())return std::unexpected(error(ErrorCode::MissingField,path.string(),"read failed"));
+  return bytes;
+ };
+ std::optional<std::string> old;
  if(expected){
-  auto before=load_project(path);
-  if(!before||before->revision!=*expected){std::filesystem::remove(tmp);return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"changed before replacement"));}
+  old=read_bytes();if(!old)return std::unexpected(old.error());
+  auto existing=parse_project(*old);if(!existing)return std::unexpected(existing.error());
+  if(existing->revision!=*expected)
+   return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"revision conflict"));
+ }else if(fs::exists(path,ec)||ec)
+  return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"create requires absent destination"));
+ auto tmp=path;tmp+=".aelyxora-stage";
+ if(fs::exists(tmp,ec)||ec)
+  return std::unexpected(error(ErrorCode::StaleRevision,tmp.string(),"staging exists; inspect before recovery"));
+ {
+  std::ofstream out(tmp,std::ios::binary|std::ios::trunc);
+  if(!out)return std::unexpected(error(ErrorCode::MissingField,tmp.string(),"staging open failed"));
+  out.write(text->data(),static_cast<std::streamsize>(text->size()));
+  out.flush();if(!out){out.close();fs::remove(tmp,ec);return std::unexpected(error(ErrorCode::MissingField,tmp.string(),"write failed"));}
  }
- std::error_code ec;std::filesystem::rename(tmp,path,ec);
- if(ec){std::filesystem::remove(tmp);return std::unexpected(error(ErrorCode::MissingField,path.string(),ec.message()));}
+ // Guard against external edits made while this writer prepared the output.
+ // This comparison is not a cross-process atomic compare-and-swap.
+ if(expected){
+  auto current=read_bytes();
+  if(!current||*current!=*old){
+   fs::remove(tmp,ec);
+   return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"file changed during save"));
+  }
+ }else if(fs::exists(path,ec)||ec){
+  fs::remove(tmp,ec);
+  return std::unexpected(error(ErrorCode::StaleRevision,path.string(),"destination appeared during create"));
+ }
+ fs::rename(tmp,path,ec);
+ if(ec){
+  // In particular, do not delete existing Windows destination to force rename:
+  // doing so would lose atomic replacement semantics.
+  std::error_code cleanup;fs::remove(tmp,cleanup);
+  return std::unexpected(error(ErrorCode::MissingField,path.string(),"replacement failed: "+ec.message()));
+ }
  return {};
 }
 }
