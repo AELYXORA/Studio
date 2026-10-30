@@ -11,7 +11,7 @@
 7. **G6 Hardware tools:** ISA/ABI checks, register and interrupt models, DMA ownership rules, optional local target debugging.
 8. **G7 Target expansion:** AArch64 and further target platforms only after on-target verification.
 
-**Current implementation:** documentation and illustrative fixtures only; no running IDE, compiler, renderer, live AI or hardware debugging.
+**Current implementation:** documentation, illustrative fixtures, and a limited Linux x86-64 Assembly JSON lexical preflight; no complete parser, Project Graph engine, IDE, AUI compiler, renderer, live AI or hardware debugging.
 
 **Rules:** short documents, proof-oriented gates, manual local tests, no GitHub Actions until release preparation.
 
@@ -27,7 +27,7 @@ Each gate must provide a locally runnable acceptance fixture, exact command, obs
 
 ## S0 implementation status
 
-The earlier Python validator and tests have been removed. S0 currently has **no executable implementation**. See [Implementation Language Policy](../architecture/language-policy.md) and [S0 status](../architecture/s0-graph-implementation.md).
+The earlier Python validator and tests have been removed. S0 has **no functional graph validator**; only an experimental native Linux x86-64 JSON lexical preflight. See [Implementation Language Policy](../architecture/language-policy.md) and [S0 status](../architecture/s0-graph-implementation.md).
 
 
 **Implementation restriction:** Python is prohibited in the Studio codebase, build tooling and tests. [Policy](../architecture/language-policy.md).
