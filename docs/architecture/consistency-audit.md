@@ -73,3 +73,7 @@ Architecture can be considered coherent when there is one authority for each con
 
 
 [Package Resolution and Reproducible Build Contract](package-resolution-build.md) defines offline locked dependency resolution, digest design, target checks and reproducibility gates. [Proposed lockfile schema](../../schemas/package-lock.schema.json). No fabricated lockfile or verified build.
+
+## D2 design-pass update (proposed)
+
+The [Graph Behavior Contract](graph-behavior-contract.md) proposes an exact interpretation of `hosts` as **physical topology** and models data channels/workflow state transitions using canonical graph IDs. [Project Graph](project-graph.md), [Project Format](project-and-package-format.md), draft [project schema](../../schemas/project.schema.json) and sensor fixtures reflect this candidate. This reduces taxonomy ambiguity **at documentation level only**. The schema cannot prove semantic references, actual command implementation, workflow execution, buffer ownership or D6 crash safety. D2 remains Proposed/Open pending architect review, full fixtures and native validator evidence.
