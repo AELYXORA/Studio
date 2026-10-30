@@ -32,6 +32,9 @@ The proposal records project base revision, target list, model/provider identity
 
 ## 4. ChatGPT account access
 
+**Authoritative integration design:** [ChatGPT Plus Connection](chatgpt-connection.md). OpenAI now documents eligible official Sign in with ChatGPT plan-usage flows for participating open-source clients. Whether AELYXORA qualifies and can use this flow remains unverified. Identity and inference allowance require distinct consent; neither grants access to existing ChatGPT conversations.
+
+
 Desired UX: **sign in with ChatGPT**, ideally using an eligible paid subscription and without user-managed API keys. This requires an officially offered integration with appropriate entitlements and approval. A ChatGPT Plus subscription is not a reusable general API credential. Do not build around session cookie extraction, private endpoint access, password collection, or pretending that login guarantees model access.
 
 **Fallback:** offline architecture editing and manual Assembly work must function with AI disconnected. An optional alternative provider mechanism is a separate product decision, not silently introduced. Do not promise the account-based connector until access is proven by a real end-to-end authorization test.
