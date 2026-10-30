@@ -65,10 +65,10 @@ A logical transferable value has canonical TypeID, owner, lifetime/generation an
 | --- | --- | --- |
 | copy | Receiver owns newly allocated copy, producer retains original | Temporary allocations cleaned; producer unchanged |
 | move | Ownership transferred **only upon** accepted queue/command reservation | Producer keeps original, no double-release |
-| borrow | Bounded synchronous same-domain call only; never queued, awaited or passed across workers | FLOW_CROSS_DOMAIN_BORROW if attempted |
+| borrow | Synchronous same-domain call-scoped ONLY, not an accepted stream/snapshot transfer in this first profile | FLOW_CROSS_DOMAIN_BORROW across domains; FLOW_BORROW_REQUIRES_SYNC for same-domain queued/snapshot channel |
 | device/DMA | Separate opaque platform capability and active operation lease | Buffer cannot be reclaimed before physical completion/acknowledged stop |
 
-For drop-oldest, release evicted owned payload exactly once and report the loss; drop-newest must not leak the rejected payload. For reject, retain sender ownership and report FLOW_BACKPRESSURE. Blocking overflow is illegal on UI/IRQ/nonblocking domains. Cross-domain copies require a verified safe representation or explicit serialization, not a raw pointer. UI ViewIdentity or render thread does not own driver/DMA memory.
+The draft JSON transfer enum includes borrow only for future compatibility; all existing DataFlow channel modes are queued/retained, so a first-profile semantic validator MUST reject transfer=borrow (with the diagnostics above). No borrowed view may enter a queued stream or persisted snapshot even when senderDomain equals receiverDomain. For drop-oldest, release evicted owned payload exactly once and report the loss; drop-newest must not leak the rejected payload. For reject, retain sender ownership and report FLOW_BACKPRESSURE. Blocking overflow is illegal on UI/IRQ/nonblocking domains. Cross-domain copies require a verified safe representation or explicit serialization, not a raw pointer. UI ViewIdentity or render thread does not own driver/DMA memory.
 
 Resource budget includes bounded mailbox slots, channel descriptors, payload maximums, task tickets, provider in-flight buffers and allocation overhead. Unknown unbounded payload size or buffer growth is an explicit unsupported condition, not a guessed constant.
 
