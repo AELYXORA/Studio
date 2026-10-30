@@ -81,3 +81,6 @@ Component catalog design: [AUI Component Framework](component-framework.md) (pro
 
 
 [Design-Time Engine and Studio Workspace](design-time-engine.md) specifies map interactions, palette, inspector, data-flow editor, AI proposal review, transactions, undo/redo and source synchronization. Proposed; not implemented.
+
+
+[AI Engineering Workflow and Tool Integration](ai-engineering-workflow.md) defines scoped context disclosure, structured proposals, human approval, controlled tool execution and verification evidence. Proposed, not implemented.
