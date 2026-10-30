@@ -1,6 +1,6 @@
 # AUI Event, Command and Binding Semantics
 
-**Status: proposed D3 language candidate; no parser or runtime exists.** This is the precise *design candidate* for event wiring and state update rules. [AUI Syntax](aui-syntax.md) remains the language syntax authority; this file defines its event/binding subset. No claim of a completed or frozen overall grammar.
+**Status: proposed D3+ language candidate; no parser or runtime exists.** This file describes extended event/binding possibilities and its earlier examples; [D3 First Language Profile](d3-first-language-profile.md) owns exact **L0/L1 source grammar**, and [D3 Event Delivery and Command Linkage](d3-event-delivery-and-command-linkage.md) owns bounded first-profile admission, per-view FIFO, exact handler cardinality and non-reentrancy. The extended syntax here remains open; this is not a contradictory current L1 grammar.
 
 ## Declaration and view attachment grammar
 
@@ -53,7 +53,7 @@ This contract deliberately leaves the exact AUI source syntax for binding a nest
 
 ## Event routing and delivery
 
-Event payload is immutable, with stable type identity. Event occurrence is not itself an effect permission. An event handler cannot block the UI scheduler, invoke raw OS/device instructions, or bypass required command capability checks. Multiple handlers, ordering, queue/backpressure, reentrancy and cancellation policy remain open and must be explicitly decided for D3 acceptance.
+Event payload is immutable, with stable type identity. Event occurrence is not itself an effect permission. An event handler cannot block the UI scheduler, invoke raw OS/device instructions, or bypass required command capability checks. For **L1 only**, event admission/order/non-reentrancy are now an explicit **proposal** in [D3 Event Delivery](d3-event-delivery-and-command-linkage.md): bounded per-view FIFO, single handler, explicit overflow and stale-generation diagnostics. D3+ multi-handler fanout, async completion, writable bindings, general ordering and cross-target runtime proof remain open.
 
 ## Diagnostic examples
 
@@ -75,3 +75,5 @@ All examples are expected diagnostic outcomes for future golden fixtures; none a
 ## Open before accepting D3
 
 Parser precedence and full expression grammar, generic constraints, event ordering/reentrancy, explicit command linkage format, dynamic collection identity, child property addressing, error/Result propagation, cancellation, modifier argument rules and source-level ownership syntax. Do not claim that D3 is closed.
+
+**First-slice modifier syntax:** L0/L1 uses accessibilityLabel(value: String) with a named argument, not the positional accessibilityLabel("...") illustrated above. AUI source command implementations are bound via [derived command-link schema](../../schemas/aui-command-link.schema.json); the [positive L1 fixture](../../examples/aui-language/linked-consumer-panel.aui) is not a linked executable ABI. No compiler or UI runtime exists.
