@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D2 architecture behavior design — proposed
+
+[Workflow and Data Flow Semantics](graph-behavior-contract.md) formalizes the D2 design candidate: explicit state-machine workflows, bounded typed channels, source/target ownership, event-to-command boundaries, and invariant-preserving graph revisions. Draft [sensor fixtures](../../examples/architecture-sensor/project.auiproj.json) and [negative behavior cases](../../examples/architecture-sensor/d2-invalid-cases.json) are **documentation-stage artifacts, not a runnable graph engine**. Owning contracts remain proposed pending architect sign-off.
+
 ## Product doctrine — architecture-first RAD
 
 **Confirmed product intent:** AELYXORA is RAD for an AI-native development workflow: the human architects the system; AI primarily implements the components and their native code. Success means the shortest **architectural idea -> approved contracts -> native implementation -> verified result** loop, not faster manual coding or visual placement of widgets.
