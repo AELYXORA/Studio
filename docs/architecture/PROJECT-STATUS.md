@@ -6,6 +6,8 @@
 
 Proposed workflow/data-flow and D2 execution/consistency contracts, expanded JSON Schemas, typed command/signal fixtures, staged cancellation example and future sensor runtime acceptance scenarios now exist. No native parser, semantic validator, canonical serializer, cryptographic snapshot publisher, transaction journal, workflow engine, command dispatcher, channel runtime, or ABI implementation was added. These changes do not change the implementation-readiness status or mark tests passed. Their proposed semantics require architect acceptance, cross-contract closure and implementation before Phase III tests.
 
+**Cross-contract design review:** [D2/D6 Baseline Review](d2-d6-baseline-review.md) and [Export Contract Identity](d2-export-contract-identity.md) document unresolved and corrected specification issues. A committed JSON schema or SHA test vector does not make a binary, parser, snapshot adapter or external platform work.
+
 ## Implemented in the repository
 
 - Proposed Project Graph and component package JSON fixtures, negative mutation cases, and draft machine-readable schemas under `schemas/`.
