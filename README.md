@@ -1,5 +1,7 @@
 # AELYXORA Studio
 
+**Current implementation status:** [verified artifacts, missing components and authoritative milestones](docs/architecture/PROJECT-STATUS.md).
+
 **Imagine. Design. Engineer.**
 
 **AI-driven architecture studio for software close to hardware.** Its primary interface is an **interactive Project Architecture Map with an integrated, context-aware AI chat**. The center is neither a form designer nor a source editor: it is the live system graph. Humans own architectural decisions, AI primarily implements and tests components within approved contracts.
