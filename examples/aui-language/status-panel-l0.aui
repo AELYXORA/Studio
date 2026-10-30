@@ -1,0 +1,9 @@
+// D3 L0 candidate only: aui.core registry and runtime not implemented.
+import aui.core;
+
+component StatusPanel(input title: String) {
+  VStack(spacing: 12) {
+    Text(value: title).accessibilityLabel(value: "Status title")
+    Button(title: "Inspect").accessibilityLabel(value: "Inspect")
+  }
+}
