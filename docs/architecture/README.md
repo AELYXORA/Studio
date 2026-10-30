@@ -1,47 +1,50 @@
-# AELYXORA Architecture
+# AELYXORA Studio — Architecture
 
-**Product center: Project Architecture Map.** Not a form designer, source editor, or AI chat window. A mind-map-friendly spatial overview with UML-grade typed component relations.
+**Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
-## Core experience
+## Experience
 
-- **Map:** nodes represent components, modules, data and external systems. Typed edges represent interfaces, calls, events, data flow and dependencies. Subgraphs provide zoomable scope and architectural grouping.
-- **Architect (human):** defines component boundaries, ports, contracts, responsibilities and constraints. Approves changes.
-- **AI Component Engineer:** uses the selected node/subgraph and its dependencies as bounded context; proposes implementations, tests and structured edits. It cannot silently modify the architecture.
-- **Evidence:** each node exposes source ownership, target support, diagnostics, build/test status and generated artifacts. Unverified is different from passing.
-- **Detail editors:** declarative UI, code, properties and tests open from the selected node. They are views of the same model.
+- **Center: live architecture graph.** Modules, components, interfaces, devices and runtime services are typed nodes; dependencies, data/control flows and resource ownership are typed edges. Mind-map ergonomics, UML-level precision. Zoom, groups, navigation and selection are map affordances, not architecture truth.
+- **Side: AI chat.** Chat is dockable and grounded in the user's explicitly selected node or subgraph. The UI shows exactly which contracts, code and diagnostics would be sent. AI proposes a change set; an architectural/source diff and verification precede human approval.
+- **Details on demand.** Component contracts, Assembly source, registers, test evidence, declarative UI and debugging views open from map nodes. No disconnected secondary source of truth.
+- **Human architect / AI implementer.** Human owns boundaries, semantics and approval; AI predominantly writes and tests components, not silently restructures the graph.
 
-## Canonical model
+## Hardware-aware project graph
+
+Each node can carry target triples, ISA extensions, ABI/calling convention, execution context (user/kernel/firmware), hardware capabilities, memory ownership/alignment, resource ranges, thread/interrupt constraints, and supported toolchains. Explicit graph kinds include **CPU/SoC, device, bus, driver, firmware interface, protocol, runtime service, component and external dependency**. Typed edges may express **calls, events/interrupts, data flow, MMIO/I/O access, DMA ownership, protocol and dependency**.
+
+Hardware constraints are **optional typed capabilities**, not clutter on every node. Hard gating matters: an unsafe or unsupported IRQ/MMIO/DMA operation must not be inferred from an attractive diagram. Require target-specific tests; on-device debug and physical access are later capabilities.
+
+## System boundaries
 
 ```text
-Project
-  Modules / groups / components / instances
-  Stable IDs + typed ports + properties + capabilities
-  Directed typed connections (dependency, call, event, data flow)
-  Contracts + revisions + ownership + verification records
-  Views: architecture map | declarative UI | source | diagnostics
+     Interactive Architecture Map  |  Contextual AI Chat
+                         |
+          Typed Project Graph + Contracts
+                         |
+      Human-reviewed transactions and AI proposals
+                         |
+       Assembly components + device/OS adapters
+                         |
+       LLVM/Clang toolchain + local verification
+                         |
+               Supported hardware targets
 ```
 
-The map is a projection of the canonical graph, not an image. Visual positions and collapsible groups are presentation metadata; architecture correctness must not depend on coordinates.
+- **Studio technology:** own declarative UI framework and Assembly-first core. No Qt/QML/C++/FMX runtime in the intended Studio stack.
+- **Portability:** graph and ABI contracts are target-neutral; native Assembly is ISA-specific and OS/ABI-specific.
+- **AI:** officially supported authorization only. ChatGPT Plus is not automatically a general API credential. AI access is unimplemented. Local project work never requires an AI login.
+- **Safety:** select context → propose → validate → inspect graph/source diffs → approve → apply → locally test. No untrusted hardware operations in IDE process; builds/probes are isolated where supported.
+- **Evidence:** every status distinguishes supported/unsupported and passed/failed/not tested, per target. No CI until release preparation.
 
-## Implementation boundaries
+## Minimal product milestone
 
-- **Core:** own Assembly-first implementation, LLVM/Clang integrated assembler.
-- **UI:** own declarative language and rendering runtime. Qt/QML, C++, FMX and Slint runtime are not target dependencies.
-- **Portability:** typed contracts are CPU-neutral; machine Assembly and OS adapters are per-target.
-- **AI authentication:** target official Sign in with ChatGPT / eligible subscription authorization. Do not scrape ChatGPT browser sessions, request passwords, or assume automatic API rights. Authentication capability remains unimplemented and depends on supported provider onboarding.
-- **Safety:** propose → validate → preview graph/source diff → human approval → apply → local verification. AI never replaces architecture ownership.
-- **Offline:** projects and architecture remain readable/editable without AI; new AI tasks require connectivity.
+A native AELYXORA window containing **architecture map plus contextual AI chat area**; load a hardware-aware project graph, select a component, inspect its contracts, create an approved change, and see local build/test evidence. Chat can be a clearly marked non-connected UI placeholder until official authorization is available.
 
-## Minimal end-to-end milestone
+**Reality:** currently there is only an x86-64 Linux Assembly UI-tree validator. The map, renderer, chat, graph schema and hardware integrations do not yet run.
 
-Open a local project → display a real architecture graph → edit a component contract → ask AI (when authorized) to implement that component → review graph/source changes → run local verification. The first renderable window is a technical prerequisite, not the product milestone.
+## Documentation policy
 
-## Current evidence
+This document is the **canonical architectural source**. [Roadmap](../product/roadmap.md) defines a small set of proof-oriented gates. Technical contracts are supporting references; don't generate parallel strategy documents that contradict this one. Review consequential design shifts through ADRs only.
 
-Only the Linux x86-64 native Assembly UI-node validator and local test harness exist. The map UI, schema, persisted project graph, renderer, AI authorization and generation are not built.
-
-## Documentation discipline
-
-This README is the **single source of truth** for product architecture. [Roadmap](../product/roadmap.md) defines only the next observable gates. [ADRs](../adr/README.md) record consequential decisions. Other documents are subordinate technical references; if they disagree, update or retire them, not add another speculative layer. No automatic CI before release.
-
-Useful references: [declarative UI](declarative-ui.md), [Assembly ABI](assembly-first.md), [component contracts](component-contract.md), [runtime bindings](bindings-and-runtime.md), [source ownership](source-ownership.md), [security](extension-and-security.md).
+References: [Declarative UI](declarative-ui.md), [Assembly ABI](assembly-first.md), [Component contracts](component-contract.md), [State and bindings](bindings-and-runtime.md), [Security](extension-and-security.md).
