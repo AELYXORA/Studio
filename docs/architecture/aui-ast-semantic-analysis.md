@@ -67,3 +67,8 @@ Diagnostic envelope: stable error code, severity, span, graph ID if known, expec
 ## Design caveats
 
 The source grammar still lacks fully defined event wiring, generic constraint syntax, operators and dynamic collections; AST variants for these are **provisional**. Finalize exact syntax and golden fixture outputs before declaring grammar or semantic analyzer stable. No parser, type checker or AST producer is running.
+
+
+## Event attachment lowering (design candidate)
+
+`ViewCall(...).on(activated: inspect)` lowers to an explicit `EventConnection(sourceViewIdentity, sourceEventSymbol, destinationEventSymbol, sourceSpan)` node. The semantic checker resolves `activated` in the view component's declared event outputs and `inspect` in the current component's event namespace; payload types must agree exactly. The `on inspect(payload) { send Inspect(); }` handler lowers separately to `EventHandler(eventSymbol, payloadBinder, CommandDispatch(Inspect))`. Neither node confers hardware permission. The command's implementation is linked through the Project Graph contract; an absent provider yields `AUI_COMMAND_UNLINKED`. See [Event and Binding Semantics](aui-event-binding-semantics.md). This contract remains proposed and unimplemented.
