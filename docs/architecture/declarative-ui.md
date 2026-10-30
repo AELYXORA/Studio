@@ -1,31 +1,31 @@
-# AELYXORA Declarative UI (Assembly-first)
+# AELYXORA Declarative UI
 
-**Status:** experimental tree/ABI validator, not yet a visual renderer.
+**Goal:** our own SwiftUI-like declarative ergonomics, not a SwiftUI/Slint/QML clone and not dependent on those runtimes.
 
-## Intended model
+## Planned language
 
-Human architects declare reusable views and state flow. AI implements components under type, accessibility, layout and lifecycle contracts. Like SwiftUI, the target UI is described declaratively rather than by imperative widget construction. No claim of SwiftUI source-language compatibility.
+Human-readable declaration files describe reusable views, typed state, layouts, styling, actions and accessibility. The syntax is **not yet specified**; no parser exists. Stable keys identity-map nodes across revisions; bindings are type-checked and cyclic graphs rejected unless explicitly delayed.
 
-Proposed layers:
-- **Declarative UI AST:** stable node keys, containers, properties, events and reactive state.
-- **Assembly UI Core:** validation, diff/reconciliation, layout and dispatch in portable ABI-constrained modules.
-- **Render adapters:** OS GPU, text, input, accessibility and window backends. Platform adaptation is not portable assembly.
-- **Design-time tools:** previews, inspector, diagnostics, hot reload and AI-authored component proposals.
+## Planned runtime
 
-## First executable experiment
+1. Parse declarations to an immutable UI AST.
+2. Validate component contracts, capabilities and property types.
+3. Reconcile previous/next trees by stable keys, preserving state when identity and type allow.
+4. Incrementally measure and layout, then generate platform-neutral drawing commands.
+5. Renderer adapters present frames and route input through validated events.
+6. Design-time inspector edits AST transactions, never arbitrary generated code.
 
-`include/aelyxora/ui.h` defines a packed-by-layout (16-byte, naturally aligned) C ABI for four node kinds: VStack, HStack, Text, Button. `ax_ui_validate` verifies count bounds, first/root, recognized kinds, keys, parent order and leaf parent restrictions. The x86-64 Linux implementation is written in Clang-compatible GAS assembly with the System V calling convention. The C++23 equivalent is a portability/reference fallback for other platforms. Both share the same tests.
+## Current code
 
-**This is not yet a UI toolkit.** It does not display pixels, implement layout, parse a DSL, handle state, process events, perform reconciliation or generate components.
+The sole executable kernel is `ax_ui_validate(nodes,count)`, declared in `include/aelyxora/ui.h`, implemented by `src/ui/validate_x86_64_sysv.S`. It supports four node tags, one root, preorder parents, nonzero unique keys, leaf restrictions and reserved flags. It does not render pixels.
 
-## ABI and portability
+## Portability
 
-Native assembler is ISA/ABI-specific. Do not compile the Linux System V implementation for Windows x64, macOS or ARM64; those need separate tested implementations or the portable reference implementation. No direct syscalls inside the core. All strings, memory ownership and API evolution must be specified before extending the ABI.
+All Assembly must have per-target calling convention documentation and an automated shared contract suite. First target: Linux x86-64 System V ABI. Later: AArch64, Windows x64, macOS, mobile targets, each gated by builds and runtime tests. The declarative language remains CPU-neutral.
 
-## Next steps
+## Near-term gates
 
-1. Introduce an actual declarative source format and parser with roundtrip/golden tests.
-2. Add immutable tree and stable-key diff operations; validate correctness against a reference implementation.
-3. Add measure/layout contracts, then a minimal rendering backend and event dispatch.
-4. Produce an AArch64 Assembly implementation and test with the same fixtures.
-5. Connect the UI model to component registry and controlled AI proposals, not arbitrary unvalidated code.
+- Define schema and parser for a minimal view (VStack/HStack/Text/Button).
+- Specify stable identity and state transitions.
+- Implement deterministic layout, diff and one renderer.
+- Build the IDE's own first window from this runtime.
