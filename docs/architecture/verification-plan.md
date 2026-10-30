@@ -4,7 +4,7 @@
 
 ## Present baseline
 
-Run `sh build.sh` on Linux x86-64 with Clang. It assembles `src/ui/validate_x86_64_sysv.S`, links the Assembly test harness and runs validator assertions. No window is rendered. Until actually run on a specified system, document results as **not run**.
+There is currently no executable baseline or build script. For every future verification fixture, record the exact local invocation, target, expected outcome and observed **not run / pass / fail** result. Do not claim test execution without evidence.
 
 ## Planned gates
 
