@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D2/D6 baseline consistency review — proposed
+
+[Contradiction and decision register](d2-d6-baseline-review.md) now tracks the integrated architecture-to-storage boundary, remaining P0 choices and acceptance criteria. [Logical Export Contract Identity](d2-export-contract-identity.md) explains why changing ASM source bytes can invalidate a package/build without changing semantic architecture. [Export Reference Vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json) distinguish those digests. D2/D6 have NOT been approved or implemented.
+
 ## D6 package integrity and filesystem guarantees — proposed
 
 [Package Integrity](d6-package-integrity.md) defines exact first-profile package inventory, path safety, digest framing and lock boundary. [Filesystem Adapters](d6-filesystem-adapters.md) identifies unsupported and unverified host durability claims on Windows and Linux. [Integrity vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) are codec-only, not a native build or proven crash recovery. No additional implementation has begun.
