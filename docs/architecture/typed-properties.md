@@ -1,22 +1,41 @@
 # Typed Component Properties
 
-**Status:** experimental C++23 implementation, not yet integrated into the persisted Application Model.
+**Status:** C++23 model + transaction + optional JSON adapter implementation committed; full CI result not independently verified.
 
-The headless `aelyxora_properties` module defines Boolean, signed 64-bit Integer, double Real and UTF-8 Text property values. Component definitions declare property names, kinds, defaults and mutability. Property instances store overrides; missing overrides use defaults at resolution time (resolution API is not yet implemented).
+## Implemented integration
 
-## Implemented checks
+- `Component` owns `property_definitions` and typed `properties` overrides.
+- Types: Boolean, signed 64-bit Integer, finite double Real and UTF-8 Text.
+- Model validation rejects duplicate declarations, mismatched defaults, undeclared overrides and invalid real values.
+- `SetComponentProperty` participates in revision-checked, candidate-copy project transactions.
+- Unknown and read-only properties reject edits; failed commands do not publish a new model revision.
+- Optional Boost.JSON adapter reads/writes `propertyDefinitions` and `properties`; the formal JSON Schema includes those fields.
+- CTest covers property mutation and persisted roundtrip cases.
 
-- Declaration uniqueness and nonempty names
-- Type agreement for defaults and overrides
-- Finite floating-point values
-- Unknown property rejection
-- Read-only protection
-- Candidate-copy mutation, so invalid edits cannot partially modify an instance
+## JSON representation (draft)
 
-## Missing before RAD integration
+```json
+{
+  "id": "submit",
+  "type": "ui.button",
+  "propertyDefinitions": [
+    {"name": "title", "kind": "text", "default": "Submit", "writable": true},
+    {"name": "enabled", "kind": "boolean", "default": true}
+  ],
+  "properties": {"title": "Save"}
+}
+```
 
-Typed property instances are not yet stored in `Project` or its JSON Schema; this is a standalone proof of contract. Enum, null, decimal, object, list, resource references, cross-property constraints, event bindings, dynamic expressions, revision-based edits and QML reflection are future work. The change API does **not** currently update a project revision.
+Overrides do not need to repeat the type: the declaration determines type checking. Absence of an override means use the default.
 
-## Verification
+## Known gaps
 
-`properties_tests` is registered with CTest. Claims of cross-platform success require actual CI evidence.
+- Project schema and C++ parser are not yet independently checked for complete JSON Schema semantic equivalence; `kind/default` agreement is enforced by C++ but not by JSON Schema conditional logic.
+- No polymorphic component registry: definitions are currently stored with each component instance.
+- No property-level revision, nested data models, design-time editors, ranges, enum, null or structured values.
+- No data binding engine, QML visual inspector, computed expressions or runtime component system.
+- Persistence durability and Windows replacement remain experimental; do not use for irreplaceable projects.
+
+## Next design step
+
+Move reusable component definitions to a registry referenced by stable type/version, introduce property resolution and typed binding validation, and prove end-to-end save/reopen of one visual component before broadening the palette.
