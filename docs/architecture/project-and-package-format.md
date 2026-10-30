@@ -43,6 +43,12 @@ Fields: `format`, `schemaVersion`, `packageId`, `packageVersion`, `components`, 
 
 [D2 Execution and Consistency](d2-execution-consistency.md) specifies the in-memory instance ordering, command-ticket scope and approved project CAS at the **semantic** level. Project persistence must bind expectedRevision, expectedSemanticDigest, operationId, source hashes, staged complete outputs, durable commit and recovery. View-only layout changes use a separate ViewRevision and cannot invalidate the semantic graph hash. Exact journal states and canonical fingerprint vectors remain a D6 P0 blocker. No transactional promise includes physical hardware effects or unsent/late external commands.
 
+## D2/D6 identity, byte encoding and recovery boundary
+
+[D2 Identity and Type Resolution](d2-identity-and-type-resolution.md) defines the graph/port/type namespace and retired identity requirements. [D6 Canonical Persistence](d6-canonical-persistence.md) proposes a restricted canonical UTF-8 JSON serializer, semantic graph digest distinct from exact source/package/snapshot digests, and immutable snapshot publication with two checksum-protected HEAD slots. Display-only label, map layout, positions and ViewRevision must not influence the semantic graph hash; contract-bearing names and port identities must. Any declaration changing exported signatures must change its contract identity even if a UI looks the same.
+
+This is a **candidate on-disk protocol**, not an accepted stable format or proof of power-loss safety. The final byte framing, complete index/HEAD schemas, target filesystem durability and retired-ID serialization remain open D6 blockers; the existing sensor manifest is an illustrative JSON document, not a committed crash-safe snapshot. No device/network effect is included in the file transaction.
+
 ## Versions and resolution
 
 Project schema, package schema, component contract version, AUI source grammar, native ABI and compiler/toolchain version are distinct. A dependency is resolved by package ID, an explicit version constraint and artifact content hash in a separate lockfile. No implicit network update during offline builds. Reject missing packages, incompatible required capabilities, duplicate exported component IDs and unsupported target/ABI combinations.
