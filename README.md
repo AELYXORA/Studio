@@ -25,6 +25,10 @@ Only an experimental Linux x86-64 Assembly UI-tree validator with manual local t
 ## Working documents
 
 - [Architecture — source of truth](docs/architecture/README.md)
+- [Interactive map workspace](docs/architecture/workspace.md)
+- [Canonical project graph](docs/architecture/project-graph.md)
+- [AI engineer and ChatGPT integration](docs/architecture/ai-engineer.md)
+- [Hardware and targets](docs/architecture/hardware-and-targets.md)
 - [Short evidence-based roadmap](docs/product/roadmap.md)
 - [Declarative UI](docs/architecture/declarative-ui.md)
 - [Assembly-first toolchain](docs/architecture/assembly-first.md)
