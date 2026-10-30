@@ -1,5 +1,7 @@
 # AELYXORA Studio — Architecture
 
+**Current policy:** complete and review design before further implementation. [Design gates](design-completion-gates.md) establish acceptance; [official ChatGPT Plus integration contract](chatgpt-connection.md) addresses user consent, eligible allowance and offline operation.
+
 **Current implementation status:** [verified artifacts, missing components and authoritative milestones](PROJECT-STATUS.md).
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
