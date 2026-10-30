@@ -1,0 +1,126 @@
+{
+  "format": "aui.project",
+  "schemaVersion": "0.1-draft",
+  "projectId": "example.sensor-telemetry",
+  "revision": 0,
+  "targets": [
+    {
+      "id": "linux-arm64",
+      "triple": "aarch64-unknown-linux-gnu",
+      "execution": "user"
+    }
+  ],
+  "packageDependencies": [
+    {
+      "packageId": "example.sensor",
+      "version": "0.1.0"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "soc",
+      "kind": "cpu",
+      "label": "ARM64 SoC"
+    },
+    {
+      "id": "bus",
+      "kind": "bus",
+      "label": "I2C Bus"
+    },
+    {
+      "id": "sensor",
+      "kind": "device",
+      "label": "Sensor"
+    },
+    {
+      "id": "driver",
+      "kind": "driver",
+      "label": "Sensor Driver",
+      "typeRef": "example.sensor/driver",
+      "target": "linux-arm64",
+      "ports": [
+        {
+          "id": "sample",
+          "direction": "out",
+          "type": "RawSample"
+        }
+      ]
+    },
+    {
+      "id": "decoder",
+      "kind": "component",
+      "label": "Decoder",
+      "typeRef": "example.sensor/decoder",
+      "ports": [
+        {
+          "id": "raw",
+          "direction": "in",
+          "type": "RawSample"
+        },
+        {
+          "id": "reading",
+          "direction": "out",
+          "type": "Measurement"
+        }
+      ]
+    },
+    {
+      "id": "app",
+      "kind": "component",
+      "label": "Telemetry App",
+      "ports": [
+        {
+          "id": "reading",
+          "direction": "in",
+          "type": "Measurement"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "hosts",
+      "from": {
+        "node": "soc"
+      },
+      "to": {
+        "node": "bus"
+      }
+    },
+    {
+      "id": "e2",
+      "kind": "hosts",
+      "from": {
+        "node": "bus"
+      },
+      "to": {
+        "node": "sensor"
+      }
+    },
+    {
+      "id": "e3",
+      "kind": "data-flow",
+      "from": {
+        "node": "driver",
+        "port": "sample"
+      },
+      "to": {
+        "node": "decoder",
+        "port": "raw"
+      }
+    },
+    {
+      "id": "e4",
+      "kind": "data-flow",
+      "from": {
+        "node": "decoder",
+        "port": "reading"
+      },
+      "to": {
+        "node": "app",
+        "port": "reading"
+      }
+    }
+  ]
+}
