@@ -38,6 +38,8 @@ Version namespaces are separate: project schema, package schema, component API, 
 
 The canonical digest procedure is still open; do not claim byte-identical reproducibility from ordinary JSON formatting. A migration never upgrades dependencies implicitly.
 
+**D2/D6 cross-gate review:** [Baseline contradiction and decision register](d2-d6-baseline-review.md) records the resolved-by-documentation logical-export-vs-package-digest conflict, the draft operationId HEAD/index linkage, and remaining unapproved persistence recovery policies. D2 does not claim platform crash safety merely because graph CAS passes in memory.
+
 ## D2 command / instance consistency boundary
 
 [D2 Execution and Consistency](d2-execution-consistency.md) proposes expectedRevision + expectedSemanticDigest CAS, staged immutable graph snapshots, separate ViewRevision and pinning of old validated graph/package revisions for running instances. Graph publication is **not** atomic with external device/network effects. A proposed cancel request is **not** immediate physical cancellation. D6 still must define the exact bytes, durable operationId journal, fsync protocol and crash recovery algorithm; do not treat the D2 model as a completed durable storage design.
