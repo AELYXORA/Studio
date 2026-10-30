@@ -4,7 +4,7 @@
 
 ## D2 documentation update (design-only)
 
-Proposed workflow/data-flow and D2 execution/consistency contracts, expanded JSON Schemas, typed command/signal fixtures, staged cancellation example and future sensor runtime acceptance scenarios now exist. No native parser, semantic validator, transaction journal, workflow engine, command dispatcher, channel runtime, or ABI implementation was added. These changes do not change the implementation-readiness status or mark tests passed. Their proposed semantics require architect acceptance, cross-contract closure and implementation before Phase III tests.
+Proposed workflow/data-flow and D2 execution/consistency contracts, expanded JSON Schemas, typed command/signal fixtures, staged cancellation example and future sensor runtime acceptance scenarios now exist. No native parser, semantic validator, canonical serializer, cryptographic snapshot publisher, transaction journal, workflow engine, command dispatcher, channel runtime, or ABI implementation was added. These changes do not change the implementation-readiness status or mark tests passed. Their proposed semantics require architect acceptance, cross-contract closure and implementation before Phase III tests.
 
 ## Implemented in the repository
 
@@ -47,3 +47,5 @@ S1 and S2 may need tightly scoped joint experiments for bootstrapping native UI,
 ## Unresolved blockers
 
 Strict schema/duplicate-key policy, canonical package hashes and lockfile, event/command AUI syntax, fixed native ABI layouts, Windows host toolchain/backend selection, transaction recovery, platform text/rendering and provider authentication. Placeholder format/package versions in JSON fixtures are **not document versions or releases**.
+
+**Additional design-only references:** [D2 identity/type resolution](d2-identity-and-type-resolution.md), [D6 canonical persistence](d6-canonical-persistence.md), [four expected canonical hash vectors](../../examples/architecture-sensor/d2-canonical-vectors.json), [HEAD/index schema drafts](../../schemas/project-head.schema.json), and [30 future crash recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md). No production durability or executable codec evidence is claimed.
