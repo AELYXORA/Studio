@@ -1,5 +1,7 @@
 # AELYXORA Studio
 
+**Project phase: documentation-first.** [Design completion gates](docs/architecture/design-completion-gates.md) control readiness before further implementation. [ChatGPT Plus integration design](docs/architecture/chatgpt-connection.md) covers eligible official sign-in and account consent; not yet implemented.
+
 **Current implementation status:** [verified artifacts, missing components and authoritative milestones](docs/architecture/PROJECT-STATUS.md).
 
 **Imagine. Design. Engineer.**
