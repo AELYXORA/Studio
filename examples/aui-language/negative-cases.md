@@ -1,6 +1,6 @@
 # AUI D3 — Negative Golden Fixture Specifications
 
-**Status: expected diagnostics only; not executed.** Each snippet inherits the same illustrative imported AUI.Core symbols as sensor-summary.aui. Exactly which source positions and error prioritization to report remains subject to grammar and semantic freeze.
+**Status: historical broader D3+ expected diagnostics only; not executed.** These fragments use the legacy illustrative sensor-summary.aui context and are **not** strict L0/L1 golden inputs. The bounded [L0/L1 negative fixture set](d3-first-profile-negative-cases.json) owns current first-slice expected diagnostics. Exactly which source positions and error prioritization to report remains subject to grammar and semantic freeze.
 
 | Case | Invalid fragment | Expected diagnostic |
 | --- | --- | --- |
