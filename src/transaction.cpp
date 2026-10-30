@@ -17,6 +17,19 @@ TransactionResult apply(Project& project, const Transaction& transaction) {
             if constexpr(std::is_same_v<T,SetProjectName>) {
                 candidate.name=cmd.name;
                 return {};
+            } else if constexpr(std::is_same_v<T,SetComponentProperty>) {
+                for(auto& module:candidate.modules) for(auto& component:module.components) {
+                    if(component.id!=cmd.component_id) continue;
+                    for(const auto& def:component.property_definitions) if(def.name==cmd.property) {
+                        if(!def.writable) return {{ErrorCode::MissingField,cmd.property,"read-only property"}};
+                        if(cmd.value.index()!=static_cast<std::size_t>(def.kind))
+                            return {{ErrorCode::MissingField,cmd.property,"type mismatch"}};
+                        component.properties[cmd.property]=cmd.value;
+                        return {};
+                    }
+                    return {{ErrorCode::UnresolvedDependency,cmd.property,"unknown property"}};
+                }
+                return {{ErrorCode::UnresolvedDependency,cmd.component_id,"unknown component"}};
             } else {
                 if(cmd.from==cmd.to)
                     return {{ErrorCode::InvalidId,"components","rename must change identity"}};
