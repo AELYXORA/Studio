@@ -64,7 +64,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 
 ## D3 — AUI source language and user-facing declarative semantics
 
-**Authority:** [AUI Syntax](aui-syntax.md), [Event/Binding Semantics](aui-event-binding-semantics.md), [AUI Core Library](aui-core-library.md), [Types and Ownership](aui-types-and-ownership.md). **Current status: Proposed/Open.**
+**Authority:** [D3 First Language Profile L0/L1](d3-first-language-profile.md), [D3 Type/Binding Profile](d3-type-and-binding-profile.md), [D3 Event Delivery and Command Linkage](d3-event-delivery-and-command-linkage.md), [D3 Language Review](d3-language-review.md), with broader unaccepted D3+ designs in [AUI Syntax](aui-syntax.md), [AUI Core Library](aui-core-library.md), and [Types/Ownership](aui-types-and-ownership.md). **Current status: Proposed/Open.**
 
 | ID | Required design closure | Evidence fixture |
 | --- | --- | --- |
@@ -76,7 +76,7 @@ If a requirement lacks any material element above, it remains **Open**. A docume
 | D3-06 | Dynamic collections, stable view keys, property addressing and child-slot rules | Insert/reorder collection; duplicate key; invalid child |
 | D3-07 | Fully linked, **standalone** golden AUI module for first host; imports and providers real within fixture | Parseable event/text/command program, not pseudocode |
 
-**P0 open:** expression grammar/precedence, generics, dynamic identity, provider linkage, full golden fixture.
+**P0 open:** the first L0/L1 subset has a proposed restricted grammar and event/command link map, but D3+ general expression grammar, state/derived/bind/tasks, generics, dynamic identity, final core registry and ABI, provider approval, byte-spanned compiler golden output and full executable fixture remain unaccepted. See [15 D3 review decisions](d3-language-review.md).
 
 ## D4 — Compiler, intermediate representations and binary ABI
 
@@ -216,3 +216,7 @@ The [Graph Behavior Contract](graph-behavior-contract.md) now gives proposed def
 ## D2/D6 byte-linked reference and resolver design pass (Proposed)
 
 [Canonical Semantic Projection](d2-d6-semantic-projection.md) provides field-by-field digest input, excluding implementation bytes. [Offline Dependency Resolver](d6-offline-dependency-resolution.md) defines one exact package version per packageId, closure, source-object integrity, export digest and failure ordering. [Locked Pure Reference](../../examples/locked-pure-reference/README.md) contains actual **reference** Assembly bytes (not a verified AELYXORA ABI implementation), package manifest, semantic project, lock, snapshot, HEAD and [negative fixtures](../../examples/locked-pure-reference/negative-cases.json). This is a design baseline candidate, **NOT a native result, sign-off or successful build**. Full primitive core type system, D4 ABI and selected first-host durability remain P0.
+
+## D3 first-slice language documentation pass (PROPOSED, NOT ACCEPTED)
+
+[First Language Profile](d3-first-language-profile.md) defines strict UTF-8/NFC lexing, explicit imports, named-only arguments and L0/L1 grammar. [D3 Types/Bindings](d3-type-and-binding-profile.md) proposes pinned aui.core, nominal type and property/effect checks. [D3 Event Delivery](d3-event-delivery-and-command-linkage.md) defines one-handler bounded UI event admission, stale-generation handling and a separate source-to-graph [link-map schema](../../schemas/aui-command-link.schema.json). Two positive [L0](../../examples/aui-language/status-panel-l0.aui) and [L1](../../examples/aui-language/linked-consumer-panel.aui) source examples, [proposed link map](../../examples/aui-language/linked-consumer-panel.link.json), and [28 expected negative cases](../../examples/aui-language/d3-first-profile-negative-cases.json) exist. [D3 Review](d3-language-review.md) records fifteen P0 decisions. All native parser/renderer/runtime tests NOT-RUN and no product source implementation authorized.
