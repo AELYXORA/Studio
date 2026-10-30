@@ -62,3 +62,8 @@
 ## Completion definition
 
 Architecture can be considered coherent when there is one authority for each contract; all illustrative examples agree with it; all hard ambiguities are either resolved or explicitly experimental with acceptance criteria; no cross-document links break; and negative fixtures and local verification methodology are defined. **Passing design review is not the same as proving machine code correctness or production security.**
+
+
+[Architecture Design Closure — Sensor Slice](architecture-closure.md) defines canonical type IDs, package exports and the end-to-end graph-to-code contract. The sensor fixtures use qualified types. This is a proposed design and has not been run.
+
+**Audit update:** C-04 has a concrete proposed resolution in the closure document and sensor fixtures; it remains unverified until formal schema validation. Other findings remain open unless individually evidenced.
