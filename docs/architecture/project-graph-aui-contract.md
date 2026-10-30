@@ -8,7 +8,7 @@
 - TypeID is a package-qualified exported identity (e.g. `example.sensor/Measurement`), pinned to a resolved package content identity. Same display spelling does not imply same type.
 - AUI declaration identity uses a resolved symbol identity (package/module/declaration), while a **runtime ViewIdentity** tracks an instantiated rendered view. These three identities must not be conflated.
 - AUI source locations (file/byte span) are *references*, never permanent identity. Moving a line or formatting a file cannot reassign GraphNodeID.
-- The canonical graph owns nodes, inter-component edges, permissions, targets and source ownership. AUI owns its declaration bodies and presentation hierarchy; proposed source changes that affect graph contracts require a graph transaction.
+- The canonical graph owns nodes, inter-component edges, permissions, targets and source ownership. [Export Contract Identity](d2-export-contract-identity.md) defines logical type identity separately from locked source bytes. AUI owns its declaration bodies and presentation hierarchy; proposed source changes that affect graph contracts require a graph transaction.
 
 ## 2. Resolved declarations and component instances
 
@@ -108,3 +108,5 @@ Index validation MUST check source hash, locked package digest, graph revision a
 **AI boundary:** model-generated source and graph diffs are untrusted proposals. Their types, dependencies, capabilities and source ownership must match the frozen graph/lock before review; accepting a proposal does not authorize executing code or external effects.
 
 **Open dependencies:** approved source-level import/export grammar, canonical resolved package contract digest, full TypeID resolution, AUI property and event identity, native ABI byte layout, target-specific compiler errors and source mapping verification. This section is Proposed, not a D2/D3/D4 sign-off.
+
+**Cross-revision reconciliation:** a source-only Assembly edit can change the package/snapshot/build digests while preserving exportedContractDigest and semanticGraphDigest. It still requires exact source ownership validation and renewed build/security evidence; a change in the public type/command contract requires a graph semantic revision. See [export contract vectors](../../examples/architecture-sensor/d2-export-contract-vectors.json). No inferred equivalence of native runtime behavior.
