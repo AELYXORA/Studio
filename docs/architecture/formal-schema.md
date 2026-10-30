@@ -4,7 +4,7 @@
 
 - [JSON Schema 2020-12](../../schemas/project.schema.json) defines the current persisted subset: project, target, module, component, dependencies.
 - [CustomerDesk fixture](../../examples/customerdesk/project.aelyxora.json) exercises the subset.
-- [C++20 model](../../include/aelyxora/model.hpp) provides an independent in-memory representation and basic graph validation.
+- [C++23 model](../../include/aelyxora/model.hpp) provides an independent in-memory representation and basic graph validation.
 - [Model tests](../../tests/model_tests.cpp) exercise duplicate identities, invalid dependencies, cycles and optimistic revision checks.
 
 ## Important limitations
