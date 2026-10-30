@@ -64,7 +64,7 @@ A component must distinguish:
 - device capability versus permission to access it;
 - simulator result versus actual hardware validation.
 
-Memory-region ownership and DMA buffers require explicit allocation/deallocation, alignment, visibility/synchronization and trust-boundary policies. Overlapping MMIO or interrupt claims are rejected unless a sharing contract explains them.
+The proposed [typed D2 hardware-resource profile](d2-hardware-resource-contract.md) introduces required target features/privilege, resource-access edge-linked MMIO/IRQ/DMA/memory claims, range/overlap validation and explicit capability requirements under schemaVersion 0.2-hw-draft. It is a **candidate inside the same canonical Project Graph**, not a device-access permission or native ABI proof. Pure 0.1-draft graphs cannot silently acquire it. Memory-region ownership and DMA buffers require explicit allocation/deallocation, alignment, visibility/synchronization and trust-boundary policies. Overlapping MMIO or interrupt claims are rejected unless a sharing contract explains them.
 
 ## 5. View semantics
 
@@ -74,14 +74,14 @@ The map may render several views (logical, deployment, hardware, runtime, data f
 
 ## 6. Persistence and transactions (D2 model; D6 encoding and durability)
 
-Use a versioned, deterministic, human-inspectable format. Exact serialization syntax is undecided; do not claim JSON or custom binary is final. Record schemaVersion separately from architecture concept. Normalize ordering for stable diffs. Never infer edges from proximity.
+Use a versioned, deterministic, human-inspectable format. [D6 Canonical Persistence](d6-canonical-persistence.md) now proposes an exact canonical JSON and snapshot format; it is **not** an accepted release wire format or a verified durable implementation. Record schemaVersion separately from architecture concept. Normalize ordering for stable diffs. Never infer edges from proximity.
 
 Atomic command transaction contract: expected revision, stable operation ID, candidate graph/workflow/data-flow changes, declared capabilities, validation diagnostics, new revision or no change. Referenced edge deletion must either co-delete/rebind all dependent flow/workflow references in the same transaction or be rejected. Semantic changes to queue capacity, transfer policy, target or workflow transition invalidate relevant build artifacts and evidence; layout-only operations do not. Commands include add/remove/rename node, set contract, connect/disconnect ports, set target requirements and edit presentation. Remove operations must surface affected references, with an explicit deletion policy. Undo/redo must preserve invariant validation.
 
 ## 7. Example acceptance fixture
 
 ```text
-[ARM64 SoC]--hosts-->[I2C bus]--connects-->[Sensor]
+[ARM64 SoC]--hosts-->[I2C bus]--hosts-->[Sensor]
                                    |
                               [Sensor driver]
                                    |
