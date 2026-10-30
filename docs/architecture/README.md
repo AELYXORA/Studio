@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D2 identity and D6 persistence — proposed
+
+[Persistent identities and nominal TypeID resolution](d2-identity-and-type-resolution.md) establishes the candidate first-slice ID/type policies and explicit Graph/AUI/native ABI identity boundaries. [Canonical snapshot and crash recovery design](d6-canonical-persistence.md) specifies candidate UTF-8 encoding, semantic/source/package digests, immutable revision publication and recovery checks. [Byte/hash vectors](../../examples/architecture-sensor/d2-canonical-vectors.json) and [recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md) are documentation artifacts only; no native implementation/tests exist.
+
 ## D2 execution and consistency — proposed
 
 [Concurrency, Command Dispatch, Resource Ownership and Transaction Semantics](d2-execution-consistency.md) defines the bounded single-process execution policy, typed signals, cancellation/completion races, safe ownership transfer and separated graph/runtime/external-effect transaction boundaries. [Sensor D2 runtime scenarios](../../examples/architecture-sensor/d2-runtime-scenarios.md) cover 18 designed future tests, all NOT-RUN. The Studio runtime and graph validator do not yet exist.
