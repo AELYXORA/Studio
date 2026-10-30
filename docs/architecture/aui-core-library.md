@@ -77,3 +77,7 @@ Exact Length/TextStyle types, command-handler AUI syntax, generic constraint gra
 ## Event attachment contract (design candidate)
 
 `Button` exports `activated: Event<Unit>`. A parent may attach `.on(activated: inspect)` where `inspect` is its declared `Event<Unit>`; the AUI AST resolves both symbols and checks payload identity. A `Toggle` exposes `editRequested: Event<Bool>`, and a `TextField` exposes typed edit and commit events; neither mutates bound state directly. See [Event and Binding Semantics](aui-event-binding-semantics.md). This syntax is proposed; it is not a running widget API.
+
+## L0/L1 core registry candidate
+
+[D3 Type and Binding Profile](d3-type-and-binding-profile.md) proposes an explicit version-pinned built-in aui.core/0.1-draft import. The bounded initial view signatures are VStack/HStack(spacing: U32) with static child Views, Text(value: String), Button(title: String) with Event<Unit> activated and required accessibilityLabel(value: String), plus the exact .on(activated: event) attachment. The larger catalog and pseudo-signatures above do not automatically become L0/L1 parser-ready or supported targets; target rendering/IME/focus remain D5 obligations.
