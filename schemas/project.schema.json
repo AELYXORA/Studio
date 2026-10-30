@@ -761,7 +761,527 @@
           }
         }
       }
+    },
+    "resourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "targetRequirements",
+        "claims"
+      ],
+      "properties": {
+        "profile": {
+          "const": "aui.hardware-resources/v1"
+        },
+        "targetRequirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "targetId",
+              "addressBits",
+              "endian",
+              "privilege",
+              "featureRegistryId",
+              "isaFeatures",
+              "adapterContractId"
+            ],
+            "properties": {
+              "targetId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "addressBits": {
+                "enum": [
+                  32,
+                  64
+                ]
+              },
+              "endian": {
+                "enum": [
+                  "little",
+                  "big"
+                ]
+              },
+              "privilege": {
+                "enum": [
+                  "user",
+                  "kernel",
+                  "bare-metal"
+                ]
+              },
+              "featureRegistryId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "isaFeatures": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                }
+              },
+              "adapterContractId": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "targetId",
+              "ownerNodeId",
+              "resourceNodeId",
+              "edgeId",
+              "addressSpaceId",
+              "sharing",
+              "requiredCapabilities"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "kind": {
+                "enum": [
+                  "mmio",
+                  "irq",
+                  "dma",
+                  "memory"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "ownerNodeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "resourceNodeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "edgeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "addressSpaceId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "sharing": {
+                "enum": [
+                  "exclusive",
+                  "shared-read"
+                ]
+              },
+              "requiredCapabilities": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "mmio.read",
+                    "mmio.write",
+                    "irq.handle",
+                    "dma.submit",
+                    "memory.map",
+                    "memory.read",
+                    "memory.write"
+                  ]
+                }
+              },
+              "mmio": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "base",
+                  "length",
+                  "registerWidthBits",
+                  "alignmentBytes",
+                  "endian",
+                  "access",
+                  "ordering"
+                ],
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "length": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "registerWidthBits": {
+                    "enum": [
+                      8,
+                      16,
+                      32,
+                      64
+                    ]
+                  },
+                  "alignmentBytes": {
+                    "type": "integer",
+                    "enum": [
+                      1,
+                      2,
+                      4,
+                      8,
+                      16,
+                      32,
+                      64,
+                      128,
+                      256,
+                      512,
+                      1024,
+                      2048,
+                      4096
+                    ]
+                  },
+                  "endian": {
+                    "enum": [
+                      "little",
+                      "big"
+                    ]
+                  },
+                  "access": {
+                    "enum": [
+                      "read",
+                      "write",
+                      "read-write"
+                    ]
+                  },
+                  "ordering": {
+                    "enum": [
+                      "device",
+                      "strong"
+                    ]
+                  }
+                }
+              },
+              "irq": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "controllerNodeId",
+                  "line",
+                  "trigger",
+                  "ackPolicy"
+                ],
+                "properties": {
+                  "controllerNodeId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "line": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "trigger": {
+                    "enum": [
+                      "edge-rising",
+                      "edge-falling",
+                      "level-high",
+                      "level-low"
+                    ]
+                  },
+                  "ackPolicy": {
+                    "enum": [
+                      "explicit",
+                      "controller-auto"
+                    ]
+                  }
+                }
+              },
+              "dma": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "engineNodeId",
+                  "channelId",
+                  "bufferClaimId",
+                  "direction",
+                  "coherency",
+                  "alignmentBytes",
+                  "maxBytes",
+                  "maxInFlight"
+                ],
+                "properties": {
+                  "engineNodeId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "channelId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "bufferClaimId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "direction": {
+                    "enum": [
+                      "to-device",
+                      "from-device",
+                      "bidirectional"
+                    ]
+                  },
+                  "coherency": {
+                    "enum": [
+                      "coherent",
+                      "explicit-sync"
+                    ]
+                  },
+                  "alignmentBytes": {
+                    "type": "integer",
+                    "enum": [
+                      1,
+                      2,
+                      4,
+                      8,
+                      16,
+                      32,
+                      64,
+                      128,
+                      256,
+                      512,
+                      1024,
+                      2048,
+                      4096
+                    ]
+                  },
+                  "maxBytes": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "maxInFlight": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 65535
+                  }
+                }
+              },
+              "memory": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "base",
+                  "length",
+                  "regionType",
+                  "access"
+                ],
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "length": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "regionType": {
+                    "enum": [
+                      "ram",
+                      "device",
+                      "reserved"
+                    ]
+                  },
+                  "access": {
+                    "enum": [
+                      "read",
+                      "write",
+                      "read-write",
+                      "execute"
+                    ]
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "mmio"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "mmio"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "irq"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "dma"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "memory"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "irq"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "irq"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "mmio"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "dma"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "memory"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "dma"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "dma"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "mmio"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "irq"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "memory"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "memory"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "memory"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "mmio"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "irq"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "dma"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": {
+            "const": "0.2-hw-draft"
+          }
+        },
+        "required": [
+          "schemaVersion"
+        ]
+      },
+      "then": {
+        "required": [
+          "resourceModel"
+        ]
+      },
+      "else": {
+        "not": {
+          "required": [
+            "resourceModel"
+          ]
+        }
+      }
+    }
+  ]
 }
