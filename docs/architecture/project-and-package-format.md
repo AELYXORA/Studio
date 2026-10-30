@@ -79,3 +79,5 @@ See [Graph Validation and Migration](graph-validation-and-migration.md) for orde
 
 
 [Manifest Schema and Validation Contract](schema-validation-contract.md) documents the proposed JSON schemas, semantic rules, observed fixture checks and unresolved lockfile requirements. Structural schemas: [project](../../schemas/project.schema.json), [component package](../../schemas/component-package.schema.json).
+
+**New D6 design references:** [HEAD record](../../schemas/project-head.schema.json), [immutable snapshot index](../../schemas/project-snapshot-index.schema.json), [canonical hash vectors](../../examples/architecture-sensor/d2-canonical-vectors.json), and [30 future recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md). Structural example files are not accepted wire formats or evidence of durable I/O.
