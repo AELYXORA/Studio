@@ -20,7 +20,7 @@ The aim is to complete a coherent theoretical architecture before broad implemen
 
 ## Decision discipline
 
-Use **accepted**, **proposed**, **open** and **verified** labels with explicit evidence. Invariants belong to Architecture README; precise semantics belong to their owning documents. Do not copy whole contracts into multiple files. ADR only for significant changes. Keep unverified assumptions visible.
+Use **accepted**, **proposed**, **open** and **verified** labels with explicit evidence. Invariants belong to Architecture README; precise semantics belong to their owning documents. Do not copy whole contracts into multiple files. Record significant decisions in their owning specifications, without a separate historical ADR archive. Keep unverified assumptions visible.
 
 ## Design completion criteria
 
