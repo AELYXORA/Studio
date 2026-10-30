@@ -78,3 +78,5 @@ Decisions move from proposed to accepted only after an explicit ADR and correspo
 
 - [Formal Project Schema](formal-schema.md) — draft JSON Schema, fixture, C++20 headless model, test scope and gaps.
 - The in-memory model and schema are **not yet integrated through a JSON parser**. Persistence, migration, typed property bindings and generation remain unimplemented.
+
+- [Experimental JSON Persistence Adapter](persistence-adapter.md) — C++23 JSON load/save, opt-in Boost.JSON, revision checks, known durability limitations.
