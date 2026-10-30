@@ -63,3 +63,5 @@ sourceRoot is a *locator* and not part of package content digest. Relocation may
 [Package and snapshot codec vectors](../../examples/architecture-sensor/d6-integrity-vectors.json) specify exact candidate hash bytes. They are not passed native tests.
 
 **Open P0:** export contract canonical digest, typed resource/fixture manifest, source ownership and path safety across platforms, publisher authenticity, dependency namespace conflicts and independent vector approval. No implementation is implied.
+
+**Logical export resolution:** see [Export Contract Identity](d2-export-contract-identity.md). The verified packageContentDigest is immutable source provenance; logical exportedContractDigest is a distinct semantic hash. Source-only edits invalidate the package lock/build while preserving the graph's logical type identity if every public contract remains byte-equivalent under the candidate projection. No automatic execution trust carries over.
