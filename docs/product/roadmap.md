@@ -14,3 +14,9 @@
 **Current implementation:** isolated Linux x86-64 UI-node validator; no visual IDE, graph, renderer, live AI or hardware debugging.
 
 **Rules:** short documents, proof-oriented gates, manual local tests, no GitHub Actions until release preparation.
+
+## Required evidence per gate
+
+Each gate must provide a locally runnable acceptance fixture, exact command, observed pass/fail/not-run result and limitations. G1 uses a sensor/driver/protocol/application graph with invalid-port, resource-conflict and target-mismatch negative tests. G2 demonstrates map selection, contextual contract inspection, docked disconnected chat and save/reopen fidelity. G3 demonstrates rejected stale writes, rejected AI proposals without mutation and reversible graph edits. G4 compares component behavior with target ABI fixtures and keeps generated source ownership distinct from user-edited files.
+
+**Next implementation task:** define the first persisted Project Graph fixture and its validation contract, before building a decorative canvas.
