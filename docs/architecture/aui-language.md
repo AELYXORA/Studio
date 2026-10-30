@@ -52,9 +52,9 @@ Semantic role, label, focus, keyboard action and accessibility value are first-c
 
 ## Still open
 
-Final grammar, generic constraints, string interpolation, async syntax, immutable collection representation, source maps, binary module packaging and component version resolution. Freeze syntax only after parser + type-checker fixture comparisons.
+Final grammar, generic constraints, string interpolation, async syntax, immutable collection representation, source maps, binary module packaging and component version resolution. Freeze syntax only after parser + type-checker fixture comparisons. See [AUI v0.1 Syntax and Semantics](aui-syntax-v0.1.md) for the current extended language candidate.
 
-## Grammar draft (proposed, normative for examples only)
+## Early restricted grammar draft (historical subset; see the current v0.1 candidate)
 
 This EBNF defines a **restricted design subset**. It is not yet a frozen compiler grammar. Identifiers are UTF-8 but normalization, reserved words and escaping need an explicit lexical decision.
 
