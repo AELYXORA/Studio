@@ -6,6 +6,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## D3 — AUI language first profile (PROPOSED)
+
+[D3 Source Grammar L0/L1](d3-first-language-profile.md) defines a deliberately bounded static view and typed intent syntax. [Type and Binding Profile](d3-type-and-binding-profile.md), [Event and Graph Command Linkage](d3-event-delivery-and-command-linkage.md) and the [D3 Review Register](d3-language-review.md) specify unapproved type, queue, effect and explicit provider linkage rules. [L0](../../examples/aui-language/status-panel-l0.aui), [L1](../../examples/aui-language/linked-consumer-panel.aui) and [28 negative examples](../../examples/aui-language/d3-first-profile-negative-cases.json) are documentation fixtures; no compiler or renderer was built.
+
 ## D2/D6 exact projection and linked reference — proposed
 
 [Exact Semantic Graph Projection](d2-d6-semantic-projection.md) and [Offline Dependency Closure](d6-offline-dependency-resolution.md) now govern the candidate digest/lock pipeline. The [Locked Pure Reference](../../examples/locked-pure-reference/README.md) supplies real reference ASM bytes and an internally cross-linked project, lock and immutable snapshot for future validation tests. Its source bytes are **not** a compiled AELYXORA component ABI or runtime success.
