@@ -23,6 +23,18 @@ Only the project manifest and explicitly listed declaration files are canonical.
 
 Fields: `format`, `schemaVersion`, `projectId`, `revision`, `targets`, `nodes`, `edges`, `packageDependencies`. Nodes have unique stable IDs, a kind, type reference, ports and optional target-specific hardware constraints. Edges have stable IDs, kind and explicit port endpoints. Presentation fields live in view files. A manifest never serializes native pointers or secrets.
 
+## D2 workflow and data-flow fixture extension (proposed)
+
+The first illustrative project JSON now has optional project-owned `dataFlows` and `workflows` collections alongside canonical `nodes` and `edges`. These are **semantic members of the Project Graph**, not separate independently editable files. A DataFlow lists policy bindings by existing EdgeID; a Workflow has ID, ownerNodeId, trigger, initial state, states and transitions referring to the same graph. The owner of exact behavior is [Graph Behavior](graph-behavior-contract.md).
+
+- `dataFlows[].channels[].edgeId` must reference an existing `data-flow` edge, not replicate endpoint data. For an active data-flow edge, exactly one authoritative binding exists in the first profile.
+- `workflows[].trigger.edgeId` is a `data-arrival` reference to a bound data-flow edge in the draft machine-readable profile. Later event triggers require typed exported event/command contracts, not an arbitrary name.
+- `workflows[].transitions[].action` names a graph-bound operation or existing transport edge. The graph does not execute it by itself.
+- `component.auipkg.json` can expose a proposed `commands` list with input types, result/error TypeIDs, effects and domain. The example decoder declares `Decode`, but its Assembly source is still absent, so it remains **unbuildable**.
+- All semantic changes to workflows, transitions, channel modes, capacities and transfer policies require a graph revision; view-only moves are stored separately.
+
+The structural [Project JSON Schema](../../schemas/project.schema.json) and [Package Schema](../../schemas/component-package.schema.json) describe this *draft fixture encoding* only. They do **not** validate reference resolution, workflow reachability, actual command linking, capability safety, transaction durability, or executable code. The project file's format identifier and placeholder version do not constitute a stable external file-format release.
+
 ## Component package draft
 
 Fields: `format`, `schemaVersion`, `packageId`, `packageVersion`, `components`, `dependencies`, `targets`, `sources`, `capabilities`, `testFixtures`. Components specify exported stable type IDs, contract versions, typed ports, effects and owned source paths. Each source maps to a target triple or an explicitly shared declarative source. Platform-specific Assembly source is not assumed reusable across ISAs.
