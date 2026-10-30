@@ -2,13 +2,24 @@
 
 **Status: proposed contract; not implemented.** Applies to the illustrative JSON manifests under `examples/architecture-sensor`. This document refines [Project and Package Format](project-and-package-format.md). It does not make JSON the final persistent representation.
 
+## D2 behavioral graph validation (design proposal)
+
+Follow the single-owner [Graph Behavior Contract](graph-behavior-contract.md). The graph validation pipeline must also validate:
+- **Taxonomy:** canonical edge kinds (including `hosts` as physical topology, distinct from `containment`) and legal endpoint classes. Unknown kind: `GRAPH_EDGE_KIND_UNKNOWN`.
+- **Data flow:** binding EdgeID references an existing data-flow edge; no duplicate active binding; strict type/units, exclusive writer, sender/receiver execution domain, transfer ownership, stream capacity and overflow policy; reject cross-domain borrows.
+- **Workflow:** owner and trigger references, initial/terminal states, reachable transitions, no ambiguous duplicate (from,signal), exact action target and export, publish edge/source consistency, required capabilities and execution domains.
+- **Deletion:** a transaction that deletes an edge but leaves a workflow or binding pointing to it rejects with `GRAPH_REFERENCED_EDGE`; a coordinated valid update may remove both.
+- **No implicit execution:** validation can accept a structural flow graph without granting hardware operations, scheduling guarantees, or provider implementation; only a linked and authorized native implementation can execute.
+
+**Deterministic error precedence** (proposal): UTF-8/JSON parse -> structural schema -> unique IDs -> references -> typed endpoint/direction -> flow policies -> workflow rules -> target/capabilities -> transactional publication. For a single fixture with multiple errors, report primary error according to this sequence, then secondary errors sorted by code and stable ID. An invalid capacity zero is structurally rejected as `SCHEMA_INVALID` by the draft schema; `FLOW_CAPACITY_INVALID` is an additional possible semantic diagnostic only for an object entering the semantic layer without the schema gate.
+
 ## Validation stages (ordered)
 
 1. **Decode:** strict UTF-8 JSON; reject duplicate object keys, truncated data, invalid numbers, excessive nesting/size and unsupported format/schema versions. Never execute package content while parsing.
 2. **Shape:** verify required fields, types, nonempty identifiers, integer nonnegative project revision, permitted enum values, and unknown required features. Preserve optional extension keys only under explicitly namespaced fields.
 3. **Identity:** unique project node IDs and edge IDs; unique target IDs, component type IDs and port IDs per component. IDs are stable under layout changes and cannot be reassigned to a different identity.
 4. **References:** verify target references, package/type references, edge endpoints, and endpoint port existence. Every data-flow edge needs an output source and input destination with exactly matching canonical type identity. A display label is never a type identity.
-5. **Graph semantics:** detect illegal containment cycles, duplicate exclusive resource claims, unsupported execution-domain transitions and synchronous dependency cycles without an explicit delay/buffer edge.
+5. **Graph semantics:** detect illegal containment/first-profile hosts cycles, unknown edge kinds, duplicate exclusive resource claims, unsupported execution-domain transitions and synchronous dependency cycles without an explicit delay/buffer edge; resolve data-flow bindings and workflow state-machine references before declaring a candidate semantically valid.
 6. **Hardware/target:** validate target triple, ABI compatibility, execution privilege, address-space/range constraints, IRQ/MMIO/DMA capability and required platform adapters. Unknown hardware support is an explicit unsupported/unknown status rather than assumed success.
 7. **Package resolution:** locate exact package IDs and versions from a lockfile or explicit local vendor directory; check hash, required dependencies and target coverage before accepting the build graph.
 8. **Publication:** stage a candidate revision; validate all layers; atomically replace the canonical snapshot only if the expected prior revision matches. On failure the old revision remains authoritative.
