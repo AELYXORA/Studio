@@ -105,3 +105,6 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 
 [OwnershipIR and Compile-Time Safety](aui-ownership-ir.md) defines ownership CFG, borrow conflicts, async transfer and cleanup checks. Proposed, not implemented.
+
+
+[AUI TargetMIR and Native Code Generation](aui-targetmir-native-codegen.md) specifies ISA-aware lowering, registers, stack, ABI, optimization limits and target-specific verification. Proposed; not implemented.
