@@ -1,6 +1,6 @@
 # Project Graph Validation, Dependency Resolution and Migration
 
-**Status: proposed v0.1 contract; not implemented.** Applies to the illustrative JSON manifests under `examples/architecture-sensor`. This document refines [Project and Package Format](project-and-package-format.md). It does not make JSON the final persistent representation.
+**Status: proposed contract; not implemented.** Applies to the illustrative JSON manifests under `examples/architecture-sensor`. This document refines [Project and Package Format](project-and-package-format.md). It does not make JSON the final persistent representation.
 
 ## Validation stages (ordered)
 
