@@ -36,3 +36,9 @@ Use **accepted**, **proposed**, **open** and **verified** labels with explicit e
 ## Immediate next design pass
 
 Specify a versioned canonical Project Graph sample, formal AUI grammar draft, and one complete flow: sensor IRQ -> bounded task channel -> typed state -> architecture map visualization -> AI-proposed ASM driver change -> approval and local verification. Keep user-facing map central; AUI supports it.
+
+## Design pass: grammar, compiler IR and runtime ownership
+
+Detailed proposals now exist for restricted [AUI grammar and static diagnostics](aui-language.md), [typed compiler IR and target lowering](aui-compiler.md), [state identity, event-to-frame ordering and bounded channels](aui-runtime.md), plus the [sensor telemetry end-to-end design fixture](sensor-vertical-slice.md).
+
+**Still open before design freeze:** final parser grammar; precise value/memory ownership and ABI representation; serialized graph format; effect-handler syntax; UI identity for dynamic loops; hardware device choice; target-specific layout/rendering. The fixture is illustrative and cannot be advertised as an executed program.
