@@ -53,3 +53,7 @@ These remain **proposed**. Before freezing them, define precise binary layouts, 
 ## Compiler backend and component execution
 
 [Backend and execution design](aui-backend-and-execution.md) specifies graph-based linking, static/dynamic call selection, safe binding fusion, effect barriers and runtime scheduling boundaries. **Proposed, unverified.** Pending decisions include symbol mangling, MIR instruction set and platform scheduling.
+
+## Project and package design pass
+
+[Project and Package Format](project-and-package-format.md) now has illustrative machine-readable sensor project, package and map-view fixtures. Next: formal schema, deterministic normalization, dependency lockfile and negative fixtures. No parser or target code exists yet for these files.
