@@ -84,7 +84,7 @@ No generic component marketplace, multi-target claims, speculative AI login hack
 
 ## Practical local acceptance record
 
-Every local run stores: `fixtureId`, `command`, `host`, `target`, `inputDigest`, `toolDigest`, `expected`, `observed` (`pass/fail/not-run`), `diagnostics` and `limitations`. A test remains `not-run` until actually executed. **Current S0–S4 implementation gates: not-run.**
+Every local run stores: `fixtureId`, `command`, `host`, `target`, `inputDigest`, `toolDigest`, `expected`, `observed` (`pass/fail/not-run`), `diagnostics` and `limitations`. A test remains `not-run` until actually executed. **Current S0–S4 implementation gates: not-run.** The Linux x86-64 Assembly lexical preflight has limited separate smoke observations, but does not satisfy S0.
 
 ## Next concrete repository work
 
