@@ -1,21 +1,11 @@
 #pragma once
 #include "aelyxora/model.hpp"
-#include <cstdint>
 #include <expected>
 #include <map>
 #include <string>
-#include <variant>
 #include <vector>
 
 namespace aelyxora {
-using PropertyValue = std::variant<bool, std::int64_t, double, std::string>;
-enum class PropertyKind { Boolean, Integer, Real, Text };
-struct PropertyDefinition {
-    std::string name;
-    PropertyKind kind;
-    PropertyValue default_value;
-    bool writable = true;
-};
 struct PropertyInstance {
     std::string component_id;
     std::map<std::string, PropertyValue> values;
