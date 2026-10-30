@@ -12,7 +12,7 @@ The portable part is the component/API contract and declarative representation, 
 
 No executable Assembly prototype is retained in the active tree. Target-specific implementations will follow the design and acceptance criteria.
 
-The first real milestone is a visible native window using our own UI AST and renderer. No CI runs until release preparation.
+The first implementation milestone is a native Project Graph foundation. A visible native window using our own AUI AST and renderer follows after validated graph semantics. No CI runs until release preparation.
 
 ## Risks
 
