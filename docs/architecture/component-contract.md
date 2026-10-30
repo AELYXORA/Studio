@@ -1,19 +1,22 @@
-# Component Contract
+# Assembly Component Contract
 
-**Status:** proposed.
+**Status:** architecture specification; only the UI tree validator ABI has an implementation.
 
-A component is a reusable typed unit, potentially visual or headless. Every component declares a stable type ID, API version and capability set.
+Every component is identified by a stable type ID and interface version. A contract declares typed inputs/outputs, property defaults, events, errors, lifetime, ownership, alignment, threading, privileges and supported target triples. Implementation is native Assembly for a target CPU/OS ABI. Portability is verified by equivalent behavior, not by pretending that x86-64 and AArch64 share instruction syntax.
 
-- **Properties:** type, default, mutability, constraints and design-time editor metadata.
-- **Actions:** typed arguments/results, failure model, cancellation and sync/async semantics.
-- **Events:** typed payload, delivery order and threading guarantees.
-- **Ports / bindings:** direction, data type, transformation and backpressure policy when streaming.
-- **Lifecycle:** create, initialize, mount (visual only), activate, suspend, dispose.
-- **State:** transient/persisted fields, ownership and migration.
-- **Capabilities:** explicitly requested file/network/device/process access.
-- **Tests and docs:** contract examples, expected errors, test fixtures.
-- **Native bindings:** separately defined ABI and ownership when wrapping C/C++/Rust/ASM.
+## ABI requirements
 
-Initial categories are UI (window, container, text, input, table, dialog), Data (record, repository, SQLite), Logic (action, validation, transformation), Integration (HTTP, files, exports) and Native (external library or process).
+- Fixed-width integer types and explicit byte layouts. Define endian and alignment requirements.
+- Never expose internal allocator ownership implicitly. Every buffer identifies allocator/deallocator and lifetime.
+- Never unwind an exception across an ABI boundary.
+- Fail through stable error codes plus optional diagnostic records.
+- Separate platform imports/syscalls in replaceable adapters, not portable component logic.
+- Declare supported CPU features, OS API versions, and object format.
 
-Design-time metadata cannot change runtime semantics. Cross-thread data ownership must be explicit. Plugins are untrusted; a manifest is not a sandbox. Component versioning is separate from product and architecture naming.
+## AI generation contract
+
+Human architect approves interfaces and acceptance tests. AI produces Assembly implementations, tests and build recipes, as proposed changes. Passing one assembler run does not establish correctness. Unsupported target implementations must report unsupported, never silently substitute another ABI.
+
+## First contract
+
+See `include/aelyxora/ui.h`: `ax_ui_validate` with a 16-byte node descriptor and x86-64 System V implementation. This is an ABI probe, not a complete component runtime.
