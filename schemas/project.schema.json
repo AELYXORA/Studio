@@ -152,8 +152,18 @@
             "minLength": 1
           },
           "kind": {
-            "type": "string",
-            "minLength": 1
+            "enum": [
+              "containment",
+              "hosts",
+              "dependency",
+              "call",
+              "event",
+              "data-flow",
+              "interrupt",
+              "protocol",
+              "resource-access",
+              "ownership"
+            ]
           },
           "from": {
             "type": "object",
@@ -191,6 +201,351 @@
           }
         },
         "additionalProperties": false
+      }
+    },
+    "dataFlows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "channels"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "channels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "edgeId",
+                "mode",
+                "senderDomain",
+                "receiverDomain",
+                "transfer",
+                "ordering",
+                "errorPolicy"
+              ],
+              "properties": {
+                "edgeId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "mode": {
+                  "enum": [
+                    "stream",
+                    "snapshot"
+                  ]
+                },
+                "senderDomain": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "receiverDomain": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "transfer": {
+                  "enum": [
+                    "copy",
+                    "move",
+                    "borrow"
+                  ]
+                },
+                "ordering": {
+                  "enum": [
+                    "fifo",
+                    "latest"
+                  ]
+                },
+                "errorPolicy": {
+                  "enum": [
+                    "propagate",
+                    "reject-and-report",
+                    "drop-and-report"
+                  ]
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "overflow": {
+                  "enum": [
+                    "reject",
+                    "drop-newest",
+                    "drop-oldest",
+                    "block"
+                  ]
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "mode": {
+                        "const": "stream"
+                      }
+                    },
+                    "required": [
+                      "mode"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "capacity",
+                      "overflow"
+                    ],
+                    "properties": {
+                      "ordering": {
+                        "const": "fifo"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "mode": {
+                        "const": "snapshot"
+                      }
+                    },
+                    "required": [
+                      "mode"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "ordering": {
+                        "const": "latest"
+                      }
+                    },
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "capacity"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "overflow"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "ownerNodeId",
+          "trigger",
+          "initialState",
+          "states",
+          "transitions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "ownerNodeId": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "trigger": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "edgeId"
+            ],
+            "properties": {
+              "kind": {
+                "const": "data-arrival"
+              },
+              "edgeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              }
+            }
+          },
+          "initialState": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "states": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "terminal": {
+                  "enum": [
+                    "success",
+                    "failure",
+                    "cancelled"
+                  ]
+                }
+              }
+            }
+          },
+          "transitions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "from",
+                "to",
+                "signal",
+                "action"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "from": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "to": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "signal": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "action": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "kind"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "enum": [
+                        "none",
+                        "dispatch",
+                        "publish"
+                      ]
+                    },
+                    "nodeId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                    },
+                    "operationId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                    },
+                    "edgeId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                    }
+                  },
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "dispatch"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "nodeId",
+                          "operationId"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "publish"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "edgeId"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "none"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "nodeId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "operationId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "edgeId"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
