@@ -17,7 +17,7 @@ Human-readable declaration files describe reusable views, typed state, layouts, 
 
 ## Current code
 
-The sole executable kernel is `ax_ui_validate(nodes,count)`, declared in `include/aelyxora/ui.h`, implemented by `src/ui/validate_x86_64_sysv.S`. It supports four node tags, one root, preorder parents, nonzero unique keys, leaf restrictions and reserved flags. It does not render pixels.
+No AUI parser, validator, renderer or runtime currently exists. See [AUI Language](aui-language.md) for the proposed syntax and type rules.
 
 ## Portability
 
