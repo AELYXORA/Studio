@@ -8,6 +8,8 @@ int main(){
  require(registry.register_type({"ui.text","1.0.0",{{"text",PropertyKind::Text,std::string("default"),true},{"visible",PropertyKind::Boolean,true,true}}}).has_value());
  Project project;project.id="app.bindings";project.name="Bindings";
  Component a{"a","ui.text",{}},b{"b","ui.text",{}},c{"c","ui.text",{}};
+ const auto definitions=registry.find("ui.text")->properties;
+ a.property_definitions=definitions;b.property_definitions=definitions;c.property_definitions=definitions;
  a.properties["text"]=std::string("Hello");
  project.modules.push_back({"main",{a,b,c}});
  const std::vector<PropertyBinding> chain={{"a","text","b","text"},{"b","text","c","text"}};
