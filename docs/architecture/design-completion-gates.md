@@ -36,3 +36,6 @@ Do not assign pretend release versions to documents. Serialized schemas/packages
 
 
 [Project Graph ↔ AUI Formal Integration Contract](project-graph-aui-contract.md) defines identity, exports, typed edges, source synchronization and D2/D3 acceptance fixtures. **Proposed, not accepted or implemented.**
+
+
+[D3 Event and Binding Semantics](aui-event-binding-semantics.md) is proposed, with AST/AUI.Core references and fixture expectations. D3 is not yet accepted or implemented.
