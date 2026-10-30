@@ -101,8 +101,73 @@
       },
       "expected": "SCHEMA_INVALID",
       "note": "Structurally rejected because snapshot forbids overflow; not a runtime outcome"
+    },
+    {
+      "id": "workflow-undeclared-signal",
+      "mutation": {
+        "path": "/workflows/0/transitions/1/signal",
+        "value": "unexpected-result"
+      },
+      "expected": "WORKFLOW_SIGNAL_UNDECLARED"
+    },
+    {
+      "id": "workflow-wrong-result-type",
+      "mutation": {
+        "path": "/workflows/0/signals/1/payloadType",
+        "value": "example.sensor/RawSample"
+      },
+      "expected": "WORKFLOW_SIGNAL_TYPE"
+    },
+    {
+      "id": "workflow-zero-mailbox",
+      "mutation": {
+        "path": "/workflows/0/mailboxCapacity",
+        "value": 0
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "workflow-zero-instances",
+      "mutation": {
+        "path": "/workflows/0/maxConcurrentInstances",
+        "value": 0
+      },
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "workflow-ambiguous-state-event",
+      "mutations": [
+        {
+          "path": "/workflows/0/transitions/2/from",
+          "value": "decoding"
+        },
+        {
+          "path": "/workflows/0/transitions/2/signal",
+          "value": "decoded"
+        }
+      ],
+      "expected": "WORKFLOW_NONDETERMINISTIC",
+      "note": "Duplicates the (decoding,decoded) pair with transition ok"
+    },
+    {
+      "id": "workflow-wrong-control-signal",
+      "mutation": {
+        "path": "/workflows/0/signals/3/id",
+        "value": "stop"
+      },
+      "expected": "WORKFLOW_SIGNAL_UNDECLARED",
+      "note": "cancel transitions reference the old signal ID"
+    },
+    {
+      "id": "workflow-nonterminal-cancel-confirmation-missing",
+      "mutation": {
+        "path": "/workflows/0/transitions/5/signal",
+        "value": "decoded"
+      },
+      "expected": "WORKFLOW_NONDETERMINISTIC",
+      "note": "When the declaration now duplicates the cancelling+decoded transition; no terminal cancellation proof"
     }
   ],
-  "mutationSemantics": "Each case is independently applied as a single JSON Pointer replacement or addition to a deep copy of baseProject. Cases are specifications; actual schema/parser/semantic validator tests are not-run.",
+  "mutationSemantics": "Each case is independently applied to a deep copy of baseProject. A `mutation` object is one JSON Pointer replace/add; `mutations` is an ordered sequence of replacements applied atomically to one candidate. Expected diagnostics are specification, NOT observed tests.",
   "diagnosticPriority": "Structural JSON Schema errors before reference/semantic errors; then identities and references -> edge compatibility -> DataFlow policies -> Workflow checks -> capabilities. No runtime success claimed."
 }
