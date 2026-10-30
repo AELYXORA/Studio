@@ -10,10 +10,15 @@ int main(){
  auto roundtrip=parse_project(*encoded);check(roundtrip.has_value()&&roundtrip->id==p->id);
  check(!parse_project("not json").has_value());
  check(!parse_project(R"({"schemaVersion":"future"})").has_value());
+ check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"x","name":"x","targets":[],"modules":[],"unexpected":1})").has_value());
+ check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"bad id","name":"x","targets":[],"modules":[]})").has_value());
+ check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"x","name":"x","revision":-1,"targets":[],"modules":[]})").has_value());
+ check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"x","name":"x","targets":[],"modules":[{"id":"m","components":[{"id":"a","type":"x","dependencies":["b","b"]},{"id":"b","type":"x"}]}]})").has_value());
+ check(!parse_project(R"({"schemaVersion":"0.1-draft","projectId":"x","name":"x","targets":[],"modules":[{"id":"m","components":[{"id":"a","type":"x","dependencies":["a"]}]}]})").has_value());
  auto dir=std::filesystem::temp_directory_path()/"aelyxora-persistence-tests";
  std::filesystem::create_directories(dir);
  auto file=dir/"project.aelyxora.json";
- std::filesystem::remove(file);std::filesystem::remove(file.string()+".tmp");
+ std::filesystem::remove(file);std::filesystem::remove(file.string()+".tmp");std::filesystem::remove(file.string()+".aelyxora-stage");std::filesystem::remove_all(file.string()+".aelyxora-lock");
  check(save_project(file,*p).has_value());
  check(!save_project(file,*p).has_value());
  auto loaded=load_project(file);check(loaded.has_value()&&loaded->revision==0);
