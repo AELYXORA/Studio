@@ -86,3 +86,5 @@ Decisions move from proposed to accepted only after an explicit ADR and correspo
 - [Typed Component Properties](typed-properties.md): experimental C++23 property declarations, validation and candidate-copy mutation. The property module is not yet part of persisted Project JSON or the designer.
 
 - [Component Registry](component-registry.md) — reusable type contracts, resolved defaults, and static binding compatibility checks. No runtime data propagation yet.
+
+- [Data Binding Engine prototype](binding-prototype.md) — synchronous one-way graph evaluation, cycle and multi-writer rejection, candidate-based atomic publication. Binding persistence and reactive runtime remain unimplemented.
