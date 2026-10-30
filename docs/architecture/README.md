@@ -203,3 +203,7 @@ The earlier Python validator and tests have been removed. S0 has a limited Linux
 
 
 [Event, Command and Binding Semantics](aui-event-binding-semantics.md) proposes explicit AUI event wiring and diagnostics; the design gate remains open.
+
+## D2 typed hardware resource model — PROPOSED
+
+[D2 Hardware Resource Contract](d2-hardware-resource-contract.md) and [D2↔D3 Command Authority](d2-d3-hardware-command-boundary.md) introduce a **version-gated, non-authorizing** resourceModel design inside the canonical Project Graph. The [hardware sensor fixture](../../examples/architecture-sensor/hardware-resource-profile-project.auiproj.json) illustrates MMIO, IRQ, DMA and memory; [29 diagnostic scenarios](../../examples/architecture-sensor/hardware-resource-negative-cases.json) remain design-only. Existing 0.1-draft pure digest inputs are untouched. The new 0.2-hw-draft is **not architect accepted**, no target adapter/ABI/hardware execution tested.
