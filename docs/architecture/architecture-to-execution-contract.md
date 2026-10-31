@@ -1,6 +1,6 @@
 # AELYXORA — Architecture-to-Execution Contract
 
-**Status: Proposed for human architectural review.** This document refines product priorities and defines the end-to-end architectural contract. The canonical [Architecture](README.md) remains authoritative for product invariants; [Project Graph](project-graph.md), [Studio Platform](studio-platform-contract.md), [AUI Syntax](aui-syntax.md), [AI Workflow](ai-engineering-workflow.md), and their specialist specifications own their respective detailed semantics. When a conflict is discovered, correct the owning specification rather than treating this document as a competing normative definition.
+**Status: Proposed for human architectural review.** This document refines product priorities and the end-to-end design trace. The [Architecture index](README.md) governs product invariants; the [ONE Canonical Project Graph](canonical-project-graph-and-components.md) owns all graph and public component semantics. [Studio Platform](studio-platform-contract.md), [D3 first AUI profile](d3-first-language-profile.md), [AUI extended syntax](aui-syntax.md), [AI Workflow](ai-engineering-workflow.md), and their specialist specifications supply domain detail where compatible with the canonical owner. Correct an owning contract when conflicts arise; do not construct competing normative definitions.
 
 ## 1. Product intent and priority
 
