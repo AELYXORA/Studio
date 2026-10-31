@@ -28,6 +28,8 @@ src/auic/core/diag_json.S      # deterministic failed report
 
 Each module uses the narrow owned CompilationContext contract defined by [FC1/FC4](aui-compiler-frontend-closure.md). Shared private record offsets and cross-module register conventions must be reviewed before parallel Assembly implementation. An internal pointer, arena offset or compiler-local ViewID never becomes a persistent GraphNodeID.
 
+**Result contract clarification:** `check --source-only` discards temporary TypedHIR after validating and reports success solely by exit status, while `emit-plan --source-only` additionally creates the approved bounded **UNVERIFIED_SOURCE_ONLY** JSON plan. On invalid source, neither mode creates a successful plan; captured-source errors use a distinct diagnostic envelope. Both emitted envelopes must carry the SHA-256 of exact provisional catalogue bytes, not only a catalogue file path. A `--profile l0` source containing an L1 event/command/handler/attachment is rejected explicitly at the profile gate.
+
 ## Ordered future implementation tasks
 
 | Task | Output | Required rejection or evidence |
