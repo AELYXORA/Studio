@@ -103,3 +103,7 @@ If UI binding state includes only a String status, converting TaskOutcome to Str
 ## T8. L4 keyed task slot lifetime (PROPOSED)
 
 [L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) extends TaskSlot runtime identity with the **full tagged parent item ViewIdentity path and incarnation generation**. The static TaskSlot source symbol may be identical for template clones, but their live tickets, admission capacity and owner cleanup are separate. Reorder within one parent preserves the original slot and its pending result subscriber; delete/reinsert, reparent or component TypeID replacement unmounts and revokes only the old-generation subscriber. Provider CommandTickets remain D2/D4-owned and must not be freed before quiescence. This does not enable arbitrary task fanout or unbounded dynamic tasks. D4/D5 queue/memory proof and actual result routing are still P0.
+
+## T8. L4 dynamic keyed TaskSlot scope (PROPOSED)
+
+[L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) extends a task slot's runtime identity by the full parent item path and fresh incarnation generation. Two copies of one source template have different TaskSlots even if their lexical ID is equal. Same-parent reorder preserves the running task/subscriber; removal, reparent or TypeID change invalidates only the old subscriber and requests scoped cancellation. D2/D4 provider tickets retain their true ownership until terminal completion or confirmed physical quiescence. This does not authorize unbounded task fanout. Native D4/D5 evidence remains NOT-RUN.
