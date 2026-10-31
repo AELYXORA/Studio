@@ -1,5 +1,7 @@
 # AELYXORA — Specification Completion Matrix
 
+**Single-graph review baseline:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+
 **Status: proposed review tracker; no gate accepted by this document.** Last repository baseline reviewed: 2026-10-30, main at 4ea0d200. This matrix is a **navigation and closure ledger**, not a duplicate specification. Detailed semantics belong to each listed owning document. A requirement becomes **Accepted** only after an explicit human architecture decision recorded in the owning document. "Verified" is reserved for later observed evidence.
 
 ## Purpose and sequencing
