@@ -20,9 +20,16 @@ The following is an intentional restricted extension, not the earlier broad task
     awaitStmt        = "let", ID, "=", "await", ID, "(", [ namedArgs ], ")", ";" ;
     returnStmt       = "return", ID, ";" ;
     submitStmt       = "submit", ID, "(", [ namedArgs ], ")", "as", ID, ";" ;
-    settledHandler   = "on", "settled", ID, "(", ID, ")", "{", stateCommit, "}" ;
+    settledHandler   = "on", "settled", ID, "(", ID, ")", "{", outcomeMatch, "}" ;
+    outcomeMatch     = "match", ID, "{", successArm, failureArm,
+                       rejectArm, cancelledArm, unavailableArm, "}" ;
+    successArm       = "Successful", "(", ID, ")", "=>", stateCommit ;
+    failureArm       = "Failed", "(", ID, ")", "=>", stateCommit ;
+    rejectArm        = "AdmissionRejected", "(", ID, ")", "=>", stateCommit ;
+    cancelledArm     = "Cancelled", "(", ID, ")", "=>", stateCommit ;
+    unavailableArm   = "ProviderUnavailable", "(", ID, ")", "=>", stateCommit ;
 
-An L3 ordinary UI event handler contains exactly one submitStmt **instead of** the L1 send or L2 local commit, with no implicit ordering or chained effects. The destination ID after as names a **statically declared, source-scoped task slot**, reserved in the component. No variable global registry or remote ref is created. The settled handler ID must be that same slot, not the task name or graph operation spelling. One settled handler per slot.
+An L3 ordinary UI event handler contains exactly one submitStmt **instead of** the L1 send or L2 local commit, with no implicit ordering or chained effects. The destination ID after as names a **statically declared, source-scoped task slot**, reserved in the component. No variable global registry or remote ref is created. The settled handler ID must be that same slot, not the task name or graph operation spelling. One settled handler per slot. The match operand is the handler parameter. The five arms are **mandatory exactly once** and ordered as shown for this first candidate profile; each arm has one typed binding for its variant payload and exactly one atomic L2 stateCommit. Reordering, omitting or duplicating an arm rejects AUI_OUTCOME_NONEXHAUSTIVE or AUI_OUTCOME_DUPLICATE. A payload may be unused, but cannot be used as another variant type. No branch implicitly maps failure/cancel into success. An exhaustive match is purely a result classifier, not a retry instruction.
 
 L3 task body has exactly one awaited *approved graph command* and returns the bound Result envelope unchanged. The result local variable must have exactly the declared Result<T,E> type. The task runs in its declared domain; the command's required domain and effect/capability set are checked separately. The core L3 Task/Result type registry, keyword conflicts and parser surface require explicit approval before implementation. This small candidate intentionally avoids throwing exceptions, dynamic Task arrays, retry directives or synthetic success paths.
 
@@ -58,7 +65,7 @@ No automatic retry is allowed on ambiguous network/OS/hardware effects. A crash 
 
 ## T5. Error/result propagation to UI State
 
-The settled handler is not a generic event from a foreign component. It receives only the source-correlated TaskOutcome for one live slot/generation, and its entire body is one [L2 atomic stateCommit](d3-state-derived-binding-contract.md). The handler may commit a pure mapped status/Result value, not invoke hardware I/O, block, await, or synchronously retry the command.
+The settled handler is not a generic event from a foreign component. It receives only the source-correlated TaskOutcome for one live slot/generation, and executes **exactly one** [L2 atomic stateCommit](d3-state-derived-binding-contract.md) from its exhaustive outcome match. Every arm writes a separate candidate state revision, never all arms. The handler may commit a pure mapped status/Result value, not invoke hardware I/O, block, await, or synchronously retry the command.
 
 If UI binding state includes only a String status, converting TaskOutcome to String requires an **explicit reviewed pure converter** bound to the exact core registry; no hidden stringify. Failed state commit leaves the previously committed UI state authoritative; it does **not** re-run the completed provider task. A renderer error after commit does not retry effects.
 
@@ -82,6 +89,7 @@ If UI binding state includes only a String status, converting TaskOutcome to Str
 | Non-Send handle into worker | OWN_NOT_SEND |
 | Wrong provider success/error TypeID | AUI_COMMAND_CONTRACT |
 | Wrong target/effect capability | AUI_TARGET_UNSUPPORTED / CAPABILITY_DENIED |
+| Missing or duplicated TaskOutcome match arm | AUI_OUTCOME_NONEXHAUSTIVE / AUI_OUTCOME_DUPLICATE |
 | Cancel-request races with success | Success OR confirmed cancel once; no double terminal |
 | View unmounted before completion | AUI_TASK_STALE, no replacement state update |
 | UI result queue full | Bounded rejection/backpressure, never unbounded leak |
