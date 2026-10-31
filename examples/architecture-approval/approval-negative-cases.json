@@ -1,0 +1,98 @@
+{
+  "format": "aui.approval-negative-cases",
+  "status": "DOCUMENTATION-ONLY future validation expectations; no signature verification or native AELYXORA run",
+  "cases": [
+    {
+      "id": "no-architecture-receipt",
+      "expected": "APPROVAL_SIGNATURE_INVALID"
+    },
+    {
+      "id": "no-executable-receipt",
+      "expected": "MODULE_APPROVAL_UNVERIFIED"
+    },
+    {
+      "id": "valid-signature-wrong-key-role",
+      "expected": "APPROVAL_ROLE_UNAUTHORIZED"
+    },
+    {
+      "id": "signed-payload-unknown-field",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "architecture-with-signed-pe-field",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "executable-missing-signed-pe-sha",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "wrong-proposal-digest",
+      "expected": "APPROVAL_PROPOSAL_MISMATCH"
+    },
+    {
+      "id": "wrong-typed-link-digest",
+      "expected": "APPROVAL_PROPOSAL_MISMATCH"
+    },
+    {
+      "id": "changed-source-hash-same-graph",
+      "expected": "AUI_APPROVAL_STALE"
+    },
+    {
+      "id": "changed-semantic-graph",
+      "expected": "AUI_APPROVAL_STALE"
+    },
+    {
+      "id": "replay-old-approval-epoch",
+      "expected": "APPROVAL_REPLAYED"
+    },
+    {
+      "id": "revoked-signer-key",
+      "expected": "APPROVAL_REVOKED"
+    },
+    {
+      "id": "expired-receipt",
+      "expected": "APPROVAL_EXPIRED"
+    },
+    {
+      "id": "unavailable-required-revocation-status",
+      "expected": "MODULE_REVOCATION_UNVERIFIED"
+    },
+    {
+      "id": "PE-signature-only",
+      "expected": "MODULE_APPROVAL_UNVERIFIED"
+    },
+    {
+      "id": "PE-full-byte-changed-after-sign",
+      "expected": "MODULE_ARTIFACT_MISMATCH"
+    },
+    {
+      "id": "signature-on-noncanonical-JSON",
+      "expected": "APPROVAL_SIGNATURE_INVALID"
+    },
+    {
+      "id": "forged-embedded-public-key",
+      "expected": "APPROVAL_KEY_UNTRUSTED"
+    },
+    {
+      "id": "new-capability-outside-approved-scope",
+      "expected": "CAPABILITY_DENIED"
+    },
+    {
+      "id": "runtime-capability-revoked",
+      "expected": "CAPABILITY_DENIED"
+    },
+    {
+      "id": "receipt-binds-own-final-snapshot",
+      "expected": "APPROVAL_HASH_CYCLE"
+    },
+    {
+      "id": "receipt-verified-but-ABI-missing",
+      "expected": "ABI_LAYOUT_UNVERIFIED"
+    },
+    {
+      "id": "approval-same-key-for-two-roles-not-authorized",
+      "expected": "APPROVAL_ROLE_UNAUTHORIZED"
+    }
+  ]
+}
