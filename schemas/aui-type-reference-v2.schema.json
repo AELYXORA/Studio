@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA TypeReference v2 proposal",
+  "description": "Candidate only. Does NOT extend existing 0.1-draft project/package/lock or v1 export hash grammar. Exact digest and DAG/type owner validation is semantic and separately approved; never trust a supplied digest by shape alone.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/nominal"
+    },
+    {
+      "$ref": "#/$defs/generic"
+    }
+  ],
+  "$defs": {
+    "nominal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "kind",
+        "ownerPackageId",
+        "typeId",
+        "exportProfile",
+        "contractDigest"
+      ],
+      "properties": {
+        "profile": {
+          "const": "aui.type-ref/v2-draft"
+        },
+        "kind": {
+          "const": "nominal"
+        },
+        "ownerPackageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exportProfile": {
+          "enum": [
+            "aui.export-contract/v2-core",
+            "aui.export-contract/v2-record"
+          ]
+        },
+        "contractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "generic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "kind",
+        "instanceProfile",
+        "template",
+        "arguments",
+        "instanceDigest"
+      ],
+      "properties": {
+        "profile": {
+          "const": "aui.type-ref/v2-draft"
+        },
+        "kind": {
+          "const": "generic"
+        },
+        "instanceProfile": {
+          "const": "aui.generic-instantiation/v2-record-args"
+        },
+        "template": {
+          "$ref": "#/$defs/nominal"
+        },
+        "arguments": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/nominal"
+          }
+        },
+        "instanceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}
