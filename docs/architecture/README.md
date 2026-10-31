@@ -34,6 +34,10 @@ The remainder of this index contains supporting research and frozen historical p
 
 [CR13 in the D3 core owner](d3-core-registry-value-contract.md) fixes the proposed closed nested error/control payload shapes and separates them from trustworthy provider dispatch/quiescence proofs. [28 design scenarios](../../examples/canonical-graph/task-control-payload-cases.json) test shape vs authenticated origin, while [25 core-definition scenarios](../../examples/canonical-graph/core-definition-review-cases.json) describe semantic identity changes and mandatory rejection. The [15-entry registry](../../examples/canonical-graph/core-registry-candidate.json) remains unverified; rule IDs do not substitute for immutable rule-content hashes. No approved release digest or native runtime result exists.
 
+## Compiler COMP-01–05 handoff: concrete but unapproved
+
+The [COMP-01–05 Front-End Closure](aui-compiler-frontend-closure.md) and [Assembly implementation backlog](aui-compiler-implementation-backlog.md) now define the candidate Win64 CLI/module layout, Unicode 15.1.0 XID/NFC and 64 MiB bounds, strict L0/L1 type/event/accessibility checks, deterministic TypedHIR and separate error reports. The first [source-only test folder](../../examples/aui-compiler-first-slice/README.md) includes a strict [catalogue schema](../../schemas/aui-compiler-review-type-catalog.schema.json), [diagnostics schema](../../schemas/aui-compiler-source-only-diagnostics.schema.json), an exact invalid U32 AUI source/report and **35 additional NOT-RUN Unicode cases**. No compiler, real parser, qualified Win64 toolchain, approved source/Graph link or runtime exists. All human COMP and D1–D8 gates remain OPEN.
+
 ## Cross-Specification Audit — 2026-10-31
 
 [Full D1–D8 consistency audit](cross-specification-audit-2026-10-31.md) records ten confirmed documentation conflicts addressed in main and fourteen still-open design risks. It covers contract owners, runtime/ABI, dependency resolution, D2 channel borrow lifetimes, D3 source examples and Phase I–IV gating. Corrected text is **not architect sign-off** or native verification.
