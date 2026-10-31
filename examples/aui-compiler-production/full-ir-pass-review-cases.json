@@ -15,7 +15,8 @@
     "Scenarios describe design-level expected behavior; these are not executable native pass test results",
     "Positive JSON review fixtures demonstrate structural shape only, not trusted signed input, SSA/ownership/effect proof, machine ABI, COFF or real UI",
     "Exact positive/negative source+IR golden bytes, error precedence and observed command/output/target evidence required before marking PASS",
-    "No second type registry, Canonical Project Graph or alternative compiler is defined"
+    "No second type registry, Canonical Project Graph or alternative compiler is defined",
+    "Three schema-valid review envelopes are materialized with intentionally invalid SSA lifetime or unqualified Win64 call semantics. The schemas must admit their shapes while a future real semantic verifier rejects them. Neither observation is an AELYXORA test PASS."
   ],
   "cases": [
     {
@@ -261,7 +262,9 @@
       "group": "SSA",
       "expected": "reject",
       "scenario": "Use value before dominating definition",
-      "observed": "NOT-RUN"
+      "observed": "NOT-RUN",
+      "materializedReviewInput": "ownership-cfg-undefined-value.invalid.json",
+      "expectedCandidateDiagnostic": "IR_SSA_INVALID"
     },
     {
       "id": "IR-036",
@@ -303,7 +306,9 @@
       "group": "OWNERSHIP",
       "expected": "reject",
       "scenario": "Move after move, double drop, read moved owner, join Available and Moved then use",
-      "observed": "NOT-RUN"
+      "observed": "NOT-RUN",
+      "materializedReviewInput": "ownership-cfg-double-move.invalid.json",
+      "expectedCandidateDiagnostic": "OWN_USE_AFTER_MOVE"
     },
     {
       "id": "IR-042",
@@ -450,7 +455,9 @@
       "group": "TARGET",
       "expected": "reject",
       "scenario": "Calling convention violates Win64 preserved registers, shadow space or stack alignment",
-      "observed": "NOT-RUN"
+      "observed": "NOT-RUN",
+      "materializedReviewInput": "win64-targetmir-unqualified-call.invalid.json",
+      "expectedCandidateDiagnostic": "MIR_ABI_MISMATCH"
     },
     {
       "id": "IR-063",
