@@ -83,3 +83,25 @@ First GUI OS/backend, precise platform service ABI and dispatch table layout, fo
 ## Candidate D5 root and OS adapter quota boundary — PROPOSED
 
 [D5 UI Resource Budget](d5-ui-resource-budget-and-publication.md) proposes a 160 MiB per-root accounting envelope and separate simultaneous limits for view event count/bytes, task/result admissions, scene metadata and detached owner cleanup. This budget explicitly **excludes native GPU/OS/device/DMA bytes**, which require independently bounded platform adapter quotas plus a process-level multi-root ceiling. [D4 Value ABI](d4-core-value-abi-contract.md) requires exact native layout and ownership proof, not inferred ABI from portable core bytes. [D3/D4/D5 core review](d3-d4-d5-core-contract-review.md) tracks unverified target capabilities. No Windows or Linux resource/latency measurement exists.
+
+
+## Compiler-required runtime service import closure — full AUI L0–L4 (PROPOSED, not ABI)
+
+The [full production AUI compiler](aui-compiler.md) may emit native code only against a **closed, reviewed, target-qualified runtime service table**. The following is the *minimum logical service inventory* needed to support the complete shipping L0–L4 language; it does **not** invent Windows function names, native struct offsets, COM vtables, ABI calling conventions or executable authority. For Win64, [D4](d4-win64-native-component-abi.md), [D5 Windows](d5-windows-host-runtime-contract.md) and [module descriptors](d4-win64-module-and-result-descriptors.md) must freeze every exact native import symbol/signature, data layout, ownership and failure result before the compiler claims native support.
+
+| Required logical service | Compiler emission | Target/runtime obligation |
+| --- | --- | --- |
+| Static View construction/update/destroy | L0 immutable View template and ordered native descriptors | Verified renderer owner/generation, bounded strings, safe detach and source accessibility metadata |
+| Event attachment + local typed dispatch | L1 Event<Unit>, Button activated route and command request intent | UI-thread ingress, per-ViewIdentity FIFO/backpressure, no reentrant handler, no implicit provider permission |
+| State allocation/read and atomic commit | L2 typed StateSlot/StateRevision, initialized property and commit transaction | Owner/generation CAS, rollback on error, typed changes and atomic render invalidation |
+| Derived dependency + bound property update | L2 checked pure DAG and single binding writer | No effectful callbacks, ordered recomputation, missing/changed key error and bounded resource budget |
+| Provider admission and typed operation dispatch | L1/L3 verified OperationID, source/Graph/target/capability closure | Live permission, exact result/error ABI, safe ownership transfer and observable admission rejection |
+| TaskSlot reserve/submit/settled/cancel | L3 source-declared TaskSlot<T,E> and AsyncIR transition machine | Single active ticket, bounded queue, trusted terminal CAS/quiescence, late completion/unknown-effect cleanup |
+| Keyed list snapshot and reconciliation | L4 List<T>/StableKey, source template and full parent-key path | Duplicate/stale keys, generation-scoped create/reorder/remove, no positional fallback, bounded retained owners |
+| Renderer layout/text/accessibility/IME | L0–L4 view metadata, labels, input and focus origins | Qualified Win32/CPU raster, DPI/IME/UI Automation, native error codes, budgeted text/font and surface handles |
+| Module validation/trust/loader | Exact GraphLinkedIR module dependencies and target/layout ABI identity | Signed/approved read-only operation/module tables, import whitelist, live capability and generation-specific execution |
+| Runtime teardown and error reporting | Explicit OwnershipIR cleanup, dropped state, cancelled/stale result | Safe unmount and provider resource retention until quiescence; bounded diagnostic redaction and no native pointer escape |
+
+**Mandatory binding fields for every eventually approved service:** target ABI version, exact exported symbol or ordinal within an immutable module descriptor, complete typed inputs/outputs/errors, owner/lifetime/retain/drop rules, execution domain and reentrancy, effect/capability checks, cancellation and cleanup obligations, resource quota, source and Graph origins and negative ABI test vectors. A compiler may not assume a service merely exists because an illustrated \`Text()\` or \`taskSlot\` source fragment compiles.
+
+**Missing native import contract => target unsupported / link error**, not a fallback JSON interpreter, silent no-op or direct unchecked OS call. This remains a **Phase I design checklist**; no runtime service has been implemented, ABI-checked or approved through this document.
