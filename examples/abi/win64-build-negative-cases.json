@@ -1,0 +1,87 @@
+{
+  "format": "aui.win64-build-input-negative-cases",
+  "status": "DESIGN ONLY — not a native compiler, linker, Windows signature or CI result",
+  "profile": "1-draft",
+  "cases": [
+    {
+      "id": "missing-source",
+      "mutation": "Remove one required source input",
+      "expected": "BUILD_UNDECLARED_INPUT"
+    },
+    {
+      "id": "same-version-different-assembler-sha",
+      "mutation": "Change assembler toolSha256 while leaving version string unchanged",
+      "expected": "BUILD_INPUT_DIGEST_CHANGED"
+    },
+    {
+      "id": "argument-order",
+      "mutation": "Swap two ordered linker flags",
+      "expected": "BUILD_INPUT_DIGEST_CHANGED"
+    },
+    {
+      "id": "timestamp-ambient",
+      "mutation": "Include live system time in PE debug information without controlled deterministic input",
+      "expected": "BUILD_NONDETERMINISTIC"
+    },
+    {
+      "id": "absolute-user-path",
+      "mutation": "Inject C:/Users/user into source paths and produce nonportable debug path",
+      "expected": "BUILD_INPUT_INVALID"
+    },
+    {
+      "id": "duplicate-casefold-source",
+      "mutation": "Inputs A/Driver.asm and a/driver.asm",
+      "expected": "BUILD_INPUT_COLLISION"
+    },
+    {
+      "id": "network-dependency",
+      "mutation": "Attempt to fetch a missing package during build",
+      "expected": "BUILD_UNDECLARED_INPUT"
+    },
+    {
+      "id": "misleading-PE-timestamp",
+      "mutation": "Compare COFF TimeDateStamp as actual calendar build time",
+      "expected": "REVIEW_INVALID_EVIDENCE"
+    },
+    {
+      "id": "unsigned-signed-file-sha-mismatch",
+      "mutation": "Expect signed image raw-file hash to equal unsigned raw-file hash",
+      "expected": "REVIEW_INVALID_EXPECTATION"
+    },
+    {
+      "id": "matching-unsigned-builds-only",
+      "mutation": "Claim module execution permission from identical unsigned PE digest",
+      "expected": "MODULE_APPROVAL_UNVERIFIED"
+    },
+    {
+      "id": "authenticode-only",
+      "mutation": "Valid Windows signature but wrong exact Graph/source approval receipt",
+      "expected": "MODULE_APPROVAL_STALE"
+    },
+    {
+      "id": "approval-text-only",
+      "mutation": "Set approvalStatus=approved in unsigned file",
+      "expected": "MODULE_APPROVAL_UNVERIFIED"
+    },
+    {
+      "id": "offline-revocation-unavailable",
+      "mutation": "Production policy requires fresh revocation but network unavailable",
+      "expected": "MODULE_REVOCATION_UNVERIFIED"
+    },
+    {
+      "id": "TOCTOU",
+      "mutation": "Replace verified PE bytes before OS module load",
+      "expected": "MODULE_LOAD_RACE"
+    },
+    {
+      "id": "different-ABI-output",
+      "mutation": "Same source and logical TypeID, changed native layout digest",
+      "expected": "BUILD_INPUT_DIGEST_CHANGED"
+    },
+    {
+      "id": "compiler-signing-self-hash",
+      "mutation": "Embed SHA-256 of full signed PE within its own hashed PE bytes",
+      "expected": "BUILD_HASH_CYCLE_UNSUPPORTED"
+    }
+  ]
+}
