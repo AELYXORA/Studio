@@ -74,3 +74,7 @@ The bundle schema is **a first structural shape**, not a signed authorization sy
 ## R10. Typed v2 supplement and nonrecursive signed receipt proof (PROPOSED)
 
 [TypeReference v2](d2-d6-typeref-v2-resolution.md) adds separate complete nominal and generic type references; [typed source/Graph link schema](../../schemas/aui-typed-source-graph-link-v2.schema.json) pins command source bytes, Graph OperationID, full typed input/result/error and TaskOutcome refs. Its independently canonicalized typedLinkDigest and the original sourceLinkBundleDigest are BOTH required in the [preapproval proposal schema](../../schemas/aui-review-proposal.schema.json). [Signed architecture and executable receipts](d2-d6-signed-approval-receipt.md) authenticate the nonrecursive proposal, not the final index/snapshotDigest that stores the receipt. The [end-to-end trace](d2-d6-typed-win64-end-to-end-trace.md) is design-only; a future typed component/Graph v2 semantic projection and native ABI proof remain P0. The original 0.1-draft source link map cannot grant new type permissions.
+
+## R11. Typed Graph v2 source linkage — PROPOSED
+
+The [new typed graph contract](d2-d6-project-graph-v2-typed-contract.md) binds explicit operation/component digests. [Typed source link](../../schemas/aui-typed-source-graph-link-v2.schema.json) still requires exact GraphNodeID, OperationID, source SHA, typed results and signed review. The [graph fixture](../../examples/typed-graph-v2/typed-graph-project.auiproj.json) is a SHA reference, not a validated AUI linkage or runtime permission.
