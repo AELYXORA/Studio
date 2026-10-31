@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA review-only L0/L1 compiler type catalogue shape",
+  "description": "Strict source-only type catalogue input shape; these declarations are intentionally UNVERIFIED and do not authorize linked/native output. Exact set and referential integrity requirements also require semantic checking.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "status",
+    "purpose",
+    "sourceProfile",
+    "imports",
+    "visualConstructors",
+    "modifiers",
+    "sourceOnlyPolicy",
+    "accessibilityPolicy",
+    "eventPolicy"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.compiler-source-only-review-catalog"
+    },
+    "status": {
+      "const": "PROVISIONAL / UNVERIFIED / NON-EXECUTABLE"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceProfile": {
+      "const": [
+        "l0",
+        "l1"
+      ]
+    },
+    "imports": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceImport",
+          "packageId",
+          "verified",
+          "typeExports"
+        ],
+        "properties": {
+          "sourceImport": {
+            "enum": [
+              "aui.core",
+              "example.locked"
+            ]
+          },
+          "packageId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verified": {
+            "const": false
+          },
+          "typeExports": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 6,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "sourceName",
+                "logicalTypeId",
+                "kind"
+              ],
+              "properties": {
+                "sourceName": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "logicalTypeId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "kind": {
+                  "enum": [
+                    "nominal",
+                    "generic-template"
+                  ]
+                },
+                "arity": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2
+                },
+                "context": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "visualConstructors": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "requiredNamedArguments",
+          "children",
+          "eventOutputs"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "VStack",
+              "HStack",
+              "Text",
+              "Button"
+            ]
+          },
+          "requiredNamedArguments": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/$defs/namedType"
+            }
+          },
+          "children": {
+            "enum": [
+              "one-or-more",
+              "none"
+            ]
+          },
+          "eventOutputs": {
+            "type": "array",
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/$defs/namedType"
+            }
+          }
+        }
+      }
+    },
+    "modifiers": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "requiredNamedArguments",
+          "appliesTo"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "accessibilityLabel",
+              "on"
+            ]
+          },
+          "requiredNamedArguments": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "$ref": "#/$defs/namedType"
+            }
+          },
+          "appliesTo": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "VStack",
+                "HStack",
+                "Text",
+                "Button"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "sourceOnlyPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outputStatus",
+        "rejectNativeEmission",
+        "rejectGraphLink",
+        "permitOnlyPureTextualSummary",
+        "requiredNamedArgumentsOnly",
+        "implicitConversions",
+        "manualRuntimePermission",
+        "commandDomains",
+        "commandEffects",
+        "commandDomainNote",
+        "provisionalTypesOnly"
+      ],
+      "properties": {
+        "outputStatus": {
+          "const": "UNVERIFIED_SOURCE_ONLY"
+        },
+        "rejectNativeEmission": {
+          "const": true
+        },
+        "rejectGraphLink": {
+          "const": true
+        },
+        "permitOnlyPureTextualSummary": {
+          "const": true
+        },
+        "requiredNamedArgumentsOnly": {
+          "const": true
+        },
+        "implicitConversions": {
+          "const": false
+        },
+        "manualRuntimePermission": {
+          "const": false
+        },
+        "commandDomains": {
+          "const": [
+            "io-worker",
+            "ui"
+          ]
+        },
+        "commandEffects": {
+          "const": []
+        },
+        "commandDomainNote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provisionalTypesOnly": {
+          "const": true
+        }
+      }
+    },
+    "accessibilityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Button",
+        "otherViews"
+      ],
+      "properties": {
+        "Button": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requiredModifier",
+            "exactOccurrences",
+            "nonEmptyLiteral",
+            "boundStringRuntimeCheck"
+          ],
+          "properties": {
+            "requiredModifier": {
+              "const": "accessibilityLabel"
+            },
+            "exactOccurrences": {
+              "const": 1
+            },
+            "nonEmptyLiteral": {
+              "const": true
+            },
+            "boundStringRuntimeCheck": {
+              "const": true
+            }
+          }
+        },
+        "otherViews": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "allowedModifier",
+            "maxOccurrences"
+          ],
+          "properties": {
+            "allowedModifier": {
+              "const": "accessibilityLabel"
+            },
+            "maxOccurrences": {
+              "const": 1
+            }
+          }
+        }
+      }
+    },
+    "eventPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Button",
+        "localEvent",
+        "sourceOnlyDispatch"
+      ],
+      "properties": {
+        "Button": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eventOutput",
+            "payloadTypeId",
+            "maxAttachments"
+          ],
+          "properties": {
+            "eventOutput": {
+              "const": "activated"
+            },
+            "payloadTypeId": {
+              "const": "aui.core/Unit"
+            },
+            "maxAttachments": {
+              "const": 1
+            }
+          }
+        },
+        "localEvent": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requiredHandlerCount",
+            "handlerSendCount"
+          ],
+          "properties": {
+            "requiredHandlerCount": {
+              "const": 1
+            },
+            "handlerSendCount": {
+              "const": 1
+            }
+          }
+        },
+        "sourceOnlyDispatch": {
+          "const": "intent-only-no-provider-authority"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "namedType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "typeId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typeId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
