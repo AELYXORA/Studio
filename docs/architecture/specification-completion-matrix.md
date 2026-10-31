@@ -81,6 +81,10 @@ The existing [canonical package schema](../../schemas/canonical-component-packag
 
 **P0 still open:** human acceptance of the **meaning** of all 34 texts and their complete dependency/portable value limits, exact canonical public type/registry hash preimage and separately computed goldens, authentic D2/D6 source/Graph lock and approval, D4/D5 ABI/ownership/runtime qualification. The 66 full native compiler acceptance cases remain NOT-RUN.
 
+## One current public contract digest-chain candidate — 2026-10-31
+
+The [existing single-Graph public digest integration](d2-d6-public-contract-digest-pipeline.md) now proposes the complete validation order and closed core/type/operation/component/set/Graph digest projections. Public `typeExportSetDigest` is Graph-scoped `{scope:"graph",projectId,coreRegistryFingerprint,exports}`; package `exportedTypeSetDigest` is package-scoped `{scope:"package",packageId,coreRegistryFingerprint,exports}`; their root sets and dependency closures differ. These are not new authored Graph fields and retain one `AELYXORA/type-export-set/canonical` candidate domain with an explicit scope discriminator. [Two JSON schemas](../../schemas/canonical-public-digest-sets-candidate.schema.json) plus [public derived projection schema](../../schemas/canonical-public-contract-projections-candidate.schema.json) specify structural representations. [50 mutation scenarios](../../examples/canonical-graph/public-digest-pipeline-review-cases.json) remain NOT-RUN and two arithmetic vectors use **fake source hashes**. **Design P0:** approve all 34 CR14 meanings, immutable authenticated 15-core registry, D6 byte domains, full dependency/trait/provenance closure, actual independently verified golden vectors, namespace IDs, target ABI and D1–D8. The hashing structure is elaborated, but not accepted or natively implemented.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
