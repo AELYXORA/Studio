@@ -116,6 +116,10 @@ A nested generic `List<Result<Measurement,SensorError>>` needs a **fully admitte
 **Still OPEN:** exact D4/D5 renderer/state/event/task/reconciliation ABI function signatures, compiler assembler syntax and toolchain versions, native module export/symbol mangling, allocator/drop paths, reloc/unwind/debug fixture bytes, full target import capability mapping, native codegen positive/negative evidence and architecture sign-off. Win64 is a **candidate**, not an observed working backend.
 
 
+## Qualified physical machine opcode tag catalogue — design-only
+
+The [one IR tag/payload contract](aui-compiler-ir-payload-contract.md) now enumerates **eight T5 LayoutIR** and **23 T6 TargetMIR** candidate tags with exact `Layout64`, `MachineInstruction64` and `MachineTerminator48` byte templates and typed `Ref64` descriptor targets. A `MachineCall` requires a qualified native import/layout proof and preserved effect token; matching byte fields do not validate Win64 register allocation, stack alignment, caller shadow space, relocations, unwind or runtime imports. The [candidate catalog](../../schemas/aui-compiler-ir-payload-layout-candidate.json) and [16 payload byte vectors](../../examples/aui-compiler-production/ir-payload-template-byte-vectors.json) require separate GAS/COFF native offset and object probes. All 77 tag review cases are NOT-RUN. Public D4 user component ABI and target runtime services remain independent and unqualified.
+
 ## TM0. Exact target-neutral-to-Win64 lowering verifier — production candidate
 
 **Status: PROPOSED / NO NATIVE TARGET QUALIFIED / ALL TESTS NOT-RUN.** This section is the machine-code owner corresponding to the [single T0–T8 full compiler contract](aui-ir-layout.md) and the [OwnershipIR worklist proof](aui-ownership-ir.md). It never authorizes a direct source→Assembly shortcut. TargetMIR is a **verified target-specific internal machine program**, not public TypeReference/Graph identity, an LLVM IR replacement product or a JSON file consumed by the OS. The [review MIR shape](../../schemas/aui-compiler-targetmir-candidate.schema.json) is only a limited inspection example, not ABI bytes.
