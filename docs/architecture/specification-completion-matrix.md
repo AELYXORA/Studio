@@ -55,6 +55,12 @@ The architect requires a **complete native AUI compiler**, designed as a whole b
 
 **Architectural stopping rule:** engineering implementation may follow approved incremental workstreams **only after the complete in-scope baseline receives the required review**. A successful source-only TypedHIR, single COFF object or demo window cannot be called a full compiler. The existing [implementation backlog](aui-compiler-implementation-backlog.md) now explicitly includes the complete production workstreams and treats frontend P00–P06 as an early engineering unit only.
 
+## Integrated production AUI grammar and type admission — 2026-10-31
+
+One [combined component grammar for L0–L4](aui-syntax.md) now appears within the existing AUI Syntax owner, with the previously defined interface-only contract module and explicit profile, token, key, task-slot, binding and pure-expression rules. [Cross-profile types and ownership](aui-types-and-ownership.md) now specify complete nominal/generic lookup and effects admission. The [36 new grammar-design cases](../../examples/aui-compiler-production/integrated-grammar-cases.json) are NOT-RUN; the [66 full native compiler cases](../../examples/aui-compiler-production/complete-compiler-acceptance.json) remain NOT-RUN.
+
+**Confirmed blocker:** the current canonical component package supports only `types[].kind=record`, not public enum exports; service source declarations still lack independently verified package command metadata (provider source, target, capability, side-effect class, retry policy and complete type/operation digests). These are **existing D2/D3/D6 owner decisions**, not permission for a second compiler-local graph. Full grammar and public types remain PROPOSED / unapproved, and D1–D8 gates remain OPEN.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
