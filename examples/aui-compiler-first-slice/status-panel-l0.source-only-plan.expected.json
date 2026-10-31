@@ -1,0 +1,146 @@
+{
+  "format": "aui.compiler-source-only-plan",
+  "status": "UNVERIFIED_SOURCE_ONLY",
+  "profile": "l0",
+  "source": {
+    "path": "examples/aui-language/status-panel-l0.aui",
+    "sha256": "aaccb407277bd686fa561c2eecbb539a97a626112b6727d7f9c1a7597ce5b1e5",
+    "byteLength": 296
+  },
+  "catalog": {
+    "status": "UNVERIFIED",
+    "sourceFormat": "aui.compiler-source-only-review-catalog",
+    "sourceIdentity": "examples/aui-compiler-first-slice/review-type-catalog.json"
+  },
+  "component": {
+    "name": "StatusPanel",
+    "span": {
+      "startByte": 90,
+      "endByte": 295
+    },
+    "imports": [
+      "aui.core"
+    ],
+    "inputs": [
+      {
+        "name": "title",
+        "logicalType": "aui.core/String",
+        "span": {
+          "startByte": 112,
+          "endByte": 131
+        }
+      }
+    ],
+    "events": [],
+    "commands": [],
+    "handlers": [],
+    "rootView": {
+      "localId": "v0",
+      "kind": "VStack",
+      "arguments": [
+        {
+          "name": "spacing",
+          "valueKind": "literal-u32",
+          "typeId": "aui.core/U32",
+          "value": "12",
+          "span": {
+            "startByte": 144,
+            "endByte": 155
+          }
+        }
+      ],
+      "children": [
+        {
+          "localId": "v1",
+          "kind": "Text",
+          "arguments": [
+            {
+              "name": "value",
+              "valueKind": "member-path",
+              "typeId": "aui.core/String",
+              "value": "title",
+              "span": {
+                "startByte": 168,
+                "endByte": 180
+              }
+            }
+          ],
+          "children": [],
+          "modifiers": [
+            {
+              "name": "accessibilityLabel",
+              "arguments": [
+                {
+                  "name": "value",
+                  "valueKind": "literal-string",
+                  "typeId": "aui.core/String",
+                  "value": "Status title",
+                  "span": {
+                    "startByte": 201,
+                    "endByte": 222
+                  }
+                }
+              ],
+              "span": {
+                "startByte": 181,
+                "endByte": 223
+              }
+            }
+          ],
+          "span": {
+            "startByte": 163,
+            "endByte": 223
+          }
+        },
+        {
+          "localId": "v2",
+          "kind": "Button",
+          "arguments": [
+            {
+              "name": "title",
+              "valueKind": "literal-string",
+              "typeId": "aui.core/String",
+              "value": "Inspect",
+              "span": {
+                "startByte": 235,
+                "endByte": 251
+              }
+            }
+          ],
+          "children": [],
+          "modifiers": [
+            {
+              "name": "accessibilityLabel",
+              "arguments": [
+                {
+                  "name": "value",
+                  "valueKind": "literal-string",
+                  "typeId": "aui.core/String",
+                  "value": "Inspect",
+                  "span": {
+                    "startByte": 272,
+                    "endByte": 288
+                  }
+                }
+              ],
+              "span": {
+                "startByte": 252,
+                "endByte": 289
+              }
+            }
+          ],
+          "span": {
+            "startByte": 228,
+            "endByte": 289
+          }
+        }
+      ],
+      "modifiers": [],
+      "span": {
+        "startByte": 137,
+        "endByte": 293
+      }
+    }
+  },
+  "diagnostics": []
+}
