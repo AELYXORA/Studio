@@ -42,3 +42,5 @@ Historic filenames still contain obsolete exploratory labels and hash domains; d
 5. Record explicit architect accept/reject/defer for all D1–D8; only then proceed to implementation.
 
 **No architecture gate is accepted by this audit.**
+
+[32 negative-case designs](../../examples/canonical-graph/negative-cases.json) enumerate expected validation, lifecycle, capability and persistence errors. They are NOT-RUN and diagnostic identifiers are proposals, not registered native engine output.
