@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA TaskOutcome nested control payload candidate (shape ONLY)",
+  "description": "Review-only closed JSON shape for CR13 TaskOutcome control branches. A structurally valid object CANNOT prove provider dispatch, identity, authorization or quiescence; this is NOT a portable public type registry, native transport or release schema.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "payload"
+      ],
+      "properties": {
+        "outcome": {
+          "const": "AdmissionRejected"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "code"
+          ],
+          "properties": {
+            "code": {
+              "enum": [
+                "invalid-arguments",
+                "capacity-exceeded",
+                "stale-view",
+                "capability-denied",
+                "unsupported-target"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "payload"
+      ],
+      "properties": {
+        "outcome": {
+          "const": "ProviderUnavailable"
+        },
+        "payload": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "phase",
+                "code"
+              ],
+              "properties": {
+                "phase": {
+                  "const": "never-admitted"
+                },
+                "code": {
+                  "enum": [
+                    "provider-unavailable",
+                    "link-unresolved",
+                    "abi-unverified",
+                    "transport-failure"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "phase",
+                "code"
+              ],
+              "properties": {
+                "phase": {
+                  "const": "indeterminate-after-admission"
+                },
+                "code": {
+                  "enum": [
+                    "provider-unavailable",
+                    "transport-failure"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "outcome",
+        "payload"
+      ],
+      "properties": {
+        "outcome": {
+          "const": "Cancelled"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "const": "confirmed-quiescent"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
