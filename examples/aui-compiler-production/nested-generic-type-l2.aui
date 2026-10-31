@@ -1,0 +1,9 @@
+// DESIGN ONLY: recursive TypeReference *syntax*, not verified portable ownership.
+import aui.core;
+import example.contract;
+
+component HistoryPanel(input history: List<Result<Measurement, SensorError>>) {
+  VStack(spacing: 12) {
+    Text(value: "History").accessibilityLabel(value: "History")
+  }
+}
