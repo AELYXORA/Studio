@@ -84,3 +84,7 @@ No actual AELYXORA Windows HWND, IME, UIA, renderer, ABI probe or latency/heap m
 ## WI8. Remaining P0 architecture acceptance decisions
 
 First Windows build range and manifest, OS security mitigation policy, exact TSF/COM text service mapping, Win32 message normalization, UIA fragment/control-pattern mapping, CPU raster surface API, GPU negotiation/fallback, host-wide memory/event quotas, native allocator/thread shutdown and full D4 Win64 ABI verification. Windows/NTFS **project persistence durability** remains a separate D6 filesystem qualification, not guaranteed by UI host support.
+
+## WI9. Win64 module runtime and UI adapter are separate native boundaries
+
+[D4 Win64 Module/Result](d4-win64-module-and-result-descriptors.md) provides a proposed native module verification/typed outcome transport model. A Win32 HWND, COM/TSF UIA interface or pointer may never be stored in D6 project records or treated as a public TypeID. Window event ingress and GPU/IME resource teardown remain owned by D5 and independently quota-limited; the module header/operation table does not substitute for OS authorization, signed/verified loading or native event tests. All Win64/UI adapter evidence remains NOT-RUN.
