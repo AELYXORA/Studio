@@ -1,0 +1,232 @@
+{
+  "format": "aui.canonical-graph-negative-cases",
+  "status": "PROPOSED: future negative test catalogue. No AELYXORA semantic validator or native runtime has executed these.",
+  "referenceSource": "sensor-project.auiproj.json",
+  "sourceDigests": "synthetic placeholders, not verified",
+  "cases": [
+    {
+      "id": "GRAPH-01",
+      "mutation": "Duplicate GraphNodeID",
+      "expected": "GRAPH_NODE_DUPLICATE",
+      "domain": "graph",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-02",
+      "mutation": "Duplicate EdgeID",
+      "expected": "GRAPH_EDGE_DUPLICATE",
+      "domain": "graph",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-03",
+      "mutation": "A component-instance has no exact component export contract",
+      "expected": "GRAPH_EXPORT_UNRESOLVED",
+      "domain": "component",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-04",
+      "mutation": "Node port TypeReference differs from its verified component port",
+      "expected": "GRAPH_PORT_TYPE_MISMATCH",
+      "domain": "component",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-05",
+      "mutation": "Connect output to output, not output to input",
+      "expected": "GRAPH_EDGE_DIRECTION",
+      "domain": "edge",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-06",
+      "mutation": "Join two nominal types with equal native size but different TypeIDs",
+      "expected": "GRAPH_EDGE_TYPE_MISMATCH",
+      "domain": "edge",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-07",
+      "mutation": "Generic argument contractDigest differs from pinned nominal type contract",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH",
+      "domain": "type",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-08",
+      "mutation": "User record directly or indirectly refers to itself via generic list",
+      "expected": "TYPE_RECURSION_UNSUPPORTED",
+      "domain": "type",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-09",
+      "mutation": "Workflow ownerNodeId does not exist",
+      "expected": "WORKFLOW_OWNER_UNKNOWN",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-10",
+      "mutation": "Workflow references an unknown initial state",
+      "expected": "WORKFLOW_STATE_UNKNOWN",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-11",
+      "mutation": "Workflow has two outgoing transitions for same state and signal",
+      "expected": "WORKFLOW_NONDETERMINISTIC",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-12",
+      "mutation": "Workflow contains unreachable nonterminal state",
+      "expected": "WORKFLOW_UNREACHABLE_STATE",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-13",
+      "mutation": "Terminal state has an outgoing transition",
+      "expected": "WORKFLOW_TERMINAL_HAS_TRANSITION",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-14",
+      "mutation": "Workflow dispatches a command not exported by owner component",
+      "expected": "WORKFLOW_COMMAND_UNLINKED",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-15",
+      "mutation": "Workflow cancellation request is immediately reported as provider-quiescent cancellation",
+      "expected": "WORKFLOW_CANCEL_UNCONFIRMED",
+      "domain": "runtime",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-16",
+      "mutation": "DataFlow binds an unknown edgeId",
+      "expected": "DATAFLOW_EDGE_UNKNOWN",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-17",
+      "mutation": "DataFlow sender and receiver domains do not match edge owners",
+      "expected": "DATAFLOW_DOMAIN_MISMATCH",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-18",
+      "mutation": "DataFlow cross-domain borrow has no safe pinned ownership proof",
+      "expected": "OWN_ASYNC_ESCAPE",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-19",
+      "mutation": "Stream channel omits bounded capacity/overflow policy",
+      "expected": "SCHEMA_INVALID",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-20",
+      "mutation": "Snapshot channel uses FIFO stream policy and mutable buffer",
+      "expected": "DATAFLOW_MODE_UNSUPPORTED",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-21",
+      "mutation": "Hardware resource claim points to nonexisting resource-access edge",
+      "expected": "RESOURCE_EDGE_UNKNOWN",
+      "domain": "hardware",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-22",
+      "mutation": "MMIO claim address plus length exceeds declared target addressBits",
+      "expected": "RESOURCE_RANGE_OVERFLOW",
+      "domain": "hardware",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-23",
+      "mutation": "DMA buffer is dropped on UI unmount before provider quiescence",
+      "expected": "RESOURCE_OWNER_ACTIVE",
+      "domain": "runtime",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-24",
+      "mutation": "Target privilege is user but resource requires a bare-metal adapter",
+      "expected": "TARGET_PRIVILEGE_UNSUPPORTED",
+      "domain": "hardware",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-25",
+      "mutation": "Claim exists only in unreviewed mutable IDE hardware scan",
+      "expected": "RESOURCE_UNDECLARED",
+      "domain": "hardware",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-26",
+      "mutation": "Retired GraphNodeID is reused for a newly unrelated component",
+      "expected": "GRAPH_RETIRED_ID_REUSED",
+      "domain": "identity",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-27",
+      "mutation": "AUI source link resolves to an OperationID of a different verified component",
+      "expected": "AUI_COMMAND_UNLINKED",
+      "domain": "linkage",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-28",
+      "mutation": "Workflow or resourceModel changes while canonical semantic digest remains unchanged",
+      "expected": "GRAPH_DIGEST_MISMATCH",
+      "domain": "canonical",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-29",
+      "mutation": "Architecture approval is valid but runtime capability lease was revoked",
+      "expected": "CAPABILITY_DENIED",
+      "domain": "security",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-30",
+      "mutation": "Snapshot save claims external device effect was rolled back atomically",
+      "expected": "PERSIST_ATOMICITY_MISCLAIM",
+      "domain": "persistence",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-31",
+      "mutation": "PayloadTypeRef in workflow does not equal provider result/failure export",
+      "expected": "WORKFLOW_SIGNAL_TYPE_MISMATCH",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-32",
+      "mutation": "A dataFlow snapshot is treated as an unbounded stream with implicit queue",
+      "expected": "DATAFLOW_MODE_UNSUPPORTED",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    }
+  ]
+}
