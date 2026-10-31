@@ -76,3 +76,7 @@ Do not serialize any ephemeral ViewIdentity/StateRevision/TaskTicket as a projec
 - Evidence: architecture acceptance for each gate **before** implementation, then target-native tests/races/benchmark observations in Phase III.
 
 The L4 contract plus this review are **design candidates, not a declaration of D3/D4/D5 completion**.
+
+## C5. Logical core, ABI layouts and UI resource admission — PROPOSED
+
+[D3 logical registry](d3-core-registry-value-contract.md), [D4 native ABI](d4-core-value-abi-contract.md) and [D5 UI resource budget](d5-ui-resource-budget-and-publication.md) refine the lifecycle contracts above. A portable StableKey byte frame cannot be reinterpreted as a native tagged union; provider Result<T,E> and UI TaskOutcome<T,E> have distinct terminal/admission semantics. A per-view event cap is insufficient for thousands of dynamic views, so D5 adds aggregate count AND byte accounting. [Core review](d3-d4-d5-core-contract-review.md) records 12 unresolved cross-owner issues. All observed native layout, cleanup, renderer and performance tests remain NOT-RUN.
