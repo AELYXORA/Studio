@@ -1,6 +1,6 @@
 # AUI Compiler and Assembly Toolchain — Design Specification
 
-**Status: proposed.** Compiler architecture is independent from specific source-language grammar and ISA.
+**Status: proposed design; not implemented, architect-approved or compiler-tested.** The concrete first implementation candidate is [AUI Compiler: First Implementable Architecture Contract](aui-compiler-first-implementation-contract.md): strict D3 L0/L1, native Assembly front end, proposed Windows x64 host, bounded source-only P00–P06 → separately verified graph linkage → separately admitted Win64 native backend. This document describes the **future generalized compiler**, not a competing initial pipeline or authorization to compile from unverified public exports. The [single canonical Project Graph](canonical-project-graph-and-components.md) continues to own architectural meaning.
 
 ## Pipeline
 
@@ -33,6 +33,14 @@ Each target profile specifies CPU, ISA extensions, environment, endianness, poin
 ## Zero-cost objective
 
 Eliminate avoidable dynamic allocation, boxing and dispatch on static paths. For generic components specialize only when bounded code size permits. Document tradeoff between specialization, startup size and incremental build performance. Compare the generated native implementation to a hand-written baseline under equivalent contracts. Safety checks necessary to enforce contracts are not automatically removable.
+
+## First implementation specialization (proposed)
+
+The selected first milestone is a **real native Assembly lexer/parser/type-checking frontend** with deterministic inspectable TypedHIR, not a synthetic `llvm` prototype and not a full executable Studio. P00–P06 of [the first compiler contract](aui-compiler-first-implementation-contract.md) have explicit input/output/failure gates. The existing Linux delimiter preflight is unrelated research, not a working AUI lexer or parser.
+
+**Native backend candidate (later P08–P10):** per-target x86-64 Assembly text + qualified COFF/PE toolchain, with target ABI and UI runtime contracts approved first. LLVM IR remains research-optional; it is not the first backend, a requirement of the first source-only compiler or a replacement for hand-authored native Assembly components. `status-panel-l0.aui` can be checked now in a future source-only tool against the [explicit provisional catalog](../../examples/aui-compiler-first-slice/review-type-catalog.json), but no actual compiled output exists and no runtime module may be linked from an unverified catalogue.
+
+**Compiler acceptance remains separate from runtime acceptance:** source-only success is not verified graph linkage; verified graph linkage is not a signed executable; signed module identity is not live OS permission. Phase II implementation needs the [Design Gate](design-completion-gates.md) decision and [COMP-01–09 review checklist](aui-compiler-first-implementation-contract.md).
 
 ## Open decisions
 
