@@ -93,3 +93,7 @@ The [L2 State/Derived/Bind contract](d3-state-derived-binding-contract.md) and [
 ## L2/L3 source profile separation
 
 [L2 State/Derived/Bind](d3-state-derived-binding-contract.md) and [L3 Task/Result](d3-task-result-lifecycle.md) are **proposed versioned D3+ profiles**. They do not relax this L0/L1 grammar's strict imports/types, named arguments, semantic source/graph checking or command authority. A state/await/submit/settled token remains AUI_PROFILE_UNSUPPORTED in L0/L1. [Source snapshot](d3-source-snapshot-reconciliation.md) must pin exact source bytes/profile/core registry for later linkage. No advanced parser or runtime is implemented.
+
+## L4 dynamic feature gate (PROPOSED)
+
+[Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) proposes an explicitly versioned aui.source/l4-keyed/v1 extension with a bounded ForEach view child, typed List<T> and immutable StableKey. It is not part of this L0/L1 grammar: ForEach/List<T>/dynamic view children are rejected as AUI_PROFILE_UNSUPPORTED in the first profile until a later L4 compilation context is explicitly selected. Indexed or implicit row identity must never be used as fallback. [L4 examples](../../examples/aui-language/L4-README.md) are design-only.
