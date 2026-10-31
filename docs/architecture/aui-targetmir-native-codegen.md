@@ -2,6 +2,14 @@
 
 **Status: proposed specification, not implemented.** TargetMIR consumes verified [OwnershipIR](aui-ownership-ir.md) and typed layout information from [IR and Layout](aui-ir-layout.md). It emits target-specific Assembly or LLVM-compatible backend input. No target is verified.
 
+## First native emitter selection — explicitly gated proposal
+
+The first intended native target for AUI codegen is Windows x64 user-mode, `x86_64-pc-windows-msvc`, COFF/PE32+, with **readable target-specific Assembly output** and the permitted Clang/LLVM assembler/linker toolchain. This is a *candidate backend*, not a working module or approved ABI. The upstream [first compiler contract](aui-compiler-first-implementation-contract.md) initially emits only a source-only L0/L1 TypedHIR/static plan. Its current [review catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json) is UNVERIFIED and can never authorize TargetMIR/native artifacts.
+
+A later native L0 emission must bind exact static view descriptor/value ownership to an **approved D4 Win64 module ABI and D5 renderer service contract**; use no invented permanent exported symbols or direct Windows controls as an accidental substitute for the Studio runtime. L1 command emission is a typed provider request with independently verified graph export/signature, not a raw OS or hardware function call. Until the renderer descriptor, event attachment ABI, signed graph/source approval, ABI layout and runtime admission are approved, native codegen is blocked at P08.
+
+LLVM IR remains an optional later internal experiment, not a second required backend or a host-portable Assembly language. For a future non-Win64 target, qualify an independent backend/ABI before claiming support.
+
 ## Invariants
 
 - Source-language/component identity is target neutral; binary artifacts are target-specific.
