@@ -44,3 +44,7 @@ Historic filenames still contain obsolete exploratory labels and hash domains; d
 **No architecture gate is accepted by this audit.**
 
 [32 negative-case designs](../../examples/canonical-graph/negative-cases.json) enumerate expected validation, lifecycle, capability and persistence errors. They are NOT-RUN and diagnostic identifiers are proposals, not registered native engine output.
+
+## Canonical projection ownership reconciliation — 2026-10-31
+
+The [canonical graph owner](canonical-project-graph-and-components.md) now enumerates complete projection coverage, semantic-vs-presentation classification, deterministic ordering requirements and seven cross-contract rejection invariants. The older [Project Graph](project-graph.md) and [historical partial D2/D6 projection](d2-d6-semantic-projection.md) no longer claim competing current ownership. This is a **documentation authority correction**, not a final byte encoding, accepted hash domain, schema conformance, executable validator or test result. Canonical projection encoding and positive/negative golden vectors remain P0 OPEN.
