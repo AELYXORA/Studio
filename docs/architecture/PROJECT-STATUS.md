@@ -60,6 +60,14 @@ A limited independent **structural** check found the expected plan conforms to t
 
 **First actual development approval still OPEN:** COMP-01–05 (host/toolchain decision, lexer Unicode/profile/budgets, provisional import catalogue policy, TypedHIR/static-plan format, accessibility/event/effect checks), plus explicit human in-scope D1–D8 Phase I sign-off or reviewed bounded authorization. COMP-06–08 (verified exports/lock, source-to-Graph approvals, Win64 ABI+runtime) remain prerequisites for linked/native output. No product code was added during this documentation task.
 
+## First AUI compiler COMP-01–05 implementation-level design (2026-10-31)
+
+[Front-End Closure](aui-compiler-frontend-closure.md) now specifies the first Win64 Assembly source-only compiler module ownership, the **proposed** Unicode 15.1.0 XID/NFC tables, exact L0/L1 lexical/profile precedence and budgets, provisional typed catalogue, TypedHIR and static accessibility/event/effect rules. [Future implementation backlog](aui-compiler-implementation-backlog.md) breaks those contracts into named native Assembly modules with explicit failure criteria; it **does not create source code**.
+
+The [first compiler fixture set](../../examples/aui-compiler-first-slice/README.md) now contains 45 original NOT-RUN acceptance designs, 35 additional Unicode/lexical designs, an explicitly unverified type catalogue/schema, the positive L0 manual plan and a materialized negative AUI with exact P04/U32-range diagnostic shape. A limited independent JSON Schema-keyword check found no structural discrepancies in the three example/schema pairs; the negative literal span matches the 304-byte file, and source SHA values have been independently calculated for the exact positive/negative bytes. **No AELYXORA compiler, native ABI or test runner produced those results.**
+
+Remaining COMP-01–05 review blockers are explicit human acceptance, actual pinned Unicode 15.1.0 UCD input hashes and normalization data, installed Win64 toolchain qualification, agreed memory/diagnostic bounds and final source-only output byte conventions. COMP-06–08 still block linked/native compiler output, and Phase II implementation is **NOT AUTHORIZED**.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
