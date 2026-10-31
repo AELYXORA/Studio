@@ -102,3 +102,40 @@ The older generic state/derived/bind/task/await grammar above is an **illustrati
 ## D3+ L2/L3 compatibility (PROPOSED)
 
 The older generic state/derived/bind/task/await grammar above is **illustrative** wherever it conflicts with [L2 State/Derived/Bind](d3-state-derived-binding-contract.md) and [L3 Task/Result](d3-task-result-lifecycle.md). L2 binding uses a statically keyed view property and atomic commit, never an arbitrary memberPath write. L3 requires explicit bounded TaskSlot submit, one await and exhaustive TaskOutcome matching; a bare await in a UI handler remains invalid. L0/L1 continues to reject these new features. [Source/snapshot approval](d3-source-snapshot-reconciliation.md) is required for actual graph linkage.
+
+
+## Complete production AUI grammar integration — review candidate, not frozen
+
+The **product goal** is a [complete native AUI compiler](aui-compiler.md), not a permanently L0/L1-only checker. The current broad EBNF in section 2 is illustrative and does **not** override the already precise [L0/L1 owner](d3-first-language-profile.md) or the explicit [L2](d3-state-derived-binding-contract.md), [L3](d3-task-result-lifecycle.md) and [L4](d3-keyed-dynamic-view-lifecycle.md) extensions. This section defines how the **shipping** language grammar must be composed before it can be called full-compiler-ready.
+
+### Language/profile admissibility matrix (explicit compilation context, no auto-escalation)
+
+| Construct / expression | L0 | L1 | L2 | L3 | L4 |
+| --- | --- | --- | --- | --- | --- |
+| imports, one component, named inputs, static Views and visual labels | Yes | Yes | Yes | Yes | Yes |
+| Event<Unit>, command intent, local send and Button.activated | Reject | Yes | Yes | Yes | Yes |
+| state, derived, bind, static source-key, atomic commit | Reject | Reject | Yes | Yes | Yes |
+| task/await, taskSlot, submit, settled/TaskOutcome five-way match | Reject | Reject | Reject | Yes | Yes |
+| List<Row>, StableKey, dynamic ForEach and nested item path | Reject | Reject | Reject | Reject | Yes |
+| record/enum/service source definitions and pure call declarations | Review required | Review required | Review required | Review required | **P0: source-form/profile scope to approve** |
+| arbitrary pointer/FFI, OS calls, implicit conversions, dynamic arbitrary loops | Reject | Reject | Reject | Reject | Reject unless explicitly approved separate extension |
+
+An invocation selects **one** allowed language profile and its verified public type/core and component package closure. A parser recognizes future constructs to produce \`AUI_PROFILE_UNSUPPORTED\`; it never upgrades L0 to L4 based on the text. Inclusion of L0–L3 features in L4 preserves their original exact semantics, unless a specific source contract explicitly adds a new L4 rule.
+
+### Core integrated parse principles
+
+1. **Lexer/token identity:** strict UTF-8 and pinned Unicode 15.1 XID/NFC identifiers (the selected version remains PROPOSED), raw byte spans, unnormalized string scalar values, single token identity for \`->\`, \`<-\`, \`=>\` and \`.\`, and contextual \`on io-worker\` domain atoms distinct from subtraction. Tokenization must never reinterpret ambiguous syntax based on a later target ABI.
+2. **Source declarations:** imports precede declarations, duplicate imports and duplicate same-namespace normalized source names reject; component View must remain the final body expression. The reviewed L0/L1 first subset requires exactly one component per file. For full shipping AUI, decide whether separately exported Record/Enum/Service declarations live in **interface-only compilation units** or appear before one component; do not accept both through undocumented parser fallback. All exported TypeIDs are resolved to locked package public contracts, never inferred from source spelling alone.
+3. **L2 syntax:** incorporate precisely the [L2 S1](d3-state-derived-binding-contract.md) \`state/derived/bind/commit/set\` productions, the explicit static \`.key(value: ID)\` modifier, and the now specified *bound Text empty-initializer* rule. \`bind view.keyName.property <- pureExpr;\` creates one typed writer, never an arbitrary mutable reference.
+4. **L3 syntax:** incorporate [L3 T1](d3-task-result-lifecycle.md) including **explicit \`taskSlot ID: TaskSlot<T,E>;\`** declaration, task/await/return, one submit and typed five-branch settled match. The source ID after \`as\` resolves to an already declared slot, not an implicitly created native handle. \`TaskSlot\` is nonportable. Missing slot, duplicate match branch, untrusted cancellation construction or wrong Result/TaskOutcome generic pair are errors.
+5. **L4 syntax:** incorporate precisely [L4 K0](d3-keyed-dynamic-view-lifecycle.md) \`ForEach(items: pureExpr, key: item.field) { item in viewExpr }\` in child-View positions. The binding named \`item\` and the key expression must resolve under the template scope; no global item variable, implicit numeric index or positional fallback is permitted. L4 nested ForEach is a recursive *template* grammar with bounded nesting and a verified \`List<T>\`/StableKey requirement.
+6. **Generic types:** accept only explicitly approved named core templates with correct arity and verified nominal arguments; user-defined generic functions, nested arbitrary generics, recursive TypeRefs and unchecked monomorphization cannot be imported merely because extended EBNF parses their angle brackets. The [one core registry](d3-core-registry-value-contract.md) and verified Graph lock own identity.
+7. **Pure-expression scope:** \`pureAtom\` (literal or immutable member path) and explicitly approved \`pureCall\` are the only automatically admitted bounded pure expressions in the L2–L4 candidates. Operators, general arithmetic, user-service expressions, overloading and numeric units in the older broad grammar are **NOT FORMALLY SPECIFIED**: they must either be fully defined in this source owner and typed/effect checked, or explicitly absent from the selected shipping contract. No silent default arithmetic or no-op effect.
+8. **Services/records/enums:** the product language direction includes these, but the currently broad illustrative EBNF does not define complete public field order, default/variant payload, scoped visibility, generic constraints, version/exports or service implementation boundary. A **production shipping decision** must freeze exact grammar, visibility, type/export contract encoding and source-unit rules before the compiler can claim this part of AUI. A \`service\` declaration may describe a verified provider **interface**, never grant native effectful implementation authority solely from its source block.
+9. **Parser recovery:** preserve original CST with error-marked nodes for editing, but never emit successful TypedHIR/GraphLinkedIR/native output from recovered syntax. All profile branches, extension tokens and expression boundaries require unique error diagnostics with source byte spans.
+
+### AUI grammar completeness gate (NO-GO for production until CLOSED)
+
+A **single composed EBNF/grammar source** must enumerate every declared production, ordered token precedence, Unicode policy, profile admission, modifier/child grammar, pure expression form, record/enum/service surface, name scopes, generics and supported target capabilities. It must have deterministic positive and negative golden **complete source files** for all declared features and selected profiles, including L2 state/bind, L3 task/settled/ownership and L4 nested keyed Views. Per-feature snippets are helpful but not enough to certify the whole parser.
+
+**Status:** This is a **composition contract and decision checklist**, not falsely named a complete accepted grammar. The current L0/L1 EBNF and L2–L4 fragments are substantial, but **record/enum/service**, pure-call operation semantics and several cross-profile bindings still need a single frozen parser baseline and human approval. The [compiler's full-product gates](aui-compiler.md) explicitly reject release without it.
