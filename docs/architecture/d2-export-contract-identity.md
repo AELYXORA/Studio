@@ -146,3 +146,7 @@ Error distinctions: GRAPH_EXPORT_UNRESOLVED, WORKFLOW_SIGNAL_TYPE, AUI_CONTRACT_
 ## C10. Proposed typed v2 references are NOT v1 fields
 
 [TypeReference v2](d2-d6-typeref-v2-resolution.md) proposes separate aui.export-contract/v2-record and aui.generic-instantiation/v2-record-args domains with explicit type-owner/export digests, not silent v1 record/component field substitutions. [Signed review receipts](d2-d6-signed-approval-receipt.md) may authorize a **new** exact source/Graph migration but never rewrite existing v1 exportedContractDigest vectors. The original v1 Project Graph semantic hash has no approved v2 typed node/port projection, so v2 executable linkage fails GRAPH_PROFILE_UNSUPPORTED until a versioned Graph profile is accepted.
+
+## C11. Typed v2 operation and component digest domains (PROPOSED)
+
+[Typed Project Graph v2](d2-d6-project-graph-v2-typed-contract.md) defines separate exported operation and component SHA-256 projections over exact TypeReference v2, effects and capabilities. Component identity includes verified operation digests; the graph pins component digests and exact port mirrors. [Five reference vectors](../../examples/typed-graph-v2/typed-component-contract-vectors.json) are not AELYXORA executable validation. Existing v1 exports and pure graph hashes remain unchanged.
