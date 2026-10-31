@@ -124,7 +124,7 @@ Two valid inputs with identical projected canonical bytes have identical **candi
 
 1. Freeze one domain-separated digest framing and interoperable D6 canonical byte encoding for the unified model; historical `/v1` and `/v2` domains are not automatically promoted.
 2. Freeze verified core/type/operation/component digest composition (C10 below), scope and registry identity, including generic/record cycles and absence/empty handling.
-3. Create independently calculated **real** golden hashes from validated non-placeholder exports, with full projected bytes and an ordered set of mutation expectations.
+3. Create independently calculated **real** golden hashes from validated non-placeholder exports, with full projected bytes and an ordered set of mutation expectations. The [26 proposed change/invariance/rejection scenarios](../../examples/canonical-graph/semantic-projection-change-matrix.json) provide a **design-only matrix**, not hashes or passed tests.
 4. Decide qualified first-host/target registries, semantic limits and signed review/snapshot binding; only subsequent native tests can claim verification.
 
 ## C10. Logical operation and component export closure — proposed normalized contracts
