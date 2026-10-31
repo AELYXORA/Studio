@@ -262,3 +262,20 @@ The ONE [canonical package schema](../../schemas/canonical-component-package.sch
 
 **Remaining true blockers:** full enum value/constructor/pattern syntax, immutable public rule-content normalizations and code/ABI portability, exact command side-effect/capability/target/source verifier, independently validated hash vectors, full target toolchain and signed D1–D8 architecture acceptance. No compiler/runtime code or trusted export has been built.
 
+
+
+## Full AUI compiler enum-value and nested generic public identity audit — 2026-10-31
+
+**Scope:** documentation-only full production compiler type/value/readiness checks; no native compiler/runtime implemented, no architect approval. Reused ONE D3 type owner, ONE canonical TypeReference schema, ONE Canonical C9/C10 graph projection and D2 identity authority — no new project graph, public registry, product edition or trusted hash source.
+
+**Concrete ambiguities resolved as review candidates:**
+
+1. **Enum is more than a declaration.** [D3 type owner](aui-types-and-ownership.md) now specifies zero/one payload immutable constructors, typed logical value carrier, strict L2+ pure exhaustive `matchEnum`, binder ownership, exact payload presence and no portable numeric native tag. [Integrated source syntax](aui-syntax.md), [TypedHIR](aui-ast-semantic-analysis.md) and [TargetMIR](aui-targetmir-native-codegen.md) reflect matching parser/IR/native ABI obligations. An enum `TypeReference` remains UNVERIFIED until full exported semantics/core rules/codec and D4 target proof.
+2. **Nested generic structural conflict.** [One canonical TypeReference schema](../../schemas/aui-type-reference.schema.json) now permits recursive `generic.arguments[]`, preserving nominal form. [D3 CR11/CR12](d3-core-registry-value-contract.md) proposes max eight generic applications per path and 128 total nodes, exact template arity, no unreviewed type-definition cycles and conditional traits; syntactic recursion does NOT authorize portable `TaskSlot` or nested unchecked `Send`.
+3. **Identity versus semantic digest.** [D2 I9](d2-identity-and-type-resolution.md) proposes a reserved `@inst` derived C9 export ID based on a **digest-free identity-only** recursive tree, with its strict [schema](../../schemas/aui-generic-export-identity-candidate.schema.json). [Canonical C10](canonical-project-graph-and-components.md) separately owns the public *semantic* generic contractDigest over verified templates/arguments. Neither an identity ID nor hash string is authentic trust proof.
+4. **Reference arithmetic, no fake approval.** [Enum type logical vectors](../../examples/aui-compiler-production/enum-logical-digest-reference-vectors.json) contain three exact D6-style ASCII canonical byte strings; [generic identity vectors](../../examples/aui-compiler-production/generic-export-identity-reference-vectors.json) contain two. Both groups' SHA-256 calculations matched Python hashlib and OpenSSL for exact domain/NUL/preimage. All labels explicitly state **PROPOSED / ARITHMETIC-ONLY**, not accepted `contractDigest`, `coreRegistryFingerprint` or native AELYXORA test PASS.
+5. **Real source proof inputs.** [36 new NOT-RUN enum/generic cases](../../examples/aui-compiler-production/enum-generic-value-cases.json) include payload-bearing `enum`, L2 pure match and nested List<Result<...>> source plus three materialized invalid AUI sources (missing match arm, missing payload binder, wrong generic arity). Actual native parser/typed HIR/machine/renderer tests remain NOT-RUN.
+
+**Remaining P0:** user enum constructor/match semantic language approval, complete portable tagged value D3 codec and authenticated 15-core-rule contents, D2 generated identity namespace/retirement and D6 canonical bytes approval, separate verified generic public type contract hashing, D4 native tag/payload and conditional trait proof, D5 runtime/service ABI, real source/Graph signature closure and D1–D8 human acceptance.
+
+**Conclusion:** substantial full-compiler architecture refinement, **NOT a finished or authorized compiler**. No test runner, native code or signer has passed the documented acceptance cases.
