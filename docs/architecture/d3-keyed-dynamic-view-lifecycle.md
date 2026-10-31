@@ -108,3 +108,7 @@ D4 owns physical handle/table layout, lifetime and atomics; D5 owns memory, even
 Approve: exact List<T> and StableKey public core registry, source grammar and typed AST, StableSymbolID persistence/provenance, strict target-specific memory budgets, nested list semantics, parent/type migration, list item cross-domain ownership, deterministic focus fallback, subscription unregister/drain, external resource owner retention, ABA-safe generation allocation, D4/D5 target atomics and actual renderer/async races. Dynamic window recreation, virtualization and platform accessibility are future extensions requiring separate proof.
 
 **All rules above are a documentation candidate; D3, D4 and D5 stay Proposed/Open.** 
+
+## L4 portable key values and D5 memory accounting — PROPOSED
+
+[D3 Core Value Registry](d3-core-registry-value-contract.md) now proposes explicit tagged StringKey and U64Key portable key bytes; [byte reference vectors](../../examples/aui-language/d3-core-value-vectors.json) include U64 values above JS safe integer, composed/decomposed Unicode, and embedded NUL. This is **not** a native struct layout. [D5 budget contract](d5-ui-resource-budget-and-publication.md) retains the proposed per-list 256, depth 8 and 4096 dynamic-node limits, adding independent per-view and global count+byte pressure. The [D3/D4/D5 core review](d3-d4-d5-core-contract-review.md) tracks ABI/layout and first-host proofs. L4 source/ABI and accepted core export hashes remain P0.
