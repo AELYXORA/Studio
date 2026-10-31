@@ -80,6 +80,14 @@ No source statement can fetch dependencies, execute a native command, instantiat
 
 The core library is a **candidate pinned built-in registry**, not automatically shipped or tested. This source is a positive *syntax/type* case only. Existing sensor-summary.aui is an older illustrative example using positional modifier shorthand and is NOT L0/L1 parser-ready until migrated.
 
+## First compiler implementation boundary — source profile owner
+
+[First compiler architecture contract](aui-compiler-first-implementation-contract.md) maps this **same L0/L1 EBNF** into ordered native Assembly compiler passes P00–P10. It is a subordinate implementation plan, not a second grammar. The provisional [source-only type catalog](../../examples/aui-compiler-first-slice/review-type-catalog.json) documents exact builtin visual signatures and nominal aliases but contains **no verified public export digests**. A future frontend may validate and emit a deterministic `UNVERIFIED_SOURCE_ONLY` plan, but it must not emit verified graph-linked/native code from this catalog.
+
+**Precise first-profile error precedence candidate:** strict raw UTF-8 and string escapes → recognized future-profile constructs (including attempted `let ... await` or `ForEach`) → grammar → symbols/imports → named args/types → local event/handler/effects → static accessibility → linked graph/target/ABI. Unknown future forms yield `AUI_PROFILE_UNSUPPORTED`, not normal success or silent dropping of tokens. The Unicode XID/NFC table version, exact parser bounds and diagnostic tie-breakers remain COMP-02 sign-off items.
+
+[Compiler-first acceptance cases](../../examples/aui-compiler-first-slice/acceptance-cases.json) are future **NOT-RUN** tests. Historical examples using positional modifiers remain illustrative, not L0/L1 positive fixtures.
+
 ## L5. Phase III future acceptance
 
 The initial parser must record stable diagnostic code, file/source digest, start/end byte spans, normalized symbol name, expected/actual and graph origin where known. Order: encoding -> lexer -> syntax/profile -> imports/symbols -> types/argument labels -> child/modifier/event wiring -> effects/command link -> target/ownership -> TypedHIR. Golden legal and illegal fixtures live in [AUI Language Examples](../../examples/aui-language/). They are designed, not executed.
