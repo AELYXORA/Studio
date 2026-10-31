@@ -104,6 +104,10 @@ The same [canonical TypeReference schema](../../schemas/aui-type-reference.schem
 
 The [full current public contract pipeline DG0–DG6](d2-d6-public-contract-digest-pipeline.md) defines deterministic candidate core type → 15-core fingerprint → nominal/enum/generic type → operation → component → scoped type-export set → C9 semanticGraphDigest dependency order with separate immutable source/approval/native proofs. In particular a **package-level** `exportedTypeSetDigest` cannot substitute for a **project Graph-level** `typeExportSetDigest` even if some referenced types coincide. Six exact projection shapes and 50 NOT-RUN change/rejection cases support future implementation, but all current core public exports are UNVERIFIED. Compilation may produce source-only analysis without trust, yet only a fully authenticated digest/Graph/source/target chain may produce GraphLinkedIR or native release artifacts.
 
+### Public contract hash pipeline: exact candidate golden data, no GraphLinkedIR trust
+
+[Full 15-core candidate arithmetic](../../examples/canonical-graph/core-15-content-digest-arithmetic-vectors.json), [sensor typed chain through semantic C9 Graph](../../examples/canonical-graph/sensor-full-digest-chain-arithmetic.json), and [six D6 Unicode canonical-byte cases](../../examples/canonical-graph/d6-unicode-canonical-byte-arithmetic-vectors.json) now provide **32 exact reference hash/byte tuples** for future independent compiler D2/D3/D6 pass verifiers. The historical sensor Graph's original forged synthetic hash strings remain unchanged; the computed graph is only an untrusted derived candidate. TypedHIR can carry unverified source-only type analysis, but GraphLinkedIR/native backend may accept **only authenticated and approved full public digest/source/Graph/ABI closure**, never these arithmetic candidate values.
+
 ## PC4. Contract for IR, linking and lowering between modules
 
 1. **CST and AST** contain token boundaries and recovery information. Recovered nodes are diagnostic-only. No error-containing AST may become a successful TypedHIR.
