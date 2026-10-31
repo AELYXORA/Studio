@@ -52,6 +52,8 @@ Notation: braces mean repetition, square brackets optional, bar alternative, ID/
     effectAtom       = ID, { "-", ID } ;
     domainAtom       = ID, { "-", ID } ;
 
+**Profile discrimination is semantic and mandatory:** the shared EBNF is a *superset* covering L0 **or** L1, not a claim that both have identical allowed declarations. With `--profile l0`, **any** `eventDecl`, `commandDecl`, `handlerDecl` or `.on(activated: ...)` is forbidden and produces `AUI_PROFILE_UNSUPPORTED` at P02 **before** type or provider-link checking. With `--profile l1`, those declarations are admitted only under the exact L1 typing/event constraints, and their provider is still UNVERIFIED until P07. An unknown profile or an unsupported future keyword cannot silently select a permissive fallback grammar. The complete source remains one component and one root view in both profiles.
+
 Static restrictions beyond grammar:
 1. Exactly one top-level view expression; VStack/HStack require one or more children, Text/Button require none. The four built-ins must be imported from a pinned core registry. No arbitrary unknown view call is accepted for linked output.
 2. All arguments are named, no positional shorthand, and duplicate argument labels fail. Static named property signatures: VStack/HStack(spacing: U32); Text(value: String); Button(title: String); optional accessibilityLabel(value: String) visual modifier; optional Button-only .on(activated: localEventID).
