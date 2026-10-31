@@ -1,5 +1,7 @@
 # D2-D6 Typed Project Graph v2 Cross-Contract Review
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED / OPEN.** Design review only; no native Studio compiler, Win64 ABI, signature, test runner or architect acceptance.
 
 The [typed graph contract](d2-d6-project-graph-v2-typed-contract.md) separates logical type, operation, component, type-export-set and semantic graph digests. [Reference vectors](../../examples/typed-graph-v2/typed-component-contract-vectors.json) contain five reference hashes independently verified with Python hashlib. [35 designed negative cases](../../examples/typed-graph-v2/typed-graph-negative-cases.json) have not run in Studio.
