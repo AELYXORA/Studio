@@ -10,6 +10,12 @@
 
 **D2/D6 design gate is still OPEN** pending actual verified core/public exports, approved canonical byte/hash domains, complete target/permission semantics, stable source-to-Graph signed review, real locked snapshot inputs and explicit architect acceptance. Do not convert these documentation improvements into Phase II permission.
 
+## Current D2/D3/D6 core and operation closure follow-up (2026-10-31)
+
+The [current 15-entry core inventory](../../examples/canonical-graph/core-registry-candidate.json) supersedes the old 13-entry **as an unapproved review candidate only**; historical reference digests and frozen bytes remain unchanged. [D3 CR11](d3-core-registry-value-contract.md) records missing `Bytes`/`F64` in the older inventory and the unresolved `TaskOutcome` error/control semantics. [Canonical C12](canonical-project-graph-and-components.md) identifies exact source-to-derived operation/component public contract fields. [26 NOT-RUN design cases](../../examples/canonical-graph/operation-export-review-cases.json) cover semantic changes, invariance and rejection. Before gate acceptance, calculate real checked core/type/operation/component/export-set digests from exact locked bytes and approved semantics, then test the native pipeline.
+
+**No D1–D8 acceptance or Phase II implementation authorization is implied.**
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
