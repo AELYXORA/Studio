@@ -1,6 +1,6 @@
 # D2/D6 — Exact Semantic Graph Projection
 
-**Status: PROPOSED, not architect-approved, implemented, or tested by AELYXORA.** This is the first-slice owner for the **field-by-field semanticGraphDigest input**. [Project Graph](project-graph.md) owns node/edge meaning; [Graph Behavior](graph-behavior-contract.md) owns workflow/data-flow semantics; [Export Contract Identity](d2-export-contract-identity.md) owns logical type/component exports; [Canonical Persistence](d6-canonical-persistence.md) owns strict JSON bytes and SHA-256. This document does not establish a runnable compiler.
+**Status: HISTORICAL PARTIAL PROJECTION / PROPOSED, not architect-approved, implemented, or tested by AELYXORA.** This document defines historical scoped projection experiments; it is **not** the authoritative full projection of the single current architecture. [One Canonical Project Graph](canonical-project-graph-and-components.md) requires a complete unified projection covering all semantic fields. Until that full contract and byte vectors are accepted, historical digest domains must not be used to certify the current graph. [Project Graph](project-graph.md) owns node/edge meaning; [Graph Behavior](graph-behavior-contract.md) owns workflow/data-flow semantics; [Export Contract Identity](d2-export-contract-identity.md) owns logical type/component exports; [Canonical Persistence](d6-canonical-persistence.md) owns strict JSON bytes and SHA-256. This document does not establish a runnable compiler.
 
 ## SP1. Preconditions and identity
 
