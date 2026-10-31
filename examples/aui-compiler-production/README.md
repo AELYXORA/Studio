@@ -21,6 +21,12 @@ The original [canonical package schema](../../schemas/canonical-component-packag
 
 A `service` interface is **not** a new TypeID or native implementation: it must resolve to the exact reviewed existing `components[].commands`, and the signed package must supply all missing required command/component metadata. Adding an enum branch makes authoring syntax *representable*, but does **not** approve a portable enum codec, TypeReference hash or Win64 layout.
 
+## Enum values, exhaustive match and nested generics
+
+[Enum and generic value review cases](enum-generic-value-cases.json) now contain **36 NOT-RUN** designed outcomes. The source inputs include [a payload-bearing enum contract](sensor-contract-payload.aui), [L2 pure exhaustive enum matching](sensor-status-enum-match-l2.aui) and [nested generic TypeReference syntax](nested-generic-type-l2.aui). Three exact negative AUI sources exercise [nonexhaustive match](sensor-status-enum-nonexhaustive-l2.aui), [missing case payload binder](sensor-status-enum-missing-binder-l2.aui), and [wrong List<T> arity](nested-generic-wrong-arity-l2.aui); their expected diagnostics are designs, NOT native compiler observations.
+
+There are also [three enum logical candidate hash vectors](enum-logical-digest-reference-vectors.json) and [two proposed generic export identity vectors](generic-export-identity-reference-vectors.json). Both use D6-style canonical UTF-8 and distinct domains; both sets were arithmetic-crosschecked using Python/OpenSSL. **None is a verified public contractDigest or trusted C9 Graph export.** The enum is only a value-type candidate, and the generic export namespace/contract meaning requires D2/D3/D6 architect approval.
+
 ## Correct release gate
 
 A complete AUI compiler release requires: one human-accepted full grammar/profile and core semantic registry; real locked canonical Graph/TypeReference/OperationID source links; fully verified ReactiveIR/AsyncIR/KeyedIR/OwnershipIR/TargetMIR; a qualified target-native COFF/PE backend and D5 runtime/UI service table; runnable end-to-end examples and negative/hostile-input tests; identical pinned clean-build bytes and actual signed module admission. Every item needs observed evidence. Native codegen for one L0 View alone is insufficient.
