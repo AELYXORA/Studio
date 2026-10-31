@@ -1,101 +1,36 @@
 # AELYXORA Studio — Current Technical Status
 
-**Authoritative architecture direction:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+**Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
-**As of 2026-10-31. This is the authoritative implementation-status summary.** The architecture documents describe intended behavior unless a concrete committed artifact and observed test are cited. No global architecture freeze or product release is claimed.
+## One current architectural direction
 
-## D3 language design pass (documentation only)
+[ONE Canonical Project Graph](canonical-project-graph-and-components.md) owns typed components/ports and operation contracts, targets, graph topology, workflows and state machines, typed dataFlow policies, hardware resource claims and retired stable identities. There are **no numbered product/architecture editions**. Project revision is an edit-history counter. Historical experimental source encodings and hashes are not the active architecture.
 
-[D3 First Language Profile](d3-first-language-profile.md), [D3 Type/Binding Profile](d3-type-and-binding-profile.md), [D3 Event Delivery](d3-event-delivery-and-command-linkage.md) and [D3 Review](d3-language-review.md) now provide proposed minimal source grammar, typed UI intent, an explicit graph command-link schema, L0/L1 example files and future negative diagnostics. Existing older AUI source is still illustrative. **No AUI compiler, semantic analyzer, native ABI provider, renderer, linked runtime or observed tests have been added.** D3 remains Proposed/Open; full State/Derived/Bind/Task/await and other D3+ features still require design completion.
+Current proposed source schemas: [Graph](../../schemas/canonical-project-graph.schema.json), [Component Package](../../schemas/canonical-component-package.schema.json), [TypeReference](../../schemas/aui-type-reference.schema.json). [Unified sensor design example](../../examples/canonical-graph/README.md) illustrates all key domains in the same graph. Its hashes are **synthetic placeholders** and are NOT verified public exports.
 
-## D2 documentation update (design-only)
+## What the repository actually contains
 
-Proposed workflow/data-flow and D2 execution/consistency contracts, expanded JSON Schemas, typed command/signal fixtures, staged cancellation example and future sensor runtime acceptance scenarios now exist. No native parser, semantic validator, canonical serializer, cryptographic snapshot publisher, transaction journal, workflow engine, command dispatcher, channel runtime, or ABI implementation was added. These changes do not change the implementation-readiness status or mark tests passed. Their proposed semantics require architect acceptance, cross-contract closure and implementation before Phase III tests.
+- Architecture specifications, proposed JSON schema drafts and design/test vectors, including historical immutable fixture snapshots.
+- A limited experimental Linux x86-64 Assembly JSON lexical preflight. It does **not** constitute a complete Studio JSON parser, Graph validator or working native compiler.
+- AUI grammar/state/task/keyed-view/lifecycle research, Win64 ABI layout proposals, signed architecture/executable approval designs, D5 resource-budget and renderer requirements.
+- Independent arithmetic/reference checks for some historical SHA-256 input projections and a partial structural/cross-reference check of the new unified example.
 
-**Cross-contract design review:** [D2/D6 Baseline Review](d2-d6-baseline-review.md) and [Export Contract Identity](d2-export-contract-identity.md) document unresolved and corrected specification issues. A committed JSON schema or SHA test vector does not make a binary, parser, snapshot adapter or external platform work.
+## Not yet implemented or demonstrated
 
-## Implemented in the repository
+- A complete canonical graph parser, schema+semantic validator, type resolver, workflow/dataFlow engine and hardware adapter.
+- A native AUI compiler, linked component ABI, typed source-to-Graph resolver, interactive architecture map, renderer, IME/accessibility and full desktop Studio.
+- Signed trustworthy code/reviewer enrollment and approval verification, actual Win64 PE/COFF operation dispatch, secure ownership/cancellation/resource teardown and reproducible signed build.
+- D6 real NTFS crash-durable immutable snapshot/HEAD publication and recovery, full test framework, measured performance and released installer.
 
-- Proposed Project Graph and component package JSON fixtures, negative mutation cases, and draft machine-readable schemas under `schemas/`.
-- An experimental native **Linux x86-64** Assembly lexical preflight at [src/bootstrap/linux-x86_64/json_preflight.S](../../src/bootstrap/linux-x86_64/json_preflight.S). It reads a file using Linux syscalls and checks delimiter nesting and string termination. **It is not a valid JSON parser or graph validator** and may accept malformed JSON.
-- [Bootstrap commands](../../src/bootstrap/linux-x86_64/README.md) document a limited local Clang-based smoke experiment. Those observations are not compiler/graph/runtime acceptance evidence.
+## Open critical design gates
 
-## Not implemented
+[Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
 
-Strict JSON tokenizer/parser; semantic Project Graph engine; complete schema validator; package lock resolver; safe atomic persistence and revision journal; AUI parser/TypedHIR/OwnershipIR/TargetMIR implementation; Assembly code generation; native window/renderer; live AI provider integration; hardware drivers; end-to-end local test harness. Existing proposed fixture tests are **not-run by a native Project Graph validator**.
+## Delivery discipline
 
-## Binding architectural decisions
+1. Finish one complete architecture and obtain **explicit human acceptance** (D1–D8).
+2. Implement only the approved contracts in Phase II.
+3. Perform native Win64 and other qualified-target security, ABI, runtime, compiler and durability tests in Phase III, recording true observations.
+4. Fix and reverify in Phase IV. Do not mark a scenario PASS from a design vector or a SHA arithmetic self-check.
 
-**Current process:** documentation-first; major implementation resumes only after [Design Completion Gates](design-completion-gates.md). The existing Linux Assembly preflight is an exploratory artifact, not a completed design gate.
-
-**ChatGPT Plus:** OpenAI documents official Sign in with ChatGPT plan usage for eligible participating/open-source clients. AELYXORA-specific eligibility and authorization are unverified; see [ChatGPT Connection](chatgpt-connection.md).
-
-
-1. Architecture Map + contextual AI Chat are the primary intended Studio UX. Project Graph is canonical; source/UI/AI views do not replace it.
-2. Human architect approves graph/source changes; AI output alone grants no write, execution, network or device rights.
-3. Core and Studio runtime are **Assembly-first**, target-native; AUI is our own declarative language. LLVM/Clang may assemble and link target-dependent code.
-4. [Language Policy](language-policy.md) **prohibits Python** for project code, tests and tooling. Qt/QML/C++/FMX are not part of the active Studio implementation stack; other implementation languages require explicit approval.
-5. Linux x86-64 is the **host of the existing bootstrap experiment**, not a decision to abandon Windows x64 as a proposed first Studio desktop host. The sensor fixture describes a Linux AArch64 **target**, not currently runnable hardware support.
-6. No GitHub Actions or CI before release preparation; locally observed results must be distinguished from specified expected outcomes.
-
-## One implementation order
-
-- **S0:** strict native JSON parse -> typed graph construction -> graph/package contract checks -> diagnostics -> revisioned safe persistence; prove against positive/negative sensor fixtures.
-- **S1:** native architecture map + property inspection + disconnected contextual AI panel using the validated graph.
-- **S2:** minimal sound AUI grammar -> semantic analysis and ownership checks -> target code generation -> working native UI built from AUI.
-- **S3:** reviewed AI proposals, tool authorization and local evidence; official provider authorization only when available.
-- **S4:** selected real device/target, on-target ABI and hardware verification.
-
-S1 and S2 may need tightly scoped joint experiments for bootstrapping native UI, but acceptance requires actual AUI-generated native code; a manually coded prototype must not be presented as AUI compiler verification.
-
-## Documentation authority
-
-[Architecture](README.md) owns product principles; [Project Graph](project-graph.md) owns graph semantics; [AUI Syntax](aui-syntax.md) owns proposed grammar; [OwnershipIR](aui-ownership-ir.md) owns resource flow; [Component ABI](aui-component-binary-abi.md) owns binary component contracts; [Project Format](project-and-package-format.md) owns persistence; [Platform Services](aui-platform-runtime-services.md) owns OS adapters; [AI Workflow](ai-engineering-workflow.md) owns proposal permissions; [Roadmap](../product/roadmap.md) owns milestones; [Verification Plan](verification-plan.md) owns evidence policy. Superseded examples or audits are historical evidence, not competing accepted specifications.
-
-## Unresolved blockers
-
-Strict schema/duplicate-key policy, canonical package hashes and lockfile, event/command AUI syntax, fixed native ABI layouts, Windows host toolchain/backend selection, transaction recovery, platform text/rendering and provider authentication. Placeholder format/package versions in JSON fixtures are **not document versions or releases**.
-
-**Additional design-only references:** [D2 identity/type resolution](d2-identity-and-type-resolution.md), [D6 canonical persistence](d6-canonical-persistence.md), [four expected canonical hash vectors](../../examples/architecture-sensor/d2-canonical-vectors.json), [HEAD/index schema drafts](../../schemas/project-head.schema.json), and [30 future crash recovery scenarios](../../examples/architecture-sensor/d6-recovery-scenarios.md). No production durability or executable codec evidence is claimed.
-
-**D6 new proposed documentation:** [Package Integrity](d6-package-integrity.md), [Filesystem Adapter Capability Matrix](d6-filesystem-adapters.md) and [codec-only package/snapshot/HEAD integrity vectors](../../examples/architecture-sensor/d6-integrity-vectors.json). No AELYXORA package resolver, native checksum verifier, Windows/Linux durable save adapter or executable test was created.
-
-**New D2/D6 design fixture:** [Locked Pure Reference](../../examples/locked-pure-reference/README.md) demonstrates concrete source-byte/package-lock/graph/export/snapshot linkages. [Canonical Projection](d2-d6-semantic-projection.md), [Offline Resolver](d6-offline-dependency-resolution.md) and [Negative Cases](../../examples/locked-pure-reference/negative-cases.json) are documentation-only and remain unexecuted by AELYXORA.
-
-**2026-10-31 repository documentation audit:** [Cross-Specification Audit](cross-specification-audit-2026-10-31.md) reconciles ten document-level conflicts and records fourteen remaining architectural risks. No Studio parser, component ABI, runtime, native test, release, or CI implementation is implied by these repairs. Exact source and evidence limitations remain unchanged.
-
-## D2 hardware profile documentation update — 2026-10-31
-
-[Hardware Resource Contract](d2-hardware-resource-contract.md) specifies a **proposed** version-gated resourceModel for targets and MMIO/IRQ/DMA/memory; [D2↔D3 Boundary](d2-d3-hardware-command-boundary.md) requires verified provider, approved graph/resource edge and live capability for effects. The [sensor hardware fixture](../../examples/architecture-sensor/hardware-resource-profile-project.auiproj.json) is not package-lock/ABI-linked or executable. Nine of nine intentionally invalid structural variants were rejected by a small independent checker; twenty semantic/target cases remain NOT-RUN. No native Studio code has been added or hardware access authorized. D1–D8 not accepted.
-
-## D3+ documentation-only update
-
-[L2 State/Derived/Bind](d3-state-derived-binding-contract.md), [L3 Task/await/Result](d3-task-result-lifecycle.md) and [D3 Source/Snapshot Approval](d3-source-snapshot-reconciliation.md) now propose bounded state/async semantics beyond unchanged L0/L1. [Extended source fixtures](../../examples/aui-language/D3PLUS-README.md) and [31 future diagnostic/race scenarios](../../examples/aui-language/d3plus-negative-cases.json) exist; none has run in native AELYXORA. A [draft source-link bundle schema](../../schemas/aui-source-link-bundle.schema.json) is structural only and cannot grant privileges. AUI compiler, runtime, ownership checker, ABI, signed review, physical target and native tests remain absent. Human approval of D1–D8 is still required before implementation.
-
-## D3 L4 dynamic identity documentation update
-
-[Keyed View Lifecycle](d3-keyed-dynamic-view-lifecycle.md) and [D3/D4/D5 Review](d3-d4-d5-lifecycle-consistency-review.md) now specify candidate parent-path plus StableKey identity, same-parent reorder preservation, fresh incarnation after unmount/reparent, bounded reconciliation and safe result-subscription teardown. [L4 fixtures](../../examples/aui-language/L4-README.md) include a 12-step reference-only identity trace and [40 design scenarios](../../examples/aui-language/l4-negative-cases.json). No Studio implementation/ABI/renderer or native validation was added. D3/D4/D5 are still Proposed/Open, all D1–D8 acceptance pending.
-
-## D3 L4 dynamic views — documentation progress only
-
-[Keyed Dynamic View Lifecycle](d3-keyed-dynamic-view-lifecycle.md) and [D3/D4/D5 consistency review](d3-d4-d5-lifecycle-consistency-review.md) now describe stable keyed list identity, fresh mount generations, bounded reconciliation and task/renderer ownership boundaries. [L4 source and 12-step reference-only trace](../../examples/aui-language/L4-README.md) and [40 designed rejection/race cases](../../examples/aui-language/l4-negative-cases.json) are documentation fixtures. No AUI runtime, ABI linker, native parser, GPU renderer or actual lifecycle test was added. All human D1-D8 acceptance gates remain OPEN.
-
-## D3 core + D4 native ABI + D5 resource accounting documentation update
-
-[Logical core values](d3-core-registry-value-contract.md), [native ABI requirements](d4-core-value-abi-contract.md), [UI root memory/queue policy](d5-ui-resource-budget-and-publication.md), and [cross-owner review](d3-d4-d5-core-contract-review.md) now describe the proposed type/ownership and renderer boundary. A design-only [core registry](../../examples/aui-language/d3-core-registry-proposal.json), [StableKey frames](../../examples/aui-language/d3-core-value-vectors.json) and [D5 arithmetic scenarios](../../examples/aui-language/d5-budget-reference-vectors.json) exist. No verified ABI offsets, target-native tests, approved registry export hashes, renderer, or measured memory budget. D1-D8 Phase I human approval still blocks implementation.
-
-## Core digest v2 and exact Win64 ABI design — documentation only
-
-[Core export hash versioning](d2-d3-core-export-digest-contract.md) adds proposed exact normalized v2-core logical export profiles, without altering existing v1 graph/snapshot digests. [Native Win64 call](d4-win64-native-component-abi.md), [module/result layouts](d4-win64-module-and-result-descriptors.md) and [Windows UI host](d5-windows-host-runtime-contract.md) now propose exact descriptor offsets, Win64 calling-convention, Win32/DPI/IME/UIA requirements and target-specific safety gates. [Core vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json), [frame](../../examples/abi/win64-native-layout-v1.json) and [module/outcome](../../examples/abi/win64-module-and-outcome-v1.json) fixtures are reference arithmetic only. No Windows executable, signed module, ABI probe, UIA provider, or native renderer exists. See [15-gate review](d2-d6-win64-baseline-review.md). Architecture approval is absent and Phase II remains blocked.
-
-## G1 generics, core migration and Win64 trust/build design pass
-
-[Generic instance identity](d2-d3-generic-instantiation-identity.md), [v1/v2 compatibility](d2-d6-core-profile-compatibility.md), [module signing and live admission](d4-win64-module-trust-and-admission.md), [deterministic Win64 build inputs](d6-win64-reproducible-build-contract.md) and [D2–D6 review](d2-d6-generic-trust-repro-consistency-review.md) are newly proposed documentation. The G1 vectors are reference SHA arithmetic only and the 16 build negative cases have not run. A SHA/WinVerifyTrust policy text is **not** a verified signed module, PE loader, ABI or compiler. No Studio executable, CI, native Win64 conformance or D6 NTFS recovery proof has been added. D1–D8 remain Proposed/Open.
-
-## TypeReference v2 / signed approval review — documentation update only
-
-[Typed v2 references](d2-d6-typeref-v2-resolution.md), [signed architecture/executable review protocol](d2-d6-signed-approval-receipt.md), [typed Win64 end-to-end trace](d2-d6-typed-win64-end-to-end-trace.md), and [14 finding audit](d2-d6-typeref-approval-consistency-review.md) are new unapproved specifications. [v2 record/List<Row> digest example](../../examples/aui-language/d2-typeref-v2-vectors.json) has independently checked hashes; [unsigned approval examples](../../examples/architecture-approval/unsigned-approval-shapes.json) intentionally contain synthetic hashes and **no signature or trust key**. No new executable, source/Graph v2 implementation, Win64 module load or NTFS crash-test exists. D1–D8 remain Proposed/Open and Phase II blocked pending explicit architect acceptance.
-
-## Typed Project Graph v2 vertical slice — Phase I only
-
-[Typed Graph contract](d2-d6-project-graph-v2-typed-contract.md), [component/operation/type-set/schema designs](../../examples/typed-graph-v2/README.md), and [cross-owner consistency review](d2-d6-typed-graph-v2-consistency-review.md) now cover a bounded typed component/data-edge scenario. Five SHA-256 reference digests were independently checked against hashlib; 35 negative scenarios are future NOT-RUN tests. Nonempty workflows, dataFlows and hardware claims remain P0 and are expressly rejected by this narrow slice, never discarded. No AUI compiler, real package lock, PE/COFF binary, signed approval or native test exists; D1-D8 acceptance is OPEN.
+Work directly on main. Preserve older immutable pure reference bytes and hashes. No GitHub Actions/CI until release preparation. The architecture remains **PROPOSED / OPEN**.
