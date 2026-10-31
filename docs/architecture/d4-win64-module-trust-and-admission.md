@@ -47,3 +47,6 @@ Threats to test: forged approvalStatus, self-signed unrelated certificate, compr
 - CAPABILITY_DENIED: runtime permission is absent despite trusted module.
 
 **P0 remaining:** exact receipt/writer trust schema, key management, offline revocation and timestamp policies, pinned publisher constraints, Windows loader and DLL search proof, OS-supported signature integration, actual native module signature checks and fault injection. All previous ABI layout vectors are *design-only*, not proof of this admission policy.
+## MT6. Architecture and executable approval receipts are separate trusted roles
+
+[Signed Approval Receipts](d2-d6-signed-approval-receipt.md) proposes a candidate Ed25519 detached signature over D6 canonical payload bytes, validated using a separately pinned signer key/role/epoch trust store. Architecture approval binds graph/lock/core/source and a **typedLinkDigest** to a nonrecursive proposalDigest. Executable approval additionally binds exact signed PE raw-file SHA, buildInputDigest and operationContractSetDigest, and may not widen the architecture capabilities/effects. A certificate and WinVerifyTrust success never substitute for this source-to-Graph approval. [Receipt shape/negative examples](../../examples/architecture-approval/approval-negative-cases.json) contain **no real valid signature** and do not make modules trusted.
