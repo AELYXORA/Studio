@@ -26,6 +26,10 @@ The remainder of this index contains supporting research and frozen historical p
 
 [D3 CR12](d3-core-registry-value-contract.md) specifies candidate bit-exact finite F64, owned bounded Bytes and scalar portable value rules. [41 NOT-RUN boundary cases](../../examples/canonical-graph/core-value-boundary-cases.json) accompany it; an independent lightweight token classifier is **not a native engine or verified hash proof**. [D3 Task T9](d3-task-result-lifecycle.md) handles transport loss after dispatch, irrevocable effects, original UI slot finality and ongoing native cleanup; [16 NOT-RUN race/uncertainty scenarios](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) document expected behavior. Approval and native proof remain P0.
 
+## TaskOutcome control and public core semantics — current design
+
+[CR13 in the D3 core owner](d3-core-registry-value-contract.md) fixes the proposed closed nested error/control payload shapes and separates them from trustworthy provider dispatch/quiescence proofs. [28 design scenarios](../../examples/canonical-graph/task-control-payload-cases.json) test shape vs authenticated origin, while [25 core-definition scenarios](../../examples/canonical-graph/core-definition-review-cases.json) describe semantic identity changes and mandatory rejection. The [15-entry registry](../../examples/canonical-graph/core-registry-candidate.json) remains unverified; rule IDs do not substitute for immutable rule-content hashes. No approved release digest or native runtime result exists.
+
 ## Cross-Specification Audit — 2026-10-31
 
 [Full D1–D8 consistency audit](cross-specification-audit-2026-10-31.md) records ten confirmed documentation conflicts addressed in main and fourteen still-open design risks. It covers contract owners, runtime/ABI, dependency resolution, D2 channel borrow lifetimes, D3 source examples and Phase I–IV gating. Corrected text is **not architect sign-off** or native verification.
