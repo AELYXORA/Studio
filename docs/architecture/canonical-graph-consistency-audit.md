@@ -209,6 +209,12 @@ A limited independent JSON-schema-keyword and source-offset check found the prop
 **Conclusion:** first compiler development is now *documented as a bounded staged candidate* but not yet **approved for coding**. A design fixture is not an executed test, and no partial plan hash or source-only check can authorize external effects or physical device access.
 
 
+## Compiler first-slice consistency corrections — implementation re-audit, 2026-10-31
+
+The [practical readiness audit](implementation-readiness.md) confirms one consistent L0/L1 compiler architecture. Explicit fixes: **L0 denies L1 declarations/event attachments at P02**, both successful source-only plan and failed captured-source diagnostic report include the **exact provisional catalog byte SHA**, `check` does not publish a successful plan while `emit-plan` does, and a fully typed [L1 source-only expected trace](../../examples/aui-compiler-first-slice/linked-consumer-panel-l1.source-only-plan.expected.json) now covers command/event/handler/visual modifiers. A detected invalid parameter source span in that manually authored L1 trace was fixed.
+
+The current [compiler fixture inventory](../../examples/aui-compiler-first-slice/acceptance-cases.json) is **47 NOT-RUN**, including two new L0/L1 boundary checks, plus [35 Unicode/lexical NOT-RUN cases](../../examples/aui-compiler-first-slice/unicode-and-diagnostics-cases.json). These are not observed compiler test results. Remaining P0 before unconditional source-only implementation: COMP-01..05 human acceptance, real Win64 Assembly toolchain/host wrappers, pinned UCD data SHA, private compiler module layout, exact output byte format and enough materialized negative sources to test the first parser. **P07–P10 remain blocked by verified core/public exports, canonical Graph source-link trust and D4/D5 native runtime contracts.**
+
 ## First AUI compiler COMP-01–05 engineering handoff review — 2026-10-31
 
 **Scope:** the requested compiler work in this turn remains **Phase I architecture documentation**. We reviewed the existing strict [D3 L0/L1 grammar](d3-first-language-profile.md), first [P00–P10 compiler contract](aui-compiler-first-implementation-contract.md), [AST and TypedHIR](aui-ast-semantic-analysis.md), [D3 source-only typing](d3-type-and-binding-profile.md), [local event semantics](d3-event-delivery-and-command-linkage.md) and [implementation process](design-completion-gates.md).
