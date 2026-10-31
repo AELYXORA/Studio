@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA Canonical Component Package — one typed architecture",
+  "type": "object",
+  "required": [
+    "format",
+    "packageId",
+    "packageVersion",
+    "targets",
+    "components",
+    "dependencies",
+    "testFixtures",
+    "types",
+    "exportedTypeSetDigest"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.component-package"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "packageVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "triple",
+          "status"
+        ],
+        "properties": {
+          "triple": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "planned",
+              "supported",
+              "unsupported",
+              "unknown"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "typeId",
+          "ports",
+          "capabilities",
+          "sources"
+        ],
+        "properties": {
+          "typeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "direction",
+                "typeRef"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "direction": {
+                  "enum": [
+                    "in",
+                    "out"
+                  ]
+                },
+                "typeRef": {
+                  "$ref": "aui-type-reference.schema.json"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "target",
+                "ownership"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "ownership": {
+                  "enum": [
+                    "human",
+                    "generated",
+                    "vendored"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "inputs",
+                "successTypeRef",
+                "failureTypeRef",
+                "effects",
+                "domain",
+                "sideEffectClass",
+                "retryPolicy",
+                "requiredCapabilities",
+                "declaredTargets"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "inputs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "name",
+                      "typeRef"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "typeRef": {
+                        "$ref": "aui-type-reference.schema.json"
+                      }
+                    }
+                  }
+                },
+                "effects": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "domain": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sideEffectClass": {
+                  "enum": [
+                    "none",
+                    "local-reversible",
+                    "external-nonreversible"
+                  ],
+                  "description": "Conservative classification for review; not permission to execute effects"
+                },
+                "retryPolicy": {
+                  "const": "never",
+                  "description": "First-profile non-replay policy; idempotent retry needs later versioned contract"
+                },
+                "successTypeRef": {
+                  "$ref": "aui-type-reference.schema.json"
+                },
+                "failureTypeRef": {
+                  "$ref": "aui-type-reference.schema.json"
+                },
+                "requiredCapabilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "declaredTargets": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "First-slice exact offline transitive dependencies; no ranges or implicit upgrades",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "packageId",
+          "packageVersion"
+        ],
+        "properties": {
+          "packageId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "packageVersion": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "testFixtures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256",
+          "purpose"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "typeId",
+          "kind",
+          "fields"
+        ],
+        "properties": {
+          "typeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "const": "record"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "typeRef"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "typeRef": {
+                  "$ref": "aui-type-reference.schema.json"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "exportedTypeSetDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One package contract with typed ports, commands, records, explicit effects/capabilities, target support and source inventory. No architecture edition branches. Native operation requires separate verified authorization."
+}
