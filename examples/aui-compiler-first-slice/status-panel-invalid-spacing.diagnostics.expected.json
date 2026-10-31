@@ -11,7 +11,8 @@
   "catalog": {
     "status": "UNVERIFIED",
     "sourceFormat": "aui.compiler-source-only-review-catalog",
-    "sourceIdentity": "examples/aui-compiler-first-slice/review-type-catalog.json"
+    "sourceIdentity": "examples/aui-compiler-first-slice/review-type-catalog.json",
+    "sha256": "8446fb67384923b0ff4baf6c90509b34a3fd711a1880526034300f66153b22b0"
   },
   "exitCode": 1,
   "diagnostics": [
