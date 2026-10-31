@@ -1,0 +1,93 @@
+# D3+ — Command Result, Task/await, Cancellation and View Lifecycle
+
+**Status: PROPOSED L3 design, NOT accepted, implemented, ABI-linked or tested.** [D3 L0/L1 Event Delivery](d3-event-delivery-and-command-linkage.md) retains request-only send; [L2 State/Binding](d3-state-derived-binding-contract.md) owns local UI commits; [D2 Execution](d2-execution-consistency.md) owns CommandTicket/Workflow ExecutionID and cancellation races; [OwnershipIR](aui-ownership-ir.md) owns liveness/borrow safety; [D4 Binary ABI](aui-component-binary-abi.md) owns target-level atomics and provider call frames.
+
+## T0. Profiles and authority
+
+Candidate L3 source profile token = aui.source/l3-async/v1, selected by reviewed compilation context. L3 includes L2 capabilities and adds a **bounded** async task and completion subscription surface. L0/L1 source grammar and old fixtures remain unchanged. L1 send remains fire-and-forget *at source level*, with admission/rejection available through diagnostics; it is NOT silently reinterpreted as returning a synchronous Result.
+
+L3 never creates an implicit graph provider or device permission. Every underlying command must match the approved exact [source-to-Graph binding](d3-event-delivery-and-command-linkage.md) and the D2/D4 target/effect contract. A Task declaration is a local AUI orchestration plan, distinct from a GraphNodeID and provider OperationID, not a privileged native function.
+
+## T1. Bounded proposed L3 source syntax
+
+The following is an intentional restricted extension, not the earlier broad task grammar as an automatically accepted implementation. General multi-statement async control-flow, retries, branching and joins are outside this profile.
+
+    taskDecl         = "task", ID, "(", [ taskParams ], ")", "->",
+                       "Result", "<", typeName, ",", typeName, ">",
+                       "on", domainAtom, "{", awaitStmt, returnStmt, "}" ;
+    taskParams       = taskParam, { ",", taskParam } ;
+    taskParam        = ID, ":", typeName ;
+    awaitStmt        = "let", ID, "=", "await", ID, "(", [ namedArgs ], ")", ";" ;
+    returnStmt       = "return", ID, ";" ;
+    submitStmt       = "submit", ID, "(", [ namedArgs ], ")", "as", ID, ";" ;
+    settledHandler   = "on", "settled", ID, "(", ID, ")", "{", stateCommit, "}" ;
+
+An L3 ordinary UI event handler contains exactly one submitStmt **instead of** the L1 send or L2 local commit, with no implicit ordering or chained effects. The destination ID after as names a **statically declared, source-scoped task slot**, reserved in the component. No variable global registry or remote ref is created. The settled handler ID must be that same slot, not the task name or graph operation spelling. One settled handler per slot.
+
+L3 task body has exactly one awaited *approved graph command* and returns the bound Result envelope unchanged. The result local variable must have exactly the declared Result<T,E> type. The task runs in its declared domain; the command's required domain and effect/capability set are checked separately. The core L3 Task/Result type registry, keyword conflicts and parser surface require explicit approval before implementation. This small candidate intentionally avoids throwing exceptions, dynamic Task arrays, retry directives or synthetic success paths.
+
+## T2. Source-level result and admission types
+
+- Result<T,E>: the **provider** returned success or declared failure. Its exact logical TypeIDs are checked against locked exported command contract. It is not an exception, task completion flag, OS handle or permission.
+- TaskOutcome<T,E>: proposed **closed discriminated union** with Successful(T), Failed(E), AdmissionRejected(AdmissionError), Cancelled(CancellationConfirmation), ProviderUnavailable(ProviderError). Its exact core registry type digest and serialization are P0. A timeout/cancel-request alone is **not** a Cancelled outcome.
+- The settled handler receives immutable TaskOutcome<T,E> from its task-slot subscription. An explicit approved pure converter (e.g. a core outcome-to-status renderer) may produce a String; no implicit enum/String conversion, privilege expansion, or outcome erasure.
+- A stale generation or duplicate terminal result is **not delivered** to a new settled handler; it produces a diagnostic to original task ownership. A source file's command result must never be silently interpreted as application-level success because task dispatch was accepted.
+
+## T3. Request, ticket, lifecycle and backpressure
+
+A TaskSlot identity is (ProjectID, pinned graph/source/lock snapshot, component GraphNodeID/instance, ViewIdentity and generation, source StableSymbolID of task slot). A runtime TaskTicket is a separate ephemeral generation-checked ID; its provider CommandTicket is the D2 namespace. Neither is a serialized Project Graph object or global stable path.
+
+First L3 candidate admits **at most one active task per TaskSlot per live ViewIdentity generation**. A second submit before the prior slot becomes terminal returns AUI_TASK_SLOT_BUSY without creating another provider dispatch. Max task slots and total queued tasks are bounded by D5; current proposal does not fabricate a universal limit. D3's UI event ingress queue limit (candidate 64 per view) is **not** task queue capacity or D2 workflow mailbox capacity.
+
+A submit follows:
+1. Validate live view generation, exact compiled Task symbol/slot, named input types, Send/ownership and source digest.
+2. Reserve bounded task slot and result-delivery capacity before moving any owned inputs. On failure, leave sender owner unchanged and expose a typed AdmissionRejected outcome (when the slot/generation remains live) or an explicit diagnostic; do not begin a provider operation.
+3. Validate graph command link, package/ABI target, execution domain, declared effects and **fresh live** capabilities at the D2 provider admission boundary.
+4. Create a TaskTicket that owns the awaited provider CommandTicket and cleanup obligations. On accepted dispatch, move/copy inputs exactly once. A task's awaited provider call MUST NOT run on UI/render/IRQ scheduler when blocking, nor use a raw UI pointer as cross-domain payload.
+5. Terminal result races (success, failure, confirmed cancellation) publish exactly once under generation and ticket checks. A duplicate or late provider callback is diagnostic, not another UI StateRevision or automatic retry.
+6. On valid completion, enqueue an **owned immutable TaskOutcome** to the original ViewIdentity's bounded UI completion ingress. Only the correct live generation and slot may invoke the settled handler and its L2 stateCommit. If no capacity exists, retain a bounded completed result with explicit backpressure **or fail the task slot safely**; silent drop, overwrite and unbounded result buffering are forbidden. Exact reservation protocol is a D5 P0.
+7. A successful UI state transaction publishes one StateRevision. Failure or stale generation cannot partially mutate it. Cleanup uses exact ownership rules independent of UI rendering success.
+
+An accepted Task request does not mean a physical device effect started, or that a UI commit has happened.
+
+## T4. Cancellation and shutdown
+
+Cancel is a **request**, not a terminal outcome. View unmount/generation replacement invalidates its completion subscription; it requests cancellation only for tasks attached to that scope. Provider tickets and device/DMA buffers remain owned until **confirmed quiescence** or a normal terminal completion. Cancellation racing with success/failure resolves via one D2 terminal publication; if operation succeeds after cancel request, final outcome is Successful, not fabricated Cancelled.
+
+No automatic retry is allowed on ambiguous network/OS/hardware effects. A crash may leave an external effect already performed, so D6 project snapshot recovery is not runtime task replay. Timeout is a scheduling observation and may request cancellation, but does not assert the provider stopped. Shutdown must drain and destroy task/result subscriptions without callback-after-destroy; exact D4/D5 atomics and allocator lifecycle remain proof obligations.
+
+## T5. Error/result propagation to UI State
+
+The settled handler is not a generic event from a foreign component. It receives only the source-correlated TaskOutcome for one live slot/generation, and its entire body is one [L2 atomic stateCommit](d3-state-derived-binding-contract.md). The handler may commit a pure mapped status/Result value, not invoke hardware I/O, block, await, or synchronously retry the command.
+
+If UI binding state includes only a String status, converting TaskOutcome to String requires an **explicit reviewed pure converter** bound to the exact core registry; no hidden stringify. Failed state commit leaves the previously committed UI state authoritative; it does **not** re-run the completed provider task. A renderer error after commit does not retry effects.
+
+## T6. Cross-profile and graph consistency
+
+- L0: pure static view, no local state or tasks.
+- L1: typed single send request, no completion callback in source.
+- L2: single atomic UI-local state commit and one-way bindings, no asynchronous result subscription.
+- L3: explicit bounded TaskSlot, typed submit/await/settled and one L2 completion commit; no implicit task loops or fanout.
+- D2 workflow: distinct persistent definition and ephemeral ExecutionID/CommandTicket, independent from UI-local TaskTicket. Existing workflow graph may dispatch a command to the same provider, but it does not inherit the L3 UI TaskSlot or its queue.
+- D4/D5: target-specific scheduler, frame layout, allocator, atomics and actual physical effects remain unimplemented.
+
+## T7. Design acceptance scenarios — NOT-RUN
+
+| Case | Expected |
+| --- | --- |
+| One approved awaited provider Result and live settled handler | At most one terminal TaskOutcome/StateRevision |
+| TaskSlot already busy | AUI_TASK_SLOT_BUSY, no duplicate provider call |
+| Await inside derived/layout | AUI_AWAIT_CONTEXT |
+| Borrowed UI state escapes suspend | OWN_ASYNC_ESCAPE |
+| Non-Send handle into worker | OWN_NOT_SEND |
+| Wrong provider success/error TypeID | AUI_COMMAND_CONTRACT |
+| Wrong target/effect capability | AUI_TARGET_UNSUPPORTED / CAPABILITY_DENIED |
+| Cancel-request races with success | Success OR confirmed cancel once; no double terminal |
+| View unmounted before completion | AUI_TASK_STALE, no replacement state update |
+| UI result queue full | Bounded rejection/backpressure, never unbounded leak |
+| Failure during L2 state commit | Prior StateRevision kept, no provider replay |
+| Crash after external effect before result | No implicit operation replay |
+| Two independent slots complete out of order | No assumed global order |
+| User source modifies TaskOutcome without pure mapping | AUI_TYPE_MISMATCH |
+
+**Remaining P0:** exact TaskOutcome and Ticket type registry digests; authorization/link-map persistence; task slot/source grammar and extension compatibility; D5 admission/results queue fairness, StateRevision/cancel atomics; ownership borrow/lifetime proofs; platform ABI and hardware-safe shutdown; native golden fixtures and observed race tests. This text is not a tested async engine.
