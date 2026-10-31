@@ -67,6 +67,14 @@ The existing [canonical package schema](../../schemas/canonical-component-packag
 
 **Still P0:** exact public semantic rule contents, verified core/type/generic hash inputs, enum payload/tag codecs, complete signed provider/source mapping, concrete native ABI and object/run evidence, D1–D8 acceptance. Do not treat schema-valid enum as a trusted release export.
 
+## Enum logical values / nested generic public identity — 2026-10-31
+
+[Existing D3 type owner](aui-types-and-ownership.md) now proposes exact typed enum zero/one payload, `SensorError.Case` constructors and L2+ exhaustive pure `matchEnum`; AUI Syntax owns the source grammar; D4 owns tag layout. [Existing TypeReference JSON schema](../../schemas/aui-type-reference.schema.json) now allows nested generic `arguments[]` structurally while [CR11/CR12](d3-core-registry-value-contract.md) constrain template/ownership gates, depth<=8 and total nodes<=128. [D2 I9](d2-identity-and-type-resolution.md) now proposes a distinct, reserved, **identity-only generic exportId domain**, while C10 holds the separate candidate semantic contract digest. Unapproved source aliases, fake signatures and native pointers cannot enter GraphLinkedIR.
+
+[36 NOT-RUN enum/generic cases](../../examples/aui-compiler-production/enum-generic-value-cases.json), [3 candidate enum digest vectors](../../examples/aui-compiler-production/enum-logical-digest-reference-vectors.json) and [2 candidate generic exportId vectors](../../examples/aui-compiler-production/generic-export-identity-reference-vectors.json) were added. Their reference arithmetic was Python/OpenSSL matched, **not** an AELYXORA compiler run or trusted published hash.
+
+**Still P0:** approved immutable full 15-type core semantic rule definitions, enum portable payload codec and D4 ABI, generic instance public semantic hash projection and D2 generated export namespace/verification, exhaustive source/Graph link, target service ABI, actual native verification, and explicit architect D1–D8 acceptance.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
