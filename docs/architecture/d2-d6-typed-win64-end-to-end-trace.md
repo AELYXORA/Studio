@@ -86,3 +86,7 @@ On valid completion, UI owner receives an immutable TaskOutcome with exact full 
 ## ET6. Architecture review decision and remaining P0
 
 To make this trace truly normative requires an accepted **Project Graph typed v2**, typed component contract/profile, exact complete type export set digest, source link + preapproval proposal, signed trust keys/epochs, on-disk D6 source/receipt artifact ownership, real Win64 module signing/loading and ABI tests, D5 renderer/TaskTicket implementation, and Windows/NTFS fault injection. All are **OPEN**. Source/profile design, hash references and fake signed-envelope examples are NOT an approved executable test.
+
+## ET7. Typed v2 operation/component/graph contract stage — PROPOSED
+
+[Project Graph v2](d2-d6-project-graph-v2-typed-contract.md) now defines separate domain-separated public operation, component, transitive type-export-set and typed graph digests. [Five reference hashes](../../examples/typed-graph-v2/typed-component-contract-vectors.json) were checked against independent Python hashlib. The new graph hash excludes source revision and label; the AUI source-link/approval and exact signed Win64 executable remain distinct downstream identities. No compiler or runtime test has been performed.
