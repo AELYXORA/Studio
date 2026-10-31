@@ -207,7 +207,7 @@ service SensorReader {
 ### Lexical tokens and disambiguation
 
 - Strict UTF-8, no BOM, source byte spans, pinned Unicode XID/NFC lookup for identifiers, **not** for general String values. Keep NFC collisions visible with original source spans. ASCII punctuation; longest-match tokenization of `->`, `<-`, `=>`; otherwise `-`, `<`, `>`, `=`, `.` are single tokens. A `-` is legal only between name segments in a declared `domainAtom`/`effectAtom`; do **not** add unary/binary subtraction by accident.
-- Keyword set (case-sensitive): `import component input event command effects on send state derived bind commit set task taskSlot let await return submit as settled match ForEach items key in record enum service true false`. The source contexts for `Successful Failed AdmissionRejected Cancelled ProviderUnavailable` are **reserved pattern tags** only in L3 settled-match arms; `Result Event List StableKey TaskOutcome TaskSlot` are recognized *type names* validated through exact core exports, not arbitrary implicit values.
+- Keyword set (case-sensitive): `import component input event command effects on send state derived bind commit set task taskSlot let await return submit as settled match matchEnum case ForEach items key in record enum service true false`. The source contexts for `Successful Failed AdmissionRejected Cancelled ProviderUnavailable` are **reserved pattern tags** only in L3 settled-match arms; `Result Event List StableKey TaskOutcome TaskSlot` are recognized *type names* validated through exact core exports, not arbitrary implicit values.
 - The tokens `view` in `bind view.key.property`, `item` in `key: item.field`, `value`/`activated` in property labels and `io-worker` in declared domains are contextual names, not globally variable declarations. `ForEach` is a reserved View constructor in L4; no user package may shadow it in that compilation context. No semicolon after final root View; no comma between child Views.
 - Comments are `//` to LF/EOF only. First shipping candidate deliberately excludes block comments, raw/interpolated/multiline strings, generic operator expressions, floating source literals, named default parameters, positional calls, dynamic import versions and unrestricted macros. Unknown constructs reject instead of being accepted and dropped during lowering.
 
@@ -282,8 +282,12 @@ modifier         = ".", modifierName, "(", namedArg,
 modifierName     = ID | "on" | "key" ;
 namedArgs        = namedArg, { ",", namedArg } ;
 namedArg         = ID, ":", pureExpr ;
-pureExpr         = pureAtom | pureCall ;
+pureExpr         = pureAtom | pureCall | enumMatchExpr ;
 pureCall         = qualifiedName, "(", [ namedArgs ], ")" ;
+enumMatchExpr    = "matchEnum", "(", "value", ":", pureExpr, ")", "{",
+                   enumMatchArm, { enumMatchArm }, "}" ;
+enumMatchArm     = "case", qualifiedName, [ "(", ID, ")" ],
+                   "=>", pureExpr, ";" ;
 pureAtom         = STR | INT | "true" | "false" | memberPath ;
 memberPath       = ID, { ".", ID } ;
 
@@ -323,6 +327,16 @@ The **current** [Canonical Component Package schema](../../schemas/canonical-com
 **Service authoring exact validation order:** resolve a `service` declaration's owning package namespace and exact nonvisual component public ID from an immutable D6 lock; resolve its authored command by stable operation ID; compare **ordered** named inputs, exact success/failure TypeReferences, explicit `effects` set and `domain`; then verify the locked component contract's complete `sideEffectClass,retryPolicy,requiredCapabilities,declaredTargets,ports,capabilities,sources`. None of those latter missing source fields may be filled with compiler-generated defaults. Confirm native source exists for the target and match target **triple**, not Graph target ID; reject until actual target qualification and signed source review. Keep the derived component/operation public projection exactly under [Canonical C10/C12](canonical-project-graph-and-components.md), without a synthetic `service` export kind. This is a **review candidate**; the current source interface is not sufficient to create a runnable provider.
 
 **Enum source mapping:** compile `enum` variants in author order into the **one existing canonical `types[]`**; each case has a name and optional verified payload `typeRef`. The proposed [enum fixture](../../examples/aui-compiler-production/sensor-error-enum-entry.proposed.json) contains only structural fields, no fabricated digest or ABI. Case name collisions, empty variants, mixed `fields/variants`, by-value cycles and unverified public payload refs reject. Full constructor/pattern syntax and logical value codec remain P0 even though the authored JSON Schema now supports the shape. [28 review scenarios](../../examples/aui-compiler-production/public-export-closure-review-cases.json) remain NOT-RUN.
+
+### Enum constructor and exhaustive pure match — L2+ structural candidate
+
+**Source form:** an enum zero-payload constructor is `SensorError.NoReading`, parsed by `memberPath` and *resolved as an enum constructor by the type resolver*. A one-payload constructor is `SensorError.BadReading(value: reading)`, parsed structurally by `pureCall` and resolved to a verified enum variant rather than a user arbitrary function. Exactly one named `value` argument is required for a payload variant, zero arguments for the payload-free form; unknown/mismatched variants reject. The parser does not interpret all qualified names ending in an uppercase identifier as enum constructors.
+
+**Pure match:** `matchEnum(value: error) { case SensorError.NoReading => "none"; case SensorError.BadReading(reading) => "bad"; }` is an `enumMatchExpr` permitted only in L2+ pure-expression contexts. Its `case` qualifier must resolve to the exact enum TypeReference of the scrutinee, all cases appear exactly once in declaration order **or any authored branch order** (coverage is a set; source arm order is preserved), and binder occurrence must match payload presence. Payload binder is immutable and scoped to its own arm. All arm results are the exact same logical type, evaluation is pure and scrutinee is evaluated exactly once. No wildcard, default, async handler, OS service dispatch or direct state mutation inside a pure match. `matchEnum` is **distinct** from L3's five fixed `match` arms for `TaskOutcome`.
+
+**Grammar and semantic priority:** longest-match lexer; parse matchEnum by dedicated keyword before generic `pureCall`. Within `pureAtom | pureCall`, use `(` lookahead to distinguish memberPath/zero-payload variant from a named-call/payload variant. Type resolution, not token capitalization, determines whether a qualified name is a pure function, enum constructor or ordinary member path. No implicit conversions. Nested `typeRef` generic arguments may themselves be generic after the [existing canonical TypeReference schema](../../schemas/aui-type-reference.schema.json) recursive candidate, but **only** approved templates and bounds (8 generic applications per path, 128 nodes total) pass linked/native checks.
+
+**Native lowering requirement:** a successful enum expression has a TypedHIR constructor/match node, exhaustive variant coverage proof, exact source spans, payload ownership and explicit error/cleanup branches; the ABI-tag and payload layout stay under D4. A successful *source-only* parse is still not evidence of verified enum TypeReference, target native code or renderer. [D3 Type/Ownership](aui-types-and-ownership.md) owns value semantics, and [enum/generic design cases](../../examples/aui-compiler-production/enum-generic-value-cases.json) remain NOT-RUN.
 
 ### Known grammar/semantic issues that remain genuine blockers
 
