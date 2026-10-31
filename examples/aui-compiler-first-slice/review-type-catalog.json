@@ -153,6 +153,37 @@
     "permitOnlyPureTextualSummary": true,
     "requiredNamedArgumentsOnly": true,
     "implicitConversions": false,
-    "manualRuntimePermission": false
+    "manualRuntimePermission": false,
+    "commandDomains": [
+      "io-worker",
+      "ui"
+    ],
+    "commandEffects": [],
+    "commandDomainNote": "Both io-worker and ui are recognized as source-only declared domains; a linked provider's exact declared domain and blocking policy are verified only at P07/P08. A textual ui declaration is not execution permission.",
+    "provisionalTypesOnly": true
+  },
+  "accessibilityPolicy": {
+    "Button": {
+      "requiredModifier": "accessibilityLabel",
+      "exactOccurrences": 1,
+      "nonEmptyLiteral": true,
+      "boundStringRuntimeCheck": true
+    },
+    "otherViews": {
+      "allowedModifier": "accessibilityLabel",
+      "maxOccurrences": 1
+    }
+  },
+  "eventPolicy": {
+    "Button": {
+      "eventOutput": "activated",
+      "payloadTypeId": "aui.core/Unit",
+      "maxAttachments": 1
+    },
+    "localEvent": {
+      "requiredHandlerCount": 1,
+      "handlerSendCount": 1
+    },
+    "sourceOnlyDispatch": "intent-only-no-provider-authority"
   }
 }
