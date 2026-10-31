@@ -29,7 +29,9 @@
     "The concrete per-tag descriptor validation table and accepted lowering proofs remain subject to architect review; this is the candidate full tag inventory, not release-ready executable ABI",
     "Each tag validation descriptor lists required nonzero slots, must-zero slots, and exact stage semantics; fields not covered remain subject to typed callee/owner/liveness verification and bounds.",
     "All array spans are Ref64 to Span16 with elementSize matching exact array element descriptor and checked total count; a nonzero pointer alone never proves semantic content",
-    "T1 semantic enums, enum exhaustiveness or generic identity may be source-only; authenticated public contracts and machine eligibility only after T2"
+    "T1 semantic enums, enum exhaustiveness or generic identity may be source-only; authenticated public contracts and machine eligibility only after T2",
+    "All 16 templates now contain a complete Ref64 referenceFields list; each Ref64 must resolve to its exact expected pointeeKind, not merely an in-bounds address; no OS/Graph credential can be built from raw bits.",
+    "Every Span16<Ref64:...> field requires checked Span16 elementSize=8 and each child Ref64 of the named specific descriptor class; runtime permission still requires independently verified evidence."
   ],
   "payloadTemplates": {
     "Declaration64": {
@@ -98,6 +100,27 @@
           "size": 8,
           "type": "u64",
           "meaning": "Must equal zero"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "declaredTypeRef",
+          "pointeeKind": "ResolvedTypeDescriptor"
+        },
+        {
+          "field": "orderedMembersRef",
+          "pointeeKind": "Span16<Ref64:TypedHIRNode>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "metadataRef",
+          "pointeeKind": "ImmutableDeclarationMetadata"
+        },
+        {
+          "field": "contractEvidenceRef",
+          "pointeeKind": "AuthenticatedPublicContractReceipt"
         }
       ]
     },
@@ -168,6 +191,37 @@
           "type": "u32",
           "meaning": "Zero until reviewed accessible set"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "namedArgumentsRef",
+          "pointeeKind": "Span16<Ref64:NamedArgumentNode>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "childrenRef",
+          "pointeeKind": "Span16<Ref64:ViewNode>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "modifiersRef",
+          "pointeeKind": "Span16<Ref64:ViewModifierNode>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "resultTypeRef",
+          "pointeeKind": "ResolvedTypeDescriptor"
+        },
+        {
+          "field": "originEvidenceRef",
+          "pointeeKind": "ImmutableOriginDescriptor"
+        }
       ]
     },
     "Expression48": {
@@ -222,6 +276,30 @@
           "size": 4,
           "type": "u32",
           "meaning": "Zero in candidate"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "operandsRef",
+          "pointeeKind": "Span16<Ref64:TypedExpressionNode>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "auxiliaryRef",
+          "pointeeKind": "Span16<Ref64:TypedArgumentOrMemberNode>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "constantRef",
+          "pointeeKind": "ImmutableTypedConstantDescriptor"
+        },
+        {
+          "field": "expectedTypeRef",
+          "pointeeKind": "ResolvedTypeDescriptor"
         }
       ]
     },
@@ -292,6 +370,35 @@
           "type": "u32",
           "meaning": "Must equal zero"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "enumTypeRef",
+          "pointeeKind": "ResolvedEnumTypeDescriptor"
+        },
+        {
+          "field": "payloadValueRef",
+          "pointeeKind": "TypedExpressionNode"
+        },
+        {
+          "field": "armsRef",
+          "pointeeKind": "Span16<Ref64:EnumMatchArmDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "exhaustivenessProofRef",
+          "pointeeKind": "CompilerVerifiedCoverageReceipt"
+        },
+        {
+          "field": "ownershipRef",
+          "pointeeKind": "ImmutableOwnershipTraitProof"
+        },
+        {
+          "field": "originEvidenceRef",
+          "pointeeKind": "ImmutableOriginDescriptor"
+        }
       ]
     },
     "Generic64": {
@@ -360,6 +467,35 @@
           "size": 4,
           "type": "u32",
           "meaning": "Must equal zero"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "templateTypeRef",
+          "pointeeKind": "ResolvedNominalTemplateType"
+        },
+        {
+          "field": "orderedArgsRef",
+          "pointeeKind": "Span16<Ref64:ResolvedTypeDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "derivedIdentityRef",
+          "pointeeKind": "D2DerivedIdentityDescriptor"
+        },
+        {
+          "field": "semanticContractRef",
+          "pointeeKind": "AuthenticatedPublicContractReceipt"
+        },
+        {
+          "field": "traitProofRef",
+          "pointeeKind": "ImmutableOwnershipTraitProof"
+        },
+        {
+          "field": "originEvidenceRef",
+          "pointeeKind": "ImmutableOriginDescriptor"
         }
       ]
     },
@@ -430,6 +566,28 @@
           "type": "u32",
           "meaning": "Must equal zero"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "sourceReceiptRef",
+          "pointeeKind": "AuthenticatedSourceReceipt"
+        },
+        {
+          "field": "graphReceiptRef",
+          "pointeeKind": "AuthenticatedGraphReceipt"
+        },
+        {
+          "field": "typeExportProofRef",
+          "pointeeKind": "AuthenticatedTypeExportReceipt"
+        },
+        {
+          "field": "packageLockProofRef",
+          "pointeeKind": "AuthenticatedPackageLockReceipt"
+        },
+        {
+          "field": "targetAbiProofRef",
+          "pointeeKind": "QualifiedTargetAbiReceipt"
+        }
       ]
     },
     "Reactive64": {
@@ -498,6 +656,34 @@
           "size": 4,
           "type": "u32",
           "meaning": "Must equal zero"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "readSetRef",
+          "pointeeKind": "Span16<Ref64:TypedStateReadDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "writeSetRef",
+          "pointeeKind": "Span16<Ref64:TypedStateWriteDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "oldStateRef",
+          "pointeeKind": "VerifiedStateRevisionDescriptor"
+        },
+        {
+          "field": "newStateRef",
+          "pointeeKind": "VerifiedStateRevisionDescriptor"
+        },
+        {
+          "field": "effectProofRef",
+          "pointeeKind": "VerifiedLinearEffectToken"
         }
       ]
     },
@@ -582,6 +768,41 @@
           "type": "Ref64",
           "meaning": "Source/graph causal origin"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "providerTicketProofRef",
+          "pointeeKind": "OpaqueProviderTicketLifecycleProof"
+        },
+        {
+          "field": "argumentsRef",
+          "pointeeKind": "Span16<Ref64:TypedAsyncArgument>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "continuationsRef",
+          "pointeeKind": "Span16<Ref64:AsyncSuccessorDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "outcomeCasesRef",
+          "pointeeKind": "Span16<Ref64:TaskOutcomeCaseDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "effectProofRef",
+          "pointeeKind": "VerifiedLinearEffectToken"
+        },
+        {
+          "field": "originEvidenceRef",
+          "pointeeKind": "ImmutableOriginDescriptor"
+        }
       ]
     },
     "Keyed64": {
@@ -650,6 +871,30 @@
           "size": 4,
           "type": "u32",
           "meaning": "Must equal zero"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "fullStableKeyPathRef",
+          "pointeeKind": "Span16<Ref64:ImmutableStableKeyDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "childTemplateRef",
+          "pointeeKind": "KeyedChildTemplateNode"
+        },
+        {
+          "field": "diffSpanRef",
+          "pointeeKind": "Span16<Ref64:KeyedDiffActionDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "ownershipProofRef",
+          "pointeeKind": "ImmutableOwnerGenerationProof"
         }
       ]
     },
@@ -720,6 +965,42 @@
           "type": "u32",
           "meaning": "Exact approved lane code"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "operandsRef",
+          "pointeeKind": "Span16<Ref64:SSAValueV1>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "resultsRef",
+          "pointeeKind": "Span16<Ref64:SSAValueV1>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "ownerStateRef",
+          "pointeeKind": "PathSensitiveOwnerState"
+        },
+        {
+          "field": "regionRef",
+          "pointeeKind": "BorrowRegionProof"
+        },
+        {
+          "field": "effectInputRef",
+          "pointeeKind": "VerifiedLinearEffectToken"
+        },
+        {
+          "field": "effectOutputRef",
+          "pointeeKind": "VerifiedLinearEffectToken"
+        },
+        {
+          "field": "signatureProofRef",
+          "pointeeKind": "AuthenticatedCallSignatureProof"
+        }
       ]
     },
     "OwnershipTerminator64": {
@@ -788,6 +1069,51 @@
           "size": 4,
           "type": "u32",
           "meaning": "Must equal zero"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "conditionRef",
+          "pointeeKind": "SSAValueV1"
+        },
+        {
+          "field": "targetsRef",
+          "pointeeKind": "Span16<Ref64:CFGBlockV1>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "edgeArgsRef",
+          "pointeeKind": "Span16<Ref64:BlockEdgeArgumentDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "variantCasesRef",
+          "pointeeKind": "Span16<Ref64:TypedVariantCaseDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "liveOwnersRef",
+          "pointeeKind": "Span16<Ref64:OwnerRecordV1>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "effectExitRef",
+          "pointeeKind": "Span16<Ref64:VerifiedLinearEffectToken>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "originRef",
+          "pointeeKind": "ImmutableOriginDescriptor"
         }
       ]
     },
@@ -858,6 +1184,38 @@
           "type": "u32",
           "meaning": "Zero candidate"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "exactTypeRef",
+          "pointeeKind": "ResolvedTypeDescriptor"
+        },
+        {
+          "field": "descriptorRef",
+          "pointeeKind": "QualifiedTargetLayoutDescriptor"
+        },
+        {
+          "field": "fieldsRef",
+          "pointeeKind": "Span16<Ref64:FieldLayoutDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "variantsRef",
+          "pointeeKind": "Span16<Ref64:VariantLayoutDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "traitsRef",
+          "pointeeKind": "ImmutableOwnershipTraitProof"
+        },
+        {
+          "field": "abiProofRef",
+          "pointeeKind": "QualifiedTargetAbiReceipt"
+        }
       ]
     },
     "MachineInstruction64": {
@@ -927,6 +1285,38 @@
           "type": "u32",
           "meaning": "Zero except accepted opcode flags"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "operandsRef",
+          "pointeeKind": "Span16<Ref64:MachineOperandDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "resultsRef",
+          "pointeeKind": "Span16<Ref64:MachineOperandDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "relocationRef",
+          "pointeeKind": "QualifiedRelocationDescriptor"
+        },
+        {
+          "field": "importProofRef",
+          "pointeeKind": "QualifiedNativeImportReceipt"
+        },
+        {
+          "field": "effectProofRef",
+          "pointeeKind": "VerifiedLinearEffectToken"
+        },
+        {
+          "field": "layoutProofRef",
+          "pointeeKind": "QualifiedTargetLayoutDescriptor"
+        }
       ]
     },
     "MachineTerminator48": {
@@ -981,6 +1371,37 @@
           "size": 4,
           "type": "u32",
           "meaning": "Must equal zero"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "targetsRef",
+          "pointeeKind": "Span16<Ref64:MachineBlockDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "edgeValuesRef",
+          "pointeeKind": "Span16<Ref64:MachineBlockArgumentDescriptor>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "switchTableRef",
+          "pointeeKind": "Span16<Ref64:PhysicalVariantTagCase>",
+          "requiredElementSize": 8,
+          "elementEncoding": "Ref64",
+          "immediateArrayBytes": false
+        },
+        {
+          "field": "predicateRef",
+          "pointeeKind": "MachineOperandDescriptor"
+        },
+        {
+          "field": "frameProofRef",
+          "pointeeKind": "QualifiedWin64FrameReceipt"
         }
       ]
     },
@@ -1037,6 +1458,24 @@
           "type": "u32",
           "meaning": "Zero in candidate"
         }
+      ],
+      "referenceFields": [
+        {
+          "field": "sourceSpanRef",
+          "pointeeKind": "SourceSpanV1"
+        },
+        {
+          "field": "graphOriginRef",
+          "pointeeKind": "AuthenticatedGraphOriginDescriptor"
+        },
+        {
+          "field": "packageLockRef",
+          "pointeeKind": "AuthenticatedPackageLockReceipt"
+        },
+        {
+          "field": "approvalReceiptRef",
+          "pointeeKind": "AuthenticatedApprovalReceipt"
+        }
       ]
     },
     "OwnerCheck48": {
@@ -1091,6 +1530,28 @@
           "size": 4,
           "type": "u32",
           "meaning": "Zero in candidate"
+        }
+      ],
+      "referenceFields": [
+        {
+          "field": "ownerRef",
+          "pointeeKind": "OwnerRecordV1"
+        },
+        {
+          "field": "stateBeforeRef",
+          "pointeeKind": "PathSensitiveOwnerState"
+        },
+        {
+          "field": "stateAfterRef",
+          "pointeeKind": "PathSensitiveOwnerState"
+        },
+        {
+          "field": "effectStateRef",
+          "pointeeKind": "VerifiedLinearEffectToken"
+        },
+        {
+          "field": "regionProofRef",
+          "pointeeKind": "BorrowRegionProof"
         }
       ]
     }
