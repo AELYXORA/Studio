@@ -1,0 +1,526 @@
+{
+  "format": "aui.full-ir-pass-review-matrix",
+  "status": "PROPOSED / ALL NOT-RUN / NATIVE COMPILER NOT IMPLEMENTED",
+  "owner": "docs/architecture/aui-ir-layout.md#ir0-full-compiler-logical-pass-contract--one-production-pipeline-design-candidate",
+  "schemas": [
+    "schemas/aui-compiler-ownership-cfg-candidate.schema.json",
+    "schemas/aui-compiler-targetmir-candidate.schema.json"
+  ],
+  "reviewExamples": [
+    "ownership-cfg-branch-review.json",
+    "ownership-cfg-move-review.json",
+    "win64-targetmir-constant-review.json"
+  ],
+  "notes": [
+    "Scenarios describe design-level expected behavior; these are not executable native pass test results",
+    "Positive JSON review fixtures demonstrate structural shape only, not trusted signed input, SSA/ownership/effect proof, machine ABI, COFF or real UI",
+    "Exact positive/negative source+IR golden bytes, error precedence and observed command/output/target evidence required before marking PASS",
+    "No second type registry, Canonical Project Graph or alternative compiler is defined"
+  ],
+  "cases": [
+    {
+      "id": "IR-001",
+      "group": "FRONTEND",
+      "expected": "accept",
+      "scenario": "L0-L4 source constructs and record/enum/service tags all retain exact source origins in one TypedHIR",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-002",
+      "group": "FRONTEND",
+      "expected": "reject",
+      "scenario": "Unknown TypedHIR tag or target-incompatible profile tag silently dropped by visitor",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-003",
+      "group": "FRONTEND",
+      "expected": "reject",
+      "scenario": "Missing enum variant or duplicate match arm in source but TypedHIR claims exhaustive",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-004",
+      "group": "FRONTEND",
+      "expected": "reject",
+      "scenario": "Nested generic resolved TypeReference contains identity-only @inst as public contract digest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-005",
+      "group": "FRONTEND",
+      "expected": "reject",
+      "scenario": "Source-only catalogue unverified core exports promoted into GraphLinkedIR without signed review",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-006",
+      "group": "FRONTEND",
+      "expected": "reject",
+      "scenario": "Contract interface-only service lowered to direct native operation without authenticated provider",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-007",
+      "group": "GRAPH-LINK",
+      "expected": "accept",
+      "scenario": "Exact signed source snapshot, core, package lock, operation TypeReference/effect/target and Graph projection all agree",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-008",
+      "group": "GRAPH-LINK",
+      "expected": "reject",
+      "scenario": "Change source digest between TypedHIR and Graph link",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-009",
+      "group": "GRAPH-LINK",
+      "expected": "reject",
+      "scenario": "Keep OperationID but change public success/error/effect/target ABI under original signed snapshot",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-010",
+      "group": "GRAPH-LINK",
+      "expected": "reject",
+      "scenario": "Duplicate or missing Graph node provenance when linking one AUI source symbol",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-011",
+      "group": "GRAPH-LINK",
+      "expected": "reject",
+      "scenario": "Graph package/target runtime capabilities missing despite a matching numeric public digest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-012",
+      "group": "GRAPH-LINK",
+      "expected": "reject",
+      "scenario": "Package scoped exportedTypeSetDigest substituted for project typeExportSetDigest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-013",
+      "group": "REACTIVE",
+      "expected": "accept",
+      "scenario": "Initialized StateSlot + pure Derived dependency DAG + one Text value bind + atomic commit success and rollback paths",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-014",
+      "group": "REACTIVE",
+      "expected": "reject",
+      "scenario": "Duplicate binding writers to one static View.key.property",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-015",
+      "group": "REACTIVE",
+      "expected": "reject",
+      "scenario": "Derived reads state in dependency cycle or calls effectful service",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-016",
+      "group": "REACTIVE",
+      "expected": "reject",
+      "scenario": "Commit graph permits success to publish only a subset of written state",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-017",
+      "group": "REACTIVE",
+      "expected": "reject",
+      "scenario": "Failed StateRevision CAS publishes a new renderer value",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-018",
+      "group": "REACTIVE",
+      "expected": "reject",
+      "scenario": "Commit error branch forgets cleanup of candidate owned String/List payload",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-019",
+      "group": "ASYNC",
+      "expected": "accept",
+      "scenario": "Declared TaskSlot single ticket, exact typed await and five settled arms, retained owner on uncertainty",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-020",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "Borrowed UI string survives await without reviewed pinned owner/cancel cleanup",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-021",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "Submit two active tickets through one TaskSlot",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-022",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "No-dispatch admission failure represented as successful provider Result<T,E>",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-023",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "Indeterminate-after-admission ProviderUnavailable immediately releases native provider/DMA ticket",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-024",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "Cancelled UI status minted without same-owner/ticket/generation quiescence proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-025",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "Provider completion from old View incarnation mutates new generation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-026",
+      "group": "ASYNC",
+      "expected": "reject",
+      "scenario": "TaskOutcome five-arm switch missing ProviderUnavailable or duplicates Cancelled",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-027",
+      "group": "KEYED",
+      "expected": "accept",
+      "scenario": "L4 nested parent StableKey path + per-incarnation generation reconcile with source-key provenance",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-028",
+      "group": "KEYED",
+      "expected": "reject",
+      "scenario": "List index substituted for immutable StableKey during row reorder",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-029",
+      "group": "KEYED",
+      "expected": "reject",
+      "scenario": "Duplicate StableKey for siblings accepted as positional fallback",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-030",
+      "group": "KEYED",
+      "expected": "reject",
+      "scenario": "Delete and reinsert same stable key reuses prior provider ticket/subscription generation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-031",
+      "group": "KEYED",
+      "expected": "reject",
+      "scenario": "Resource budget failure publishes partial keyed View diff",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-032",
+      "group": "SSA",
+      "expected": "accept",
+      "scenario": "CFG entry param dominates uses and block edge arg count/type matches target params",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-033",
+      "group": "SSA",
+      "expected": "accept",
+      "scenario": "Owned resource move transfers resource identity to return exactly once",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-034",
+      "group": "SSA",
+      "expected": "reject",
+      "scenario": "Duplicate SSA value result definitions across blocks",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-035",
+      "group": "SSA",
+      "expected": "reject",
+      "scenario": "Use value before dominating definition",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-036",
+      "group": "SSA",
+      "expected": "reject",
+      "scenario": "Cond branch passes one argument to block with two required parameters",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-037",
+      "group": "SSA",
+      "expected": "reject",
+      "scenario": "Two blocks share the same ID or branch target is undefined",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-038",
+      "group": "SSA",
+      "expected": "reject",
+      "scenario": "Implicit fallthrough or missing terminator accepted",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-039",
+      "group": "SSA",
+      "expected": "reject",
+      "scenario": "Switch enum case set incomplete despite complete:true in inspection JSON",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-040",
+      "group": "OWNERSHIP",
+      "expected": "accept",
+      "scenario": "All success/error/cancellation exits explicitly drop or transfer owned resources exactly once",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-041",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "Move after move, double drop, read moved owner, join Available and Moved then use",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-042",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "Drop owner with outstanding shared borrow or overlap unique and shared borrow",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-043",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "Unproven borrow escapes await, worker queue or keyed lifecycle",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-044",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "Copy opaque TaskTicket or native UI handle by matching pointer width",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-045",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "Release native device buffer on UI detach before provider quiescence",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-046",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "Allocation failure loses prior owned resource without cleanup",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-047",
+      "group": "OWNERSHIP",
+      "expected": "reject",
+      "scenario": "An unrecognized OwnershipIR op becomes a default no-op",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-048",
+      "group": "EFFECT",
+      "expected": "accept",
+      "scenario": "UI event → verified provider admission → provider result → committed StateRevision respects token order",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-049",
+      "group": "EFFECT",
+      "expected": "reject",
+      "scenario": "Two simultaneously reachable consumers of same linear effect token",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-050",
+      "group": "EFFECT",
+      "expected": "reject",
+      "scenario": "Provider dispatch moved across effect barrier by optimizer",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-051",
+      "group": "EFFECT",
+      "expected": "reject",
+      "scenario": "A native FFI call with unknown writes treated as pure and reordered",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-052",
+      "group": "EFFECT",
+      "expected": "reject",
+      "scenario": "Volatile MMIO/atomic release-acquire ordering dropped during machine lowering",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-053",
+      "group": "EFFECT",
+      "expected": "reject",
+      "scenario": "Drop/retain/cancel cleanup removed as dead code",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-054",
+      "group": "LAYOUT",
+      "expected": "accept",
+      "scenario": "D4 public type and exact target ABI produce checked enum/record/Result layout with ownership",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-055",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "Layout derives enum tag number from public String variant name without approved target descriptor",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-056",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "Overflowing array stride/aggregate size accepted as wrapped small allocation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-057",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "Enum payload misalignment or uninitialized padding exposed as public data",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-058",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "TaskSlot/TaskTicket turned into portable Record or unverified Win64 FFI pointer",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-059",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "Missing D5 renderer/task/keyed service signatures replaced by invented local exports",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-060",
+      "group": "TARGET",
+      "expected": "accept",
+      "scenario": "Verified target MIR emits valid Win64 COFF with exact imports and unwind/frame evidence",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-061",
+      "group": "TARGET",
+      "expected": "reject",
+      "scenario": "Unknown target machine opcode silently omitted",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-062",
+      "group": "TARGET",
+      "expected": "reject",
+      "scenario": "Calling convention violates Win64 preserved registers, shadow space or stack alignment",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-063",
+      "group": "TARGET",
+      "expected": "reject",
+      "scenario": "Missing required nonleaf unwind metadata or wrong stack probing",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-064",
+      "group": "TARGET",
+      "expected": "reject",
+      "scenario": "Incorrect relocation kind, import allowlist or executable+writable section",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-065",
+      "group": "TARGET",
+      "expected": "reject",
+      "scenario": "Machine object generated from UNVERIFIED_SOURCE_ONLY TypedHIR",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-066",
+      "group": "TARGET",
+      "expected": "reject",
+      "scenario": "An O1 optimization changes observable resource release or task cancellation behavior",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-067",
+      "group": "RELEASE",
+      "expected": "accept",
+      "scenario": "Two pinned clean native builds yield identical unsigned code and verified source maps",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-068",
+      "group": "RELEASE",
+      "expected": "reject",
+      "scenario": "Native backend reports production compiler complete after L0 static-only COFF object",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-069",
+      "group": "RELEASE",
+      "expected": "reject",
+      "scenario": "Runtime module loads with stale signed source/Graph/ABI or denied capability",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-070",
+      "group": "RELEASE",
+      "expected": "reject",
+      "scenario": "A review-only JSON status string allExitsClosed=true treated as actual ownership proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-071",
+      "group": "RELEASE",
+      "expected": "reject",
+      "scenario": "Native test failure or NOT-RUN result silently reported as PASS",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IR-072",
+      "group": "RELEASE",
+      "expected": "reject",
+      "scenario": "Build failure overwrites last known-good staged release",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
