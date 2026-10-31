@@ -65,3 +65,7 @@ CORE_REGISTRY_UNRESOLVED, CORE_CONTRACT_DIGEST_MISMATCH, TYPE_GENERIC_ARG_MISMAT
 ## CR7. Approval blockers
 
 A fully typed exported core-registry schema with public contract digest vectors, exact referenced primitive registry, fully specified generic instantiation and recursive/variance policy, logical error registries, immutable owned List and String value semantics, compiled AST key-field selection, and a confirmed migration plan from aui.core/0.1-draft. D4 then separately specifies native binary layouts and ABI gates. Until approved and native-tested, this is a **logical design candidate**, not a released stdlib.
+
+## CR8. Proposed domain-separated public core contract digests
+
+[D2/D3/D6 Core Export Digest](d2-d3-core-export-digest-contract.md) defines the proposed aui.export-contract/v2-core whitelist and SHA-256 frame; [13 type hash vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json) give reference normalized bytes and a registry set fingerprint. Existing v1 record/component digests and source-profile compatibility are unaffected; no approved mixed v1-v2 type migration exists. Native String/List/StableKey/TaskOutcome layouts are separately specified as *proposed Win64 frames* in [D4](d4-win64-native-component-abi.md), not inferred from portable type digest values. No ABI/core runtime tests passed.
