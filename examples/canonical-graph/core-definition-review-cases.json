@@ -1,0 +1,188 @@
+{
+  "format": "aui.core-definition-review-expectations",
+  "status": "PROPOSED design comparison/rejection matrix; NOT-RUN, NO accepted core-registry digests or native compiler tests",
+  "referenceRegistry": "core-registry-candidate.json",
+  "owner": "docs/architecture/d3-core-registry-value-contract.md#cr134-candidate-logical-projection-skeleton--not-a-digest-preimage-yet",
+  "meaning": {
+    "same": "Proposed structural comparison skeleton same; evidence/provenance may still require review",
+    "different": "Approved semantic meaning would require changed complete public contract projection, not only a ruleId string",
+    "reject": "Not eligible for current public export resolution, trusted hashes or runtime admission"
+  },
+  "cases": [
+    {
+      "id": "CORE-01",
+      "expected": "same",
+      "mutation": "Reorder the 15 registry entries without changing their exact identities or definitions",
+      "rationale": "Registry is compared as a sorted set by unique TypeID",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-02",
+      "expected": "same",
+      "mutation": "Reorder logicalTraits for a type without changing the unique trait set",
+      "rationale": "Trait set canonical lexical order",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-03",
+      "expected": "same",
+      "mutation": "Reorder semanticModel.ruleIds without changing their unique set",
+      "rationale": "Rule ID references are a sorted set; definitions still unresolved",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-04",
+      "expected": "same",
+      "mutation": "Edit semanticSummary prose only while underlying normative rule meanings stay unchanged",
+      "rationale": "Human prose excluded; source evidence may still need review",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-05",
+      "expected": "same",
+      "mutation": "Reorder object JSON keys without changing decoded keys/values",
+      "rationale": "Canonical JSON byte projection independent of authored key order",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-06",
+      "expected": "same",
+      "mutation": "Update nativeLayoutStatus from unapproved to separately documented qualified evidence without changing logical semantics",
+      "rationale": "Native ABI is a distinct identity and requires separate approval",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-07",
+      "expected": "different",
+      "mutation": "Change Bytes portableCarrier from typed-json-bytes-hex to any other reviewed encoding",
+      "rationale": "Public portable encoding semantics change",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-08",
+      "expected": "different",
+      "mutation": "Change F64 finite-only rule definition to admit NaN and infinity under a new approved semantic definition",
+      "rationale": "Logical value domain changes; rule-content digest MUST change",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-09",
+      "expected": "different",
+      "mutation": "Swap ordered Result<T,E> parameter positions",
+      "rationale": "Generic argument order is semantic",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-10",
+      "expected": "different",
+      "mutation": "Swap ordered TaskOutcome Successful(T) and Failed(E) branch order",
+      "rationale": "Variant order is semantic",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-11",
+      "expected": "different",
+      "mutation": "Change TaskOutcome permitted ProviderError phase-code matrix under approved new rules",
+      "rationale": "Nested control contract semantics change",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-12",
+      "expected": "different",
+      "mutation": "Change String exact-scalar equality to NFC-normalized comparison under a new approved rule",
+      "rationale": "Value equality changes public semantics",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-13",
+      "expected": "different",
+      "mutation": "Change a feature gate from L4 to L0/L1 in a reviewed contract",
+      "rationale": "Public availability policy changes",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-14",
+      "expected": "different",
+      "mutation": "Change List graphPayloadEligible from true to false in a fully revised contract",
+      "rationale": "Public transport compatibility changes",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-15",
+      "expected": "different",
+      "mutation": "Change ownershipClass of Bytes from owned-immutable to a separately qualified borrowed-only model",
+      "rationale": "Public lifetime and transport semantics change",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-16",
+      "expected": "reject",
+      "mutation": "Remove aui.core/F64 while the canonical sensor public record still references it",
+      "rationale": "Missing verified public owner",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-17",
+      "expected": "reject",
+      "mutation": "Reuse the old 13-entry registry fingerprint for 15 current types",
+      "rationale": "Different registry identity/closure",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-18",
+      "expected": "reject",
+      "mutation": "Compute a production digest while even one core entry is exportStatus UNVERIFIED",
+      "rationale": "Unapproved public semantics cannot be hashed as trusted",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-19",
+      "expected": "reject",
+      "mutation": "Change the meaning of CR12/F64/finite-only but preserve its ruleId and old claimed public digest",
+      "rationale": "Unversioned rule-content change must never silently retain export identity",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-20",
+      "expected": "reject",
+      "mutation": "Change TaskTicket graphPayloadEligible to true without approved portable ownership and ABI contract",
+      "rationale": "Opaque native request handle cannot become graph payload",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-21",
+      "expected": "reject",
+      "mutation": "Change a generic arity but preserve the old TypeReference, operation and component assertions",
+      "rationale": "Stale export dependency chain",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-22",
+      "expected": "reject",
+      "mutation": "Duplicate a core typeId in the registry inventory",
+      "rationale": "Ambiguous logical owner",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-23",
+      "expected": "reject",
+      "mutation": "Introduce an unknown semanticModel property or unsupported value carrier",
+      "rationale": "Unknown meaning must fail closed",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-24",
+      "expected": "reject",
+      "mutation": "Forge Cancelled control payload while no trusted same-owner ticket quiescence exists",
+      "rationale": "Shape does not establish cancellation trust",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CORE-25",
+      "expected": "reject",
+      "mutation": "Import Event<T> as arbitrary cross-domain dataFlow payload without approved event provenance contract",
+      "rationale": "Event/source handling cannot silently imply transport permissions",
+      "testResult": "NOT-RUN"
+    }
+  ]
+}
