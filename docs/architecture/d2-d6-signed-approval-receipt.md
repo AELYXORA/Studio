@@ -13,7 +13,7 @@ The first candidate cryptographic algorithm is Ed25519 with externally pinned ke
 
 ## AR2. Hash-acyclic proposal -> receipts -> D6 snapshot
 
-[Proposal structural schema](../../schemas/aui-review-proposal.schema.json) defines a strict canonical object with format aui.review-proposal, profile 1-draft, projectId, graphRevision, semanticGraphDigest, lockDigest, sourceLinkBundleDigest, coreRegistryFingerprint, typeExportSetDigest, targetTriple, abiLayoutDigest, capabilities, effects and sourceRevision. Sort capabilities/effects bytewise and reject duplicates. The object has **no approval receipt field, no signature, no output artifact digest and no final snapshotDigest**.
+[Proposal structural schema](../../schemas/aui-review-proposal.schema.json) defines a strict canonical object with format aui.review-proposal, profile 1-draft, projectId, graphRevision, semanticGraphDigest, lockDigest, sourceLinkBundleDigest, typedLinkDigest, coreRegistryFingerprint, typeExportSetDigest, targetTriple, abiLayoutDigest, capabilities, effects and sourceRevision. Sort capabilities/effects bytewise and reject duplicates. The object has **no approval receipt field, no signature, no output artifact digest and no final snapshotDigest**.
 
     proposalDigest = SHA256(
       ASCII("AELYXORA/approval-proposal/v1") + 0x00 +
