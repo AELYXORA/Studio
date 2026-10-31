@@ -1,0 +1,212 @@
+{
+  "format": "aui.public-export-review-matrix",
+  "status": "PROPOSED DESIGN ONLY; all 28 cases NOT-RUN; no approved public hashes or production compiler",
+  "owner": "docs/architecture/canonical-project-graph-and-components.md",
+  "sample": "examples/aui-compiler-production/sensor-error-enum-entry.proposed.json",
+  "scope": "One canonical component package with record/enum type branches, and service interface -> existing component/operation mapping; not a second graph or type registry",
+  "outcomes": {
+    "schema-accept": "proposed JSON Schema structure accepts, not approved public type semantics",
+    "schema-reject": "proposed JSON Schema structure must reject",
+    "semantic-reject": "JSON shape may accept but canonical resolver/public trust must reject",
+    "semantic-different": "verified logical projection must differ on mutation, requiring different digest once hash contracts accepted",
+    "semantic-same": "verified logical projection unchanged by implementation-only mutation; provenance/build evidence still changes"
+  },
+  "cases": [
+    {
+      "id": "EXPORT-01",
+      "expected": "schema-accept",
+      "mutation": "A canonical type entry containing kind=record and ordered fields remains valid under additive enum schema",
+      "rationale": "Original record package fixtures must be structurally unchanged",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-02",
+      "expected": "schema-accept",
+      "mutation": "A canonical type entry containing kind=enum and one-or-more ordered case names, without payload TypeReference",
+      "rationale": "Closed zero-payload enum is representable",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-03",
+      "expected": "schema-accept",
+      "mutation": "An enum variant may include a complete canonical nominal TypeReference payload",
+      "rationale": "Exact payload owner and digest still need semantic verification",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-04",
+      "expected": "schema-accept",
+      "mutation": "An enum variant may include a complete bounded generic TypeReference payload",
+      "rationale": "Acyclic template and public type meaning still unresolved",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-05",
+      "expected": "schema-reject",
+      "mutation": "An enum entry has both variants and fields",
+      "rationale": "No mixing record and enum authored structures",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-06",
+      "expected": "schema-reject",
+      "mutation": "A record entry has both fields and variants",
+      "rationale": "No mixing record and enum authored structures",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-07",
+      "expected": "schema-reject",
+      "mutation": "An enum has empty variants list",
+      "rationale": "Closed exported enum needs at least one case",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-08",
+      "expected": "schema-reject",
+      "mutation": "An enum variant has no name or an empty name",
+      "rationale": "Every variant has a source name",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-09",
+      "expected": "schema-reject",
+      "mutation": "An enum variant has unexpected executable/native fields",
+      "rationale": "Schema does not encode runtime implementation or ABI",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-10",
+      "expected": "schema-reject",
+      "mutation": "An enum variant uses null instead of absent optional typeRef",
+      "rationale": "Unit/no-payload and null are not interchangeable",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-11",
+      "expected": "schema-reject",
+      "mutation": "A type entry has kind=service",
+      "rationale": "Service maps to existing components and operations, not public type kind",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-12",
+      "expected": "schema-reject",
+      "mutation": "A package type entry has kind=unknown",
+      "rationale": "Unknown public kind fails closed",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-13",
+      "expected": "semantic-reject",
+      "mutation": "An enum has two NFC-equivalent or duplicate case names",
+      "rationale": "Unique normalized variant IDs not expressible by plain JSON Schema",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-14",
+      "expected": "semantic-different",
+      "mutation": "Swap two authored enum variants without changing their names and payloads",
+      "rationale": "Author-order logical enum meaning changes and resulting type digest must change",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-15",
+      "expected": "semantic-different",
+      "mutation": "Add, remove, rename, or change a variant payload from absent to Unit",
+      "rationale": "Logical value domain and type digest change",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-16",
+      "expected": "semantic-reject",
+      "mutation": "Enum payload TypeReference points to this same enum by value, including through a cycle",
+      "rationale": "Unbounded value recursion forbidden until separately reviewed ownership indirection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-17",
+      "expected": "semantic-reject",
+      "mutation": "Enum payload imports unverified core contract digest even when 64-hex-shaped",
+      "rationale": "Shape alone does not authorize public export",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-18",
+      "expected": "semantic-reject",
+      "mutation": "Two types export same package-qualified typeId with record and enum kinds",
+      "rationale": "One namespace with no kind-overload",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-19",
+      "expected": "semantic-reject",
+      "mutation": "Source service declares Read but verified component has different Result success/error type",
+      "rationale": "Exact typed public operation link mismatch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-20",
+      "expected": "semantic-reject",
+      "mutation": "Source service has effect device-read but package command declares no effect",
+      "rationale": "Undeclared effect cannot be inferred or erased",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-21",
+      "expected": "semantic-reject",
+      "mutation": "Service source omits capability, source, target and retry fields and no independently locked component package exists",
+      "rationale": "No default native provider or trusted operation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-22",
+      "expected": "semantic-reject",
+      "mutation": "Source service is assigned type kind service and published under resolvedExports.kind=type",
+      "rationale": "Only existing component operation public identity is applicable",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-23",
+      "expected": "semantic-reject",
+      "mutation": "Service command points to target id instead of qualified target triple",
+      "rationale": "Graph target reference and operation target triple are different namespaces",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-24",
+      "expected": "semantic-reject",
+      "mutation": "Source interface claims native executable when package has only planned target status",
+      "rationale": "Qualification requires actual target-specific native evidence",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-25",
+      "expected": "semantic-different",
+      "mutation": "Enum field identifier renamed but physical target-native variant layout remains identical",
+      "rationale": "Logical public identity changes independently of ABI shape",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-26",
+      "expected": "semantic-same",
+      "mutation": "Reorder implementation source paths of the verified component without altering logical interface",
+      "rationale": "Implementation provenance changes, not logical public operation digest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-27",
+      "expected": "semantic-reject",
+      "mutation": "Operation default sideEffectClass or retryPolicy inferred from absence in AUI service interface",
+      "rationale": "All fields supplied and verified from canonical package, never guessed",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EXPORT-28",
+      "expected": "semantic-reject",
+      "mutation": "Public service interface is treated as permission for OS device-read operation",
+      "rationale": "Live capability and signed provider proof still required",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
