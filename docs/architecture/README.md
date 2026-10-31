@@ -8,6 +8,14 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Current architectural owners and review
+
+Use [Canonical Project Graph and Components](canonical-project-graph-and-components.md) for **all** graph identity, semantics, typed exports, operations, workflows, dataFlows and resource claims; [first AUI language profile](d3-first-language-profile.md) for bounded initial syntax; [Graph ↔ AUI integration](project-graph-aui-contract.md) for source reconciliation; [D6 Persistence](d6-canonical-persistence.md) for proposed bytes and snapshot publication **subject to** the canonical graph; [Source Ownership](source-ownership.md) for edits; and [Design Completion Gates](design-completion-gates.md) for acceptance. These files do not create independently authoritative models.
+
+**Latest focused audit:** [Canonical cross-contract re-audit and outstanding P0 decisions](canonical-graph-consistency-audit.md). The sensor fixture has three matching component declarations and 35 **NOT-RUN** negative scenarios. Its structural inspection is explicitly limited, and real public hashes/native proofs remain absent.
+
+The remainder of this index contains supporting research and frozen historical profile references. Their old numbered format or digest labels are **not product or architecture editions** and cannot override the current canonical owner.
+
 ## Cross-Specification Audit — 2026-10-31
 
 [Full D1–D8 consistency audit](cross-specification-audit-2026-10-31.md) records ten confirmed documentation conflicts addressed in main and fourteen still-open design risks. It covers contract owners, runtime/ABI, dependency resolution, D2 channel borrow lifetimes, D3 source examples and Phase I–IV gating. Corrected text is **not architect sign-off** or native verification.
