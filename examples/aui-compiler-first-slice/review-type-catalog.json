@@ -1,0 +1,158 @@
+{
+  "format": "aui.compiler-source-only-review-catalog",
+  "status": "PROVISIONAL / UNVERIFIED / NON-EXECUTABLE",
+  "purpose": "Explicit deterministic names/signatures for proposed L0/L1 compiler frontend typechecking. This is NOT the current coreRegistryFingerprint, verified package lock, platform ABI, provider link or native renderer.",
+  "sourceProfile": [
+    "l0",
+    "l1"
+  ],
+  "imports": [
+    {
+      "sourceImport": "aui.core",
+      "packageId": "aui.core",
+      "verified": false,
+      "typeExports": [
+        {
+          "sourceName": "String",
+          "logicalTypeId": "aui.core/String",
+          "kind": "nominal"
+        },
+        {
+          "sourceName": "Unit",
+          "logicalTypeId": "aui.core/Unit",
+          "kind": "nominal"
+        },
+        {
+          "sourceName": "Bool",
+          "logicalTypeId": "aui.core/Bool",
+          "kind": "nominal"
+        },
+        {
+          "sourceName": "U32",
+          "logicalTypeId": "aui.core/U32",
+          "kind": "nominal"
+        },
+        {
+          "sourceName": "Event",
+          "logicalTypeId": "aui.core/Event",
+          "kind": "generic-template",
+          "arity": 1,
+          "context": "event-declaration-only"
+        },
+        {
+          "sourceName": "Result",
+          "logicalTypeId": "aui.core/Result",
+          "kind": "generic-template",
+          "arity": 2,
+          "context": "command-return-only"
+        }
+      ]
+    },
+    {
+      "sourceImport": "example.locked",
+      "packageId": "example.locked",
+      "verified": false,
+      "typeExports": [
+        {
+          "sourceName": "Tick",
+          "logicalTypeId": "example.locked/Tick",
+          "kind": "nominal"
+        },
+        {
+          "sourceName": "Failure",
+          "logicalTypeId": "example.locked/Failure",
+          "kind": "nominal"
+        }
+      ]
+    }
+  ],
+  "visualConstructors": [
+    {
+      "id": "VStack",
+      "requiredNamedArguments": [
+        {
+          "name": "spacing",
+          "typeId": "aui.core/U32"
+        }
+      ],
+      "children": "one-or-more",
+      "eventOutputs": []
+    },
+    {
+      "id": "HStack",
+      "requiredNamedArguments": [
+        {
+          "name": "spacing",
+          "typeId": "aui.core/U32"
+        }
+      ],
+      "children": "one-or-more",
+      "eventOutputs": []
+    },
+    {
+      "id": "Text",
+      "requiredNamedArguments": [
+        {
+          "name": "value",
+          "typeId": "aui.core/String"
+        }
+      ],
+      "children": "none",
+      "eventOutputs": []
+    },
+    {
+      "id": "Button",
+      "requiredNamedArguments": [
+        {
+          "name": "title",
+          "typeId": "aui.core/String"
+        }
+      ],
+      "children": "none",
+      "eventOutputs": [
+        {
+          "name": "activated",
+          "typeId": "aui.core/Event<aui.core/Unit>"
+        }
+      ]
+    }
+  ],
+  "modifiers": [
+    {
+      "name": "accessibilityLabel",
+      "requiredNamedArguments": [
+        {
+          "name": "value",
+          "typeId": "aui.core/String"
+        }
+      ],
+      "appliesTo": [
+        "VStack",
+        "HStack",
+        "Text",
+        "Button"
+      ]
+    },
+    {
+      "name": "on",
+      "requiredNamedArguments": [
+        {
+          "name": "activated",
+          "typeId": "local-event-reference"
+        }
+      ],
+      "appliesTo": [
+        "Button"
+      ]
+    }
+  ],
+  "sourceOnlyPolicy": {
+    "outputStatus": "UNVERIFIED_SOURCE_ONLY",
+    "rejectNativeEmission": true,
+    "rejectGraphLink": true,
+    "permitOnlyPureTextualSummary": true,
+    "requiredNamedArgumentsOnly": true,
+    "implicitConversions": false,
+    "manualRuntimePermission": false
+  }
+}
