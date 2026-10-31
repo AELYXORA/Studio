@@ -22,6 +22,10 @@ The remainder of this index contains supporting research and frozen historical p
 
 [D3 Core Type Registry CR11](d3-core-registry-value-contract.md) now reconciles a single [15-entry current core inventory](../../examples/canonical-graph/core-registry-candidate.json) and its [strict documentary schema](../../schemas/canonical-core-registry-candidate.schema.json) with the canonical sensor's `Bytes` and `F64` TypeReferences. [Canonical Graph C12](canonical-project-graph-and-components.md) specifies the authored-to-derived operation/component export mapping; [26 NOT-RUN operation cases](../../examples/canonical-graph/operation-export-review-cases.json) outline invalidation and authorization. No accepted core fingerprints, real golden exports or native ABI results exist.
 
+## Portable core values and runtime uncertainty — PROPOSED
+
+[D3 CR12](d3-core-registry-value-contract.md) specifies candidate bit-exact finite F64, owned bounded Bytes and scalar portable value rules. [41 NOT-RUN boundary cases](../../examples/canonical-graph/core-value-boundary-cases.json) accompany it; an independent lightweight token classifier is **not a native engine or verified hash proof**. [D3 Task T9](d3-task-result-lifecycle.md) handles transport loss after dispatch, irrevocable effects, original UI slot finality and ongoing native cleanup; [16 NOT-RUN race/uncertainty scenarios](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) document expected behavior. Approval and native proof remain P0.
+
 ## Cross-Specification Audit — 2026-10-31
 
 [Full D1–D8 consistency audit](cross-specification-audit-2026-10-31.md) records ten confirmed documentation conflicts addressed in main and fourteen still-open design risks. It covers contract owners, runtime/ABI, dependency resolution, D2 channel borrow lifetimes, D3 source examples and Phase I–IV gating. Corrected text is **not architect sign-off** or native verification.
