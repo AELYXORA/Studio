@@ -1,0 +1,86 @@
+{
+  "format": "aui.approval-unsigned-fixture",
+  "status": "SYNTHETIC SHAPE EXAMPLES ONLY. NO real hash, Ed25519 signature, signer key, trust store, authorization, D6 publication or executable.",
+  "proposal": {
+    "format": "aui.review-proposal",
+    "profile": "1-draft",
+    "projectId": "example.review.synthetic",
+    "graphRevision": 7,
+    "semanticGraphDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "lockDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "sourceLinkBundleDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "typedLinkDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "coreRegistryFingerprint": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "typeExportSetDigest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "targetTriple": "x86_64-pc-windows-msvc",
+    "abiLayoutDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "capabilities": [
+      "ui.render"
+    ],
+    "effects": [
+      "pure"
+    ],
+    "sourceRevision": 3
+  },
+  "proposedUnsignedArchitecturePayload": {
+    "profile": "aui.approval-payload/v1-draft",
+    "decision": "approve",
+    "proposalDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "sourceLinkBundleDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "projectId": "example.review.synthetic",
+    "graphRevision": 7,
+    "semanticGraphDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "lockDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "coreRegistryFingerprint": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "targetTriple": "x86_64-pc-windows-msvc",
+    "abiLayoutDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "capabilities": [
+      "ui.render"
+    ],
+    "signerKeyId": "synthetic-untrusted-key",
+    "approvalEpoch": 1,
+    "notBefore": "2027-01-01T00:00:00Z",
+    "expiresAt": "2027-12-31T23:59:59Z",
+    "nonce": "0123456789abcdef0123456789abcdef",
+    "reviewKind": "architecture",
+    "signerRole": "architecture-reviewer"
+  },
+  "proposedUnsignedExecutablePayload": {
+    "profile": "aui.approval-payload/v1-draft",
+    "decision": "approve",
+    "proposalDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "sourceLinkBundleDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "projectId": "example.review.synthetic",
+    "graphRevision": 7,
+    "semanticGraphDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "lockDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "coreRegistryFingerprint": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "targetTriple": "x86_64-pc-windows-msvc",
+    "abiLayoutDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "capabilities": [
+      "ui.render"
+    ],
+    "signerKeyId": "synthetic-untrusted-key",
+    "approvalEpoch": 1,
+    "notBefore": "2027-01-01T00:00:00Z",
+    "expiresAt": "2027-12-31T23:59:59Z",
+    "nonce": "0123456789abcdef0123456789abcdef",
+    "reviewKind": "executable",
+    "signerRole": "release-approver",
+    "signedPeSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "buildInputDigest": "3333333333333333333333333333333333333333333333333333333333333333",
+    "operationContractSetDigest": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "proposedEnvelopeShape": {
+    "format": "aui.signed-approval-receipt",
+    "envelopeVersion": "1-draft",
+    "payload": "one of the above payload objects",
+    "signature": "Ed25519 detached 64-byte signature, NOT supplied because none exists"
+  },
+  "notes": [
+    "The 64-hex strings are deliberately synthetic placeholders. Never interpret as computed SHA digests.",
+    "The unsigned payloads are NOT valid receipts. They cannot be trusted, signed or executed by themselves.",
+    "Production proposalDigest must be independently computed from exact canonical proposal, not copied from this sample.",
+    "A signed executable receipt also must bind an approved real signed PE artifact and verified module contracts."
+  ]
+}
