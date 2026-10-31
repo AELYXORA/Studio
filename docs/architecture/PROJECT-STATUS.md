@@ -36,6 +36,14 @@ Current priority: approve one complete field-level graph projection and operatio
 
 The `coreRegistryFingerprint`, type-export-set and component public digests in the sensor project remain deliberately **synthetic placeholders**. Missing resolved F64 semantics, closed TaskOutcome error/control types and approved executable/native layouts prevent treating the proposed registry as a verified import or authorizing execution.
 
+## Portable values and post-dispatch uncertainty — design pass (2026-10-31)
+
+[D3 CR12](d3-core-registry-value-contract.md) now defines a **proposed** finite-only bit-preserving F64 carrier (NaN/infinity rejected, signed zero/subnormals preserved), owned Bytes with a proposed 1 MiB first-interchange cap, and typed U32/U64/Bool rules. The [41 boundary cases](../../examples/canonical-graph/core-value-boundary-cases.json) are NOT-RUN reference expectations. A limited independent token/bit classifier matched all 41 expected accept/reject labels, but **no AELYXORA parser or ABI was exercised**.
+
+[D3 Task T9](d3-task-result-lifecycle.md) now explicitly distinguishes never-admitted from **indeterminate-after-admission** provider failure. An indeterminate UI TaskOutcome is not a claim that an external effect failed or never ran; an old UI slot may finish while provider buffers and cleanup still require ownership. [16 lifecycle scenarios](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) remain NOT-RUN. No automatic retry of externally observable effects is allowed.
+
+**Design closure still OPEN:** human acceptance of value codecs/limits, full structured core semantic definitions and error-control public exports, independently validated hash vectors, native bit/ownership/terminal ordering, signed approval, qualified targets and D6 durable recovery. All existing Phase I/II/III/IV rules continue to apply.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
