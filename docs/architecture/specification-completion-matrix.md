@@ -97,6 +97,10 @@ The [existing single-Graph public digest integration](d2-d6-public-contract-dige
 
 [Internal compiler ABI](aui-compiler-internal-assembly-abi.md) now proposes exact little-endian `CompilationContextV1/IRNodeHeaderV1/SourceSpanV1/CFGBlockV1/SSAValueV1/OwnerRecordV1/EffectRecordV1/Span16/PassRequestV1/PassReplyV1` and checked arena generation refs for T0–T8. [Layout table](../../schemas/aui-compiler-internal-abi-layout-candidate.json) has **10 structures, 99 exact non-overlapping fields and 19 proposed limits**. [Ten arithmetic byte vectors](../../examples/aui-compiler-production/internal-abi-layout-byte-vectors.json) and [54 NOT-RUN physical acceptance cases](../../examples/aui-compiler-production/internal-abi-and-arena-review-cases.json) are design evidence only. **P0:** closed per-node-tag payload structs and every pass-local arena record, real generated Assembly offset/ABI probes, semantic budgets/performance, external qualified D4/D5 native service table, all D2/Graph/lock trust and D1–D8 approval.
 
+## IAI-v1 full IR tag/payload closure candidate — 2026-11-01
+
+[IR tag/payload contract](aui-compiler-ir-payload-contract.md) now provides the missing **139 T1–T6 numeric instruction/node tags**, their **16 physical templates, 138 fields, 85 typed Ref64 targets**, per-tag value/ownership/effect/Graph proof requirements, exact [layout JSON](../../schemas/aui-compiler-ir-payload-layout-candidate.json) and [structural catalog schema](../../schemas/aui-compiler-ir-payload-catalog.schema.json). The [16 endian vectors](../../examples/aui-compiler-production/ir-payload-template-byte-vectors.json) were checked arithmetically; [77 tag coverage design cases](../../examples/aui-compiler-production/ir-tag-payload-review-cases.json) remain NOT-RUN. **Still P0:** T0 CST/token ABI, approved tag semantics, executable 139-tag validator/native lowering, D2/D4/D5 verified runtime contracts and human architecture D1–D8.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
