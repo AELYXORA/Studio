@@ -67,3 +67,7 @@ No target is yet verified for this ABI; no executable ABI probe is retained.
 ## Target-specific core value lowering — PROPOSED
 
 [D3 Core Registry](d3-core-registry-value-contract.md) defines logical Unit/Bool/U32/U64/String/List/StableKey/Result/TaskOutcome/StateRevision and task identities. [D4 Core Value ABI](d4-core-value-abi-contract.md) now owns separately verified native layouts, discriminants, calling convention, allocator, generation and terminal-result publication. Canonical portable StableKey bytes are **not** a struct that may be cast across modules; matching TypeID/source hash does not prove exact Win64 or SysV offsets. [D3/D4/D5 review](d3-d4-d5-core-contract-review.md) lists remaining P0 native verification; all ABI target outcomes NOT-RUN.
+
+## Candidate Win64 ABI layout — not released
+
+[D4 Win64 ABI](d4-win64-native-component-abi.md) proposes one Win64 native call frame, span and admission context with exact 64/48/64-byte field layouts, recorded in [offset fixtures](../../examples/abi/win64-native-layout-v1.json). This refines the previously **illustrative** ModuleHeader/Span/CallFrame discussion but does not fully define the final ModuleHeader, native Result/TaskOutcome tagged payloads or all target ABI layouts. A moduleHandle/operationIndex ordinal must be resolved against the validated symbolic graph OperationID; pointer values and live capabilities are not serialized. PE/COFF, shadow space, nonvolatile register saves and .pdata/.xdata remain on-host test gates, NOT-RUN.
