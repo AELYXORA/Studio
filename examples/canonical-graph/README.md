@@ -14,3 +14,9 @@ Authoritative design direction: [One Canonical Project Graph and Component Model
 [35 proposed rejection scenarios](negative-cases.json) cover type mismatches, workflow transitions, dataFlow ownership/backpressure, hardware claims, retired identity reuse and approval; they are test designs, not executed outcomes.
 
 **Focused inspection evidence (documentation stage, 2026-10-31):** a limited independent recursive check of JSON Schema keywords (`required`, `type`, `properties`, `$ref`, `const`, `enum`, `oneOf`, `anyOf`, `allOf`, `if/then/else`, `not` and basic array/string constraints) found 0 structural errors in the project and package after the missing `app` export was added. A separate graph/package reference check found 0 component-port mirror, data-flow endpoint/binding or workflow operation lookup mismatches. This is **not** full Draft 2020-12 conformance, proof of hashes, native component resolution, qualified hardware authorization or a runnable test. All placeholder 64-hex values remain unverified.
+
+## Current unified projection review fixtures
+
+[Semantic Projection Change Matrix](semantic-projection-change-matrix.json) defines **26 NOT-RUN expectations**: six nonsemantic changes that preserve projected bytes, eight semantic changes that require a distinct projection after complete validation, and twelve inputs that must be rejected before an authoritative digest can exist. This matrix is a design companion to [Canonical Graph C9/C10](../../docs/architecture/canonical-project-graph-and-components.md), not an alternative schema or hash profile.
+
+The reference package still contains only planned `src/aarch64/*.S` paths and deliberately synthetic digest placeholders. The matrix cannot be evaluated as released SHA golden vectors without real locked public exports, a frozen canonical byte encoder and independent calculations. No source code or native tests were run.
