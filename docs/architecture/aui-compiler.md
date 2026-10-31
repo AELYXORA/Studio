@@ -33,7 +33,7 @@ The *compiler implementation* is Assembly-first. A qualified assembler/linker su
 
 ## PC2. Production pass architecture, inputs, outputs and trust
 
-\`\`\`text
+```text
 Immutable snapshot / package lock / source / Graph / target
   -> Capture + integrity + offline resolve
   -> UTF-8 lexer -> lossless CST -> profile-aware complete AST
@@ -52,7 +52,7 @@ Immutable snapshot / package lock / source / Graph / target
   -> inspect PE/COFF symbols, relocations, unwind and import policy
   -> deterministic manifest + immutable staged publication
   -> separately signed artifact approval -> trusted loading/runtime
-\`\`\`
+```
 
 | Stage | Mandatory compiled representation / proof | Stop condition and authority |
 | --- | --- | --- |
@@ -70,7 +70,7 @@ Immutable snapshot / package lock / source / Graph / target
 | C11 Emit/Link | Assembly, machine COFF/other accepted target object, deterministic link inputs and real native binary/module | Assembler/linker errors, undefined/duplicate symbols, wrong imports/section flags, ABI mismatch reject |
 | C12 Publish | Source/Graph/type/tool/runtime dependency identities, object/executable hashes, mapping and verification manifest; separate signed admission | Incomplete evidence/signature or failed artifact verification never publishes a trusted executable |
 
-**Stage typing:** \`SourceAnalyzed\` ≠ \`GraphLinked\` ≠ \`TargetLowered\` ≠ \`ObjectBuilt\` ≠ \`ArtifactVerified\` ≠ \`SignedAndAdmitted\`. Distinct immutable stage receipts require *proof of all predecessor gates*; one mode must not promote an earlier stage by adding a boolean to a JSON plan. The C00–C12 labels are **compiler passes**, not alternate project architectures or replacements for the narrower previously named P00–P10 milestones. A partial L0/L1 source-only compiler is a development subsystem, never the production product.
+**Stage typing:** `SourceAnalyzed` ≠ `GraphLinked` ≠ `TargetLowered` ≠ `ObjectBuilt` ≠ `ArtifactVerified` ≠ `SignedAndAdmitted`. Distinct immutable stage receipts require *proof of all predecessor gates*; one mode must not promote an earlier stage by adding a boolean to a JSON plan. The C00–C12 labels are **compiler passes**, not alternate project architectures or replacements for the narrower previously named P00–P10 milestones. A partial L0/L1 source-only compiler is a development subsystem, never the production product.
 
 ## PC3. Full language semantics and closure required before coding the finished compiler
 
@@ -86,7 +86,7 @@ The production compiler must **accept or reject each feature deterministically i
 | Types, records, services | Nominal public record/enum definitions and closed type/generic signatures as **explicitly accepted** in the shipping profile | Exact public type export digests, param layouts, user-defined service symbol dispatch and safety validation. Their present broad source syntax is still incomplete; not release-ready |
 | Targets/runtime | Declared target triple, capability/effects/operation domain, owned native adapters | Correct target ISA/ABI, import table, stack/unwind, OS UI/runtime dispatch and restricted hardware access |
 
-**Critical currently unresolved *language* blockers** (must be closed at D3 owners before declaring full compiler source syntax frozen): L2 \`Text().key(...)\` and binding/property initialization interactions; L3 task slot **declaration syntax** and typed identity; L3 match binder scopes and payload types/cancel provenance; L4 \`ForEach\` nested grammar and List/StableKey public exports; coherent structural syntax for user records/enums/services; pure expression operators/calls and explicit effect/overload rules; complete namespace/import/profile coexistence. An illustrative extended syntax is not enough to implement a production parser.
+**Critical currently unresolved *language* blockers** (must be closed at D3 owners before declaring full compiler source syntax frozen): L2 `Text().key(...)` and binding/property initialization interactions; L3 task slot **declaration syntax** and typed identity; L3 match binder scopes and payload types/cancel provenance; L4 `ForEach` nested grammar and List/StableKey public exports; coherent structural syntax for user records/enums/services; pure expression operators/calls and explicit effect/overload rules; complete namespace/import/profile coexistence. An illustrative extended syntax is not enough to implement a production parser.
 
 ## PC4. Contract for IR, linking and lowering between modules
 
@@ -94,7 +94,7 @@ The production compiler must **accept or reject each feature deterministically i
 2. **TypedHIR** contains explicit resolved public TypeReferences (including generic instantiation identity), owner/symbol origin, effect/capability sets, source span, immutable declarations, view template relationships and typed binding/event/task edges. Compiler-local integer IDs are never Graph IDs.
 3. **ReactiveIR** contains finite dependency vertices, update trigger, evaluation order, transaction candidate/commit/rollback edges, key-scope and old/new generation IDs. Cycles and multiple writers reject unless a separately reviewed delay/feedback contract allows them.
 4. **AsyncIR** contains state-machine block labels, task slot owner/generation, caller/provider ticket distinction, result discriminant, cancellation/quiescence proof prerequisites, owned buffers and terminal/late-completion edges. No automatic retry for indeterminate physical effects.
-5. **OwnershipIR** describes explicit move/borrow/copy/retain/release, ownership regions, all exceptional cleanup and cross-domain transfer. A source-level logical \`Send\` trait does not prove native DMA/OS memory safety.
+5. **OwnershipIR** describes explicit move/borrow/copy/retain/release, ownership regions, all exceptional cleanup and cross-domain transfer. A source-level logical `Send` trait does not prove native DMA/OS memory safety.
 6. **GraphLinkedIR** contains **verified** GraphNodeID, TypeReference/OperationID/source digest, package-lock/snapshot identity, target triple and exactly reviewed signer scope. Names or files alone cannot construct it. Source-only plan MUST NOT contain GraphLinkedIR.
 7. **TargetMIR** contains basic blocks, typed virtual registers, liveness, calling convention/ABI mapping, target-specific memory alignment, imported/exported symbols, relocation kinds, unwind/debug origins and denied OS capability requests. Generated code cannot access unapproved OS services by inventing imported symbols.
 8. Each representation is **private compiler IR** until its serialization and compatibility is explicitly accepted. In-process immutable arena handles are not stable on-disk/public ABI identities. If incremental caches serialize IR, they must bind compiler version, source/lock/core/graph, profile, target, ABI and optimization mode; cache corruption/ambiguity causes safe rebuild, not trusted execution.
@@ -104,15 +104,15 @@ Every stage has a declared verifier: SSA use-before-def/dominance where applicab
 ## PC5. Optimizer, codegen, linker and debugging as part of compiler correctness
 
 - **Optimization baseline:** O0 semantics-first, no implicit optimizer required to achieve functional completeness; later O1+ only through declared pass DAG and before/after IR invariants. Eligible transformations include pure constant folding, dead pure-view branch elimination, static binding specialization and bounded inlining/monomorphization *when* source/ownership/effect provenance remains unchanged. Preserve MMIO/volatile, atomics, event FIFO, UI transactions, task terminal ordering, resource/drop timing, cancellation, errors and signal/command observable effects. If optimizer proof is absent, reject transform; do not claim zero-cost performance from documents.
-- **Win64 machine backend:** select instructions/registers, spill and stack layout, canonical Win64 shadow/home space, callee-save preservation, 16-byte stack call alignment, unwind \`.pdata/.xdata\`, safe constant relocations, imports/exports, section permissions (W^X), CFG policy and proper PE/COFF. The D4 native ABI owner sets exact module/call descriptor bytes. Microsoft x64 calling convention is reference input, not proof AELYXORA implements it.
+- **Win64 machine backend:** select instructions/registers, spill and stack layout, canonical Win64 shadow/home space, callee-save preservation, 16-byte stack call alignment, unwind `.pdata/.xdata`, safe constant relocations, imports/exports, section permissions (W^X), CFG policy and proper PE/COFF. The D4 native ABI owner sets exact module/call descriptor bytes. Microsoft x64 calling convention is reference input, not proof AELYXORA implements it.
 - **Object/link stage:** use qualified native assembler/linker with explicit target triple, input object order, fixed target/runtime libraries and import whitelist, deterministic image/PDB paths and failure diagnostics; inspect actual linked object/binary symbol + relocation + unwind tables. The compiler has to produce *actual machine-code objects* even for a pure L0 View; a JSON descriptor alone is insufficient.
 - **Source-level debug experience:** preserve byte-precise source spans from original files, stable symbol/Graph origin mappings and typed diagnostic notes through target lowering and object debug info. Generated optimization must not point user diagnostics at nonexistent source regions. No dump or debug trace may leak private source, signed credentials or native memory pointers without policy.
 - **Incremental build:** pure content-addressed dependency DAG of source imports, type exports, graph semantic revision, checked lock, target/runtime ABI, compiler/Unicode/toolchain, options and relevant runtime services; invalidation is conservative, caches read-only until verified, no ambient network. Deterministic clean build is the baseline; optimization/incremental performance does not override correctness.
-- **Target platform matrix:** distinguish \`compiler-host supported\`, \`cross-assembly supported\`, \`link supported\`, \`runtime qualified\`, \`signed-admission qualified\`, \`hardware capabilities approved\`. Do not imply all these from one successful emitted assembly file.
+- **Target platform matrix:** distinguish `compiler-host supported`, `cross-assembly supported`, `link supported`, `runtime qualified`, `signed-admission qualified`, `hardware capabilities approved`. Do not imply all these from one successful emitted assembly file.
 
 ## PC6. Complete user/developer-facing compiler contract
 
-Commands are **candidate subcommands of one compiler** (not separate products). \`check\` parses/types without publishing; \`emit-ir\` emits one explicitly labeled diagnostics/debug IR only after its producing stage succeeds; \`build\` takes exact immutable source/Graph/lock/target and attempts a verified native build; \`verify\` checks an existing staged artifact against locked manifest and target/ABI contract. \`run\`/deploy is a **separate runtime/admission action**, not implicitly performed by build. Full build must not accept \`--source-only\` catalogue in place of authenticated verified exports.
+Commands are **candidate subcommands of one compiler** (not separate products). `check` parses/types without publishing; `emit-ir` emits one explicitly labeled diagnostics/debug IR only after its producing stage succeeds; `build` takes exact immutable source/Graph/lock/target and attempts a verified native build; `verify` checks an existing staged artifact against locked manifest and target/ABI contract. `run`/deploy is a **separate runtime/admission action**, not implicitly performed by build. Full build must not accept `--source-only` catalogue in place of authenticated verified exports.
 
 Stable diagnostics include stage, code, original source byte span, profile, expected/actual type, resolved symbol and Graph origin if **verified**; machine-readable JSON and human-friendly output remain separate. CLI/IO errors before reading any source carry no fictitious source SHA. Compiler failures cannot leave a usable, partially linked binary in the authorized release output path. Error codes, exit status, maximal diagnostic count, source maps and non-UTF8 path policies require exact freeze before shipped implementation.
 
@@ -128,7 +128,7 @@ The Studio designer/AI may propose source edits or request compilation; neither 
 4. **MACHINE:** actual Win64 (then each added declared target) machine object/executable with independently inspected imports/exports, stack, unwind, relocations, ABI call/return, runtime service linkage and source maps.
 5. **END-TO-END:** authorized native application actually runs L0 static UI, L1 command/event, L2 state/bind, L3 async terminal/uncertain results and L4 stable keyed lists on qualified platform, with accessibility and rendering verification, not screenshots alone.
 6. **DETERMINISM/SECURITY:** repeated clean builds on pinned inputs yield identical unsigned output, failures atomically preserve trusted outputs, no unauthorized effect or dependency download, memory/hostile-input/fuzz/privilege tests pass with observed evidence.
-7. **RELEASE:** exact manifest, compilation/source/Graph/core/toolchain/target/runtime identities, genuine tests and signature/admission policy, human architect approval. Zero imaginary \`PASS\` statuses.
+7. **RELEASE:** exact manifest, compilation/source/Graph/core/toolchain/target/runtime identities, genuine tests and signature/admission policy, human architect approval. Zero imaginary `PASS` statuses.
 
 A target unsupported for any required shipping feature must be explicitly reported **unsupported**, not silently substituted with a source-only plan or runtime interpreter. Feature subsets may exist as interim development checkpoints but cannot be labeled a *full AUI compiler*.
 
