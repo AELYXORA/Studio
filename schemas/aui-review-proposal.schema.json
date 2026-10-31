@@ -18,7 +18,8 @@
     "abiLayoutDigest",
     "capabilities",
     "effects",
-    "sourceRevision"
+    "sourceRevision",
+    "typedLinkDigest"
   ],
   "properties": {
     "format": {
@@ -84,6 +85,11 @@
       "type": "integer",
       "minimum": 0,
       "maximum": 9007199254740991
+    },
+    "typedLinkDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Hash of a validated separate typed source-to-Graph link v2 supplemental bundle; mandatory to avoid unapproved TypeReference substituting into source Graph link"
     }
   }
 }
