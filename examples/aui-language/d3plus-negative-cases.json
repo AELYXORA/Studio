@@ -9,7 +9,7 @@
     "L2": "feedback-panel-l2.aui",
     "L3": "review-panel-l3.aui"
   },
-  "policy": "All substitutions begin from fresh baseline and are byte-exact. Static invalid cases are evaluated under their selected L2/L3 profile with approved core registry assumed; review-only/operational cases require a distinct harness and MUST NOT be presented as compile-time failures.",
+  "policy": "All substitutions begin from fresh baseline and are byte-exact. Static invalid cases are evaluated under their selected L2/L3 profile with approved core registry assumed; review-only/operational cases require a distinct harness and MUST NOT be presented as compile-time failures. The double-submit scenario L3-R01 is runtime-only and is not a source-text mutation.",
   "cases": [
     {
       "id": "L2-01",
@@ -186,14 +186,6 @@
       "replace": "AdmissionRejected(reason) => commit { set status = \"Succeeded\"; }",
       "expected": "REVIEW_SEMANTIC_STATUS_MISLEADING",
       "stage": "review-only"
-    },
-    {
-      "id": "L3-10",
-      "profile": "L3",
-      "search": "on settled refreshSlot(outcome)",
-      "replace": "on settled refreshSlot(outcome)",
-      "expected": "AUI_TASK_SLOT_BUSY",
-      "stage": "runtime-double-submit"
     },
     {
       "id": "L3-11",
