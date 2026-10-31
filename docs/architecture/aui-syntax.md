@@ -139,3 +139,62 @@ An invocation selects **one** allowed language profile and its verified public t
 A **single composed EBNF/grammar source** must enumerate every declared production, ordered token precedence, Unicode policy, profile admission, modifier/child grammar, pure expression form, record/enum/service surface, name scopes, generics and supported target capabilities. It must have deterministic positive and negative golden **complete source files** for all declared features and selected profiles, including L2 state/bind, L3 task/settled/ownership and L4 nested keyed Views. Per-feature snippets are helpful but not enough to certify the whole parser.
 
 **Status:** This is a **composition contract and decision checklist**, not falsely named a complete accepted grammar. The current L0/L1 EBNF and L2–L4 fragments are substantial, but **record/enum/service**, pure-call operation semantics and several cross-profile bindings still need a single frozen parser baseline and human approval. The [compiler's full-product gates](aui-compiler.md) explicitly reject release without it.
+
+
+## Native-service and nominal-contract source units — explicit shipping grammar candidate
+
+The production compiler must understand separately authored **interface-only AUI source units** for public record/enum/service contracts, while preserving the strict one-View-component-per-file L0/L1 source grammar. This resolves the earlier broad grammar ambiguity without creating a second language or Project Graph. The **single** source-language grammar has two explicitly selected *module kinds* through the immutable compilation context:
+
+- \`component\` source unit: the existing imports + **one** component with the admitted L0–L4 profile and exactly one terminal root view.
+- \`contract\` source unit: imports + **one or more** public nominal record, enum or nonvisual service interface declarations, **no View and no executable native service body**. It is compiled to candidate type/operation/component public contracts and linked under verified D2/D6 package-review rules. It is never an executable application by itself.
+
+**Exact structural EBNF candidate** (this is *not* a user-approved freeze):
+
+\`\`\`ebnf
+contractModule = { importDecl }, contractDecl, { contractDecl }, EOF ;
+contractDecl   = recordDecl | enumDecl | serviceInterface ;
+recordDecl     = "record", ID, "{", recordField, { recordField }, "}" ;
+recordField    = ID, ":", typeRef, ";" ;
+enumDecl       = "enum", ID, "{", enumCase, { enumCase }, "}" ;
+enumCase       = ID, [ "(", typeRef, ")" ], ";" ;
+serviceInterface
+               = "service", ID, "{", serviceCommand, { serviceCommand }, "}" ;
+serviceCommand = "command", ID, "(", [ commandParams ], ")",
+                 "->", "Result", "<", typeRef, ",", typeRef, ">",
+                 [ "effects", "(", [ effectList ], ")" ],
+                 "on", domainAtom, ";" ;
+typeRef        = qualifiedName, [ "<", typeRef, { ",", typeRef }, ">" ] ;
+\`\`\`
+
+**Semantics and admission:**
+
+1. Each exported \`record\`, \`enum\` or \`service\` receives a fully-qualified public owner-package/type/service ID derived from a verified D6 package namespace. Duplicates, NFC collisions, zero-field records if not expressly admitted by a reviewed contract, empty enums, duplicate variant names and ambiguous imports reject. Record fields and enum variants are **author-order semantic**; no alphabetical reordering changes their public meaning silently.
+2. A \`record\` is an immutable **value** definition, not a native pointer, OS file struct or mutable class. Each field has exactly one verified publicly admissible TypeReference. Recursion by-value rejects until an explicit bounded-indirection/ownership contract exists. Exact D4 target layout is derived separately and does not replace logical type identity.
+3. An \`enum\` is a closed discriminated union of zero- or one-payload variants in this shipping candidate; a payload type must be verified nominal/approved generic and have an explicitly owned move/copy/drop policy. The **tag encoding, payload layout and portable value codec** are separate reviewed D3/D4 obligations; no compiler may invent native union sizes. Constructor/pattern-match syntax for *user-defined* enum variants is **NOT YET APPROVED** and must be closed before claiming arbitrary enum use in UI expressions.
+4. A \`service\` defines a nonvisual **interface** only: exact ordered named command arguments, two-branch Result<T,E>, effects/domain/capabilities from a verified owning public contract and no native body. A service implementation can be an independently authored/verified Assembly package bound by the ONE Canonical Graph and D4 module table; the AUI interface declaration alone is **not a dispatch implementation or permission**. The exact service provider mapping must be signed/reviewed before GraphLinkedIR or native codegen.
+5. Within \`typeRef\`, accept only verified templates of admitted arity and ownership, including 1-argument List<Event> forms only where source/type gates permit, and 2-argument Result/TaskOutcome/TaskSlot where the owning D3 profile permits. Generic nesting, cycles, ownership/Send and package bounds are checked by the same core/export resolver, not by loose surface grammar.
+6. If an AUI file is compiled in \`component\` mode, top-level \`record/enum/service\` forms reject as wrong module kind; if in \`contract\` mode, \`component\`, \`state\`, \`task\`, \`ForEach\`, native machine instructions and arbitrary imperative bodies reject. This is a **compilation-unit distinction**, not a new product architecture/version.
+7. The source→export compilation mode has **no native execution output** by itself. Output is a strict proposed *authored public contract candidate*, validated against [Canonical Graph C10/C12](canonical-project-graph-and-components.md) and only considered a trusted public export once exact structured type/operation semantic definitions and D6 lock/signature closure have been independently reviewed. Human typed source cannot supply its own trustworthy digest.
+
+**Example contract source (design only):**
+
+\`\`\`aui
+import aui.core;
+
+record Measurement {
+  value: F64;
+  valid: Bool;
+}
+
+enum SensorError {
+  NoReading;
+  DeviceUnavailable;
+}
+
+service SensorReader {
+  command Read() -> Result<Measurement, SensorError>
+    effects(device-read) on io-worker;
+}
+\`\`\`
+
+**Unfinished exact decisions:** where native public effect/capability atoms are declared (source service effect text cannot impersonate a registered capability); whether user-defined enum construction/pattern matching and generic composition are in shipping D3; the exact \`contract\` CLI mode and namespace/package provenance; complete binary/portable payload codecs and ABI layout; verified compiler source-plan schemas and golden bytes. Until these receive architect approval, this is a **concrete candidate** rather than a frozen shipping grammar. The full [AUI compiler](aui-compiler.md) requires these decisions to be closed before its product release.
