@@ -1,0 +1,940 @@
+{
+  "format": "aui.sensor-full-public-digest-dag-arithmetic",
+  "status": "CANDIDATE-ONLY / UNTRUSTED CR14 CORE / SENSOR SOURCE PLACEHOLDER ASSERTIONS UNCHANGED / ALL NATIVE TESTS NOT-RUN",
+  "sources": [
+    "examples/canonical-graph/core-15-content-digest-arithmetic-vectors.json",
+    "examples/canonical-graph/sensor-package.auipkg.json",
+    "examples/canonical-graph/sensor-project.auiproj.json"
+  ],
+  "owner": "docs/architecture/d2-d6-public-contract-digest-pipeline.md",
+  "notes": [
+    "This is a closed arithmetic exercise on one historical sensor package and project, NOT a valid signed re-issued package or trusted Graph",
+    "All three sensor package record/port/operation source TypeReference contractDigests are repeated 1/2/3/4/5/6/7/8 placeholders and authored asserted exportedTypeSetDigest b is fake: this exercise computes replacements in a DERIVED projection only and never edits authored files",
+    "The current CR14 15-core fingerprint and all descendant hashes are arithmetic over UNVERIFIED semantics and never native link proofs",
+    "The sensor project targets an unqualified aarch64 kernel/hardware profile; no Windows/ARM native compiler, physical I/O or validated source providers exist",
+    "Source-only contract graph may have unrelated current C9/D4 semantic errors; this exercise tests hashing and typed field dependency substitution only, not full project acceptance",
+    "Keep all exact canonical string bytes for future independent native encoder regression tests"
+  ],
+  "coreRegistryFingerprintCandidate": "cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1",
+  "typeVectors": [
+    {
+      "name": "example.sensor/RawSample",
+      "domainAscii": "AELYXORA/type-contract/canonical",
+      "projection": {
+        "exportKind": "type",
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/RawSample",
+        "kind": "record",
+        "fields": [
+          {
+            "name": "bytes",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/Bytes",
+              "contractDigest": "6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286"
+            }
+          },
+          {
+            "name": "capturedAt",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/U64",
+              "contractDigest": "24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf"
+            }
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"fields\":[{\"name\":\"bytes\",\"typeRef\":{\"contractDigest\":\"6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/Bytes\"}},{\"name\":\"capturedAt\",\"typeRef\":{\"contractDigest\":\"24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/U64\"}}],\"kind\":\"record\",\"packageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"}",
+      "canonicalByteLength": 484,
+      "expectedArithmeticSha256": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+    },
+    {
+      "name": "example.sensor/Measurement",
+      "domainAscii": "AELYXORA/type-contract/canonical",
+      "projection": {
+        "exportKind": "type",
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/Measurement",
+        "kind": "record",
+        "fields": [
+          {
+            "name": "value",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/F64",
+              "contractDigest": "642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e"
+            }
+          },
+          {
+            "name": "valid",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/Bool",
+              "contractDigest": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572"
+            }
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"fields\":[{\"name\":\"value\",\"typeRef\":{\"contractDigest\":\"642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/F64\"}},{\"name\":\"valid\",\"typeRef\":{\"contractDigest\":\"8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/Bool\"}}],\"kind\":\"record\",\"packageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"}",
+      "canonicalByteLength": 480,
+      "expectedArithmeticSha256": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+    },
+    {
+      "name": "example.sensor/DecodeError",
+      "domainAscii": "AELYXORA/type-contract/canonical",
+      "projection": {
+        "exportKind": "type",
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/DecodeError",
+        "kind": "record",
+        "fields": [
+          {
+            "name": "code",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/U32",
+              "contractDigest": "69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c"
+            }
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"fields\":[{\"name\":\"code\",\"typeRef\":{\"contractDigest\":\"69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/U32\"}}],\"kind\":\"record\",\"packageId\":\"example.sensor\",\"typeId\":\"example.sensor/DecodeError\"}",
+      "canonicalByteLength": 296,
+      "expectedArithmeticSha256": "5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf"
+    }
+  ],
+  "componentVectors": [
+    {
+      "name": "example.sensor/driver",
+      "operations": [],
+      "component": {
+        "domainAscii": "AELYXORA/component-contract/canonical",
+        "projection": {
+          "exportKind": "component",
+          "packageId": "example.sensor",
+          "typeId": "example.sensor/driver",
+          "ports": [
+            {
+              "id": "sample",
+              "direction": "out",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/RawSample",
+                "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+              }
+            }
+          ],
+          "capabilities": [
+            "i2c.transfer"
+          ],
+          "commands": []
+        },
+        "canonicalUtf8": "{\"capabilities\":[\"i2c.transfer\"],\"commands\":[],\"exportKind\":\"component\",\"packageId\":\"example.sensor\",\"ports\":[{\"direction\":\"out\",\"id\":\"sample\",\"typeRef\":{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"}}],\"typeId\":\"example.sensor/driver\"}",
+        "canonicalByteLength": 361,
+        "expectedArithmeticSha256": "526079ea89c651b88ab2ad59a49bc58e0295984737daf1842fb1c95e055677e0"
+      }
+    },
+    {
+      "name": "example.sensor/decoder",
+      "operations": [
+        {
+          "operationId": "Decode",
+          "domainAscii": "AELYXORA/operation-contract/canonical",
+          "projection": {
+            "exportKind": "operation",
+            "packageId": "example.sensor",
+            "componentTypeId": "example.sensor/decoder",
+            "operationId": "Decode",
+            "inputs": [
+              {
+                "name": "raw",
+                "typeRef": {
+                  "kind": "nominal",
+                  "ownerPackageId": "example.sensor",
+                  "typeId": "example.sensor/RawSample",
+                  "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+                }
+              }
+            ],
+            "successTypeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "example.sensor",
+              "typeId": "example.sensor/Measurement",
+              "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+            },
+            "failureTypeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "example.sensor",
+              "typeId": "example.sensor/DecodeError",
+              "contractDigest": "5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf"
+            },
+            "effects": [],
+            "domain": "io-worker",
+            "sideEffectClass": "none",
+            "retryPolicy": "never",
+            "requiredCapabilities": [],
+            "declaredTargets": [
+              "aarch64-unknown-linux-gnu"
+            ]
+          },
+          "canonicalUtf8": "{\"componentTypeId\":\"example.sensor/decoder\",\"declaredTargets\":[\"aarch64-unknown-linux-gnu\"],\"domain\":\"io-worker\",\"effects\":[],\"exportKind\":\"operation\",\"failureTypeRef\":{\"contractDigest\":\"5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/DecodeError\"},\"inputs\":[{\"name\":\"raw\",\"typeRef\":{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"}}],\"operationId\":\"Decode\",\"packageId\":\"example.sensor\",\"requiredCapabilities\":[],\"retryPolicy\":\"never\",\"sideEffectClass\":\"none\",\"successTypeRef\":{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"}}",
+          "canonicalByteLength": 869,
+          "expectedArithmeticSha256": "94ed7ddbe4248615ef786909796f27828dccb8c1444cd735dfae1f3c329d0d2e"
+        }
+      ],
+      "component": {
+        "domainAscii": "AELYXORA/component-contract/canonical",
+        "projection": {
+          "exportKind": "component",
+          "packageId": "example.sensor",
+          "typeId": "example.sensor/decoder",
+          "ports": [
+            {
+              "id": "raw",
+              "direction": "in",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/RawSample",
+                "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+              }
+            },
+            {
+              "id": "reading",
+              "direction": "out",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/Measurement",
+                "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+              }
+            }
+          ],
+          "capabilities": [],
+          "commands": [
+            {
+              "id": "Decode",
+              "operationContractDigest": "94ed7ddbe4248615ef786909796f27828dccb8c1444cd735dfae1f3c329d0d2e"
+            }
+          ]
+        },
+        "canonicalUtf8": "{\"capabilities\":[],\"commands\":[{\"id\":\"Decode\",\"operationContractDigest\":\"94ed7ddbe4248615ef786909796f27828dccb8c1444cd735dfae1f3c329d0d2e\"}],\"exportKind\":\"component\",\"packageId\":\"example.sensor\",\"ports\":[{\"direction\":\"in\",\"id\":\"raw\",\"typeRef\":{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"}},{\"direction\":\"out\",\"id\":\"reading\",\"typeRef\":{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"}}],\"typeId\":\"example.sensor/decoder\"}",
+        "canonicalByteLength": 672,
+        "expectedArithmeticSha256": "e89c9fcfc7b08c0a332cbac70550e0387452e8761e1e8fc1edaaaa6ea82b41a1"
+      }
+    },
+    {
+      "name": "example.sensor/app",
+      "operations": [],
+      "component": {
+        "domainAscii": "AELYXORA/component-contract/canonical",
+        "projection": {
+          "exportKind": "component",
+          "packageId": "example.sensor",
+          "typeId": "example.sensor/app",
+          "ports": [
+            {
+              "id": "reading",
+              "direction": "in",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/Measurement",
+                "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+              }
+            }
+          ],
+          "capabilities": [],
+          "commands": []
+        },
+        "canonicalUtf8": "{\"capabilities\":[],\"commands\":[],\"exportKind\":\"component\",\"packageId\":\"example.sensor\",\"ports\":[{\"direction\":\"in\",\"id\":\"reading\",\"typeRef\":{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"}}],\"typeId\":\"example.sensor/app\"}",
+        "canonicalByteLength": 346,
+        "expectedArithmeticSha256": "2eeb1052b5907eb8f9b05aa5df6e495f1fdb19d0fb34f63ed6960bc7b75a5753"
+      }
+    }
+  ],
+  "packageTypeSet": {
+    "domainAscii": "AELYXORA/type-export-set/canonical",
+    "projection": {
+      "scope": "package",
+      "packageId": "example.sensor",
+      "coreRegistryFingerprint": "cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1",
+      "exports": [
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/Bool",
+          "contractDigest": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/Bytes",
+          "contractDigest": "6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/F64",
+          "contractDigest": "642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/U32",
+          "contractDigest": "69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/U64",
+          "contractDigest": "24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/DecodeError",
+          "contractDigest": "5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/Measurement",
+          "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/RawSample",
+          "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+        }
+      ]
+    },
+    "canonicalUtf8": "{\"coreRegistryFingerprint\":\"cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1\",\"exports\":[{\"contractDigest\":\"8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572\",\"exportId\":\"aui.core/Bool\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286\",\"exportId\":\"aui.core/Bytes\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e\",\"exportId\":\"aui.core/F64\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c\",\"exportId\":\"aui.core/U32\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf\",\"exportId\":\"aui.core/U64\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf\",\"exportId\":\"example.sensor/DecodeError\",\"kind\":\"type\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"exportId\":\"example.sensor/Measurement\",\"kind\":\"type\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"exportId\":\"example.sensor/RawSample\",\"kind\":\"type\",\"packageId\":\"example.sensor\"}],\"packageId\":\"example.sensor\",\"scope\":\"package\"}",
+    "canonicalByteLength": 1406,
+    "expectedArithmeticSha256": "1233c810a94884e95f3b029c538a551deb40946114d97a384f0b576883d01a5c"
+  },
+  "graphTypeSet": {
+    "domainAscii": "AELYXORA/type-export-set/canonical",
+    "projection": {
+      "scope": "graph",
+      "projectId": "example.sensor-telemetry",
+      "coreRegistryFingerprint": "cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1",
+      "exports": [
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/Bool",
+          "contractDigest": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/Bytes",
+          "contractDigest": "6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/F64",
+          "contractDigest": "642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/U32",
+          "contractDigest": "69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/U64",
+          "contractDigest": "24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/DecodeError",
+          "contractDigest": "5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/Measurement",
+          "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/RawSample",
+          "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+        }
+      ]
+    },
+    "canonicalUtf8": "{\"coreRegistryFingerprint\":\"cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1\",\"exports\":[{\"contractDigest\":\"8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572\",\"exportId\":\"aui.core/Bool\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286\",\"exportId\":\"aui.core/Bytes\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e\",\"exportId\":\"aui.core/F64\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c\",\"exportId\":\"aui.core/U32\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf\",\"exportId\":\"aui.core/U64\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf\",\"exportId\":\"example.sensor/DecodeError\",\"kind\":\"type\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"exportId\":\"example.sensor/Measurement\",\"kind\":\"type\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"exportId\":\"example.sensor/RawSample\",\"kind\":\"type\",\"packageId\":\"example.sensor\"}],\"projectId\":\"example.sensor-telemetry\",\"scope\":\"graph\"}",
+    "canonicalByteLength": 1414,
+    "expectedArithmeticSha256": "e7c534ee73a0fa543053729e412fb465a3338300c36ee5d0ddd8ccddc03eba7d"
+  },
+  "graphVector": {
+    "domainAscii": "AELYXORA/semantic-graph/canonical",
+    "projection": {
+      "format": "aui.semantic-graph",
+      "projectId": "example.sensor-telemetry",
+      "coreRegistryFingerprint": "cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1",
+      "typeExportSetDigest": "e7c534ee73a0fa543053729e412fb465a3338300c36ee5d0ddd8ccddc03eba7d",
+      "resolvedExports": [
+        {
+          "kind": "component",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/app",
+          "contractDigest": "2eeb1052b5907eb8f9b05aa5df6e495f1fdb19d0fb34f63ed6960bc7b75a5753"
+        },
+        {
+          "kind": "component",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/decoder",
+          "contractDigest": "e89c9fcfc7b08c0a332cbac70550e0387452e8761e1e8fc1edaaaa6ea82b41a1"
+        },
+        {
+          "kind": "component",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/driver",
+          "contractDigest": "526079ea89c651b88ab2ad59a49bc58e0295984737daf1842fb1c95e055677e0"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/Bool",
+          "contractDigest": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/Bytes",
+          "contractDigest": "6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/F64",
+          "contractDigest": "642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/U32",
+          "contractDigest": "69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c"
+        },
+        {
+          "kind": "type",
+          "packageId": "aui.core",
+          "exportId": "aui.core/U64",
+          "contractDigest": "24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/DecodeError",
+          "contractDigest": "5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/Measurement",
+          "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+        },
+        {
+          "kind": "type",
+          "packageId": "example.sensor",
+          "exportId": "example.sensor/RawSample",
+          "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+        }
+      ],
+      "targets": [
+        {
+          "id": "linux-arm64",
+          "triple": "aarch64-unknown-linux-gnu",
+          "execution": "kernel"
+        }
+      ],
+      "packageDependencies": [
+        {
+          "packageId": "example.sensor",
+          "version": "0.1.0"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "app",
+          "kind": "component-instance",
+          "ports": [
+            {
+              "id": "reading",
+              "direction": "in",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/Measurement",
+                "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+              }
+            }
+          ],
+          "target": "linux-arm64",
+          "component": {
+            "packageId": "example.sensor",
+            "typeId": "example.sensor/app",
+            "contractDigest": "2eeb1052b5907eb8f9b05aa5df6e495f1fdb19d0fb34f63ed6960bc7b75a5753"
+          }
+        },
+        {
+          "id": "bus",
+          "kind": "bus",
+          "target": "linux-arm64"
+        },
+        {
+          "id": "decoder",
+          "kind": "component-instance",
+          "ports": [
+            {
+              "id": "raw",
+              "direction": "in",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/RawSample",
+                "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+              }
+            },
+            {
+              "id": "reading",
+              "direction": "out",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/Measurement",
+                "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+              }
+            }
+          ],
+          "target": "linux-arm64",
+          "component": {
+            "packageId": "example.sensor",
+            "typeId": "example.sensor/decoder",
+            "contractDigest": "e89c9fcfc7b08c0a332cbac70550e0387452e8761e1e8fc1edaaaa6ea82b41a1"
+          }
+        },
+        {
+          "id": "dma_memory",
+          "kind": "storage",
+          "target": "linux-arm64"
+        },
+        {
+          "id": "driver",
+          "kind": "component-instance",
+          "target": "linux-arm64",
+          "ports": [
+            {
+              "id": "sample",
+              "direction": "out",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/RawSample",
+                "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+              }
+            }
+          ],
+          "component": {
+            "packageId": "example.sensor",
+            "typeId": "example.sensor/driver",
+            "contractDigest": "526079ea89c651b88ab2ad59a49bc58e0295984737daf1842fb1c95e055677e0"
+          }
+        },
+        {
+          "id": "sensor",
+          "kind": "device",
+          "target": "linux-arm64"
+        },
+        {
+          "id": "soc",
+          "kind": "cpu",
+          "target": "linux-arm64"
+        }
+      ],
+      "edges": [
+        {
+          "id": "e1",
+          "kind": "hosts",
+          "from": {
+            "node": "soc"
+          },
+          "to": {
+            "node": "bus"
+          }
+        },
+        {
+          "id": "e2",
+          "kind": "hosts",
+          "from": {
+            "node": "bus"
+          },
+          "to": {
+            "node": "sensor"
+          }
+        },
+        {
+          "id": "e3",
+          "kind": "data-flow",
+          "from": {
+            "node": "driver",
+            "port": "sample"
+          },
+          "to": {
+            "node": "decoder",
+            "port": "raw"
+          }
+        },
+        {
+          "id": "e4",
+          "kind": "data-flow",
+          "from": {
+            "node": "decoder",
+            "port": "reading"
+          },
+          "to": {
+            "node": "app",
+            "port": "reading"
+          }
+        },
+        {
+          "id": "e5",
+          "kind": "resource-access",
+          "from": {
+            "node": "driver"
+          },
+          "to": {
+            "node": "sensor"
+          }
+        },
+        {
+          "id": "e6",
+          "kind": "resource-access",
+          "from": {
+            "node": "driver"
+          },
+          "to": {
+            "node": "dma_memory"
+          }
+        }
+      ],
+      "dataFlows": [
+        {
+          "id": "sensor-telemetry",
+          "channels": [
+            {
+              "edgeId": "e3",
+              "mode": "stream",
+              "senderDomain": "io-worker",
+              "receiverDomain": "io-worker",
+              "transfer": "copy",
+              "ordering": "fifo",
+              "errorPolicy": "propagate",
+              "capacity": 32,
+              "overflow": "reject"
+            },
+            {
+              "edgeId": "e4",
+              "mode": "snapshot",
+              "senderDomain": "io-worker",
+              "receiverDomain": "ui",
+              "transfer": "copy",
+              "ordering": "latest",
+              "errorPolicy": "propagate"
+            }
+          ]
+        }
+      ],
+      "workflows": [
+        {
+          "id": "sample-to-measurement",
+          "ownerNodeId": "decoder",
+          "trigger": {
+            "kind": "data-arrival",
+            "edgeId": "e3"
+          },
+          "initialState": "waiting",
+          "states": [
+            {
+              "id": "cancelled",
+              "terminal": "cancelled"
+            },
+            {
+              "id": "cancelling"
+            },
+            {
+              "id": "decoding"
+            },
+            {
+              "id": "done",
+              "terminal": "success"
+            },
+            {
+              "id": "failed",
+              "terminal": "failure"
+            },
+            {
+              "id": "waiting"
+            }
+          ],
+          "transitions": [
+            {
+              "id": "cancel-confirmed",
+              "from": "cancelling",
+              "to": "cancelled",
+              "signal": "cancel-confirmed",
+              "action": {
+                "kind": "none"
+              }
+            },
+            {
+              "id": "cancel-running",
+              "from": "decoding",
+              "to": "cancelling",
+              "signal": "cancel",
+              "action": {
+                "kind": "request-cancel"
+              }
+            },
+            {
+              "id": "cancel-wait",
+              "from": "waiting",
+              "to": "cancelled",
+              "signal": "cancel",
+              "action": {
+                "kind": "none"
+              }
+            },
+            {
+              "id": "completed-after-cancel",
+              "from": "cancelling",
+              "to": "done",
+              "signal": "decoded",
+              "action": {
+                "kind": "publish",
+                "edgeId": "e4"
+              }
+            },
+            {
+              "id": "error",
+              "from": "decoding",
+              "to": "failed",
+              "signal": "decode-error",
+              "action": {
+                "kind": "none"
+              }
+            },
+            {
+              "id": "failed-after-cancel",
+              "from": "cancelling",
+              "to": "failed",
+              "signal": "decode-error",
+              "action": {
+                "kind": "none"
+              }
+            },
+            {
+              "id": "ok",
+              "from": "decoding",
+              "to": "done",
+              "signal": "decoded",
+              "action": {
+                "kind": "publish",
+                "edgeId": "e4"
+              }
+            },
+            {
+              "id": "rx",
+              "from": "waiting",
+              "to": "decoding",
+              "signal": "sample-arrived",
+              "action": {
+                "kind": "dispatch",
+                "nodeId": "decoder",
+                "operationId": "Decode"
+              }
+            }
+          ],
+          "scheduling": "per-instance-fifo",
+          "maxConcurrentInstances": 32,
+          "onLimit": "reject-and-report",
+          "mailboxCapacity": 8,
+          "mailboxOverflow": "reject-and-report",
+          "signals": [
+            {
+              "id": "cancel",
+              "source": "control"
+            },
+            {
+              "id": "cancel-confirmed",
+              "source": "control"
+            },
+            {
+              "id": "decode-error",
+              "source": "command-failure",
+              "nodeId": "decoder",
+              "operationId": "Decode",
+              "payloadTypeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/DecodeError",
+                "contractDigest": "5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf"
+              }
+            },
+            {
+              "id": "decoded",
+              "source": "command-success",
+              "nodeId": "decoder",
+              "operationId": "Decode",
+              "payloadTypeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/Measurement",
+                "contractDigest": "4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1"
+              }
+            },
+            {
+              "id": "sample-arrived",
+              "source": "trigger",
+              "payloadTypeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/RawSample",
+                "contractDigest": "1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1"
+              }
+            }
+          ]
+        }
+      ],
+      "retiredIdentities": [],
+      "resourceModel": {
+        "profile": "aui.hardware-resources",
+        "targetRequirements": [
+          {
+            "targetId": "linux-arm64",
+            "addressBits": 64,
+            "endian": "little",
+            "privilege": "kernel",
+            "featureRegistryId": "example.aarch64.features/draft",
+            "isaFeatures": [
+              "armv8-a"
+            ],
+            "adapterContractId": "example.sensor/mock-target-adapter"
+          }
+        ],
+        "claims": [
+          {
+            "id": "claim_dma",
+            "kind": "dma",
+            "targetId": "linux-arm64",
+            "ownerNodeId": "driver",
+            "resourceNodeId": "sensor",
+            "edgeId": "e5",
+            "addressSpaceId": "dma0",
+            "sharing": "exclusive",
+            "requiredCapabilities": [
+              "dma.submit"
+            ],
+            "dma": {
+              "engineNodeId": "sensor",
+              "channelId": "ch0",
+              "bufferClaimId": "claim_ram",
+              "direction": "from-device",
+              "coherency": "explicit-sync",
+              "alignmentBytes": 16,
+              "maxBytes": "0x1000",
+              "maxInFlight": 1
+            }
+          },
+          {
+            "id": "claim_irq",
+            "kind": "irq",
+            "targetId": "linux-arm64",
+            "ownerNodeId": "driver",
+            "resourceNodeId": "sensor",
+            "edgeId": "e5",
+            "addressSpaceId": "intc0",
+            "sharing": "exclusive",
+            "requiredCapabilities": [
+              "irq.handle"
+            ],
+            "irq": {
+              "controllerNodeId": "soc",
+              "line": "0x2",
+              "trigger": "level-high",
+              "ackPolicy": "explicit"
+            }
+          },
+          {
+            "id": "claim_mmio",
+            "kind": "mmio",
+            "targetId": "linux-arm64",
+            "ownerNodeId": "driver",
+            "resourceNodeId": "sensor",
+            "edgeId": "e5",
+            "addressSpaceId": "physical",
+            "sharing": "exclusive",
+            "requiredCapabilities": [
+              "mmio.read",
+              "mmio.write"
+            ],
+            "mmio": {
+              "base": "0x10000000",
+              "length": "0x100",
+              "registerWidthBits": 32,
+              "alignmentBytes": 4,
+              "endian": "little",
+              "access": "read-write",
+              "ordering": "device"
+            }
+          },
+          {
+            "id": "claim_ram",
+            "kind": "memory",
+            "targetId": "linux-arm64",
+            "ownerNodeId": "driver",
+            "resourceNodeId": "dma_memory",
+            "edgeId": "e6",
+            "addressSpaceId": "physical",
+            "sharing": "exclusive",
+            "requiredCapabilities": [
+              "memory.map",
+              "memory.read",
+              "memory.write"
+            ],
+            "memory": {
+              "base": "0x40000000",
+              "length": "0x1000",
+              "regionType": "ram",
+              "access": "read-write"
+            }
+          }
+        ]
+      }
+    },
+    "canonicalUtf8": "{\"coreRegistryFingerprint\":\"cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1\",\"dataFlows\":[{\"channels\":[{\"capacity\":32,\"edgeId\":\"e3\",\"errorPolicy\":\"propagate\",\"mode\":\"stream\",\"ordering\":\"fifo\",\"overflow\":\"reject\",\"receiverDomain\":\"io-worker\",\"senderDomain\":\"io-worker\",\"transfer\":\"copy\"},{\"edgeId\":\"e4\",\"errorPolicy\":\"propagate\",\"mode\":\"snapshot\",\"ordering\":\"latest\",\"receiverDomain\":\"ui\",\"senderDomain\":\"io-worker\",\"transfer\":\"copy\"}],\"id\":\"sensor-telemetry\"}],\"edges\":[{\"from\":{\"node\":\"soc\"},\"id\":\"e1\",\"kind\":\"hosts\",\"to\":{\"node\":\"bus\"}},{\"from\":{\"node\":\"bus\"},\"id\":\"e2\",\"kind\":\"hosts\",\"to\":{\"node\":\"sensor\"}},{\"from\":{\"node\":\"driver\",\"port\":\"sample\"},\"id\":\"e3\",\"kind\":\"data-flow\",\"to\":{\"node\":\"decoder\",\"port\":\"raw\"}},{\"from\":{\"node\":\"decoder\",\"port\":\"reading\"},\"id\":\"e4\",\"kind\":\"data-flow\",\"to\":{\"node\":\"app\",\"port\":\"reading\"}},{\"from\":{\"node\":\"driver\"},\"id\":\"e5\",\"kind\":\"resource-access\",\"to\":{\"node\":\"sensor\"}},{\"from\":{\"node\":\"driver\"},\"id\":\"e6\",\"kind\":\"resource-access\",\"to\":{\"node\":\"dma_memory\"}}],\"format\":\"aui.semantic-graph\",\"nodes\":[{\"component\":{\"contractDigest\":\"2eeb1052b5907eb8f9b05aa5df6e495f1fdb19d0fb34f63ed6960bc7b75a5753\",\"packageId\":\"example.sensor\",\"typeId\":\"example.sensor/app\"},\"id\":\"app\",\"kind\":\"component-instance\",\"ports\":[{\"direction\":\"in\",\"id\":\"reading\",\"typeRef\":{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"}}],\"target\":\"linux-arm64\"},{\"id\":\"bus\",\"kind\":\"bus\",\"target\":\"linux-arm64\"},{\"component\":{\"contractDigest\":\"e89c9fcfc7b08c0a332cbac70550e0387452e8761e1e8fc1edaaaa6ea82b41a1\",\"packageId\":\"example.sensor\",\"typeId\":\"example.sensor/decoder\"},\"id\":\"decoder\",\"kind\":\"component-instance\",\"ports\":[{\"direction\":\"in\",\"id\":\"raw\",\"typeRef\":{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"}},{\"direction\":\"out\",\"id\":\"reading\",\"typeRef\":{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"}}],\"target\":\"linux-arm64\"},{\"id\":\"dma_memory\",\"kind\":\"storage\",\"target\":\"linux-arm64\"},{\"component\":{\"contractDigest\":\"526079ea89c651b88ab2ad59a49bc58e0295984737daf1842fb1c95e055677e0\",\"packageId\":\"example.sensor\",\"typeId\":\"example.sensor/driver\"},\"id\":\"driver\",\"kind\":\"component-instance\",\"ports\":[{\"direction\":\"out\",\"id\":\"sample\",\"typeRef\":{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"}}],\"target\":\"linux-arm64\"},{\"id\":\"sensor\",\"kind\":\"device\",\"target\":\"linux-arm64\"},{\"id\":\"soc\",\"kind\":\"cpu\",\"target\":\"linux-arm64\"}],\"packageDependencies\":[{\"packageId\":\"example.sensor\",\"version\":\"0.1.0\"}],\"projectId\":\"example.sensor-telemetry\",\"resolvedExports\":[{\"contractDigest\":\"2eeb1052b5907eb8f9b05aa5df6e495f1fdb19d0fb34f63ed6960bc7b75a5753\",\"exportId\":\"example.sensor/app\",\"kind\":\"component\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"e89c9fcfc7b08c0a332cbac70550e0387452e8761e1e8fc1edaaaa6ea82b41a1\",\"exportId\":\"example.sensor/decoder\",\"kind\":\"component\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"526079ea89c651b88ab2ad59a49bc58e0295984737daf1842fb1c95e055677e0\",\"exportId\":\"example.sensor/driver\",\"kind\":\"component\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572\",\"exportId\":\"aui.core/Bool\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286\",\"exportId\":\"aui.core/Bytes\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e\",\"exportId\":\"aui.core/F64\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c\",\"exportId\":\"aui.core/U32\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf\",\"exportId\":\"aui.core/U64\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf\",\"exportId\":\"example.sensor/DecodeError\",\"kind\":\"type\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"exportId\":\"example.sensor/Measurement\",\"kind\":\"type\",\"packageId\":\"example.sensor\"},{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"exportId\":\"example.sensor/RawSample\",\"kind\":\"type\",\"packageId\":\"example.sensor\"}],\"resourceModel\":{\"claims\":[{\"addressSpaceId\":\"dma0\",\"dma\":{\"alignmentBytes\":16,\"bufferClaimId\":\"claim_ram\",\"channelId\":\"ch0\",\"coherency\":\"explicit-sync\",\"direction\":\"from-device\",\"engineNodeId\":\"sensor\",\"maxBytes\":\"0x1000\",\"maxInFlight\":1},\"edgeId\":\"e5\",\"id\":\"claim_dma\",\"kind\":\"dma\",\"ownerNodeId\":\"driver\",\"requiredCapabilities\":[\"dma.submit\"],\"resourceNodeId\":\"sensor\",\"sharing\":\"exclusive\",\"targetId\":\"linux-arm64\"},{\"addressSpaceId\":\"intc0\",\"edgeId\":\"e5\",\"id\":\"claim_irq\",\"irq\":{\"ackPolicy\":\"explicit\",\"controllerNodeId\":\"soc\",\"line\":\"0x2\",\"trigger\":\"level-high\"},\"kind\":\"irq\",\"ownerNodeId\":\"driver\",\"requiredCapabilities\":[\"irq.handle\"],\"resourceNodeId\":\"sensor\",\"sharing\":\"exclusive\",\"targetId\":\"linux-arm64\"},{\"addressSpaceId\":\"physical\",\"edgeId\":\"e5\",\"id\":\"claim_mmio\",\"kind\":\"mmio\",\"mmio\":{\"access\":\"read-write\",\"alignmentBytes\":4,\"base\":\"0x10000000\",\"endian\":\"little\",\"length\":\"0x100\",\"ordering\":\"device\",\"registerWidthBits\":32},\"ownerNodeId\":\"driver\",\"requiredCapabilities\":[\"mmio.read\",\"mmio.write\"],\"resourceNodeId\":\"sensor\",\"sharing\":\"exclusive\",\"targetId\":\"linux-arm64\"},{\"addressSpaceId\":\"physical\",\"edgeId\":\"e6\",\"id\":\"claim_ram\",\"kind\":\"memory\",\"memory\":{\"access\":\"read-write\",\"base\":\"0x40000000\",\"length\":\"0x1000\",\"regionType\":\"ram\"},\"ownerNodeId\":\"driver\",\"requiredCapabilities\":[\"memory.map\",\"memory.read\",\"memory.write\"],\"resourceNodeId\":\"dma_memory\",\"sharing\":\"exclusive\",\"targetId\":\"linux-arm64\"}],\"profile\":\"aui.hardware-resources\",\"targetRequirements\":[{\"adapterContractId\":\"example.sensor/mock-target-adapter\",\"addressBits\":64,\"endian\":\"little\",\"featureRegistryId\":\"example.aarch64.features/draft\",\"isaFeatures\":[\"armv8-a\"],\"privilege\":\"kernel\",\"targetId\":\"linux-arm64\"}]},\"retiredIdentities\":[],\"targets\":[{\"execution\":\"kernel\",\"id\":\"linux-arm64\",\"triple\":\"aarch64-unknown-linux-gnu\"}],\"typeExportSetDigest\":\"e7c534ee73a0fa543053729e412fb465a3338300c36ee5d0ddd8ccddc03eba7d\",\"workflows\":[{\"id\":\"sample-to-measurement\",\"initialState\":\"waiting\",\"mailboxCapacity\":8,\"mailboxOverflow\":\"reject-and-report\",\"maxConcurrentInstances\":32,\"onLimit\":\"reject-and-report\",\"ownerNodeId\":\"decoder\",\"scheduling\":\"per-instance-fifo\",\"signals\":[{\"id\":\"cancel\",\"source\":\"control\"},{\"id\":\"cancel-confirmed\",\"source\":\"control\"},{\"id\":\"decode-error\",\"nodeId\":\"decoder\",\"operationId\":\"Decode\",\"payloadTypeRef\":{\"contractDigest\":\"5c409d5608d2676ad28cd70f044d2d066a2ad3195778b818d4d7f00dbfdc9dcf\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/DecodeError\"},\"source\":\"command-failure\"},{\"id\":\"decoded\",\"nodeId\":\"decoder\",\"operationId\":\"Decode\",\"payloadTypeRef\":{\"contractDigest\":\"4e9574ce7eef309542a54f0cdacbd7c9c0cb8d347a85f8ad7dee247f1441eab1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/Measurement\"},\"source\":\"command-success\"},{\"id\":\"sample-arrived\",\"payloadTypeRef\":{\"contractDigest\":\"1ea2729e01049a94ff4e5545efac8156908b24a0b2725116b680353b39c7feb1\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.sensor\",\"typeId\":\"example.sensor/RawSample\"},\"source\":\"trigger\"}],\"states\":[{\"id\":\"cancelled\",\"terminal\":\"cancelled\"},{\"id\":\"cancelling\"},{\"id\":\"decoding\"},{\"id\":\"done\",\"terminal\":\"success\"},{\"id\":\"failed\",\"terminal\":\"failure\"},{\"id\":\"waiting\"}],\"transitions\":[{\"action\":{\"kind\":\"none\"},\"from\":\"cancelling\",\"id\":\"cancel-confirmed\",\"signal\":\"cancel-confirmed\",\"to\":\"cancelled\"},{\"action\":{\"kind\":\"request-cancel\"},\"from\":\"decoding\",\"id\":\"cancel-running\",\"signal\":\"cancel\",\"to\":\"cancelling\"},{\"action\":{\"kind\":\"none\"},\"from\":\"waiting\",\"id\":\"cancel-wait\",\"signal\":\"cancel\",\"to\":\"cancelled\"},{\"action\":{\"edgeId\":\"e4\",\"kind\":\"publish\"},\"from\":\"cancelling\",\"id\":\"completed-after-cancel\",\"signal\":\"decoded\",\"to\":\"done\"},{\"action\":{\"kind\":\"none\"},\"from\":\"decoding\",\"id\":\"error\",\"signal\":\"decode-error\",\"to\":\"failed\"},{\"action\":{\"kind\":\"none\"},\"from\":\"cancelling\",\"id\":\"failed-after-cancel\",\"signal\":\"decode-error\",\"to\":\"failed\"},{\"action\":{\"edgeId\":\"e4\",\"kind\":\"publish\"},\"from\":\"decoding\",\"id\":\"ok\",\"signal\":\"decoded\",\"to\":\"done\"},{\"action\":{\"kind\":\"dispatch\",\"nodeId\":\"decoder\",\"operationId\":\"Decode\"},\"from\":\"waiting\",\"id\":\"rx\",\"signal\":\"sample-arrived\",\"to\":\"decoding\"}],\"trigger\":{\"edgeId\":\"e3\",\"kind\":\"data-arrival\"}}]}",
+    "canonicalByteLength": 8922,
+    "expectedArithmeticSha256": "bd9e405922174eea539f93417766fb7ec9f98797b99eb24d064f5569f9169afd"
+  },
+  "assertionPolicy": {
+    "originalPackageExportedTypeSetDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "originalGraphTypeExportSetDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "originalCoreFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "allOriginalAuthoredAssertionsRemainUnverified": true
+  }
+}
