@@ -134,3 +134,7 @@ Error distinctions: GRAPH_EXPORT_UNRESOLVED, WORKFLOW_SIGNAL_TYPE, AUI_CONTRACT_
 - C-12: type dependency cycle unsupported by first profile, explicit TYPE_RECURSION_UNSUPPORTED.
 
 **Blocking approval questions:** exact first-profile TypeKind set and primitive core registry IDs; formal definition of component-target support; complete project semantic projection; manifest schema extension rules; inheritance/generics/recursion policy; independent native canonicalizer and exact fixture vectors; choice of first target ABI. This candidate does not mark D2/D6 accepted.
+
+## C8. Separate proposed D3 core type digest domain — no v1 migration implied
+
+[Versioned Core Export Digest](d2-d3-core-export-digest-contract.md) proposes a strictly separate aui.export-contract/v2-core profile and normalized core type registry projections. It does NOT change the existing aui.export-contract/v1 user record/component canonical frames, reference vectors, or the locked pure fixture. A v1 record referring to a future v2-core type needs explicit **approved mixed-profile compatibility** before field typeContractDigest resolution; otherwise CORE_PROFILE_MISMATCH. [13 design-only hash vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json) are not an AELYXORA native validator or approved executable registry. Logical export identity remains distinct from [Win64 native ABI layout](d4-win64-native-component-abi.md) and exact source/package bytes.
