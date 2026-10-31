@@ -1,0 +1,357 @@
+{
+  "format": "aui.win64-abi-layout-design",
+  "status": "DESIGN-ONLY offset/width arithmetic; no native COFF/.pdata/.xdata, Win64 call or ABI test executed",
+  "profile": "aui.native-abi/win64-v1-proposed",
+  "targetTriple": "x86_64-pc-windows-msvc",
+  "endianness": "little",
+  "pointerBits": 64,
+  "entrypoint": {
+    "name": "AuiInvokeV1",
+    "argumentRegisters": [
+      "RCX: AuiCallFrameV1 pointer"
+    ],
+    "returnRegister": "EAX: U32 transport status",
+    "shadowSpaceBytes": 32,
+    "stackAlignmentBeforeCallBytes": 16
+  },
+  "layouts": [
+    {
+      "name": "AuiCallFrameV1",
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "magic",
+          "offset": 0,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "abiMajor",
+          "offset": 4,
+          "size": 2,
+          "type": "U16"
+        },
+        {
+          "name": "abiMinor",
+          "offset": 6,
+          "size": 2,
+          "type": "U16"
+        },
+        {
+          "name": "frameSize",
+          "offset": 8,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "flags",
+          "offset": 12,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "moduleHandle",
+          "offset": 16,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "operationIndex",
+          "offset": 24,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "callerDomain",
+          "offset": 28,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "inputSpanPtr",
+          "offset": 32,
+          "size": 8,
+          "type": "PTR64"
+        },
+        {
+          "name": "inputCount",
+          "offset": 40,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "outputCount",
+          "offset": 44,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "outputSpanPtr",
+          "offset": 48,
+          "size": 8,
+          "type": "PTR64"
+        },
+        {
+          "name": "admissionContextPtr",
+          "offset": 56,
+          "size": 8,
+          "type": "PTR64"
+        }
+      ]
+    },
+    {
+      "name": "AuiSpanV1",
+      "size": 48,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "ownerHandle",
+          "offset": 0,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "byteOffset",
+          "offset": 8,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "byteLength",
+          "offset": 16,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "byteCapacity",
+          "offset": 24,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "ownerGeneration",
+          "offset": 32,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "accessFlags",
+          "offset": 40,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "reserved",
+          "offset": 44,
+          "size": 4,
+          "type": "U32"
+        }
+      ]
+    },
+    {
+      "name": "AuiAdmissionContextV1",
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "contextSize",
+          "offset": 0,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "flags",
+          "offset": 4,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "capabilityLeaseHandle",
+          "offset": 8,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "allocatorHandle",
+          "offset": 16,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "taskTicketHandle",
+          "offset": 24,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "graphSnapshotHandle",
+          "offset": 32,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "callerGeneration",
+          "offset": 40,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "inputBudgetBytes",
+          "offset": 48,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "outputBudgetBytes",
+          "offset": 56,
+          "size": 8,
+          "type": "U64"
+        }
+      ]
+    }
+  ],
+  "independentStructuralAudit": {
+    "issues": [],
+    "layoutCounts": [
+      {
+        "name": "AuiCallFrameV1",
+        "fieldCount": 13,
+        "expectedSize": 64
+      },
+      {
+        "name": "AuiSpanV1",
+        "fieldCount": 7,
+        "expectedSize": 48
+      },
+      {
+        "name": "AuiAdmissionContextV1",
+        "fieldCount": 9,
+        "expectedSize": 64
+      }
+    ]
+  },
+  "diagnosticDesignCases": [
+    {
+      "id": "good-frame",
+      "stage": "shape",
+      "mutation": "exact 64 bytes, aligned 8, correct 0x31495541, version 1.0, zero flags",
+      "expected": "ACCEPT_CANDIDATE_FRAME"
+    },
+    {
+      "id": "wrong-magic",
+      "stage": "header",
+      "mutation": "magic 0x12345678",
+      "expected": "ABI_HEADER_INVALID"
+    },
+    {
+      "id": "wrong-major",
+      "stage": "header",
+      "mutation": "abiMajor=2",
+      "expected": "ABI_VERSION_UNSUPPORTED"
+    },
+    {
+      "id": "wrong-minor",
+      "stage": "header",
+      "mutation": "abiMinor=1 without negotiated optional fields",
+      "expected": "ABI_VERSION_UNSUPPORTED"
+    },
+    {
+      "id": "truncated-frame",
+      "stage": "header",
+      "mutation": "frameSize=56",
+      "expected": "ABI_DESCRIPTOR_TRUNCATED"
+    },
+    {
+      "id": "unmatched-size",
+      "stage": "header",
+      "mutation": "frameSize=72 under strict v1",
+      "expected": "ABI_DESCRIPTOR_SIZE"
+    },
+    {
+      "id": "unknown-flags",
+      "stage": "header",
+      "mutation": "flags=0x80000000",
+      "expected": "ABI_FEATURE_UNSUPPORTED"
+    },
+    {
+      "id": "input-null-with-count",
+      "stage": "array",
+      "mutation": "inputCount=1 inputSpanPtr=0",
+      "expected": "ABI_SPAN_ARRAY_INVALID"
+    },
+    {
+      "id": "input-nonnull-zero-count",
+      "stage": "array",
+      "mutation": "inputCount=0 inputSpanPtr!=0",
+      "expected": "ABI_SPAN_ARRAY_INVALID"
+    },
+    {
+      "id": "unbounded-count",
+      "stage": "array",
+      "mutation": "inputCount=0xffffffff",
+      "expected": "ABI_SPAN_ARRAY_INVALID"
+    },
+    {
+      "id": "span-size-overflow",
+      "stage": "range",
+      "mutation": "byteOffset+byteCapacity exceeds owner capacity",
+      "expected": "ABI_SPAN_OUT_OF_RANGE"
+    },
+    {
+      "id": "span-length",
+      "stage": "range",
+      "mutation": "byteLength>byteCapacity",
+      "expected": "ABI_SPAN_OUT_OF_RANGE"
+    },
+    {
+      "id": "span-reserved",
+      "stage": "range",
+      "mutation": "reserved=1",
+      "expected": "ABI_RESERVED_NONZERO"
+    },
+    {
+      "id": "span-access",
+      "stage": "access",
+      "mutation": "accessFlags=0x4",
+      "expected": "ABI_ACCESS_INVALID"
+    },
+    {
+      "id": "stale-owner",
+      "stage": "ownership",
+      "mutation": "ownerGeneration differs from allocation table",
+      "expected": "ABI_OWNER_STALE"
+    },
+    {
+      "id": "invalid-context",
+      "stage": "context",
+      "mutation": "contextSize=56",
+      "expected": "ABI_DESCRIPTOR_TRUNCATED"
+    },
+    {
+      "id": "unapproved-capability",
+      "stage": "permissions",
+      "mutation": "capabilityLeaseHandle revoked",
+      "expected": "CAPABILITY_DENIED"
+    },
+    {
+      "id": "overlap-invalid",
+      "stage": "ownership",
+      "mutation": "unreviewed writable output aliases read-only input",
+      "expected": "ABI_ALIASING_INVALID"
+    },
+    {
+      "id": "cancel-before-quiescence",
+      "stage": "async",
+      "mutation": "cancel requested but provider still running",
+      "expected": "NOT_TERMINAL_CANCELLED"
+    },
+    {
+      "id": "return-foreign-exception",
+      "stage": "interop",
+      "mutation": "SEH/C++ unwind across Assembly component ABI",
+      "expected": "ABI_FOREIGN_UNWIND_FORBIDDEN"
+    }
+  ],
+  "evidence": "No Win64 toolchain, assembler, linker, imported DLL, GPR/XMM register preservation or OS exception metadata verified"
+}
