@@ -48,3 +48,42 @@ Historic filenames still contain obsolete exploratory labels and hash domains; d
 ## Canonical projection ownership reconciliation — 2026-10-31
 
 The [canonical graph owner](canonical-project-graph-and-components.md) now enumerates complete projection coverage, semantic-vs-presentation classification, deterministic ordering requirements and seven cross-contract rejection invariants. The older [Project Graph](project-graph.md) and [historical partial D2/D6 projection](d2-d6-semantic-projection.md) no longer claim competing current ownership. This is a **documentation authority correction**, not a final byte encoding, accepted hash domain, schema conformance, executable validator or test result. Canonical projection encoding and positive/negative golden vectors remain P0 OPEN.
+
+
+## Focused D1–D8 documentation re-audit — 2026-10-31
+
+**Scope and method:** compared the live canonical graph/package/TypeReference schemas, the unified sensor project/package, the active graph behavior and source-link contracts, and selected D1, D3, D4, D5, D6, D7 and verification/process documents. This is a focused cross-contract review, **not** a new whole-repository link count or an exhaustive formal proof. The earlier broad link counts remain historical and were not remeasured here.
+
+### Confirmed documentation defects corrected in main
+
+| Finding | Severity | Observed contradiction | Resolution in owning file |
+| --- | --- | --- | --- |
+| R-01 | P0 | Old Project Graph / behavior / hash-projection / persistence texts claimed competing semantic ownership alongside ONE graph | Restrained their scope: [one graph](canonical-project-graph-and-components.md) defines current semantics; former projections and their numbered hash domains are historical candidates |
+| R-02 | P0 | [Graph↔AUI](project-graph-aui-contract.md) described TypeID without the complete current TypeReference digest and delegated identity authority to the older Project Graph | Require verified TypeReference with exact contractDigest, and bind source linking to the canonical owner |
+| R-03 | P0 | [Source ownership](source-ownership.md) called view definitions “canonical” without saying that presentation/source ownership cannot redefine architecture | Separated authored source/presentation from graph authority and required reviewed reconciliation |
+| R-04 | P1 | [Canonical sensor project](../../examples/canonical-graph/sensor-project.auiproj.json) referenced an `example.sensor/app` instance missing from [its package](../../examples/canonical-graph/sensor-package.auipkg.json) | Added the missing typed app export and planned source declaration. Source files and public digest verification still absent |
+| R-05 | P1 | Expected error identifiers in [negative cases](../../examples/canonical-graph/negative-cases.json) disagreed with [graph behavior contract](graph-behavior-contract.md) for unresolved dispatch/edge, cross-domain borrow and structurally invalid snapshot | Aligned these expectations and added same-domain queued borrow, result-type mismatch and unverified-export rejections; now 35 **NOT-RUN** proposals |
+| R-06 | P0 | Canonical operation dispatch was described as “verified” without acknowledging that the current package schema has no stored per-command digest nor an accepted digest projection | [Canonical owner](canonical-project-graph-and-components.md) now requires deriving and verifying exact operation/component exports and rejecting unproven public hashes; framing remains explicitly P0 OPEN |
+| R-07 | P1 | First AUI profile, platform contract and Architecture-to-Execution summary continued to point at exploratory graph/syntax texts as current owners | Redirected authority to the single graph and bounded first AUI grammar, preserving former files as supporting research |
+
+### Targeted fixture inspection (design-only)
+
+- A limited independent recursive check of relevant JSON Schema constructs against the [unified sensor graph](../../examples/canonical-graph/sensor-project.auiproj.json) and [package](../../examples/canonical-graph/sensor-package.auipkg.json) reported **0 shape errors**. The check supports `$ref`, `oneOf`, `anyOf`, `allOf`, `if/then/else`, `not`, required properties, constraints and ordinary recursion, but is **not** a standards-complete JSON Schema Draft 2020-12 validator.
+- A separate static cross-reference inspection reported **0 missing component exports, 0 port-mirror mismatches, 0 incompatible endpoint/binding references, and 0 unresolved example workflow dispatch lookups**. Seven nodes, six edges, one workflow and two flow channels were inspected.
+- These findings do **not** turn the example into a valid locked build: synthetic 64-hex placeholders, unmaterialized ASM sources, missing real package locks, unavailable qualified target adapter and unverified operation/export signatures remain **hard blockers**. No Studio engine, on-host ABI, compiler or security/runtime test ran.
+
+### Remaining design gaps requiring decisions, not wording cleanup
+
+| Gate | Priority | Exact unresolved boundary | Required closure evidence before D1–D8 acceptance |
+| --- | --- | --- | --- |
+| D2/D6 | P0 | Complete field-by-field semantic projection, normalized bytes, hash domain, order/absence handling and golden hashes are not frozen as ONE current graph profile | Approved single projection with meaningful-change/no-change tables, independent byte vectors and reject-on-unknown rules |
+| D2/D3 | P0 | Verified core registry, recursive type export closure, exact operation/component digest composition and Graph/Source operation linkage are not proven | One approved type/export algorithm, target/domain/effect checks and end-to-end positive/negative source→graph vectors |
+| D2/D4/D5 | P0 | Execution ownership, provider cancellation/quiescence, caller buffers, terminal-once atomics and device transfer safety lack machine-level verification | Accepted logical invariant + target-specific ABI contract + future race/fault tests |
+| D2/D5 | P0 | Hardware target feature registry, qualified OS/bare-metal adapters and true privilege boundaries are not accepted | Target-qualified declaration/authorization matrix; explicit rejection when unavailable |
+| D3/D5 | P0 | Full State/Derived/Bind/Task/Result/keyed view, event fairness, focus/IME/accessibility and bounded publication are proposed but unaccepted | Exact grammar/type/runtime semantics with sources, negative fixtures, budget and lifecycle acceptance matrices |
+| D4/D6 | P0 | Native component layout, ABI, unsigned-vs-signed artifact chain, reviewer/key trust and replay/revocation policies remain design proposals | Verified receipt-to-module binding and documented key custody/approval policy; native proof in later phase |
+| D6 | P0 | Safe package path inventory, snapshot crash atomicity, historical tombstone continuity and operation-ID replay retention are unproven | Approved durable state/HEAD/retention protocol and later filesystem fault injection |
+| D7 | P0 | Official ChatGPT subscription-backed integration eligibility, auth scopes and real connected-app flow are not demonstrated | Actual provider eligibility/registration plus consent and failure-mode contract; no implicit Plus→API entitlement |
+| D1/D8 | P1 | Human usability acceptance and explicit architect sign-off of the complete design baseline are absent | Single reviewed D1–D8 record, bounded exclusions and one consistent first-host/target trace |
+
+**No new architecture edition, new branch, product code or CI is introduced by this audit.** Earlier frozen reference bytes remain unchanged. Every acceptance gate remains **OPEN** until explicitly signed off; a passed documentation checker is never native verification.
