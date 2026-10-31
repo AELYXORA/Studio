@@ -98,3 +98,7 @@ A UI source runtime may return AUI_UI_BUDGET, AUI_LIST_BUDGET, AUI_EVENT_QUEUE_F
 ## B6. Blocking decisions
 
 Memory envelope compatibility with real product workloads, exact byte accounting and high-water marks, OS window/GPU/provider quota integration, max per-root/process count, task result maximum payload, scheduler fairness and starvation proof, focus/IME/readers across platforms, StateRevision atomic memory ordering, cleanup progress and fault-injection methodology. **No D5 gate is accepted by this proposal**.
+
+## B7. Windows first-host adapter scope — PROPOSED
+
+[D5 Windows UI Host](d5-windows-host-runtime-contract.md) extends the generic root budget to Win32 message ingress, Per-Monitor V2 DPI changes, IME/TSF composition and UI Automation fragment lifetimes. Generation-tagged input and keyed focus survive same-parent reorder, reject stale unmounted rows and cannot roll back a committed UI StateRevision because drawing fails. Windows kernel/GPU/font/COM memory and provider buffers are **external quotas**, not invisibly counted in the candidate 160 MiB UI-root heap. The host needs native Windows tests, accessibility checks, ABI layout proof and explicit adapter ownership before it can be called supported.
