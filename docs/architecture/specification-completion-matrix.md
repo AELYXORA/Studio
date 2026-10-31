@@ -93,6 +93,10 @@ The [existing single-Graph public digest integration](d2-d6-public-contract-dige
 
 [Full T0–T8 compilation stages](aui-ir-layout.md), [trusted GraphLinkedIR](aui-ast-semantic-analysis.md), [SSA OwnershipIR](aui-ownership-ir.md), and [Win64 TargetMIR](aui-targetmir-native-codegen.md) now define a common proposed pass contract with ownership, effect ordering, target layout, machine ABI, native artifacts and separate signed admission. [72 conformance scenarios](../../examples/aui-compiler-production/full-ir-pass-review-cases.json) remain NOT-RUN. Review-only [Ownership CFG](../../schemas/aui-compiler-ownership-cfg-candidate.schema.json) and [TargetMIR](../../schemas/aui-compiler-targetmir-candidate.schema.json) shapes do not establish runtime trust. Still P0: exact Assembly IR layout, L2–L4 resource bounds, D4/D5 native imports and tests, verified core/Graph approval and human D1–D8 sign-off.
 
+## Full compiler in-process Assembly ABI — current IAI-v1 candidate
+
+[Internal compiler ABI](aui-compiler-internal-assembly-abi.md) now proposes exact little-endian `CompilationContextV1/IRNodeHeaderV1/SourceSpanV1/CFGBlockV1/SSAValueV1/OwnerRecordV1/EffectRecordV1/Span16/PassRequestV1/PassReplyV1` and checked arena generation refs for T0–T8. [Layout table](../../schemas/aui-compiler-internal-abi-layout-candidate.json) has **10 structures, 99 exact non-overlapping fields and 19 proposed limits**. [Ten arithmetic byte vectors](../../examples/aui-compiler-production/internal-abi-layout-byte-vectors.json) and [54 NOT-RUN physical acceptance cases](../../examples/aui-compiler-production/internal-abi-and-arena-review-cases.json) are design evidence only. **P0:** closed per-node-tag payload structs and every pass-local arena record, real generated Assembly offset/ABI probes, semantic budgets/performance, external qualified D4/D5 native service table, all D2/Graph/lock trust and D1–D8 approval.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
