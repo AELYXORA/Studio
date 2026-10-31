@@ -1,0 +1,57 @@
+{
+  "format": "aui.targetmir-review",
+  "status": "PROPOSED-NOT-RUN",
+  "targetTriple": "x86_64-pc-windows-msvc",
+  "abiRevision": "D4-W1-PROPOSED",
+  "ownershipInputIdentity": "review-only-OwnershipIR",
+  "runtimeTableIdentity": "review-only-D5-unverified",
+  "imports": [],
+  "functions": [
+    {
+      "id": "demo.returnConstant",
+      "callingConvention": "win64",
+      "args": [],
+      "returns": [
+        {
+          "valueId": "retU32",
+          "regClass": "gpr",
+          "logicalType": "aui.core/U32"
+        }
+      ],
+      "frame": {
+        "stackAlignment": 16,
+        "shadowSpaceBytes": 32,
+        "calleeSaved": [],
+        "unwindRequired": false,
+        "stackProbeRequired": false
+      },
+      "blocks": [
+        {
+          "id": "b0",
+          "params": [],
+          "instructions": [
+            {
+              "opcode": "const",
+              "operands": [],
+              "results": [
+                {
+                  "valueId": "retU32",
+                  "regClass": "gpr",
+                  "logicalType": "aui.core/U32"
+                }
+              ],
+              "sourceOrigin": "source:constant",
+              "memoryEffect": "none"
+            }
+          ],
+          "terminator": {
+            "kind": "ret",
+            "values": [
+              "retU32"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
