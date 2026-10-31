@@ -84,3 +84,7 @@ The source grammar still lacks fully defined event wiring, generic constraint sy
 ## D3+ AST/HIR extended candidate
 
 [L2](d3-state-derived-binding-contract.md) adds StateDecl, DerivedDecl, static ViewPropertyRef, BindingDecl, CommitBlock and SetStmt. [L3](d3-task-result-lifecycle.md) adds TaskDecl, TaskSlot, SubmitStmt, AwaitStmt, SettledHandler and exhaustive typed OutcomeMatch. [Source reconciliation](d3-source-snapshot-reconciliation.md) must verify exact source profiles/hashes and graph bindings before emitting linked TypedHIR. No compiler or OwnershipIR verification is claimed.
+
+## L4 source scope and TypedHIR candidate
+
+[L4 Dynamic View Contract](d3-keyed-dynamic-view-lifecycle.md) adds a typed ForEach AST with List<T>, one immutable StableKey field, a lexical item scope and a stable TemplateSymbolID, lowered to a tagged keyed-child template in TypedHIR. Child positions and source spans are not persistent or runtime identity. The [source-link bundle schema](../../schemas/aui-source-link-bundle.schema.json) requires L4 templateSymbols for L4 sources, but semantic verification against the pinned core registry and approved source remains mandatory. A duplicate live sibling key fails AUI_KEY_DUPLICATE before reconciliation; runtime native outcomes are NOT-RUN.
