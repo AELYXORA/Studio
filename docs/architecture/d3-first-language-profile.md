@@ -85,3 +85,7 @@ The core library is a **candidate pinned built-in registry**, not automatically 
 The initial parser must record stable diagnostic code, file/source digest, start/end byte spans, normalized symbol name, expected/actual and graph origin where known. Order: encoding -> lexer -> syntax/profile -> imports/symbols -> types/argument labels -> child/modifier/event wiring -> effects/command link -> target/ownership -> TypedHIR. Golden legal and illegal fixtures live in [AUI Language Examples](../../examples/aui-language/). They are designed, not executed.
 
 **Open P0:** pin a concrete core registry, Unicode tables/version, parser resource budgets, exact D3 event scheduling and graph command link mapping, D3+ state/bind/tasks, view identity rules, actual target rendering and ABI. No gate is accepted by this draft.
+
+## L2/L3 versioned extension policy
+
+The [L2 State/Derived/Bind contract](d3-state-derived-binding-contract.md) and [L3 Task/Result contract](d3-task-result-lifecycle.md) are future **versioned source profiles**, NOT extensions admitted by this strict L0/L1 grammar. They do not implicitly relax named-only arguments, strict UTF-8, source IDs, target/effect/capability checks, or Graph source authority. The [source-to-Graph bundle](d3-source-snapshot-reconciliation.md) requires an approved immutable source+lock+graph review. All future profile tests remain NOT-RUN; a token such as state or await in an L0/L1 file is still AUI_PROFILE_UNSUPPORTED.
