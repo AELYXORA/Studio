@@ -4,9 +4,10 @@ These are **future acceptance expectations** for the bounded [first Assembly com
 
 ## Fixture inventory
 
-- [Acceptance cases](acceptance-cases.json): 45 designed source-only, graph-link, native, limit, trust, deterministic emission and no-publication checks. Every case has `observed: NOT-RUN`.
+- [Acceptance cases](acceptance-cases.json): 47 designed source-only, graph-link, native, limit, trust, deterministic emission and no-publication checks. Every case has `observed: NOT-RUN`.
 - [Provisional L0/L1 review catalogue](review-type-catalog.json): exact type names/builtin property signatures for local source-only checks, including the historical fixture aliases `Tick` and `Failure`. **Not** an authenticated `coreRegistryFingerprint`, public type/operation digest, Win64 runtime or permission.
 - [StatusPanel expected source-only plan](status-panel-l0.source-only-plan.expected.json): one proposed normalized output for [unchanged L0 source](../aui-language/status-panel-l0.aui), with three view nodes and two static accessibility labels. This file is a **manually authored design vector**, not compiler-produced output; field shape is described by the [source-only plan schema](../../schemas/aui-compiler-source-only-plan.schema.json).
+- [ConsumerPanel L1 expected source-only plan](linked-consumer-panel-l1.source-only-plan.expected.json): manually authored 579-byte L1 type/event/command/handler and two-modifier view tree. Catalogue bytes and source SHA are pinned, but public Tick/Failure exports and operation provider are UNVERIFIED. This tests P02–P06 mapping only.
 - [D3 first-profile negative cases](../aui-language/d3-first-profile-negative-cases.json): historical design fixture mutations reused without modifying the original sources. The [L1 ConsumerPanel](../aui-language/linked-consumer-panel.aui) has a **historical, unapproved** link JSON, not proof of the current complete canonical graph.
 
 ## COMP-01–05 detailed closure and first error vector
