@@ -50,3 +50,7 @@ The [D3 Type and Binding Profile](d3-type-and-binding-profile.md) restricts L0/L
 ## D3+ state/task ownership policy (PROPOSED)
 
 [L2 State](d3-state-derived-binding-contract.md) restricts mutable state to its owning UI scheduler and accepts only owned/immutable copied message values from other domains; derived and binding sources are pure and cannot capture raw device pointers. [L3 Task/Result](d3-task-result-lifecycle.md) defines a single active TaskTicket per TaskSlot, target/domain Send checks and generation-isolated results. Cross-await borrow must satisfy [OwnershipIR](aui-ownership-ir.md) or fail OWN_ASYNC_ESCAPE; cancellation never releases in-flight DMA/OS buffers until proven safe. Logical StateRevision, GraphRevision, TaskTicket, CommandTicket and D6 snapshot/HEAD epoch remain disjoint. No native borrow checker was run.
+
+## D3+ state/task ownership (proposed)
+
+[L2 State](d3-state-derived-binding-contract.md) confines mutation to owning UI scheduler, rejects storage of unproven borrows and uses owned immutable messages from other domains. [L3 Task/Result](d3-task-result-lifecycle.md) distinguishes TaskSlot, TaskTicket and provider CommandTicket, requires Send/Share proof and retains physical buffers after cancellation request until confirmed quiescence. StateRevision, GraphRevision and D6 HEAD epoch remain disjoint. [OwnershipIR](aui-ownership-ir.md) must prove await lifetimes; no checker exists yet.
