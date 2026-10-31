@@ -1,0 +1,12 @@
+// L4 design-only syntax fixture. Missing example.rows package / core List<> and StableKey ABI.
+// Explicit profile aui.source/l4-keyed/v1 required; L0-L3 must reject ForEach.
+import aui.core;
+import example.rows;
+
+component RowList(input rows: List<Row>) {
+  VStack(spacing: 8) {
+    ForEach(items: rows, key: item.id) {
+      item in Text(value: item.title).accessibilityLabel(value: item.title)
+    }
+  }
+}
