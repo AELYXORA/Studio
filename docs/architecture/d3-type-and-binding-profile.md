@@ -91,3 +91,7 @@ A string is a logical UTF-8 scalar sequence; target-native representation, alloc
 ## D3+ proposed core type additions
 
 [L2 State](d3-state-derived-binding-contract.md) requires typed StateRevision, static keyed view property and purity contracts beyond the existing L0/L1 catalog. [L3 Task/Result](d3-task-result-lifecycle.md) proposes TaskSlot/TaskTicket and closed TaskOutcome<T,E> variants Successful, Failed, AdmissionRejected, confirmed Cancelled and ProviderUnavailable. These are **not yet pinned aui.core/0.1-draft exports or native ABI layouts**. A result cannot be implicitly converted to String or hardware permission. Actual type digest registry and target ABI are P0.
+
+## Logical core registry versus native ABI — PROPOSED
+
+[D3 Core Registry](d3-core-registry-value-contract.md) now distinguishes the first L0/L1 candidate from a separately proposed extended registry (U64, List<T>, StableKey, StateRevision, TaskOutcome and task ownership). [Registry inventory schema](../../schemas/aui-core-registry-proposal.schema.json) does not include any approved core exportedContractDigest or native layout; the values are NOT automatically trusted TypeIDs. [D4 ABI](d4-core-value-abi-contract.md) must separately prove exact target layouts, ownership and errors. [D5](d5-ui-resource-budget-and-publication.md) owns resource pressure and admission. L0/L1 typed imports and properties are unchanged.
