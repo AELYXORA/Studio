@@ -18,6 +18,10 @@ Use [Canonical Project Graph and Components](canonical-project-graph-and-compone
 
 The remainder of this index contains supporting research and frozen historical profile references. Their old numbered format or digest labels are **not product or architecture editions** and cannot override the current canonical owner.
 
+## Current type and operation closure — design-only
+
+[D3 Core Type Registry CR11](d3-core-registry-value-contract.md) now reconciles a single [15-entry current core inventory](../../examples/canonical-graph/core-registry-candidate.json) and its [strict documentary schema](../../schemas/canonical-core-registry-candidate.schema.json) with the canonical sensor's `Bytes` and `F64` TypeReferences. [Canonical Graph C12](canonical-project-graph-and-components.md) specifies the authored-to-derived operation/component export mapping; [26 NOT-RUN operation cases](../../examples/canonical-graph/operation-export-review-cases.json) outline invalidation and authorization. No accepted core fingerprints, real golden exports or native ABI results exist.
+
 ## Cross-Specification Audit — 2026-10-31
 
 [Full D1–D8 consistency audit](cross-specification-audit-2026-10-31.md) records ten confirmed documentation conflicts addressed in main and fourteen still-open design risks. It covers contract owners, runtime/ABI, dependency resolution, D2 channel borrow lifetimes, D3 source examples and Phase I–IV gating. Corrected text is **not architect sign-off** or native verification.
