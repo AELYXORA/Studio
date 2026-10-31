@@ -38,6 +38,10 @@ The remainder of this index contains supporting research and frozen historical p
 
 The [COMP-01–05 Front-End Closure](aui-compiler-frontend-closure.md) and [Assembly implementation backlog](aui-compiler-implementation-backlog.md) now define the candidate Win64 CLI/module layout, Unicode 15.1.0 XID/NFC and 64 MiB bounds, strict L0/L1 type/event/accessibility checks, deterministic TypedHIR and separate error reports. The first [source-only test folder](../../examples/aui-compiler-first-slice/README.md) includes a strict [catalogue schema](../../schemas/aui-compiler-review-type-catalog.schema.json), [diagnostics schema](../../schemas/aui-compiler-source-only-diagnostics.schema.json), an exact invalid U32 AUI source/report and **35 additional NOT-RUN Unicode cases**. No compiler, real parser, qualified Win64 toolchain, approved source/Graph link or runtime exists. All human COMP and D1–D8 gates remain OPEN.
 
+## Integrated AUI language and types — design pass
+
+The [AUI Syntax owner](aui-syntax.md) now presents one combined L0-L4 candidate grammar and contract-module syntax. [Types and Ownership](aui-types-and-ownership.md) owns cross-profile type admission. There are [36 NOT-RUN grammar cases](../../examples/aui-compiler-production/integrated-grammar-cases.json). Public enum/service mapping remains P0 because the canonical package schema only exports record types.
+
 ## Complete AUI production compiler — single end-state
 
 **The [authoritative full AUI compiler specification](aui-compiler.md) is the actual product target**, not a restricted L0/L1 checker. It covers integrated AUI source profiles L0–L4, typed record/enum/service contract units, exact core and one Canonical Project Graph links, TypedHIR/ReactiveIR/AsyncIR/KeyedIR/OwnershipIR/TargetMIR, safe optimizations, qualified target-native Assembly/COFF/PE linking, D5 renderer/runtime, D6 reproducible and separately signed release evidence. [Complete target acceptance designs](../../examples/aui-compiler-production/README.md) now contain **66 NOT-RUN requirements**, including actual native application behavior; no production compiler has been built or accepted.
