@@ -71,6 +71,12 @@ The decomposition above is an implementation backlog, **not a claim of a finishe
 **Ready for first coding** requires explicit human acceptance of COMP-01..05 and the agreed scope of the Phase II gate (or an expressly recorded bounded exception under existing project policy). The completed documentation by itself is not authority to begin implementation or run unverified native modules.
 
 
+## Full IR production workstream — Phase I prerequisites
+
+Before future Assembly implementation of any T2–T8 pass, review the [full T0–T8 compiler architecture](aui-ir-layout.md), [GraphLinkedIR evidence](aui-ast-semantic-analysis.md), [OwnershipIR transfer/worklist](aui-ownership-ir.md) and [Win64 TargetMIR code generation](aui-targetmir-native-codegen.md). [72 IR acceptance designs](../../examples/aui-compiler-production/full-ir-pass-review-cases.json) remain NOT-RUN. The review-only schemas and six sample CFG/MIR JSON documents are inspection fixtures, not trusted compiler IR or ABI tests.
+
+The implementation must construct native internal typed IR, run actual dominance, resource/effect/lifetime and machine ABI verifiers **after each transformation**, link exact signed source/Graph/operation evidence, and independently inspect and run target COFF/PE with D5 service adapters. Exact Assembly record layout and allocator offsets, native runtime service symbol table, full IR resource bounds, platform toolchain and observed acceptance remain Phase I/III open gates. No alternative frontend-only compiler is considered the finished product.
+
 ## Complete AUI production compiler — all product workstreams (NOT just P00–P06)
 
 **Scope correction:** this document's earlier AUIC-00..10 tasks are only the *initial front-end portion* of the **single** [full native compiler specification](aui-compiler.md). The final product **must** emit, link, validate and package native code for all accepted shipping L0–L4 language capabilities. A source-only static plan is a **temporary engineering artifact**, not a shippable full compiler or a forever-allowed shortcut around Graph/source/type/target authority.
