@@ -246,6 +246,12 @@ For **each one** of exactly 15 unique TypeIDs, verify in this order:
 5. Public semantic dependency closure is separate from logical field shape: generic templates require exact ordered argument TypeReferences, complete type/effect/ownership/Send admissibility, and verified public nested contract values. Result/TaskOutcome control payload rule contents must be fully reviewed; a type's text alone is not a portable codec, runtime proof or signed source identity.
 6. Only **after** accepted semantic rules, canonical writer, immutable source/lock signatures, independent golden byte/hash vectors, owner/target and D1–D8 human review can the approved D2/C10 public type/registry digest algorithm be invoked. This proposed CR14 comparison projection is **not an accepted final domain-separated public digest preimage**, and it does not validate a native D4 ABI.
 
+### CR14.1a Full public core type projection wrapper — proposed, not trusted
+
+CR14's seven-field `typeId,kind,typeArity,featureGate,logicalTraits,semanticModel,semanticRules` comparator is the **content-bearing logical meaning** of one core type. The [unified D2/D6 derived public digest candidate](d2-d6-public-contract-digest-pipeline.md) wraps **exactly those same seven fields** with only the established public export discriminator `exportKind:"type"` and owner `packageId:"aui.core"`, making one closed nine-field public core type projection. The [strict candidate projection schema](../../schemas/canonical-public-contract-projections-candidate.schema.json) makes this shape explicit; no new core inventory field, type ID or public hash domain is created.
+
+**Untrusted sample:** the [Core Bool projection example](../../examples/canonical-graph/public-contract-projection-shapes-candidate.json) is derived from the live 15-type candidate, includes full `semanticRules` text and is still **UNVERIFIED**. A successful projection-shape validation is not permission to compute a public type `contractDigest`. Only after approved CR14 meaning + D6 exact bytes/domain + authenticated source/lock + independent golden evidence may the future trusted resolver enter the full public hash DAG. A core type's own `contractDigest`, review status, source path and target ABI are **never** fields of its logical hash projection.
+
 ### CR14.2 Exact remaining gaps hidden by mere rule count
 
 The proposed **34 explicit texts** establish auditable meaning *candidates*, not proof that every value serializer and native resource consequence is closed. In particular:
