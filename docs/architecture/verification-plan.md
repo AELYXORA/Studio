@@ -20,6 +20,14 @@ A full compiler verification campaign must include: (a) positive complete AUI so
 
 **Testability gap:** most cases are described semantic mutations of existing source examples, not materialized full source files or compiler-emitted diagnostics. Before marking PASS, materialize immutable byte-exact positive and negative test inputs, target/import/core/lock context, expected diagnostic code+source span, correct emitted typed IR and actual Graph/native output where applicable. Record real compiler tool version, hashes and observed results. Even a full parser PASS cannot satisfy [66 production native compiler acceptance cases](../../examples/aui-compiler-production/complete-compiler-acceptance.json) without backend/runtime verification. All currently **NOT-RUN**.
 
+## Enum, exhaustive match and generic identity conformance — designed, NOT-RUN
+
+[36 new value/type scenarios](../../examples/aui-compiler-production/enum-generic-value-cases.json) specify enum constructor payload arity, exhaustive pure match/binder scope, source profile gating, nested generic arity/depth/node budgets, recursive type cycle/Send/opaque handle rejection and trustworthy public export closure. Three cases have [materialized .aui sources](../../examples/aui-compiler-production/README.md) rather than only a prose mutation. The expected diagnostics are **candidate design outputs**, not observed compiler errors.
+
+[Enum candidate logical digests](../../examples/aui-compiler-production/enum-logical-digest-reference-vectors.json) (3 exact ASCII D6-style projection strings) and [generic export ID candidates](../../examples/aui-compiler-production/generic-export-identity-reference-vectors.json) (2 exact recursive identity-only byte strings) were computed by Python hashlib and independently crosschecked with OpenSSL SHA-256. These are **only arithmetic reference vectors** against **unapproved domains**; the real AELYXORA compiler, D2 source resolver, D4 ABI and public core export trust were NOT-RUN / UNVERIFIED.
+
+Future native verifier MUST prove separately: valid enum constructors and exhaustive match HIR, immutable ownership/move/drop across switch arms, exact ABI tag/payload/align/return, full typed nested generic ownership and resource limits, absence of invented public hash authority and correct source/Graph signed locks. A reference digest, a recursively valid JSON shape or successful source-only parse is **never** a production compiler PASS.
+
 ## Present baseline
 
 There is a limited Linux x86-64 Assembly JSON lexical preflight, but no complete JSON parser, Project Graph validator, native AUI compiler or general build coordinator. The preflight is **not** a verification baseline for graph semantics. For every future verification fixture, record the exact local invocation, target, expected outcome and observed **not run / pass / fail** result. Do not claim test execution without evidence.
