@@ -1,0 +1,271 @@
+{
+  "format": "aui.d5-ui-budget-vectors",
+  "status": "PROPOSED reference arithmetic ONLY; no AELYXORA allocator, scheduler, native renderer or OS tests run",
+  "rootBudgetBytes": 167772160,
+  "pools": [
+    {
+      "name": "committedView",
+      "limitMiB": 32,
+      "limitBytes": 33554432
+    },
+    {
+      "name": "candidateScratch",
+      "limitMiB": 32,
+      "limitBytes": 33554432
+    },
+    {
+      "name": "stateDerivedBindings",
+      "limitMiB": 16,
+      "limitBytes": 16777216
+    },
+    {
+      "name": "eventIngress",
+      "limitMiB": 8,
+      "limitBytes": 8388608
+    },
+    {
+      "name": "outcomeIngress",
+      "limitMiB": 8,
+      "limitBytes": 8388608
+    },
+    {
+      "name": "sceneMetadata",
+      "limitMiB": 32,
+      "limitBytes": 33554432
+    },
+    {
+      "name": "teardownMetadata",
+      "limitMiB": 16,
+      "limitBytes": 16777216
+    },
+    {
+      "name": "accountingHeadroom",
+      "limitMiB": 16,
+      "limitBytes": 16777216
+    }
+  ],
+  "limits": {
+    "maxItemsPerForEach": 256,
+    "maxForEachNestingDepth": 8,
+    "maxDynamicNodesPerRoot": 4096,
+    "maxPendingEventsPerView": 64,
+    "maxPendingEventsPerRoot": 8192,
+    "maxEventBytesPerRoot": 8388608,
+    "maxActiveTaskTicketsPerRoot": 256,
+    "maxPendingOutcomeEnvelopesPerRoot": 256,
+    "maxOutcomeBytesPerRoot": 8388608,
+    "maxDetachedCleanupOwners": 512,
+    "maxCleanupMetadataBytesPerRoot": 16777216,
+    "maxRenderSubmissionsPerRoot": 2,
+    "maxStateCommitSetOps": 16,
+    "firstHostRootHeapMaxBytes": 167772160
+  },
+  "boundaryCases": [
+    {
+      "id": "per-view-event-full",
+      "usage": {
+        "eventsForView": 64,
+        "globalEvents": 64,
+        "globalEventBytes": 1000
+      },
+      "request": {
+        "events": 1,
+        "eventBytes": 16
+      },
+      "expected": "AUI_EVENT_QUEUE_FULL",
+      "independentModel": "AUI_EVENT_QUEUE_FULL"
+    },
+    {
+      "id": "root-event-count-full",
+      "usage": {
+        "eventsForView": 0,
+        "globalEvents": 8192,
+        "globalEventBytes": 4000
+      },
+      "request": {
+        "events": 1,
+        "eventBytes": 16
+      },
+      "expected": "AUI_EVENT_QUEUE_FULL",
+      "independentModel": "AUI_EVENT_QUEUE_FULL"
+    },
+    {
+      "id": "root-event-byte-full",
+      "usage": {
+        "eventsForView": 0,
+        "globalEvents": 10,
+        "globalEventBytes": 8388608
+      },
+      "request": {
+        "events": 1,
+        "eventBytes": 1
+      },
+      "expected": "AUI_EVENT_QUEUE_FULL",
+      "independentModel": "AUI_EVENT_QUEUE_FULL"
+    },
+    {
+      "id": "per-view-allowed",
+      "usage": {
+        "eventsForView": 63,
+        "globalEvents": 8191,
+        "globalEventBytes": 8388607
+      },
+      "request": {
+        "events": 1,
+        "eventBytes": 1
+      },
+      "expected": "accepted",
+      "independentModel": "accepted"
+    },
+    {
+      "id": "task-global-full",
+      "usage": {
+        "activeTasks": 256
+      },
+      "request": {
+        "tasks": 1
+      },
+      "expected": "AUI_TASK_SLOT_BUSY",
+      "independentModel": "AUI_TASK_SLOT_BUSY"
+    },
+    {
+      "id": "outcome-count-full",
+      "usage": {
+        "pendingOutcomes": 256,
+        "outcomeBytes": 4096
+      },
+      "request": {
+        "outcomes": 1,
+        "outcomeBytes": 16
+      },
+      "expected": "AUI_RESULT_BUDGET",
+      "independentModel": "AUI_RESULT_BUDGET"
+    },
+    {
+      "id": "outcome-bytes-full",
+      "usage": {
+        "pendingOutcomes": 0,
+        "outcomeBytes": 8388608
+      },
+      "request": {
+        "outcomes": 1,
+        "outcomeBytes": 16
+      },
+      "expected": "AUI_RESULT_BUDGET",
+      "independentModel": "AUI_RESULT_BUDGET"
+    },
+    {
+      "id": "outcome-allowed",
+      "usage": {
+        "pendingOutcomes": 255,
+        "outcomeBytes": 8388592
+      },
+      "request": {
+        "outcomes": 1,
+        "outcomeBytes": 16
+      },
+      "expected": "accepted",
+      "independentModel": "accepted"
+    },
+    {
+      "id": "list-size-full",
+      "usage": {
+        "itemsInList": 256
+      },
+      "request": {
+        "newItems": 1
+      },
+      "expected": "AUI_LIST_BUDGET",
+      "independentModel": "AUI_LIST_BUDGET"
+    },
+    {
+      "id": "tree-nodes-full",
+      "usage": {
+        "dynamicNodes": 4096
+      },
+      "request": {
+        "newDynamicNodes": 1
+      },
+      "expected": "AUI_LIST_BUDGET",
+      "independentModel": "AUI_LIST_BUDGET"
+    },
+    {
+      "id": "nested-list-full",
+      "usage": {
+        "nestedDepth": 8
+      },
+      "request": {
+        "extraNestedLevels": 1
+      },
+      "expected": "AUI_LIST_BUDGET",
+      "independentModel": "AUI_LIST_BUDGET"
+    },
+    {
+      "id": "cleanup-owner-full",
+      "usage": {
+        "detachedOwners": 512,
+        "cleanupMetadataBytes": 1
+      },
+      "request": {
+        "newDetachedOwners": 1,
+        "cleanupMetadataBytes": 100
+      },
+      "expected": "AUI_UI_BUDGET",
+      "independentModel": "AUI_UI_BUDGET"
+    },
+    {
+      "id": "cleanup-byte-full",
+      "usage": {
+        "detachedOwners": 5,
+        "cleanupMetadataBytes": 16777216
+      },
+      "request": {
+        "newDetachedOwners": 1,
+        "cleanupMetadataBytes": 1
+      },
+      "expected": "AUI_UI_BUDGET",
+      "independentModel": "AUI_UI_BUDGET"
+    },
+    {
+      "id": "frame-submission-full",
+      "usage": {
+        "framesInFlight": 2
+      },
+      "request": {
+        "newFrames": 1
+      },
+      "expected": "AUI_UI_BUDGET",
+      "independentModel": "AUI_UI_BUDGET"
+    },
+    {
+      "id": "commit-set-count-full",
+      "usage": {
+        "commitOps": 16
+      },
+      "request": {
+        "extraCommitOps": 1
+      },
+      "expected": "AUI_STATE_BUDGET",
+      "independentModel": "AUI_STATE_BUDGET"
+    },
+    {
+      "id": "candidate-memory-cap",
+      "usage": {
+        "candidateScratchBytes": 33554432
+      },
+      "request": {
+        "newCandidateScratchBytes": 1
+      },
+      "expected": "AUI_UI_BUDGET",
+      "independentModel": "AUI_UI_BUDGET"
+    }
+  ],
+  "invariants": [
+    "All pool bytes sum exactly to root budget",
+    "Count and byte limits are conjunctive",
+    "Per-view event capacity does not bypass global capacity",
+    "Admission must reserve owned payload and cleanup bytes before copying or effect",
+    "Native GPU/OS/provider bytes require separate quotas and do not silently fit this root budget",
+    "No physical memory/performance benchmark has been performed"
+  ]
+}
