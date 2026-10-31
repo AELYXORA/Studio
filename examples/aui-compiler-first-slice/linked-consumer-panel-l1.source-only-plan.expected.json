@@ -51,8 +51,8 @@
             "name": "tick",
             "logicalType": "example.locked/Tick",
             "span": {
-              "startByte": 211,
-              "endByte": null
+              "startByte": 271,
+              "endByte": 281
             }
           }
         ],
