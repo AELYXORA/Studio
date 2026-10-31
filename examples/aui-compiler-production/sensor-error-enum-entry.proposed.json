@@ -1,0 +1,12 @@
+{
+  "typeId": "example.contract/SensorError",
+  "kind": "enum",
+  "variants": [
+    {
+      "name": "NoReading"
+    },
+    {
+      "name": "DeviceUnavailable"
+    }
+  ]
+}
