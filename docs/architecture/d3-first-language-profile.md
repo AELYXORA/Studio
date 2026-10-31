@@ -88,6 +88,12 @@ The core library is a **candidate pinned built-in registry**, not automatically 
 
 [Compiler-first acceptance cases](../../examples/aui-compiler-first-slice/acceptance-cases.json) are future **NOT-RUN** tests. Historical examples using positional modifiers remain illustrative, not L0/L1 positive fixtures.
 
+## Compiler lexical/Unicode selection — concrete candidate, not language revision
+
+[COMP-02 in the first front-end closure](aui-compiler-frontend-closure.md) proposes pinning **Unicode 15.1.0** for XID_Start/XID_Continue membership and NFC identifier comparison (not host locale/OS default), with exact versioned UCD data inputs and future normalization conformance. This clarifies, rather than changes, the L0/L1 source grammar above. ASCII-only source remains fully supported. Source String values preserve their literal scalar sequence; no NFC/case folding of user strings is permitted.
+
+[35 Unicode/lexical negative and positive designs](../../examples/aui-compiler-first-slice/unicode-and-diagnostics-cases.json) specify invalid UTF-8, surrogate escapes, NFC collision and profile boundaries. The [COMP-01–05 implementation backlog](aui-compiler-implementation-backlog.md) describes prospective lexer/parser/TypedHIR Assembly modules only. The actual XID/NFC source-file SHA values and human language contract approval remain OPEN; no parser has been implemented or tested.
+
 ## L5. Phase III future acceptance
 
 The initial parser must record stable diagnostic code, file/source digest, start/end byte spans, normalized symbol name, expected/actual and graph origin where known. Order: encoding -> lexer -> syntax/profile -> imports/symbols -> types/argument labels -> child/modifier/event wiring -> effects/command link -> target/ownership -> TypedHIR. Golden legal and illegal fixtures live in [AUI Language Examples](../../examples/aui-language/). They are designed, not executed.
