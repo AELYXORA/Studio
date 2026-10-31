@@ -1,5 +1,7 @@
 # D2/D3/D6 — Versioned TypeReference v2 and Transitive Typed Export Resolution
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED design; NOT approved, implemented, typechecked by AELYXORA, or admitted in existing 0.1-draft project schemas.** [v1 public export](d2-export-contract-identity.md), [project schema](../../schemas/project.schema.json), [component-package schema](../../schemas/component-package.schema.json), [locked pure fixture](../../examples/locked-pure-reference/README.md), v1/v2-core and G1 vectors all remain unchanged. [D3 core registry](d3-core-registry-value-contract.md), [G1](d2-d3-generic-instantiation-identity.md) and [D6 canonical P1](d6-canonical-persistence.md) retain their own ownership.
 
 ## TR1. Exact versioned boundaries
