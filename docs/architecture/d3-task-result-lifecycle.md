@@ -17,6 +17,8 @@ The following is an intentional restricted extension, not the earlier broad task
                        "on", domainAtom, "{", awaitStmt, returnStmt, "}" ;
     taskParams       = taskParam, { ",", taskParam } ;
     taskParam        = ID, ":", typeName ;
+    taskSlotDecl     = "taskSlot", ID, ":", "TaskSlot", "<",
+                       typeName, ",", typeName, ">", ";" ;
     awaitStmt        = "let", ID, "=", "await", ID, "(", [ namedArgs ], ")", ";" ;
     returnStmt       = "return", ID, ";" ;
     submitStmt       = "submit", ID, "(", [ namedArgs ], ")", "as", ID, ";" ;
@@ -28,6 +30,8 @@ The following is an intentional restricted extension, not the earlier broad task
     rejectArm        = "AdmissionRejected", "(", ID, ")", "=>", stateCommit ;
     cancelledArm     = "Cancelled", "(", ID, ")", "=>", stateCommit ;
     unavailableArm   = "ProviderUnavailable", "(", ID, ")", "=>", stateCommit ;
+
+**Full compiler source grammar closure candidate:** `taskSlotDecl` above is the explicit missing declaration of a source-scoped slot. It is a component-level L3 declaration before the final root view, with a unique NFC-checked source ID and **exactly two ordered nominal public result/error type arguments**. `taskSlot refreshSlot: TaskSlot<Tick, Failure>;` is the proposed syntax for the existing [ReviewPanel L3 example](../../examples/aui-language/review-panel-l3.aui). The `TaskSlot<T,E>` syntax names an opaque UI-owned runtime holder; it may **not** create a portable graph record, transferable value, native pointer or user-constructed task ticket. A `submit SomeTask(args) as refreshSlot` must resolve to a declared task with exactly matching `Result<T,E>` signature and runtime owner scope; `on settled refreshSlot(outcome)` must resolve to that same slot and an exact `TaskOutcome<T,E>` immutable payload. Missing slot, mismatched T/E, duplicate slot, unused/duplicate settled handler or out-of-scope task -> reject before IR production. No inferred implicit slot is created merely because its name is present after `as`. This remains **PROPOSED**, not an accepted extension or ABI verification; the complete L3 grammar owner is this T1 section and the [integrated compiler](aui-compiler.md) requires it to be frozen before full compilation.
 
 An L3 ordinary UI event handler contains exactly one submitStmt **instead of** the L1 send or L2 local commit, with no implicit ordering or chained effects. The destination ID after as names a **statically declared, source-scoped task slot**, reserved in the component. No variable global registry or remote ref is created. The settled handler ID must be that same slot, not the task name or graph operation spelling. One settled handler per slot. The match operand is the handler parameter. The five arms are **mandatory exactly once** and ordered as shown for this first candidate profile; each arm has one typed binding for its variant payload and exactly one atomic L2 stateCommit. Reordering, omitting or duplicating an arm rejects AUI_OUTCOME_NONEXHAUSTIVE or AUI_OUTCOME_DUPLICATE. A payload may be unused, but cannot be used as another variant type. No branch implicitly maps failure/cancel into success. An exhaustive match is purely a result classifier, not a retry instruction.
 
