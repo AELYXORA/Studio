@@ -1,0 +1,419 @@
+{
+  "format": "aui.task-control-review-cases",
+  "status": "DESIGN-ONLY EXPECTATIONS, NOT-RUN. Shape checks do not prove native trust or capability.",
+  "schema": "../../schemas/canonical-task-control-payload-candidate.schema.json",
+  "owner": "docs/architecture/d3-core-registry-value-contract.md#cr13-closed-taskoutcome-control-payloads-and-public-contract-readiness--one-model-proposal",
+  "originMeaning": {
+    "trusted-no-dispatch": "Runtime has independent trusted proof no provider dispatch occurred",
+    "trusted-uncertain-dispatch": "Runtime binds ticket/owner/generation and proves dispatch uncertain with no terminal evidence",
+    "trusted-quiescence": "Runtime has same-ticket and same-generation authenticated quiescence proof",
+    "trusted-provider": "Runtime has terminal provider result; distinct from these three control categories",
+    "no-dispatch-unverified": "Only an unsupported claim exists",
+    "untrusted-user": "User/source supplies a value with no trusted constructor",
+    "wrong-generation": "Proof belongs to another UI owner or view generation",
+    "contradicted-dispatch-proof": "Evidence shows provider dispatch might have occurred"
+  },
+  "cases": [
+    {
+      "id": "CTRL-01",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "invalid-arguments"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Exactly one recognized admission category with authenticated no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-02",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "capacity-exceeded"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Exactly one recognized admission category with authenticated no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-03",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "stale-view"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Exactly one recognized admission category with authenticated no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-04",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "capability-denied"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Exactly one recognized admission category with authenticated no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-05",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "unsupported-target"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Exactly one recognized admission category with authenticated no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-06",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "never-admitted",
+          "code": "provider-unavailable"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Valid closed pre-admission phase/code and explicit no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-07",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "never-admitted",
+          "code": "link-unresolved"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Valid closed pre-admission phase/code and explicit no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-08",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "never-admitted",
+          "code": "abi-unverified"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Valid closed pre-admission phase/code and explicit no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-09",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "never-admitted",
+          "code": "transport-failure"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Valid closed pre-admission phase/code and explicit no-dispatch proof",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-10",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "indeterminate-after-admission",
+          "code": "provider-unavailable"
+        }
+      },
+      "origin": "trusted-uncertain-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Permitted uncertain phase without asserting provider terminal/quiescence",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-11",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "indeterminate-after-admission",
+          "code": "transport-failure"
+        }
+      },
+      "origin": "trusted-uncertain-dispatch",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Permitted uncertain phase without asserting provider terminal/quiescence",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-12",
+      "value": {
+        "outcome": "Cancelled",
+        "payload": {
+          "state": "confirmed-quiescent"
+        }
+      },
+      "origin": "trusted-quiescence",
+      "expectedShape": "accept",
+      "expectedRuntime": "accept",
+      "rationale": "Trusted terminal proof is required outside the shape",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-13",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "indeterminate-after-admission",
+          "code": "abi-unverified"
+        }
+      },
+      "origin": "trusted-uncertain-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "reject",
+      "rationale": "ABI must have been checked before admission",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-14",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "indeterminate-after-admission",
+          "code": "link-unresolved"
+        }
+      },
+      "origin": "trusted-uncertain-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "Link resolution is a pre-dispatch guard",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-15",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "indeterminate-after-admission",
+          "code": "unknown"
+        }
+      },
+      "origin": "trusted-uncertain-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "Unknown failure code",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-16",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "after-admission",
+          "code": "transport-failure"
+        }
+      },
+      "origin": "trusted-uncertain-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "Unknown phase",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-17",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "code": "transport-failure"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "Missing phase",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-18",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "not-allowed"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "Unknown admission category",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-19",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "invalid-arguments",
+          "message": "secret"
+        }
+      },
+      "origin": "trusted-no-dispatch",
+      "expectedShape": "reject",
+      "expectedRuntime": "Additional untyped field, potential secret leakage",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-20",
+      "value": {
+        "outcome": "Cancelled",
+        "payload": {
+          "state": "requested"
+        }
+      },
+      "origin": "untrusted-user",
+      "expectedShape": "reject",
+      "expectedRuntime": "reject",
+      "rationale": "Cancel request is not quiescence",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-21",
+      "value": {
+        "outcome": "Cancelled",
+        "payload": {
+          "state": "confirmed-quiescent",
+          "ticketPtr": 1234
+        }
+      },
+      "origin": "trusted-quiescence",
+      "expectedShape": "reject",
+      "expectedRuntime": "reject",
+      "rationale": "Raw ticket/pointer cannot be in public payload",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-22",
+      "value": {
+        "outcome": "Successful",
+        "payload": {
+          "code": "invalid-arguments"
+        }
+      },
+      "origin": "trusted-provider",
+      "expectedShape": "reject",
+      "expectedRuntime": "reject",
+      "rationale": "These three control shapes do not represent provider results",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-23",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "never-admitted",
+          "code": "transport-failure"
+        }
+      },
+      "origin": "no-dispatch-unverified",
+      "expectedShape": "accept",
+      "expectedRuntime": "reject",
+      "rationale": "Shape is valid but lack of proof prevents certainty that no effect started",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-24",
+      "value": {
+        "outcome": "Cancelled",
+        "payload": {
+          "state": "confirmed-quiescent"
+        }
+      },
+      "origin": "untrusted-user",
+      "expectedShape": "accept",
+      "expectedRuntime": "reject",
+      "rationale": "Syntactically valid forged cancellation confirmation",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-25",
+      "value": {
+        "outcome": "AdmissionRejected",
+        "payload": {
+          "code": "capacity-exceeded"
+        }
+      },
+      "origin": "untrusted-user",
+      "expectedShape": "accept",
+      "expectedRuntime": "reject",
+      "rationale": "Untrusted source cannot certify no-dispatch admission boundary",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-26",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "indeterminate-after-admission",
+          "code": "provider-unavailable"
+        }
+      },
+      "origin": "untrusted-user",
+      "expectedShape": "accept",
+      "expectedRuntime": "reject",
+      "rationale": "Untrusted UI cannot manufacture provider state",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-27",
+      "value": {
+        "outcome": "Cancelled",
+        "payload": {
+          "state": "confirmed-quiescent"
+        }
+      },
+      "origin": "wrong-generation",
+      "expectedShape": "accept",
+      "expectedRuntime": "reject",
+      "rationale": "Trusted evidence from another owner/generation is not valid for this TaskSlot",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "CTRL-28",
+      "value": {
+        "outcome": "ProviderUnavailable",
+        "payload": {
+          "phase": "never-admitted",
+          "code": "provider-unavailable"
+        }
+      },
+      "origin": "contradicted-dispatch-proof",
+      "expectedShape": "accept",
+      "expectedRuntime": "reject",
+      "rationale": "Positive proof of admission contradicts never-admitted claim",
+      "testResult": "NOT-RUN"
+    }
+  ]
+}
