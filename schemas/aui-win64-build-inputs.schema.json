@@ -19,7 +19,10 @@
     "inputs",
     "tools",
     "environment",
-    "outputs"
+    "outputs",
+    "genericInstanceDigests",
+    "targetCpuFeatures",
+    "importPolicyId"
   ],
   "properties": {
     "format": {
@@ -186,6 +189,29 @@
           }
         }
       }
+    },
+    "genericInstanceDigests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "uniqueItems": true,
+      "description": "Sorted unique G1 generic type digests in semantic byte order, only when approved by source/core profile"
+    },
+    "targetCpuFeatures": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+      },
+      "uniqueItems": true,
+      "description": "Exact pinned target CPU feature set; semantic sort and target compatibility checked outside schema"
+    },
+    "importPolicyId": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Separately approved Windows DLL/import dependency policy; never automatically trust ambient PATH"
     }
   }
 }
