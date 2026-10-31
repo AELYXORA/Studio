@@ -69,3 +69,7 @@ Strict schema/duplicate-key policy, canonical package hashes and lockfile, event
 ## D3+ documentation-only update
 
 [L2 State/Derived/Bind](d3-state-derived-binding-contract.md), [L3 Task/await/Result](d3-task-result-lifecycle.md) and [D3 Source/Snapshot Approval](d3-source-snapshot-reconciliation.md) now propose bounded state/async semantics beyond unchanged L0/L1. [Extended source fixtures](../../examples/aui-language/D3PLUS-README.md) and [31 future diagnostic/race scenarios](../../examples/aui-language/d3plus-negative-cases.json) exist; none has run in native AELYXORA. A [draft source-link bundle schema](../../schemas/aui-source-link-bundle.schema.json) is structural only and cannot grant privileges. AUI compiler, runtime, ownership checker, ABI, signed review, physical target and native tests remain absent. Human approval of D1–D8 is still required before implementation.
+
+## D3 L4 dynamic identity documentation update
+
+[Keyed View Lifecycle](d3-keyed-dynamic-view-lifecycle.md) and [D3/D4/D5 Review](d3-d4-d5-lifecycle-consistency-review.md) now specify candidate parent-path plus StableKey identity, same-parent reorder preservation, fresh incarnation after unmount/reparent, bounded reconciliation and safe result-subscription teardown. [L4 fixtures](../../examples/aui-language/L4-README.md) include a 12-step reference-only identity trace and [40 design scenarios](../../examples/aui-language/l4-negative-cases.json). No Studio implementation/ABI/renderer or native validation was added. D3/D4/D5 are still Proposed/Open, all D1–D8 acceptance pending.
