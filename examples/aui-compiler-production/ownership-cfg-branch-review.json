@@ -1,0 +1,102 @@
+{
+  "format": "aui.ownership-cfg-review",
+  "status": "PROPOSED-NOT-RUN",
+  "functionId": "demo.select",
+  "entryBlockId": "b0",
+  "values": [
+    {
+      "id": "vCondition",
+      "typeIdentity": "aui.core/Bool",
+      "ownership": "copy",
+      "origin": "source:input"
+    },
+    {
+      "id": "vTrue",
+      "typeIdentity": "aui.core/U32",
+      "ownership": "copy",
+      "origin": "source:true"
+    },
+    {
+      "id": "vFalse",
+      "typeIdentity": "aui.core/U32",
+      "ownership": "copy",
+      "origin": "source:false"
+    },
+    {
+      "id": "pTrue",
+      "typeIdentity": "aui.core/U32",
+      "ownership": "copy",
+      "origin": "derived:blocktrue"
+    },
+    {
+      "id": "pFalse",
+      "typeIdentity": "aui.core/U32",
+      "ownership": "copy",
+      "origin": "derived:blockfalse"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b0",
+      "params": [
+        "vCondition"
+      ],
+      "instructions": [
+        {
+          "op": "const",
+          "defs": [
+            "vTrue"
+          ],
+          "uses": [],
+          "sourceOrigin": "source:one"
+        },
+        {
+          "op": "const",
+          "defs": [
+            "vFalse"
+          ],
+          "uses": [],
+          "sourceOrigin": "source:two"
+        }
+      ],
+      "terminator": {
+        "kind": "cond",
+        "condition": "vCondition",
+        "trueTarget": "b1",
+        "trueArgs": [
+          "vTrue"
+        ],
+        "falseTarget": "b2",
+        "falseArgs": [
+          "vFalse"
+        ]
+      }
+    },
+    {
+      "id": "b1",
+      "params": [
+        "pTrue"
+      ],
+      "instructions": [],
+      "terminator": {
+        "kind": "return",
+        "values": [
+          "pTrue"
+        ]
+      }
+    },
+    {
+      "id": "b2",
+      "params": [
+        "pFalse"
+      ],
+      "instructions": [],
+      "terminator": {
+        "kind": "return",
+        "values": [
+          "pFalse"
+        ]
+      }
+    }
+  ]
+}
