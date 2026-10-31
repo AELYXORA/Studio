@@ -88,3 +88,22 @@ The [canonical graph owner](canonical-project-graph-and-components.md) now enume
 | D1/D8 | P1 | Human usability acceptance and explicit architect sign-off of the complete design baseline are absent | Single reviewed D1–D8 record, bounded exclusions and one consistent first-host/target trace |
 
 **No new architecture edition, new branch, product code or CI is introduced by this audit.** Earlier frozen reference bytes remain unchanged. Every acceptance gate remains **OPEN** until explicitly signed off; a passed documentation checker is never native verification.
+
+
+## Unified C9/C10 field-completeness pass — 2026-10-31 (Phase I only)
+
+The [ONE Canonical Project Graph](canonical-project-graph-and-components.md) now contains a **single C9 field-level candidate projection** and **C10 logical type/operation/component closure**. [D6 byte encoding](d6-canonical-persistence.md) explicitly limits its historical `AELYXORA/semantic-graph/v1` domain to older reference fixtures. The [older partial semantic projection](d2-d6-semantic-projection.md) and [older logical export-digest proposal](d2-export-contract-identity.md) no longer claim independent current ownership. **No current canonical hash profile is accepted yet.**
+
+A static source-schema field inventory checked every canonical Graph **top-level** authored field: `format` is transformed into the projection marker, `revision` is excluded as history metadata, and all **eleven other** authored keys are covered by C9 (including optional `resourceModel`). This is a manual/structural completeness check and does not prove nested schema completeness across later schema edits.
+
+The [26-item semantic projection mutation matrix](../../examples/canonical-graph/semantic-projection-change-matrix.json) specifies 6 same-projection, 8 different-projection, and 12 rejection expectations. These are **NOT-RUN documentation scenarios**, and the reference graph contains synthetic public digests. An independent, **limited structural projection-skeleton** inspection of seven selected modifications matched all seven expected same/different classifications (label, revision, unordered array reorder, stream capacity, workflow mailbox capacity, retired identity, MMIO base). It **did not** resolve real public exports, calculate approved digest bytes, use an AELYXORA native validator, qualify hardware/OS permissions, or verify cryptographic golden hashes.
+
+### Remaining C9/C10 P0 design acceptance work
+
+1. Approve the complete logical core/type registry and real package/object lock closure; resolve nominal/generic type cycles and independently derived operation/component digest inputs.
+2. Freeze the exact current domain framing, canonical byte encoder, Unicode bounds and resource/target registry semantics, with real independent positive and negative golden vectors.
+3. Decide stable operation identities and effect/capability registry; verify dispatch target **ID versus triple** mapping, signal payload source and error/publication behavior.
+4. Prove signed source/Graph review and D6 immutable snapshot binding without self-hash recursion; record what remains native/security testing in Phase III.
+5. Confirm complete per-field coverage when schema changes; a new semantic field MUST fail closed until included in the same current projection.
+
+**Status:** documentation proposal expanded; all D1–D8 architect sign-off gates remain OPEN. The above arithmetic/skeleton checks do not constitute compiler, ABI, runtime or hardware verification.
