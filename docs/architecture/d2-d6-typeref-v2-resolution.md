@@ -64,3 +64,7 @@ Strict schema/profile -> locked owners/type registry -> record dependency DAG ->
 - Source or Graph changed since review: AUI_APPROVAL_STALE.
 
 **P0:** approve typed v2 project/package/component/Graph schemas, complete record+generic type resolution, source/Graph signed receipt, D6 immutable snapshot vectors, native Win64 ABI and proof, migration, Unicode canonical vectors and architect sign-off.
+
+## TR7. First bounded typed Project Graph v2 consumer (PROPOSED)
+
+[Typed Project Graph v2](d2-d6-project-graph-v2-typed-contract.md) now defines a **separate** 0.3-typed-slice-draft project format, public operation digest, component digest, transitive TypeReference export set and new semanticGraphDigest domain. [Typed fixture](../../examples/typed-graph-v2/typed-component-contract-vectors.json) demonstrates v2 Row/List<Row> in exact port and command signatures, but is design-only. The source schema requires empty workflows/dataFlows and forbids hardware resourceModel; **do not migrate** v1 semantics by omission. A signed [typed source-to-Graph link](../../schemas/aui-typed-source-graph-link-v2.schema.json) and native ABI verification are still required before any command can run.
