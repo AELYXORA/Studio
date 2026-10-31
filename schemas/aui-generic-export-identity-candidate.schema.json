@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA — derived generic export ID identity-only source tree (PROPOSED)",
+  "description": "A derived verifier input, not an authored package field, TypeReference contractDigest, public type registry or signed approval. Semantic checks additionally enforce max 8 template applications/branch, max 128 nodes, template arity, namespace uniqueness and dependency DAG.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/nominal"
+    },
+    {
+      "$ref": "#/$defs/generic"
+    }
+  ],
+  "$defs": {
+    "nominal": {
+      "type": "object",
+      "required": [
+        "kind",
+        "ownerPackageId",
+        "typeId"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "nominal"
+        },
+        "ownerPackageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typeId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "generic": {
+      "type": "object",
+      "required": [
+        "kind",
+        "template",
+        "arguments"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "generic"
+        },
+        "template": {
+          "$ref": "#/$defs/nominal"
+        },
+        "arguments": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#"
+          }
+        }
+      }
+    }
+  }
+}
