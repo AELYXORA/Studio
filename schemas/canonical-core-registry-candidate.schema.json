@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AELYXORA — one current canonical core registry review inventory",
-  "description": "Design-only strict 15-entry single current core inventory, with machine-checkable type-specific arity/category/variant/wire/ownership candidates. Public export hashes, actual accepted logical semantics, native representation and runtime safety remain unverified. Semantic uniqueness of 15 TypeIDs must be checked separately.",
+  "description": "Design-only strict 15-entry single current core inventory, with machine-checkable type-specific arity/category/variant/wire/ownership candidates. Public export hashes, actual accepted logical semantics, native representation and runtime safety remain unverified. Semantic uniqueness of 15 TypeIDs must be checked separately. All 15 entries now require explicit semanticRules definitions, not merely ruleId document pointers; exact cross-field equality, semantic correctness, canonical digest and source authenticity remain separate P0 gates.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -45,6 +45,7 @@
           "semanticSummary",
           "unresolvedObligations",
           "semanticModel",
+          "semanticRules",
           "exportStatus"
         ],
         "properties": {
@@ -195,6 +196,31 @@
                 "items": {
                   "type": "string",
                   "pattern": "^[A-Za-z][A-Za-z0-9._/-]+$"
+                }
+              }
+            }
+          },
+          "semanticRules": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "description": "Unapproved exact normative rule text candidates; same ordered unique ruleId set as semanticModel.ruleIds, semantic equality MUST be verified beyond JSON Schema. Any definition text change is a semantic change even when ruleId is unchanged.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "ruleId",
+                "definition"
+              ],
+              "properties": {
+                "ruleId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._/-]+$"
+                },
+                "definition": {
+                  "type": "string",
+                  "minLength": 25,
+                  "pattern": "^[^\\r\\n]+$"
                 }
               }
             }
