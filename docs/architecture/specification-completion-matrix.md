@@ -28,6 +28,12 @@ The single [15-entry core inventory](../../examples/canonical-graph/core-registr
 
 **Gate remains blocked:** content-based immutable semantic rule normalization (not just ruleId), accepted error/control exports, canonical actual core/operation/component/graph digest bytes and independently calculated goldens, per-target D4 ownership/ABI, D5 terminal/retention proof and human D1–D8 acceptance. The 15 inventory model shapes and reference comparisons do not authorize implementation or release.
 
+## First compiler implementation design readiness — 2026-10-31
+
+[Native AUI compiler-first contract](aui-compiler-first-implementation-contract.md) now defines the complete first-stage **proposed** P00–P06 source-only pipeline and separate P07 linked/P08–P10 native gates. Source language is the existing D3 L0/L1 grammar; **not** a new architecture edition, executable ABI or bypass of the [Design Completion Gates](design-completion-gates.md). An explicitly [unverified review catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json), [closed source-only plan shape](../../schemas/aui-compiler-source-only-plan.schema.json), [expected real-source plan](../../examples/aui-compiler-first-slice/status-panel-l0.source-only-plan.expected.json) and [45 NOT-RUN compiler cases](../../examples/aui-compiler-first-slice/acceptance-cases.json) are added as design acceptance inputs.
+
+**Implementation-ready decision list (all OPEN until architect sign-off):** COMP-01 (Windows x64 host + Assembly and toolchain), COMP-02 (lexer Unicode/profile/limits), COMP-03 (strict unverified source-only catalogue/report contract), COMP-04 (TypedHIR/static-plan identity/order), COMP-05 (accessibility/event/type/effect obligations). Linked/native compiler also needs COMP-06 (verified public core/record/operation exports), COMP-07 (signed source-to-canonical-Graph linkage) and COMP-08 (native ABI/D5 renderer). COMP-09 covers observed evidence/diagnostics. Source-only checking is not a shortcut to Graph or executable trust.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
