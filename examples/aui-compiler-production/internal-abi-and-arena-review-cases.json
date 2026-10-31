@@ -1,0 +1,393 @@
+{
+  "format": "aui.internal-compiler-assembly-abi-review-matrix",
+  "status": "DESIGN-ONLY / ALL NOT-RUN; NO NATIVE ASSEMBLY PROBE",
+  "owner": "docs/architecture/aui-compiler-internal-assembly-abi.md",
+  "layout": "schemas/aui-compiler-internal-abi-layout-candidate.json",
+  "byteVectors": "examples/aui-compiler-production/internal-abi-layout-byte-vectors.json",
+  "scope": "Internal compiler process records, generational arenas, pass ABI, failure atomicity and bounded resources; explicitly NOT public D4 component ABI.",
+  "notes": [
+    "PASS is allowed only after real in-memory Assembly layout and pass/arena verifier tests and approved D1–D8 gates",
+    "Current reference hex vectors are byte placement arithmetic, not ABI conformance evidence",
+    "All 15 public core types and qualified native runtime services remain unverified"
+  ],
+  "cases": [
+    {
+      "id": "IA-001",
+      "group": "LAYOUT",
+      "expected": "accept",
+      "scenario": "CompilationContextV1 is 128 bytes with 8-byte base alignment and 20 exact non-overlapping fields",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-002",
+      "group": "LAYOUT",
+      "expected": "accept",
+      "scenario": "Span16 and Ref64 use the published little-endian packing and checked arena generations",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-003",
+      "group": "LAYOUT",
+      "expected": "accept",
+      "scenario": "All 10 internal structs have exact contiguous fields and final field ends at declared size",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-004",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "CompilationContextV1 reserved0 nonzero or magic/major/structBytes mismatch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-005",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "IRNodeHeaderV1 payloadOffset/payloadBytes exceed its same-arena committed region",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-006",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "An IRNodeHeaderV1 unknown payload tag silently skipped or interpreted as another tag",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-007",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "SourceSpan startByte>endByte or endByte exceeds exact immutable source length",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-008",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "SSAValueV1 uses a different owner/region after unsafe implicit integer reinterpretation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-009",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "A 64-bit source byte span is truncated to arena-local u32 offset",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-010",
+      "group": "LAYOUT",
+      "expected": "reject",
+      "scenario": "Internal struct pointer/layout substituted for public D4 AuiCallFrameV1 or AuiSpanV1",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-011",
+      "group": "REF64",
+      "expected": "accept",
+      "scenario": "Valid Ref64 bit ranges recover offset 4096, arena index 7 and generation 3",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-012",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "All-zero Ref64 used as required record or table handle",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-013",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "Nonzero ref with arenaIndex=0 or generation=0",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-014",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "Generation 9 Ref64 used after owning arena generation advanced to 10",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-015",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "Generation 65535 wrapped to 1 while stale references are still possible",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-016",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "arena offset+size overflow accepted without subtractive bounds check",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-017",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "BaseRef resolves unaligned typed element or wrong expected descriptor type",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-018",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "Span16 byteLength is not divisible by elementSize or elementSize is zero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-019",
+      "group": "REF64",
+      "expected": "reject",
+      "scenario": "Span16 flags permit both immutable and exclusive mutable simultaneously for one live span",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-020",
+      "group": "ARENA",
+      "expected": "accept",
+      "scenario": "New pass writes into private mutable arena, then validator seals and ledger atomically publishes it",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-021",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "A later pass edits immutable sealed ancestor arena to patch a source span",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-022",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "An input Ref64 kept after arena RETIRED or DISCARDED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-023",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "Output arena sealed with unresolved child reference, missing terminator or open owned borrow",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-024",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "A failed pass leaves a positive outputArtifactRef or outputProofRef",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-025",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "A failed pass advances lastVerifiedStage or changes authoritative Graph state",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-026",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "Pass output references temporary scratch memory that is released on return",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-027",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "Lease cycle retains two retired arenas indefinitely",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-028",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "Opaque OS handle or native TaskTicket appears as a serializable Ref64",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-029",
+      "group": "ARENA",
+      "expected": "reject",
+      "scenario": "PassRequest reused after CompilationContext contextGeneration changed",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-030",
+      "group": "PASS",
+      "expected": "accept",
+      "scenario": "Win64 internal PassRun uses RCX/RDX/R8 borrowed buffers, EAX status, no pointer retention",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-031",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "PassRequest inputProofRef is zero at T2 despite trust requirement",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-032",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "PassReply status PASS but validator never ran and outputProofRef is fabricated",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-033",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "PassReply status REJECT contains outputArenaLeaseRef or outputArtifactRef",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-034",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "Source-only trustState changed to qualified target without independent source/Graph/ABI receipts",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-035",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "Output proof bound to old inputArtifactDigestRef or wrong stage revision",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-036",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "PassRun callee clobbers nonvolatile Win64 register or violates 16-byte stack alignment",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-037",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "Assembler backend accepts a debug JSON allExitsClosed flag as actual OwnershipIR proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-038",
+      "group": "PASS",
+      "expected": "reject",
+      "scenario": "Unknown pass ID or ABI minor with required unsupported feature silently ignored",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-039",
+      "group": "BUDGET",
+      "expected": "accept",
+      "scenario": "A 64MiB source total and 512MiB arena ceiling checked before all allocations",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-040",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "One AUI file exceeds 16MiB even though global source space remains",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-041",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "4,097 source files, 2,000,001 tokens or 1,000,001 combined source IR nodes",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-042",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "250,001 CFG blocks, 4,000,001 instructions or 1,000,001 CFG edges",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-043",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "Two million SSA/effect IDs exceeded via duplicate allocation on separate branches",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-044",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "Typed array byte count multiplication wraps u64 and bypasses arena limit",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-045",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "One arena commits >128MiB or combined sealed+scratch bytes exceed 512MiB",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-046",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "Per-pass scratch budget exceeds 64MiB and still reports a successful pass",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-047",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "More than 1,000 diagnostics or diagnostic message >4096 bytes silently truncated with PASS",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-048",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "100 million abstract step limit exceeded without deterministic compiler resource failure",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-049",
+      "group": "BUDGET",
+      "expected": "reject",
+      "scenario": "Use D5 live UI root budget as substitute for independent compiler resource accounting",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-050",
+      "group": "NATIVE",
+      "expected": "reject",
+      "scenario": "Internal candidate memory offsets are treated as verified Win64 executable public component ABI",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-051",
+      "group": "NATIVE",
+      "expected": "reject",
+      "scenario": "A target-native object is emitted while public 15-core registry remains UNVERIFIED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-052",
+      "group": "NATIVE",
+      "expected": "reject",
+      "scenario": "One source span/compiler diagnostic is declared native verified without an actual Assembly-offset probe",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-053",
+      "group": "NATIVE",
+      "expected": "reject",
+      "scenario": "Generation invalidation tested only by word comparison, without real arena slot reuse",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IA-054",
+      "group": "NATIVE",
+      "expected": "reject",
+      "scenario": "Partial IR header implementation called full compiler without all accepted L0–L4/contract passes",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
