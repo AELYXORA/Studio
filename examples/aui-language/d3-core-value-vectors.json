@@ -1,0 +1,115 @@
+{
+  "format": "aui.core-value-vectors",
+  "status": "NON-NATIVE independent reference arithmetic; proposed D3 portable StableKey codec, not native ABI, no released registry",
+  "proposal": "aui.core/extended-0.2-draft",
+  "sourceContract": "../../docs/architecture/d3-core-registry-value-contract.md",
+  "positive": [
+    {
+      "id": "str-a",
+      "type": "StringKey",
+      "value": "a",
+      "bytes": "010000000161"
+    },
+    {
+      "id": "str-one",
+      "type": "StringKey",
+      "value": "1",
+      "bytes": "010000000131"
+    },
+    {
+      "id": "str-nul",
+      "type": "StringKey",
+      "value": "\u0000",
+      "bytes": "010000000100"
+    },
+    {
+      "id": "str-nfc-é",
+      "type": "StringKey",
+      "value": "é",
+      "bytes": "0100000002c3a9"
+    },
+    {
+      "id": "str-decomposed-e-acute",
+      "type": "StringKey",
+      "value": "é",
+      "bytes": "010000000365cc81"
+    },
+    {
+      "id": "u64-zero",
+      "type": "U64Key",
+      "value": "0",
+      "bytes": "020000000000000000"
+    },
+    {
+      "id": "u64-one",
+      "type": "U64Key",
+      "value": "1",
+      "bytes": "020000000000000001"
+    },
+    {
+      "id": "u64-above-js-safe",
+      "type": "U64Key",
+      "value": "9007199254740993",
+      "bytes": "020020000000000001"
+    },
+    {
+      "id": "u64-max",
+      "type": "U64Key",
+      "value": "18446744073709551615",
+      "bytes": "02ffffffffffffffff"
+    }
+  ],
+  "negative": [
+    {
+      "id": "empty-string",
+      "type": "StringKey",
+      "value": "",
+      "expected": "AUI_KEY_MISSING"
+    },
+    {
+      "id": "over-256-utf8-bytes",
+      "type": "StringKey",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expected": "AUI_KEY_TOO_LARGE"
+    },
+    {
+      "id": "illformed-utf8",
+      "rawHex": "0100000001ff",
+      "expected": "AUI_KEY_TYPE"
+    },
+    {
+      "id": "wrong-length",
+      "rawHex": "010000000261",
+      "expected": "AUI_KEY_TYPE"
+    },
+    {
+      "id": "unsupported-tag",
+      "rawHex": "030000000000000000",
+      "expected": "AUI_KEY_TYPE"
+    },
+    {
+      "id": "u64-wrong-width",
+      "rawHex": "0200000001",
+      "expected": "AUI_KEY_TYPE"
+    },
+    {
+      "id": "u64-negative",
+      "type": "U64Key",
+      "value": "-1",
+      "expected": "AUI_KEY_TYPE"
+    },
+    {
+      "id": "u64-overflow",
+      "type": "U64Key",
+      "value": "18446744073709551616",
+      "expected": "AUI_KEY_TYPE"
+    }
+  ],
+  "invariants": [
+    "Tag participates in equality; StringKey(1) != U64Key(1)",
+    "Unicode composed and decomposed scalar sequences differ",
+    "U64 must preserve values above JavaScript max safe integer via integer-exact parsing",
+    "A portable canonical StableKey frame is not a native memory struct",
+    "All key validation precedes dynamic reconciliation/allocations"
+  ]
+}
