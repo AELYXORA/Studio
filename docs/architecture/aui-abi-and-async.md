@@ -63,3 +63,7 @@ For each target: layout/offset fixture, register/stack calling fixture, owned-bu
 ## Open decisions
 
 Stable wire/ABI serialization, descriptor representation, allocator hooks, exception-free debug diagnostics, unwind metadata, asynchronous scheduler implementation, cross-module hot reload and compatibility negotiation.
+
+## L4 lifecycle and source TaskOutcome versus provider terminal ABI (PROPOSED)
+
+[L4 identity](d3-keyed-dynamic-view-lifecycle.md) is a logical generation-tagged UI path; [D3/D4/D5 review](d3-d4-d5-lifecycle-consistency-review.md) separates dynamic UI unmount, UI TaskSlot terminal TaskOutcome and native provider CommandTicket. AdmissionRejected/ProviderUnavailable before provider admission must not create fabricated D4 terminal tickets. A cancelled view invalidates UI completion subscription, but no native buffer is freed until the provider really completes or confirms quiescence. Same-parent reorder retains ticket ownership and subscriber. D4 atomics and memory ordering are still unverified.
