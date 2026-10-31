@@ -1,0 +1,117 @@
+{
+  "format": "aui.project",
+  "schemaVersion": "0.3-typed-slice-draft",
+  "projectId": "example.rows.graph",
+  "revision": 1,
+  "targets": [
+    {
+      "id": "win64",
+      "triple": "x86_64-pc-windows-msvc",
+      "execution": "user"
+    }
+  ],
+  "packageDependencies": [
+    {
+      "packageId": "example.rows",
+      "version": "2-typed-draft"
+    }
+  ],
+  "coreRegistryFingerprint": "155e9a6520e07d6128f80cbcadb5e5d9a38e5ec96f7ac4c28aa775bd5b9777b7",
+  "typeExportSetDigest": "0e3057d62f299e74c3c8277ce75d3d1b49ea5e6d7fdf88532344979ca34c8a6c",
+  "nodes": [
+    {
+      "id": "provider",
+      "kind": "component-instance",
+      "packageId": "example.rows",
+      "componentTypeId": "example.rows/RowProvider",
+      "componentContractDigest": "1fa208cc763039ece683791f34d32cc9cb5bf34e56f868a64c74516e6750423a",
+      "targetId": "win64",
+      "ports": [
+        {
+          "id": "rows",
+          "direction": "out",
+          "typeRef": {
+            "profile": "aui.type-ref/v2-draft",
+            "kind": "generic",
+            "instanceProfile": "aui.generic-instantiation/v2-record-args",
+            "template": {
+              "profile": "aui.type-ref/v2-draft",
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/List",
+              "exportProfile": "aui.export-contract/v2-core",
+              "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+            },
+            "arguments": [
+              {
+                "profile": "aui.type-ref/v2-draft",
+                "kind": "nominal",
+                "ownerPackageId": "example.rows",
+                "typeId": "example.rows/Row",
+                "exportProfile": "aui.export-contract/v2-record",
+                "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+              }
+            ],
+            "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+          }
+        }
+      ],
+      "label": "Rows provider"
+    },
+    {
+      "id": "viewer",
+      "kind": "component-instance",
+      "packageId": "example.rows",
+      "componentTypeId": "example.rows/RowViewer",
+      "componentContractDigest": "5a62fc8c87daea7b7caa034340128b9ef8d73971855a465d14c115a6b2edd8ec",
+      "targetId": "win64",
+      "ports": [
+        {
+          "id": "rows",
+          "direction": "in",
+          "typeRef": {
+            "profile": "aui.type-ref/v2-draft",
+            "kind": "generic",
+            "instanceProfile": "aui.generic-instantiation/v2-record-args",
+            "template": {
+              "profile": "aui.type-ref/v2-draft",
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/List",
+              "exportProfile": "aui.export-contract/v2-core",
+              "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+            },
+            "arguments": [
+              {
+                "profile": "aui.type-ref/v2-draft",
+                "kind": "nominal",
+                "ownerPackageId": "example.rows",
+                "typeId": "example.rows/Row",
+                "exportProfile": "aui.export-contract/v2-record",
+                "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+              }
+            ],
+            "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+          }
+        }
+      ],
+      "label": "Rows viewer"
+    }
+  ],
+  "edges": [
+    {
+      "id": "rowsFlow",
+      "kind": "data",
+      "from": {
+        "node": "provider",
+        "port": "rows"
+      },
+      "to": {
+        "node": "viewer",
+        "port": "rows"
+      }
+    }
+  ],
+  "workflows": [],
+  "dataFlows": []
+}
