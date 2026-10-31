@@ -126,3 +126,30 @@ The [26 new operation/core review cases](../../examples/canonical-graph/operatio
 4. Compute independent real golden vectors only after a pinned verified registry and exact package lock exist, with signed review and ABI/OS tests subsequently performed in their proper phases.
 
 **D2/D3/D4/D6 and all remaining D1–D8 gates: OPEN / NOT-RUN.** No product parser, AUI compiler, runtime, CI or signed module has been produced during this documentation work.
+
+
+## CR12 and T9 detailed value/uncertainty design audit — 2026-10-31
+
+The single active [D3 logical type owner](d3-core-registry-value-contract.md) now contains **CR12**, a proposed bounded portable typed-value layer for the existing [15-entry current core candidate](../../examples/canonical-graph/core-registry-candidate.json). This is a reviewable policy proposal, **not** an accepted core export hash, separate registry, native ABI, source-language feature or execution authorization.
+
+### Confirmed design ambiguities resolved as explicit candidates
+
+| Item | Before | Proposed candidate / remaining proof |
+| --- | --- | --- |
+| `Bytes` | Only an unbounded prose octet-sequence description | Immutable owned finite bytes, 0..1 MiB per portable value, typed lowercase hex encoding; native allocator/retain/copy/move proof still P0 |
+| `F64` | NaN/infinity/signed zero/subnormal serialization and comparison undefined | Finite IEEE-754 bit patterns only; sign-zero and subnormals retained, all exponent 0x7ff rejected, typed 16-hex bit notation; no L0/L1 arithmetic, D4 floating-point/FTZ proof still P0 |
+| `U32/U64/Bool` | Exact domains defined but typed JSON tokens not explicitly distinguished | U32 canonical JSON integer token, U64 unsigned decimal **string**, Bool true/false only; no floating-point coercion |
+| `TaskOutcome` internal errors | Admission/Provider/Confirmation names lacked closed category boundaries | Candidate runtime-only category sets and trusted quiescence proof requirements; **no invented/verified portable public TypeReference** |
+| Provider link loss | Five-case TaskOutcome left post-dispatch effect uncertainty ambiguous | [D3 Task T9](d3-task-result-lifecycle.md) distinguishes no dispatch from uncertain after admission; UI slot finality separate from ongoing native provider resource ownership; explicit no-retry without reviewed idempotency/compensation |
+
+[41 core value boundary cases](../../examples/canonical-graph/core-value-boundary-cases.json) contain **18 proposed accept** and **23 proposed reject** expectations. A small independent JavaScript typed-token and binary64 exponent classifier matched all **41** labels; this was **not a Studio native test**. The largest Bytes case is symbolic (specified by a future generator), not 2 MiB of serialized test data in the repository. [16 task outcome/uncertainty scenarios](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) are **NOT-RUN** specification cases; none was exercised by a real task runner.
+
+### Residual design gates
+
+1. **Human architecture acceptance** of finite-only F64, typed-hex Bytes, portability caps and exact scalar wire carriers; these candidates may be revised only with deliberate contract review.
+2. Full structured core public contracts and independently calculated verified 15-type registry fingerprint, operation/component/graph hashes and reusable golden bytes. The 13-entry historical core fixture and old hash vectors must not be relabeled.
+3. Complete portable public error/control exports (AdmissionError, ProviderError, CancellationConfirmation) or a reviewed alternative with the same closed semantics, with exact TaskOutcome ABI and compile-time source gating.
+4. D4 proof of binary64 subnormal/zero bit preservation across target callbacks, Bytes allocation and owned transfer, provider ticket/terminal linearization; D5 bounded queue/result retention and deterministic stale-generation behavior.
+5. D6 recovery of indeterminate external effects as **records**, never automatic operation replays; real filesystem and privilege tests only in their later authorized phases.
+
+**All D1–D8 acceptance gates remain OPEN.** A source- and token-level inspection cannot prove correctness, native memory safety, actual provider cancellation, cryptographic source authenticity or target hardware permissions.
