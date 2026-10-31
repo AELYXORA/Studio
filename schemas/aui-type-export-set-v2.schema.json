@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AUI v2 typed export set projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "types"
+  ],
+  "properties": {
+    "profile": {
+      "const": "aui.type-export-set/v2-typed-slice"
+    },
+    "types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "aui-type-reference-v2.schema.json"
+      }
+    }
+  }
+}
