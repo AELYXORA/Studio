@@ -81,3 +81,7 @@ Exact Length/TextStyle types, command-handler AUI syntax, generic constraint gra
 ## L0/L1 core registry candidate
 
 [D3 Type and Binding Profile](d3-type-and-binding-profile.md) proposes an explicit version-pinned built-in aui.core/0.1-draft import. The bounded initial view signatures are VStack/HStack(spacing: U32) with static child Views, Text(value: String), Button(title: String) with Event<Unit> activated and required accessibilityLabel(value: String), plus the exact .on(activated: event) attachment. The larger catalog and pseudo-signatures above do not automatically become L0/L1 parser-ready or supported targets; target rendering/IME/focus remain D5 obligations.
+
+## L4 core List and stable key registry proposal
+
+[L4 Keyed Views](d3-keyed-dynamic-view-lifecycle.md) proposes bounded immutable List<T> and tagged StableKey.String / StableKey.U64 for dynamic ForEach. They are **not** established aui.core/0.1-draft runtime exports; full type IDs, exported-contract digests, exact ownership and binary layouts need later D3/D4 approval. Static L2 view .key(value: ID) is distinct from an item's runtime StableKey; index-position keys are forbidden. [D3/D4/D5 consistency review](d3-d4-d5-lifecycle-consistency-review.md) records required type and resource budgets, not observed tests.
