@@ -198,3 +198,123 @@ service SensorReader {
 ```
 
 **Unfinished exact decisions:** where native public effect/capability atoms are declared (source service effect text cannot impersonate a registered capability); whether user-defined enum construction/pattern matching and generic composition are in shipping D3; the exact `contract` CLI mode and namespace/package provenance; complete binary/portable payload codecs and ABI layout; verified compiler source-plan schemas and golden bytes. Until these receive architect approval, this is a **concrete candidate** rather than a frozen shipping grammar. The full [AUI compiler](aui-compiler.md) requires these decisions to be closed before its product release.
+
+
+## Integrated candidate grammar: exact L0–L4 composition for one production parser
+
+**Status: PROPOSED COMPLETE *structural* grammar / NOT an accepted language standard.** This consolidates the already selected D3 L0/L1, L2 state, L3 task and L4 keyed source forms **inside the existing AUI Syntax owner**, to prevent five independently implemented parsers. It deliberately does **not** pretend to solve verified core exports, all pure-call semantics, enum construction, full type ABI, OS runtime or signer admission. When a more detailed rule conflicts, reconcile the owning D3 section before acceptance; do not privately implement whichever one is convenient.
+
+### Lexical tokens and disambiguation
+
+- Strict UTF-8, no BOM, source byte spans, pinned Unicode XID/NFC lookup for identifiers, **not** for general String values. Keep NFC collisions visible with original source spans. ASCII punctuation; longest-match tokenization of \`->\`, \`<-\`, \`=>\`; otherwise \`-\`, \`<\`, \`>\`, \`=\`, \`.\` are single tokens. A \`-\` is legal only between name segments in a declared \`domainAtom\`/\`effectAtom\`; do **not** add unary/binary subtraction by accident.
+- Keyword set (case-sensitive): \`import component input event command effects on send state derived bind commit set task taskSlot let await return submit as settled match ForEach items key in record enum service true false\`. The source contexts for \`Successful Failed AdmissionRejected Cancelled ProviderUnavailable\` are **reserved pattern tags** only in L3 settled-match arms; \`Result Event List StableKey TaskOutcome TaskSlot\` are recognized *type names* validated through exact core exports, not arbitrary implicit values.
+- The tokens \`view\` in \`bind view.key.property\`, \`item\` in \`key: item.field\`, \`value\`/\`activated\` in property labels and \`io-worker\` in declared domains are contextual names, not globally variable declarations. \`ForEach\` is a reserved View constructor in L4; no user package may shadow it in that compilation context. No semicolon after final root View; no comma between child Views.
+- Comments are \`//\` to LF/EOF only. First shipping candidate deliberately excludes block comments, raw/interpolated/multiline strings, generic operator expressions, floating source literals, named default parameters, positional calls, dynamic import versions and unrestricted macros. Unknown constructs reject instead of being accepted and dropped during lowering.
+
+### Unified grammar candidate — component source unit
+
+Notation: \`{...}\` zero-or-more; \`[...]\` optional; \`|\` alternative; \`EOF\` mandatory. This is parser grammar; the semantic profile and exact type/ownership rules below narrow what parses successfully.
+
+\`\`\`ebnf
+sourceUnit       = componentModule | contractModule ;
+componentModule  = { importDecl }, componentDecl, EOF ;
+componentDecl    = "component", ID, "(", [ inputList ], ")", "{",
+                   { componentMember }, rootView, "}" ;
+componentMember  = eventDecl | commandDecl | eventHandler
+                 | stateDecl | derivedDecl | bindDecl
+                 | taskSlotDecl | taskDecl | settledHandler ;
+inputList        = inputDecl, { ",", inputDecl } ;
+inputDecl        = "input", ID, ":", typeRef ;
+importDecl       = "import", qualifiedName, ";" ;
+
+eventDecl        = "event", ID, ":", "Event", "<", typeRef, ">", ";" ;
+commandDecl      = "command", ID, "(", [ commandParams ], ")", "->",
+                   "Result", "<", typeRef, ",", typeRef, ">",
+                   [ "effects", "(", [ effectList ], ")" ],
+                   "on", domainAtom, ";" ;
+commandParams    = commandParam, { ",", commandParam } ;
+commandParam     = ID, ":", typeRef ;
+effectList       = effectAtom, { ",", effectAtom } ;
+
+stateDecl        = "state", ID, ":", typeRef, "=", pureExpr, ";" ;
+derivedDecl      = "derived", ID, ":", typeRef, "=", pureExpr, ";" ;
+bindDecl         = "bind", "view", ".", ID, ".", ID, "<-", pureExpr,
+                   [ "using", qualifiedName ], ";" ;
+
+eventHandler     = "on", ID, "(", ID, ")", "{",
+                   ( sendStmt | stateCommit | submitStmt ), "}" ;
+sendStmt         = "send", ID, "(", [ namedArgs ], ")", ";" ;
+stateCommit      = "commit", "{", setStmt, { setStmt }, "}" ;
+setStmt          = "set", ID, "=", pureExpr, ";" ;
+
+taskSlotDecl     = "taskSlot", ID, ":", "TaskSlot", "<",
+                   typeRef, ",", typeRef, ">", ";" ;
+taskDecl         = "task", ID, "(", [ commandParams ], ")", "->",
+                   "Result", "<", typeRef, ",", typeRef, ">",
+                   "on", domainAtom, "{", awaitStmt, returnStmt, "}" ;
+awaitStmt        = "let", ID, "=", "await", ID, "(",
+                   [ namedArgs ], ")", ";" ;
+returnStmt       = "return", ID, ";" ;
+submitStmt       = "submit", ID, "(", [ namedArgs ], ")",
+                   "as", ID, ";" ;
+settledHandler   = "on", "settled", ID, "(", ID, ")", "{",
+                   "match", ID, "{",
+                     successArm, failureArm, rejectArm,
+                     cancelledArm, unavailableArm,
+                   "}", "}" ;
+successArm       = "Successful", "(", ID, ")", "=>", stateCommit ;
+failureArm       = "Failed", "(", ID, ")", "=>", stateCommit ;
+rejectArm        = "AdmissionRejected", "(", ID, ")", "=>", stateCommit ;
+cancelledArm     = "Cancelled", "(", ID, ")", "=>", stateCommit ;
+unavailableArm   = "ProviderUnavailable", "(", ID, ")", "=>", stateCommit ;
+
+rootView         = staticView ;
+staticView       = viewName, "(", [ namedArgs ], ")",
+                   [ "{", childView, { childView }, "}" ],
+                   { modifier } ;
+childView        = staticView | dynamicView ;
+dynamicView      = "ForEach", "(", "items", ":", pureExpr,
+                   ",", "key", ":", "item", ".", ID, ")",
+                   "{", "item", "in", childView, "}" ;
+
+modifier         = ".", modifierName, "(", namedArg,
+                   { ",", namedArg }, ")" ;
+modifierName     = ID | "on" ;
+namedArgs        = namedArg, { ",", namedArg } ;
+namedArg         = ID, ":", pureExpr ;
+pureExpr         = pureAtom | pureCall ;
+pureCall         = qualifiedName, "(", [ namedArgs ], ")" ;
+pureAtom         = STR | INT | "true" | "false" | memberPath ;
+memberPath       = ID, { ".", ID } ;
+
+viewName         = ID ;
+typeRef          = qualifiedName, [ "<", typeRef,
+                   { ",", typeRef }, ">" ] ;
+qualifiedName    = ID, { ".", ID } ;
+effectAtom       = ID, { "-", ID } ;
+domainAtom       = ID, { "-", ID } ;
+\`\`\`
+
+**Mandatory refinement of the grammar above:**
+1. **Root must be a static View**, not a raw ForEach; L4 dynamic Views occur only in static stack children or another ForEach template child. To expose a dynamic root, wrap it in a static stack. A \`ForEach\` has exactly one template \`childView\` and \`item\` as its bound variable for this candidate, not arbitrary expression statements.
+2. **No empty / invalid children:** \`VStack/HStack\` require \`{ childView+ }\`; \`Text/Button\` reject any child block. The parser admits the structural forms but the closed visual constructor contract validates them. \`Text()\` only when L2+ static \`.key(value: ID)\` and one matching bind writer; otherwise require exactly \`Text(value: String)\`.
+3. **No accidental general calls:** \`pureCall\` is permitted only in L2+ contexts where an **exact verified pure function**, complete named signature, bound execution/memory cost and no OS/IO/async effects have been resolved. In L0/L1 named arguments are only literals/member paths; a syntactic pureCall there produces \`AUI_PROFILE_UNSUPPORTED\`. \`pureCall\` cannot be used to fake a provider command.
+4. **Scope and restrictions:** componentMembers may appear in any authored declaration order before root View, but all same-scope normalized names/keywords must pass namespace checks. Events/commands/handlers are L1+, state/derived/bind/commit are L2+, taskSlot/task/submit/settled are L3+, dynamicView is L4 only. \`task\` always owns exactly one \`await\` and one \`return\`. L2 handlers contain exactly one send **or** one commit; L3 handlers contain exactly one send **or** commit **or** submit; no implicit multi-action sequence.
+5. **Declaration references are two-phase:** collect declarations first, then resolve state/derived DAG, event handlers, task/slot/output links and View static keys independent of authored member order. Never make meaning depend on a source declaration preceding its use, but duplicate symbols and unknown names reject. \`on settled\` has a distinct keyword lookahead from \`on ID\` event handler.
+6. **Generics are parsed structurally but accepted semantically only for verified core/export templates** with exact arity, admitted nesting and owner/transport policy. \`List<Row>\`, \`Result<T,E>\`, \`Event<Unit>\`, \`TaskSlot<T,E>\` have specific context rules; arbitrary recursive/higher-kinded generics remain unsupported. \`TaskSlot\` is non-portable, not graph payload.
+7. **Initializer and string semantics:** \`state\` init and \`derived\` pureExpr are validated for exact type, deterministic purity and bounded evaluation. \`bind view.key.prop\` has precisely one writer; a \`Text(value: ...)\` and \`bind\` to its value conflict. Textual \`String\` scalar equality is exact, identifiers resolve under pinned NFC. No general numerical operators are implied by \`pureExpr\`.
+8. **Property/modifier semantic checking:** an unknown modifier, mismatched argument, duplicate \`key\`, repeated \`on(activated:...)\`, missing Button accessibilityLabel, illegal View-specific modifier or unrecognized bind target rejects. \`.key(value: ID)\` is a source-symbol identifier, not an arbitrary String, runtime StableKey, native address or GraphNodeID. It is allowed only from L2+.
+9. **No undefined whitespace rules:** braces, comma, semicolon, dots, angle brackets and the three multi-character operators are exact; line endings only affect original byte spans. No implicit semicolon insertion or accepted trailing comma unless a **separate** explicit source rule is frozen.
+10. **Contract module imports and types:** the interface-only module grammar remains [the same existing contractModule owner above](#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate); its \`commandParams\`, \`effectList\`, \`domainAtom\`, \`typeRef\` and \`importDecl\` are the identical productions defined here, **not invented local alternatives**. Contract-mode source cannot contain a component, event handler, task implementation or native service body. Module kind is explicit immutable compilation input, not automatic token-based selection in a trusted build.
+
+### Known grammar/semantic issues that remain genuine blockers
+
+- **Keyword-versus-ID lexical contract:** \`state\`, \`on\`, \`set\`, \`item\`, \`value\`, \`true\` and \`false\` have contextual positions. The accepted parser contract must pin which reserved keywords can be used as named argument/property labels. This grammar **proposes** contextual labels, but does not authorize unchecked shadowing of declaration names. Freeze the lexical classifier and error precedence with complete tokenization fixtures.
+- **Pure call/overload and bound conversion:** no approved pure function registry, overloaded resolution policy, constant evaluation budget or \`using Converter\` operation identity is yet fully frozen for L2+. An opaque external service implementation must not be silently accepted as pure.
+- **L4 view keys** use \`StableKey\` values for runtime items but L2 static \`.key\` uses a source ID. These are different types and must be independently validated. Keyed nested child fragments, handler capture ownership and full current item parent-path runtime resource/expiry still require D4/D5 testing.
+- **Native public enum/service availability:** the current [canonical component package schema](../../schemas/canonical-component-package.schema.json) defines public \`types\` as **record** entries and components/commands, not a complete source-authored enum/service export model. An AUI \`enum SensorError\` or \`service SensorReader\` can be parsed as a design candidate, but **cannot produce a trusted public TypeReference or native-linked service** until that **existing canonical owner/schema** is extended and independently accepted; do not create a sidecar "service graph".
+- **Full shipping grammar closure:** exact source file identity, imported package namespace mapping, complete record/enum variant constructors and pattern match usage, generic type syntactic restrictions, diagnostic code table and compiler-value/ABI mapping remain separate explicit D3/D4/D6 sign-off items. Claiming that an EBNF alone makes a full compiler ready is incorrect.
+
+### Acceptance for the combined parser (design-only, not-run)
+
+The [production grammar review cases](../../examples/aui-compiler-production/integrated-grammar-cases.json) enumerate complete source profiles, module-kind/profile errors, L3 slot/Outcome matching, L2 bind initialization, L4 keyed template boundaries, effect/pure call gate and exact record/enum/service export blockers. The full [production compiler criteria](../../examples/aui-compiler-production/complete-compiler-acceptance.json) additionally require actual target-native machine code, Graph link, runtime and reproducible signed release. Neither suite is currently executed; no AUI parser exists in the repository.
