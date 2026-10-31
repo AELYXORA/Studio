@@ -1,0 +1,173 @@
+{
+  "format": "aui.generic-instantiation-vectors",
+  "status": "design reference SHA256 only; no native AELYXORA compiler/ABI/schema evaluator executed",
+  "profile": "aui.generic-instantiation/v1-draft",
+  "sha256SelfTest": "abc matched known standard digest",
+  "positives": [
+    {
+      "id": "list-string",
+      "input": {
+        "profile": "aui.generic-instantiation/v1-draft",
+        "exportKind": "generic-instantiation",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "templateTypeId": "aui.core/List",
+        "templateContractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a",
+        "featureGate": "L4",
+        "typeArguments": [
+          {
+            "typeId": "aui.core/String",
+            "typeContractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+          }
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"generic-instantiation\",\"featureGate\":\"L4\",\"packageId\":\"aui.core\",\"profile\":\"aui.generic-instantiation/v1-draft\",\"registryId\":\"aui.core/extended-0.2-draft\",\"templateContractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"templateTypeId\":\"aui.core/List\",\"typeArguments\":[{\"typeContractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"typeId\":\"aui.core/String\"}]}",
+      "expectedSha256": "c5fc018b7d13ec52ffeb94142ce9dd49d864fcbcf121a5b6c403ad478abe2481"
+    },
+    {
+      "id": "list-u32",
+      "input": {
+        "profile": "aui.generic-instantiation/v1-draft",
+        "exportKind": "generic-instantiation",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "templateTypeId": "aui.core/List",
+        "templateContractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a",
+        "featureGate": "L4",
+        "typeArguments": [
+          {
+            "typeId": "aui.core/U32",
+            "typeContractDigest": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+          }
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"generic-instantiation\",\"featureGate\":\"L4\",\"packageId\":\"aui.core\",\"profile\":\"aui.generic-instantiation/v1-draft\",\"registryId\":\"aui.core/extended-0.2-draft\",\"templateContractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"templateTypeId\":\"aui.core/List\",\"typeArguments\":[{\"typeContractDigest\":\"2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d\",\"typeId\":\"aui.core/U32\"}]}",
+      "expectedSha256": "73915a0af9b1be52ba38717e0b0ec7c4ee70f162fce8ef59167522a9703bf593"
+    },
+    {
+      "id": "result-u32-string",
+      "input": {
+        "profile": "aui.generic-instantiation/v1-draft",
+        "exportKind": "generic-instantiation",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "templateTypeId": "aui.core/Result",
+        "templateContractDigest": "b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba",
+        "featureGate": "L0/L1",
+        "typeArguments": [
+          {
+            "typeId": "aui.core/U32",
+            "typeContractDigest": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+          },
+          {
+            "typeId": "aui.core/String",
+            "typeContractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+          }
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"generic-instantiation\",\"featureGate\":\"L0/L1\",\"packageId\":\"aui.core\",\"profile\":\"aui.generic-instantiation/v1-draft\",\"registryId\":\"aui.core/extended-0.2-draft\",\"templateContractDigest\":\"b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba\",\"templateTypeId\":\"aui.core/Result\",\"typeArguments\":[{\"typeContractDigest\":\"2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d\",\"typeId\":\"aui.core/U32\"},{\"typeContractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"typeId\":\"aui.core/String\"}]}",
+      "expectedSha256": "d32a96e4ca6c2c061d50bfab4e8ae5e618bef3b95e27515b2ec4f53d30159f03"
+    },
+    {
+      "id": "result-string-u32",
+      "input": {
+        "profile": "aui.generic-instantiation/v1-draft",
+        "exportKind": "generic-instantiation",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "templateTypeId": "aui.core/Result",
+        "templateContractDigest": "b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba",
+        "featureGate": "L0/L1",
+        "typeArguments": [
+          {
+            "typeId": "aui.core/String",
+            "typeContractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+          },
+          {
+            "typeId": "aui.core/U32",
+            "typeContractDigest": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+          }
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"generic-instantiation\",\"featureGate\":\"L0/L1\",\"packageId\":\"aui.core\",\"profile\":\"aui.generic-instantiation/v1-draft\",\"registryId\":\"aui.core/extended-0.2-draft\",\"templateContractDigest\":\"b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba\",\"templateTypeId\":\"aui.core/Result\",\"typeArguments\":[{\"typeContractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"typeId\":\"aui.core/String\"},{\"typeContractDigest\":\"2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d\",\"typeId\":\"aui.core/U32\"}]}",
+      "expectedSha256": "e19fdad2e522c017764ff1a5f04d77375e69d019abb05263ef67ac272aa866b9"
+    },
+    {
+      "id": "task-outcome-u32-string",
+      "input": {
+        "profile": "aui.generic-instantiation/v1-draft",
+        "exportKind": "generic-instantiation",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "templateTypeId": "aui.core/TaskOutcome",
+        "templateContractDigest": "ee63626bc10cdd42a8420e93a07ebf3cdd42b59695d4f19bdbafe5668d29af03",
+        "featureGate": "L3",
+        "typeArguments": [
+          {
+            "typeId": "aui.core/U32",
+            "typeContractDigest": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+          },
+          {
+            "typeId": "aui.core/String",
+            "typeContractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+          }
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"generic-instantiation\",\"featureGate\":\"L3\",\"packageId\":\"aui.core\",\"profile\":\"aui.generic-instantiation/v1-draft\",\"registryId\":\"aui.core/extended-0.2-draft\",\"templateContractDigest\":\"ee63626bc10cdd42a8420e93a07ebf3cdd42b59695d4f19bdbafe5668d29af03\",\"templateTypeId\":\"aui.core/TaskOutcome\",\"typeArguments\":[{\"typeContractDigest\":\"2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d\",\"typeId\":\"aui.core/U32\"},{\"typeContractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"typeId\":\"aui.core/String\"}]}",
+      "expectedSha256": "0c9413422cf51e2b560654934111d211cddadb766aac20ca8ed0e818c1af245d"
+    }
+  ],
+  "negativeExpectations": [
+    {
+      "id": "arity-result-one",
+      "mutation": "drop second typeArguments element",
+      "expected": "TYPE_GENERIC_ARG_MISMATCH"
+    },
+    {
+      "id": "template-as-instance",
+      "mutation": "use templateContractDigest as instance exported identity",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH"
+    },
+    {
+      "id": "mixed-v1-user-record",
+      "mutation": "append example.locked/Tick v1 record argument instead of approved core primitive",
+      "expected": "CORE_PROFILE_MISMATCH"
+    },
+    {
+      "id": "nested-generic",
+      "mutation": "nest List<U32> as generic argument",
+      "expected": "TYPE_GENERIC_PROFILE_UNSUPPORTED"
+    },
+    {
+      "id": "unknown-type",
+      "mutation": "set argument typeId aui.core/Unknown",
+      "expected": "GRAPH_EXPORT_UNRESOLVED"
+    },
+    {
+      "id": "wrong-digest",
+      "mutation": "keep aui.core/U32 but provide Bool digest",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH"
+    },
+    {
+      "id": "unapproved-recursive",
+      "mutation": "recursive List<List<T>>",
+      "expected": "TYPE_GENERIC_PROFILE_UNSUPPORTED"
+    },
+    {
+      "id": "generic-locale-sort",
+      "mutation": "sort Result<String,U32> args and reuse old digest",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH"
+    },
+    {
+      "id": "same-native-size",
+      "mutation": "reuse Result<U32,String> digest for TaskOutcome<U32,String> because payload layout might match",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH"
+    }
+  ],
+  "notes": [
+    "All values here are ASCII; full Unicode canonical serialization remains D6 owner",
+    "Template digest and instance digest must differ; no aliasing by native layout",
+    "v1 user-defined records not eligible under first G1 candidate",
+    "Old v1 public record/component hashes and locked pure files unchanged"
+  ]
+}
