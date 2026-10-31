@@ -89,6 +89,10 @@ The [existing single-Graph public digest integration](d2-d6-public-contract-dige
 
 [CR14 complete arithmetic corpus](../../examples/canonical-graph/core-15-content-digest-arithmetic-vectors.json) covers all 15 current candidate types; [full sensor chain](../../examples/canonical-graph/sensor-full-digest-chain-arithmetic.json) covers records, operation, components, scoped sets and C9 Graph; [D6 Unicode byte writer arithmetic](../../examples/canonical-graph/d6-unicode-canonical-byte-arithmetic-vectors.json) covers non-ASCII and canonical escaping. The 32 saved candidate SHA-256/byte-length tuples were rechecked and two fresh individual public projections independently matched Python/OpenSSL. **This closes missing exact candidate arithmetic inputs, not the P0 native and trust gates.** 15 CR14 core exports UNVERIFIED, D2/D6 signature/lock/public domains not approved, typed graph acceptance unimplemented, native D4/D5 target ABI/open and 50 digest plus 66 full native compiler review scenarios NOT-RUN.
 
+## IR and machine-code verification contract — 2026-10-31
+
+[Full T0–T8 compilation stages](aui-ir-layout.md), [trusted GraphLinkedIR](aui-ast-semantic-analysis.md), [SSA OwnershipIR](aui-ownership-ir.md), and [Win64 TargetMIR](aui-targetmir-native-codegen.md) now define a common proposed pass contract with ownership, effect ordering, target layout, machine ABI, native artifacts and separate signed admission. [72 conformance scenarios](../../examples/aui-compiler-production/full-ir-pass-review-cases.json) remain NOT-RUN. Review-only [Ownership CFG](../../schemas/aui-compiler-ownership-cfg-candidate.schema.json) and [TargetMIR](../../schemas/aui-compiler-targetmir-candidate.schema.json) shapes do not establish runtime trust. Still P0: exact Assembly IR layout, L2–L4 resource bounds, D4/D5 native imports and tests, verified core/Graph approval and human D1–D8 sign-off.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
