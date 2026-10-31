@@ -1,0 +1,368 @@
+{
+  "format": "aui.current-public-digest-pipeline-review-cases",
+  "status": "DESIGN-ONLY / CANDIDATE PROJECTIONS NOT ACCEPTED / ALL NOT-RUN",
+  "owner": "docs/architecture/d2-d6-public-contract-digest-pipeline.md",
+  "meaning": {
+    "same": "Equivalent complete canonical projection only, separate source/build authorization may change",
+    "different": "A meaning-bearing projection must change and downstream candidate hashes invalidate; no trusted hash has been published",
+    "reject": "Fail closed before trusted public hash, GraphLinkedIR, signed approval or native execution",
+    "accept": "Future verification only after complete normative/lock/source/arch approval; not an observed PASS"
+  },
+  "notes": [
+    "None are executable native compiler test cases yet",
+    "No fabricated coreRegistryFingerprint, TypeReference, operation/Graph contractDigest or signer receipts",
+    "Package-wide and Graph-reachable type-export set scope still requires explicit acceptance"
+  ],
+  "cases": [
+    {
+      "id": "DG-01",
+      "group": "CORE",
+      "expected": "accept",
+      "mutation": "Complete 15 core definitions with 34 exact accepted rule strings, lock and approval produce candidate type projections in stable typeId order",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-02",
+      "group": "CORE",
+      "expected": "reject",
+      "mutation": "One core entry remains exportStatus UNVERIFIED even when all candidate digests are valid SHA-256",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-03",
+      "group": "CORE",
+      "expected": "different",
+      "mutation": "Change CR12/F64/finite-only exact definition without changing ruleId",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-04",
+      "group": "CORE",
+      "expected": "same",
+      "mutation": "Reorder semanticRules and logicalTraits sets without changing exact rule-to-text pairs",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-05",
+      "group": "CORE",
+      "expected": "reject",
+      "mutation": "Two core types with the same typeId under one source registry",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-06",
+      "group": "CORE",
+      "expected": "reject",
+      "mutation": "Same ruleId with contradictory definition in the registry and separately reviewed owner",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-07",
+      "group": "CORE",
+      "expected": "different",
+      "mutation": "Change a core variant order or type generic arity",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-08",
+      "group": "CORE",
+      "expected": "reject",
+      "mutation": "Use historical 13-type fingerprint in a current 15-type graph",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-09",
+      "group": "CORE",
+      "expected": "reject",
+      "mutation": "Set coreRegistryFingerprint to a 64-hex placeholder and skip its independent recomputation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-10",
+      "group": "TYPE",
+      "expected": "same",
+      "mutation": "Reorder JSON object keys in core or record/enum projection under D6 canonical writing",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-11",
+      "group": "TYPE",
+      "expected": "different",
+      "mutation": "Swap two authored record fields while keeping their field names and types",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-12",
+      "group": "TYPE",
+      "expected": "different",
+      "mutation": "Swap two authored enum variants or change zero-payload to Unit-payload",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-13",
+      "group": "TYPE",
+      "expected": "reject",
+      "mutation": "Enum payload TypeReference references unresolved core or its own enum by value",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-14",
+      "group": "TYPE",
+      "expected": "different",
+      "mutation": "Swap ordered Result<T,E> generic arguments",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-15",
+      "group": "TYPE",
+      "expected": "reject",
+      "mutation": "Take generic instance identity-only @inst digest as its public contractDigest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-16",
+      "group": "TYPE",
+      "expected": "reject",
+      "mutation": "Generic instance own contractDigest embedded recursively inside its public projection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-17",
+      "group": "TYPE",
+      "expected": "reject",
+      "mutation": "TypeReference has ninth generic application or 129 total nodes",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-18",
+      "group": "TYPE",
+      "expected": "reject",
+      "mutation": "Type contract public digest computed before all transitive nominal/core dependencies are trusted",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-19",
+      "group": "TYPE",
+      "expected": "reject",
+      "mutation": "Same packageId and exportId assigned to two distinct public digests",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-20",
+      "group": "OPERATION",
+      "expected": "different",
+      "mutation": "Change operation input order or one success/failure TypeReference",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-21",
+      "group": "OPERATION",
+      "expected": "different",
+      "mutation": "Change effects, domain, retryPolicy or requiredCapabilities for the same OperationID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-22",
+      "group": "OPERATION",
+      "expected": "same",
+      "mutation": "Reorder effects/requiredCapabilities/declaredTargets as unique unordered sets",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-23",
+      "group": "OPERATION",
+      "expected": "reject",
+      "mutation": "Operation public projection includes missing/extra C12 keys, source path or its own digest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-24",
+      "group": "OPERATION",
+      "expected": "reject",
+      "mutation": "Source service exposes only some operations of its exact locked component or changes provider target metadata",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-25",
+      "group": "OPERATION",
+      "expected": "reject",
+      "mutation": "Attempt to derive service permission from an authored AUI service declaration alone",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-26",
+      "group": "COMPONENT",
+      "expected": "same",
+      "mutation": "Change only implementation ASM formatting or declared sources path, with unchanged verified public interface",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-27",
+      "group": "COMPONENT",
+      "expected": "different",
+      "mutation": "Add a verified command or change one command digest, port or capability",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-28",
+      "group": "COMPONENT",
+      "expected": "reject",
+      "mutation": "Duplicate command IDs or omit a command from parent component projection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-29",
+      "group": "COMPONENT",
+      "expected": "same",
+      "mutation": "A component with absent authored commands has derived commands:[] in its public projection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-30",
+      "group": "COMPONENT",
+      "expected": "reject",
+      "mutation": "Use one synthetic 64-hex command digest instead of recomputing the actual C12 operation contract",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-31",
+      "group": "TYPE_SET",
+      "expected": "different",
+      "mutation": "Add a newly reachable public type under graph roots",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-32",
+      "group": "TYPE_SET",
+      "expected": "same",
+      "mutation": "Reorder set-like type export tuples without changing unique identities",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-33",
+      "group": "TYPE_SET",
+      "expected": "reject",
+      "mutation": "Resolved type export set contains the same packageId+exportId twice",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-34",
+      "group": "TYPE_SET",
+      "expected": "reject",
+      "mutation": "Use Graph transitive typeExportSetDigest as package exportedTypeSetDigest without approved scope projection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-35",
+      "group": "TYPE_SET",
+      "expected": "reject",
+      "mutation": "Omit a type referenced transitively through enum variant, generic, workflow signal or operation result",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-36",
+      "group": "TYPE_SET",
+      "expected": "different",
+      "mutation": "Change core registry semantic content and recompute dependent type-export-set identity",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-37",
+      "group": "GRAPH",
+      "expected": "same",
+      "mutation": "Change view coordinates or authored GraphRevision without changing meaning-bearing canonical C9 fields",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-38",
+      "group": "GRAPH",
+      "expected": "different",
+      "mutation": "Change workflow, dataFlow error/overflow, resource or tombstone meaning-bearing field",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-39",
+      "group": "GRAPH",
+      "expected": "reject",
+      "mutation": "Authored node contractDigest mismatches recomputed verified component digest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-40",
+      "group": "GRAPH",
+      "expected": "reject",
+      "mutation": "Historical typed-graph-v2 SHA presented as current unified semanticGraphDigest",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-41",
+      "group": "GRAPH",
+      "expected": "reject",
+      "mutation": "Sign source review before canonical graph semantics, exact type/operation and lock are validated",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-42",
+      "group": "GRAPH",
+      "expected": "reject",
+      "mutation": "Approved digest arithmetic but unauthenticated source, unsigned provider or forbidden runtime capability",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-43",
+      "group": "GRAPH",
+      "expected": "reject",
+      "mutation": "Emit trusted GraphLinkedIR or native binary when any prior digest gate is incomplete",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-44",
+      "group": "CANONICAL",
+      "expected": "reject",
+      "mutation": "Duplicate decoded JSON object key, invalid Unicode, BOM, float/exponent or negative zero canonical number",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-45",
+      "group": "CANONICAL",
+      "expected": "same",
+      "mutation": "Reorder object keys but preserve decoded meaning and meaning-bearing arrays",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-46",
+      "group": "CANONICAL",
+      "expected": "different",
+      "mutation": "Change a semantic String scalar without Unicode normalization during canonical writing",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-47",
+      "group": "CANONICAL",
+      "expected": "reject",
+      "mutation": "Move a meaning-bearing authored enum variant from source order into alphabetical canonical order",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-48",
+      "group": "CANONICAL",
+      "expected": "reject",
+      "mutation": "Reuse a domain after changing its projection keys or public meaning",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-49",
+      "group": "CANONICAL",
+      "expected": "reject",
+      "mutation": "Hash a pretty-printed authored package manifest as a public contract projection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "DG-50",
+      "group": "CANONICAL",
+      "expected": "reject",
+      "mutation": "Count an arithmetic-only fixture SHA as approved public contract or signer authorization",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
