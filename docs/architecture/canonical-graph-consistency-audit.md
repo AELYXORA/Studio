@@ -43,7 +43,7 @@ Historic filenames still contain obsolete exploratory labels and hash domains; d
 
 **No architecture gate is accepted by this audit.**
 
-[32 negative-case designs](../../examples/canonical-graph/negative-cases.json) enumerate expected validation, lifecycle, capability and persistence errors. They are NOT-RUN and diagnostic identifiers are proposals, not registered native engine output.
+[35 negative-case designs](../../examples/canonical-graph/negative-cases.json) enumerate expected validation, lifecycle, capability and persistence errors. They are NOT-RUN and diagnostic identifiers are proposals, not registered native engine output.
 
 ## Canonical projection ownership reconciliation — 2026-10-31
 
