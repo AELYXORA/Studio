@@ -1,5 +1,7 @@
 # AELYXORA Studio — Current Technical Status
 
+**Authoritative architecture direction:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+
 **As of 2026-10-31. This is the authoritative implementation-status summary.** The architecture documents describe intended behavior unless a concrete committed artifact and observed test are cited. No global architecture freeze or product release is claimed.
 
 ## D3 language design pass (documentation only)
