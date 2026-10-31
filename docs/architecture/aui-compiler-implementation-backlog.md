@@ -54,7 +54,7 @@ The decomposition above is an implementation backlog, **not a claim of a finishe
 
 **Negative L0:** [materialized invalid U32 spacing source](../../examples/aui-compiler-first-slice/status-panel-invalid-spacing.aui), 304 bytes with exact SHA-256 1231502beaa755aa1dd4b235621ccf4f10e1aa03cbb72e105875f3f5eca4f96a, must reject at P04 with AUI_NUMBER_RANGE, original byte range [153,163), matching the proposed [diagnostic report](../../examples/aui-compiler-first-slice/status-panel-invalid-spacing.diagnostics.expected.json). No successful TypedHIR/native object or previous output alteration follows.
 
-[45 compiler-first design cases](../../examples/aui-compiler-first-slice/acceptance-cases.json), [35 Unicode/lexical design cases](../../examples/aui-compiler-first-slice/unicode-and-diagnostics-cases.json) and existing [D3 negative cases](../../examples/aui-language/d3-first-profile-negative-cases.json) cover remaining proposed verification. All remain **NOT-RUN** by AELYXORA.
+[47 compiler-first design cases](../../examples/aui-compiler-first-slice/acceptance-cases.json), [35 Unicode/lexical design cases](../../examples/aui-compiler-first-slice/unicode-and-diagnostics-cases.json) and existing [D3 negative cases](../../examples/aui-language/d3-first-profile-negative-cases.json) cover remaining proposed verification. All remain **NOT-RUN** by AELYXORA.
 
 ## Unapproved decision record
 
