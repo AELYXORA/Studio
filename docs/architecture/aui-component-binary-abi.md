@@ -71,3 +71,7 @@ No target is yet verified for this ABI; no executable ABI probe is retained.
 ## Candidate Win64 ABI layout — not released
 
 [D4 Win64 ABI](d4-win64-native-component-abi.md) proposes one Win64 native call frame, span and admission context with exact 64/48/64-byte field layouts, recorded in [offset fixtures](../../examples/abi/win64-native-layout-v1.json). This refines the previously **illustrative** ModuleHeader/Span/CallFrame discussion but does not fully define the final ModuleHeader, native Result/TaskOutcome tagged payloads or all target ABI layouts. A moduleHandle/operationIndex ordinal must be resolved against the validated symbolic graph OperationID; pointer values and live capabilities are not serialized. PE/COFF, shadow space, nonvolatile register saves and .pdata/.xdata remain on-host test gates, NOT-RUN.
+
+## Candidate Win64 module and outcome descriptor refinement
+
+[Module and Result Descriptors](d4-win64-module-and-result-descriptors.md) propose machine-sized header/operation/typed value and outcome layouts in addition to the [Win64 call frame](d4-win64-native-component-abi.md). These are not final signed module headers or released public ABI symbols. An ordinal resolves only within an independently verified module generation and exact logical OperationID/contract digest; an approvalStatus string or direct function pointer does not grant execution. [Additional fixtures](../../examples/abi/win64-module-and-outcome-v1.json) supply arithmetic/layout requirements, never PE/COFF output.
