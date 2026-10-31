@@ -279,7 +279,7 @@ dynamicView      = "ForEach", "(", "items", ":", pureExpr,
 
 modifier         = ".", modifierName, "(", namedArg,
                    { ",", namedArg }, ")" ;
-modifierName     = ID | "on" ;
+modifierName     = ID | "on" | "key" ;
 namedArgs        = namedArg, { ",", namedArg } ;
 namedArg         = ID, ":", pureExpr ;
 pureExpr         = pureAtom | pureCall ;
