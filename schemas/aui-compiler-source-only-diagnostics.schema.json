@@ -63,7 +63,8 @@
       "required": [
         "status",
         "sourceFormat",
-        "sourceIdentity"
+        "sourceIdentity",
+        "sha256"
       ],
       "properties": {
         "status": {
@@ -75,6 +76,11 @@
         "sourceIdentity": {
           "type": "string",
           "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of exact original UTF-8 review-type-catalog bytes; identity only, not verified public exports"
         }
       }
     },
