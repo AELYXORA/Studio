@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 lexical/CST/AST kind registry — proposed
+
+[T0 kind registry and syntax-to-TypedHIR mapping](aui-compiler-t0-kind-registry.md) proposes numerical token/CST/AST kind inventories with profile-aware contextual identifiers, CST-only recovery, and the cross-stage family mapping. **It is not exhaustive production-level closure yet:** speculative/unmapped entries and remaining grammar choices must be reconciled before acceptance; native tests are NOT-RUN.
+
 ## T0 source and syntax-memory handoff — proposed
 
 [Physical T0 source/token/CST/AST contract](aui-compiler-t0-physical-contract.md) proposes exact internal source/token/trivia/CST/AST records, lossless byte coverage, immutable source spans, Unicode/profile safeguards, parser recovery restrictions and fail-closed handoff to TypedHIR. Numeric kind registries and native assembler tests remain P0; this is **not an implemented compiler**.
