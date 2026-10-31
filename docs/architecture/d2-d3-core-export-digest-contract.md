@@ -62,3 +62,7 @@ The type template (for example List<T>) is not equivalent to one instantiated Li
 Reference invariants: source JSON object key/whitespace reformatting and trait-order permutations preserve *logical* digests; removing a trait or changing feature gate/arity changes it; changes to native layout alone do not change it; the existing D2 v1 vectors and all prior locked pure graph/snapshot hashes remain unchanged.
 
 **Open P0:** complete approved core export/trait registry and semantic type errors, exact generic instantiation policy, mixed-profile migration, source publisher/authenticity and ABI/Win64 native proof. Never assert architect acceptance merely from reference SHA-256 calculations.
+
+## CD6. Bounded G1 generic specialization and v1/v2 barrier
+
+[Exact generic instance identity](d2-d3-generic-instantiation-identity.md) defines a **new** domain-separated, ordered-argument logical digest for core List<T>, Result<T,E> and TaskOutcome<T,E>, distinct from these 13 template export digests. [v1/v2 compatibility policy](d2-d6-core-profile-compatibility.md) forbids silently inserting v2-core/generic references into existing v1 exported fields/Graph. User-defined v1 records such as Row in List<Row> remain unsupported in G1 until a new typed TypeReference and migration profile is architect-approved. [G1 vectors](../../examples/aui-language/d2-generic-instantiation-vectors.json) are reference SHA-256 only, NOT native compiler tests.
