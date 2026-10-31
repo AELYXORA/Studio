@@ -275,43 +275,86 @@
     "types": {
       "type": "array",
       "items": {
-        "type": "object",
-        "required": [
-          "typeId",
-          "kind",
-          "fields"
-        ],
-        "properties": {
-          "typeId": {
-            "type": "string",
-            "minLength": 1
-          },
-          "kind": {
-            "const": "record"
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": [
-                "name",
-                "typeRef"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "typeRef": {
-                  "$ref": "aui-type-reference.schema.json"
-                }
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "typeId",
+              "kind",
+              "fields"
+            ],
+            "properties": {
+              "typeId": {
+                "type": "string",
+                "minLength": 1
               },
-              "additionalProperties": false
-            }
+              "kind": {
+                "const": "record"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "typeRef"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "typeRef": {
+                      "$ref": "aui-type-reference.schema.json"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "typeId",
+              "kind",
+              "variants"
+            ],
+            "properties": {
+              "typeId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "const": "enum"
+              },
+              "variants": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "typeRef": {
+                      "$ref": "aui-type-reference.schema.json"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            },
+            "additionalProperties": false
           }
-        },
-        "additionalProperties": false
-      }
+        ]
+      },
+      "description": "PROPOSED additive record-or-closed-enum public type syntax. Existing record entries unchanged; new enum variant ordering and payload TypeReference are logical type semantics, not accepted contract digests or native tag ABI. Exports remain unverified until architect review."
     },
     "exportedTypeSetDigest": {
       "type": "string",
@@ -319,5 +362,5 @@
     }
   },
   "additionalProperties": false,
-  "description": "One package contract with typed ports, commands, records, explicit effects/capabilities, target support and source inventory. No architecture edition branches. Native operation requires separate verified authorization."
+  "description": "Single canonical authored package schema, design candidate: additive enum type branch in existing types[]; compiler must separately verify unique names, exact public export digests, package lock, operation service mapping and target ABI. Shape-valid does not mean approved."
 }
