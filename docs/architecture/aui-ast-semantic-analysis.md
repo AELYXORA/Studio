@@ -146,3 +146,23 @@ The one production compiler must explicitly represent three further immutable lo
 For every node family define **before implementation** a closed internal node tag, full field types, input/output invariant, source origin, successor/predecessor relationships, ownership/deallocation rules, deterministic diagnostic code, serialization/format decision and invalidation dependency. A compiler pass MUST NOT silently drop an unknown tag in a forward/backward upgrade. New node tags require a new reviewed compiler IR contract, not a new project architecture. An IR walker must reject unknown enum discriminants, duplicate declaration IDs, impossible control-flow predecessors and unresolved graph symbols.
 
 The current existing L0/L1 [plan schema](../../schemas/aui-compiler-source-only-plan.schema.json) and expected JSON plans are **debug/inspection formats only**, not the full shipping TypedHIR, runtime interchange protocol or public ABI. Complete L2/L3/L4 IR record layout, cross-pass ownership, and target module evidence still require an accepted structural definition and target tests. **All such gates remain PROPOSED / NOT-RUN**.
+
+
+## GL0. Full-production GraphLinkedIR handoff proof — proposed, not approved
+
+The [one full compiler T0–T8 contract](aui-ir-layout.md) requires a **non-forgeable distinction between typed source analysis and trusted Graph-linked native compilation**. A structurally correct source-only `TypedHIR` and a 64-hex type digest are **not** evidence for a graph-linked command or native service.
+
+Each linked, executable-relevant TypedHIR node (component/View root, event handler/command dispatch, state/task/keyed source construct) carries an *immutable* `GraphOriginEvidence` referencing:
+
+- exact `sourceModuleIdentity` (SHA of captured bytes), source revision, original `[startByte,endByte)` span and compiler-local resolved declaration symbol;
+- exact project `graphSnapshotIdentity` and recomputed [C9 semanticGraphDigest](canonical-project-graph-and-components.md), not a user-authored revision number alone;
+- exact signed/approved source-review and package/lock receipts **checked by the trust owner**, not strings whose prefix says `signed`;
+- exact verified core Registry and scoped Graph public type export set, complete package/operation/component contract digests and resolved public `TypeReference`;
+- optional exact Graph node/port/operation identities and target/required capability/effect/domain matching evidence **where the source actually needs them**. A static View is not automatically a physical device operation;
+- exact requested qualified target runtime/ABI identity for any native operation, separately from logical Graph type IDs.
+
+**Linked proof is an output of validation, not an input user JSON field.** Every resolved source operation must match one authenticated existing C9 Graph component's entire public operation signature, owner/capability/effect/domain/target closure and source-to-node reconciliation. A source `service` is only an interface. A pure `Derived` node may link a verified public pure function but cannot silently use an unverified provider. Missing required evidence stops at T2 before OwnershipIR/TargetMIR; `UNVERIFIED_SOURCE_ONLY` remains a distinct non-executable path.
+
+Source-to-Graph reconciliation must verify exact stable symbol ownership, source map coverage, intentional multiplicity (one authored template creates multiple runtime keyed instances), static View key versus runtime StableKey distinction and no source line number masquerading as a permanent `GraphNodeID`. A source source/snapshot/core/operation/ABI change invalidates the proof and all descendant IR caches. An inspection dump may describe `verifiedGraphOrigin:true` as **illustration only**; it never grants trust when reloaded.
+
+The [full IR negative review cases](../../examples/aui-compiler-production/full-ir-pass-review-cases.json) include stale source, wrong operation contract and unapproved source-only trust promotion. All are **NOT-RUN**. This section establishes the contract for the future T2 verifier, not a signed approval mechanism, native provider or implemented linker.
