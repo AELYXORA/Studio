@@ -1,0 +1,484 @@
+{
+  "format": "aui.project",
+  "projectId": "example.sensor-telemetry",
+  "revision": 0,
+  "targets": [
+    {
+      "id": "linux-arm64",
+      "triple": "aarch64-unknown-linux-gnu",
+      "execution": "kernel"
+    }
+  ],
+  "packageDependencies": [
+    {
+      "packageId": "example.sensor",
+      "version": "0.1.0"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "soc",
+      "kind": "cpu",
+      "label": "ARM64 SoC",
+      "target": "linux-arm64"
+    },
+    {
+      "id": "bus",
+      "kind": "bus",
+      "label": "I2C Bus",
+      "target": "linux-arm64"
+    },
+    {
+      "id": "sensor",
+      "kind": "device",
+      "label": "Sensor",
+      "target": "linux-arm64"
+    },
+    {
+      "id": "driver",
+      "kind": "component-instance",
+      "label": "Sensor Driver",
+      "target": "linux-arm64",
+      "ports": [
+        {
+          "id": "sample",
+          "direction": "out",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/RawSample",
+            "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        }
+      ],
+      "component": {
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/driver",
+        "contractDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    },
+    {
+      "id": "decoder",
+      "kind": "component-instance",
+      "label": "Decoder",
+      "ports": [
+        {
+          "id": "raw",
+          "direction": "in",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/RawSample",
+            "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        },
+        {
+          "id": "reading",
+          "direction": "out",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/Measurement",
+            "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        }
+      ],
+      "target": "linux-arm64",
+      "component": {
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/decoder",
+        "contractDigest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      }
+    },
+    {
+      "id": "app",
+      "kind": "component-instance",
+      "label": "Telemetry App",
+      "ports": [
+        {
+          "id": "reading",
+          "direction": "in",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/Measurement",
+            "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        }
+      ],
+      "target": "linux-arm64",
+      "component": {
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/app",
+        "contractDigest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    {
+      "id": "dma_memory",
+      "kind": "storage",
+      "label": "Declared DMA RAM",
+      "target": "linux-arm64"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "kind": "hosts",
+      "from": {
+        "node": "soc"
+      },
+      "to": {
+        "node": "bus"
+      }
+    },
+    {
+      "id": "e2",
+      "kind": "hosts",
+      "from": {
+        "node": "bus"
+      },
+      "to": {
+        "node": "sensor"
+      }
+    },
+    {
+      "id": "e3",
+      "kind": "data-flow",
+      "from": {
+        "node": "driver",
+        "port": "sample"
+      },
+      "to": {
+        "node": "decoder",
+        "port": "raw"
+      }
+    },
+    {
+      "id": "e4",
+      "kind": "data-flow",
+      "from": {
+        "node": "decoder",
+        "port": "reading"
+      },
+      "to": {
+        "node": "app",
+        "port": "reading"
+      }
+    },
+    {
+      "id": "e5",
+      "kind": "resource-access",
+      "from": {
+        "node": "driver"
+      },
+      "to": {
+        "node": "sensor"
+      }
+    },
+    {
+      "id": "e6",
+      "kind": "resource-access",
+      "from": {
+        "node": "driver"
+      },
+      "to": {
+        "node": "dma_memory"
+      }
+    }
+  ],
+  "dataFlows": [
+    {
+      "id": "sensor-telemetry",
+      "channels": [
+        {
+          "edgeId": "e3",
+          "mode": "stream",
+          "senderDomain": "io-worker",
+          "receiverDomain": "io-worker",
+          "transfer": "copy",
+          "ordering": "fifo",
+          "errorPolicy": "propagate",
+          "capacity": 32,
+          "overflow": "reject"
+        },
+        {
+          "edgeId": "e4",
+          "mode": "snapshot",
+          "senderDomain": "io-worker",
+          "receiverDomain": "ui",
+          "transfer": "copy",
+          "ordering": "latest",
+          "errorPolicy": "propagate"
+        }
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "sample-to-measurement",
+      "ownerNodeId": "decoder",
+      "trigger": {
+        "kind": "data-arrival",
+        "edgeId": "e3"
+      },
+      "initialState": "waiting",
+      "states": [
+        {
+          "id": "waiting"
+        },
+        {
+          "id": "decoding"
+        },
+        {
+          "id": "cancelling"
+        },
+        {
+          "id": "done",
+          "terminal": "success"
+        },
+        {
+          "id": "failed",
+          "terminal": "failure"
+        },
+        {
+          "id": "cancelled",
+          "terminal": "cancelled"
+        }
+      ],
+      "transitions": [
+        {
+          "id": "rx",
+          "from": "waiting",
+          "to": "decoding",
+          "signal": "sample-arrived",
+          "action": {
+            "kind": "dispatch",
+            "nodeId": "decoder",
+            "operationId": "Decode"
+          }
+        },
+        {
+          "id": "ok",
+          "from": "decoding",
+          "to": "done",
+          "signal": "decoded",
+          "action": {
+            "kind": "publish",
+            "edgeId": "e4"
+          }
+        },
+        {
+          "id": "error",
+          "from": "decoding",
+          "to": "failed",
+          "signal": "decode-error",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "cancel-wait",
+          "from": "waiting",
+          "to": "cancelled",
+          "signal": "cancel",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "cancel-running",
+          "from": "decoding",
+          "to": "cancelling",
+          "signal": "cancel",
+          "action": {
+            "kind": "request-cancel"
+          }
+        },
+        {
+          "id": "cancel-confirmed",
+          "from": "cancelling",
+          "to": "cancelled",
+          "signal": "cancel-confirmed",
+          "action": {
+            "kind": "none"
+          }
+        },
+        {
+          "id": "completed-after-cancel",
+          "from": "cancelling",
+          "to": "done",
+          "signal": "decoded",
+          "action": {
+            "kind": "publish",
+            "edgeId": "e4"
+          }
+        },
+        {
+          "id": "failed-after-cancel",
+          "from": "cancelling",
+          "to": "failed",
+          "signal": "decode-error",
+          "action": {
+            "kind": "none"
+          }
+        }
+      ],
+      "scheduling": "per-instance-fifo",
+      "maxConcurrentInstances": 32,
+      "onLimit": "reject-and-report",
+      "mailboxCapacity": 8,
+      "mailboxOverflow": "reject-and-report",
+      "signals": [
+        {
+          "id": "sample-arrived",
+          "source": "trigger",
+          "payloadTypeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/RawSample",
+            "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        },
+        {
+          "id": "decoded",
+          "source": "command-success",
+          "nodeId": "decoder",
+          "operationId": "Decode",
+          "payloadTypeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/Measurement",
+            "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        },
+        {
+          "id": "decode-error",
+          "source": "command-failure",
+          "nodeId": "decoder",
+          "operationId": "Decode",
+          "payloadTypeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/DecodeError",
+            "contractDigest": "3333333333333333333333333333333333333333333333333333333333333333"
+          }
+        },
+        {
+          "id": "cancel",
+          "source": "control"
+        },
+        {
+          "id": "cancel-confirmed",
+          "source": "control"
+        }
+      ]
+    }
+  ],
+  "retiredIdentities": [],
+  "resourceModel": {
+    "profile": "aui.hardware-resources",
+    "targetRequirements": [
+      {
+        "targetId": "linux-arm64",
+        "addressBits": 64,
+        "endian": "little",
+        "privilege": "kernel",
+        "featureRegistryId": "example.aarch64.features/draft",
+        "isaFeatures": [
+          "armv8-a"
+        ],
+        "adapterContractId": "example.sensor/mock-target-adapter"
+      }
+    ],
+    "claims": [
+      {
+        "id": "claim_dma",
+        "kind": "dma",
+        "targetId": "linux-arm64",
+        "ownerNodeId": "driver",
+        "resourceNodeId": "sensor",
+        "edgeId": "e5",
+        "addressSpaceId": "dma0",
+        "sharing": "exclusive",
+        "requiredCapabilities": [
+          "dma.submit"
+        ],
+        "dma": {
+          "engineNodeId": "sensor",
+          "channelId": "ch0",
+          "bufferClaimId": "claim_ram",
+          "direction": "from-device",
+          "coherency": "explicit-sync",
+          "alignmentBytes": 16,
+          "maxBytes": "0x1000",
+          "maxInFlight": 1
+        }
+      },
+      {
+        "id": "claim_irq",
+        "kind": "irq",
+        "targetId": "linux-arm64",
+        "ownerNodeId": "driver",
+        "resourceNodeId": "sensor",
+        "edgeId": "e5",
+        "addressSpaceId": "intc0",
+        "sharing": "exclusive",
+        "requiredCapabilities": [
+          "irq.handle"
+        ],
+        "irq": {
+          "controllerNodeId": "soc",
+          "line": "0x2",
+          "trigger": "level-high",
+          "ackPolicy": "explicit"
+        }
+      },
+      {
+        "id": "claim_mmio",
+        "kind": "mmio",
+        "targetId": "linux-arm64",
+        "ownerNodeId": "driver",
+        "resourceNodeId": "sensor",
+        "edgeId": "e5",
+        "addressSpaceId": "physical",
+        "sharing": "exclusive",
+        "requiredCapabilities": [
+          "mmio.read",
+          "mmio.write"
+        ],
+        "mmio": {
+          "base": "0x10000000",
+          "length": "0x100",
+          "registerWidthBits": 32,
+          "alignmentBytes": 4,
+          "endian": "little",
+          "access": "read-write",
+          "ordering": "device"
+        }
+      },
+      {
+        "id": "claim_ram",
+        "kind": "memory",
+        "targetId": "linux-arm64",
+        "ownerNodeId": "driver",
+        "resourceNodeId": "dma_memory",
+        "edgeId": "e6",
+        "addressSpaceId": "physical",
+        "sharing": "exclusive",
+        "requiredCapabilities": [
+          "memory.map",
+          "memory.read",
+          "memory.write"
+        ],
+        "memory": {
+          "base": "0x40000000",
+          "length": "0x1000",
+          "regionType": "ram",
+          "access": "read-write"
+        }
+      }
+    ]
+  },
+  "coreRegistryFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "typeExportSetDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}
