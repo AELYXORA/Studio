@@ -40,7 +40,7 @@ The [COMP-01–05 Front-End Closure](aui-compiler-frontend-closure.md) and [Asse
 
 ## Integrated AUI language and types — design pass
 
-The [AUI Syntax owner](aui-syntax.md) now presents one combined L0-L4 candidate grammar and contract-module syntax. [Types and Ownership](aui-types-and-ownership.md) owns cross-profile type admission. There are [36 NOT-RUN grammar cases](../../examples/aui-compiler-production/integrated-grammar-cases.json). Public enum/service mapping remains P0 because the canonical package schema only exports record types.
+The [AUI Syntax owner](aui-syntax.md) now presents one combined L0-L4 candidate grammar and contract-module syntax. [Types and Ownership](aui-types-and-ownership.md) owns cross-profile type admission. There are [36 NOT-RUN grammar cases](../../examples/aui-compiler-production/integrated-grammar-cases.json). The one canonical package schema now **provisionally supports enum entries** alongside records, but public enum contract digests and the source service-to-verified-component mapping remain P0.
 
 ## Complete AUI production compiler — single end-state
 
