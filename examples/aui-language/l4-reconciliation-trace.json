@@ -1,0 +1,707 @@
+{
+  "format": "aui.d3-l4-keyed-reconciliation-trace",
+  "status": "DESIGN REFERENCE MODEL ONLY — no AELYXORA compiler/ABI/renderer/runtime test run",
+  "profile": "aui.source/l4-keyed/v1",
+  "source": "keyed-rows-l4.aui",
+  "notes": [
+    "Parents p and q represent two independent ForEach owner paths",
+    "String stable keys are fully tagged and scoped to parent + TemplateSymbolID; the slash notation in this fixture is not runtime encoding",
+    "The state column models a hypothetical stateful child template, not implemented by the Text-only source example",
+    "Incarnation generations are modeled per parent/key path; a new parent creates a distinct identity",
+    "On rejected updates expectedCommitted must match the last successful committed vector",
+    "Ticket/unsubscribe/OS/GPU behavior requires future native tests"
+  ],
+  "frames": [
+    {
+      "op": "mount",
+      "lists": {
+        "p": [
+          [
+            "a",
+            "Row"
+          ],
+          [
+            "b",
+            "Row"
+          ],
+          [
+            "c",
+            "Row"
+          ]
+        ],
+        "q": []
+      },
+      "expect": "accepted",
+      "explain": "New keyed rows",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 2
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "c",
+            "Row"
+          ],
+          [
+            "a",
+            "Row"
+          ],
+          [
+            "b",
+            "Row"
+          ]
+        ],
+        "q": []
+      },
+      "expect": "accepted",
+      "explain": "Same-parent reorder preserves three incarnations",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 2
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "c",
+            "Row"
+          ],
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "Row"
+          ],
+          [
+            "b",
+            "Row"
+          ]
+        ],
+        "q": []
+      },
+      "expect": "accepted",
+      "explain": "New d only",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 2
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 3
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "c",
+            "Row"
+          ],
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "Row"
+          ]
+        ],
+        "q": []
+      },
+      "expect": "accepted",
+      "explain": "Remove b invalidates generation one",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 2
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "c",
+            "Row"
+          ],
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "Row"
+          ],
+          [
+            "b",
+            "Row"
+          ]
+        ],
+        "q": []
+      },
+      "expect": "accepted",
+      "explain": "Reinsert b uses new incarnation",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 2
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "fresh",
+            "position": 3
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "set-local-state",
+      "parent": "p",
+      "key": "b",
+      "generation": 2,
+      "value": "active",
+      "expect": "accepted",
+      "explain": "Only current b generation may receive local state",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 2
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 3
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "c",
+            "Row"
+          ],
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "InfoRow"
+          ],
+          [
+            "b",
+            "Row"
+          ]
+        ],
+        "q": []
+      },
+      "expect": "accepted",
+      "explain": "Type replacement remounts a",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "InfoRow",
+            "generation": 2,
+            "state": "fresh",
+            "position": 2
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 3
+          }
+        ],
+        "q": []
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "InfoRow"
+          ],
+          [
+            "b",
+            "Row"
+          ]
+        ],
+        "q": [
+          [
+            "c",
+            "Row"
+          ]
+        ]
+      },
+      "expect": "accepted",
+      "explain": "Cross-parent transfer is removal plus new mount, no state transfer",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "InfoRow",
+            "generation": 2,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 2
+          }
+        ],
+        "q": [
+          {
+            "id": "q/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "InfoRow"
+          ],
+          [
+            "b",
+            "Row"
+          ]
+        ],
+        "q": [
+          [
+            "c",
+            "Row"
+          ]
+        ]
+      },
+      "expect": "AUI_KEY_DUPLICATE",
+      "explain": "Reject whole candidate, retain last committed vector",
+      "observedByIndependentModel": "AUI_KEY_DUPLICATE",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "InfoRow",
+            "generation": 2,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 2
+          }
+        ],
+        "q": [
+          {
+            "id": "q/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "dispatch-old-event",
+      "parent": "p",
+      "key": "b",
+      "generation": 1,
+      "expect": "AUI_EVENT_STALE",
+      "explain": "Old incarnation does not hit live b",
+      "observedByIndependentModel": "AUI_EVENT_STALE",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "InfoRow",
+            "generation": 2,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 2
+          }
+        ],
+        "q": [
+          {
+            "id": "q/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "deliver-old-task",
+      "parent": "p",
+      "key": "b",
+      "generation": 1,
+      "expect": "AUI_TASK_STALE",
+      "explain": "Old task completion cannot write new b",
+      "observedByIndependentModel": "AUI_TASK_STALE",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "InfoRow",
+            "generation": 2,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 2
+          }
+        ],
+        "q": [
+          {
+            "id": "q/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          }
+        ]
+      }
+    },
+    {
+      "op": "reconcile",
+      "lists": {
+        "p": [
+          [
+            "b",
+            "Row"
+          ],
+          [
+            "d",
+            "Row"
+          ],
+          [
+            "a",
+            "InfoRow"
+          ]
+        ],
+        "q": [
+          [
+            "c",
+            "Row"
+          ]
+        ]
+      },
+      "expect": "accepted",
+      "explain": "Reorder b retains generation two and active state",
+      "observedByIndependentModel": "accepted",
+      "expectedCommitted": {
+        "p": [
+          {
+            "id": "p/b",
+            "key": "b",
+            "type": "Row",
+            "generation": 2,
+            "state": "active",
+            "position": 0
+          },
+          {
+            "id": "p/d",
+            "key": "d",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 1
+          },
+          {
+            "id": "p/a",
+            "key": "a",
+            "type": "InfoRow",
+            "generation": 2,
+            "state": "fresh",
+            "position": 2
+          }
+        ],
+        "q": [
+          {
+            "id": "q/c",
+            "key": "c",
+            "type": "Row",
+            "generation": 1,
+            "state": "fresh",
+            "position": 0
+          }
+        ]
+      }
+    }
+  ]
+}
