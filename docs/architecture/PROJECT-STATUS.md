@@ -73,3 +73,7 @@ Strict schema/duplicate-key policy, canonical package hashes and lockfile, event
 ## D3 L4 dynamic identity documentation update
 
 [Keyed View Lifecycle](d3-keyed-dynamic-view-lifecycle.md) and [D3/D4/D5 Review](d3-d4-d5-lifecycle-consistency-review.md) now specify candidate parent-path plus StableKey identity, same-parent reorder preservation, fresh incarnation after unmount/reparent, bounded reconciliation and safe result-subscription teardown. [L4 fixtures](../../examples/aui-language/L4-README.md) include a 12-step reference-only identity trace and [40 design scenarios](../../examples/aui-language/l4-negative-cases.json). No Studio implementation/ABI/renderer or native validation was added. D3/D4/D5 are still Proposed/Open, all D1–D8 acceptance pending.
+
+## D3 L4 dynamic views — documentation progress only
+
+[Keyed Dynamic View Lifecycle](d3-keyed-dynamic-view-lifecycle.md) and [D3/D4/D5 consistency review](d3-d4-d5-lifecycle-consistency-review.md) now describe stable keyed list identity, fresh mount generations, bounded reconciliation and task/renderer ownership boundaries. [L4 source and 12-step reference-only trace](../../examples/aui-language/L4-README.md) and [40 designed rejection/race cases](../../examples/aui-language/l4-negative-cases.json) are documentation fixtures. No AUI runtime, ABI linker, native parser, GPU renderer or actual lifecycle test was added. All human D1-D8 acceptance gates remain OPEN.
