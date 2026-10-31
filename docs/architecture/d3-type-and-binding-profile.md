@@ -87,3 +87,7 @@ A string is a logical UTF-8 scalar sequence; target-native representation, alloc
 ## Proposed L2/L3 core type extensions
 
 [L2 State](d3-state-derived-binding-contract.md) adds StateRevision and static keyed-view binding contracts without changing L0/L1 Text(value: String) constructor requirements. [L3 Task/Result](d3-task-result-lifecycle.md) proposes TaskSlot, TaskTicket and a closed TaskOutcome<T,E> with Successful, Failed, AdmissionRejected, confirmed Cancelled and ProviderUnavailable. These are logical typed surfaces, **not** existing pinned aui.core/0.1-draft exports or proved native layouts. No implicit result-to-String conversion, general generics or device capability follows from naming them. Core registry digest, ownership and target ABI remain unaccepted P0.
+
+## D3+ proposed core type additions
+
+[L2 State](d3-state-derived-binding-contract.md) requires typed StateRevision, static keyed view property and purity contracts beyond the existing L0/L1 catalog. [L3 Task/Result](d3-task-result-lifecycle.md) proposes TaskSlot/TaskTicket and closed TaskOutcome<T,E> variants Successful, Failed, AdmissionRejected, confirmed Cancelled and ProviderUnavailable. These are **not yet pinned aui.core/0.1-draft exports or native ABI layouts**. A result cannot be implicitly converted to String or hardware permission. Actual type digest registry and target ABI are P0.
