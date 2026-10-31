@@ -1,5 +1,7 @@
 # D2–D6 — Type-Aware Source → Graph → Win64 ABI Review Trace
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED end-to-end architecture trace; not a runnable AUI program, approved v2 Graph profile, validated source-link map, signed receipt, native PE module or Phase III result.** This is the first unified walkthrough connecting [TypeReference v2](d2-d6-typeref-v2-resolution.md), [source/Graph approval](d3-source-snapshot-reconciliation.md), [signed receipts](d2-d6-signed-approval-receipt.md), [Win64 ABI](d4-win64-native-component-abi.md), [module result envelopes](d4-win64-module-and-result-descriptors.md), [D5 state/task](d3-task-result-lifecycle.md) and [D6 persistence](d6-canonical-persistence.md).
 
 ## ET1. Logical source/type scenario (conceptual only)
