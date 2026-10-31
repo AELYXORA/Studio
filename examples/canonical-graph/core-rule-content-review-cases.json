@@ -1,0 +1,265 @@
+{
+  "format": "aui.core-semantic-content-review-cases",
+  "status": "PROPOSED / DESIGN-ONLY / NOT-RUN; no accepted public digests or native AUI tests",
+  "owner": "docs/architecture/d3-core-registry-value-contract.md#cr14-complete-review-content-for-all-current-core-rules--proposed-semantic-closure-contract",
+  "source": "examples/canonical-graph/core-registry-candidate.json",
+  "semantics": {
+    "same": "Canonical candidate logical review projection unchanged, never implies approval",
+    "different": "Proposed normative semantic content differs; an approved future type digest MUST change",
+    "reject": "Malformed or untrusted candidate must not be used for public export, graph link or native execution"
+  },
+  "cases": [
+    {
+      "id": "RULE-01",
+      "expected": "same",
+      "mutation": "Reorder all 15 type entries in the candidate registry without modifying their content",
+      "rationale": "Type set sorted by exact TypeID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-02",
+      "expected": "same",
+      "mutation": "Reorder semanticRules entries while maintaining exact unique ruleId-to-definition bindings",
+      "rationale": "Candidate projection canonicalizes semanticRules by UTF-8 ruleId",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-03",
+      "expected": "same",
+      "mutation": "Reorder logicalTraits set or semanticModel.ruleIds set without modifying values",
+      "rationale": "Canonicalize unordered sets by UTF-8",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-04",
+      "expected": "same",
+      "mutation": "Edit semanticSummary or unresolvedObligations review prose without changing normative definition content",
+      "rationale": "Human documentation not part of logical semantic identity",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-05",
+      "expected": "same",
+      "mutation": "Reorder JSON object keys of a rule object without changing decoded keys or values",
+      "rationale": "D6 canonical object key ordering",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-06",
+      "expected": "different",
+      "mutation": "Change exact definition string for CR12/F64/finite-only while preserving its ruleId",
+      "rationale": "Full normative content changes; ruleId-only hash prohibited",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-07",
+      "expected": "different",
+      "mutation": "Change CR3/String/no-implicit-normalization to allow NFC equality while preserving ruleId",
+      "rationale": "String value semantics change",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-08",
+      "expected": "different",
+      "mutation": "Change CR13/TaskOutcome/closed-control permitted ProviderError phase-code pair",
+      "rationale": "TaskOutcome control semantic change",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-09",
+      "expected": "different",
+      "mutation": "Change Bytes maximum to 2097152 while preserving ruleId",
+      "rationale": "Admitted value domain changes",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-10",
+      "expected": "different",
+      "mutation": "Change List nominal-only user element rule to authorize all nested generic values",
+      "rationale": "Semantic admission change even though TypeReference schema already parses nested refs",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-11",
+      "expected": "different",
+      "mutation": "Swap two ordered union variants in Result or TaskOutcome while holding rule definitions unchanged",
+      "rationale": "Ordered variant semantics change; inconsistent definitions require further review",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-12",
+      "expected": "different",
+      "mutation": "Change logicalTraits SendConditional to unconditional Send for String or List",
+      "rationale": "Ownership/transfer meaning changes",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-13",
+      "expected": "reject",
+      "mutation": "Remove the semanticRules field from a type entry",
+      "rationale": "Required content-bearing field absent",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-14",
+      "expected": "reject",
+      "mutation": "Omit one ruleId from semanticRules but leave it in semanticModel.ruleIds",
+      "rationale": "Rule set mismatch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-15",
+      "expected": "reject",
+      "mutation": "Add an orphan semanticRules ruleId absent from semanticModel.ruleIds",
+      "rationale": "Rule set mismatch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-16",
+      "expected": "reject",
+      "mutation": "Duplicate a semanticRules ruleId within the same type",
+      "rationale": "Each definition appears exactly once",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-17",
+      "expected": "reject",
+      "mutation": "Duplicate a semanticModel.ruleIds ID but keep distinct textual definitions",
+      "rationale": "Rule sets must be unique",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-18",
+      "expected": "reject",
+      "mutation": "Set semanticRules definition to empty string",
+      "rationale": "Complete meaning required",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-19",
+      "expected": "reject",
+      "mutation": "Set semanticRules definition to a newline-containing string",
+      "rationale": "Canonical normative text profile excludes raw CR/LF",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-20",
+      "expected": "reject",
+      "mutation": "Change one definition while claiming the old approved public contractDigest",
+      "rationale": "Authenticated public meaning mismatch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-21",
+      "expected": "reject",
+      "mutation": "Compute contractDigest with all 15 exportStatus UNVERIFIED",
+      "rationale": "Admission is independent from hashable projection",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-22",
+      "expected": "reject",
+      "mutation": "Build coreRegistryFingerprint using historical 13-entry registry or mixed source revision",
+      "rationale": "Only one complete verified 15-entry current registry",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-23",
+      "expected": "reject",
+      "mutation": "Treat a stable SHA-shaped 64-hex review fingerprint as signed source approval",
+      "rationale": "Digest format is not cryptographic provenance",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-24",
+      "expected": "reject",
+      "mutation": "Serialize TaskSlot or TaskTicket as Graph value despite explicit nonportable definition",
+      "rationale": "Opaque runtime resource must not cross portable payload boundary",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-25",
+      "expected": "reject",
+      "mutation": "Treat Event<T> presence as an automatically verified native subscription",
+      "rationale": "Origin/generation proof and runtime execution authority required",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-26",
+      "expected": "reject",
+      "mutation": "Serialize arbitrary List<Result<T,E>> solely because recursive TypeReference shape accepts it",
+      "rationale": "Current L4 List element requires a verified nominal immutable record; other instantiations need approved specialization",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-27",
+      "expected": "reject",
+      "mutation": "Infer F64 NaN acceptance from target IEEE-754 ABI although rule is finite-only",
+      "rationale": "Portable type and native layout are different contracts",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-28",
+      "expected": "reject",
+      "mutation": "Treat typed JSON Unit as native null or omitted value by default",
+      "rationale": "Unit portable carrier remains deferred; no invented codec",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-29",
+      "expected": "reject",
+      "mutation": "Change ProviderError phase to indeterminate-after-admission while preserving an asserted no-dispatch guarantee",
+      "rationale": "Trusted admission provenance cannot be forged from payload shape",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-30",
+      "expected": "reject",
+      "mutation": "Treat CancellationConfirmation state confirmed-quiescent as sufficient without owner/ticket/generation proof",
+      "rationale": "Runtime quiescence provenance separate from source JSON",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-31",
+      "expected": "reject",
+      "mutation": "Use a new nested generic template with unverified Send/Copy traits as if outer List always makes it portable",
+      "rationale": "Traits conditional and recursively verified",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-32",
+      "expected": "reject",
+      "mutation": "Compute public digest from ruleId only, ignoring semanticRules.definition",
+      "rationale": "Same ID may map to different meaning",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-33",
+      "expected": "reject",
+      "mutation": "Hash semanticSummary, source filenames or review status instead of exact closed semantic definition projection",
+      "rationale": "Excluded workflow metadata never substitutes for normative content",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-34",
+      "expected": "reject",
+      "mutation": "Accept a type whose kind/arity/ordered variant list contradicts its semantic rule text",
+      "rationale": "Shape checks alone do not prove source-to-rule consistency",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-35",
+      "expected": "reject",
+      "mutation": "Use current 15-type content while a nested type or internal TaskOutcome control rule is unresolved",
+      "rationale": "Public dependency closure incomplete",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "RULE-36",
+      "expected": "reject",
+      "mutation": "Assume current candidate comparison projection is an accepted public hash profile",
+      "rationale": "Human approved canonical domain and independent goldens still absent",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
