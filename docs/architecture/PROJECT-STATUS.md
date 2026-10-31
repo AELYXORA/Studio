@@ -68,6 +68,12 @@ The [first compiler fixture set](../../examples/aui-compiler-first-slice/README.
 
 Remaining COMP-01–05 review blockers are explicit human acceptance, actual pinned Unicode 15.1.0 UCD input hashes and normalization data, installed Win64 toolchain qualification, agreed memory/diagnostic bounds and final source-only output byte conventions. COMP-06–08 still block linked/native compiler output, and Phase II implementation is **NOT AUTHORIZED**.
 
+## Compiler readiness re-audit — 2026-10-31
+
+The [implementation-facing COMP-01..05 audit](implementation-readiness.md) now distinguishes **P00–P06 source-only compiler design: mostly specified, NOT ACCEPTED** from **P07 Graph-linked / P08–P10 native compilation: NOT READY**. This review repaired explicit L0-vs-L1 parser admission, added real unverified catalogue-byte SHA to success/error outputs, separated `check` from `emit-plan`, and prepared a [579-byte L1 expected plan](../../examples/aui-compiler-first-slice/linked-consumer-panel-l1.source-only-plan.expected.json) in addition to L0 and invalid-U32 cases. An invalid parameter span in the new L1 fixture was found and corrected before use.
+
+There are now **47 NOT-RUN compiler acceptance designs** plus **35 NOT-RUN Unicode/lexer cases**. A standalone limited structural check of the current L0/L1 plans and diagnostic envelope is not a compiler test. True Win64/COFF host qualification, pinned Unicode 15.1 data hashes, private Assembly module ABI/arena layout, exact output byte serialization, more runnable negative vectors and explicit human approval are still needed. No source-only/compiler code or D1–D8 approval was created.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
