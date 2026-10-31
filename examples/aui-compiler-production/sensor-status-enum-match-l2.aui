@@ -1,0 +1,14 @@
+// DESIGN ONLY: L2 enum match + static-key bound Text, no native provider.
+import aui.core;
+import example.contract;
+
+component SensorStatus(input error: SensorError) {
+  derived statusLabel: String = matchEnum(value: error) {
+    case SensorError.NoReading => "No reading";
+    case SensorError.BadReading(reading) => "Bad reading";
+  };
+  bind view.statusLabel.value <- statusLabel;
+  VStack(spacing: 12) {
+    Text().key(value: statusLabel).accessibilityLabel(value: "Sensor status")
+  }
+}
