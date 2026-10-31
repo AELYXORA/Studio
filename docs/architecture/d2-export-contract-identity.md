@@ -1,6 +1,6 @@
 # D2/D6 — Export Contract Identity Versus Package Implementation Identity
 
-**Status: Proposed for architect review. Not accepted, implemented or runtime-tested.** This document owns the exact candidate **logical export-contract digest**, which is intentionally different from package file-set digest and build artifact digest. [D2 Identity](d2-identity-and-type-resolution.md) owns persistent IDs; [D6 Package Integrity](d6-package-integrity.md) owns all-file package hashing; [Graph ↔ AUI](project-graph-aui-contract.md) owns reconciliation; [Binary ABI](aui-component-binary-abi.md) owns actual machine representations.
+**Status: HISTORICAL CANDIDATE for architect review, not accepted, implemented or runtime-tested.** This document explains earlier scoped **logical export-contract digest** proposals, which differ from package file-set and artifact digests. The one current candidate closure and derived operation/component contract requirements are now owned by [Canonical Project Graph C3/C10](canonical-project-graph-and-components.md); do not promote historical hash domains or partial export formats to an approved current graph. [D2 Identity](d2-identity-and-type-resolution.md) owns persistent IDs; [D6 Package Integrity](d6-package-integrity.md) owns all-file package hashing; [Graph ↔ AUI](project-graph-aui-contract.md) owns reconciliation; [Binary ABI](aui-component-binary-abi.md) owns actual machine representations.
 
 ## C1. Critical invariant and earlier conflict
 
