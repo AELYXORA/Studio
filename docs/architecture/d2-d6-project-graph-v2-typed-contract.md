@@ -1,5 +1,7 @@
 # D2/D3/D6 — Project Graph v2: Typed Components, Operations and Semantic Digest
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED bounded typed slice, not an accepted full graph migration, compiler or Win64 implementation.** [Original Project Graph](../../schemas/project.schema.json), [v1 semantic projection](d2-d6-semantic-projection.md), and all locked pure reference hashes stay unchanged. [TypeReference v2](d2-d6-typeref-v2-resolution.md) owns types; [D6 P1](d6-canonical-persistence.md) owns canonical JSON; [D3 source binding](d3-source-snapshot-reconciliation.md) and [Win64 ABI](d4-win64-native-component-abi.md) own later stages.
 
 ## TG1. Version and supported meaning
