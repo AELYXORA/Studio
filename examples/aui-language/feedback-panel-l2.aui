@@ -1,0 +1,22 @@
+// D3+ L2 design fixture ONLY. Not legal L0/L1 source, no parser/runtime implemented.
+// Requires exact candidate aui.source/l2-state/v1 profile and reviewed L2 Text core catalog.
+import aui.core;
+
+component FeedbackPanel(input title: String) {
+  state status: String = "Ready";
+  derived visibleStatus: String = status;
+  bind view.statusLabel.value <- visibleStatus;
+
+  event activate: Event<Unit>;
+  on activate(payload) {
+    commit {
+      set status = "Activated";
+    }
+  }
+
+  VStack(spacing: 8) {
+    Text(value: title)
+    Text().key(value: statusLabel).accessibilityLabel(value: "Current status")
+    Button(title: "Activate").on(activated: activate).accessibilityLabel(value: "Activate")
+  }
+}
