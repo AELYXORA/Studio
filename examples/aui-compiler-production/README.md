@@ -9,6 +9,12 @@
 - [Existing L0/L1 frontend examples](../aui-compiler-first-slice/README.md): the separately designed incremental frontend milestone; its checks and plans do **not** prove full production compiler readiness.
 - [L2 state/bind](../aui-language/feedback-panel-l2.aui), [L3 async/settled](../aui-language/review-panel-l3.aui) (now explicitly declares taskSlot), [L4 keyed ForEach](../aui-language/keyed-rows-l4.aui): historical design-only complete source examples, not native compiler output.
 
+## Integrated grammar and export requirements
+
+The existing [AUI Syntax owner](../../docs/architecture/aui-syntax.md) now contains the candidate unified L0-L4 grammar and contract-module syntax. The [36 integrated grammar review cases](integrated-grammar-cases.json) cover source profiles, task slots, bindings, keyed views, module kind, and public enum/service export refusal. All are NOT-RUN design expectations, not parser tests.
+
+The canonical package schema currently supports record type exports only; enum export and service mapping to fully specified component commands need separate architecture approval. The [full AUI type rules](../../docs/architecture/aui-types-and-ownership.md) must be verified before native linking.
+
 ## Correct release gate
 
 A complete AUI compiler release requires: one human-accepted full grammar/profile and core semantic registry; real locked canonical Graph/TypeReference/OperationID source links; fully verified ReactiveIR/AsyncIR/KeyedIR/OwnershipIR/TargetMIR; a qualified target-native COFF/PE backend and D5 runtime/UI service table; runnable end-to-end examples and negative/hostile-input tests; identical pinned clean-build bytes and actual signed module admission. Every item needs observed evidence. Native codegen for one L0 View alone is insufficient.
