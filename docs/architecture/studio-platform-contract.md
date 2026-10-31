@@ -1,6 +1,6 @@
 # AELYXORA Studio — Complete Platform and Interaction Contract
 
-**Status: normative product requirements; implementation pending.** This document defines expected behavior, not proof of working features. The [Architecture](README.md) remains the source of product principles; [Project Graph](project-graph.md) defines canonical graph storage and identity; this document defines workflows, component taxonomy and execution semantics. Avoid duplicated conflicting rules.
+**Status: normative product requirements; implementation pending, design gates open.** This document defines expected product behaviors, not proof of working features. The [Architecture index](README.md) owns product principles; the [ONE Canonical Project Graph](canonical-project-graph-and-components.md) exclusively owns graph semantics, typed components and persistent identities. This document specifies user workflows, palette and interaction expectations, subordinate to that graph contract. More detailed runtime mechanics remain proposed in specialist D2–D6 documents; no duplicate graph or independent workflow model is created.
 
 ## 1. Product, roles and responsibilities
 
