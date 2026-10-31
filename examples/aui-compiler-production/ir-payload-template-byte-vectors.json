@@ -1,0 +1,362 @@
+{
+  "format": "aui.full-ir-payload-template-byte-arithmetic",
+  "status": "ARITHMETIC ONLY / NOT NATIVE ASSEMBLY / ALL SEMANTIC IR VALIDATORS NOT-RUN",
+  "owner": "docs/architecture/aui-compiler-ir-payload-contract.md",
+  "sourceCatalog": "schemas/aui-compiler-ir-payload-layout-candidate.json",
+  "notes": [
+    "All 16 payload templates have exact little-endian bytes and declared 8-byte base alignment",
+    "Only two sample non-reserved fields set per template; these are NOT runnable or semantically accepted IR nodes",
+    "Raw 64-bit Ref64 sample fields are internal handles, not source, Graph or native OS proof",
+    "A header with matching tag/size is not sufficient to prove every required enum match arm or its type",
+    "No assembler, native memory, runtime or target qualification executed"
+  ],
+  "vectors": [
+    {
+      "payloadTemplate": "Declaration64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "08070605040302010807060504030201000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "symbolId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "ownerSymbolId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "View64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "08070605040302010807060504030201000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "constructorSymbolId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "staticIdentitySymbolId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Expression48",
+      "byteLength": 48,
+      "alignment": 8,
+      "hexLittleEndian": "080706050403020190020000030007000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "symbolId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "operandsRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000290"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Enum64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "c0020000030007000807060504030201000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "enumTypeRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x00070003000002c0"
+        },
+        {
+          "field": "variantSymbolId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Generic64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "00030000030007001003000003000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "templateTypeRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000300"
+        },
+        {
+          "field": "orderedArgsRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000310"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Link64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "08070605040302010807060504030201000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "sourceSymbolId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "graphSymbolId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Reactive64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "08070605040302010807060504030201000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "stateSymbolId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "ownerSymbolId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Async80",
+      "byteLength": 80,
+      "alignment": 8,
+      "hexLittleEndian": "0807060504030201080706050403020100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "taskSlotId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "uiOwnerId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Keyed64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "08070605040302010807060504030201000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "templateSymbolId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "ownerSymbolId",
+          "offset": 8,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "OwnershipInstruction64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "40040000030007005004000003000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "operandsRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000440"
+        },
+        {
+          "field": "resultsRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000450"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "OwnershipTerminator64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "80040000030007009004000003000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "conditionRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000480"
+        },
+        {
+          "field": "targetsRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000490"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Layout64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "c004000003000700d004000003000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "exactTypeRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x00070003000004c0"
+        },
+        {
+          "field": "descriptorRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x00070003000004d0"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "MachineInstruction64",
+      "byteLength": 64,
+      "alignment": 8,
+      "hexLittleEndian": "00050000030007001005000003000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "operandsRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000500"
+        },
+        {
+          "field": "resultsRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000510"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "MachineTerminator48",
+      "byteLength": 48,
+      "alignment": 8,
+      "hexLittleEndian": "400500000300070050050000030007000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "targetsRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000540"
+        },
+        {
+          "field": "edgeValuesRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000550"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "Origin48",
+      "byteLength": 48,
+      "alignment": 8,
+      "hexLittleEndian": "080706050403020190050000030007000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "sourceUnitId",
+          "offset": 0,
+          "type": "u64",
+          "rawValueHex": "0x0102030405060708"
+        },
+        {
+          "field": "sourceSpanRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x0007000300000590"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    },
+    {
+      "payloadTemplate": "OwnerCheck48",
+      "byteLength": 48,
+      "alignment": 8,
+      "hexLittleEndian": "c005000003000700d0050000030007000000000000000000000000000000000000000000000000000000000000000000",
+      "setFields": [
+        {
+          "field": "ownerRef",
+          "offset": 0,
+          "type": "Ref64",
+          "rawValueHex": "0x00070003000005c0"
+        },
+        {
+          "field": "stateBeforeRef",
+          "offset": 8,
+          "type": "Ref64",
+          "rawValueHex": "0x00070003000005d0"
+        }
+      ],
+      "semanticValidity": "NOT ESTABLISHED: deliberately partial structural placement only"
+    }
+  ],
+  "detachedHeaderSample": {
+    "tagName": "EnumMatch",
+    "tagId": 337,
+    "arenaIndex": 3,
+    "arenaGeneration": 7,
+    "nodeHeaderByteOffset": 128,
+    "payloadByteOffset": 512,
+    "payloadByteLength": 64,
+    "headerHexLittleEndian": "51010000010000003000000000000000d204000000000000000000000000000000000000000000000002000040000000",
+    "note": "Header/payload not contiguous but same arena; zero required type/origin fields mean it is NOT a semantically valid EnumMatch"
+  }
+}
