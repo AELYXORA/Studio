@@ -1,5 +1,7 @@
 # Project Graph — Canonical Model
 
+**Canonical typed graph decision:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+
 **Status:** authoritative graph topology design **candidate**, pending explicit D2 architect acceptance. [D2 Execution and Consistency](d2-execution-consistency.md) specifies the separate instance execution and model-transaction boundary. No implementation started. [Graph Behavior Contract](graph-behavior-contract.md) owns detailed workflows/data-flow semantics; this document owns canonical node/edge identities and graph structure.
 
 ## 1. Purpose and ownership
