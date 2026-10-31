@@ -120,7 +120,7 @@ All rows are *expected*, not outcomes measured by an AELYXORA implementation. D2
 
 ### Identity-only structural projection (exact proposed candidate)
 
-Use a **strict closed recursive tree** after D3 source namespace/import resolution, **without any contract digest**:
+Use a **strict closed recursive tree**, structurally constrained by the [derived identity-only candidate schema](../../schemas/aui-generic-export-identity-candidate.schema.json), after D3 source namespace/import resolution, **without any contract digest**:
 
 - Nominal leaf: exactly `{kind:"nominal",ownerPackageId,typeId}` (the two IDs are exact locked public names, not source aliases).
 - Generic node: exactly `{kind:"generic",template,arguments}`, where `template` is an identity-only nominal leaf of the exact verified core/public template and `arguments` is 1–2 **ordered** identity-only nominal or generic child nodes.
