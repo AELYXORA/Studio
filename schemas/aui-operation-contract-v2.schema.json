@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA v2 typed operation public contract projection",
+  "description": "Proposed exact digest input, not runtime permission. No operationContractDigest inside input to avoid circular hashes. Unknown effects, capabilities, targets and type ownership checked semantically after JSON-schema validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "exportKind",
+    "packageId",
+    "componentTypeId",
+    "operationId",
+    "inputs",
+    "successTypeRef",
+    "failureTypeRef",
+    "domain",
+    "effects",
+    "requiredCapabilities",
+    "sideEffectClass",
+    "retryPolicy",
+    "declaredTargets"
+  ],
+  "properties": {
+    "profile": {
+      "const": "aui.operation-contract/v2-typed"
+    },
+    "exportKind": {
+      "const": "operation"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "componentTypeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operationId": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "typeRef"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "typeRef": {
+            "$ref": "aui-type-reference-v2.schema.json"
+          }
+        }
+      }
+    },
+    "successTypeRef": {
+      "$ref": "aui-type-reference-v2.schema.json"
+    },
+    "failureTypeRef": {
+      "$ref": "aui-type-reference-v2.schema.json"
+    },
+    "domain": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+    },
+    "effects": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+      }
+    },
+    "requiredCapabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+      }
+    },
+    "sideEffectClass": {
+      "enum": [
+        "none",
+        "local-reversible",
+        "external-nonreversible"
+      ]
+    },
+    "retryPolicy": {
+      "const": "never"
+    },
+    "declaredTargets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
