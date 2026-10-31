@@ -4,7 +4,7 @@
 
 ## CR1. Registry identity and version rules
 
-Candidate ID: aui.core/extended-0.2-draft (NOT a SemVer upgrade or implicitly shipped feature). Every accepted type entry must specify canonical qualified TypeID, definition kind, exact normalized public contract, field/variant order, type parameters and variance, effect/ownership traits, target support, feature gate, and a domain-separated exportedContractDigest. Generic instances must resolve using the **full** normalized type-argument identities/digests, never only readable names. A compiler must validate registry source/content digest before using TypeID or deriving LayoutIR; source syntax profile and native ABI version remain independent axes.
+**Historical 13-entry exploration:** `aui.core/extended-0.2-draft` (not a released ID or active unified registry). The **current single 15-entry candidate** is `aui.core/canonical-candidate` under CR11; no verified fingerprint exists. Every accepted type entry must specify canonical qualified TypeID, definition kind, exact normalized public contract, field/variant order, type parameters and variance, effect/ownership traits, target support, feature gate, and a domain-separated exportedContractDigest. Generic instances must resolve using the **full** normalized type-argument identities/digests, never only readable names. A compiler must validate registry source/content digest before using TypeID or deriving LayoutIR; source syntax profile and native ABI version remain independent axes.
 
 The intended logical TypeIDs below are candidates. No current D2/D6 export fixture implicitly incorporates them. A name-only lookup, a pinned digest string without verified registry bytes, or a target-specific layout is insufficient for type resolution.
 
@@ -68,7 +68,7 @@ A fully typed exported core-registry schema with public contract digest vectors,
 
 ## CR8. Proposed domain-separated public core contract digests
 
-[D2/D3/D6 Core Export Digest](d2-d3-core-export-digest-contract.md) defines the proposed aui.export-contract/v2-core whitelist and SHA-256 frame; [13 type hash vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json) give reference normalized bytes and a registry set fingerprint. Existing v1 record/component digests and source-profile compatibility are unaffected; no approved mixed v1-v2 type migration exists. Native String/List/StableKey/TaskOutcome layouts are separately specified as *proposed Win64 frames* in [D4](d4-win64-native-component-abi.md), not inferred from portable type digest values. No ABI/core runtime tests passed.
+[D2/D3/D6 Core Export Digest](d2-d3-core-export-digest-contract.md) describes a **historical** aui.export-contract/v2-core candidate whitelist/SHA-256 frame; [13 historical type hash vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json) give reference normalized bytes and a set fingerprint which **must not** be copied onto the current 15-entry registry. C10/CR11 will require one reviewed new full logical encoding before any current fingerprint is trusted. Existing v1 record/component digests and source-profile compatibility are unaffected; no approved mixed v1-v2 type migration exists. Native String/List/StableKey/TaskOutcome layouts are separately specified as *proposed Win64 frames* in [D4](d4-win64-native-component-abi.md), not inferred from portable type digest values. No ABI/core runtime tests passed.
 
 ## CR9. Logical Result versus native Win64 tagged envelope
 
@@ -76,7 +76,7 @@ A fully typed exported core-registry schema with public contract digest vectors,
 
 ## CR10. Bounded G1 instances and no implicit v1/v2 mixing
 
-[Generic Instantiation Identity](d2-d3-generic-instantiation-identity.md) now proposes a separate type identity domain binding template digest + ordered resolved nominal argument/digest pairs. The same List<T> **template digest is not** List<String> instantiated digest, and Result<U32,String> differs from Result<String,U32>. [v1/v2 policy](d2-d6-core-profile-compatibility.md) deliberately blocks List<Row> with v1 user record until explicitly reviewed type-reference schema/migration. [G1 vectors](../../examples/aui-language/d2-generic-instantiation-vectors.json) are design arithmetic only. Native target layout and D4 signature/loader proof still required.
+[Generic Instantiation Identity](d2-d3-generic-instantiation-identity.md) historically proposed a separate type identity domain binding template digest + ordered resolved nominal argument/digest pairs. The current unified canonical TypeReference keeps that tuple principle but cannot import its historical hash domains unreviewed. The same List<T> **template digest is not** List<String> instantiated digest, and Result<U32,String> differs from Result<String,U32>. [v1/v2 policy](d2-d6-core-profile-compatibility.md) deliberately blocks List<Row> with v1 user record until explicitly reviewed type-reference schema/migration. [G1 vectors](../../examples/aui-language/d2-generic-instantiation-vectors.json) are design arithmetic only. Native target layout and D4 signature/loader proof still required.
 
 
 ## CR11. Reconciled current core inventory for one canonical graph — PROPOSED / P0 OPEN
