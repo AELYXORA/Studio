@@ -23,7 +23,7 @@
       "source": "linked-consumer-panel.aui",
       "mutation": "none",
       "expected": "typed-plan-candidate",
-      "meaning": "one event, one command, one handler; unresolved external Tick/Failure require explicitly pinned provisional import catalog and mark output unverified",
+      "meaning": "One event, one command, one handler and Button activated connection; exact expected L1 source-only plan in linked-consumer-panel-l1.source-only-plan.expected.json, with UNVERIFIED Tick/Failure external types and no GraphOrigin",
       "observed": "NOT-RUN"
     },
     {
@@ -411,6 +411,24 @@
       "mutation": "unknown-tool-option",
       "expected": "cli-reject",
       "meaning": "no automatic fallback to another requested mode",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-046",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "insert-L1-event-command-handler-into-l0-profile",
+      "expected": "profile-reject",
+      "meaning": "Shared EBNF is a superset; --profile l0 MUST reject eventDecl, commandDecl and handlerDecl with AUI_PROFILE_UNSUPPORTED at P02",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-047",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "add-Button-on-activated-in-l0-profile",
+      "expected": "profile-reject",
+      "meaning": "--profile l0 rejects Button .on(...) even if local Event<Unit> would be well formed in l1; fail at P02",
       "observed": "NOT-RUN"
     }
   ]
