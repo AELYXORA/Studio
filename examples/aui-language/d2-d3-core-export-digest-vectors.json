@@ -1,0 +1,352 @@
+{
+  "format": "aui.core-export-digest-vectors",
+  "status": "DESIGN-ONLY: independent JS SHA-256 verified against abc known-answer, not AELYXORA compiler/native digest/architect approval",
+  "registryId": "aui.core/extended-0.2-draft",
+  "exportProfile": "aui.export-contract/v2-core",
+  "exportHashFrame": "ASCII(AELYXORA/export-contract/v2-core) + NUL + D6P1CanonicalUTF8(input)",
+  "positive": [
+    {
+      "typeId": "aui.core/Bool",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/Bool",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/Bool\"}",
+      "expectedSha256": "02c87dabe775a598f979154c1620403f525750f240b5bb634d4c6496a33b989c"
+    },
+    {
+      "typeId": "aui.core/Event",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/Event",
+        "kind": "generic-value",
+        "typeArity": 1,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":1,\"typeId\":\"aui.core/Event\"}",
+      "expectedSha256": "a14c09f490fc46bba1a2bb07e2eba9620bca0d9404299a5642b64db48adae204"
+    },
+    {
+      "typeId": "aui.core/List",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/List",
+        "kind": "generic-value",
+        "typeArity": 1,
+        "featureGate": "L4",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L4\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":1,\"typeId\":\"aui.core/List\"}",
+      "expectedSha256": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+    },
+    {
+      "typeId": "aui.core/Result",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/Result",
+        "kind": "generic-value",
+        "typeArity": 2,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":2,\"typeId\":\"aui.core/Result\"}",
+      "expectedSha256": "b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba"
+    },
+    {
+      "typeId": "aui.core/StableKey",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/StableKey",
+        "kind": "tagged-union",
+        "typeArity": 0,
+        "featureGate": "L4",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L4\",\"kind\":\"tagged-union\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/StableKey\"}",
+      "expectedSha256": "6dc16f71523d7d2fd6da536ab5936a5f5ca64379d884f451b5990262868fb90f"
+    },
+    {
+      "typeId": "aui.core/StateRevision",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/StateRevision",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L2",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send",
+          "UIOwner"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L2\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\",\"UIOwner\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/StateRevision\"}",
+      "expectedSha256": "5005b5904e8c98036f98263691ece337338f99be9ccc251844b2c4019036cb85"
+    },
+    {
+      "typeId": "aui.core/String",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/String",
+        "kind": "immutable-value",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"immutable-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/String\"}",
+      "expectedSha256": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+    },
+    {
+      "typeId": "aui.core/TaskOutcome",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/TaskOutcome",
+        "kind": "generic-value",
+        "typeArity": 2,
+        "featureGate": "L3",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L3\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":2,\"typeId\":\"aui.core/TaskOutcome\"}",
+      "expectedSha256": "ee63626bc10cdd42a8420e93a07ebf3cdd42b59695d4f19bdbafe5668d29af03"
+    },
+    {
+      "typeId": "aui.core/TaskSlot",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/TaskSlot",
+        "kind": "opaque-runtime",
+        "typeArity": 2,
+        "featureGate": "L3",
+        "logicalTraits": [
+          "Affine",
+          "Opaque",
+          "UIOwner"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L3\",\"kind\":\"opaque-runtime\",\"logicalTraits\":[\"Affine\",\"Opaque\",\"UIOwner\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":2,\"typeId\":\"aui.core/TaskSlot\"}",
+      "expectedSha256": "85ecdf7cb189117a85d4527e8416d872105396d1c1c0c0dc088c323dfdd45cb5"
+    },
+    {
+      "typeId": "aui.core/TaskTicket",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/TaskTicket",
+        "kind": "opaque-runtime",
+        "typeArity": 0,
+        "featureGate": "L3",
+        "logicalTraits": [
+          "Affine",
+          "Opaque"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L3\",\"kind\":\"opaque-runtime\",\"logicalTraits\":[\"Affine\",\"Opaque\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/TaskTicket\"}",
+      "expectedSha256": "55083387fe72907d7b9c5b9945e57373ad13fd98ae03a7af2db02627c8a94704"
+    },
+    {
+      "typeId": "aui.core/U32",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/U32",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/U32\"}",
+      "expectedSha256": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+    },
+    {
+      "typeId": "aui.core/U64",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/U64",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L4",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L4\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/U64\"}",
+      "expectedSha256": "aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024"
+    },
+    {
+      "typeId": "aui.core/Unit",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/Unit",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ]
+      },
+      "expectedCanonical": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"profile\":\"aui.export-contract/v2-core\",\"registryId\":\"aui.core/extended-0.2-draft\",\"typeArity\":0,\"typeId\":\"aui.core/Unit\"}",
+      "expectedSha256": "e943eaf46783179f427ad9665b67d4be0b7ffc41fc6dedf6f5b871118fe493d5"
+    }
+  ],
+  "registryFingerprint": {
+    "input": {
+      "profile": "aui.core-registry/v1",
+      "registryId": "aui.core/extended-0.2-draft",
+      "entries": [
+        {
+          "typeId": "aui.core/Bool",
+          "exportedContractDigest": "02c87dabe775a598f979154c1620403f525750f240b5bb634d4c6496a33b989c"
+        },
+        {
+          "typeId": "aui.core/Event",
+          "exportedContractDigest": "a14c09f490fc46bba1a2bb07e2eba9620bca0d9404299a5642b64db48adae204"
+        },
+        {
+          "typeId": "aui.core/List",
+          "exportedContractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+        },
+        {
+          "typeId": "aui.core/Result",
+          "exportedContractDigest": "b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba"
+        },
+        {
+          "typeId": "aui.core/StableKey",
+          "exportedContractDigest": "6dc16f71523d7d2fd6da536ab5936a5f5ca64379d884f451b5990262868fb90f"
+        },
+        {
+          "typeId": "aui.core/StateRevision",
+          "exportedContractDigest": "5005b5904e8c98036f98263691ece337338f99be9ccc251844b2c4019036cb85"
+        },
+        {
+          "typeId": "aui.core/String",
+          "exportedContractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+        },
+        {
+          "typeId": "aui.core/TaskOutcome",
+          "exportedContractDigest": "ee63626bc10cdd42a8420e93a07ebf3cdd42b59695d4f19bdbafe5668d29af03"
+        },
+        {
+          "typeId": "aui.core/TaskSlot",
+          "exportedContractDigest": "85ecdf7cb189117a85d4527e8416d872105396d1c1c0c0dc088c323dfdd45cb5"
+        },
+        {
+          "typeId": "aui.core/TaskTicket",
+          "exportedContractDigest": "55083387fe72907d7b9c5b9945e57373ad13fd98ae03a7af2db02627c8a94704"
+        },
+        {
+          "typeId": "aui.core/U32",
+          "exportedContractDigest": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+        },
+        {
+          "typeId": "aui.core/U64",
+          "exportedContractDigest": "aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024"
+        },
+        {
+          "typeId": "aui.core/Unit",
+          "exportedContractDigest": "e943eaf46783179f427ad9665b67d4be0b7ffc41fc6dedf6f5b871118fe493d5"
+        }
+      ]
+    },
+    "expectedCanonical": "{\"entries\":[{\"exportedContractDigest\":\"02c87dabe775a598f979154c1620403f525750f240b5bb634d4c6496a33b989c\",\"typeId\":\"aui.core/Bool\"},{\"exportedContractDigest\":\"a14c09f490fc46bba1a2bb07e2eba9620bca0d9404299a5642b64db48adae204\",\"typeId\":\"aui.core/Event\"},{\"exportedContractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"typeId\":\"aui.core/List\"},{\"exportedContractDigest\":\"b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba\",\"typeId\":\"aui.core/Result\"},{\"exportedContractDigest\":\"6dc16f71523d7d2fd6da536ab5936a5f5ca64379d884f451b5990262868fb90f\",\"typeId\":\"aui.core/StableKey\"},{\"exportedContractDigest\":\"5005b5904e8c98036f98263691ece337338f99be9ccc251844b2c4019036cb85\",\"typeId\":\"aui.core/StateRevision\"},{\"exportedContractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"typeId\":\"aui.core/String\"},{\"exportedContractDigest\":\"ee63626bc10cdd42a8420e93a07ebf3cdd42b59695d4f19bdbafe5668d29af03\",\"typeId\":\"aui.core/TaskOutcome\"},{\"exportedContractDigest\":\"85ecdf7cb189117a85d4527e8416d872105396d1c1c0c0dc088c323dfdd45cb5\",\"typeId\":\"aui.core/TaskSlot\"},{\"exportedContractDigest\":\"55083387fe72907d7b9c5b9945e57373ad13fd98ae03a7af2db02627c8a94704\",\"typeId\":\"aui.core/TaskTicket\"},{\"exportedContractDigest\":\"2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d\",\"typeId\":\"aui.core/U32\"},{\"exportedContractDigest\":\"aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024\",\"typeId\":\"aui.core/U64\"},{\"exportedContractDigest\":\"e943eaf46783179f427ad9665b67d4be0b7ffc41fc6dedf6f5b871118fe493d5\",\"typeId\":\"aui.core/Unit\"}],\"profile\":\"aui.core-registry/v1\",\"registryId\":\"aui.core/extended-0.2-draft\"}",
+    "expectedSha256": "155e9a6520e07d6128f80cbcadb5e5d9a38e5ec96f7ac4c28aa775bd5b9777b7"
+  },
+  "changedSemantics": [
+    {
+      "id": "change-bool-trait",
+      "input": {
+        "profile": "aui.export-contract/v2-core",
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "registryId": "aui.core/extended-0.2-draft",
+        "typeId": "aui.core/Bool",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "Send"
+        ]
+      },
+      "expectedSha256": "763a204d208c89bccef02f6a534481ceb989fd31e6cef6d09561c21fa3705264",
+      "mustDifferFrom": "02c87dabe775a598f979154c1620403f525750f240b5bb634d4c6496a33b989c"
+    }
+  ],
+  "notes": [
+    "Only ASCII keys/string values appear in these reference core projections; canonicalization for arbitrary Unicode remains independently unproven",
+    "logicalTraits unordered set is sorted bytewise; component command signatures remain governed by existing v1",
+    "No backwards rewriting of old 0.1-draft hashes or existing immutable snapshots",
+    "Source registry file SHA, ABI layout ID, package file-set digest and human approval are separate"
+  ]
+}
