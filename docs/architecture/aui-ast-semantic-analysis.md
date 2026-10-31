@@ -2,6 +2,14 @@
 
 **Status: proposed design contract, not implemented.** This document owns source-tree shape, symbol resolution, type/effect analysis and TypedHIR output. [AUI Syntax](aui-syntax.md) owns surface grammar, [IR/Layout](aui-ir-layout.md) owns ownership lowering, and [Component Framework](component-framework.md) owns component definitions.
 
+## First implementable TypedHIR subset and proof level
+
+The [first compiler contract](aui-compiler-first-implementation-contract.md) is the bounded D3 L0/L1 specialization of this broader AST/HIR proposal. For P00–P06, the only legal AST/HIR declarations are `Module, Component, Input, Event, Command, Handler, View` and source spans. There are no first-slice `StateSlot`, `BindingEdge`, `Task`, dynamic ForEach, user TypeDecl or generic value nodes. A parsed future syntax construct must reject at the source-profile gate, not be tolerated as an untyped placeholder.
+
+A `GraphOrigin` field MUST be absent on every source-only TypedHIR node. It may be populated only by a validated P07 source/link pass, with exact graph ID, operation/export/type resolution, snapshot and human review scope; a compiler-local AST ID never becomes a persistent node identity. A source-only TypedHIR is marked `UNVERIFIED_SOURCE_ONLY`, even after complete syntax, property and local event checks. It cannot be lowered to an executable module as a workaround for missing verified core packages.
+
+Portable TypedHIR identity differs from target data layout; native codegen must pass [OwnershipIR](aui-ownership-ir.md) and [TargetMIR](aui-targetmir-native-codegen.md) **after** target ABI admission. All partial HIR on error-recovered CST is diagnostic-only and cannot be published as success.
+
 ## Compiler boundary
 
 Source UTF-8 -> lexer tokens -> lossless Concrete Syntax Tree (CST) -> structural AST -> name/type/effect/identity analysis -> TypedHIR -> OwnershipIR -> TargetMIR. CST retains comments and user formatting for editor diffs; AST removes trivia but keeps stable source spans. No code is executed during semantic analysis.
