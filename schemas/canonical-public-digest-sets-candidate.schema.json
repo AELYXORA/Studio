@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA — Candidate core fingerprint and scoped type-export-set public digest projections",
+  "description": "Design-only exact logical projection schemas for one canonical Graph and package owner, not an authored format, a trusted digest, an extension of coreRegistryFingerprint authority or target-native approval. Set uniqueness, exact 15 core IDs, sorted UTF-8 ordering, complete type DAG, lock/signature trust and Graph-reachability are separate semantic gates.",
+  "$defs": {
+    "typeExport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "packageId",
+        "exportId",
+        "contractDigest"
+      ],
+      "properties": {
+        "kind": {
+          "const": "type"
+        },
+        "packageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exportId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "coreFingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registryId",
+        "entries"
+      ],
+      "properties": {
+        "registryId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 15,
+          "maxItems": 15,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "typeId",
+              "contractDigest"
+            ],
+            "properties": {
+              "typeId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "contractDigest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "graphTypeSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "projectId",
+        "coreRegistryFingerprint",
+        "exports"
+      ],
+      "properties": {
+        "scope": {
+          "const": "graph"
+        },
+        "projectId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coreRegistryFingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "exports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeExport"
+          }
+        }
+      }
+    },
+    "packageTypeSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "packageId",
+        "coreRegistryFingerprint",
+        "exports"
+      ],
+      "properties": {
+        "scope": {
+          "const": "package"
+        },
+        "packageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "coreRegistryFingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "exports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typeExport"
+          }
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/coreFingerprint"
+    },
+    {
+      "$ref": "#/$defs/graphTypeSet"
+    },
+    {
+      "$ref": "#/$defs/packageTypeSet"
+    }
+  ]
+}
