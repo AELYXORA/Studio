@@ -71,3 +71,38 @@ Allow constant folding, dead pure computations, static component specialization,
 ## Open design questions
 
 Precise machine opcode set, register allocator algorithm, LLVM IR versus handwritten Assembly emission strategy, ABI classifier implementation, atomics/memory model, debug format and object-level integration. Decide via focused target-specific experiments before design freeze. No CI before release preparation.
+
+
+## Production native compiler closure — mandatory beyond a source-only plan
+
+The [complete AUI compiler](aui-compiler.md) cannot be called a production compiler until this backend emits **actual verified target machine objects and linked modules** for the approved shipping AUI profiles. L0/L1 source-only P00–P06 is an implementation milestone only. The frontend/backend separation is **TypedHIR → GraphLinkedIR → OwnershipIR → target-qualified LayoutIR → TargetMIR → target assembly/object → linker → verifiable native image → independent signed admission**.
+
+### Win64 native backend contract candidate (first qualified target)
+
+1. **Target normalization:** only a reviewed exact target triple, ABI revision, ISA feature set and runtime service set may enter TargetMIR. All output functions record call conventions and verified public type contract/layout identity, not platform-neutral names masquerading as native offsets.
+2. **Linkage environment:** build input closure includes approved compiler/toolchain binary SHA, exact Unicode/core registry, package lock, immutable source/Graph/review snapshot, target/D4 ABI/renderer and OS adapter identities. The command line and environment whitelist are part of the D6 build identity. A target whose module/renderer imports are missing is **unsupported**, not a linker prompt or dynamic search for nearby DLLs.
+3. **Instruction selection:** map each verified SSA/block-argument instruction to target-register virtual ops with typed sizes, signedness, explicit address spaces, MMIO/volatile ordering, atomic acquire/release constraints, bounds and error paths. Reject unsupported operation/ISA instead of silently miscompiling.
+4. **Calling convention:** Win64 RCX/RDX/R8/R9 and XMM argument classification, callee-saved GPR/XMM rules, shadow space and RSP alignment, target-specific aggregate/Result/owned buffer handoff, _verified_ \`AuiCallFrameV1\`/module header entrypoint layout. Public AELYXORA ABI bytes are owned by [D4 Win64 native ABI](d4-win64-native-component-abi.md) and [module/Outcome descriptors](d4-win64-module-and-result-descriptors.md).
+5. **Frame and unwind:** stack slot allocation with bounded checked sizes/alignment, prolog/epilog and required \`.pdata/.xdata\` unwind descriptors on nonleaf functions, stack probing for large allocation, nonvolatile save/restore and no foreign exception escaping Assembly ABI. Native stack evidence must be compiled and inspected; text documentation is not such evidence.
+6. **Constants/data:** encode immutable String/Bytes/finite-F64 payloads using approved D3 value codecs and D4 target representations. Input source strings do not become unbounded NUL-terminated native pointers. Constant payloads are in bounded read-only sections, mutable state in separately owned runtime regions, code in non-writable sections. Relocation kinds/visibility and safe static initialization remain explicit.
+7. **Graph/command dispatch:** static visual components use typed D5 renderer descriptors. L1–L3 operations use a verified module operation table; every dispatched request binds exact OperationID, logical type/ABI result, domain/effect/target/capability and live runtime authorization. Never lower a declarative command into direct OS/hardware system calls solely because its text mentions an effect.
+8. **L2/L3/L4 runtime lowering:** emit state-slot and derived/binding graph descriptors plus atomic commit procedures, task state-machine/terminal/cancel/unknown-result and cleanup transition functions, keyed dynamic View template factories and stable-key reconciliation descriptors. The ABI for all these services must be approved in D4/D5 **before** emitting a successful app.
+9. **Object emission and inspection:** target-specific readable Assembly assembled into COFF, with symbol/section/import/export/relocation/unwind/debug records. An independent validator confirms names, lengths, ABI layout and imports match the verified build/Graph manifest. Linking uses a pinned runtime, explicitly declared OS libraries, deterministic flags and isolated output staging.
+10. **Build + admission:** deterministic unsigned PE module/object evidence is separate from publisher signature, signed architecture approval and live OS capability. A successful object is neither a full running application nor authorization to load it. A linker failure or missing renderer adapter prevents release publication.
+
+**Optimizer rule:** semantic correctness at O0 is the minimum. Each optional O1+ pass is independently enabled only after proving ownership/effect/dataflow-preserving transformations; no pass moves ordered UI event, volatile/IRQ/MMIO or task quiescence/cleanup effects. A failed optimization falls back only to a **verified semantics-equivalent** prior IR when the source/Graph/target trust remains valid; a failed trust gate is never repaired by optimizer fallback.
+
+### Required actual native conformance matrix (NOT-RUN)
+
+| Case | Evidence before claiming the target supported |
+| --- | --- |
+| Pure L0 UI | Real COFF/PE object + link, runtime creation/ownership of three Views, text rendering, accessibility labels |
+| L1 event/command | Actual Button activation and bounded event queue, verified provider admission, exact ABI output/error |
+| L2 state/bind | Native state slot init, derived DAG, atomic commit and renderer invalidation, no partial state on failure |
+| L3 async | TaskSlot single-active, Result/TaskOutcome 5 branches, stale-generation cleanup, cancellation and unknown post-dispatch effect |
+| L4 keyed rows | Nested List<T>/StableKey, reorder vs delete/reinsert lifecycle, owner/keyed generation, bounded memory |
+| Machine ABI | Win64 stack/unwind and callee-save under instrumentation, relocation/import verification, module descriptor and CFG checks |
+| Security | No unapproved OS/hardware import, no unverified binary executing; missing/corrupt signing/build identity rejects |
+| Determinism | Independently pinned identical unsigned binary from two clean builds, toolchain/SDK hashes and exact manifest |
+
+**Still OPEN:** exact D4/D5 renderer/state/event/task/reconciliation ABI function signatures, compiler assembler syntax and toolchain versions, native module export/symbol mangling, allocator/drop paths, reloc/unwind/debug fixture bytes, full target import capability mapping, native codegen positive/negative evidence and architecture sign-off. Win64 is a **candidate**, not an observed working backend.
