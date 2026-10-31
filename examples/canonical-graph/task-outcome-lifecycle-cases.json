@@ -1,0 +1,136 @@
+{
+  "format": "aui.task-outcome-lifecycle-expectations",
+  "status": "PROPOSED TEST DESIGNS, NOT RUN. Not a native scheduler, external effect transaction or certified rollback guarantee.",
+  "owner": "docs/architecture/d3-task-result-lifecycle.md#t9-post-dispatch-uncertainty-provider-loss-and-irreversible-effects--proposed-closure",
+  "conditions": "Each provider ticket is bound to verified graph/source/lock, operation identity, exact owner/generation, side-effect policy and live capability. UI task-slot finality is separate from provider native resource quiescence.",
+  "cases": [
+    {
+      "id": "TO-01",
+      "phase": "pre-admission",
+      "scenario": "bad typed argument, no ticket, live slot",
+      "expected": "AdmissionRejected(invalid-arguments)",
+      "reason": "No provider Result and no effect",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-02",
+      "phase": "pre-admission",
+      "scenario": "result queue capacity cannot be reserved, no ticket",
+      "expected": "AdmissionRejected(capacity-exceeded)",
+      "reason": "Never dispatch, retain caller input ownership",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-03",
+      "phase": "pre-admission",
+      "scenario": "target or capability invalid before provider acceptance",
+      "expected": "AdmissionRejected(capability-denied/unsupported-target)",
+      "reason": "No provider effect started",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-04",
+      "phase": "pre-admission",
+      "scenario": "provider unavailable and absence of dispatch is proven",
+      "expected": "ProviderUnavailable(never-admitted)",
+      "reason": "No provider Result is fabricated",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-05",
+      "phase": "post-dispatch",
+      "scenario": "operation admitted, provider link lost, no terminal/quiescence proof",
+      "expected": "ProviderUnavailable(indeterminate-after-admission)",
+      "reason": "UI slot may settle with uncertainty while provider resources remain owned",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-06",
+      "phase": "post-dispatch",
+      "scenario": "indeterminate result delivered, late provider success later",
+      "expected": "late-provider-cleanup-only",
+      "reason": "Never publish second UI TaskOutcome; preserve evidence/cleanup and no implicit replay",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-07",
+      "phase": "post-dispatch",
+      "scenario": "provider result Success(T) linearized before link loss",
+      "expected": "Successful(T)",
+      "reason": "Later transport loss cannot overwrite verified terminal",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-08",
+      "phase": "post-dispatch",
+      "scenario": "provider Result Failure(E) linearized before link loss",
+      "expected": "Failed(E)",
+      "reason": "Failure payload is exact provider error, never ProviderError category",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-09",
+      "phase": "cancel",
+      "scenario": "user requests cancellation, provider has not confirmed quiescence",
+      "expected": "pending-not-cancelled",
+      "reason": "No Cancelled TaskOutcome from request alone",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-10",
+      "phase": "cancel",
+      "scenario": "provider success wins race with cancel request",
+      "expected": "Successful(T)",
+      "reason": "One terminal UI outcome, preserve actual provider success",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-11",
+      "phase": "cancel",
+      "scenario": "verified quiescence wins before any successful/failed provider result",
+      "expected": "Cancelled(confirmed)",
+      "reason": "Proof binds exact ticket, owner and generation",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-12",
+      "phase": "teardown",
+      "scenario": "view unmounts after dispatch but provider is not yet quiescent",
+      "expected": "no-handler-and-owned-cleanup",
+      "reason": "Stale view handler must not run, provider buffer remains owned",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-13",
+      "phase": "recovery",
+      "scenario": "restart after unknown external effect, without idempotency contract",
+      "expected": "no-retry",
+      "reason": "Snapshot recovery must not redispatch external operation",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-14",
+      "phase": "capacity",
+      "scenario": "indeterminate after dispatch and UI ingress is full",
+      "expected": "owned-bounded-retention-or-diagnostic",
+      "reason": "No drop, extra effect, fake provider failure or unbounded queue",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-15",
+      "phase": "trust",
+      "scenario": "fake cancellation confirmation from untrusted UI callback",
+      "expected": "reject",
+      "reason": "Only trusted provider/runtime may attest quiescence",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "TO-16",
+      "phase": "identity",
+      "scenario": "late completion ticket belongs to a replaced view generation",
+      "expected": "stale-reject-and-cleanup",
+      "reason": "Old generation cannot mutate replacement state",
+      "testResult": "NOT-RUN"
+    }
+  ]
+}
