@@ -16,6 +16,8 @@ The intended logical TypeIDs below are candidates. No current D2/D6 export fixtu
 | Bool | Exactly two logical values false/true; no truthy integer coercion | L0/L1 |
 | U32 | Unsigned 32-bit integer, range 0..2^32-1 | L0/L1 |
 | U64 | Unsigned 64-bit integer, range 0..2^64-1 | L4 key carrier; no JS floating-number coercion |
+| Bytes | Immutable owned octet sequence with proposed first portable interchange cap of 1 MiB; exact lowercase typed hex carrier (CR12) | D2 graph/package reference, not automatic AUI literals |
+| F64 | Proposed **finite-only** IEEE-754 binary64 bit carrier; accepted signed zero/subnormals and rejected NaN/infinity (CR12) | D2 graph/package reference, arithmetic not available in L0/L1 |
 | String | Immutable Unicode scalar sequence, encoded as strict UTF-8 at portable byte boundaries; not NUL-terminated by contract | L0/L1 |
 | List<T> | Finite immutable ordered sequence of one **exact nominal** element type T, with immutable length and indexed pure reads under an owned lifetime | L4 only |
 | StableKey | Tagged closed union StringKey(String) / U64Key(U64), with full value equality including tag | L4 only |
@@ -88,7 +90,7 @@ The [15-entry current review inventory](../../examples/canonical-graph/core-regi
 | Category | Types | Admission and portable obligation |
 | --- | --- | --- |
 | Logical scalars | `Unit`, `Bool`, `U32`, `U64` | Exact value-domain/trait semantics per CR2–CR5; no native layout is implied |
-| Sensor data | `Bytes`, `F64` | Both appear in the canonical sensor records but were **absent** from the previous 13-entry inventory. `Bytes` denotes an owned immutable octet sequence. `F64` is IEEE-754 binary64 only as a **proposed logical type**; NaN payload/equality, signed zero, infinity, rounding and portable non-JSON encoding remain P0 and therefore its export digest cannot be trusted |
+| Sensor data | `Bytes`, `F64` | Both appear in the canonical sensor records but were **absent** from the previous 13-entry inventory. `Bytes` denotes an owned immutable octet sequence. `F64` has a precise **unapproved CR12 candidate**: bit-exact finite-only IEEE-754, signed zero preserved, NaN/infinity rejected and typed nonnumeric JSON bit notation; target arithmetic/rounding/ABI and architect acceptance remain P0, so its export digest cannot be trusted |
 | UI values | `String`, `StableKey`, `StateRevision` | Exact Unicode scalar/key representation and UI-owner generation; no implicit string-key coercion or GraphRevision equality |
 | Public generic templates | `Event<T>`, `List<T>`, `Result<T,E>`, `TaskOutcome<T,E>` | Exact template arity 1/1/2/2; bounded acyclic **nominal** arguments; conditional ownership traits; no implicit nested generics or trait inference |
 | Runtime-only names | `TaskSlot<T,E>`, `TaskTicket` | Opaque/affine runtime resources. Their presence in an AUI declaration does **not** make them serializable public package port/record/operation payload types. Never create a portable `TypeReference` that lets an opaque native ticket escape to D2 dataFlow or D6 snapshot |
@@ -110,7 +112,7 @@ The five branches of `TaskOutcome<T,E>` still refer to unresolved exact logical 
 
 Reject an imported sensor package if either `Bytes` or `F64` is missing from the exact pinned verified registry; reject if a core type's semantic definition differs while its purported contractDigest stays unchanged; reject use of `TaskTicket` in persisted records or cross-domain dataFlow; reject unqualified `TaskOutcome` with missing closed error types, incorrect generic arity, nested/disallowed generics, and failed Send/ownership proof. All these are future tests, **NOT-RUN**.
 
-**P0 remains:** complete mathematical `F64` value/codec policy; exact `Bytes` ownership/resource limits; closed error/control variant definitions; canonical core logical contract encoding and independently computed registry/export hash vectors; target ABI and source-language profile admission; explicit architect D2/D3/D4/D6 review. No historical 13-entry digest is silently reused for the new 15-entry candidate.
+**P0 remains:** acceptance and on-target proof of the precise **CR12 proposed** finite-only F64 and bounded Bytes portable codecs; closed portable error/control export definitions; canonical structured core logical contract encoding and independently computed registry/export hash vectors; target ABI, ownership and source-language profile admission; explicit architect D2/D3/D4/D6 review. No historical 13-entry digest is silently reused for the new 15-entry candidate.
 
 ## CR12. Portable core values and task-control semantics — bounded single-model candidate
 
