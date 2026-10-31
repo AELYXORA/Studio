@@ -29,6 +29,12 @@ The earlier **G1 Graph validator + CLI round-trip** remains a required *linked/n
 
 COMP-01–05 are compiler-front-end architecture decisions; COMP-06–08 remain linked/native dependencies. Record the architect's explicit approval before entering Phase II or conducting implementation experiments.
 
+## Detailed frontend COMP candidate (still Phase I)
+
+The [COMP-01–05 closure](aui-compiler-frontend-closure.md) has an explicit proposed Win64 Assembly CLI/module decomposition, pinned Unicode 15.1.0 input policy, 64 MiB context budget, exact source-only reference data and failed diagnostics. [Backlog](aui-compiler-implementation-backlog.md) names future AUIC implementation slices and acceptance handoff. The new [strict catalogue and diagnostics shapes](../../examples/aui-compiler-first-slice/README.md) are source-only artefacts and no real parser, compiler or toolchain qualification has been executed.
+
+**Do not interpret this as permission to start coding.** The original D1–D8 process, explicit bounded acceptance scope and remaining COMP public core/Graph/ABI gates still control implementation and native output.
+
 ## Recommended host and first milestone
 
 Recommend **Windows x64** as the first Studio host only as a planning choice, not an architectural dependency. The host/target distinction is mandatory: the **sensor example targets Linux AArch64**, and Windows hosting does not imply it can execute the target binary. Treat initial sensor work as structural and semantic verification. Alternate hosts remain possible with the same project and component contracts.
