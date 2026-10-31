@@ -3,7 +3,7 @@
   "registryId": "aui.core/canonical-candidate",
   "status": "PROPOSED-NOT-ACCEPTED",
   "sourceOfTruth": "docs/architecture/d3-core-registry-value-contract.md",
-  "notes": "Single current design inventory, NOT a second Project Graph or architecture edition. The 13-entry historical registry and its old hash vectors remain unchanged. Summaries are review aids, not frozen digest input, ABI layout or a verified registry fingerprint.",
+  "notes": "Single current design inventory, NOT a second Project Graph or architecture edition. The 13-entry historical registry and its old hash vectors remain unchanged. Summaries and CR12 portable codecs are design-only review aids, not frozen digest inputs, ABI layout or a verified registry fingerprint.",
   "entries": [
     {
       "typeId": "aui.core/Bool",
@@ -15,8 +15,10 @@
         "Immutable",
         "Send"
       ],
-      "semanticSummary": "Two logical values false/true; no integer truthiness",
-      "unresolvedObligations": []
+      "semanticSummary": "Exactly two logical values; candidate portable typed JSON tokens true or false only, never integer truthiness",
+      "unresolvedObligations": [
+        "architect acceptance of typed JSON Bool external encoding profile"
+      ]
     },
     {
       "typeId": "aui.core/Bytes",
@@ -27,9 +29,11 @@
         "Immutable",
         "SendConditional"
       ],
-      "semanticSummary": "Immutable finite sequence of octets; byte-for-byte equality, owned lifetime required across async boundaries",
+      "semanticSummary": "Immutable owned octet sequence, candidate 0..1048576 bytes; typed JSON 0x followed by even lowercase hex digits, zero length allowed",
       "unresolvedObligations": [
-        "exact portable owned buffer and ABI proof"
+        "architect approval of first-portable-value size/encoding policy in D3 CR12",
+        "native owned storage and cross-domain retain/move/cleanup proof",
+        "D5 target buffer budget qualification"
       ]
     },
     {
@@ -56,12 +60,11 @@
         "Immutable",
         "Send"
       ],
-      "semanticSummary": "IEEE-754 binary64 logical numeric domain used by typed imported sensor values, never direct unconstrained JSON number",
+      "semanticSummary": "Candidate finite IEEE-754 binary64 only, including signed zeros and subnormals; portable typed JSON bit string 0x plus exactly 16 lowercase hex digits; all exponent 0x7ff patterns reject",
       "unresolvedObligations": [
-        "NaN payload/equality and signaling policy",
-        "signed zero and Infinity policy",
-        "portable serialization/canonical representation",
-        "target FPU/rounding compliance and native ABI"
+        "architect acceptance of finite-only and bit-exact portable policy in D3 CR12",
+        "target ABI and no-flush-to-zero/subnormal preservation proof",
+        "arithmetic/rounding semantics if later exposed in source language"
       ]
     },
     {
@@ -145,10 +148,11 @@
         "Immutable",
         "SendConditional"
       ],
-      "semanticSummary": "Five variants Successful,Failed,AdmissionRejected,Cancelled,ProviderUnavailable; cancellation requires provider quiescence",
+      "semanticSummary": "Five distinct UI request outcomes; provisional internal AdmissionError/ProviderError/CancellationConfirmation category rules in CR12, NOT complete portable public type exports",
       "unresolvedObligations": [
-        "canonical AdmissionError/ProviderError/CancellationConfirmation contracts",
-        "generic-instance and native tagged ABI proof"
+        "approved closed portable error/control payload export definitions and digests",
+        "trusted quiescence/cancellation proof and source-to-Graph outcome linkage",
+        "generic instance closure, native tagged ABI and ownership proof"
       ]
     },
     {
@@ -190,8 +194,10 @@
         "Immutable",
         "Send"
       ],
-      "semanticSummary": "Unsigned integer in [0,4294967295]",
-      "unresolvedObligations": []
+      "semanticSummary": "Unsigned 0..4294967295; candidate typed JSON integer token, strict no exponent/leading zeroes",
+      "unresolvedObligations": [
+        "architect acceptance of typed JSON U32 external encoding profile"
+      ]
     },
     {
       "typeId": "aui.core/U64",
@@ -203,8 +209,10 @@
         "Immutable",
         "Send"
       ],
-      "semanticSummary": "Unsigned integer in [0,18446744073709551615], never JS floating-point coercion",
-      "unresolvedObligations": []
+      "semanticSummary": "Unsigned 0..18446744073709551615; candidate typed JSON decimal string without leading zeroes, never floating-point coercion",
+      "unresolvedObligations": [
+        "architect acceptance of typed JSON U64 external encoding profile"
+      ]
     },
     {
       "typeId": "aui.core/Unit",
