@@ -2,6 +2,10 @@
 
 **Policy:** GitHub Actions and automated CI are disabled until release preparation. All checks are local, manual invocations. No CI workflow is permitted on the active branch before that decision changes. **Design the tests during Phase I; execute them only after implementation in Phase III; apply corrections and regression testing in Phase IV.** [Design Gates](design-completion-gates.md) and [Specification Matrix](specification-completion-matrix.md) govern traceability.
 
+## AUI compiler-first design fixture baseline (NOT-RUN)
+
+[First compiler architecture contract](aui-compiler-first-implementation-contract.md) proposes P00–P06 UTF-8 lexer, L0/L1 parser and typed source-only plan before any linked/native compiler stage. [45 designed scenarios](../../examples/aui-compiler-first-slice/acceptance-cases.json) cover legal L0/L1, lexical corruption, unsupported future syntax, type/event/accessibility diagnostics, snapshot trust and no artifact publication on failure. [Provisional source-only catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json), [expected L0 output](../../examples/aui-compiler-first-slice/status-panel-l0.source-only-plan.expected.json) and [output shape](../../schemas/aui-compiler-source-only-plan.schema.json) are review artifacts only. The source-only plan's explicit `UNVERIFIED_SOURCE_ONLY` status must never be reported as a validated native executable or approved graph. Every new scenario remains NOT-RUN by AELYXORA.
+
 ## Present baseline
 
 There is a limited Linux x86-64 Assembly JSON lexical preflight, but no complete JSON parser, Project Graph validator, native AUI compiler or general build coordinator. The preflight is **not** a verification baseline for graph semantics. For every future verification fixture, record the exact local invocation, target, expected outcome and observed **not run / pass / fail** result. Do not claim test execution without evidence.
