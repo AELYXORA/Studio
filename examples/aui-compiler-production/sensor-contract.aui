@@ -1,0 +1,19 @@
+// Full AUI compiler CONTRACT-MODULE design fixture ONLY (not compiled or verified).
+// Requires explicit contract source kind, exact package namespace, verified exports
+// and a registered effect/capability profile; never grants hardware access.
+import aui.core;
+
+record Measurement {
+  value: F64;
+  valid: Bool;
+}
+
+enum SensorError {
+  NoReading;
+  DeviceUnavailable;
+}
+
+service SensorReader {
+  command Read() -> Result<Measurement, SensorError>
+    effects(device-read) on io-worker;
+}
