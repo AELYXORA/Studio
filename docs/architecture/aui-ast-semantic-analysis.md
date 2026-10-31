@@ -148,6 +148,10 @@ For every node family define **before implementation** a closed internal node ta
 The current existing L0/L1 [plan schema](../../schemas/aui-compiler-source-only-plan.schema.json) and expected JSON plans are **debug/inspection formats only**, not the full shipping TypedHIR, runtime interchange protocol or public ABI. Complete L2/L3/L4 IR record layout, cross-pass ownership, and target module evidence still require an accepted structural definition and target tests. **All such gates remain PROPOSED / NOT-RUN**.
 
 
+## TypedHIR and GraphLinkedIR tag bytes — candidate handoff
+
+The [single IR tag catalog](aui-compiler-ir-payload-contract.md) now gives **36 T1 TypedHIR** and **7 T2 GraphLinkedIR** tag IDs, exact physical payload templates and typed Ref64 target classes, including separate `EnumConstruct`, `EnumMatch` and `ResolvedGenericType`. Its [catalog JSON](../../schemas/aui-compiler-ir-payload-layout-candidate.json) includes per-tag required/nonzero/zero checks and semantic invariants. Source-only T1 public contract evidence stays absent; T2 links require *real* authenticated source, Graph, type/export and package lock receipts. A tag/payload with matching bytes does not establish a verified GraphLink. Physical layout is a proposal and does not supersede this document's source scope/type/effect/namespaces or exact source span requirements. [77 tag/payload review cases](../../examples/aui-compiler-production/ir-tag-payload-review-cases.json) are NOT-RUN.
+
 ## GL0. Full-production GraphLinkedIR handoff proof — proposed, not approved
 
 The [one full compiler T0–T8 contract](aui-ir-layout.md) requires a **non-forgeable distinction between typed source analysis and trusted Graph-linked native compilation**. A structurally correct source-only `TypedHIR` and a 64-hex type digest are **not** evidence for a graph-linked command or native service.
