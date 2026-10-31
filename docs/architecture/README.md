@@ -12,6 +12,8 @@
 
 Use [Canonical Project Graph and Components](canonical-project-graph-and-components.md) for **all** graph identity, semantics, typed exports, operations, workflows, dataFlows and resource claims; [first AUI language profile](d3-first-language-profile.md) for bounded initial syntax; [Graph ↔ AUI integration](project-graph-aui-contract.md) for source reconciliation; [D6 Persistence](d6-canonical-persistence.md) for proposed bytes and snapshot publication **subject to** the canonical graph; [Source Ownership](source-ownership.md) for edits; and [Design Completion Gates](design-completion-gates.md) for acceptance. These files do not create independently authoritative models.
 
+**Latest C9/C10 design progress:** [Unified field-level semantic projection and logical export closure](canonical-project-graph-and-components.md), with [26 NOT-RUN projection mutation expectations](../../examples/canonical-graph/semantic-projection-change-matrix.json). Do not use historical D6 domains as current approved hash identities.
+
 **Latest focused audit:** [Canonical cross-contract re-audit and outstanding P0 decisions](canonical-graph-consistency-audit.md). The sensor fixture has three matching component declarations and 35 **NOT-RUN** negative scenarios. Its structural inspection is explicitly limited, and real public hashes/native proofs remain absent.
 
 The remainder of this index contains supporting research and frozen historical profile references. Their old numbered format or digest labels are **not product or architecture editions** and cannot override the current canonical owner.
