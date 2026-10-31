@@ -1,0 +1,252 @@
+{
+  "format": "aui.internal-abi-byte-reference",
+  "status": "CANDIDATE ARITHMETIC ONLY / NO ASSEMBLY COMPILED / NATIVE OFFSET TESTS NOT-RUN",
+  "owner": "docs/architecture/aui-compiler-internal-assembly-abi.md",
+  "layout": "schemas/aui-compiler-internal-abi-layout-candidate.json",
+  "endianness": "little",
+  "notes": [
+    "Byte placement alone cannot establish a legal runtime pointer, valid source/type evidence or target ABI",
+    "Context vector deliberately lacks required Ref64 references and is NOT usable as active compilation context",
+    "Stale Ref64 validity depends on independently verified arena generation",
+    "Reject replies must not contain partial output proof/artifact references"
+  ],
+  "ref64Vectors": [
+    {
+      "label": "valid arena 7 generation 3 offset 4096",
+      "offset": 4096,
+      "arenaIndex": 7,
+      "generation": 3,
+      "expected": "valid",
+      "wordHex": "0x0003000700001000",
+      "littleEndianBytesHex": "0010000007000300"
+    },
+    {
+      "label": "invalid all-zero",
+      "offset": 0,
+      "arenaIndex": 0,
+      "generation": 0,
+      "expected": "reject",
+      "wordHex": "0x0000000000000000",
+      "littleEndianBytesHex": "0000000000000000"
+    },
+    {
+      "label": "invalid zero arena index",
+      "offset": 1,
+      "arenaIndex": 0,
+      "generation": 5,
+      "expected": "reject",
+      "wordHex": "0x0005000000000001",
+      "littleEndianBytesHex": "0100000000000500"
+    },
+    {
+      "label": "invalid zero generation",
+      "offset": 4096,
+      "arenaIndex": 2,
+      "generation": 0,
+      "expected": "reject",
+      "wordHex": "0x0000000200001000",
+      "littleEndianBytesHex": "0010000002000000"
+    },
+    {
+      "label": "stale generation",
+      "offset": 64,
+      "arenaIndex": 2,
+      "generation": 9,
+      "expected": "reject",
+      "wordHex": "0x0009000200000040",
+      "littleEndianBytesHex": "4000000002000900",
+      "liveArenaGeneration": 10
+    }
+  ],
+  "recordByteVectors": [
+    {
+      "name": "CompilationContextV1",
+      "byteLength": 128,
+      "littleEndianBytesHex": "434149310100000080000000000000002a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000",
+      "fields": [
+        {
+          "field": "magic",
+          "offset": 0,
+          "width": 4,
+          "valueDecimal": "826884419"
+        },
+        {
+          "field": "abiMajor",
+          "offset": 4,
+          "width": 2,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "structBytes",
+          "offset": 8,
+          "width": 4,
+          "valueDecimal": "128"
+        },
+        {
+          "field": "compilationId",
+          "offset": 16,
+          "width": 8,
+          "valueDecimal": "42"
+        },
+        {
+          "field": "contextGeneration",
+          "offset": 104,
+          "width": 8,
+          "valueDecimal": "1"
+        }
+      ],
+      "expected": "STRUCTURAL_BYTES_ONLY",
+      "meaning": "Not a live context: required Ref64s absent"
+    },
+    {
+      "name": "Span16",
+      "byteLength": 16,
+      "littleEndianBytesHex": "00100000070003004000000008000100",
+      "fields": [
+        {
+          "field": "baseRef",
+          "offset": 0,
+          "width": 8,
+          "valueDecimal": "844454994907136"
+        },
+        {
+          "field": "byteLength",
+          "offset": 8,
+          "width": 4,
+          "valueDecimal": "64"
+        },
+        {
+          "field": "elementSize",
+          "offset": 12,
+          "width": 2,
+          "valueDecimal": "8"
+        },
+        {
+          "field": "flags",
+          "offset": 14,
+          "width": 2,
+          "valueDecimal": "1"
+        }
+      ],
+      "expected": "STRUCTURAL_BYTES_ONLY",
+      "meaning": "No arena lease present"
+    },
+    {
+      "name": "IRNodeHeaderV1",
+      "byteLength": 48,
+      "littleEndianBytesHex": "010000000100000030000000000000007b00000000000000000000000000000000000000000000000001000010000000",
+      "fields": [
+        {
+          "field": "tag",
+          "offset": 0,
+          "width": 2,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "schemaMajor",
+          "offset": 4,
+          "width": 2,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "recordBytes",
+          "offset": 8,
+          "width": 4,
+          "valueDecimal": "48"
+        },
+        {
+          "field": "nodeId",
+          "offset": 16,
+          "width": 8,
+          "valueDecimal": "123"
+        },
+        {
+          "field": "payloadOffset",
+          "offset": 40,
+          "width": 4,
+          "valueDecimal": "256"
+        },
+        {
+          "field": "payloadBytes",
+          "offset": 44,
+          "width": 4,
+          "valueDecimal": "16"
+        }
+      ],
+      "expected": "STRUCTURAL_BYTES_ONLY",
+      "meaning": "Tag payload not yet approved"
+    },
+    {
+      "name": "PassRequestV1",
+      "byteLength": 64,
+      "littleEndianBytesHex": "40000000010000000400000000000000010000000000000000080000030004000000000000000000000000000000000000000000000000000000000000000000",
+      "fields": [
+        {
+          "field": "requestBytes",
+          "offset": 0,
+          "width": 4,
+          "valueDecimal": "64"
+        },
+        {
+          "field": "abiMajor",
+          "offset": 4,
+          "width": 2,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "passId",
+          "offset": 8,
+          "width": 4,
+          "valueDecimal": "4"
+        },
+        {
+          "field": "expectedContextGeneration",
+          "offset": 16,
+          "width": 8,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "inputArtifactRef",
+          "offset": 24,
+          "width": 8,
+          "valueDecimal": "1125912791746560"
+        }
+      ],
+      "expected": "STRUCTURAL_BYTES_ONLY",
+      "meaning": "Input proof not included"
+    },
+    {
+      "name": "PassReplyV1",
+      "byteLength": 64,
+      "littleEndianBytesHex": "40000000010000000100000003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "fields": [
+        {
+          "field": "replyBytes",
+          "offset": 0,
+          "width": 4,
+          "valueDecimal": "64"
+        },
+        {
+          "field": "abiMajor",
+          "offset": 4,
+          "width": 2,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "status",
+          "offset": 8,
+          "width": 4,
+          "valueDecimal": "1"
+        },
+        {
+          "field": "lastVerifiedStage",
+          "offset": 12,
+          "width": 4,
+          "valueDecimal": "3"
+        }
+      ],
+      "expected": "STRUCTURAL_BYTES_ONLY",
+      "meaning": "REJECT output and proof references all zero"
+    }
+  ]
+}
