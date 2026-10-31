@@ -86,7 +86,13 @@ D3 now proposes explicit L3 `taskSlot ID: TaskSlot<T,E>;` ([ReviewPanel fixture]
 
 The [AUI Syntax owner](aui-syntax.md) now includes one proposed combined L0-L4 component grammar and separately selected record/enum/service contract units. [Full type and ownership admission](aui-types-and-ownership.md) defines profile-scoped type resolution, immutable values, pure function checks and effect/ownership rules. [36 grammar review cases](../../examples/aui-compiler-production/integrated-grammar-cases.json) are NOT-RUN, separate from the 66 full native compiler acceptance cases.
 
-**Confirmed P0:** canonical package `types[].kind` is currently **record-only**. Public AUI enums and service interface-to-component command mapping cannot be trusted until that existing package/Graph owner defines complete export semantics, capability/target/source closure and verified digests. Full grammar and human sign-off remain OPEN; no parser or codegen exists.
+**Updated P0:** the ONE canonical package `types[]` now has a **PROPOSED additive enum variant** beside unchanged record entries. Public enum identities remain UNVERIFIED until complete semantic values, D4 tag layout, TypeReference closure, digest vectors and approval exist. Service interfaces map to verified `components[].commands`, with signed target/source/capability/effect metadata; no independent service type kind or implicit native provider is permitted. Full grammar and human sign-off remain OPEN; no parser or codegen exists.
+
+## Public enum and service export reconciliation — 2026-10-31
+
+The original [canonical package schema](../../schemas/canonical-component-package.schema.json) has a **proposed backward-compatible type entry discriminator**: `record/fields` or `enum/variants`. The [single Canonical Graph C10/C12](canonical-project-graph-and-components.md) now describes ordered enum logical projections and exact service interface-to-existing-component/operation mapping. [AUI Syntax](aui-syntax.md) and [Types/Ownership](aui-types-and-ownership.md) carry the same constraints. [28 additional design cases](../../examples/aui-compiler-production/public-export-closure-review-cases.json) are **NOT-RUN**, and a [zero-payload enum entry example](../../examples/aui-compiler-production/sensor-error-enum-entry.proposed.json) contains no invented digest.
+
+A limited structural predicate accepted the 3 existing record type entries and the proposed enum entry, with 8/8 selected shape comparisons as expected. This is **not full JSON Schema, approved logical hashing, a parser or native ABI evidence**. All core types, enum codec, service package lock, digest framing and D1–D8 approval remain OPEN.
 
 ## Open critical design gates
 
