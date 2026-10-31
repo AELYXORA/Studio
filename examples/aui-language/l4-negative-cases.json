@@ -1,0 +1,280 @@
+{
+  "format": "aui.l4-negative-cases",
+  "status": "DOCUMENTATION GOLDENS ONLY. No AELYXORA compiler, renderer, ABI, ownership checker or hardware tests performed.",
+  "profile": "aui.source/l4-keyed/v1",
+  "staticCases": [
+    {
+      "id": "L4-S01",
+      "base": "keyed-rows-l4.aui",
+      "search": "ForEach(items: rows, key: item.id)",
+      "replace": "ForEach(items: rows)",
+      "expected": "AUI_KEY_MISSING",
+      "stage": "syntax-profile"
+    },
+    {
+      "id": "L4-S02",
+      "base": "keyed-rows-l4.aui",
+      "search": "key: item.id",
+      "replace": "key: item.index",
+      "expected": "AUI_KEY_POSITIONAL",
+      "stage": "key-type"
+    },
+    {
+      "id": "L4-S03",
+      "base": "keyed-rows-l4.aui",
+      "search": "key: item.id",
+      "replace": "key: item.unknown",
+      "expected": "AUI_KEY_MISSING",
+      "stage": "key-resolution"
+    },
+    {
+      "id": "L4-S04",
+      "base": "keyed-rows-l4.aui",
+      "search": "key: item.id",
+      "replace": "key: item.title",
+      "expected": "AUI_KEY_TYPE_OR_STABILITY",
+      "stage": "key-contract",
+      "note": "String can be StableKey: this case only fails when title is not declared an immutable stable identity field; requires vetted field contract and cannot be purely inferred from spelling."
+    },
+    {
+      "id": "L4-S05",
+      "base": "keyed-rows-l4.aui",
+      "search": "item in Text",
+      "replace": "row in Text",
+      "expected": "AUI_KEY_BINDING_MISMATCH",
+      "stage": "source-scope"
+    },
+    {
+      "id": "L4-S06",
+      "base": "keyed-rows-l4.aui",
+      "search": "items: rows",
+      "replace": "items: missing",
+      "expected": "AUI_UNRESOLVED",
+      "stage": "source-resolution"
+    },
+    {
+      "id": "L4-S07",
+      "base": "keyed-rows-l4.aui",
+      "search": "items: rows",
+      "replace": "items: 12",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "source-type"
+    },
+    {
+      "id": "L4-S08",
+      "base": "keyed-rows-l4.aui",
+      "search": "key: item.id",
+      "replace": "key: 0",
+      "expected": "AUI_KEY_POSITIONAL",
+      "stage": "source-profile"
+    },
+    {
+      "id": "L4-S09",
+      "base": "keyed-rows-l4.aui",
+      "search": "key: item.id",
+      "replace": "key: item",
+      "expected": "AUI_KEY_TYPE",
+      "stage": "source-profile"
+    },
+    {
+      "id": "L4-S10",
+      "base": "keyed-rows-l4.aui",
+      "search": "ForEach(items: rows, key: item.id)",
+      "replace": "ForEach(items: rows, key: item.id, key: item.title)",
+      "expected": "AUI_ARG_DUPLICATE",
+      "stage": "source-args"
+    },
+    {
+      "id": "L4-S11",
+      "base": "keyed-rows-l4.aui",
+      "search": "ForEach(items: rows, key: item.id)",
+      "replace": "ForEach(items: rows, key: item.id, capacity: 10)",
+      "expected": "AUI_ARG_NAME",
+      "stage": "source-args"
+    },
+    {
+      "id": "L4-S12",
+      "base": "keyed-rows-l4.aui",
+      "search": "item in Text(value: item.title)",
+      "replace": "item in Text(value: item.title) Text(value: item.title)",
+      "expected": "AUI_PROFILE_UNSUPPORTED",
+      "stage": "source-profile"
+    },
+    {
+      "id": "L4-S13",
+      "base": "keyed-rows-l4.aui",
+      "search": "item in Text(value: item.title)",
+      "replace": "item in Text(value: 3)",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "source-type"
+    },
+    {
+      "id": "L4-S14",
+      "base": "keyed-rows-l4.aui",
+      "search": "ForEach(items: rows, key: item.id)",
+      "replace": "ForEach(items: rows, key: item.id).on(activated: missing)",
+      "expected": "AUI_EVENT_UNRESOLVED",
+      "stage": "core-event"
+    },
+    {
+      "id": "L4-S15",
+      "base": "keyed-rows-l4.aui",
+      "search": "input rows: List<Row>",
+      "replace": "input rows: List<Bool>",
+      "expected": "AUI_KEY_TYPE",
+      "stage": "key-type"
+    },
+    {
+      "id": "L4-S16",
+      "base": "keyed-rows-l4.aui",
+      "search": "input rows: List<Row>",
+      "replace": "input rows: List<RawHandle>",
+      "expected": "OWN_NOT_SEND",
+      "stage": "ownership",
+      "note": "Only after a pinned registry declares RawHandle non-Send and crossing a domain is required; not a standalone static failure."
+    },
+    {
+      "id": "L4-S17",
+      "base": "keyed-rows-l4.aui",
+      "search": "ForEach(items: rows, key: item.id)",
+      "replace": "ForEach(items: rows, key: item.id) { nested in Text(value: item.title) }",
+      "expected": "AUI_SYNTAX",
+      "stage": "parser",
+      "note": "Existing following brace remains, making nested body malformed; this is a parser rejection, not lifecycle proof."
+    },
+    {
+      "id": "L4-S18",
+      "base": "keyed-rows-l4.aui",
+      "search": "import example.rows;",
+      "replace": "import untrusted.unknown;",
+      "expected": "AUI_UNRESOLVED_IMPORT",
+      "stage": "import"
+    },
+    {
+      "id": "L4-S19",
+      "base": "keyed-rows-l4.aui",
+      "search": "item in Text(value: item.title)",
+      "replace": "item in Text(value: item.title).key(value: rowLabel).key(value: rowLabel)",
+      "expected": "AUI_IDENTITY_DUPLICATE",
+      "stage": "identity"
+    },
+    {
+      "id": "L4-S20",
+      "base": "keyed-rows-l4.aui",
+      "search": "ForEach(items: rows, key: item.id)",
+      "replace": "ForEach(items: rows, key: item.id) { item in ForEach(items: rows, key: item.id) { item in Text(value: item.title) } }",
+      "expected": "AUI_KEY_BINDING_MISMATCH",
+      "stage": "scope",
+      "note": "This mutation also alters grammar via duplicated original body; first parser error likely precedes nested scope. Use as conceptual nested-source case, not a guaranteed diagnostic."
+    }
+  ],
+  "runtimeCases": [
+    {
+      "id": "L4-R01",
+      "action": "Reorder a,b,c to c,a,b same parent",
+      "expected": "All existing ViewIdentity/generation/state preserved"
+    },
+    {
+      "id": "L4-R02",
+      "action": "Duplicate key a in one parent list",
+      "expected": "AUI_KEY_DUPLICATE, no visible partial commit"
+    },
+    {
+      "id": "L4-R03",
+      "action": "Remove b then reinsert b",
+      "expected": "Fresh incarnation generation and state, no old completion"
+    },
+    {
+      "id": "L4-R04",
+      "action": "Change row a component TypeID",
+      "expected": "Remount a, no incompatible state/ABI reuse"
+    },
+    {
+      "id": "L4-R05",
+      "action": "Move c to different parent ForEach",
+      "expected": "No implicit state transfer, fresh full-path identity"
+    },
+    {
+      "id": "L4-R06",
+      "action": "Event with old b generation after remount",
+      "expected": "AUI_EVENT_STALE, no new b event"
+    },
+    {
+      "id": "L4-R07",
+      "action": "Task completion old b generation after remount",
+      "expected": "AUI_TASK_STALE, no new b StateRevision"
+    },
+    {
+      "id": "L4-R08",
+      "action": "Unmount b while provider holds DMA",
+      "expected": "Close subscription, request cancellation, retain DMA buffer until quiescence"
+    },
+    {
+      "id": "L4-R09",
+      "action": "Focused row reorders",
+      "expected": "Focus remains on same ViewIdentity, visual order changes"
+    },
+    {
+      "id": "L4-R10",
+      "action": "Focused row removed while IME active",
+      "expected": "IME/focus revoked before subsequent input, no index reuse"
+    },
+    {
+      "id": "L4-R11",
+      "action": "257 live items in a single ForEach",
+      "expected": "AUI_LIST_BUDGET, retain old tree"
+    },
+    {
+      "id": "L4-R12",
+      "action": "Ninth nested ForEach layer",
+      "expected": "AUI_LIST_BUDGET, retain old tree"
+    },
+    {
+      "id": "L4-R13",
+      "action": "4097 dynamic nodes within UI root",
+      "expected": "AUI_LIST_BUDGET, retain old tree"
+    },
+    {
+      "id": "L4-R14",
+      "action": "New allocation succeeds but later binding validation fails",
+      "expected": "Candidate rollback and exactly-once owned cleanup"
+    },
+    {
+      "id": "L4-R15",
+      "action": "Renderer present fails after valid new tree committed",
+      "expected": "Committed StateRevision unchanged and no provider replay"
+    },
+    {
+      "id": "L4-R16",
+      "action": "Input event arrives concurrently with unmount",
+      "expected": "Either old generation accepted before close or AUI_EVENT_STALE, never new row target"
+    },
+    {
+      "id": "L4-R17",
+      "action": "TaskSlot keyed only by source symbol across two rows",
+      "expected": "Reject shared runtime ownership, require full keyed path"
+    },
+    {
+      "id": "L4-R18",
+      "action": "String key visually same but different Unicode scalar sequences",
+      "expected": "Distinct tagged keys; no normalization-based implicit alias"
+    },
+    {
+      "id": "L4-R19",
+      "action": "Key String '1' and U64 1 in same parent",
+      "expected": "Distinct tagged values"
+    },
+    {
+      "id": "L4-R20",
+      "action": "Full key value changed from a to b",
+      "expected": "Removal plus insertion; no state/TaskTicket transfer"
+    }
+  ],
+  "precondition": "Static diagnostics assume an approved List<Row>/StableKey core registry, accessible nominal Row fields, and an exact imported package; neither exists in the current runnable product. Stage precedence can replace an intended semantic code with earlier parse/import failure.",
+  "mutationCheck": "Each static mutation must target exactly one literal source occurrence. A unique mutation is not a passed compiler validation.",
+  "notes": [
+    "A static source example has no actual ABI linker or rendered runtime",
+    "Runtime cases are intended future test semantics, not observed behavior",
+    "Cases with noted dependency on key stability/Send proofs are conditional and cannot be compiled without specific declared types"
+  ]
+}
