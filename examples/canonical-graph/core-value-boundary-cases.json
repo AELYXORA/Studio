@@ -1,0 +1,364 @@
+{
+  "format": "aui.core-value-boundary-cases",
+  "status": "PROPOSED reference expectations, no native codec, acceptance, trusted type export hashes or execution; this file is not an AELYXORA test run",
+  "owner": "docs/architecture/d3-core-registry-value-contract.md#cr12-portable-core-values-and-task-control-semantics--bounded-single-model-candidate",
+  "encodingNote": "jsonToken is the literal complete JSON input token, not the decoded JS value; generative oversize cases are specified symbolically and must not be treated as actual executed inputs",
+  "cases": [
+    {
+      "id": "CV-01",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x\"",
+      "expected": "accept",
+      "reason": "Zero-byte owned value",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-02",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x00ff\"",
+      "expected": "accept",
+      "reason": "Two exact octets, including NUL/high byte",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-03",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x000000\"",
+      "expected": "accept",
+      "reason": "Leading zero-valued octets preserved",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-04",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x0\"",
+      "expected": "reject",
+      "reason": "Odd number of hex nibbles",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-05",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x00FF\"",
+      "expected": "reject",
+      "reason": "Uppercase hex not in canonical typed Bytes",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-06",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x0g\"",
+      "expected": "reject",
+      "reason": "Non-hex digit",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-07",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"00ff\"",
+      "expected": "reject",
+      "reason": "Missing explicit 0x prefix",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-08",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "\"0x ff\"",
+      "expected": "reject",
+      "reason": "No embedded space",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-09",
+      "coreType": "aui.core/Bytes",
+      "jsonToken": "null",
+      "expected": "reject",
+      "reason": "Absent/null not a Bytes value",
+      "proposedDiagnostic": "CORE_TYPE_MISMATCH",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-10",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x0000000000000000\"",
+      "expected": "accept",
+      "reason": "Positive zero, bit identity differs from negative zero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-11",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x8000000000000000\"",
+      "expected": "accept",
+      "reason": "Negative zero; raw sign preserved",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-12",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x3ff0000000000000\"",
+      "expected": "accept",
+      "reason": "Finite positive 1.0",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-13",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0xbff0000000000000\"",
+      "expected": "accept",
+      "reason": "Finite negative 1.0",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-14",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x0000000000000001\"",
+      "expected": "accept",
+      "reason": "Minimum positive subnormal",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-15",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x8000000000000001\"",
+      "expected": "accept",
+      "reason": "Negative minimum subnormal",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-16",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x0010000000000000\"",
+      "expected": "accept",
+      "reason": "Minimum positive normal",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-17",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x7fefffffffffffff\"",
+      "expected": "accept",
+      "reason": "Maximum positive finite binary64",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-18",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0xffefffffffffffff\"",
+      "expected": "accept",
+      "reason": "Maximum magnitude negative finite binary64",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-19",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x7ff0000000000000\"",
+      "expected": "reject",
+      "reason": "Positive infinity disallowed",
+      "proposedDiagnostic": "CORE_F64_NONFINITE_UNSUPPORTED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-20",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0xfff0000000000000\"",
+      "expected": "reject",
+      "reason": "Negative infinity disallowed",
+      "proposedDiagnostic": "CORE_F64_NONFINITE_UNSUPPORTED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-21",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x7ff8000000000001\"",
+      "expected": "reject",
+      "reason": "Quiet NaN disallowed",
+      "proposedDiagnostic": "CORE_F64_NONFINITE_UNSUPPORTED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-22",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x7ff0000000000001\"",
+      "expected": "reject",
+      "reason": "Signaling NaN disallowed",
+      "proposedDiagnostic": "CORE_F64_NONFINITE_UNSUPPORTED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-23",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x3FF0000000000000\"",
+      "expected": "reject",
+      "reason": "Uppercase is not canonical",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-24",
+      "coreType": "aui.core/F64",
+      "jsonToken": "\"0x3ff000000000000\"",
+      "expected": "reject",
+      "reason": "Too few hex digits",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-25",
+      "coreType": "aui.core/F64",
+      "jsonToken": "1.0",
+      "expected": "reject",
+      "reason": "JSON floating-number tokens are not the proposed typed F64 bit string",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-26",
+      "coreType": "aui.core/U32",
+      "jsonToken": "0",
+      "expected": "accept",
+      "reason": "Exact U32 zero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-27",
+      "coreType": "aui.core/U32",
+      "jsonToken": "4294967295",
+      "expected": "accept",
+      "reason": "Exact U32 maximum",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-28",
+      "coreType": "aui.core/U32",
+      "jsonToken": "4294967296",
+      "expected": "reject",
+      "reason": "Out of range",
+      "proposedDiagnostic": "CORE_U32_RANGE",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-29",
+      "coreType": "aui.core/U32",
+      "jsonToken": "-1",
+      "expected": "reject",
+      "reason": "Negative outside unsigned domain",
+      "proposedDiagnostic": "CORE_U32_RANGE",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-30",
+      "coreType": "aui.core/U32",
+      "jsonToken": "1e0",
+      "expected": "reject",
+      "reason": "Exponent notation forbidden in canonical first-profile integer",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-31",
+      "coreType": "aui.core/U64",
+      "jsonToken": "\"0\"",
+      "expected": "accept",
+      "reason": "Unsigned decimal string zero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-32",
+      "coreType": "aui.core/U64",
+      "jsonToken": "\"18446744073709551615\"",
+      "expected": "accept",
+      "reason": "Full U64 max without float conversion",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-33",
+      "coreType": "aui.core/U64",
+      "jsonToken": "\"18446744073709551616\"",
+      "expected": "reject",
+      "reason": "Above U64 max",
+      "proposedDiagnostic": "CORE_U64_RANGE",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-34",
+      "coreType": "aui.core/U64",
+      "jsonToken": "\"00\"",
+      "expected": "reject",
+      "reason": "Noncanonical leading zero",
+      "proposedDiagnostic": "CORE_VALUE_ENCODING_INVALID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-35",
+      "coreType": "aui.core/U64",
+      "jsonToken": "42",
+      "expected": "reject",
+      "reason": "Typed U64 requires exact string encoding, not JSON numeric token",
+      "proposedDiagnostic": "CORE_TYPE_MISMATCH",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-36",
+      "coreType": "aui.core/Bool",
+      "jsonToken": "true",
+      "expected": "accept",
+      "reason": "Canonical Bool true",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-37",
+      "coreType": "aui.core/Bool",
+      "jsonToken": "false",
+      "expected": "accept",
+      "reason": "Canonical Bool false",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-38",
+      "coreType": "aui.core/Bool",
+      "jsonToken": "1",
+      "expected": "reject",
+      "reason": "Integer is not Boolean",
+      "proposedDiagnostic": "CORE_TYPE_MISMATCH",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-39",
+      "coreType": "aui.core/TaskTicket",
+      "jsonToken": "\"12345\"",
+      "expected": "reject",
+      "reason": "Opaque runtime ticket cannot be serialized as portable payload",
+      "proposedDiagnostic": "CORE_TYPE_NOT_PORTABLE",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-40",
+      "coreType": "aui.core/TaskOutcome",
+      "jsonToken": "\"Cancelled\"",
+      "expected": "reject",
+      "reason": "Outcome cannot be constructed from a bare string or unconfirmed cancel request",
+      "proposedDiagnostic": "WORKFLOW_CANCEL_UNCONFIRMED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CV-41",
+      "coreType": "aui.core/Bytes",
+      "generator": {
+        "format": "typed-json-string",
+        "prefix": "0x",
+        "hexByte": "ab",
+        "repeatBytes": 1048577
+      },
+      "expected": "reject",
+      "reason": "1 MiB limit exceeded; generator is a symbolic future fixture, not expanded in repository",
+      "proposedDiagnostic": "CORE_VALUE_TOO_LARGE",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
