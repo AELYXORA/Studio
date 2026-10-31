@@ -1,0 +1,764 @@
+{
+  "format": "aui.core-15-cr14-candidate-arithmetic-vectors",
+  "status": "ARITHMETIC ONLY / ALL 15 CORE EXPORTS UNVERIFIED / NO TRUSTED FINGERPRINT",
+  "source": "examples/canonical-graph/core-registry-candidate.json",
+  "owner": "docs/architecture/d2-d6-public-contract-digest-pipeline.md",
+  "typeDomain": "AELYXORA/type-contract/canonical",
+  "fingerprintDomain": "AELYXORA/core-registry/canonical",
+  "preimage": "sha256(ASCII(domain) || 0x00 || D6 canonical UTF-8 JSON of exact candidate closed projection)",
+  "verification": "Computed with JavaScript SHA-256 verified on standard abc and previously published reference hashes; full independent native implementation and approved normative source are NOT-RUN.",
+  "warnings": [
+    "These are NOT authorized contractDigest values, coreRegistryFingerprint, source/Graph approvals or ABI evidence",
+    "All type definitions and rule texts remain candidate UNVERIFIED",
+    "Fingerprint includes all 15 proposed content-bearing core type projections; never reuse historical 13-type fingerprint"
+  ],
+  "vectors": [
+    {
+      "typeId": "aui.core/Bool",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/Bool",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "typed-json-bool",
+          "ownershipClass": "immutable-copy",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR12/Bool/typed-boolean",
+            "CR2/Bool/two-values"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/Bool/typed-boolean",
+            "definition": "With exact Bool TypeReference, portable typed JSON is the token true or false only; numeric 0/1 and string booleans reject."
+          },
+          {
+            "ruleId": "CR2/Bool/two-values",
+            "definition": "Domain exactly {false,true}; integer, string, null and implicit truthiness conversion are invalid."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"scalar\",\"graphPayloadEligible\":true,\"ownershipClass\":\"immutable-copy\",\"portableCarrier\":\"typed-json-bool\",\"ruleIds\":[\"CR12/Bool/typed-boolean\",\"CR2/Bool/two-values\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"With exact Bool TypeReference, portable typed JSON is the token true or false only; numeric 0/1 and string booleans reject.\",\"ruleId\":\"CR12/Bool/typed-boolean\"},{\"definition\":\"Domain exactly {false,true}; integer, string, null and implicit truthiness conversion are invalid.\",\"ruleId\":\"CR2/Bool/two-values\"}],\"typeArity\":0,\"typeId\":\"aui.core/Bool\"}",
+      "canonicalByteLength": 736,
+      "expectedCandidateSha256": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572"
+    },
+    {
+      "typeId": "aui.core/Bytes",
+      "ruleCount": 3,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/Bytes",
+        "kind": "immutable-value",
+        "typeArity": 0,
+        "featureGate": "D2-graph",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "immutable-sequence",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "typed-json-bytes-hex",
+          "ownershipClass": "owned-immutable",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR12/Bytes/finite-octets",
+            "CR12/Bytes/max-1048576",
+            "CR12/Bytes/move-on-admission"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/Bytes/finite-octets",
+            "definition": "Owned immutable ordered octets, including empty; equality is length and exact octets; typed JSON is lowercase 0x prefix plus two lowercase hex digits per byte."
+          },
+          {
+            "ruleId": "CR12/Bytes/max-1048576",
+            "definition": "The proposed first portable Bytes value contains at most 1048576 decoded octets; validate size and quota with checked arithmetic before allocation."
+          },
+          {
+            "ruleId": "CR12/Bytes/move-on-admission",
+            "definition": "Owned copy duplicates or safely retains immutable storage; move takes effect only after confirmed admission; rejection leaves the original owner responsible."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"D2-graph\",\"kind\":\"immutable-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"immutable-sequence\",\"graphPayloadEligible\":true,\"ownershipClass\":\"owned-immutable\",\"portableCarrier\":\"typed-json-bytes-hex\",\"ruleIds\":[\"CR12/Bytes/finite-octets\",\"CR12/Bytes/max-1048576\",\"CR12/Bytes/move-on-admission\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"Owned immutable ordered octets, including empty; equality is length and exact octets; typed JSON is lowercase 0x prefix plus two lowercase hex digits per byte.\",\"ruleId\":\"CR12/Bytes/finite-octets\"},{\"definition\":\"The proposed first portable Bytes value contains at most 1048576 decoded octets; validate size and quota with checked arithmetic before allocation.\",\"ruleId\":\"CR12/Bytes/max-1048576\"},{\"definition\":\"Owned copy duplicates or safely retains immutable storage; move takes effect only after confirmed admission; rejection leaves the original owner responsible.\",\"ruleId\":\"CR12/Bytes/move-on-admission\"}],\"typeArity\":0,\"typeId\":\"aui.core/Bytes\"}",
+      "canonicalByteLength": 1110,
+      "expectedCandidateSha256": "6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286"
+    },
+    {
+      "typeId": "aui.core/Event",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/Event",
+        "kind": "generic-value",
+        "typeArity": 1,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "generic-value",
+          "typeParameters": [
+            "T"
+          ],
+          "variants": [],
+          "portableCarrier": "deferred-typed-payload",
+          "ownershipClass": "conditional-owned",
+          "graphPayloadEligible": false,
+          "ruleIds": [
+            "CR13/Event/not-native-subscription",
+            "CR2/Event/origin-generation"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR13/Event/not-native-subscription",
+            "definition": "Event<T> supplies neither native subscription, OS callback, transferable Graph dataFlow nor physical provider admission permission."
+          },
+          {
+            "ruleId": "CR2/Event/origin-generation",
+            "definition": "Event<T> is one immutable typed occurrence with exact verified originating ViewIdentity and generation, not user-forged source metadata."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"generic-value\",\"graphPayloadEligible\":false,\"ownershipClass\":\"conditional-owned\",\"portableCarrier\":\"deferred-typed-payload\",\"ruleIds\":[\"CR13/Event/not-native-subscription\",\"CR2/Event/origin-generation\"],\"typeParameters\":[\"T\"],\"variants\":[]},\"semanticRules\":[{\"definition\":\"Event<T> supplies neither native subscription, OS callback, transferable Graph dataFlow nor physical provider admission permission.\",\"ruleId\":\"CR13/Event/not-native-subscription\"},{\"definition\":\"Event<T> is one immutable typed occurrence with exact verified originating ViewIdentity and generation, not user-forged source metadata.\",\"ruleId\":\"CR2/Event/origin-generation\"}],\"typeArity\":1,\"typeId\":\"aui.core/Event\"}",
+      "canonicalByteLength": 853,
+      "expectedCandidateSha256": "f43362526e47b589d3d816d95caf4b2928a3558e1fcc1f1620fb9f458a5203c8"
+    },
+    {
+      "typeId": "aui.core/F64",
+      "ruleCount": 3,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/F64",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "D2-graph",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "typed-json-f64-bits",
+          "ownershipClass": "immutable-copy",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR12/F64/bit-exact-signed-zero",
+            "CR12/F64/finite-only",
+            "CR12/F64/subnormal-preservation"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/F64/bit-exact-signed-zero",
+            "definition": "Typed JSON F64 uses 0x plus exactly 16 lowercase hex digits encoding unsigned raw binary64 bits MSB-first; positive and negative zero have distinct bit identities."
+          },
+          {
+            "ruleId": "CR12/F64/finite-only",
+            "definition": "F64 is finite IEEE-754 binary64 bit patterns only; reject all exponent 0x7ff patterns before native materialization."
+          },
+          {
+            "ruleId": "CR12/F64/subnormal-preservation",
+            "definition": "Positive and negative finite subnormals round-trip with every bit intact; no implicit flush-to-zero, arithmetic, rounding, approximate equality or total order."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"D2-graph\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"scalar\",\"graphPayloadEligible\":true,\"ownershipClass\":\"immutable-copy\",\"portableCarrier\":\"typed-json-f64-bits\",\"ruleIds\":[\"CR12/F64/bit-exact-signed-zero\",\"CR12/F64/finite-only\",\"CR12/F64/subnormal-preservation\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"Typed JSON F64 uses 0x plus exactly 16 lowercase hex digits encoding unsigned raw binary64 bits MSB-first; positive and negative zero have distinct bit identities.\",\"ruleId\":\"CR12/F64/bit-exact-signed-zero\"},{\"definition\":\"F64 is finite IEEE-754 binary64 bit patterns only; reject all exponent 0x7ff patterns before native materialization.\",\"ruleId\":\"CR12/F64/finite-only\"},{\"definition\":\"Positive and negative finite subnormals round-trip with every bit intact; no implicit flush-to-zero, arithmetic, rounding, approximate equality or total order.\",\"ruleId\":\"CR12/F64/subnormal-preservation\"}],\"typeArity\":0,\"typeId\":\"aui.core/F64\"}",
+      "canonicalByteLength": 1070,
+      "expectedCandidateSha256": "642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e"
+    },
+    {
+      "typeId": "aui.core/List",
+      "ruleCount": 3,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/List",
+        "kind": "generic-value",
+        "typeArity": 1,
+        "featureGate": "L4",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "generic-value",
+          "typeParameters": [
+            "T"
+          ],
+          "variants": [],
+          "portableCarrier": "deferred-typed-payload",
+          "ownershipClass": "conditional-owned",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR11/List/nominal-only-argument",
+            "CR3/List/immutable-snapshot",
+            "CR5/List/conditional-send"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR11/List/nominal-only-argument",
+            "definition": "The current admitted L4 List<T> requires verified immutable nominal record T; syntactically nested generic T is not thereby authorized as an L4 value without reviewed specialization."
+          },
+          {
+            "ruleId": "CR3/List/immutable-snapshot",
+            "definition": "List<T> is a finite ordered immutable owned snapshot; changing elements makes a new revision; no asynchronously mutable borrowed backing store."
+          },
+          {
+            "ruleId": "CR5/List/conditional-send",
+            "definition": "List<T> is Send only when T and owned immutable snapshot retention are verified Send; enforce D5 list byte/element/tree quotas and no assumed Copy."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L4\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"generic-value\",\"graphPayloadEligible\":true,\"ownershipClass\":\"conditional-owned\",\"portableCarrier\":\"deferred-typed-payload\",\"ruleIds\":[\"CR11/List/nominal-only-argument\",\"CR3/List/immutable-snapshot\",\"CR5/List/conditional-send\"],\"typeParameters\":[\"T\"],\"variants\":[]},\"semanticRules\":[{\"definition\":\"The current admitted L4 List<T> requires verified immutable nominal record T; syntactically nested generic T is not thereby authorized as an L4 value without reviewed specialization.\",\"ruleId\":\"CR11/List/nominal-only-argument\"},{\"definition\":\"List<T> is a finite ordered immutable owned snapshot; changing elements makes a new revision; no asynchronously mutable borrowed backing store.\",\"ruleId\":\"CR3/List/immutable-snapshot\"},{\"definition\":\"List<T> is Send only when T and owned immutable snapshot retention are verified Send; enforce D5 list byte/element/tree quotas and no assumed Copy.\",\"ruleId\":\"CR5/List/conditional-send\"}],\"typeArity\":1,\"typeId\":\"aui.core/List\"}",
+      "canonicalByteLength": 1130,
+      "expectedCandidateSha256": "32a2d7fd4a1e49447c9a759fab260142acfbc21b3d27b91116c301cd5f2ab68d"
+    },
+    {
+      "typeId": "aui.core/Result",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/Result",
+        "kind": "generic-value",
+        "typeArity": 2,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "tagged-union",
+          "typeParameters": [
+            "T",
+            "E"
+          ],
+          "variants": [
+            "Success(T)",
+            "Failure(E)"
+          ],
+          "portableCarrier": "deferred-typed-payload",
+          "ownershipClass": "conditional-owned",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR13/Result/two-branches",
+            "CR4/Result/provider-only"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR13/Result/two-branches",
+            "definition": "Exactly ordered closed variants Success(T) and Failure(E); a provider Result has no TaskOutcome control branches."
+          },
+          {
+            "ruleId": "CR4/Result/provider-only",
+            "definition": "Result<T,E> represents an admitted provider terminal result, never request admission, cancellation or transport ambiguity; Success carries T, Failure carries E."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"tagged-union\",\"graphPayloadEligible\":true,\"ownershipClass\":\"conditional-owned\",\"portableCarrier\":\"deferred-typed-payload\",\"ruleIds\":[\"CR13/Result/two-branches\",\"CR4/Result/provider-only\"],\"typeParameters\":[\"T\",\"E\"],\"variants\":[\"Success(T)\",\"Failure(E)\"]},\"semanticRules\":[{\"definition\":\"Exactly ordered closed variants Success(T) and Failure(E); a provider Result has no TaskOutcome control branches.\",\"ruleId\":\"CR13/Result/two-branches\"},{\"definition\":\"Result<T,E> represents an admitted provider terminal result, never request admission, cancellation or transport ambiguity; Success carries T, Failure carries E.\",\"ruleId\":\"CR4/Result/provider-only\"}],\"typeArity\":2,\"typeId\":\"aui.core/Result\"}",
+      "canonicalByteLength": 861,
+      "expectedCandidateSha256": "7f97bafe4ffb01c3702d7eec842402ba8151762a675b157225c25a6cc0dfa0c0"
+    },
+    {
+      "typeId": "aui.core/StableKey",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/StableKey",
+        "kind": "tagged-union",
+        "typeArity": 0,
+        "featureGate": "L4",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "tagged-union",
+          "typeParameters": [],
+          "variants": [
+            "StringKey(String)",
+            "U64Key(U64)"
+          ],
+          "portableCarrier": "tagged-stable-key",
+          "ownershipClass": "owned-immutable",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR3/StableKey/exact-tag-and-value",
+            "CR3/StableKey/framed-binary"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR3/StableKey/exact-tag-and-value",
+            "definition": "Closed union StringKey(String) and U64Key(U64); exact tag and value equality; StringKey UTF-8 byte length is 1..256 with no normalization."
+          },
+          {
+            "ruleId": "CR3/StableKey/framed-binary",
+            "definition": "Portable identity bytes: StringKey tag 0x01 + big-endian 4-byte byte length + strict UTF-8; U64Key tag 0x02 + big-endian 8-byte integer; reject invalid tags, lengths and bytes."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L4\",\"kind\":\"tagged-union\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"tagged-union\",\"graphPayloadEligible\":true,\"ownershipClass\":\"owned-immutable\",\"portableCarrier\":\"tagged-stable-key\",\"ruleIds\":[\"CR3/StableKey/exact-tag-and-value\",\"CR3/StableKey/framed-binary\"],\"typeParameters\":[],\"variants\":[\"StringKey(String)\",\"U64Key(U64)\"]},\"semanticRules\":[{\"definition\":\"Closed union StringKey(String) and U64Key(U64); exact tag and value equality; StringKey UTF-8 byte length is 1..256 with no normalization.\",\"ruleId\":\"CR3/StableKey/exact-tag-and-value\"},{\"definition\":\"Portable identity bytes: StringKey tag 0x01 + big-endian 4-byte byte length + strict UTF-8; U64Key tag 0x02 + big-endian 8-byte integer; reject invalid tags, lengths and bytes.\",\"ruleId\":\"CR3/StableKey/framed-binary\"}],\"typeArity\":0,\"typeId\":\"aui.core/StableKey\"}",
+      "canonicalByteLength": 919,
+      "expectedCandidateSha256": "d4d316d15751391fbb83276a56d5636941838309726f32ba12c0f4c1a5d92f7f"
+    },
+    {
+      "typeId": "aui.core/StateRevision",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/StateRevision",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L2",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send",
+          "UIOwner"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "no-portable-serialization",
+          "ownershipClass": "ui-owner-affine",
+          "graphPayloadEligible": false,
+          "ruleIds": [
+            "CR12/StateRevision/not-GraphRevision",
+            "CR2/StateRevision/owner-generation"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/StateRevision/not-GraphRevision",
+            "definition": "StateRevision is not GraphRevision, ViewRevision, HEAD epoch, arbitrary U64 or portable Graph payload; it grants no authority to mutate another owner."
+          },
+          {
+            "ruleId": "CR2/StateRevision/owner-generation",
+            "definition": "StateRevision is a monotonic nonnegative counter bound to one specific UI owner and generation; cross-owner comparison or update is invalid."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L2\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\",\"UIOwner\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"scalar\",\"graphPayloadEligible\":false,\"ownershipClass\":\"ui-owner-affine\",\"portableCarrier\":\"no-portable-serialization\",\"ruleIds\":[\"CR12/StateRevision/not-GraphRevision\",\"CR2/StateRevision/owner-generation\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"StateRevision is not GraphRevision, ViewRevision, HEAD epoch, arbitrary U64 or portable Graph payload; it grants no authority to mutate another owner.\",\"ruleId\":\"CR12/StateRevision/not-GraphRevision\"},{\"definition\":\"StateRevision is a monotonic nonnegative counter bound to one specific UI owner and generation; cross-owner comparison or update is invalid.\",\"ruleId\":\"CR2/StateRevision/owner-generation\"}],\"typeArity\":0,\"typeId\":\"aui.core/StateRevision\"}",
+      "canonicalByteLength": 889,
+      "expectedCandidateSha256": "bdcb71b565da24ab2b538de52a995ec22bce5bf8d65f0096eabb1f19451d26f0"
+    },
+    {
+      "typeId": "aui.core/String",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/String",
+        "kind": "immutable-value",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "immutable-sequence",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "strict-utf8",
+          "ownershipClass": "owned-immutable",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR3/String/exact-scalars",
+            "CR3/String/no-implicit-normalization"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR3/String/exact-scalars",
+            "definition": "String is an immutable exact Unicode scalar sequence; strict UTF-8 at boundary; embedded U+0000 is content, not native termination."
+          },
+          {
+            "ruleId": "CR3/String/no-implicit-normalization",
+            "definition": "String values preserve exact scalar order without NFC, casefold, grapheme equality, invalid UTF-8 splits or borrowed StringView Send inference."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"immutable-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"immutable-sequence\",\"graphPayloadEligible\":true,\"ownershipClass\":\"owned-immutable\",\"portableCarrier\":\"strict-utf8\",\"ruleIds\":[\"CR3/String/exact-scalars\",\"CR3/String/no-implicit-normalization\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"String is an immutable exact Unicode scalar sequence; strict UTF-8 at boundary; embedded U+0000 is content, not native termination.\",\"ruleId\":\"CR3/String/exact-scalars\"},{\"definition\":\"String values preserve exact scalar order without NFC, casefold, grapheme equality, invalid UTF-8 splits or borrowed StringView Send inference.\",\"ruleId\":\"CR3/String/no-implicit-normalization\"}],\"typeArity\":0,\"typeId\":\"aui.core/String\"}",
+      "canonicalByteLength": 849,
+      "expectedCandidateSha256": "1e44e691d2d9a21ca827c5f4ca20cd01993421e0ab95695e06a845abc9c4faf4"
+    },
+    {
+      "typeId": "aui.core/TaskOutcome",
+      "ruleCount": 3,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/TaskOutcome",
+        "kind": "generic-value",
+        "typeArity": 2,
+        "featureGate": "L3",
+        "logicalTraits": [
+          "Immutable",
+          "SendConditional"
+        ],
+        "semanticModel": {
+          "category": "tagged-union",
+          "typeParameters": [
+            "T",
+            "E"
+          ],
+          "variants": [
+            "Successful(T)",
+            "Failed(E)",
+            "AdmissionRejected(AdmissionError)",
+            "Cancelled(CancellationConfirmation)",
+            "ProviderUnavailable(ProviderError)"
+          ],
+          "portableCarrier": "deferred-typed-payload",
+          "ownershipClass": "conditional-owned",
+          "graphPayloadEligible": false,
+          "ruleIds": [
+            "CR13/TaskOutcome/closed-control",
+            "CR4/TaskOutcome/five-branches",
+            "T9/TaskOutcome/indeterminate-ui-slot"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR13/TaskOutcome/closed-control",
+            "definition": "AdmissionError code is one of invalid-arguments, capacity-exceeded, stale-view, capability-denied, unsupported-target with trusted no-dispatch proof. ProviderError phase never-admitted permits provider-unavailable, link-unresolved, abi-unverified, transport-failure only with no-dispatch proof; phase indeterminate-after-admission permits provider-unavailable or transport-failure only. Cancelled requires same owner/ticket/generation confirmed-quiescent proof; source cannot forge control outcomes."
+          },
+          {
+            "ruleId": "CR4/TaskOutcome/five-branches",
+            "definition": "Exactly five ordered variants: Successful(T), Failed(E), AdmissionRejected(AdmissionError), Cancelled(CancellationConfirmation), ProviderUnavailable(ProviderError); distinct from provider Result<T,E>."
+          },
+          {
+            "ruleId": "T9/TaskOutcome/indeterminate-ui-slot",
+            "definition": "Indeterminate provider admission may settle the original UI slot once as ProviderUnavailable but does not free the native ticket; no fake rollback, replay, auto retry, duplicate completion or premature disposal."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L3\",\"kind\":\"generic-value\",\"logicalTraits\":[\"Immutable\",\"SendConditional\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"tagged-union\",\"graphPayloadEligible\":false,\"ownershipClass\":\"conditional-owned\",\"portableCarrier\":\"deferred-typed-payload\",\"ruleIds\":[\"CR13/TaskOutcome/closed-control\",\"CR4/TaskOutcome/five-branches\",\"T9/TaskOutcome/indeterminate-ui-slot\"],\"typeParameters\":[\"T\",\"E\"],\"variants\":[\"Successful(T)\",\"Failed(E)\",\"AdmissionRejected(AdmissionError)\",\"Cancelled(CancellationConfirmation)\",\"ProviderUnavailable(ProviderError)\"]},\"semanticRules\":[{\"definition\":\"AdmissionError code is one of invalid-arguments, capacity-exceeded, stale-view, capability-denied, unsupported-target with trusted no-dispatch proof. ProviderError phase never-admitted permits provider-unavailable, link-unresolved, abi-unverified, transport-failure only with no-dispatch proof; phase indeterminate-after-admission permits provider-unavailable or transport-failure only. Cancelled requires same owner/ticket/generation confirmed-quiescent proof; source cannot forge control outcomes.\",\"ruleId\":\"CR13/TaskOutcome/closed-control\"},{\"definition\":\"Exactly five ordered variants: Successful(T), Failed(E), AdmissionRejected(AdmissionError), Cancelled(CancellationConfirmation), ProviderUnavailable(ProviderError); distinct from provider Result<T,E>.\",\"ruleId\":\"CR4/TaskOutcome/five-branches\"},{\"definition\":\"Indeterminate provider admission may settle the original UI slot once as ProviderUnavailable but does not free the native ticket; no fake rollback, replay, auto retry, duplicate completion or premature disposal.\",\"ruleId\":\"T9/TaskOutcome/indeterminate-ui-slot\"}],\"typeArity\":2,\"typeId\":\"aui.core/TaskOutcome\"}",
+      "canonicalByteLength": 1743,
+      "expectedCandidateSha256": "dc5feba8e29f17792a348e5b92943f3ee6efdbc4be0738901f5757cfc323ca66"
+    },
+    {
+      "typeId": "aui.core/TaskSlot",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/TaskSlot",
+        "kind": "opaque-runtime",
+        "typeArity": 2,
+        "featureGate": "L3",
+        "logicalTraits": [
+          "Affine",
+          "Opaque",
+          "UIOwner"
+        ],
+        "semanticModel": {
+          "category": "opaque-token",
+          "typeParameters": [
+            "T",
+            "E"
+          ],
+          "variants": [],
+          "portableCarrier": "no-portable-serialization",
+          "ownershipClass": "ui-owner-affine",
+          "graphPayloadEligible": false,
+          "ruleIds": [
+            "CR11/TaskSlot/not-Graph-payload",
+            "T3/TaskSlot/single-active"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR11/TaskSlot/not-Graph-payload",
+            "definition": "TaskSlot<T,E> is opaque affine UI-owner/generation-bound, source-declared, nonportable and forbidden as Graph/record/command dataFlow payload or native pointer."
+          },
+          {
+            "ruleId": "T3/TaskSlot/single-active",
+            "definition": "One TaskSlot owns at most one active request ticket under the exact ViewIdentity/generation; admission, delivery, retirement and cleanup must respect the same owner."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L3\",\"kind\":\"opaque-runtime\",\"logicalTraits\":[\"Affine\",\"Opaque\",\"UIOwner\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"opaque-token\",\"graphPayloadEligible\":false,\"ownershipClass\":\"ui-owner-affine\",\"portableCarrier\":\"no-portable-serialization\",\"ruleIds\":[\"CR11/TaskSlot/not-Graph-payload\",\"T3/TaskSlot/single-active\"],\"typeParameters\":[\"T\",\"E\"],\"variants\":[]},\"semanticRules\":[{\"definition\":\"TaskSlot<T,E> is opaque affine UI-owner/generation-bound, source-declared, nonportable and forbidden as Graph/record/command dataFlow payload or native pointer.\",\"ruleId\":\"CR11/TaskSlot/not-Graph-payload\"},{\"definition\":\"One TaskSlot owns at most one active request ticket under the exact ViewIdentity/generation; admission, delivery, retirement and cleanup must respect the same owner.\",\"ruleId\":\"T3/TaskSlot/single-active\"}],\"typeArity\":2,\"typeId\":\"aui.core/TaskSlot\"}",
+      "canonicalByteLength": 904,
+      "expectedCandidateSha256": "947214e53ca95b0dc2c0cf4213191a42ee3fcfc4445162f29caf5107aae39f66"
+    },
+    {
+      "typeId": "aui.core/TaskTicket",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/TaskTicket",
+        "kind": "opaque-runtime",
+        "typeArity": 0,
+        "featureGate": "L3",
+        "logicalTraits": [
+          "Affine",
+          "Opaque"
+        ],
+        "semanticModel": {
+          "category": "opaque-token",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "no-portable-serialization",
+          "ownershipClass": "runtime-affine",
+          "graphPayloadEligible": false,
+          "ruleIds": [
+            "CR11/TaskTicket/not-Graph-payload",
+            "T9/TaskTicket/native-ownership"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR11/TaskTicket/not-Graph-payload",
+            "definition": "TaskTicket is an opaque affine runtime operation identity without source constructor, Copy, portable serialization or transferable Graph payload."
+          },
+          {
+            "ruleId": "T9/TaskTicket/native-ownership",
+            "definition": "Native TaskTicket ownership persists after uncertain UI settlement until authenticated provider terminal/quiescence and owner-generation cleanup."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L3\",\"kind\":\"opaque-runtime\",\"logicalTraits\":[\"Affine\",\"Opaque\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"opaque-token\",\"graphPayloadEligible\":false,\"ownershipClass\":\"runtime-affine\",\"portableCarrier\":\"no-portable-serialization\",\"ruleIds\":[\"CR11/TaskTicket/not-Graph-payload\",\"T9/TaskTicket/native-ownership\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"TaskTicket is an opaque affine runtime operation identity without source constructor, Copy, portable serialization or transferable Graph payload.\",\"ruleId\":\"CR11/TaskTicket/not-Graph-payload\"},{\"definition\":\"Native TaskTicket ownership persists after uncertain UI settlement until authenticated provider terminal/quiescence and owner-generation cleanup.\",\"ruleId\":\"T9/TaskTicket/native-ownership\"}],\"typeArity\":0,\"typeId\":\"aui.core/TaskTicket\"}",
+      "canonicalByteLength": 867,
+      "expectedCandidateSha256": "cb5de0dce44391b5e37a5c923c2d8b538ddaf6004c1bba26182f3f1db80a5c54"
+    },
+    {
+      "typeId": "aui.core/U32",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/U32",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "typed-json-u32",
+          "ownershipClass": "immutable-copy",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR12/U32/exact-integer",
+            "CR2/U32/unsigned-32"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/U32/exact-integer",
+            "definition": "Typed JSON U32 is a canonical nonnegative integer token 0..4294967295, without fraction, exponent, leading zeros or negative zero."
+          },
+          {
+            "ruleId": "CR2/U32/unsigned-32",
+            "definition": "U32 is exactly unsigned integers 0..4294967295 without negatives, saturation, widening or implicit conversions."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"scalar\",\"graphPayloadEligible\":true,\"ownershipClass\":\"immutable-copy\",\"portableCarrier\":\"typed-json-u32\",\"ruleIds\":[\"CR12/U32/exact-integer\",\"CR2/U32/unsigned-32\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"Typed JSON U32 is a canonical nonnegative integer token 0..4294967295, without fraction, exponent, leading zeros or negative zero.\",\"ruleId\":\"CR12/U32/exact-integer\"},{\"definition\":\"U32 is exactly unsigned integers 0..4294967295 without negatives, saturation, widening or implicit conversions.\",\"ruleId\":\"CR2/U32/unsigned-32\"}],\"typeArity\":0,\"typeId\":\"aui.core/U32\"}",
+      "canonicalByteLength": 752,
+      "expectedCandidateSha256": "69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c"
+    },
+    {
+      "typeId": "aui.core/U64",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/U64",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L4",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "typed-json-u64-decimal-string",
+          "ownershipClass": "immutable-copy",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR12/U64/string-without-float",
+            "CR2/U64/unsigned-64"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/U64/string-without-float",
+            "definition": "Typed JSON U64 is canonical unsigned decimal string 0 or a nonzero-leading digit sequence; signs, whitespace, exponent, JSON numeric tokens and overflow reject."
+          },
+          {
+            "ruleId": "CR2/U64/unsigned-64",
+            "definition": "U64 is exactly unsigned integers 0..18446744073709551615, not a floating-point approximation."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L4\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"scalar\",\"graphPayloadEligible\":true,\"ownershipClass\":\"immutable-copy\",\"portableCarrier\":\"typed-json-u64-decimal-string\",\"ruleIds\":[\"CR12/U64/string-without-float\",\"CR2/U64/unsigned-64\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"Typed JSON U64 is canonical unsigned decimal string 0 or a nonzero-leading digit sequence; signs, whitespace, exponent, JSON numeric tokens and overflow reject.\",\"ruleId\":\"CR12/U64/string-without-float\"},{\"definition\":\"U64 is exactly unsigned integers 0..18446744073709551615, not a floating-point approximation.\",\"ruleId\":\"CR2/U64/unsigned-64\"}],\"typeArity\":0,\"typeId\":\"aui.core/U64\"}",
+      "canonicalByteLength": 790,
+      "expectedCandidateSha256": "24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf"
+    },
+    {
+      "typeId": "aui.core/Unit",
+      "ruleCount": 2,
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/Unit",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "deferred-typed-payload",
+          "ownershipClass": "immutable-copy",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR12/Unit/not-null-native-pointer",
+            "CR2/Unit/single-value"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR12/Unit/not-null-native-pointer",
+            "definition": "Unit is a typed no-payload logical value, not native null pointer, uninitialized memory, cancellation token or runtime authorization."
+          },
+          {
+            "ruleId": "CR2/Unit/single-value",
+            "definition": "Unit has exactly one zero-payload inhabitant; no implicit null, missing field, boolean or provider success state."
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"featureGate\":\"L0/L1\",\"kind\":\"scalar\",\"logicalTraits\":[\"Copy\",\"Immutable\",\"Send\"],\"packageId\":\"aui.core\",\"semanticModel\":{\"category\":\"scalar\",\"graphPayloadEligible\":true,\"ownershipClass\":\"immutable-copy\",\"portableCarrier\":\"deferred-typed-payload\",\"ruleIds\":[\"CR12/Unit/not-null-native-pointer\",\"CR2/Unit/single-value\"],\"typeParameters\":[],\"variants\":[]},\"semanticRules\":[{\"definition\":\"Unit is a typed no-payload logical value, not native null pointer, uninitialized memory, cancellation token or runtime authorization.\",\"ruleId\":\"CR12/Unit/not-null-native-pointer\"},{\"definition\":\"Unit has exactly one zero-payload inhabitant; no implicit null, missing field, boolean or provider success state.\",\"ruleId\":\"CR2/Unit/single-value\"}],\"typeArity\":0,\"typeId\":\"aui.core/Unit\"}",
+      "canonicalByteLength": 792,
+      "expectedCandidateSha256": "2b9ff7842b7bb5265f2e54c26404c54c36d6f7d674380adbd58ace99d9125194"
+    }
+  ],
+  "fingerprintVector": {
+    "projection": {
+      "registryId": "aui.core/canonical-candidate",
+      "entries": [
+        {
+          "typeId": "aui.core/Bool",
+          "contractDigest": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572"
+        },
+        {
+          "typeId": "aui.core/Bytes",
+          "contractDigest": "6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286"
+        },
+        {
+          "typeId": "aui.core/Event",
+          "contractDigest": "f43362526e47b589d3d816d95caf4b2928a3558e1fcc1f1620fb9f458a5203c8"
+        },
+        {
+          "typeId": "aui.core/F64",
+          "contractDigest": "642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e"
+        },
+        {
+          "typeId": "aui.core/List",
+          "contractDigest": "32a2d7fd4a1e49447c9a759fab260142acfbc21b3d27b91116c301cd5f2ab68d"
+        },
+        {
+          "typeId": "aui.core/Result",
+          "contractDigest": "7f97bafe4ffb01c3702d7eec842402ba8151762a675b157225c25a6cc0dfa0c0"
+        },
+        {
+          "typeId": "aui.core/StableKey",
+          "contractDigest": "d4d316d15751391fbb83276a56d5636941838309726f32ba12c0f4c1a5d92f7f"
+        },
+        {
+          "typeId": "aui.core/StateRevision",
+          "contractDigest": "bdcb71b565da24ab2b538de52a995ec22bce5bf8d65f0096eabb1f19451d26f0"
+        },
+        {
+          "typeId": "aui.core/String",
+          "contractDigest": "1e44e691d2d9a21ca827c5f4ca20cd01993421e0ab95695e06a845abc9c4faf4"
+        },
+        {
+          "typeId": "aui.core/TaskOutcome",
+          "contractDigest": "dc5feba8e29f17792a348e5b92943f3ee6efdbc4be0738901f5757cfc323ca66"
+        },
+        {
+          "typeId": "aui.core/TaskSlot",
+          "contractDigest": "947214e53ca95b0dc2c0cf4213191a42ee3fcfc4445162f29caf5107aae39f66"
+        },
+        {
+          "typeId": "aui.core/TaskTicket",
+          "contractDigest": "cb5de0dce44391b5e37a5c923c2d8b538ddaf6004c1bba26182f3f1db80a5c54"
+        },
+        {
+          "typeId": "aui.core/U32",
+          "contractDigest": "69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c"
+        },
+        {
+          "typeId": "aui.core/U64",
+          "contractDigest": "24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf"
+        },
+        {
+          "typeId": "aui.core/Unit",
+          "contractDigest": "2b9ff7842b7bb5265f2e54c26404c54c36d6f7d674380adbd58ace99d9125194"
+        }
+      ]
+    },
+    "canonicalUtf8": "{\"entries\":[{\"contractDigest\":\"8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572\",\"typeId\":\"aui.core/Bool\"},{\"contractDigest\":\"6205f99207447a15741e732591be9d1904aa7fc1bf3471011b1c9cadce420286\",\"typeId\":\"aui.core/Bytes\"},{\"contractDigest\":\"f43362526e47b589d3d816d95caf4b2928a3558e1fcc1f1620fb9f458a5203c8\",\"typeId\":\"aui.core/Event\"},{\"contractDigest\":\"642482fad84796cbbebf0b75c13c55be132922722e92d74d5c2d18c8b5665e3e\",\"typeId\":\"aui.core/F64\"},{\"contractDigest\":\"32a2d7fd4a1e49447c9a759fab260142acfbc21b3d27b91116c301cd5f2ab68d\",\"typeId\":\"aui.core/List\"},{\"contractDigest\":\"7f97bafe4ffb01c3702d7eec842402ba8151762a675b157225c25a6cc0dfa0c0\",\"typeId\":\"aui.core/Result\"},{\"contractDigest\":\"d4d316d15751391fbb83276a56d5636941838309726f32ba12c0f4c1a5d92f7f\",\"typeId\":\"aui.core/StableKey\"},{\"contractDigest\":\"bdcb71b565da24ab2b538de52a995ec22bce5bf8d65f0096eabb1f19451d26f0\",\"typeId\":\"aui.core/StateRevision\"},{\"contractDigest\":\"1e44e691d2d9a21ca827c5f4ca20cd01993421e0ab95695e06a845abc9c4faf4\",\"typeId\":\"aui.core/String\"},{\"contractDigest\":\"dc5feba8e29f17792a348e5b92943f3ee6efdbc4be0738901f5757cfc323ca66\",\"typeId\":\"aui.core/TaskOutcome\"},{\"contractDigest\":\"947214e53ca95b0dc2c0cf4213191a42ee3fcfc4445162f29caf5107aae39f66\",\"typeId\":\"aui.core/TaskSlot\"},{\"contractDigest\":\"cb5de0dce44391b5e37a5c923c2d8b538ddaf6004c1bba26182f3f1db80a5c54\",\"typeId\":\"aui.core/TaskTicket\"},{\"contractDigest\":\"69823a707d558a5f0c6c9b346ab010dd634a2b8dc9d7566a6c7452a04350838c\",\"typeId\":\"aui.core/U32\"},{\"contractDigest\":\"24b55c1e494335a938c356352cc29725c56e7e1d64a98d74b5976055a86c98cf\",\"typeId\":\"aui.core/U64\"},{\"contractDigest\":\"2b9ff7842b7bb5265f2e54c26404c54c36d6f7d674380adbd58ace99d9125194\",\"typeId\":\"aui.core/Unit\"}],\"registryId\":\"aui.core/canonical-candidate\"}",
+    "canonicalByteLength": 1756,
+    "expectedCandidateFingerprintSha256": "cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1"
+  },
+  "ruleContentMutation": {
+    "typeId": "aui.core/Bool",
+    "ruleId": "CR2/Bool/two-values",
+    "mutation": "Append [UNAPPROVED VALUE CHANGE] to rule definition but keep ruleId",
+    "originalTypeCandidateSha256": "8ed27bd491da60bfda5d2728682f7695d1f53414133b3a108d8894bf2673c572",
+    "mutatedTypeCandidateSha256": "c7a85ffdd6bf474da09dc125cb9091a0d9951ac9d86bab22d6dd0e36b0666094",
+    "originalFingerprintCandidateSha256": "cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1",
+    "mutatedFingerprintCandidateSha256": "9f70f9a8b675927efe790de234e6b3ef91fd0b7bb22b55bf151c04190dfb2354"
+  }
+}
