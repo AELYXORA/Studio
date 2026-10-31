@@ -1,0 +1,315 @@
+{
+  "format": "aui.enum-generic-value-review-cases",
+  "status": "PROPOSED / all cases NOT-RUN; neither native compiler nor verified public registry executes them",
+  "owner": "docs/architecture/aui-types-and-ownership.md",
+  "constraints": {
+    "maxGenericDepth": 8,
+    "maxTypeReferenceNodes": 128,
+    "enumVariantOrder": "authored-order",
+    "enumPayload": "zero-or-one",
+    "enumMatch": "exhaustive-pure-L2+",
+    "runtime": "D4 ABI and D5 remain unqualified"
+  },
+  "sourceFiles": {
+    "payload": "sensor-contract-payload.aui",
+    "match": "sensor-status-enum-match-l2.aui",
+    "generic": "nested-generic-type-l2.aui"
+  },
+  "notes": [
+    "source-accept/syntax-accept means candidate parse semantics only, not public export or runtime proof",
+    "mutation prose is not an immutable golden file and cannot be marked PASS until materialized and executed",
+    "enum logical identity must not use native numeric tag encoding",
+    "generic schema recursion does not prove type contract digest, Send trait, transport, ownership or ABI",
+    "no new core inventory entries are introduced"
+  ],
+  "cases": [
+    {
+      "id": "EG-01",
+      "base": "sensor-contract-payload.aui",
+      "expected": "syntax-accept",
+      "mutation": "NoReading zero-payload and BadReading(Measurement) one-payload declaration",
+      "reason": "Valid structural enum source; export digest still UNVERIFIED",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-02",
+      "base": "sensor-contract-payload.aui",
+      "expected": "syntax-reject",
+      "mutation": "Duplicate BadReading enum variant",
+      "reason": "Duplicate normalized names forbidden",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-03",
+      "base": "sensor-contract-payload.aui",
+      "expected": "syntax-reject",
+      "mutation": "Remove all enum variants",
+      "reason": "Empty closed enum forbidden",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-04",
+      "base": "sensor-contract-payload.aui",
+      "expected": "semantic-reject",
+      "mutation": "Add recursive direct BadReading(SensorError) by-value payload",
+      "reason": "Unbounded type-definition dependency cycle",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-05",
+      "base": "sensor-contract-payload.aui",
+      "expected": "semantic-reject",
+      "mutation": "Rename BadReading to NFC-equivalent spelling of another variant",
+      "reason": "Same normalized owner namespace must reject",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-06",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "source-accept",
+      "mutation": "Complete L2 pure match over known SensorError with all two cases",
+      "reason": "Grammar/type design only; no real parser or verified export",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-07",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Remove NoReading match arm",
+      "reason": "Nonexhaustive enum match",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-08",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Duplicate BadReading arm",
+      "reason": "Exactly one arm per case",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-09",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Switch branch enum qualifier to unrelated enum",
+      "reason": "Match scrutinee type must match enum TypeReference",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-10",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Add payload binder to NoReading branch",
+      "reason": "Zero-payload variant forbids binder",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-11",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Remove payload binder from BadReading branch",
+      "reason": "Payload-bearing case binds exactly one immutable symbol",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-12",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Access reading binder outside BadReading arm",
+      "reason": "Binder arm scope is closed",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-13",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Return U32 for one arm and String for another",
+      "reason": "All pure arm results have same exact logical type",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-14",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use effectful SensorReader.Read() in pure enum branch",
+      "reason": "Pure match cannot call native provider",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-15",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Treat arbitrary property error.NoReading as zero-payload enum constructor",
+      "reason": "Only declared qualified enum type and variant may construct",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-16",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "profile-reject",
+      "mutation": "Compile matchEnum(value: error) under L1",
+      "reason": "L2+ pure match syntax only",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-17",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use BadReading without required value: argument in constructor",
+      "reason": "Missing exact typed payload",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-18",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use NoReading(value: 42) constructor",
+      "reason": "Unexpected payload",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-19",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Constructor BadReading(value: String) when declared Measurement",
+      "reason": "No implicit conversion",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-20",
+      "base": "sensor-status-enum-match-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use enum constructor where verified public enum export unavailable",
+      "reason": "Source-only may inspect; linked/native must reject",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-21",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "syntax-accept",
+      "mutation": "Parse nested List<Result<Measurement,SensorError>> TypeReference",
+      "reason": "Recursive canonical TypeReference syntax only; semantic instantiation review pending",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-22",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use List with two type arguments",
+      "reason": "Declared arity 1",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-23",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use Result with one type argument",
+      "reason": "Declared arity 2",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-24",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Nest generic application to ninth depth along one path",
+      "reason": "Depth >8",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-25",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Construct TypeReference with 129 total nodes",
+      "reason": "Node budget >128",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-26",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Create cyclic public type definitions via nested List<Record>",
+      "reason": "Unreviewed recursive type dependencies blocked",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-27",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Nest TaskSlot<T,E> within portable List and pass as Graph dataFlow payload",
+      "reason": "Opaque TaskSlot cannot be transported",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-28",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Nest TaskTicket in persisted enum payload",
+      "reason": "Opaque native runtime ticket not portable",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-29",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Use exact 64-character placeholder digest instead of resolved template identity",
+      "reason": "Shape is not verified trust",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-30",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Treat List<Measurement> and List<SensorError> as same generic instance",
+      "reason": "Ordered nested TypeReference identity differs",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-31",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Swap ordered Result<T,E> args",
+      "reason": "Success and error order is semantic",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-32",
+      "base": "nested-generic-type-l2.aui",
+      "expected": "semantic-reject",
+      "mutation": "Assume outer List<T> automatically provides Send or Copy for non-Send inner argument",
+      "reason": "Conditional traits checked recursively",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-33",
+      "base": "sensor-contract-payload.aui",
+      "expected": "semantic-different",
+      "mutation": "Swap enum variant declaration order",
+      "reason": "Public logical enum semantics and candidate digest change",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-34",
+      "base": "sensor-contract-payload.aui",
+      "expected": "semantic-different",
+      "mutation": "Change zero-payload NoReading to NoReading(Unit)",
+      "reason": "Absent payload and Unit are distinct",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-35",
+      "base": "sensor-contract-payload.aui",
+      "expected": "semantic-reject",
+      "mutation": "Encode a native numeric tag as the public enum value",
+      "reason": "Target layout cannot replace logical variant identity",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "EG-36",
+      "base": "sensor-contract-payload.aui",
+      "expected": "semantic-reject",
+      "mutation": "Serialize arbitrary JSON payload not matching verified type-specific portable codec",
+      "reason": "Typed value construction and codec gate required",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
