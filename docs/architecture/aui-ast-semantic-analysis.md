@@ -96,3 +96,39 @@ The source grammar still lacks fully defined event wiring, generic constraint sy
 ## L4 source scope and TypedHIR candidate
 
 [L4 Dynamic View Contract](d3-keyed-dynamic-view-lifecycle.md) adds a typed ForEach AST with List<T>, one immutable StableKey field, a lexical item scope and a stable TemplateSymbolID, lowered to a tagged keyed-child template in TypedHIR. Child positions and source spans are not persistent or runtime identity. The [source-link bundle schema](../../schemas/aui-source-link-bundle.schema.json) requires L4 templateSymbols for L4 sources, but semantic verification against the pinned core registry and approved source remains mandatory. A duplicate live sibling key fails AUI_KEY_DUPLICATE before reconciliation; runtime native outcomes are NOT-RUN.
+
+
+## Full-production TypedHIR closure and compiler-stage verifiers — design candidate
+
+**Purpose:** implement the [complete AUI compiler PC0–PC8](aui-compiler.md) rather than treating the L0/L1 TypedHIR example as its final intermediate format. Existing compiler-local AST IDs and original byte spans remain nonpersistent. Every profile's source constructs must be represented with an **explicit typed node and verifier**, not ignored as syntax understood only by the editor. The following records are the **logical compiler contract**, not a frozen Assembly in-memory field-offset ABI or a new Project Graph.
+
+| Semantic node family | Required logical fields | Verifier / required lowering |
+| --- | --- | --- |
+| Module/Import | source SHA, selected profile, locked package ID/version, verified public export set, complete source spans | All dependencies exact and offline, type namespace unambiguous; source-only review catalogue yields UNVERIFIED, never graph link |
+| Record/Enum/Service | declared public TypeID/field order/variant payload or provider operation interface, export digest and visibility | Missing full reviewed source grammar/export policy blocks shipping compiler support rather than auto-generating a guess |
+| Component/ViewTemplate | source stable symbol, target-independent visual constructor, ordered typed args, ordered children/modifiers, full type/effect/capability evidence | View child static order preserved; no runtime GraphNodeID fabricated from source line |
+| StateSlot / DerivedNode | owner/generation/source-stable declaration ID, TypeReference, initialization, full typed pure-read dependency list | L2 DAG/topological evaluation; no state mutation from pure expression or uninitialized bound property |
+| BindingEdge / Commit | qualified static View target, one source writer, pure conversion identity, candidate/new StateRevision, success/rollback | No duplicate writers, invalid binding target or partial visible commit |
+| EventConnection / Handler | originating View identity/event TypeReference, local destination symbol, binder lifetime, request or commit action | Exact L1 owner/event signature, one accepted handler, bounded reentrancy and admitted effect path |
+| TaskDeclaration / TaskSlot | task signature/domain/awaited command, Result<T,E>, slot's same ordered T/E and UI owner/generation | L3 taskSlot **must be declared explicitly**; one in-flight ticket/slot and verified lifetime, never serialize native TaskTicket |
+| SettledHandler / OutcomeMatch | source slot reference, TaskOutcome<T,E>, all five ordered arms, immutable payload binder scope, one commit/arm | Five-case exhaustiveness, no duplicate branch, no user-forged runtime-control result |
+| KeyedForEachTemplate | immutable List<T> input, approved StableKey record field, source template ID, full keyed parent scope, one typed child view | L4 nested template, duplicate keys and invalid item access reject; no positional identity fallback |
+| CommandIntent / GraphLinkedOperation | exact OperationID, ordered named typed inputs/result/error, effects/domain/target/capability, link proof identity | Source-only is UNVERIFIED; verified D2/D6 Graph+lock+signed review required before native dispatch |
+| OwnershipLifetime | immutable/owned/moved/borrowed value and region, async/cross-domain proof, drop/error/cancel path | Every reachable resource releases exactly once under its approved contract and no borrowed pointer escapes await |
+
+### Required static phase order and failure closure
+
+1. Profile-aware parse creates a complete CST and a typed AST candidate for the selected profile. **L0 rejects L1 declarations**; L1 rejects L2/3/4 etc. Unknown tokens or recovery cannot produce a successful HIR.
+2. Resolve exact source import namespace/Unicode symbols and all public type/generic closure. Public signatures need verified exports for graph-linked/native mode. An **unverified** source-only candidate must remain explicitly unlinked.
+3. Type every pure expression, record field access, view argument, modifier, state initialization, event attachment, task signature, status arm and keyed List item path. No implicit String/F64/U64 conversion, ownership coercion or invented helper calls.
+4. Verify reactive DAG/writers and transaction atomicity; task state machines and cancellation/uncertainty; keyed View identities, generation and bounded resources. Unknown required runtime service or exact ABI gate prevents target lowering.
+5. Resolve and verify source→ONE Canonical Project Graph, public operation/port payload, target capabilities and source/snapshot revision, then generate **GraphLinkedIR** with provenance. A source AST name alone can never become a trusted Graph ID.
+6. Lower to **OwnershipIR** with moves, immutable borrows, retains and all cleanup/error/terminal transitions. Run dominance/use-before-def and effect reordering verifiers on the target-neutral CFG.
+7. Specialize/inject only target-qualified runtime service imports, then produce LayoutIR/TargetMIR. The target backend checks signatures, stack, alignment, machine register liveness, native unwind, relocations and object semantics.
+8. Verify emitted object/linked module and produce build provenance; separately verify signatures/admission and stage publication.
+
+### Verifier completeness and serialization obligations
+
+For every node family define **before implementation** a closed internal node tag, full field types, input/output invariant, source origin, successor/predecessor relationships, ownership/deallocation rules, deterministic diagnostic code, serialization/format decision and invalidation dependency. A compiler pass MUST NOT silently drop an unknown tag in a forward/backward upgrade. New node tags require a new reviewed compiler IR contract, not a new project architecture. An IR walker must reject unknown enum discriminants, duplicate declaration IDs, impossible control-flow predecessors and unresolved graph symbols.
+
+The current existing L0/L1 [plan schema](../../schemas/aui-compiler-source-only-plan.schema.json) and expected JSON plans are **debug/inspection formats only**, not the full shipping TypedHIR, runtime interchange protocol or public ABI. Complete L2/L3/L4 IR record layout, cross-pass ownership, and target module evidence still require an accepted structural definition and target tests. **All such gates remain PROPOSED / NOT-RUN**.
