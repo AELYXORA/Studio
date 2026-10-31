@@ -69,3 +69,7 @@ A fully typed exported core-registry schema with public contract digest vectors,
 ## CR8. Proposed domain-separated public core contract digests
 
 [D2/D3/D6 Core Export Digest](d2-d3-core-export-digest-contract.md) defines the proposed aui.export-contract/v2-core whitelist and SHA-256 frame; [13 type hash vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json) give reference normalized bytes and a registry set fingerprint. Existing v1 record/component digests and source-profile compatibility are unaffected; no approved mixed v1-v2 type migration exists. Native String/List/StableKey/TaskOutcome layouts are separately specified as *proposed Win64 frames* in [D4](d4-win64-native-component-abi.md), not inferred from portable type digest values. No ABI/core runtime tests passed.
+
+## CR9. Logical Result versus native Win64 tagged envelope
+
+[Proposed Win64 Outcome Descriptor](d4-win64-module-and-result-descriptors.md) defines one 80-byte native *container* reused under an exact expected logical type identity: two provider Result cases and five distinct UI TaskOutcome cases. The same tag number without its verified expected TypeID is not sufficient to decode a payload. Failure before provider admission never manufactures a Result<T,E>. The native container is a D4 candidate, not part of the D3 exported-contract digest or an approved cross-platform value representation.
