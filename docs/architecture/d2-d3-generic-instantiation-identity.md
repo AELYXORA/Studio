@@ -1,5 +1,7 @@
 # D2/D3/D6 — Closed Generic Instantiation Identity (Candidate G1)
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED / OPEN.** This document is a *design* refinement of [core export v2](d2-d3-core-export-digest-contract.md), [D3 logical registry](d3-core-registry-value-contract.md), and [D6 canonical writer](d6-canonical-persistence.md). It does **not** modify the exportedContractDigest/v1 user-record/component format, existing snapshot hashes or the 13 previously calculated template digests. No native compiler/generic layout tests have run.
 
 ## GI1. Minimal profile and identity
