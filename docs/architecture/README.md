@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## First AUI compiler: implementation blueprint (proposed)
+
+The [first implementable AUI compiler architecture](aui-compiler-first-implementation-contract.md) now defines an Assembly-first **Windows x64 host candidate** with bounded D3 L0/L1 compiler passes P00–P06, exact source-only trust state, deterministic TypedHIR/static output, separate P07 verified Graph linkage and P08–P10 native Win64 emission gates. This is **Phase I design**, not compiler implementation or architect sign-off. [45 future compiler acceptance cases](../../examples/aui-compiler-first-slice/acceptance-cases.json), an explicit [provisional type catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json) and [source-only plan schema](../../schemas/aui-compiler-source-only-plan.schema.json) with an [expected L0 plan](../../examples/aui-compiler-first-slice/status-panel-l0.source-only-plan.expected.json) anchor the first coding milestone. The provisional type catalogue has no verified public export digests and cannot generate authorized executables.
+
 ## Current architectural owners and review
 
 Use [Canonical Project Graph and Components](canonical-project-graph-and-components.md) for **all** graph identity, semantics, typed exports, operations, workflows, dataFlows and resource claims; [first AUI language profile](d3-first-language-profile.md) for bounded initial syntax; [Graph ↔ AUI integration](project-graph-aui-contract.md) for source reconciliation; [D6 Persistence](d6-canonical-persistence.md) for proposed bytes and snapshot publication **subject to** the canonical graph; [Source Ownership](source-ownership.md) for edits; and [Design Completion Gates](design-completion-gates.md) for acceptance. These files do not create independently authoritative models.
