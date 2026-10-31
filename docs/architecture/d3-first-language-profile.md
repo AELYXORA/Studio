@@ -1,6 +1,6 @@
 # D3 — AUI Source Profile L0/L1, Formal Syntax and Static Semantics
 
-**Status: PROPOSED; not architect-accepted, implemented or compiler-tested.** This is a bounded first-slice profile of the broader [AUI Syntax](aui-syntax.md) and [AUI Language](aui-language.md), not a competing language. [Event Delivery](d3-event-delivery-and-command-linkage.md) owns event/command policy; [Type and Binding Rules](d3-type-and-binding-profile.md) owns type boundaries; [Graph ↔ AUI](project-graph-aui-contract.md) owns persistent identities. No native parser/compiler is being implemented during Phase I.
+**Status: PROPOSED; not architect-accepted, implemented or compiler-tested.** This is a bounded first-slice profile of the broader [AUI Syntax](aui-syntax.md) and [AUI Language](aui-language.md), not a competing language. [Event Delivery](d3-event-delivery-and-command-linkage.md) owns event/command policy; [Type and Binding Rules](d3-type-and-binding-profile.md) owns type boundaries; the [ONE Canonical Project Graph](canonical-project-graph-and-components.md) owns persistent identities, while [Graph ↔ AUI](project-graph-aui-contract.md) describes source linkage and reconciliation. No native parser/compiler is being implemented during Phase I.
 
 ## L0. Deliberately bounded feature sets
 
