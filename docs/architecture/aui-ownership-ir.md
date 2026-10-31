@@ -62,3 +62,7 @@ A design review must establish deterministic transfer functions, join semantics,
 ## L4 dynamic-view ownership gates (PROPOSED)
 
 [L4 Keyed Reconciliation](d3-keyed-dynamic-view-lifecycle.md) must not create a borrowed UI alias from a list item that escapes a valid owner region, Task await or scheduler boundary. A repeated source template owns separate runtime incarnations and result subscriptions per full keyed parent path. Removing/replacing a row marks its generation stale but leaves provider-owned DMA/OS resources attached to their actual D4 owner until safe completion. [D3/D4/D5 review](d3-d4-d5-lifecycle-consistency-review.md) lists mandatory target-native teardown and allocation-failure fixtures; no OwnershipIR implementation is claimed.
+
+## D3 core traits and D5 bounded ownership — PROPOSED
+
+[D3 Core Registry](d3-core-registry-value-contract.md) distinguishes logical immutable Copy from target-specific owned Send proof. List<T> is Send only if element type and its retained immutable owner are safe; String/StableKey/TaskOutcome retain selected payload lifetime, not raw StringView/OS pointers. [D4 Value ABI](d4-core-value-abi-contract.md) requires actual retain/release, callback drain, overflow-safe frame and generation ABA proof. [D5 root budget](d5-ui-resource-budget-and-publication.md) charges all retained events, results and detached owner metadata before transfer; it cannot free driver/DMA buffers merely on UI unmount. No native ownership verifier exists yet.
