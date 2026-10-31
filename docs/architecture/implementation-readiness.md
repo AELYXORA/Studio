@@ -21,6 +21,14 @@
 | AI provider authorization | Open and optional for first slice | Do not assume Plus supplies third-party API credentials |
 | Local evidence and tests | Defined methodology only | No committed executable validator, build scripts or observed native results |
 
+## Compiler-specific readiness — narrowed but not yet accepted
+
+The architect has requested to **finish documentation sufficient for building an AUI compiler**, not to implement it now. [The explicit first compiler contract](aui-compiler-first-implementation-contract.md) defines a separately reviewable native Assembly P00–P06 source-only compiler, then P07 verified graph linkage and P08–P10 Win64 backend/runtime gates. Its source-only outcome is a legitimate future intermediate engineering milestone, **not** the complete project implementation or a graph-approved executable. [45 design-only first compiler scenarios](../../examples/aui-compiler-first-slice/acceptance-cases.json) and an explicit unverified [frontend catalog](../../examples/aui-compiler-first-slice/review-type-catalog.json) anchor this plan.
+
+The earlier **G1 Graph validator + CLI round-trip** remains a required *linked/native product foundation*. It need not prevent designing and, once **explicitly approved** under Phase I rules, building a source-only AUI compiler frontend in parallel as an isolated bounded engineering slice; it **does** block any claim of P07 graph-linked/native compiler capability. No default exception to [the D1–D8 design gate](design-completion-gates.md) is inferred, and no implementation is authorized by this document.
+
+COMP-01–05 are compiler-front-end architecture decisions; COMP-06–08 remain linked/native dependencies. Record the architect's explicit approval before entering Phase II or conducting implementation experiments.
+
 ## Recommended host and first milestone
 
 Recommend **Windows x64** as the first Studio host only as a planning choice, not an architectural dependency. The host/target distinction is mandatory: the **sensor example targets Linux AArch64**, and Windows hosting does not imply it can execute the target binary. Treat initial sensor work as structural and semantic verification. Alternate hosts remain possible with the same project and component contracts.
