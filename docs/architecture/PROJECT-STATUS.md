@@ -52,6 +52,14 @@ The `coreRegistryFingerprint`, type-export-set and component public digests in t
 
 **New explicit P0:** document `ruleId` alone cannot serve as a public digest preimage — exact normative semantic rule content must be frozen/verified first. Typed error/control payload semantics and trusted constructors require D3/D4/D5 review. All gates stay OPEN; no production registry fingerprint, real golden hash, compiled ABI, signed approval or running Studio is claimed.
 
+## First AUI compiler architecture handoff — 2026-10-31
+
+A concrete [first implementation specification](aui-compiler-first-implementation-contract.md) has been added for the future native Assembly compiler: capture source, strict UTF-8/lexing, bounded L0/L1 parser, symbols/imports, type/property/event/effect verification, source-only TypedHIR/plan and diagnostics. Graph linkage, native Win64 code generation, signed execution and renderer remain **separate future gates**. [First compiler fixtures](../../examples/aui-compiler-first-slice/README.md) contain 45 **NOT-RUN** acceptance expectations, a non-executable provisional type catalogue and a manually authored expected L0 source-only plan bound to the unchanged 296-byte source.
+
+A limited independent **structural** check found the expected plan conforms to the new proposed schema subset, all twelve included source byte spans are within the reference file, and its v0/v1/v2 traversal corresponds to VStack/Text/Button. This is not evidence of a functioning AUI compiler, real typed Graph resolver, native backend or executable ABI.
+
+**First actual development approval still OPEN:** COMP-01–05 (host/toolchain decision, lexer Unicode/profile/budgets, provisional import catalogue policy, TypedHIR/static-plan format, accessibility/event/effect checks), plus explicit human in-scope D1–D8 Phase I sign-off or reviewed bounded authorization. COMP-06–08 (verified exports/lock, source-to-Graph approvals, Win64 ABI+runtime) remain prerequisites for linked/native output. No product code was added during this documentation task.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
