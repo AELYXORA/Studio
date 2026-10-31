@@ -151,6 +151,12 @@ Implement P00→P01 strict **ASCII-path lexical smoke** first, explicitly markin
 
 **Final judgement:** **SOURCE-ONLY COMPILER — DESIGN MOSTLY SPECIFIED / ACCEPTANCE OPEN; GRAPH-LINKED/NATIVE COMPILER — NOT READY.** The design now provides concrete handoff inputs and diagnostic fixtures, but it is not honest to label COMP-01..05 `ACCEPTED`, Phase II `AUTHORIZED`, or any compiler fixture `PASS` without the missing human decision and actual evidence.
 
+## Public enum/generic compiler gate (full production scope)
+
+The full compiler language now has a **proposed** `enum` constructor and pure exhaustive match, nested generic TypeReference tree support and clear logical-versus-native variant identity. D2 proposes a deterministic generated generic instance export ID derived from identity-only structural bytes, with the **public semantic digest separate**, and 5 candidate arithmetic vectors available for independent reproduction. [36 enum and nested generic cases](../../examples/aui-compiler-production/enum-generic-value-cases.json), including 3 materialized negative sources, remain NOT-RUN.
+
+Do **not** treat the nested TypeReference schema change as an authenticated core/export/ABI/trait approval. The 15 current core entries remain UNVERIFIED; enum payload portable codec, generic instance semantic rule digest, `@inst` namespace and public core/graph/ABI gating must be explicitly accepted before a production compiler can link or emit.
+
 ## Production AUI compiler readiness supersedes the partial frontend milestone — 2026-10-31
 
 **Clarified product goal:** the complete compiler is [AUI compiler PC0–PC8](aui-compiler.md), covering full approved L0–L4, public Record/Enum/Service contract compilation, verified one-Graph source operation link, Reactive/Async/Keyed/Ownership/Target MIR, actual native Win64 COFF/PE output, D4/D5 renderer and runtime linkage and signed reproducible build admission. [Full native acceptance matrix](../../examples/aui-compiler-production/complete-compiler-acceptance.json): **66 NOT-RUN cases**. [Production fixture readme](../../examples/aui-compiler-production/README.md) keeps native acceptance separate from the first 47+35 frontend design cases.
