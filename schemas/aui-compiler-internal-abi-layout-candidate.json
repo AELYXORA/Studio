@@ -1,0 +1,717 @@
+{
+  "format": "aui.internal-assembly-abi-layout-candidate",
+  "status": "PROPOSED-DESIGN-ONLY / NOT WIN64 ABI-TESTED / NO COMPILER CODE",
+  "owner": "docs/architecture/aui-compiler-internal-assembly-abi.md",
+  "target": {
+    "hostOS": "Windows",
+    "arch": "x86_64",
+    "endianness": "little",
+    "alignment": 8,
+    "compilerAsm": "LLVM/Clang integrated GAS proposal",
+    "publicD4AbiIndependent": true
+  },
+  "ref64": {
+    "byteOffsetBits": [
+      0,
+      31
+    ],
+    "arenaIndexBits": [
+      32,
+      47
+    ],
+    "arenaGenerationBits": [
+      48,
+      63
+    ],
+    "invalidZero": true,
+    "invalidZeroArenaIndex": true,
+    "invalidZeroGeneration": true,
+    "staleGenerationReject": true,
+    "generationWrapRetiresIndex": true
+  },
+  "structures": {
+    "Span16": {
+      "size": 16,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "baseRef",
+          "offset": 0,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "byteLength",
+          "offset": 8,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "elementSize",
+          "offset": 12,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "flags",
+          "offset": 14,
+          "size": 2,
+          "type": "u16"
+        }
+      ]
+    },
+    "CompilationContextV1": {
+      "size": 128,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "magic",
+          "offset": 0,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "abiMajor",
+          "offset": 4,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "abiMinor",
+          "offset": 6,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "structBytes",
+          "offset": 8,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "flags",
+          "offset": 12,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "compilationId",
+          "offset": 16,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "sourceSetRef",
+          "offset": 24,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "typeEnvRef",
+          "offset": 32,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "graphProofRef",
+          "offset": 40,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "targetConfigRef",
+          "offset": 48,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "arenaTableRef",
+          "offset": 56,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "diagnosticSinkRef",
+          "offset": 64,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "budgetRef",
+          "offset": 72,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "passLedgerRef",
+          "offset": 80,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "policyRef",
+          "offset": 88,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "trustState",
+          "offset": 96,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "lastVerifiedStage",
+          "offset": 100,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "contextGeneration",
+          "offset": 104,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "reserved0",
+          "offset": 112,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "reserved1",
+          "offset": 120,
+          "size": 8,
+          "type": "u64"
+        }
+      ]
+    },
+    "IRNodeHeaderV1": {
+      "size": 48,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "tag",
+          "offset": 0,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "flags",
+          "offset": 2,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "schemaMajor",
+          "offset": 4,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "reserved",
+          "offset": 6,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "recordBytes",
+          "offset": 8,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "sourceSpanIndex",
+          "offset": 12,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "nodeId",
+          "offset": 16,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "typeRef",
+          "offset": 24,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "originRef",
+          "offset": 32,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "payloadOffset",
+          "offset": 40,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "payloadBytes",
+          "offset": 44,
+          "size": 4,
+          "type": "u32"
+        }
+      ]
+    },
+    "SourceSpanV1": {
+      "size": 32,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "sourceUnitId",
+          "offset": 0,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "startByte",
+          "offset": 8,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "endByte",
+          "offset": 16,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "parentSpanIndex",
+          "offset": 24,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "flags",
+          "offset": 28,
+          "size": 4,
+          "type": "u32"
+        }
+      ]
+    },
+    "CFGBlockV1": {
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "blockId",
+          "offset": 0,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "paramSpanRef",
+          "offset": 8,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "instructionSpanRef",
+          "offset": 16,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "terminatorRef",
+          "offset": 24,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "predecessorSpanRef",
+          "offset": 32,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "originRef",
+          "offset": 40,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "flags",
+          "offset": 48,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "regionIndex",
+          "offset": 52,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "reserved",
+          "offset": 56,
+          "size": 8,
+          "type": "u64"
+        }
+      ]
+    },
+    "SSAValueV1": {
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "valueId",
+          "offset": 0,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "typeRef",
+          "offset": 8,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "ownerRef",
+          "offset": 16,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "originRef",
+          "offset": 24,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "definingBlockId",
+          "offset": 32,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "definingInstructionId",
+          "offset": 40,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "ownershipKind",
+          "offset": 48,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "regionIndex",
+          "offset": 52,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "flags",
+          "offset": 56,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "reserved",
+          "offset": 60,
+          "size": 4,
+          "type": "u32"
+        }
+      ]
+    },
+    "OwnerRecordV1": {
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "ownerId",
+          "offset": 0,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "typeRef",
+          "offset": 8,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "allocationOriginRef",
+          "offset": 16,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "regionId",
+          "offset": 24,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "ownerGeneration",
+          "offset": 32,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "capabilityEvidenceRef",
+          "offset": 40,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "traitMask",
+          "offset": 48,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "domain",
+          "offset": 52,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "flags",
+          "offset": 54,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "reserved",
+          "offset": 56,
+          "size": 8,
+          "type": "u64"
+        }
+      ]
+    },
+    "EffectRecordV1": {
+      "size": 48,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "effectId",
+          "offset": 0,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "parentEffectId",
+          "offset": 8,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "originRef",
+          "offset": 16,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "lane",
+          "offset": 24,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "ordinal",
+          "offset": 28,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "transition",
+          "offset": 32,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "flags",
+          "offset": 36,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "reserved",
+          "offset": 40,
+          "size": 8,
+          "type": "u64"
+        }
+      ]
+    },
+    "PassRequestV1": {
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "requestBytes",
+          "offset": 0,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "abiMajor",
+          "offset": 4,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "abiMinor",
+          "offset": 6,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "passId",
+          "offset": 8,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "flags",
+          "offset": 12,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "expectedContextGeneration",
+          "offset": 16,
+          "size": 8,
+          "type": "u64"
+        },
+        {
+          "field": "inputArtifactRef",
+          "offset": 24,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "inputProofRef",
+          "offset": 32,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "optionsRef",
+          "offset": 40,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "diagnosticBudgetRef",
+          "offset": 48,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "reserved",
+          "offset": 56,
+          "size": 8,
+          "type": "u64"
+        }
+      ]
+    },
+    "PassReplyV1": {
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "field": "replyBytes",
+          "offset": 0,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "abiMajor",
+          "offset": 4,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "abiMinor",
+          "offset": 6,
+          "size": 2,
+          "type": "u16"
+        },
+        {
+          "field": "status",
+          "offset": 8,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "lastVerifiedStage",
+          "offset": 12,
+          "size": 4,
+          "type": "u32"
+        },
+        {
+          "field": "outputArtifactRef",
+          "offset": 16,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "outputProofRef",
+          "offset": 24,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "diagnosticsSpanRef",
+          "offset": 32,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "outputArenaLeaseRef",
+          "offset": 40,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "inputArtifactDigestRef",
+          "offset": 48,
+          "size": 8,
+          "type": "Ref64"
+        },
+        {
+          "field": "reserved",
+          "offset": 56,
+          "size": 8,
+          "type": "u64"
+        }
+      ]
+    }
+  },
+  "resourceLimits": {
+    "sourceSetTotalBytes": 67108864,
+    "sourceUnitMaximumBytes": 16777216,
+    "sourceUnitMaximumCount": 4096,
+    "tokenMaximumCount": 2000000,
+    "combinedNodeMaximumCount": 1000000,
+    "ssaValueAndEffectTokenMaximum": 2000000,
+    "cfgBlockMaximum": 250000,
+    "cfgInstructionMaximum": 4000000,
+    "cfgEdgeMaximum": 1000000,
+    "cfgBlockPredecessorMaximum": 16384,
+    "sourceSpanMaximumCount": 2000000,
+    "genericNestingMaximum": 8,
+    "typeRefNodeMaximum": 128,
+    "globalArenaMemoryMaximumBytes": 536870912,
+    "singleArenaCommittedMaximumBytes": 134217728,
+    "perPassScratchMaximumBytes": 67108864,
+    "diagnosticMaximumCount": 1000,
+    "diagnosticMessageMaximumBytes": 4096,
+    "abstractStepMaximumCount": 100000000
+  },
+  "requirements": [
+    "All structs are internal process-only; never persist pointers or proof handles",
+    "Do not interpret reserved bits without reviewed new version",
+    "No trust promotion from any numeric trustState flag or user JSON",
+    "All failures discard mutable output arenas and preserve previous sealed input/output",
+    "All derived proof inputs must be independently authenticated by D2/D3/D6 before T2",
+    "Node header does not freeze per-tag variant payload schema; still P0"
+  ]
+}
