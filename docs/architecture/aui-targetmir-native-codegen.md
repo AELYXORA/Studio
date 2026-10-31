@@ -92,6 +92,14 @@ The [complete AUI compiler](aui-compiler.md) cannot be called a production compi
 
 **Optimizer rule:** semantic correctness at O0 is the minimum. Each optional O1+ pass is independently enabled only after proving ownership/effect/dataflow-preserving transformations; no pass moves ordered UI event, volatile/IRQ/MMIO or task quiescence/cleanup effects. A failed optimization falls back only to a **verified semantics-equivalent** prior IR when the source/Graph/target trust remains valid; a failed trust gate is never repaired by optimizer fallback.
 
+### User-enum and nested generic ABI admission — required before native full-compiler release
+
+A public AUI enum becomes a native value **only after** verified TypeReference/variant definition, portable codec or explicit nonportable local use, target ABI and error/ownership service qualification. TargetMIR must receive `EnumLayout{exactPublicTypeRef,tagEncoding,orderedVariantToTagMap,payloadLayouts,overallSize,alignment,moveDropTraits,callingConvention}` (conceptual contract; exact descriptor struct bytes still D4 P0). Its verifier rejects missing/overlapping case tags, invalid padding/size, unaligned payload, uninitialized payload storage, impossible exhaustive switch, missing drop on unused case, wrong pass-by-register/indirect ABI and unverified native providers.
+
+For `EnumMatch`, generate one scrutinee evaluation, one **exhaustive** branch per public variant (not a guessed default arm) and typed payload binder/cleanup edges. Preserve the original AUI source span and Graph/type provenance through each native basic block and unwind edge. A native tag number is never an authored source/API value or a public enum semantic digest input. A variant reorder changes the type identity and must invalidate ABI/type evidence even if physical layout happens to match.
+
+A nested generic `List<Result<Measurement,SensorError>>` needs a **fully admitted template/argument layout and ownership/send/drop support inside-out**, and an authenticated operation/Graph source contract if it crosses module/provider boundaries. A structurally valid recursive TypeReference or D2 identity-only `@inst` ID is not proof of a binary layout. Unsupported generic ABI or transport => explicit target error; no opaque pointer shape fallback, erased generics guess or JSON interpreter substitution.
+
 ### Required actual native conformance matrix (NOT-RUN)
 
 | Case | Evidence before claiming the target supported |
