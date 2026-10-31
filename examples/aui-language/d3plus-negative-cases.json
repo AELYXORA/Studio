@@ -1,0 +1,260 @@
+{
+  "format": "aui.d3plus-negative-cases",
+  "status": "DOCUMENTATION GOLDENS ONLY — AELYXORA compiler/runtime/native tests NOT-RUN",
+  "profiles": [
+    "aui.source/l2-state/v1",
+    "aui.source/l3-async/v1"
+  ],
+  "fixtureSources": {
+    "L2": "feedback-panel-l2.aui",
+    "L3": "review-panel-l3.aui"
+  },
+  "policy": "All substitutions begin from fresh baseline and are byte-exact. Static invalid cases are evaluated under their selected L2/L3 profile with approved core registry assumed; review-only/operational cases require a distinct harness and MUST NOT be presented as compile-time failures.",
+  "cases": [
+    {
+      "id": "L2-01",
+      "profile": "L2",
+      "search": "state status: String = \"Ready\";",
+      "replace": "state status: String = 42;",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "static-type"
+    },
+    {
+      "id": "L2-02",
+      "profile": "L2",
+      "search": "derived visibleStatus: String = status;",
+      "replace": "derived visibleStatus: String = visibleStatus;",
+      "expected": "AUI_BIND_CYCLE",
+      "stage": "dependency"
+    },
+    {
+      "id": "L2-03",
+      "profile": "L2",
+      "search": "bind view.statusLabel.value <- visibleStatus;",
+      "replace": "bind view.missingLabel.value <- visibleStatus;",
+      "expected": "AUI_BIND_TARGET_UNKNOWN",
+      "stage": "binding"
+    },
+    {
+      "id": "L2-04",
+      "profile": "L2",
+      "search": "bind view.statusLabel.value <- visibleStatus;",
+      "replace": "bind view.statusLabel.readonly <- visibleStatus;",
+      "expected": "AUI_BIND_READONLY",
+      "stage": "binding"
+    },
+    {
+      "id": "L2-05",
+      "profile": "L2",
+      "search": "Text().key(value: statusLabel)",
+      "replace": "Text(value: status).key(value: statusLabel)",
+      "expected": "AUI_BIND_WRITER_CONFLICT",
+      "stage": "binding"
+    },
+    {
+      "id": "L2-06",
+      "profile": "L2",
+      "search": "bind view.statusLabel.value <- visibleStatus;",
+      "replace": "bind view.statusLabel.value <- visibleStatus;\n  bind view.statusLabel.value <- visibleStatus;",
+      "expected": "AUI_BIND_WRITER_CONFLICT",
+      "stage": "binding"
+    },
+    {
+      "id": "L2-07",
+      "profile": "L2",
+      "search": "set status = \"Activated\";",
+      "replace": "set status = \"Activated\";\n      set status = \"Again\";",
+      "expected": "AUI_STATE_DUPLICATE_WRITE",
+      "stage": "state-commit"
+    },
+    {
+      "id": "L2-08",
+      "profile": "L2",
+      "search": "set status = \"Activated\";",
+      "replace": "set status = true;",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "state-commit"
+    },
+    {
+      "id": "L2-09",
+      "profile": "L2",
+      "search": "Text().key(value: statusLabel)",
+      "replace": "Text().key(value: statusLabel)\n    Text().key(value: statusLabel)",
+      "expected": "AUI_IDENTITY_DUPLICATE",
+      "stage": "identity"
+    },
+    {
+      "id": "L2-10",
+      "profile": "L2",
+      "search": "derived visibleStatus: String = status;",
+      "replace": "derived visibleStatus: String = await status;",
+      "expected": "AUI_AWAIT_CONTEXT",
+      "stage": "purity"
+    },
+    {
+      "id": "L2-11",
+      "profile": "L2",
+      "search": "derived visibleStatus: String = status;",
+      "replace": "derived visibleStatus: String = send Accept();",
+      "expected": "AUI_ILLEGAL_EFFECT",
+      "stage": "purity"
+    },
+    {
+      "id": "L2-12",
+      "profile": "L2",
+      "search": "bind view.statusLabel.value <- visibleStatus;",
+      "replace": "bind view.statusLabel.value <- false;",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "binding"
+    },
+    {
+      "id": "L2-13",
+      "profile": "L2",
+      "search": "state status: String = \"Ready\";",
+      "replace": "state status: String = \"Ready\";\n  state status: String = \"Reset\";",
+      "expected": "AUI_DUPLICATE_SYMBOL",
+      "stage": "identity"
+    },
+    {
+      "id": "L3-01",
+      "profile": "L3",
+      "search": "let outcome = await Accept(tick: tick);",
+      "replace": "let outcome = await Missing(tick: tick);",
+      "expected": "AUI_UNRESOLVED",
+      "stage": "command-link"
+    },
+    {
+      "id": "L3-02",
+      "profile": "L3",
+      "search": "on io-worker {\n    let outcome = await",
+      "replace": "on ui {\n    let outcome = await",
+      "expected": "AUI_COMMAND_CONTRACT",
+      "stage": "domain"
+    },
+    {
+      "id": "L3-03",
+      "profile": "L3",
+      "search": "return outcome;",
+      "replace": "return \"ok\";",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "task-type"
+    },
+    {
+      "id": "L3-04",
+      "profile": "L3",
+      "search": "submit Refresh(tick: tick) as refreshSlot;",
+      "replace": "submit Missing(tick: tick) as refreshSlot;",
+      "expected": "AUI_UNRESOLVED",
+      "stage": "task"
+    },
+    {
+      "id": "L3-05",
+      "profile": "L3",
+      "search": "submit Refresh(tick: tick) as refreshSlot;",
+      "replace": "submit Refresh(tick: \"wrong\") as refreshSlot;",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "task"
+    },
+    {
+      "id": "L3-06",
+      "profile": "L3",
+      "search": "on settled refreshSlot(outcome)",
+      "replace": "on settled missingSlot(outcome)",
+      "expected": "AUI_UNRESOLVED",
+      "stage": "task-slot"
+    },
+    {
+      "id": "L3-07",
+      "profile": "L3",
+      "search": "ProviderUnavailable(reason) => commit { set status = \"Provider unavailable\"; }",
+      "replace": "",
+      "expected": "AUI_OUTCOME_NONEXHAUSTIVE",
+      "stage": "outcome-match"
+    },
+    {
+      "id": "L3-08",
+      "profile": "L3",
+      "search": "Failed(error) => commit { set status = \"Provider failed\"; }",
+      "replace": "Failed(error) => commit { set status = \"Provider failed\"; }\n      Failed(err2) => commit { set status = \"Again\"; }",
+      "expected": "AUI_OUTCOME_DUPLICATE",
+      "stage": "outcome-match"
+    },
+    {
+      "id": "L3-09",
+      "profile": "L3",
+      "search": "AdmissionRejected(reason) => commit { set status = \"Not admitted\"; }",
+      "replace": "AdmissionRejected(reason) => commit { set status = \"Succeeded\"; }",
+      "expected": "REVIEW_SEMANTIC_STATUS_MISLEADING",
+      "stage": "review-only"
+    },
+    {
+      "id": "L3-10",
+      "profile": "L3",
+      "search": "on settled refreshSlot(outcome)",
+      "replace": "on settled refreshSlot(outcome)",
+      "expected": "AUI_TASK_SLOT_BUSY",
+      "stage": "runtime-double-submit"
+    },
+    {
+      "id": "L3-11",
+      "profile": "L3",
+      "search": "return outcome;",
+      "replace": "return await Accept(tick: tick);",
+      "expected": "AUI_PROFILE_UNSUPPORTED",
+      "stage": "profile"
+    },
+    {
+      "id": "L3-12",
+      "profile": "L3",
+      "search": "Cancelled(confirmation) => commit { set status = \"Cancellation confirmed\"; }",
+      "replace": "Cancelled(confirmation) => commit { set status = \"Requested cancellation\"; }",
+      "expected": "REVIEW_CANCEL_SEMANTICS",
+      "stage": "review-only"
+    }
+  ],
+  "runtimeCases": [
+    {
+      "id": "L3-R01",
+      "event": "second submit while task slot active",
+      "expected": "AUI_TASK_SLOT_BUSY",
+      "invariant": "No duplicate dispatch"
+    },
+    {
+      "id": "L3-R02",
+      "event": "late completion to replaced view generation",
+      "expected": "AUI_TASK_STALE",
+      "invariant": "No new view mutation"
+    },
+    {
+      "id": "L3-R03",
+      "event": "cancel requested and provider completes successfully first",
+      "expected": "Successful",
+      "invariant": "No fabricated Cancelled"
+    },
+    {
+      "id": "L3-R04",
+      "event": "provider confirms quiescence before success",
+      "expected": "Cancelled",
+      "invariant": "Buffers released only after quiescence"
+    },
+    {
+      "id": "L3-R05",
+      "event": "UI state commit fails after provider succeeded",
+      "expected": "AUI_STATE_STALE",
+      "invariant": "No retry of provider external effect"
+    },
+    {
+      "id": "L3-R06",
+      "event": "result ingress queue full",
+      "expected": "bounded safe backpressure/rejection",
+      "invariant": "No unbounded retained results, no silent success"
+    },
+    {
+      "id": "L3-R07",
+      "event": "power loss after external effect",
+      "expected": "recovery without effect replay",
+      "invariant": "No exactly-once claim across crashes"
+    }
+  ],
+  "acceptance": "Future Phase III must run parser, type checker, OwnershipIR, graph link and runtime race harness with exact source spans and event counts. None has run here."
+}
