@@ -1,0 +1,66 @@
+{
+  "format": "aui.scoped-type-export-set-candidate-arithmetic",
+  "status": "REFERENCE ARITHMETIC ONLY / HASH INPUTS SYMBOLIC NOT VERIFIED / NOT-RUN BY AELYXORA",
+  "owner": "docs/architecture/d2-d6-public-contract-digest-pipeline.md",
+  "domainAscii": "AELYXORA/type-export-set/canonical",
+  "formula": "SHA256(ASCII(domainAscii) || 0x00 || D6 canonical UTF-8 JSON of projection)",
+  "verifiedArithmetic": "Python hashlib and OpenSSL SHA-256 independently agreed for each of the two exact preimages, 2026-10-31; this is NOT an AELYXORA implementation or public export approval.",
+  "cautions": [
+    "Input digests are repeated 64-hex ASCII letters a/b/c, deliberately synthetic and UNTRUSTED",
+    "These results are not coreRegistryFingerprint, package exportedTypeSetDigest, Graph typeExportSetDigest, approval signature or qualified native build",
+    "The same two export tuples deliberately yield different digests when scope+authority changes",
+    "Only a future verified 15-core/content-locked export dependency closure can enter signed C9/D6"
+  ],
+  "vectors": [
+    {
+      "label": "graph-same-symbolic-types",
+      "projection": {
+        "scope": "graph",
+        "projectId": "example-project",
+        "coreRegistryFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "exports": [
+          {
+            "kind": "type",
+            "packageId": "aui.core",
+            "exportId": "aui.core/Bool",
+            "contractDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "kind": "type",
+            "packageId": "example.contract",
+            "exportId": "example.contract/Measurement",
+            "contractDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"coreRegistryFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"exports\":[{\"contractDigest\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"exportId\":\"aui.core/Bool\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"exportId\":\"example.contract/Measurement\",\"kind\":\"type\",\"packageId\":\"example.contract\"}],\"projectId\":\"example-project\",\"scope\":\"graph\"}",
+      "canonicalByteLength": 475,
+      "expectedArithmeticSha256": "6b7dd613a77a01bcdc25c0012f3a85bc3fe7b72a6aebb5fa459b07fca988dd4b"
+    },
+    {
+      "label": "package-same-symbolic-types",
+      "projection": {
+        "scope": "package",
+        "packageId": "example.contract",
+        "coreRegistryFingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "exports": [
+          {
+            "kind": "type",
+            "packageId": "aui.core",
+            "exportId": "aui.core/Bool",
+            "contractDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "kind": "type",
+            "packageId": "example.contract",
+            "exportId": "example.contract/Measurement",
+            "contractDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"coreRegistryFingerprint\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"exports\":[{\"contractDigest\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"exportId\":\"aui.core/Bool\",\"kind\":\"type\",\"packageId\":\"aui.core\"},{\"contractDigest\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"exportId\":\"example.contract/Measurement\",\"kind\":\"type\",\"packageId\":\"example.contract\"}],\"packageId\":\"example.contract\",\"scope\":\"package\"}",
+      "canonicalByteLength": 478,
+      "expectedArithmeticSha256": "7a8c49b255e390cb8923fca9f06ff0435c14a38f728359393c444a6a0e45d188"
+    }
+  ]
+}
