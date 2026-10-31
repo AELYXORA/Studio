@@ -54,3 +54,7 @@ A design review must establish deterministic transfer functions, join semantics,
 ## D3+ task cancellation and state lifetime proposal
 
 [L3 Task/Result](d3-task-result-lifecycle.md) proposes at-most-one active TaskTicket per source TaskSlot and an exhaustive typed terminal TaskOutcome; [L2 State](d3-state-derived-binding-contract.md) proposes UI-only StateRevision commits. A borrow that survives an await requires explicit proved ownership/pinning as defined in OwnershipIR; without that proof reject OWN_ASYNC_ESCAPE. A canceled UI view invalidates its result subscription, not the provider's DMA/resource lifetime; the provider must finish or confirm quiescence before its buffers are freed. Bounded admission and completion results must be proved by D4/D5. No native safety property is already verified.
+
+## D3+ async and state lifetime (PROPOSED)
+
+[L3 Task/Result](d3-task-result-lifecycle.md) proposes at most one active TaskTicket per source TaskSlot; [L2 State](d3-state-derived-binding-contract.md) confines atomic state commits to UI owner/generation. Any borrow crossing await must prove retained stable owner under this OwnershipIR, otherwise OWN_ASYNC_ESCAPE. View unmount invalidates its completion subscription but never releases in-flight DMA/resource buffer before provider quiescence. Target atomics, cancellation and cleanup proof are unimplemented.
