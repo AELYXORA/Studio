@@ -66,6 +66,7 @@ The [canonical graph owner](canonical-project-graph-and-components.md) now enume
 | R-06 | P0 | Canonical operation dispatch was described as “verified” without acknowledging that the current package schema has no stored per-command digest nor an accepted digest projection | [Canonical owner](canonical-project-graph-and-components.md) now requires deriving and verifying exact operation/component exports and rejecting unproven public hashes; framing remains explicitly P0 OPEN |
 | R-07 | P1 | First AUI profile, platform contract and Architecture-to-Execution summary continued to point at exploratory graph/syntax texts as current owners | Redirected authority to the single graph and bounded first AUI grammar, preserving former files as supporting research |
 | R-08 | P0 | [Canonical Graph](canonical-project-graph-and-components.md) called declared project dependencies “dependency locks”, while its schema stores only packageId/version; D6 separately locks exact immutable package bytes | Explicitly separated graph requirements from D6 lockfile/object digests and rejected execution on lock mismatch |
+| R-09 | P0 | [Canonical sensor package](../../examples/canonical-graph/sensor-package.auipkg.json) imports `aui.core/Bytes` and `aui.core/F64` but the exploratory [13-type inventory](../../examples/aui-language/d3-core-registry-proposal.json) does not export them | Added a single [15-entry current candidate inventory](../../examples/canonical-graph/core-registry-candidate.json), qualified missing semantics under [D3 CR11](d3-core-registry-value-contract.md), preserved all historical hashes; public registry fingerprint remains unverified |
 
 ### Targeted fixture inspection (design-only)
 
@@ -107,3 +108,21 @@ The [26-item semantic projection mutation matrix](../../examples/canonical-graph
 5. Confirm complete per-field coverage when schema changes; a new semantic field MUST fail closed until included in the same current projection.
 
 **Status:** documentation proposal expanded; all D1–D8 architect sign-off gates remain OPEN. The above arithmetic/skeleton checks do not constitute compiler, ABI, runtime or hardware verification.
+
+
+## D2/D3 core registry and derived operation exports — focused review, 2026-10-31
+
+The [single current core inventory](../../examples/canonical-graph/core-registry-candidate.json) now lists **15 proposed entries**, including the missing sensor `Bytes` and `F64`, with [documentary schema](../../schemas/canonical-core-registry-candidate.schema.json). The old 13-entry draft and computed hashes remain **unchanged historical research**, not the current verified registry. [D3 CR11](d3-core-registry-value-contract.md) flags F64 bit/equality/serialization, exact bounded Bytes ownership, `TaskOutcome` control/error definitions, conditional Send traits and native ABI proof as outstanding. The active registry candidate contains **no trusted public digest**.
+
+[Canonical Graph C12](canonical-project-graph-and-components.md) now maps actual package `commands[].id` to derived `operationId`, and requires **ordered** inputs, exact result/error TypeReference, effects, capabilities, domain, retry and target triples. Component public digests incorporate separately checked operation digests and exact typed ports, but exclude implementation source lists and qualification evidence. Native loader approval and runtime capabilities remain separate.
+
+The [26 new operation/core review cases](../../examples/canonical-graph/operation-export-review-cases.json) consist of **6 same, 8 different and 12 reject expectations; all NOT-RUN**. A limited independent inventory check found 15 unique validly named IDs, declared generic arities, unique traits and presence of all five core types referenced in the sensor package. Eight structural-only derived-operation mutation comparisons matched their expected same/different result; these changes were **not** semantically revalidated or hashed by AELYXORA.
+
+### Still-blocking acceptance decisions
+
+1. Approve one **content-bound exact logical semantic definition** per current core export; `semanticSummary` text in inventory must not be quietly treated as a public hash projection.
+2. Decide F64 NaN/infinity/signed-zero and portable bit/value policy, Bytes ownership/limits and the closed AdmissionError/ProviderError/CancellationConfirmation contracts, without inventing fake golden digests.
+3. Approve complete typed operation/component/public export-set canonical byte inputs, unique naming, bounded generic portability and target ID vs triple mapping.
+4. Compute independent real golden vectors only after a pinned verified registry and exact package lock exist, with signed review and ABI/OS tests subsequently performed in their proper phases.
+
+**D2/D3/D4/D6 and all remaining D1–D8 gates: OPEN / NOT-RUN.** No product parser, AUI compiler, runtime, CI or signed module has been produced during this documentation work.
