@@ -46,3 +46,7 @@ Precise generics, escaping rules, compile-time borrow analysis strength, shared 
 ## First-slice D3 clarification
 
 The [D3 Type and Binding Profile](d3-type-and-binding-profile.md) restricts L0/L1 to Unit/Bool/U32/String, Event<T>, Result<T,E>, and imported verified nominal record values; generic user value construction, mutating state, bind and async lifetime syntax remain D3+ proposals. L0/L1 does not permit hidden text conversions or accessing device handles. Core registry and ABI layouts are unapproved. This avoids treating broad aspirational type tables as already supported implementation.
+
+## D3+ state/task ownership policy (PROPOSED)
+
+[L2 State](d3-state-derived-binding-contract.md) restricts mutable state to its owning UI scheduler and accepts only owned/immutable copied message values from other domains; derived and binding sources are pure and cannot capture raw device pointers. [L3 Task/Result](d3-task-result-lifecycle.md) defines a single active TaskTicket per TaskSlot, target/domain Send checks and generation-isolated results. Cross-await borrow must satisfy [OwnershipIR](aui-ownership-ir.md) or fail OWN_ASYNC_ESCAPE; cancellation never releases in-flight DMA/OS buffers until proven safe. Logical StateRevision, GraphRevision, TaskTicket, CommandTicket and D6 snapshot/HEAD epoch remain disjoint. No native borrow checker was run.
