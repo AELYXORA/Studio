@@ -1,5 +1,7 @@
 # AELYXORA — Design, Implementation, Verification and Correction Roadmap
 
+**Current architecture baseline:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](../architecture/canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+
 **Status: documentation-first; specification baseline is NOT accepted or frozen.** The authoritative implementation facts are in [PROJECT-STATUS](../architecture/PROJECT-STATUS.md); this roadmap is a plan, not a claim of working software. No GitHub Actions/CI before release preparation. No Python in Studio source, tooling or tests.
 
 **Product:** architecture-first, AI-native, Assembly-first RAD for native applications and systems. The primary interface is the Architecture Map with contextual AI Chat. **Architecture -> Workflows -> Data Flows -> AI implementation -> Verification -> UX/AUI preview** is the priority order. The human owns architecture and approvals; AI primarily produces code within accepted component contracts. A declarative UI is downstream from the graph, not a separate primary editor.
