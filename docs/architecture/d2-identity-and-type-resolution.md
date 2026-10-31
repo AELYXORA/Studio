@@ -112,3 +112,25 @@ All rows are *expected*, not outcomes measured by an AELYXORA implementation. D2
 ## I8. Hardware resource claim identity — separate stable namespace (PROPOSED)
 
 [Hardware Resource Contract](d2-hardware-resource-contract.md) introduces ResourceClaimID under ProjectID (case-sensitive stable ASCII), distinct from GraphNodeID, resource-access EdgeID, physical address and runtime hardware handle. A 0.2-hw-draft resourceModel claim must reference existing stable nodes/edges and target; changing an address does **not** silently create or reuse a different claim ID. The [project schema](../../schemas/project.schema.json) now recognizes kind resource-claim tombstones in retiredIdentities with scopeId=project, and the canonical projection includes these tuples. Pure 0.1-draft graphs have no resource claims; they cannot use a resource-claim tombstone to fabricate hardware permission. Import/retirement and durable compaction proof remain D6 P0 until expressly accepted.
+
+
+## I9. Derived generic instance export identity — current C9 single-model candidate
+
+**PROPOSED, not accepted, not a new type/Graph namespace or public contract digest.** An instantiated generic has no authored `typeId`, while the existing [Canonical C9 resolvedExports](canonical-project-graph-and-components.md) requires `{kind,packageId,exportId,contractDigest}`. This section proposes a *deterministic compiler-derived exportId* that is **separate from the public contractDigest** and from any source display spelling, and preserves the current nominal ID authority.
+
+### Identity-only structural projection (exact proposed candidate)
+
+Use a **strict closed recursive tree** after D3 source namespace/import resolution, **without any contract digest**:
+
+- Nominal leaf: exactly `{kind:"nominal",ownerPackageId,typeId}` (the two IDs are exact locked public names, not source aliases).
+- Generic node: exactly `{kind:"generic",template,arguments}`, where `template` is an identity-only nominal leaf of the exact verified core/public template and `arguments` is 1–2 **ordered** identity-only nominal or generic child nodes.
+- No source positions, presentation names, public contract digests, implementation SHA, native size, trait states, target/ABI, or signer data in this **identity** projection. The missing fields must still be independently verified for the contract and runtime gates; this is not a type-check result.
+- Enforce the current proposed **eight** generic applications per path and **128** total type reference nodes; validate full template arity and reject recursive source/definition dependencies before constructing output. Reject invalid/ambiguous/duplicate owner or TypeID spellings and reserved namespace collisions.
+
+**Proposed ID framing:** `identityBytes = UTF8_D6_Canonical(identityTree)`; `idDigest = SHA256(ASCII("AELYXORA/generic-export-id/canonical") || 0x00 || identityBytes)`. The derived C9 `packageId` equals the **outer template ownerPackageId** and `exportId` equals `outerTemplateOwnerPackageId + "/@inst/" + lowercaseHex(idDigest)`. Reserve `/@inst/` as a *non-authorable* generated type-identity subtree under every package namespace; an authored public `typeId` that would collide with this subtree rejects. The leading namespace component is an exact validated package identity, not parsed from an arbitrary source path or replaced with a pretty generic spelling. Reject if the package ID/TypeID policy cannot unambiguously admit this reserved generated form.
+
+**Crucial separation:** after resolving exact core/template/argument *semantic* contracts, compute the candidate **generic instance public contractDigest** separately from the **full verified** TypeReference closure under [Canonical C10](canonical-project-graph-and-components.md); it is NOT this identity-only `idDigest`. A change in core/result semantics may preserve `exportId` while requiring a different `contractDigest`, invalidating all dependent builds/Graph links. `exportId` never includes its own public `contractDigest`, so no circularity. An identical SHA-sized string from an untrusted source cannot create a verified instance or bypass provenance. A security-relevant digest collision is a validation failure, not a reason to select a guessed alternate name.
+
+[Two exact identity-only reference vectors](../../examples/aui-compiler-production/generic-export-identity-reference-vectors.json) were computed from D6-style candidate canonical JSON by Python hashlib and OpenSSL SHA-256; they are **arithmetic design data**, NOT accepted D2 type IDs, C9 exports or executed AELYXORA tests. Prior authored nominal IDs and immutable historical profile vectors are untouched.
+
+**Approval P0:** sign-off of this reserved identity namespace/domain/length, actual package/TypeID validation and collision policy, canonical UTF-8 byte writing, complete inside-out semantic generic projection and public contract digests, owner/core registry authentication, source/Graph locks and end-to-end native conformance. Until then no generated `exportId` should be published as trusted.
