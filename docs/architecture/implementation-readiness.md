@@ -157,6 +157,10 @@ The full compiler language now has a **proposed** `enum` constructor and pure ex
 
 Do **not** treat the nested TypeReference schema change as an authenticated core/export/ABI/trait approval. The 15 current core entries remain UNVERIFIED; enum payload portable codec, generic instance semantic rule digest, `@inst` namespace and public core/graph/ABI gating must be explicitly accepted before a production compiler can link or emit.
 
+## Core semantic rule-content handoff — no false compiler readiness
+
+[D3 CR14](d3-core-registry-value-contract.md) now supplies the **exact candidate content** of 34 previously unbound rule IDs inside the existing 15-entry core registry. It specifies deterministic content-bearing comparison and prohibits UNVERIFIED public digest emission. [36 rule mutation scenarios](../../examples/canonical-graph/core-rule-content-review-cases.json) test the planned review verifier; all NOT-RUN. This means **rule text is no longer absent**, but the actual public semantic rule validation, dependency closure, platform ABI, canonical golden bytes and signed architecture acceptance are still open. The complete compiler cannot claim D2 type/operation/Graph links or native build trust from this documentation-only work.
+
 ## Production AUI compiler readiness supersedes the partial frontend milestone — 2026-10-31
 
 **Clarified product goal:** the complete compiler is [AUI compiler PC0–PC8](aui-compiler.md), covering full approved L0–L4, public Record/Enum/Service contract compilation, verified one-Graph source operation link, Reactive/Async/Keyed/Ownership/Target MIR, actual native Win64 COFF/PE output, D4/D5 renderer and runtime linkage and signed reproducible build admission. [Full native acceptance matrix](../../examples/aui-compiler-production/complete-compiler-acceptance.json): **66 NOT-RUN cases**. [Production fixture readme](../../examples/aui-compiler-production/README.md) keeps native acceptance separate from the first 47+35 frontend design cases.
