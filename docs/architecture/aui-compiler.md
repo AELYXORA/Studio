@@ -100,6 +100,10 @@ The same [canonical TypeReference schema](../../schemas/aui-type-reference.schem
 
 [D3 CR14](d3-core-registry-value-contract.md) now attaches **34 exact candidate semantic rule definitions** to all 15 current core registry entries, with one content-bearing comparison projection and [36 NOT-RUN review cases](../../examples/canonical-graph/core-rule-content-review-cases.json). This resolves the prior **missing text content** in the candidate type registry, but not final meaning approval, public digest preimage, TaskOutcome runtime provenance, source/Graph signing or native ABI proof. TypedHIR/GraphLinkedIR and the production compiler must reject every `UNVERIFIED` core export even when its rule text is structurally complete.
 
+### One complete compiler — public digest pipeline to GraphLinkedIR
+
+The [full current public contract pipeline DG0–DG6](d2-d6-public-contract-digest-pipeline.md) defines deterministic candidate core type → 15-core fingerprint → nominal/enum/generic type → operation → component → scoped type-export set → C9 semanticGraphDigest dependency order with separate immutable source/approval/native proofs. In particular a **package-level** `exportedTypeSetDigest` cannot substitute for a **project Graph-level** `typeExportSetDigest` even if some referenced types coincide. Six exact projection shapes and 50 NOT-RUN change/rejection cases support future implementation, but all current core public exports are UNVERIFIED. Compilation may produce source-only analysis without trust, yet only a fully authenticated digest/Graph/source/target chain may produce GraphLinkedIR or native release artifacts.
+
 ## PC4. Contract for IR, linking and lowering between modules
 
 1. **CST and AST** contain token boundaries and recovery information. Recovered nodes are diagnostic-only. No error-containing AST may become a successful TypedHIR.
