@@ -153,3 +153,28 @@ The single active [D3 logical type owner](d3-core-registry-value-contract.md) no
 5. D6 recovery of indeterminate external effects as **records**, never automatic operation replays; real filesystem and privilege tests only in their later authorized phases.
 
 **All D1–D8 acceptance gates remain OPEN.** A source- and token-level inspection cannot prove correctness, native memory safety, actual provider cancellation, cryptographic source authenticity or target hardware permissions.
+
+
+## CR13 control payload closure and immutable core semantic identity pass — 2026-10-31
+
+**Focused scope:** reviewed [D3 Core Registry CR13](d3-core-registry-value-contract.md), [D3 Task T9/T10](d3-task-result-lifecycle.md), the one [15-type current core candidate](../../examples/canonical-graph/core-registry-candidate.json), its [structural schema](../../schemas/canonical-core-registry-candidate.schema.json), and the active [Canonical Graph](canonical-project-graph-and-components.md). This is a focused review, **not** a new whole-repository consistency count.
+
+### Changes made in current Phase I
+
+1. **Closed three nested TaskOutcome control values (PROPOSED):** `AdmissionError(code)` with five fixed codes; `ProviderError(phase,code)` with an allowed no-dispatch/uncertain-after-admission pair matrix; and `CancellationConfirmation(state=confirmed-quiescent)`, constructible only by trusted runtime proof. These are **not three new importable core TypeIDs**, public native handles or executable permissions.
+2. **Single current core inventory augmented, not forked:** each of the 15 entries now declares a proposed `semanticModel` (category, type-parameter/variant order, carrier, ownership class, graph payload eligibility and semantic rule references) and explicitly `exportStatus: UNVERIFIED`. The JSON Schema now validates each entry's expected category/arity/variant/carrier/ownership shape with 15 type-specific constraints.
+3. **Trust must be verified independently of shape:** [control payload schema](../../schemas/canonical-task-control-payload-candidate.schema.json) rejects impossible phase/code pairs and untyped fields; [28 design cases](../../examples/canonical-graph/task-control-payload-cases.json) distinguish shape validity from authenticated no-dispatch or quiescence proof.
+4. **Structural change expectations:** [25 core-definition scenarios](../../examples/canonical-graph/core-definition-review-cases.json) distinguish unchanged review skeleton, semantically modified definitions and invalid unverified exports. Historical vectors remain untouched. [Canonical C10/C12](canonical-project-graph-and-components.md) now explicitly requires **immutable normative rule-content identity**, not only a mutable `ruleId` string.
+
+### Bounded independent checks performed (NOT native verification)
+
+A standalone limited JSON Schema-subset evaluator matched expected shapes for **28/28** payload cases and found **15/15** current inventory entries matching their type-specific structural rules, with no duplicate TypeIDs. A separate structural normalized-skeleton comparison matched **9/9** selected same/different model mutations. These checks did **not** validate all JSON Schema Draft 2020-12 behavior, type semantics, cryptographic public contracts, signer trust, native atomics, actual provider dispatch, OS capabilities or persistence.
+
+All **28+25** proposed scenarios are `NOT-RUN` by AELYXORA. Schema-conforming user-controlled `Cancelled` remains rejected when runtime proof is untrusted. A syntactically valid `ProviderUnavailable(never-admitted)` cannot override evidence that dispatch may have occurred.
+
+### Remaining acceptance gates (unchanged OPEN)
+
+- Approve immutable normalized **semantic rule contents** for all 15 types and CR13 nested cases before computing trusted public contract digests and a new core registry fingerprint; rule-ID-only hashes are insufficient.
+- Decide precise trusted constructor/provenance and UI/provider ticket lifecycle, bounded indeterminate retention, per-generation CAS and native memory teardown, and a typed L3 source match binding.
+- Confirm final portable carrier/ownership constraints, independently computed source-locked positive/negative crypto vectors, signer/target/ABI/FS recovery contracts, and explicit architect D1–D8 sign-off.
+- Preserve Phase I documentation-first policy, no feature branches, no native implementation, no CI and no invented PASS/ACCEPTED status.
