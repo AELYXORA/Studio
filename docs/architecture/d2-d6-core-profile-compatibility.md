@@ -1,5 +1,7 @@
 # D2/D3/D6 — v1 and Extended Core v2 Compatibility and Migration Gate
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED COMPATIBILITY POLICY, not approved, implemented or migrated.** The normative legacy hash owner is [D2 export-contract v1](d2-export-contract-identity.md); the proposed extended core owner is [Core v2 Export](d2-d3-core-export-digest-contract.md) and bounded [G1 Generic Specialization](d2-d3-generic-instantiation-identity.md). [D6](d6-canonical-persistence.md) owns immutable snapshot publication. Do not rewrite or reinterpret the [locked pure reference](../../examples/locked-pure-reference/integrity-vectors.json).
 
 ## CP1. Exact compatibility categories
