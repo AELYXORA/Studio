@@ -63,3 +63,7 @@ Validate strict core registry bytes and template digest first. Resolve argument 
 ## GI5. Remaining P0
 
 Approve the full generic/recursive type syntax and exported TypeReference representation in D2 schemas, mixed v1/v2 compatibility for user-defined Row/Failure types, exact error/variant registry, source-to-Graph inclusion and actual D4 target LayoutIR and ABI generic values. **This G1 slice is deliberately nonrecursive**; it is not full D3 sign-off and does not make List<Row> executable.
+
+## GI6. Separate future user-record-aware TypeReference v2 profile — still OPEN
+
+[TypeReference v2](d2-d6-typeref-v2-resolution.md) proposes a **different** aui.generic-instantiation/v2-record-args digest domain using full nominal TypeReference objects, allowing a separately accepted v2-record Row as an argument. This DOES NOT expand G1 in place: all five G1 hash vectors, core-only argument bounds and old v1 pure fixtures remain unchanged. [New Row/List<Row> digest vectors](../../examples/aui-language/d2-typeref-v2-vectors.json) are independently checked ASCII reference arithmetic, not an AUI compiler. Legacy v1 Row still rejects CORE_PROFILE_MISMATCH, nested generics/cycles remain unsupported, and a full typed Project Graph v2 must be approved first.
