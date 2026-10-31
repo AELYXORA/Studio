@@ -178,3 +178,32 @@ All **28+25** proposed scenarios are `NOT-RUN` by AELYXORA. Schema-conforming us
 - Decide precise trusted constructor/provenance and UI/provider ticket lifecycle, bounded indeterminate retention, per-generation CAS and native memory teardown, and a typed L3 source match binding.
 - Confirm final portable carrier/ownership constraints, independently computed source-locked positive/negative crypto vectors, signer/target/ABI/FS recovery contracts, and explicit architect D1–D8 sign-off.
 - Preserve Phase I documentation-first policy, no feature branches, no native implementation, no CI and no invented PASS/ACCEPTED status.
+
+
+## Compiler-first implementation design alignment — 2026-10-31
+
+**Architectural scope:** AUI compiler **documentation only**, not implementation. The new [first compiler implementation contract](aui-compiler-first-implementation-contract.md) reconciles current [D3 L0/L1 grammar](d3-first-language-profile.md), [D3 type/visual/effects](d3-type-and-binding-profile.md), [AST/TypedHIR](aui-ast-semantic-analysis.md), [AUI compiler](aui-compiler.md), [target backend](aui-targetmir-native-codegen.md), [Canonical Project Graph](canonical-project-graph-and-components.md), [D6 source links](d3-source-snapshot-reconciliation.md) and [Phase I→II design rules](design-completion-gates.md).
+
+### Confirmed first-compiler design gaps and explicit resolutions
+
+1. **Unbounded "compiler" milestone** was previously described as one pipeline starting from untrusted source and ending in native executable without a concrete first step. P00–P06 are now an explicit proposed native Assembly frontend that can emit a deterministic **UNVERIFIED_SOURCE_ONLY** typed plan; P07 verified graph link and P08–P10 native backend remain independently gated.
+2. **Architecture/source authority:** source syntax, compiler-local IDs and provisional imports cannot claim GraphNodeID/OperationID nor checked public digests. Source-only reports must not contain runtime/executable approval fields. The first [strict plan shape](../../schemas/aui-compiler-source-only-plan.schema.json) structurally enforces this separation.
+3. **Missing deterministic input/output shapes and proof fixtures:** introduced a declared provisional [catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json), [expected L0 source-only output](../../examples/aui-compiler-first-slice/status-panel-l0.source-only-plan.expected.json) and [45 NOT-RUN stage/gate cases](../../examples/aui-compiler-first-slice/acceptance-cases.json) anchored to unchanged existing AUI files.
+4. **Backend path ambiguity:** first compiler contract proposes an Assembly-only frontend and, **later after target qualification**, readable x86-64 Windows Assembly emitted through a Clang/LLVM-compatible COFF/PE toolchain. LLVM IR is optional research, not parallel architecture or proof of portability.
+5. **Process contradiction guarded:** existing Project Graph first native validator G1 remains a *prerequisite to linked/native product compiler*, not an unqualified reason to rewrite first AUI source grammar. The current documentation-only task introduces no Phase II permission and no D1–D8 architect sign-off.
+
+### Focused reference review, not compiler tests
+
+A limited independent JSON-schema-keyword and source-offset check found the proposed **296-byte** unchanged [StatusPanel L0 source](../../examples/aui-language/status-panel-l0.aui) and its manually authored source-only plan consistent for **3 static Views, two accessibility labels and 12 contained source spans**; [45 case IDs](../../examples/aui-compiler-first-slice/acceptance-cases.json) are unique and every case remains **NOT-RUN**. This did not run a UTF-8 lexer, AUI parser, Unicode normalization table, type checker, native Assembly generator, Win64 renderer or signed module.
+
+### Specific COMP gate checklist — all pending explicit approval
+
+- **COMP-01:** first host/toolchain, native Assembly implementation, bounded staging/permission under Phase I→II rules.
+- **COMP-02:** literal first-slice grammar/profile error handling, Unicode XID/NFC release, deterministic byte spans and compiler resource limits.
+- **COMP-03:** source-only provisional import catalogue, untrusted plan shape and explicit no-execution contract.
+- **COMP-04:** internal AST/TypedHIR, order-preserving static View identities and deterministic output byte format.
+- **COMP-05:** strict builtin visual accessibility, named argument typing, local event/command effects.
+- **COMP-06–08:** verified core and package export hashes, exact D2/D6 source→Graph reviewer closure, D4 Windows native ABI and D5 UI runtime/renderer; required for linked/native compiler, **not inferred from successful source-only checks**.
+- **COMP-09:** real locally observed evidence and diagnostic fixture reporting after authorized implementation.
+
+**Conclusion:** first compiler development is now *documented as a bounded staged candidate* but not yet **approved for coding**. A design fixture is not an executed test, and no partial plan hash or source-only check can authorize external effects or physical device access.
