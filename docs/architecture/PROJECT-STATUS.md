@@ -24,6 +24,8 @@ Current proposed source schemas: [Graph](../../schemas/canonical-project-graph.s
 
 ## Latest focused consistency re-audit (2026-10-31)
 
+[Canonical Graph C9/C10](canonical-project-graph-and-components.md) now documents a complete **candidate** field-level projection and logical operation/component closure. Its [26 change/invariance/rejection cases](../../examples/canonical-graph/semantic-projection-change-matrix.json) are documentation scenarios only, without independently verified hash goldens. Historical D6 hash domains are not authoritative for the unified graph.
+
 The [canonical graph consistency audit](canonical-graph-consistency-audit.md) now records eight specific repaired documentation defects (R-01–R-08) and nine cross-gate remaining design/proof gaps. Missing `example.sensor/app` export was added to the [unified sensor package](../../examples/canonical-graph/sensor-package.auipkg.json). A limited independent schema-keyword and graph-reference inspection reported zero **structural** discrepancies in the updated canonical sensor graph/package; [35 negative cases](../../examples/canonical-graph/negative-cases.json) remain **design-only, NOT-RUN**. This did **not** validate package hashes, signature trust, native binaries, hardware, a Draft 2020-12-complete validator or crash durability.
 
 Current priority: approve one complete field-level graph projection and operation/type export closure; finalize source→Graph binding, target-qualified ABI/resource safety, D6 durable snapshot and D3/D5 lifecycle; then seek explicit human D1–D8 architecture acceptance. No product implementation has been authorized by the audit.
