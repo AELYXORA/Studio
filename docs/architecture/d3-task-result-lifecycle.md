@@ -128,3 +128,19 @@ Rules:
 - Actual native dispatch/terminal CAS, provider acknowledgement trust, bounded indeterminate record retention, OS/scheduler races, load shedding and D6 external-effect recovery are **OPEN D2/D4/D5/D6 proof obligations**.
 
 [Proposed lifecycle cases](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) specify ordering/uncertainty rejection scenarios, all **NOT-RUN**. This design does not claim exactly-once physical effects or safe arbitrary shutdown.
+
+
+## T10. TaskOutcome control payload validation, provenance and UI/provider finality (CR13 alignment)
+
+**Status: proposed design, not executable assurance.** [CR13](d3-core-registry-value-contract.md) owns the *closed logical payload candidates* for `AdmissionRejected(AdmissionError)`, `ProviderUnavailable(ProviderError)` and `Cancelled(CancellationConfirmation)`. The [review-only shape schema](../../schemas/canonical-task-control-payload-candidate.schema.json) rejects unknown fields, enum variants and impossible ProviderError phase/code pairs. It is **not a provider proof, transport codec, approved public TypeID, trusted constructor or external API**.
+
+Runtime admission MUST run both independently ordered checks:
+
+1. **Type/shape and source mapping:** exact closed TaskOutcome variant, payload shape, original UI TaskSlot/ViewIdentity generation and resolved source-to-Graph/operation link. A valid-looking JSON object is not enough, and AUI source cannot forge a native confirmation by constructing it directly.
+2. **Trusted transition proof:** a runtime-owned ticket record must attest (a) that dispatch never occurred for AdmissionRejected and never-admitted ProviderUnavailable, (b) that dispatch may have occurred without terminal evidence for indeterminate-after-admission ProviderUnavailable, or (c) that same-ticket/same-owner/same-generation provider quiescence is confirmed for Cancelled. A stale generation or forged/contradictory proof always rejects.
+
+A forged `Cancelled(state=confirmed-quiescent)` cannot certify native resource release. A syntactically valid `ProviderUnavailable(never-admitted)` cannot override evidence of dispatched effects. A late completion after an indeterminate **UI-slot** outcome is recorded for the still-owned **provider** ticket and cleanup, never emitted as a second UI outcome. Unknown service states do not become `Failed(E)` merely to fit a UI form.
+
+**Typed privacy/retention boundary:** CR13 candidate public logical payloads include no raw TaskTicket, native pointer, authentication token, OS error string, personally identifying details or arbitrary untyped metadata. Redacted diagnostics may reference opaque, appropriately scoped evidence records; provenance, key custody, allocation, retention policy and proof authenticity are separate D4/D5/D6 review obligations.
+
+[28 CR13 shape/trust fixtures](../../examples/canonical-graph/task-control-payload-cases.json) and [16 T9 lifecycle fixtures](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) are **NOT-RUN**. Before approving D2/D3/D4/D5/D6: freeze their typed runtime proofs, admissibility ordering, bounded state retention and native CAS/teardown behavior. There is no generic automatic retry.
