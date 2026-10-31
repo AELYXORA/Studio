@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AELYXORA — one current canonical core registry review inventory",
-  "description": "Strict documentary shape only. This inventory is not an accepted core library, source hash domain, compiled type system or native ABI. Uniqueness and exact arity/trait/semantic constraints require semantic review.",
+  "description": "Design-only strict 15-entry single current core inventory, with machine-checkable type-specific arity/category/variant/wire/ownership candidates. Public export hashes, actual accepted logical semantics, native representation and runtime safety remain unverified. Semantic uniqueness of 15 TypeIDs must be checked separately.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -43,7 +43,9 @@
           "featureGate",
           "logicalTraits",
           "semanticSummary",
-          "unresolvedObligations"
+          "unresolvedObligations",
+          "semanticModel",
+          "exportStatus"
         ],
         "properties": {
           "typeId": {
@@ -114,8 +116,732 @@
               "type": "string",
               "minLength": 1
             }
+          },
+          "exportStatus": {
+            "const": "UNVERIFIED",
+            "description": "All current core public logical exports remain explicitly unverified; no release hash or ABI admission inferred"
+          },
+          "semanticModel": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "category",
+              "typeParameters",
+              "variants",
+              "portableCarrier",
+              "ownershipClass",
+              "graphPayloadEligible",
+              "ruleIds"
+            ],
+            "properties": {
+              "category": {
+                "enum": [
+                  "scalar",
+                  "immutable-sequence",
+                  "generic-value",
+                  "tagged-union",
+                  "opaque-token"
+                ]
+              },
+              "typeParameters": {
+                "type": "array",
+                "maxItems": 2,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "T",
+                    "E"
+                  ]
+                }
+              },
+              "variants": {
+                "type": "array",
+                "maxItems": 5,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "portableCarrier": {
+                "enum": [
+                  "typed-json-bool",
+                  "typed-json-bytes-hex",
+                  "typed-json-f64-bits",
+                  "typed-json-u32",
+                  "typed-json-u64-decimal-string",
+                  "strict-utf8",
+                  "tagged-stable-key",
+                  "deferred-typed-payload",
+                  "no-portable-serialization"
+                ]
+              },
+              "ownershipClass": {
+                "enum": [
+                  "immutable-copy",
+                  "owned-immutable",
+                  "conditional-owned",
+                  "ui-owner-affine",
+                  "runtime-affine"
+                ]
+              },
+              "graphPayloadEligible": {
+                "type": "boolean"
+              },
+              "ruleIds": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._/-]+$"
+                }
+              }
+            }
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/Bool"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "scalar"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "typed-json-bool"
+                    },
+                    "ownershipClass": {
+                      "const": "immutable-copy"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/Bytes"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "immutable-sequence"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "typed-json-bytes-hex"
+                    },
+                    "ownershipClass": {
+                      "const": "owned-immutable"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/Event"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 1
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "generic-value"
+                    },
+                    "typeParameters": {
+                      "const": [
+                        "T"
+                      ]
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "deferred-typed-payload"
+                    },
+                    "ownershipClass": {
+                      "const": "conditional-owned"
+                    },
+                    "graphPayloadEligible": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/F64"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "scalar"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "typed-json-f64-bits"
+                    },
+                    "ownershipClass": {
+                      "const": "immutable-copy"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/List"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 1
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "generic-value"
+                    },
+                    "typeParameters": {
+                      "const": [
+                        "T"
+                      ]
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "deferred-typed-payload"
+                    },
+                    "ownershipClass": {
+                      "const": "conditional-owned"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/Result"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 2
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "tagged-union"
+                    },
+                    "typeParameters": {
+                      "const": [
+                        "T",
+                        "E"
+                      ]
+                    },
+                    "variants": {
+                      "const": [
+                        "Success(T)",
+                        "Failure(E)"
+                      ]
+                    },
+                    "portableCarrier": {
+                      "const": "deferred-typed-payload"
+                    },
+                    "ownershipClass": {
+                      "const": "conditional-owned"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/StableKey"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "tagged-union"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": [
+                        "StringKey(String)",
+                        "U64Key(U64)"
+                      ]
+                    },
+                    "portableCarrier": {
+                      "const": "tagged-stable-key"
+                    },
+                    "ownershipClass": {
+                      "const": "owned-immutable"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/StateRevision"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "scalar"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "no-portable-serialization"
+                    },
+                    "ownershipClass": {
+                      "const": "ui-owner-affine"
+                    },
+                    "graphPayloadEligible": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/String"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "immutable-sequence"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "strict-utf8"
+                    },
+                    "ownershipClass": {
+                      "const": "owned-immutable"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/TaskOutcome"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 2
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "tagged-union"
+                    },
+                    "typeParameters": {
+                      "const": [
+                        "T",
+                        "E"
+                      ]
+                    },
+                    "variants": {
+                      "const": [
+                        "Successful(T)",
+                        "Failed(E)",
+                        "AdmissionRejected(AdmissionError)",
+                        "Cancelled(CancellationConfirmation)",
+                        "ProviderUnavailable(ProviderError)"
+                      ]
+                    },
+                    "portableCarrier": {
+                      "const": "deferred-typed-payload"
+                    },
+                    "ownershipClass": {
+                      "const": "conditional-owned"
+                    },
+                    "graphPayloadEligible": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/TaskSlot"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 2
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "opaque-token"
+                    },
+                    "typeParameters": {
+                      "const": [
+                        "T",
+                        "E"
+                      ]
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "no-portable-serialization"
+                    },
+                    "ownershipClass": {
+                      "const": "ui-owner-affine"
+                    },
+                    "graphPayloadEligible": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/TaskTicket"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "opaque-token"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "no-portable-serialization"
+                    },
+                    "ownershipClass": {
+                      "const": "runtime-affine"
+                    },
+                    "graphPayloadEligible": {
+                      "const": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/U32"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "scalar"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "typed-json-u32"
+                    },
+                    "ownershipClass": {
+                      "const": "immutable-copy"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/U64"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "scalar"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "typed-json-u64-decimal-string"
+                    },
+                    "ownershipClass": {
+                      "const": "immutable-copy"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "typeId": {
+                  "const": "aui.core/Unit"
+                }
+              },
+              "required": [
+                "typeId"
+              ]
+            },
+            "then": {
+              "properties": {
+                "typeArity": {
+                  "const": 0
+                },
+                "semanticModel": {
+                  "properties": {
+                    "category": {
+                      "const": "scalar"
+                    },
+                    "typeParameters": {
+                      "const": []
+                    },
+                    "variants": {
+                      "const": []
+                    },
+                    "portableCarrier": {
+                      "const": "deferred-typed-payload"
+                    },
+                    "ownershipClass": {
+                      "const": "immutable-copy"
+                    },
+                    "graphPayloadEligible": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     }
   }
