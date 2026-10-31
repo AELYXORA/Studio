@@ -127,6 +127,20 @@ The source grammar still lacks fully defined event wiring, generic constraint sy
 7. Specialize/inject only target-qualified runtime service imports, then produce LayoutIR/TargetMIR. The target backend checks signatures, stack, alignment, machine register liveness, native unwind, relocations and object semantics.
 8. Verify emitted object/linked module and produce build provenance; separately verify signatures/admission and stage publication.
 
+### Full compiler enum and nested generic TypedHIR nodes (PROPOSED)
+
+The one production compiler must explicitly represent three further immutable logical node forms between D3 type resolution and native lowering:
+
+| Node | Exact required logical information | Static/IR verification |
+| --- | --- | --- |
+| `ResolvedGenericType` | Source `typeRef` span, outer verified template nominal TypeReference, **ordered** resolved nominal/generic child refs, own separately verified public contractDigest, proposed independent D2 `exportId`, derivation/source symbol origin | Exact 1/2 arity, nesting <=8, <=128 total nodes, no definition recursion, trait/value/Send/ownership closure, no self-digest preimage or unverified SHA promotion |
+| `EnumConstruct` | Verified full enum TypeReference, ordered definition revision, exact variant name and declared index, `payloadPresence`, optional typed pure payload HIR, source span, result ownership | Exactly one declared variant, zero/one payload arity/type, source namespace disambiguation, no unreviewed implicit conversion or arbitrary enum tag creation |
+| `EnumMatch` | One typed immutable enum scrutinee expression, **ordered source arms** keyed to full enum variant IDs, optional immutable arm-local binder IDs, each typed pure result expression, final result type, proof of complete set coverage | Evaluate scrutinee once, exactly one case per variant (order unconstrained), no missing/duplicate/foreign cases, binder lifetime and move/drop on every arm, same exact result type, no effectful calls or legacy five-way TaskOutcome confusion |
+
+**Backend and ownership consequences:** `EnumConstruct` lowers to a target-independent tagged-value construction carrying a *logical* variant ID and a conditional owned payload. `EnumMatch` lowers to a verified exhaustive switch CFG with all branch payload types/provenance and cleanup/borrow edges. The first Win64 TargetMIR must derive physical variant tag width, union payload offsets and calling convention from a separately accepted **D4 enum ABI layout descriptor**, never from source variant positions alone. Optimization can specialize a constant enum case only after preserving payload ownership, drop timing and effect/exception obligations. If a service operation returns a user enum, its exact public TypeReference and ABI must be resolved through the existing Graph operation contract.
+
+`ResolvedGenericType` is a **type dependency** node, not a runtime generic object. Each nested child is resolved inside-out from the authenticated core/nominal definitions, then the derived instance's **identity-only** D2 exportId and **separate semantic** public contractDigest are checked. A matching identity-only reference digest is never enough to generate GraphLinkedIR or a native module. The existing [enum/generic design cases](../../examples/aui-compiler-production/enum-generic-value-cases.json) remain NOT-RUN.
+
 ### Verifier completeness and serialization obligations
 
 For every node family define **before implementation** a closed internal node tag, full field types, input/output invariant, source origin, successor/predecessor relationships, ownership/deallocation rules, deterministic diagnostic code, serialization/format decision and invalidation dependency. A compiler pass MUST NOT silently drop an unknown tag in a forward/backward upgrade. New node tags require a new reviewed compiler IR contract, not a new project architecture. An IR walker must reject unknown enum discriminants, duplicate declaration IDs, impossible control-flow predecessors and unresolved graph symbols.
