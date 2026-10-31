@@ -10,6 +10,7 @@ component ReviewPanel(input tick: Tick) {
 
   event launch: Event<Unit>;
   command Accept(tick: Tick) -> Result<Tick, Failure> on io-worker;
+  taskSlot refreshSlot: TaskSlot<Tick, Failure>;
   task Refresh(tick: Tick) -> Result<Tick, Failure> on io-worker {
     let outcome = await Accept(tick: tick);
     return outcome;
