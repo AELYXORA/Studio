@@ -72,6 +72,35 @@ The [public digest closure review scenarios](../../examples/canonical-graph/publ
 
 Acceptance requires architect-approved immutable rule content, a complete native implementation of D6 byte writer verified against an independently built reference encoder, strict schema/projection validators, nonfake immutable package/Graph snapshot/source links, qualified D4 target tests, signed approval checks and observed error-path tests. **Do not call this pipeline finished merely because example SHA values match**. [Production compiler PC7](aui-compiler.md) is the final acceptance owner.
 
+### DG5.1. Current 15-type CR14 candidate golden arithmetic — computed, NOT accepted
+
+The [full 15-entry core golden candidate](../../examples/canonical-graph/core-15-content-digest-arithmetic-vectors.json) contains **all 15** CR14 content-bearing core type public projection objects, their complete D6-style canonical ASCII UTF-8 JSON byte strings and lengths, and each exact candidate `AELYXORA/type-contract/canonical` SHA-256. It then computes the **complete 15-entry** proposed `{registryId,entries[{typeId,contractDigest}]}` projection under `AELYXORA/core-registry/canonical`. The symbolic candidate fingerprint is:
+
+`cb77c5cd733122140c5a2d5b117f92a6963fb444b426712c536a2e51c1bddda1`
+
+It is **NOT** a production `coreRegistryFingerprint`. Every one of its 15 input types is `UNVERIFIED`. Total canonical bytes for the 15 candidate type projections: **14,265**; included core semantic definition texts: **34**. Changing one `aui.core/Bool` rule's exact text without changing its `ruleId` changes both its candidate digest and the 15-type fingerprint. A repeat SHA-256 calculation confirmed the saved **seven older enum/generic/scoped-set vectors**; Python hashlib and OpenSSL independently verified the new Bool candidate preimage and digest. The other 14 new core hash rows are calculator/reference outputs, **not independently certified or executed by the AELYXORA compiler**.
+
+### DG5.2. Exact arithmetic from CR14 through historical sensor project
+
+The [sensor full candidate digest chain](../../examples/canonical-graph/sensor-full-digest-chain-arithmetic.json) starts from the current **unapproved** full 15-core fingerprint, resolves genuine current package type references to computed candidate core and record digests (rather than trusting the historical source's repeated-digit placeholders), and derives in sequence:
+
+1. Three ordered nominal records (`RawSample`, `Measurement`, `DecodeError`), using full verified-*shape* core child TypeReferences.
+2. One `Decode` operation and three `driver/decoder/app` component projections with complete derived public operation lists, including `commands:[]` where authored commands are absent.
+3. A package-scoped and separately Graph-scoped type-export set containing the same eight transitive reachable candidate type entries, but different **scope/owner byte frames** and therefore different candidate SHA-256.
+4. A complete candidate C9 `aui.semantic-graph` projection preserving the sensor Graph's typed workflow, dataFlows and hardware resource model, replacing **only derived public hash assertions within the candidate projection**, not mutating authored package/Graph files.
+
+The arithmetic-only complete Graph SHA-256 candidate is:
+
+`bd9e405922174eea539f93417766fb7ec9f98797b99eb24d064f5569f9169afd`
+
+The candidate Graph canonical JSON is 8,922 UTF-8 bytes. Python hashlib and OpenSSL independently verified the record `example.sensor/RawSample` candidate projection/digest. There is **no independently verified full C9 native writer**, no qualified target/ABI, and the authored package/Graph still contain fake repeated-digit hash assertions; the Graph can **never** be published from this fixture as trusted.
+
+### DG5.3. D6 canonical byte boundary regressions
+
+The [six D6 Unicode/control/reference vectors](../../examples/canonical-graph/d6-unicode-canonical-byte-arithmetic-vectors.json) cover exact `\\u000a` (six-byte JSON control escape rather than shorthand `\\n`), decoded-key UTF-8 byte ordering, composed-vs-decomposed Unicode String identity, and author-ordered arrays. Python hashlib and OpenSSL agreed on all six explicit canonical frame SHA-256 values. The separate candidate reference domain `AELYXORA/d6-canonical-reference/candidate` **must not be copied** into any public type/Graph hash domain.
+
+**Interpretation:** this pass gives an independently inspectable **candidate byte corpus** and a typed, coherent arithmetic DAG. It does **not** close actual D2/D6 source/lock/architect authority, all value codecs, P1 D6 resource bounds, canonical writer native implementation, real package/public signer proof or D4/D5 runtime. The [50 design-only public digest review cases](../../examples/canonical-graph/public-digest-pipeline-review-cases.json) stay `NOT-RUN`.
+
 ## DG6. Remaining explicit P0 review decisions
 
 1. Architect sign-off of **all 34 exact core definitions**, complete value codecs/TaskOutcome trusted control rules and exact semantic normalization (CR14); lock publisher provenance and approved core registry identifier.
