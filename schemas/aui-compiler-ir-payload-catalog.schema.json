@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA — full candidate compiler IR node tag and payload catalog (review data only)",
+  "description": "Structurally validates tag/template entries only; cross-field template linkage, unique IDs, byte non-overlap, Ref64 pointee coverage, stage ranges, zero/nonzero contradictions, arithmetic bytes, ownership semantics and security proof require the independently specified catalog verifier. NOT an executable ABI or approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "status",
+    "owner",
+    "baseHeader",
+    "internalABI",
+    "tagEncoding",
+    "payloadRules",
+    "payloadTemplates",
+    "tags",
+    "notes"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.full-compiler-ir-payload-layout-candidate"
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseHeader": {
+      "type": "string",
+      "minLength": 1
+    },
+    "internalABI": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tagEncoding": {
+      "type": "object",
+      "required": [
+        "type",
+        "zeroIsInvalid",
+        "unknownMustReject",
+        "stableOnReleaseOnlyAfterArchitectApproval",
+        "ranges"
+      ],
+      "properties": {
+        "type": {
+          "const": "unsigned16"
+        },
+        "zeroIsInvalid": {
+          "const": true
+        },
+        "unknownMustReject": {
+          "const": true
+        },
+        "stableOnReleaseOnlyAfterArchitectApproval": {
+          "type": "boolean"
+        },
+        "ranges": {
+          "type": "object",
+          "minProperties": 8,
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^0x[0-9a-f]{4}-0x[0-9a-f]{4}$"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "payloadRules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 5
+      }
+    },
+    "payloadTemplates": {
+      "type": "object",
+      "minProperties": 16,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "size",
+          "alignment",
+          "fields",
+          "referenceFields"
+        ],
+        "properties": {
+          "size": {
+            "type": "integer",
+            "minimum": 8,
+            "multipleOf": 8
+          },
+          "alignment": {
+            "const": 8
+          },
+          "fields": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "field",
+                "offset",
+                "size",
+                "type",
+                "meaning"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "offset": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "size": {
+                  "enum": [
+                    2,
+                    4,
+                    8
+                  ]
+                },
+                "type": {
+                  "enum": [
+                    "u16",
+                    "u32",
+                    "u64",
+                    "Ref64"
+                  ]
+                },
+                "meaning": {
+                  "type": "string",
+                  "minLength": 5
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "referenceFields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "field",
+                "pointeeKind"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "pointeeKind": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "requiredElementSize": {
+                  "const": 8
+                },
+                "elementEncoding": {
+                  "const": "Ref64"
+                },
+                "immediateArrayBytes": {
+                  "const": false
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 139,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "stage",
+          "payloadTemplate",
+          "requiredContext",
+          "notes",
+          "validation"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "stage": {
+            "enum": [
+              "T1_TYPED_HIR",
+              "T2_GRAPH_LINK",
+              "T3_REACTIVE",
+              "T3_ASYNC",
+              "T3_KEYED",
+              "T4_OWNERSHIP",
+              "T5_LAYOUT",
+              "T6_TARGET_MIR"
+            ]
+          },
+          "payloadTemplate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requiredContext": {
+            "type": "string",
+            "minLength": 5
+          },
+          "notes": {
+            "type": "string",
+            "minLength": 5
+          },
+          "validation": {
+            "type": "object",
+            "required": [
+              "requiredNonzeroFields",
+              "mustZeroFields",
+              "semanticInvariants"
+            ],
+            "properties": {
+              "requiredNonzeroFields": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "mustZeroFields": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "semanticInvariants": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 5
+                }
+              },
+              "operandCount": {
+                "type": "object",
+                "required": [
+                  "min"
+                ],
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "resultCount": {
+                "type": "object",
+                "required": [
+                  "min"
+                ],
+                "properties": {
+                  "min": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "max": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 5
+      }
+    }
+  }
+}
