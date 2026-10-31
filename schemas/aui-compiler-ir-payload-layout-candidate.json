@@ -1580,7 +1580,9 @@
         "mustZeroFields": [
           "flags"
         ],
-        "semanticInvariants": []
+        "semanticInvariants": [
+          "Typed immutable constantRef refers to closed constant pool with exact byte length and no implicit scalar conversion"
+        ]
       }
     },
     {
@@ -1598,7 +1600,9 @@
           "flags",
           "constantRef"
         ],
-        "semanticInvariants": []
+        "semanticInvariants": [
+          "Resolve exact source member symbol and typed owner; immutable borrow/ownership checked"
+        ]
       }
     },
     {
@@ -1756,7 +1760,9 @@
           "flags",
           "constantRef"
         ],
-        "semanticInvariants": []
+        "semanticInvariants": [
+          "Return exact declared type, all owned values and effects accounted for; not a UI side-effect shortcut"
+        ]
       }
     },
     {
@@ -1774,7 +1780,9 @@
           "flags",
           "constantRef"
         ],
-        "semanticInvariants": []
+        "semanticInvariants": [
+          "Assignment only where explicitly permitted by state transaction rules; no arbitrary hidden mutation"
+        ]
       }
     },
     {
@@ -1792,7 +1800,9 @@
           "flags",
           "constantRef"
         ],
-        "semanticInvariants": []
+        "semanticInvariants": [
+          "Resolved input source symbol and exact immutable declared input TypeReference; no implicit provider read"
+        ]
       }
     },
     {
