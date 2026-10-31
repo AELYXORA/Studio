@@ -1,0 +1,338 @@
+{
+  "format": "aui.compiler-unicode-diagnostics-design",
+  "status": "DESIGN ONLY; NOT-RUN. Some diagnostic names are candidates pending COMP-02 sign-off.",
+  "unicodeCandidate": "15.1.0",
+  "owner": "docs/architecture/aui-compiler-frontend-closure.md",
+  "notes": [
+    "utf8-hex is exact input bytes, not a complete AUI module",
+    "token fragments and future syntax are not entire compilable modules",
+    "accept applies only to isolated lexical/scope condition, not a complete source",
+    "identifier comparison uses NFC 15.1; String value comparison preserves scalars"
+  ],
+  "cases": [
+    {
+      "id": "UTF8-BOM",
+      "category": "utf8-hex",
+      "input": "efbbbf696d706f7274",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "BOM at input start",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "UTF8-OVERLONG2",
+      "category": "utf8-hex",
+      "input": "c0af",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "Overlong two-byte",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "UTF8-OVERLONG3",
+      "category": "utf8-hex",
+      "input": "e08080",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "Overlong three-byte",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "UTF8-SURROGATE",
+      "category": "utf8-hex",
+      "input": "eda080",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "Encoded surrogate",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "UTF8-ABOVE-MAX",
+      "category": "utf8-hex",
+      "input": "f4908080",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "Beyond U+10FFFF",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "UTF8-TRUNCATED",
+      "category": "utf8-hex",
+      "input": "e282",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "Truncated sequence",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "UTF8-ORPHAN",
+      "category": "utf8-hex",
+      "input": "80",
+      "expected": "reject",
+      "diagnostic": "AUI_ENCODING",
+      "reason": "Orphan continuation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-COMPOSED",
+      "category": "identifier",
+      "input": "café",
+      "expected": "accept",
+      "diagnostic": "ID",
+      "reason": "NFC single codepoint",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-DECOMPOSED",
+      "category": "identifier",
+      "input": "café",
+      "expected": "accept",
+      "diagnostic": "ID",
+      "reason": "NFC canonical equivalent to café",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-UNDERSCORE-START",
+      "category": "identifier",
+      "input": "_name",
+      "expected": "reject",
+      "diagnostic": "AUI_SYNTAX",
+      "reason": "Strict XID_Start excludes leading underscore",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-UNDERSCORE-CONT",
+      "category": "identifier",
+      "input": "count_2",
+      "expected": "accept",
+      "diagnostic": "ID",
+      "reason": "Strict XID_Continue admits underscore",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-LEADING-DIGIT",
+      "category": "identifier",
+      "input": "2count",
+      "expected": "reject",
+      "diagnostic": "AUI_SYNTAX",
+      "reason": "Digit does not start identifier",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-GREEK",
+      "category": "identifier",
+      "input": "Δείγμα",
+      "expected": "accept",
+      "diagnostic": "ID",
+      "reason": "Non-ASCII ID under pinned Unicode 15.1 properties",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "IDENT-SUBSTRING",
+      "category": "identifier",
+      "input": "awaited",
+      "expected": "accept",
+      "diagnostic": "ID",
+      "reason": "Future keyword substring is ordinary identifier",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-ESCAPE",
+      "category": "string-token",
+      "input": "\"a\\u00e9b\"",
+      "expected": "accept",
+      "diagnostic": "STR",
+      "reason": "Valid Unicode escape",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-SURROGATE-PAIR",
+      "category": "string-token",
+      "input": "\"\\uD83D\\uDE00\"",
+      "expected": "accept",
+      "diagnostic": "STR",
+      "reason": "Valid supplementary escape pair",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-HIGH-UNPAIRED",
+      "category": "string-token",
+      "input": "\"\\uD83D\"",
+      "expected": "reject",
+      "diagnostic": "AUI_STRING_ESCAPE",
+      "reason": "Unpaired high surrogate",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-LOW-UNPAIRED",
+      "category": "string-token",
+      "input": "\"\\uDE00\"",
+      "expected": "reject",
+      "diagnostic": "AUI_STRING_ESCAPE",
+      "reason": "Unpaired low surrogate",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-INVALID-PAIR",
+      "category": "string-token",
+      "input": "\"\\uD83D\\u0041\"",
+      "expected": "reject",
+      "diagnostic": "AUI_STRING_ESCAPE",
+      "reason": "Surrogate followed by non-surrogate",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-UNKNOWN-ESCAPE",
+      "category": "string-token",
+      "input": "\"abc\\q\"",
+      "expected": "reject",
+      "diagnostic": "AUI_STRING_ESCAPE",
+      "reason": "Unknown escape",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-RAW-LF",
+      "category": "utf8-hex",
+      "input": "226162630a78797a22",
+      "expected": "reject",
+      "diagnostic": "AUI_STRING_ESCAPE",
+      "reason": "Raw LF inside quoted source string",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STR-FUTURE-WORD",
+      "category": "string-token",
+      "input": "\"await\"",
+      "expected": "accept",
+      "diagnostic": "STR",
+      "reason": "String keyword is not source syntax",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-ZERO",
+      "category": "integer-token",
+      "input": "0",
+      "expected": "accept",
+      "diagnostic": "INT",
+      "reason": "Canonical zero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-DECIMAL",
+      "category": "integer-token",
+      "input": "12",
+      "expected": "accept",
+      "diagnostic": "INT",
+      "reason": "Canonical integer",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-LEADING-ZERO",
+      "category": "integer-token",
+      "input": "012",
+      "expected": "reject",
+      "diagnostic": "AUI_NUMBER_FORMAT",
+      "reason": "Leading zero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-EXPONENT",
+      "category": "integer-token",
+      "input": "1e3",
+      "expected": "reject",
+      "diagnostic": "AUI_NUMBER_FORMAT",
+      "reason": "Exponent invalid",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-FRACTION",
+      "category": "integer-token",
+      "input": "1.5",
+      "expected": "reject",
+      "diagnostic": "AUI_NUMBER_FORMAT",
+      "reason": "Fraction invalid",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-U53-OVER",
+      "category": "integer-token",
+      "input": "9007199254740992",
+      "expected": "reject",
+      "diagnostic": "AUI_NUMBER_RANGE",
+      "reason": "Above safe decimal literal bound",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NUM-U32-OVER",
+      "category": "typed-u32",
+      "input": "4294967296",
+      "expected": "reject",
+      "diagnostic": "AUI_NUMBER_RANGE",
+      "reason": "Above U32 type bound",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "PROFILE-STATE",
+      "category": "future-syntax",
+      "input": "state count: U32;",
+      "expected": "reject",
+      "diagnostic": "AUI_PROFILE_UNSUPPORTED",
+      "reason": "L2-only",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "PROFILE-FOREACH",
+      "category": "future-syntax",
+      "input": "ForEach(rows)",
+      "expected": "reject",
+      "diagnostic": "AUI_PROFILE_UNSUPPORTED",
+      "reason": "L4-only",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "PROFILE-IMPORT-VERSION",
+      "category": "future-syntax",
+      "input": "import aui.core @ 1.2;",
+      "expected": "reject",
+      "diagnostic": "AUI_PROFILE_UNSUPPORTED",
+      "reason": "No source version token",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "NFC-EQUALITY",
+      "category": "identifier-pair",
+      "input": [
+        "café",
+        "café"
+      ],
+      "expected": "equal",
+      "diagnostic": "NFC",
+      "reason": "Equivalent normalized identifiers collide in one scope",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "CASE-SENSITIVE",
+      "category": "identifier-pair",
+      "input": [
+        "a",
+        "A"
+      ],
+      "expected": "different",
+      "diagnostic": "NFC",
+      "reason": "No casefold",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "STRING-SCALARS",
+      "category": "string-value-pair",
+      "input": [
+        "é",
+        "é"
+      ],
+      "expected": "different",
+      "diagnostic": "STRING",
+      "reason": "Do not normalize values",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
