@@ -1,0 +1,222 @@
+{
+  "format": "aui.operation-export-review-expectations",
+  "status": "DOCUMENTATION CANDIDATE ONLY: not approved, executed or verified golden hashes",
+  "owner": "docs/architecture/canonical-project-graph-and-components.md#c12-exact-derived-operationcomponent-projection-keys--proposed-one-model-refinement",
+  "referencePackage": "sensor-package.auipkg.json",
+  "referenceProject": "sensor-project.auiproj.json",
+  "rules": {
+    "same": "Derived logical operation/component contract projections are equal; package/source/ABI/review evidence may still change",
+    "different": "Both fully valid public contract projections differ and dependent export/graph/source hashes must be recomputed and reviewed",
+    "reject": "Prerequisite validity, closed type/operation contract or authorization fails; no trusted digest or execution is permitted"
+  },
+  "cases": [
+    {
+      "id": "OP-01",
+      "expected": "same",
+      "mutation": "Reorder JSON object keys in the authored Decode command without changing decoded values",
+      "rationale": "Canonical public projection orders object keys",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-02",
+      "expected": "same",
+      "mutation": "Reorder effects/requiredCapabilities/declaredTargets sets with same unique members",
+      "rationale": "Public effect/capability/target sets have canonical order",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-03",
+      "expected": "same",
+      "mutation": "Change whitespace or comments inside implementation source, then correctly update verified package lock",
+      "rationale": "Logical contract same; package/build evidence invalidated",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-04",
+      "expected": "same",
+      "mutation": "Change component package target qualification status planned -> supported while preserving public signatures",
+      "rationale": "Qualification status is evidence, not permission or logical export identity",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-05",
+      "expected": "same",
+      "mutation": "Reorder authored component declarations without changing each component's verified public export",
+      "rationale": "Set-like package component declaration order has no logical effect",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-06",
+      "expected": "same",
+      "mutation": "Reorder component public port declarations while preserving exact port identities",
+      "rationale": "Derived component ports sort by id",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-07",
+      "expected": "different",
+      "mutation": "Rename Decode operation ID to a new stable ID, then update all dependent reviewed Graph/source links",
+      "rationale": "Operation public identity changes",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-08",
+      "expected": "different",
+      "mutation": "Change typed Decode input TypeReference, recomputing valid field/public references transitively",
+      "rationale": "Ordered input public type affects contract",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-09",
+      "expected": "different",
+      "mutation": "Change Decode success or error TypeReference and repair all valid workflow signals before comparison",
+      "rationale": "Provider result/error signature is public meaning",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-10",
+      "expected": "different",
+      "mutation": "Change operation execution domain from io-worker to another registered and qualified domain",
+      "rationale": "Public execution domain is semantic",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-11",
+      "expected": "different",
+      "mutation": "Change declaredTargets set from one qualified target triple to two qualified target triples",
+      "rationale": "Supported declared target contract is meaning-bearing",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-12",
+      "expected": "different",
+      "mutation": "Add a public capability requirement with its exact registered meaning",
+      "rationale": "Capability set changes operation/public component identity",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-13",
+      "expected": "different",
+      "mutation": "Add an independently verified additional operation to decoder with unique ID",
+      "rationale": "Parent component includes complete derived operation digest list",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-14",
+      "expected": "different",
+      "mutation": "Reorder an operation's two distinct typed input arguments in a valid extension fixture",
+      "rationale": "Argument order is meaningful even if named types have equal native size",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-15",
+      "expected": "reject",
+      "mutation": "Remove the core Bytes export while RawSample still references its TypeReference",
+      "rationale": "Unresolved transitive public type closure",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-16",
+      "expected": "reject",
+      "mutation": "Keep F64 digest placeholder from sensor while exact logical F64 semantics remain unresolved",
+      "rationale": "A placeholder cannot verify core logical meaning",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-17",
+      "expected": "reject",
+      "mutation": "Duplicate operation ID Decode in one component",
+      "rationale": "Ambiguous stable operation binding",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-18",
+      "expected": "reject",
+      "mutation": "Duplicate two public operation input names",
+      "rationale": "Ambiguous input parameter identity",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-19",
+      "expected": "reject",
+      "mutation": "Use TaskTicket as a public operation result or persisted record field",
+      "rationale": "Opaque runtime owner cannot escape as portable payload",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-20",
+      "expected": "reject",
+      "mutation": "Change a command signature but keep old claimed component contractDigest",
+      "rationale": "Computed logical export must match authored assertion",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-21",
+      "expected": "reject",
+      "mutation": "Dispatch Decode to a graph node owned by an unrelated component with matching operation spelling",
+      "rationale": "OperationID lookup must be scoped by verified provider export",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-22",
+      "expected": "reject",
+      "mutation": "Change command-success signal payload TypeReference without changing provider success TypeReference",
+      "rationale": "Workflow typed result must match verified command",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-23",
+      "expected": "reject",
+      "mutation": "Use graph target ID linux-arm64 in declaredTargets where the public contract requires target triple aarch64-unknown-linux-gnu",
+      "rationale": "Target identity namespaces are distinct",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-24",
+      "expected": "reject",
+      "mutation": "Claim package target status supported and try to invoke an unqualified kernel driver from desktop user mode",
+      "rationale": "Source manifest status is not a runtime capability",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-25",
+      "expected": "reject",
+      "mutation": "Mutate a source file without updating its exact locked package-object digest",
+      "rationale": "Offline lock consistency is prerequisite even when logical contract is unchanged",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    },
+    {
+      "id": "OP-26",
+      "expected": "reject",
+      "mutation": "Assume public operation digest authorizes an external effect without live scoped capability and signed module approval",
+      "rationale": "Logical hash is never runtime admission",
+      "observed": "NOT-RUN",
+      "precondition": "Use fully resolved non-placeholder registry/type/public contracts and exact D6 package lock; source/target authorization separately required"
+    }
+  ]
+}
