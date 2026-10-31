@@ -16,6 +16,12 @@ The [current 15-entry core inventory](../../examples/canonical-graph/core-regist
 
 **No D1–D8 acceptance or Phase II implementation authorization is implied.**
 
+## Current D3 value codec and D2/D4/D5 uncertainty review — 2026-10-31
+
+[D3 CR12](d3-core-registry-value-contract.md) specifies a **bounded unapproved** portable value candidate: finite-only F64 bits, owned/capped Bytes and exact scalar representations. [41 future boundary tests](../../examples/canonical-graph/core-value-boundary-cases.json) are NOT-RUN. [D3 Task T9](d3-task-result-lifecycle.md) differentiates `never-admitted` from `indeterminate-after-admission` and preserves provider-owned cleanup after a UI TaskOutcome. [16 future task lifecycle tests](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) remain NOT-RUN.
+
+**Still-open gate conditions:** explicit architect agreement with the finite-only/cap choices, independently frozen core public contract bytes and 15-type registry fingerprint, complete TaskOutcome error/control exports, D4 native F64/Bytes memory and cancellation proof, D5 bounded delivery, D6 nonreplay/retention and full target-specific runtime verification after authorized implementation.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
