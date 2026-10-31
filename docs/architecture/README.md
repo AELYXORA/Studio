@@ -1,5 +1,7 @@
 # AELYXORA Studio — Architecture
 
+**Single canonical Project Graph:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+
 **Current policy:** complete and review design before further implementation. [Design gates](design-completion-gates.md) establish acceptance; [official ChatGPT Plus integration contract](chatgpt-connection.md) addresses user consent, eligible allowance and offline operation.
 
 **Current implementation status:** [verified artifacts, missing components and authoritative milestones](PROJECT-STATUS.md).
