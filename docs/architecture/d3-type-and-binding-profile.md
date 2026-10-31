@@ -83,3 +83,7 @@ A string is a logical UTF-8 scalar sequence; target-native representation, alloc
 - L1-07: source-only code formatting edit -> new source hash/index, same logical graph export contract if unchanged.
 
 **Open P0:** explicit accepted builtin/core registry identity, actual visual property contract, effect/domain registry, type import namespacing, accessible labels across targets, D3+ bindings, ownership and error propagation. This document is design-stage only.
+
+## Proposed L2/L3 core type extensions
+
+[L2 State](d3-state-derived-binding-contract.md) adds StateRevision and static keyed-view binding contracts without changing L0/L1 Text(value: String) constructor requirements. [L3 Task/Result](d3-task-result-lifecycle.md) proposes TaskSlot, TaskTicket and a closed TaskOutcome<T,E> with Successful, Failed, AdmissionRejected, confirmed Cancelled and ProviderUnavailable. These are logical typed surfaces, **not** existing pinned aui.core/0.1-draft exports or proved native layouts. No implicit result-to-String conversion, general generics or device capability follows from naming them. Core registry digest, ownership and target ABI remain unaccepted P0.
