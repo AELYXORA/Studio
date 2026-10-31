@@ -30,6 +30,12 @@ The [canonical graph consistency audit](canonical-graph-consistency-audit.md) no
 
 Current priority: approve one complete field-level graph projection and operation/type export closure; finalize source→Graph binding, target-qualified ABI/resource safety, D6 durable snapshot and D3/D5 lifecycle; then seek explicit human D1–D8 architecture acceptance. No product implementation has been authorized by the audit.
 
+## Core registry and operation export closure follow-up (2026-10-31)
+
+[Current D3 core inventory](../../examples/canonical-graph/core-registry-candidate.json) proposes **15** types, including `Bytes` and `F64` absent from the historical 13-entry exploratory list but referenced by the sensor records. [D3 CR11](d3-core-registry-value-contract.md) documents the missing portability/error contracts; [Canonical Graph C12](canonical-project-graph-and-components.md) maps authored commands to derived operation/component public projections. [26 operation review cases](../../examples/canonical-graph/operation-export-review-cases.json) remain **NOT-RUN**. A limited type inventory/port-reference check and eight structural-only operation-projection comparisons found no identified discrepancies; no verified digest, native ABI, signed trust or release artifact exists.
+
+The `coreRegistryFingerprint`, type-export-set and component public digests in the sensor project remain deliberately **synthetic placeholders**. Missing resolved F64 semantics, closed TaskOutcome error/control types and approved executable/native layouts prevent treating the proposed registry as a verified import or authorizing execution.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
