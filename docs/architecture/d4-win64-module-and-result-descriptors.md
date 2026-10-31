@@ -86,3 +86,7 @@ Verify exact Windows calling convention, nonvolatile registers/XMM, .pdata/.xdat
 [Supplemental layout fixtures](../../examples/abi/win64-module-and-outcome-v1.json) provide offset arithmetic and negative case design only. [Cross-gate review](d2-d6-win64-baseline-review.md) retains B-04/B-06 OPEN for trust and executable evidence.
 
 **No implementation, COFF artifact, linker output, signed binary or live Win64 call is produced by this proposal.**
+
+## M5. Signed image versus approved operation contract
+
+[Win64 Trust and Admission](d4-win64-module-trust-and-admission.md) adds separate complete-file byte identity, Authenticode verification via WinVerifyTrust, exact allowed publisher identity, independently authenticated Graph/source authorization receipt and per-invocation live capability checks. A valid publisher signature on the module header/operation table is NOT authorization to execute unknown operations. [D6 reproducible build policy](d6-win64-reproducible-build-contract.md) separates deterministic unsigned PE evidence from later signed file bytes; self-referential signed-image hashes are forbidden without explicit coverage rules. OS signature/load/TOCTOU tests remain NOT-RUN.
