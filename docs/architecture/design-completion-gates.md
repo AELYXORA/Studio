@@ -21,6 +21,10 @@ Documenting test plans and expected results belongs to Phase I; **running tests 
 
 [Specification Completion Matrix](specification-completion-matrix.md) lists concrete requirements, owners, unresolved conflicts and required design fixtures. [Architecture-to-Execution Contract](architecture-to-execution-contract.md) describes the intended architecture/workflow/data-flow/AI/native trace. They support the owning documents; neither overrides accepted semantics.
 
+## First compiler scope within the existing process
+
+The requested deliverable at this stage is **compiler architecture documentation, not compiler source**. [First AUI Compiler Contract](aui-compiler-first-implementation-contract.md) proposes separately reviewable P00–P06 (strict L0/L1 front end and deterministic `UNVERIFIED_SOURCE_ONLY` plan), P07 verified Graph linkage and P08–P10 Win64 native backend. COMP-01..05 plus explicit architect review are required for a source-only implementation slice; COMP-06..08 additionally block native/linked outcomes. The default full in-scope D1–D8 sign-off requirement above **still applies** unless the human architect explicitly records a bounded exception. Creating design cases and plan-shaped JSON does not count as Phase II work or observed Phase III tests.
+
 ## Required gates
 
 | Gate | Required decisions | Acceptance proof |
