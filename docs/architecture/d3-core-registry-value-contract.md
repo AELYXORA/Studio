@@ -111,3 +111,61 @@ The five branches of `TaskOutcome<T,E>` still refer to unresolved exact logical 
 Reject an imported sensor package if either `Bytes` or `F64` is missing from the exact pinned verified registry; reject if a core type's semantic definition differs while its purported contractDigest stays unchanged; reject use of `TaskTicket` in persisted records or cross-domain dataFlow; reject unqualified `TaskOutcome` with missing closed error types, incorrect generic arity, nested/disallowed generics, and failed Send/ownership proof. All these are future tests, **NOT-RUN**.
 
 **P0 remains:** complete mathematical `F64` value/codec policy; exact `Bytes` ownership/resource limits; closed error/control variant definitions; canonical core logical contract encoding and independently computed registry/export hash vectors; target ABI and source-language profile admission; explicit architect D2/D3/D4/D6 review. No historical 13-entry digest is silently reused for the new 15-entry candidate.
+
+## CR12. Portable core values and task-control semantics — bounded single-model candidate
+
+**Status: PROPOSED, pending architect approval and native evidence.** This section proposes the precise portable *value* layer for the existing 15-entry [current core inventory](../../examples/canonical-graph/core-registry-candidate.json), not a new architecture edition, native ABI, second type registry or trusted public hash profile. Type/operation identities remain owned by [Canonical Graph C9/C10/C12](canonical-project-graph-and-components.md). A value serializer may run only after the expected verified `TypeReference`, target and ownership have been resolved. **Value encodings must never be confused with public type-export hashes or JSON project manifests.**
+
+### CR12.1 Bytes: immutable owned octets
+
+- Logical domain: a **finite sequence of bytes** with octet values `0x00..0xff`, length `0..1,048,576` bytes in this *proposed first portable interchange profile*. Empty `Bytes` is valid and distinct from a null/missing value. Larger data must be conveyed by separately bounded chunked flows or a reviewed extended policy, never by an implicit unbounded allocation. The 1 MiB cap is a **candidate semantic profile limit**, not a measured runtime capability.
+- Portable typed-JSON encoding, only when the exact expected type is `aui.core/Bytes`: one JSON **string** `"0x"` followed by exactly two lowercase ASCII hexadecimal digits per byte, with no spaces or byte separators. Thus `"0x"` is empty; `"0x00ff"` is the two-byte value 00 FF. No alternate base64, uppercase, odd-length, whitespace, numeric array or implicit Unicode decoding is accepted within this candidate.
+- Decode rejects malformed prefix/hex, odd digits, oversize input and exhausted quota **before** allocation or copying. The decoder must size-check using overflow-safe arithmetic, then reserve exact owned capacity. Native pointer/length representations, allocator choice, deallocation and shared-immutable ownership remain D4/D5 obligations.
+- Portable byte value equality is length plus exact octets. Copy keeps sender ownership and requires a safe owned duplicate or proven immutable shared retain; move transfers ownership **only after** successful admission, with sender retaining ownership on rejection. Borrow is not storable, not a permitted queued/snapshot dataFlow transfer and cannot outlive the current synchronous validated scope.
+- `Bytes` does **not** mean a text `String`, file path, network packet or native `void*`. The portable typed string encoding is a serialization of bytes, **not** permission to use string operations on the native payload.
+
+### CR12.2 F64: finite IEEE-754 binary64 carrier
+
+- The initial portable logical value domain is **all finite IEEE-754 binary64 bit patterns**, including positive/negative zero, finite normals and positive/negative subnormals. Exponent bits `0x7ff` (positive/negative infinity and all quiet/signaling NaNs) **reject** with `CORE_F64_NONFINITE_UNSUPPORTED`. This deliberately avoids an unapproved NaN-payload, signaling, ordering or portable arithmetic policy in the first bounded profile.
+- Only for an expected verified `aui.core/F64` typed value, portable JSON uses a **single lowercase string** `"0x"` + exactly **16 lowercase hexadecimal digits** of the unsigned **64-bit IEEE-754 bit pattern, most significant nibble first**. For example positive zero is `"0x0000000000000000"`, negative zero `"0x8000000000000000"`, and positive 1.0 is `"0x3ff0000000000000"`. The hex string is a bit-value notation independent of host memory endianness. Decimal JSON numbers, `"NaN"`, `"Infinity"`, exponent-text spellings, uppercase or shorter hex strings are rejected.
+- The decoder validates shape, exponent and finiteness before interpreting or materializing a native float. It preserves **all accepted 64 raw bits** through portable decode/encode, including the sign of zero and subnormal payload. No canonicalization of `-0` to `+0`, flush-to-zero, rounding or approximate decimal conversion may occur silently. A later native target must prove these guarantees before claiming portable F64 support.
+- There are **two explicitly different comparisons**: `bitIdentity` compares all 64 bits (so `+0` and `-0` are different bit identities), while an optional numerically typed `equal` compares finite numeric values (so `+0` equals `-0`). Neither is a general Graph/TypeReference identity or an implicit source-language equality operator. No total ordering, approximate equality, arithmetic, hardware rounding-mode guarantee, or nonfinite transport is introduced by this proposed carrier.
+- In the sensor's `Measurement` record, the separate `valid: Bool` remains part of the public record; it does **not** turn a NaN or infinity into an accepted F64. An unavailable/failed measurement is communicated through the explicit error/result path or the record's own approved semantics, never by inventing a NaN sentinel.
+
+These choices remove ambiguity in **candidate portable value encoding**, but public core-export digests remain blocked until the **structured logical contracts** for all 15 entries and their dependency closure are approved, not merely because sample encoded values are deterministic. Source AUI floating literals/arithmetic are still gated out of initial L0/L1. The D6 canonical JSON writer remains responsible for escaping string tokens; these typed values do not change the D6 rule forbidding JSON floating-number tokens in semantic digest input.
+
+### CR12.3 Scalar/string/sum/opaque invariants across all 15 types
+
+| Logical type | Exact relevant portable rule / scope |
+| --- | --- |
+| `Unit` | One no-payload logical inhabitant; never a null native pointer, Graph omission or untrusted marker of completion |
+| `Bool` | Exactly `false` and `true` in typed JSON; numeric 0/1 and string booleans reject |
+| `U32` | Exact unsigned 0..4294967295; typed JSON decimal integer when within D6 safe range, no fraction/exponent/leading zeros |
+| `U64` | Exact unsigned 0..18446744073709551615; typed JSON canonical unsigned decimal **string**, with `"0"` as minimum and no leading zeroes (except zero), sign, exponent, whitespace or floating-point coercion |
+| `String` | Immutable Unicode scalar sequence, strict UTF-8 interchange, preserves exact scalar values and embedded U+0000; no NFC/case folding performed on values |
+| `StableKey` | Tag + exact `String` or `U64` value; retains the separate CR3 binary key framing, no implicit conversion of numeric/text keys |
+| `StateRevision` | Monotonic per UI-owner/generation; not a general U64 key, global GraphRevision or persistent snapshot epoch |
+| `Event<T>` | Typed payload with exact verified origin/generation; an event is not native subscription/callback authority |
+| `List<T>` | Immutable ordered elements of one verified nominal type, owned snapshot and D5 list budget; no hidden alias to mutable backend memory |
+| `Result<T,E>` | Exactly two provider semantic branches `Success(T)` / `Failure(E)`; no pre-admission failure or UI task metadata inserted |
+| `TaskOutcome<T,E>` | Exactly five UI request outcome branches per CR4, with explicit provenance and no conflation with provider `Result` |
+| `TaskSlot<T,E>` | Opaque affine UI-owner request slot, invalidated by owner/generation retirement; never portable/persisted graph payload |
+| `TaskTicket` | Opaque runtime-owned pending operation handle, no portable serialization or cross-owner copy/borrow escape |
+
+The table expresses logical invariants **only**. Apart from the precise proposed `Bytes` and `F64` wire carriers and the bounded U32/U64/Bool rules above, it does not introduce an arbitrary universal JSON encoding for every complex UI/runtime object. Such an encoding needs a distinct explicit type-directed contract and may be forbidden (notably opaque handles).
+
+### CR12.4 Closed outcome categories versus public type exports
+
+`AdmissionRejected`, `ProviderUnavailable` and `Cancelled` are UI-request outcomes, not substitute provider `Result` branches. The following **candidate internal category sets** explain deterministic routing without silently inventing three new verified portable core TypeIDs:
+
+- **AdmissionError category**: `invalid-arguments`, `capacity-exceeded`, `stale-view`, `capability-denied`, `unsupported-target`. Admission rejection can occur *before* any provider ticket is created; it must not be recorded as a provider failure result. When stale view prevents delivery, the runtime retains proof/cleanup rather than invoking the retired view.
+- **ProviderError category**: `provider-unavailable`, `link-unresolved`, `abi-unverified`, `transport-failure`. These indicate failure to admit or maintain a verified provider path; a provider's declared `Failure(E)` after successful operation admission is **not** converted to this runtime category.
+- **CancellationConfirmation** is not a boolean user payload. Its minimum internal proof tuple binds `TaskTicket`, exact owner and generation, and a provider-quiescence result. Only trusted runtime/provider transition to a confirmed terminal state can construct it. A cancel request, deadline, view unmount or UI close by itself provides no such proof; native resources remain owned until actual completion/quiescence.
+
+These names are **provisional internal diagnostics/control contracts**, not a completed TypeReference export. The full portable/public payload types, discriminants, exact ownership, callback origin, error fields, trust model and D4 ABI still require explicit architect decision before `TaskOutcome<T,E>` may receive a trusted exported-contract digest. A missing/error category MUST fail closed rather than be mapped silently to `Successful` or `Cancelled`.
+
+### CR12.5 Candidate vectors, limits and explicit rejection
+
+[Portable core value reference cases](../../examples/canonical-graph/core-value-boundary-cases.json) cover exact `Bytes`/`F64` bit shapes, all-zero and maximum integer bounds, nonfinite rejects, signed zero and opaque/TaskOutcome admission failures. **These are documentary expected outcomes; no AELYXORA parser, native runtime or released core export hash has executed them.**
+
+Acceptance still requires a standards-complete strict JSON decoder and exact type-directed codec, deterministic cross-host vectors for all admitted values, per-target ownership/ABI qualification, proof of reserved memory budgets and bounded error behavior, plus the missing structured core error exports and human D2/D3/D4/D6 sign-off. **CR12 is a precise proposal, not a frozen released type system.**
