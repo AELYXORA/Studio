@@ -20,7 +20,8 @@
     "mutation prose is not an immutable golden file and cannot be marked PASS until materialized and executed",
     "enum logical identity must not use native numeric tag encoding",
     "generic schema recursion does not prove type contract digest, Send trait, transport, ownership or ABI",
-    "no new core inventory entries are introduced"
+    "no new core inventory entries are introduced",
+    "Three negative scenarios include exact materialized .aui source files. Their diagnostic codes are candidate expectations; no actual native parser has produced them."
   ],
   "cases": [
     {
@@ -77,7 +78,9 @@
       "expected": "semantic-reject",
       "mutation": "Remove NoReading match arm",
       "reason": "Nonexhaustive enum match",
-      "observed": "NOT-RUN"
+      "observed": "NOT-RUN",
+      "materializedSource": "sensor-status-enum-nonexhaustive-l2.aui",
+      "expectedDiagnosticCode": "AUI_ENUM_NOT_EXHAUSTIVE"
     },
     {
       "id": "EG-08",
@@ -109,7 +112,9 @@
       "expected": "semantic-reject",
       "mutation": "Remove payload binder from BadReading branch",
       "reason": "Payload-bearing case binds exactly one immutable symbol",
-      "observed": "NOT-RUN"
+      "observed": "NOT-RUN",
+      "materializedSource": "sensor-status-enum-missing-binder-l2.aui",
+      "expectedDiagnosticCode": "AUI_ENUM_PAYLOAD_MISSING"
     },
     {
       "id": "EG-12",
@@ -197,7 +202,9 @@
       "expected": "semantic-reject",
       "mutation": "Use List with two type arguments",
       "reason": "Declared arity 1",
-      "observed": "NOT-RUN"
+      "observed": "NOT-RUN",
+      "materializedSource": "nested-generic-wrong-arity-l2.aui",
+      "expectedDiagnosticCode": "AUI_TYPE_ARITY"
     },
     {
       "id": "EG-23",
