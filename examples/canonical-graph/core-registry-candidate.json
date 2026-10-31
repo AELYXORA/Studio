@@ -3,7 +3,7 @@
   "registryId": "aui.core/canonical-candidate",
   "status": "PROPOSED-NOT-ACCEPTED",
   "sourceOfTruth": "docs/architecture/d3-core-registry-value-contract.md",
-  "notes": "Single current design inventory, NOT a second Project Graph or architecture edition. The 13-entry historical registry and its old hash vectors remain unchanged. Summaries and CR12 portable codecs are design-only review aids, not frozen digest inputs, ABI layout or a verified registry fingerprint.",
+  "notes": "Single 15-entry current documentary candidate. semanticModel is a machine-inspectable proposed definition index tied to owning CR2–CR13 rules, NOT independently approved immutable semantic bytes, native layouts, or a trustworthy source for computing production digests. All exportStatus values stay UNVERIFIED; historic 13-entry registry/vectors remain untouched.",
   "entries": [
     {
       "typeId": "aui.core/Bool",
@@ -18,7 +18,20 @@
       "semanticSummary": "Exactly two logical values; candidate portable typed JSON tokens true or false only, never integer truthiness",
       "unresolvedObligations": [
         "architect acceptance of typed JSON Bool external encoding profile"
-      ]
+      ],
+      "semanticModel": {
+        "category": "scalar",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "typed-json-bool",
+        "ownershipClass": "immutable-copy",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR2/Bool/two-values",
+          "CR12/Bool/typed-boolean"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/Bytes",
@@ -34,7 +47,21 @@
         "architect approval of first-portable-value size/encoding policy in D3 CR12",
         "native owned storage and cross-domain retain/move/cleanup proof",
         "D5 target buffer budget qualification"
-      ]
+      ],
+      "semanticModel": {
+        "category": "immutable-sequence",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "typed-json-bytes-hex",
+        "ownershipClass": "owned-immutable",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR12/Bytes/finite-octets",
+          "CR12/Bytes/max-1048576",
+          "CR12/Bytes/move-on-admission"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/Event",
@@ -48,7 +75,22 @@
       "semanticSummary": "Typed immutable event occurrence; origin and generation validated by runtime; no implicit native subscription",
       "unresolvedObligations": [
         "source event payload/provenance export binding and exact delivery proof"
-      ]
+      ],
+      "semanticModel": {
+        "category": "generic-value",
+        "typeParameters": [
+          "T"
+        ],
+        "variants": [],
+        "portableCarrier": "deferred-typed-payload",
+        "ownershipClass": "conditional-owned",
+        "graphPayloadEligible": false,
+        "ruleIds": [
+          "CR2/Event/origin-generation",
+          "CR13/Event/not-native-subscription"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/F64",
@@ -65,7 +107,21 @@
         "architect acceptance of finite-only and bit-exact portable policy in D3 CR12",
         "target ABI and no-flush-to-zero/subnormal preservation proof",
         "arithmetic/rounding semantics if later exposed in source language"
-      ]
+      ],
+      "semanticModel": {
+        "category": "scalar",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "typed-json-f64-bits",
+        "ownershipClass": "immutable-copy",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR12/F64/finite-only",
+          "CR12/F64/bit-exact-signed-zero",
+          "CR12/F64/subnormal-preservation"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/List",
@@ -79,7 +135,23 @@
       "semanticSummary": "Finite immutable ordered owned snapshot; conditional Send, bounded by D5",
       "unresolvedObligations": [
         "generic-instance ownership/layout proof and accepted full logical trait closure"
-      ]
+      ],
+      "semanticModel": {
+        "category": "generic-value",
+        "typeParameters": [
+          "T"
+        ],
+        "variants": [],
+        "portableCarrier": "deferred-typed-payload",
+        "ownershipClass": "conditional-owned",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR3/List/immutable-snapshot",
+          "CR11/List/nominal-only-argument",
+          "CR5/List/conditional-send"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/Result",
@@ -93,7 +165,26 @@
       "semanticSummary": "Closed provider result Success(T)/Failure(E), distinct from UI request outcome",
       "unresolvedObligations": [
         "generic-instance closure and target layout proof"
-      ]
+      ],
+      "semanticModel": {
+        "category": "tagged-union",
+        "typeParameters": [
+          "T",
+          "E"
+        ],
+        "variants": [
+          "Success(T)",
+          "Failure(E)"
+        ],
+        "portableCarrier": "deferred-typed-payload",
+        "ownershipClass": "conditional-owned",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR4/Result/provider-only",
+          "CR13/Result/two-branches"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/StableKey",
@@ -107,7 +198,23 @@
       "semanticSummary": "Tagged StringKey(String) or U64Key(U64), with exact tag+value equality and portable framing",
       "unresolvedObligations": [
         "native-layout proof"
-      ]
+      ],
+      "semanticModel": {
+        "category": "tagged-union",
+        "typeParameters": [],
+        "variants": [
+          "StringKey(String)",
+          "U64Key(U64)"
+        ],
+        "portableCarrier": "tagged-stable-key",
+        "ownershipClass": "owned-immutable",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR3/StableKey/exact-tag-and-value",
+          "CR3/StableKey/framed-binary"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/StateRevision",
@@ -123,7 +230,20 @@
       "semanticSummary": "Monotonic owner-scoped revision, never GraphRevision",
       "unresolvedObligations": [
         "native concurrency and generation proof"
-      ]
+      ],
+      "semanticModel": {
+        "category": "scalar",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "no-portable-serialization",
+        "ownershipClass": "ui-owner-affine",
+        "graphPayloadEligible": false,
+        "ruleIds": [
+          "CR2/StateRevision/owner-generation",
+          "CR12/StateRevision/not-GraphRevision"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/String",
@@ -137,7 +257,20 @@
       "semanticSummary": "Immutable sequence of Unicode scalar values, exact comparison and UTF-8 portable boundary",
       "unresolvedObligations": [
         "target-owned representation and Send proof"
-      ]
+      ],
+      "semanticModel": {
+        "category": "immutable-sequence",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "strict-utf8",
+        "ownershipClass": "owned-immutable",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR3/String/exact-scalars",
+          "CR3/String/no-implicit-normalization"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/TaskOutcome",
@@ -153,7 +286,30 @@
         "approved closed portable error/control payload export definitions and digests",
         "trusted quiescence/cancellation proof and source-to-Graph outcome linkage",
         "generic instance closure, native tagged ABI and ownership proof"
-      ]
+      ],
+      "semanticModel": {
+        "category": "tagged-union",
+        "typeParameters": [
+          "T",
+          "E"
+        ],
+        "variants": [
+          "Successful(T)",
+          "Failed(E)",
+          "AdmissionRejected(AdmissionError)",
+          "Cancelled(CancellationConfirmation)",
+          "ProviderUnavailable(ProviderError)"
+        ],
+        "portableCarrier": "deferred-typed-payload",
+        "ownershipClass": "conditional-owned",
+        "graphPayloadEligible": false,
+        "ruleIds": [
+          "CR4/TaskOutcome/five-branches",
+          "CR13/TaskOutcome/closed-control",
+          "T9/TaskOutcome/indeterminate-ui-slot"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/TaskSlot",
@@ -168,7 +324,23 @@
       "semanticSummary": "Opaque affine UI-owner-bound request slot, never portable persisted value",
       "unresolvedObligations": [
         "runtime handle/lifetime proofs"
-      ]
+      ],
+      "semanticModel": {
+        "category": "opaque-token",
+        "typeParameters": [
+          "T",
+          "E"
+        ],
+        "variants": [],
+        "portableCarrier": "no-portable-serialization",
+        "ownershipClass": "ui-owner-affine",
+        "graphPayloadEligible": false,
+        "ruleIds": [
+          "CR11/TaskSlot/not-Graph-payload",
+          "T3/TaskSlot/single-active"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/TaskTicket",
@@ -182,7 +354,20 @@
       "semanticSummary": "Opaque affine runtime request identity, never portable persisted value",
       "unresolvedObligations": [
         "generation/reclamation and native handle proofs"
-      ]
+      ],
+      "semanticModel": {
+        "category": "opaque-token",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "no-portable-serialization",
+        "ownershipClass": "runtime-affine",
+        "graphPayloadEligible": false,
+        "ruleIds": [
+          "CR11/TaskTicket/not-Graph-payload",
+          "T9/TaskTicket/native-ownership"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/U32",
@@ -197,7 +382,20 @@
       "semanticSummary": "Unsigned 0..4294967295; candidate typed JSON integer token, strict no exponent/leading zeroes",
       "unresolvedObligations": [
         "architect acceptance of typed JSON U32 external encoding profile"
-      ]
+      ],
+      "semanticModel": {
+        "category": "scalar",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "typed-json-u32",
+        "ownershipClass": "immutable-copy",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR2/U32/unsigned-32",
+          "CR12/U32/exact-integer"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/U64",
@@ -212,7 +410,20 @@
       "semanticSummary": "Unsigned 0..18446744073709551615; candidate typed JSON decimal string without leading zeroes, never floating-point coercion",
       "unresolvedObligations": [
         "architect acceptance of typed JSON U64 external encoding profile"
-      ]
+      ],
+      "semanticModel": {
+        "category": "scalar",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "typed-json-u64-decimal-string",
+        "ownershipClass": "immutable-copy",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR2/U64/unsigned-64",
+          "CR12/U64/string-without-float"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     },
     {
       "typeId": "aui.core/Unit",
@@ -225,7 +436,20 @@
         "Send"
       ],
       "semanticSummary": "Single logical zero-payload value, not a native null pointer",
-      "unresolvedObligations": []
+      "unresolvedObligations": [],
+      "semanticModel": {
+        "category": "scalar",
+        "typeParameters": [],
+        "variants": [],
+        "portableCarrier": "deferred-typed-payload",
+        "ownershipClass": "immutable-copy",
+        "graphPayloadEligible": true,
+        "ruleIds": [
+          "CR2/Unit/single-value",
+          "CR12/Unit/not-null-native-pointer"
+        ]
+      },
+      "exportStatus": "UNVERIFIED"
     }
   ]
 }
