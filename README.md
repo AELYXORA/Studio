@@ -1,67 +1,33 @@
 # AELYXORA Studio
 
-**Canonical architecture direction:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](docs/architecture/canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
-
-**Project phase: documentation-first.** [Design completion gates](docs/architecture/design-completion-gates.md) control readiness before further implementation. [ChatGPT Plus integration design](docs/architecture/chatgpt-connection.md) covers eligible official sign-in and account consent; not yet implemented.
-
-**Current implementation status:** [verified artifacts, missing components and authoritative milestones](docs/architecture/PROJECT-STATUS.md).
-
 **Imagine. Design. Engineer.**
 
-**Architecture-first, AI-native RAD for native systems software.** Its primary interface is an **interactive Project Architecture Map with an integrated, context-aware AI chat**. The center is neither a form designer nor a source editor: it is the live system graph. **Architecture, workflows and data flows come first; AI implements approved component contracts primarily in target-native Assembly.** Declarative AUI preview and UX are downstream projections. Humans own architectural decisions and approvals. The design goal is rapid translation from an idea to a verified native result, not manual widget-driven RAD.
+Architecture-first, AI-native RAD Studio for professional native and systems software. The primary workspace is an interactive architecture map accompanied by a context-aware AI engineering assistant. Source, declarative AUI, component properties, diagnostics and tests are projections of one underlying architecture.
 
-## Main workspace
+## One architecture — one Project Graph
 
-The architecture map occupies the main canvas. A dockable AI chat stays available beside it and receives the explicitly selected nodes, relationships, contracts and diagnostics as context. AI suggestions appear as reviewable graph/source diffs. Source, declarative UI, properties and test results are drill-down views reachable from map nodes.
+**There are no numbered product or architecture editions.** AELYXORA has exactly [ONE Canonical Project Graph](docs/architecture/canonical-project-graph-and-components.md). It includes typed components and ports, public operation contracts, workflows/state machines, typed data flows, targets, hardware resource claims, ownership and retired identities. Nothing is split into separate graph models by capability. Project revision is an edit/history counter, not an architecture edition.
 
-## Hardware-oriented engineering
+[Canonical Project Graph schema](schemas/canonical-project-graph.schema.json) · [Canonical Component Package schema](schemas/canonical-component-package.schema.json) · [Canonical TypeReference schema](schemas/aui-type-reference.schema.json) · [Unified sensor reference](examples/canonical-graph/README.md)
 
-AELYXORA targets native systems software: device-facing applications, drivers, firmware-support tooling, protocols, embedded and desktop software, low-level libraries and performance-critical services. The project graph must represent CPU/ISA, OS/ABI, memory regions and ownership, interrupts, MMIO/IO, DMA, concurrency, real-time constraints, devices, buses and hardware interfaces where relevant. Unsupported target capabilities must be explicit.
+Older experimental schemas and their digest fixtures are retained as **historical research evidence**, not as parallel product architectures or development targets. Their bytes and expected historic hashes are not rewritten. Any future import must preserve all meaning-bearing fields and obtain a fresh approved immutable snapshot.
 
-**Technology direction:** own declarative UI language and Assembly-first core using Clang/LLVM assembler and per-target platform adapters. No Qt/QML/C++/FMX dependency in the target Studio implementation. A single native Assembly source is not portable between different CPU instruction sets.
+## Engineering principles
 
-## AI access
+- The architecture map is the semantic center; AI proposes reviewable changes, while humans approve decisions.
+- Every component operation has explicit types, effects, capabilities, ownership and target constraints.
+- Workflow transitions, data-flow channels and hardware claims exist in the same canonical graph and cannot silently disappear during conversion.
+- Native implementation is Assembly-first with verified target-specific ABI and adapters; AUI is the project's own declarative language. No Qt/QML/C++ runtime dependency in the Studio core.
+- Project Graph updates, running task state, renderer frames, native device effects and durable D6 snapshots have separate transaction boundaries.
+- Exact source/package identity, signed review provenance, runtime capabilities, memory safety and Win64 module admission are separate security checks.
+- No unapproved code execution, implicit OS privilege or unknown-source integration. No CI before release preparation.
 
-Preferred user experience: authorize ChatGPT through an officially supported provider integration, ideally with an eligible ChatGPT subscription. This is a goal, **not a working feature or a guarantee that ChatGPT Plus can be used as arbitrary API access**. No credential or browser-session scraping.
+## Status — documentation phase
 
-## Current status
+**Architecture contracts are PROPOSED, not architect-approved, implemented or native-tested.** D1–D8 human review gates remain OPEN. The repository has specifications, reference JSON and a limited experimental Linux x86-64 Assembly lexical preflight, **not** a working Studio compiler, full native AUI runtime, visual architecture map, Windows ABI integration or released product.
 
-Current repository contains architecture specifications, illustrative JSON fixtures, and an experimental Linux x86-64 Assembly JSON lexical preflight. It is not a complete JSON parser or Project Graph validator. There is no runnable AUI compiler, runtime, architecture map, chat integration, renderer or released Studio.
+The [unified sensor example](examples/canonical-graph/README.md) demonstrates typed components, data flow, state transitions and hardware claims in a single JSON document; its inserted digest strings are explicitly **synthetic placeholders**, not validated public hashes, verified device permissions or signed modules.
 
-## Working documents
+Read [Architecture](docs/architecture/README.md), [Current verified status](docs/architecture/PROJECT-STATUS.md), [Specification matrix](docs/architecture/specification-completion-matrix.md), [Design gates](docs/architecture/design-completion-gates.md), [Roadmap](docs/product/roadmap.md), [Assembly-first platform](docs/architecture/assembly-first.md) and [ChatGPT integration constraints](docs/architecture/chatgpt-connection.md).
 
-**Design-first work program (proposed for review):** [Architecture-to-Execution Contract](docs/architecture/architecture-to-execution-contract.md) and [Specification Completion Matrix](docs/architecture/specification-completion-matrix.md). Project sequence: complete/approve design -> implementation -> testing -> correction/re-verification. None of these proposed documents constitutes a design freeze.
-
-
-- [Architecture — source of truth](docs/architecture/README.md)
-- [Interactive map workspace](docs/architecture/workspace.md)
-- [Canonical project graph](docs/architecture/project-graph.md)
-- [AI engineer and ChatGPT integration](docs/architecture/ai-engineer.md)
-- [Hardware and targets](docs/architecture/hardware-and-targets.md)
-- [Short evidence-based roadmap](docs/product/roadmap.md)
-- [Declarative UI](docs/architecture/declarative-ui.md)
-- [Assembly-first toolchain](docs/architecture/assembly-first.md)
-
-**Documentation policy:** architecture README is canonical, roadmap contains observable milestones, other documents support implementation. No GitHub Actions / CI before release preparation.
-
-- [Complete Studio platform contract — roles, workflows, palettes, events, tasks, data flow, zero-cost goals](docs/architecture/studio-platform-contract.md)
-
-**Architecture review status:** [D2/D6 integrated baseline review](docs/architecture/d2-d6-baseline-review.md) tracks open P0 decisions and distinguishes proposals from accepted contracts. No product implementation is authorized until the full D1–D8 design baseline is explicitly approved. All documentation changes are committed directly to main.
-
-**Documentation-only integration fixture:** [Locked Pure Reference](examples/locked-pure-reference/README.md) demonstrates exact graph/package/lock/snapshot byte relationships with two illustrative Assembly source files. The source files are test inputs, not a Studio compiler/runtime or a verified ABI implementation. [Semantic projection contract](docs/architecture/d2-d6-semantic-projection.md) and [offline dependency resolution](docs/architecture/d6-offline-dependency-resolution.md) remain Proposed.
-
-**D3 first-slice language proposal:** [AUI grammar L0/L1](docs/architecture/d3-first-language-profile.md), [typed property/effect rules](docs/architecture/d3-type-and-binding-profile.md), [event and command linkage](docs/architecture/d3-event-delivery-and-command-linkage.md) and [D3 open review](docs/architecture/d3-language-review.md). New design fixtures are [pure view](examples/aui-language/status-panel-l0.aui) and [typed command intent](examples/aui-language/linked-consumer-panel.aui). The project still has no finished AUI parser, renderer, linked executable or D3 native test evidence.
-
-**D3+ documentation milestone:** [L2 reactive state](docs/architecture/d3-state-derived-binding-contract.md), [L3 typed Task/Result](docs/architecture/d3-task-result-lifecycle.md) and [source/Graph/snapshot reconciliation](docs/architecture/d3-source-snapshot-reconciliation.md), with [L2/L3 examples](examples/aui-language/D3PLUS-README.md). L0/L1 language remains unchanged. These are unaccepted design proposals; no Studio parser, AUI native runtime, approval validator, target ABI or executable integration test was added.
-
-**D3 L4 documentation proposal:** [Keyed Dynamic Views](docs/architecture/d3-keyed-dynamic-view-lifecycle.md), [D3/D4/D5 lifecycle review](docs/architecture/d3-d4-d5-lifecycle-consistency-review.md) and [keyed source/trace examples](examples/aui-language/L4-README.md). Reorder preserves compatible live view identity; remove/reinsert or change parent mounts a new incarnation. The reference-model fixture is not an AELYXORA runtime test. No product implementation or accepted architecture gate follows from this specification.
-
-**D3 L4 advanced UI proposal:** [Keyed Dynamic Views](docs/architecture/d3-keyed-dynamic-view-lifecycle.md), [D3/D4/D5 lifecycle review](docs/architecture/d3-d4-d5-lifecycle-consistency-review.md), and [keyed source/trace fixtures](examples/aui-language/L4-README.md). Same-parent reorder retains compatible identity; deletion or reinsertion gets a new incarnation. These are unaccepted specifications, not working AUI runtime tests.
-
-**D3/D4/D5 core and bounded UI proposal:** [Core Types](docs/architecture/d3-core-registry-value-contract.md), [Native Value ABI](docs/architecture/d4-core-value-abi-contract.md), [UI Resource Budget](docs/architecture/d5-ui-resource-budget-and-publication.md), [cross-owner review](docs/architecture/d3-d4-d5-core-contract-review.md). Proposed [registry inventory](examples/aui-language/d3-core-registry-proposal.json), [StableKey byte vectors](examples/aui-language/d3-core-value-vectors.json) and [budget arithmetic vectors](examples/aui-language/d5-budget-reference-vectors.json) are not native runtime/ABI results. D1–D8 remain unaccepted, Stage I documentation only.
-
-**D2/D3/D4/D5/D6 proposed Win64-first baseline:** [Versioned AUI core export digests](docs/architecture/d2-d3-core-export-digest-contract.md), [Win64 call frame](docs/architecture/d4-win64-native-component-abi.md), [Win64 module and outcome descriptors](docs/architecture/d4-win64-module-and-result-descriptors.md), [Windows UI host](docs/architecture/d5-windows-host-runtime-contract.md) and [open cross-gate review](docs/architecture/d2-d6-win64-baseline-review.md). Reference hashes/layout offsets are design artifacts, not released ABI or measured Windows behavior. Product code unchanged; D1–D8 still await explicit acceptance.
-
-**Current Phase I documentation:** [G1 generic type identities](docs/architecture/d2-d3-generic-instantiation-identity.md), [explicit v1/v2 compatibility](docs/architecture/d2-d6-core-profile-compatibility.md), [Win64 module trust and admission](docs/architecture/d4-win64-module-trust-and-admission.md), [Win64 deterministic build inputs](docs/architecture/d6-win64-reproducible-build-contract.md), and [D2–D6 consistency review](docs/architecture/d2-d6-generic-trust-repro-consistency-review.md). Existing pure v1 reference remains untouched. All are Proposals, not approved or implemented native code.
-
-**TypeReference v2 and secure execution proposal:** [v2 logical type/record and generic resolution](docs/architecture/d2-d6-typeref-v2-resolution.md), [signed dual reviewer receipts](docs/architecture/d2-d6-signed-approval-receipt.md), [end-to-end typed source/Graph→Win64 trace](docs/architecture/d2-d6-typed-win64-end-to-end-trace.md) and [14-item consistency review](docs/architecture/d2-d6-typeref-approval-consistency-review.md). Old v1 project fixtures are unchanged; all proposed Ed25519 approvals and synthetic schema fixtures are NOT executable security evidence.
+**Workflow:** complete one coherent architecture -> explicit human review/acceptance -> implementation -> native tests/security checks -> fixes/reverification. Work directly in main. Existing frozen reference artifacts are left intact.
