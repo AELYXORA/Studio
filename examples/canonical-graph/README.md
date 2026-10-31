@@ -10,3 +10,5 @@
 The historical sensor example was read without editing. We converted its meaning-bearing workflows, dataFlow policies, resource claims and edges into one design-only graph without omitting them.
 
 Authoritative design direction: [One Canonical Project Graph and Component Model](../../docs/architecture/canonical-project-graph-and-components.md). The JSON schemas check shape, not signer permissions, actual hardware, runtime scheduling or ABI. D1–D8 still await human approval.
+
+[32 proposed rejection scenarios](negative-cases.json) cover type mismatches, workflow transitions, dataFlow ownership/backpressure, hardware claims, retired identity reuse and approval; they are test designs, not executed outcomes.
