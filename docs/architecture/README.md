@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 source and syntax-memory handoff — proposed
+
+[Physical T0 source/token/CST/AST contract](aui-compiler-t0-physical-contract.md) proposes exact internal source/token/trivia/CST/AST records, lossless byte coverage, immutable source spans, Unicode/profile safeguards, parser recovery restrictions and fail-closed handoff to TypedHIR. Numeric kind registries and native assembler tests remain P0; this is **not an implemented compiler**.
+
 ## Complete IR verifier handoff — proposed
 
 [IR Verifier and Pass Evidence](aui-ir-verifier-and-pass-evidence.md) specifies bounded, fail-closed T1–T6 validation, exhaustive 139-tag dispatch obligations, staged semantic proofs, checked arena/Ref64/Span16 traversal, immutable pass receipts, optimization preservation and atomic publication/failure behavior. This is a **documentation candidate**, not implemented verification or authorization; all proposed acceptance tests remain NOT-RUN. It complements the existing [tag/payload catalogue](aui-compiler-ir-payload-contract.md) rather than replacing it.
