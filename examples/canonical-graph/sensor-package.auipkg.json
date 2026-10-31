@@ -1,0 +1,175 @@
+{
+  "format": "aui.component-package",
+  "packageId": "example.sensor",
+  "packageVersion": "0.1.0",
+  "targets": [
+    {
+      "triple": "aarch64-unknown-linux-gnu",
+      "status": "planned"
+    }
+  ],
+  "components": [
+    {
+      "typeId": "example.sensor/driver",
+      "ports": [
+        {
+          "id": "sample",
+          "direction": "out",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/RawSample",
+            "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        }
+      ],
+      "capabilities": [
+        "i2c.transfer"
+      ],
+      "sources": [
+        {
+          "path": "src/aarch64/driver.S",
+          "target": "aarch64-unknown-linux-gnu",
+          "ownership": "human"
+        }
+      ]
+    },
+    {
+      "typeId": "example.sensor/decoder",
+      "ports": [
+        {
+          "id": "raw",
+          "direction": "in",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/RawSample",
+            "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        },
+        {
+          "id": "reading",
+          "direction": "out",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/Measurement",
+            "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        }
+      ],
+      "capabilities": [],
+      "sources": [
+        {
+          "path": "src/aarch64/decoder.S",
+          "target": "aarch64-unknown-linux-gnu",
+          "ownership": "generated"
+        }
+      ],
+      "commands": [
+        {
+          "id": "Decode",
+          "inputs": [
+            {
+              "name": "raw",
+              "typeRef": {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/RawSample",
+                "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+              }
+            }
+          ],
+          "effects": [],
+          "domain": "io-worker",
+          "sideEffectClass": "none",
+          "retryPolicy": "never",
+          "successTypeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/Measurement",
+            "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+          },
+          "failureTypeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/DecodeError",
+            "contractDigest": "3333333333333333333333333333333333333333333333333333333333333333"
+          },
+          "requiredCapabilities": [],
+          "declaredTargets": [
+            "aarch64-unknown-linux-gnu"
+          ]
+        }
+      ]
+    }
+  ],
+  "dependencies": [],
+  "testFixtures": [],
+  "types": [
+    {
+      "typeId": "example.sensor/RawSample",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "bytes",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/Bytes",
+            "contractDigest": "4444444444444444444444444444444444444444444444444444444444444444"
+          }
+        },
+        {
+          "name": "capturedAt",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/U64",
+            "contractDigest": "5555555555555555555555555555555555555555555555555555555555555555"
+          }
+        }
+      ]
+    },
+    {
+      "typeId": "example.sensor/Measurement",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "value",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/F64",
+            "contractDigest": "6666666666666666666666666666666666666666666666666666666666666666"
+          }
+        },
+        {
+          "name": "valid",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/Bool",
+            "contractDigest": "7777777777777777777777777777777777777777777777777777777777777777"
+          }
+        }
+      ]
+    },
+    {
+      "typeId": "example.sensor/DecodeError",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "code",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/U32",
+            "contractDigest": "8888888888888888888888888888888888888888888888888888888888888888"
+          }
+        }
+      ]
+    }
+  ],
+  "exportedTypeSetDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}
