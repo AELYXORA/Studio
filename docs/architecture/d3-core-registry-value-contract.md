@@ -171,3 +171,43 @@ These names are **provisional internal diagnostics/control contracts**, not a co
 [Portable core value reference cases](../../examples/canonical-graph/core-value-boundary-cases.json) cover exact `Bytes`/`F64` bit shapes, all-zero and maximum integer bounds, nonfinite rejects, signed zero and opaque/TaskOutcome admission failures. **These are documentary expected outcomes; no AELYXORA parser, native runtime or released core export hash has executed them.**
 
 Acceptance still requires a standards-complete strict JSON decoder and exact type-directed codec, deterministic cross-host vectors for all admitted values, per-target ownership/ABI qualification, proof of reserved memory budgets and bounded error behavior, plus the missing structured core error exports and human D2/D3/D4/D6 sign-off. **CR12 is a precise proposal, not a frozen released type system.**
+
+
+## CR13. Closed TaskOutcome control payloads and public contract readiness — one-model proposal
+
+**Status: PROPOSED / review-only.** This refines the five existing `TaskOutcome<T,E>` branches without adding `AdmissionError`, `ProviderError` or `CancellationConfirmation` as independently importable core TypeIDs. Their nested **logical payload definitions** belong to the same `TaskOutcome` template's public semantic contract. [T9](d3-task-result-lifecycle.md) continues to own runtime transitions, while [C10/C12](canonical-project-graph-and-components.md) owns graph/export identity. Opaque native tickets and trusted proof artifacts remain runtime resources, never public payload bytes.
+
+### CR13.1 Complete candidate discriminants and ordered branches
+
+The `TaskOutcome<T,E>` logical template has exactly two invariant, fully resolved nominal type parameters, ordered `T,E`. Its closed case order is **Successful(T), Failed(E), AdmissionRejected(AdmissionError), Cancelled(CancellationConfirmation), ProviderUnavailable(ProviderError)**. Case spellings and their payload contracts are semantic, not labels or native ABI tag numbers. An accepted provider `Result<T,E>` has **only** `Success(T)` and `Failure(E)`; it does not have the TaskOutcome UI admission cases.
+
+For *candidate logical values only*, the three nested payload definitions are:
+
+| Nested payload | Public logical fields | Allowed values and rule |
+| --- | --- | --- |
+| `AdmissionError` | `code` | Closed enum: `invalid-arguments`, `capacity-exceeded`, `stale-view`, `capability-denied`, `unsupported-target`. Requires definitive proof that provider dispatch never occurred. |
+| `ProviderError` | `phase`, `code` | `phase` is `never-admitted` or `indeterminate-after-admission`. `code` is `provider-unavailable`, `link-unresolved`, `abi-unverified`, `transport-failure`. The admissible (phase,code) matrix below is mandatory. |
+| `CancellationConfirmation` | `state` | Constant `confirmed-quiescent`. Only a trusted terminal provider/runtime proof can construct this state; the public value is **not** itself evidence that a raw native handle is safe to free. |
+
+**Pair matrix for ProviderError:** `never-admitted` permits any of the four codes **only with positive no-dispatch proof**. `indeterminate-after-admission` permits only `provider-unavailable` and `transport-failure` when dispatch may have occurred but terminal/quiescence is unknown. `link-unresolved` and `abi-unverified` belong to pre-admission validation; if discovered only after dispatch, report a distinct internal integrity incident and retain uncertainty/ownership rather than misrepresenting a normal failure. An implementation may not map `indeterminate-after-admission` to `AdmissionRejected` or `Cancelled`.
+
+**Closed-object rule:** the candidate value representations have only the fields listed above, with no `message`, OS error number, raw pointers, secret tokens, `TaskTicket`, arbitrary metadata, user-controlled proof or untyped `details` property. Human-readable diagnostics and source spans belong to a separate redacted evidence channel, not to these portable semantic values.
+
+**Provenance and constructor rule:** `AdmissionRejected` needs an internally authenticated no-dispatch decision; `ProviderUnavailable(never-admitted)` likewise requires no-dispatch proof; `ProviderUnavailable(indeterminate-after-admission)` may settle the *original UI slot once* but does not settle native provider ownership; `Cancelled` requires trusted provider terminal/quiescence confirmation for that exact owner/ticket/generation and cannot be constructed by calling `TaskOutcome.Cancelled` from user AUI source. An already settled UI slot cannot be settled again by late completion; that completion remains an owned cleanup/audit event.
+
+**Typed source exposure is deliberately restricted:** AUI may exhaustively *match* a received TaskOutcome and inspect its closed, explicitly permitted `code`/`phase`/`state` fields through a future accepted grammar, but may not construct or forge these three runtime-control payloads, persist an opaque request ticket or call a native cancellation-confirmation constructor. The initial L0/L1 source subset still does not admit arbitrary TaskOutcome values.
+
+### CR13.2 One registry, two separate admissibility checks
+
+The [current 15-entry inventory](../../examples/canonical-graph/core-registry-candidate.json) now carries an explicit `semanticModel` **candidate** per type. Its `category`, ordered `typeParameters`, ordered `variants`, `portableCarrier` and `ownershipClass` are machine-inspectable design inputs. The companion [inventory schema](../../schemas/canonical-core-registry-candidate.schema.json) validates their shape, not whether an implementation is safe.
+
+1. **Logical definition consistency:** match the `semanticModel` against this owning CR2–CR13 contract, enforce exact type ID/arity/variant order, generic argument closure, ownership traits and the current language gate. An unsupported/opaque value must be rejected as a portable Graph/D6 payload regardless of its syntactically valid TypeReference.
+2. **Hash and execution readiness:** canonical semantic identity is computed only after *all* referenced core/nested error definitions and their immutable rule semantics are approved and authenticated. A JSON object's `semanticModel` and `semanticSummary` are **not** an independently trustworthy public registry; changing them without a reviewed semantic contract cannot produce a valid `coreRegistryFingerprint`. All 15 entries remain `exportStatus: "UNVERIFIED"` pending sign-off, signed source closure, independent canonical vectors and native target layout/ownership evidence. **No automatic digest promotion** from historical core vectors or from syntax-only schema checks.
+
+The one current runtime/source type boundary MUST reject `TaskTicket` and `TaskSlot<T,E>` as public graph dataFlow types, record fields or command return payloads. `Event<T>` is a source-facing event value with required origin/generation proofs, not a raw transport capability. `TaskOutcome<T,E>` itself can be a typed UI local result only where the L3 contract admits it; it is not an unqualified D2 hardware stream type.
+
+### CR13.3 Design-only verification and still-open questions
+
+The [TaskOutcome control negative/positive matrix](../../examples/canonical-graph/task-control-payload-cases.json) defines strict accepted/rejected **logical shape** expectations, including invalid phase-code combinations, attempts to forge cancellation, open objects, unknown enums and false no-dispatch proof. It never treats a syntactically well-formed value as *runtime proven*; values labeled `shape-accept` still require authenticated origin at runtime.
+
+**P0 OPEN:** exact finalized structured type/export byte projection (including semantic meaning of each rule and type accessibility), verified core registry content identity and public digests, full TaskOutcome outcome transport and ABI discriminants, constructor authorization/non-forgeability, retained indeterminate provider state and disposal policy, AUI L3 source match grammar, D4 ownership, D5 bounds and D6 evidence retention. No golden hash, core fingerprint, native acceptance or architect sign-off is claimed.
