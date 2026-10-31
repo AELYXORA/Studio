@@ -1,5 +1,7 @@
 # D2/D3/D6 — Versioned Core Export Contract Digests
 
+**HISTORICAL EXPLORATORY DESIGN — SUPERSEDED AS ACTIVE ARCHITECTURE.** The single current design is [ONE Canonical Project Graph and Component Model](canonical-project-graph-and-components.md). Numbered experimental formats, schemas and test hashes below remain in the repository only as immutable research/provenance references. They are NOT alternative product architectures, not implementation gates and not accepted release formats. Do not develop new features by creating another numbered graph model.
+
 **Status: PROPOSED, not architect-approved, compiled, native-validated, or signed.** The [D2 Export Identity v1](d2-export-contract-identity.md) and existing first-profile [locked pure reference](../../examples/locked-pure-reference/integrity-vectors.json) remain unchanged. [D3 Core Registry](d3-core-registry-value-contract.md) owns logical types; [D6 Canonical JSON](d6-canonical-persistence.md) owns byte normalization. This document defines a separate candidate extension, not a silent replacement for the existing public export digest.
 
 ## CD1. Versioned export profiles
