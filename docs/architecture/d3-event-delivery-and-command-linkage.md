@@ -90,3 +90,7 @@ No code generation or UI execution is authorized by this document alone.
 ## E8. Hardware authority is never inferred from AUI commands
 
 [D2 Hardware Resource Contract](d2-hardware-resource-contract.md) models typed MMIO, IRQ, DMA and memory claims in a versioned hardware project profile; [D2↔D3 Command Boundary](d2-d3-hardware-command-boundary.md) specifies how a future command request must match exact graph owner, resource-access edge, claim, component OperationID, target adapter, declared effects and **live capability** before any hardware provider can run. L0/L1 source contains no direct device operations; a successful button event or source-to-graph link map does not grant permission. A view replacement cannot release in-flight DMA ownership. All targets and ABI checks remain NOT-RUN.
+
+## L3 completion boundary (PROPOSED)
+
+L1 send stays request-only. [L3 Task/Result](d3-task-result-lifecycle.md) adds a separate bounded TaskSlot submit, one underlying provider await and an exhaustive outcome match. UI event admission, D2 command ticket terminal outcome and UI StateRevision commit remain different stages with independent queues and potential rejection. [L2 State](d3-state-derived-binding-contract.md) commits only one selected outcome arm without hardware effects. [Source snapshot](d3-source-snapshot-reconciliation.md) must receive real approval before any GRAPH_LINKED claim. Native tests NOT-RUN.
