@@ -99,11 +99,11 @@ References: [Declarative UI](declarative-ui.md), [Assembly ABI](assembly-first.m
 
 ## Normative implementation contracts
 
-Read in order: [Workspace and first-screen UX](workspace.md) → [Canonical Project Graph](project-graph.md) → [Hardware and target contracts](hardware-and-targets.md) → [AI Engineer and ChatGPT access](ai-engineer.md).
+Read in order: [Workspace and first-screen UX](workspace.md) → [One Canonical Project Graph and Component Model](canonical-project-graph-and-components.md) → [Canonical Graph Consistency Audit](canonical-graph-consistency-audit.md) → [Hardware and target contracts](hardware-and-targets.md) → [AI Engineer and ChatGPT access](ai-engineer.md). The older [Project Graph draft](project-graph.md) is reference material, not a second canonical owner.
 
 Supporting documents: [Component ABI](component-contract.md), [Declarative UI](declarative-ui.md), [Assembly-first implementation](assembly-first.md), [Binding semantics](bindings-and-runtime.md), [Source ownership](source-ownership.md), [Security boundaries](extension-and-security.md), [Local verification](verification-plan.md).
 
-**Documentation authority:** this index defines product invariants; Project Graph specifies graph semantics; Workspace specifies interaction; Hardware and Targets specifies device constraints; AI Engineer specifies AI permissions and workflow. The [Roadmap](../product/roadmap.md) orders work but does not override technical contracts. When conflicts appear, update the owning document rather than duplicating rules.
+**Documentation authority:** this index defines product invariants; [One Canonical Project Graph and Component Model](canonical-project-graph-and-components.md) is the sole current owner of graph semantics and component identity. [Project Graph](project-graph.md), [Graph Behavior](graph-behavior-contract.md), historical D2/D6 numbered reviews and their fixtures supply background proposals only where compatible with that owner; they do not define alternative architectures. Workspace specifies interaction; Hardware and Targets specifies target/device constraints subject to canonical graph validation; AI Engineer specifies AI permissions and workflow. The [Roadmap](../product/roadmap.md) orders work but does not override technical contracts. When conflicts appear, update the owning document rather than duplicating rules.
 
 ## Complete platform contract
 
@@ -133,7 +133,7 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 
 ## Project and component persistence
 
-[Project and Package Format](project-and-package-format.md) documents the proposed versioned graph and package manifests, with illustrative [sensor project](../../examples/architecture-sensor/project.auiproj.json), [component package](../../examples/architecture-sensor/component.auipkg.json) and [map view](../../examples/architecture-sensor/views/main.auiview.json). Fixtures are design examples, not tested builds.
+[Project and Package Format](project-and-package-format.md) documents historical draft serializations and proposed package manifests (not separate product architectures), with illustrative [sensor project](../../examples/architecture-sensor/project.auiproj.json), [component package](../../examples/architecture-sensor/component.auipkg.json) and [map view](../../examples/architecture-sensor/views/main.auiview.json). Fixtures are design examples, not tested builds.
 
 ## Project-format verification
 
@@ -146,7 +146,7 @@ The [theoretical design plan](aui-design-plan.md) tracks the design's completene
 [AUI.Core library](aui-core-library.md): draft APIs for visual and nonvisual components, unimplemented.
 
 
-[AUI Syntax and Semantics](aui-syntax.md) defines the current proposed extended grammar and rules for state, events, commands, bindings, tasks and modifiers. Syntax is not frozen or implemented.
+[AUI Syntax and Semantics](aui-syntax.md) describes exploratory extended grammar and rules for state, events, commands, bindings, tasks and modifiers. The [D3 first language profile](d3-first-language-profile.md) owns the bounded initial grammar; extended syntax is not frozen or implemented.
 
 
 [AUI AST and Semantic Analysis](aui-ast-semantic-analysis.md) defines compiler tree nodes, scopes, type/effect checking, bindings and TypedHIR output. Proposed and not implemented.
