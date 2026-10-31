@@ -80,3 +80,7 @@ Dynamic lists, keyed child recycling, task launch-on-state-change and multiwrite
 | Pure layout movement | StateRevision and semanticGraphDigest unchanged |
 
 **Open P0:** architect selection of L2 scope/grammar, core property signatures and pure function digest registry, exact stable-key/ViewIdentity rules, bounded renderer/allocator proof, transaction CAS memory ordering, deallocation and independent positive/negative native tests. This document alone does not close D3.
+
+## S8. L4 dynamic keyed child compatibility (PROPOSED)
+
+[L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) adds a **new runtime keyed scope beneath each ForEach item**. The L2 rule requiring static .key(value: ID) uniqueness means uniqueness *within the compiled static source template*, not across every runtime instantiation of that template. Repeating the same static child key for different tagged item StableKeys is legal because their complete parent ViewIdentity paths differ. One writer per (full ViewIdentity, static key, property) remains unchanged. Same-parent reorder retains StateRevision/generation; deletion/reinsert or child TypeID/parent change remounts with fresh generation and must never restore an old task subscription. This is a proposed extension only; L2 still rejects ForEach.
