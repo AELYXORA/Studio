@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Complete IR verifier handoff — proposed
+
+[IR Verifier and Pass Evidence](aui-ir-verifier-and-pass-evidence.md) specifies bounded, fail-closed T1–T6 validation, exhaustive 139-tag dispatch obligations, staged semantic proofs, checked arena/Ref64/Span16 traversal, immutable pass receipts, optimization preservation and atomic publication/failure behavior. This is a **documentation candidate**, not implemented verification or authorization; all proposed acceptance tests remain NOT-RUN. It complements the existing [tag/payload catalogue](aui-compiler-ir-payload-contract.md) rather than replacing it.
+
 ## First AUI compiler: implementation blueprint (proposed)
 
 The [first implementable AUI compiler architecture](aui-compiler-first-implementation-contract.md) now defines an Assembly-first **Windows x64 host candidate** with bounded D3 L0/L1 compiler passes P00–P06, exact source-only trust state, deterministic TypedHIR/static output, separate P07 verified Graph linkage and P08–P10 native Win64 emission gates. This is **Phase I design**, not compiler implementation or architect sign-off. [47 future compiler acceptance cases](../../examples/aui-compiler-first-slice/acceptance-cases.json), an explicit [provisional type catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json) and [source-only plan schema](../../schemas/aui-compiler-source-only-plan.schema.json) with an [expected L0 plan](../../examples/aui-compiler-first-slice/status-panel-l0.source-only-plan.expected.json) anchor the first coding milestone. The provisional type catalogue has no verified public export digests and cannot generate authorized executables.
