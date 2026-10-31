@@ -69,3 +69,35 @@ The decomposition above is an implementation backlog, **not a claim of a finishe
 | Phase II implementation | Code AUIC-00..10 under the accepted bounded scope | **NOT AUTHORIZED** |
 
 **Ready for first coding** requires explicit human acceptance of COMP-01..05 and the agreed scope of the Phase II gate (or an expressly recorded bounded exception under existing project policy). The completed documentation by itself is not authority to begin implementation or run unverified native modules.
+
+
+## Complete AUI production compiler — all product workstreams (NOT just P00–P06)
+
+**Scope correction:** this document's earlier AUIC-00..10 tasks are only the *initial front-end portion* of the **single** [full native compiler specification](aui-compiler.md). The final product **must** emit, link, validate and package native code for all accepted shipping L0–L4 language capabilities. A source-only static plan is a **temporary engineering artifact**, not a shippable full compiler or a forever-allowed shortcut around Graph/source/type/target authority.
+
+**Dependency graph, not feature forks:**
+
+| Workstream | Design must finish FIRST (Phase I) | Later Phase II implementation | Later Phase III observed acceptance |
+| --- | --- | --- | --- |
+| FC-A language | Freeze [one composed AUI grammar](aui-syntax.md): source/import units, all L0–L4 productions, record/enum/service scope, Unicode, pure expressions, profile gates | Lexer/parser, CST/AST, import/symbol, type inference, error recovery, diagnostics | Real positive/negative complete sources across every shipping profile |
+| FC-B public types | Freeze one 15-type [core registry](d3-core-registry-value-contract.md) semantics, record/type/generic public exports and content-bound digests | Native exact type/generic resolver, nominal field access, trait/type verifier | Type/arity/recursion/generic/errors and independently computed export golden bytes |
+| FC-C UI/state | Freeze [L2](d3-state-derived-binding-contract.md) static keys, bound Text/State/Derived/Commit and D5 renderer service contract | ReactiveIR, typed binding DAG, transaction/rollback lowering, native service imports | Real state initialization, bind, commit and rollback through running native UI |
+| FC-D async | Freeze [L3](d3-task-result-lifecycle.md) taskSlot/await/settled/cancellation, result/ownership, D4/D5 ticket/queue retention | AsyncIR state machine, typed ownership transfers, native async callbacks and cleanup | Real races, late result, cancellation, indeterminate external effect and no implicit retry |
+| FC-E dynamic UI | Freeze [L4](d3-keyed-dynamic-view-lifecycle.md) List<T>/StableKey/full parent-path semantics, source template IDs, memory/resource limits | KeyedIR templates and native reconciliation/lifecycle adapters | Native reorder, delete/reinsert, nested lists, stale generation, quotas |
+| FC-F Graph link | Freeze [one Graph](canonical-project-graph-and-components.md), source review, D6 lock and exact type/operation closure | Exact offline graph/source linker, target/effect/capability authorization | Both authentic linked native builds and rejection of altered/fake source/export/review |
+| FC-G ownership/optimizer | Freeze [TypedHIR](aui-ast-semantic-analysis.md), [OwnershipIR](aui-ownership-ir.md), [TargetMIR](aui-targetmir-native-codegen.md) node tags and verifiers | Dominance/borrow/drop/SSA, O0 lowering and optional proven O1+ passes | Ownership violations rejected, O0 and optimized native behavior equivalent |
+| FC-H Win64 native | Freeze [Win64 D4 ABI](d4-win64-native-component-abi.md), module descriptors, runtime service imported signatures, linker and PE/COFF/unwind/debug rules | Assembly emitter, target layout, register/frame allocator, COFF assemble/link, exact native runtime adapters | Independently inspected PE symbols, reloc/unwind/ABI, actual running L0–L4 Win64 tests |
+| FC-I deterministic release | Freeze [D6 build inputs](d6-win64-reproducible-build-contract.md), cache/source maps/diagnostics, signed receipt/admission, error and rollback | Reproducible isolated build, manifest, staged output, independent verifier | Identical unsigned builds, tamper/recovery failures, signer and live capability enforcement |
+| FC-J compiler/Studio UX | Freeze D1 user workflow + D7 AI proposal authorization + native debug/preview/status distinction | Studio integrates compiler diagnostics, map/editor navigation, build/review/run boundaries | Actual end-user edit→build→diagnose→approve→native-run workflow without unsafe privilege promotion |
+
+**Only after all shipping workstreams are implemented and tested is it correct to call the product a full AUI compiler.** Different workstreams may be developed incrementally in Phase II, but *the complete architecture of all workstreams must be reviewed as one coherent baseline first*, as explicitly requested by the architect. Performance and optional cross-target backends come only after exact target evidence; they cannot substitute for finishing Win64 and the shipping AUI source profiles.
+
+### Cross-workstream design-only native acceptance matrix
+
+The [62 production compiler review scenarios](../../examples/aui-compiler-production/complete-compiler-acceptance.json) require full L0–L4, verified Graph and public exports, native Win64 object/ABI/runtime, optimization safety, reproducibility and signing. These are **NOT-RUN** design expectations and are separate from the earlier **47** first-front-end source-only cases and **35** Unicode boundary cases. Do not add them into a fake number of passed tests. No AELYXORA compiler source or runtime was written by this documentation pass.
+
+### Engineering stop conditions / pending exact contracts
+
+Before the compiler's **complete** Phase I can be accepted, close and approve the full source grammar, record/enum/service/public generic rule set, L2–L4 static/async/keyed node contracts and source fixtures, exact core/type/operation/export hashes, canonical Graph/source lock, OwnershipIR and all target-specific native runtime function tables, ABI/layout and object toolchain. A developer must not fill these blanks by privately choosing alternate syntax or inventing magic runtime symbols. The formal incomplete items are tracked in the [production compiler PC8](aui-compiler.md) and [Specification Completion Matrix](specification-completion-matrix.md).
+
+The first front-end backlog above remains useful to sequence engineering **after** review; it is no longer presented as the target compiler's final delivery.
