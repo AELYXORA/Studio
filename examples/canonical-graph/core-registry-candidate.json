@@ -1,0 +1,223 @@
+{
+  "format": "aui.core-registry-candidate",
+  "registryId": "aui.core/canonical-candidate",
+  "status": "PROPOSED-NOT-ACCEPTED",
+  "sourceOfTruth": "docs/architecture/d3-core-registry-value-contract.md",
+  "notes": "Single current design inventory, NOT a second Project Graph or architecture edition. The 13-entry historical registry and its old hash vectors remain unchanged. Summaries are review aids, not frozen digest input, ABI layout or a verified registry fingerprint.",
+  "entries": [
+    {
+      "typeId": "aui.core/Bool",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Copy",
+        "Immutable",
+        "Send"
+      ],
+      "semanticSummary": "Two logical values false/true; no integer truthiness",
+      "unresolvedObligations": []
+    },
+    {
+      "typeId": "aui.core/Bytes",
+      "kind": "immutable-value",
+      "typeArity": 0,
+      "featureGate": "D2-graph",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Immutable finite sequence of octets; byte-for-byte equality, owned lifetime required across async boundaries",
+      "unresolvedObligations": [
+        "exact portable owned buffer and ABI proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/Event",
+      "kind": "generic-value",
+      "typeArity": 1,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Typed immutable event occurrence; origin and generation validated by runtime; no implicit native subscription",
+      "unresolvedObligations": [
+        "source event payload/provenance export binding and exact delivery proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/F64",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "D2-graph",
+      "logicalTraits": [
+        "Copy",
+        "Immutable",
+        "Send"
+      ],
+      "semanticSummary": "IEEE-754 binary64 logical numeric domain used by typed imported sensor values, never direct unconstrained JSON number",
+      "unresolvedObligations": [
+        "NaN payload/equality and signaling policy",
+        "signed zero and Infinity policy",
+        "portable serialization/canonical representation",
+        "target FPU/rounding compliance and native ABI"
+      ]
+    },
+    {
+      "typeId": "aui.core/List",
+      "kind": "generic-value",
+      "typeArity": 1,
+      "featureGate": "L4",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Finite immutable ordered owned snapshot; conditional Send, bounded by D5",
+      "unresolvedObligations": [
+        "generic-instance ownership/layout proof and accepted full logical trait closure"
+      ]
+    },
+    {
+      "typeId": "aui.core/Result",
+      "kind": "generic-value",
+      "typeArity": 2,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Closed provider result Success(T)/Failure(E), distinct from UI request outcome",
+      "unresolvedObligations": [
+        "generic-instance closure and target layout proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/StableKey",
+      "kind": "tagged-union",
+      "typeArity": 0,
+      "featureGate": "L4",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Tagged StringKey(String) or U64Key(U64), with exact tag+value equality and portable framing",
+      "unresolvedObligations": [
+        "native-layout proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/StateRevision",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L2",
+      "logicalTraits": [
+        "Copy",
+        "Immutable",
+        "Send",
+        "UIOwner"
+      ],
+      "semanticSummary": "Monotonic owner-scoped revision, never GraphRevision",
+      "unresolvedObligations": [
+        "native concurrency and generation proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/String",
+      "kind": "immutable-value",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Immutable sequence of Unicode scalar values, exact comparison and UTF-8 portable boundary",
+      "unresolvedObligations": [
+        "target-owned representation and Send proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/TaskOutcome",
+      "kind": "generic-value",
+      "typeArity": 2,
+      "featureGate": "L3",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "semanticSummary": "Five variants Successful,Failed,AdmissionRejected,Cancelled,ProviderUnavailable; cancellation requires provider quiescence",
+      "unresolvedObligations": [
+        "canonical AdmissionError/ProviderError/CancellationConfirmation contracts",
+        "generic-instance and native tagged ABI proof"
+      ]
+    },
+    {
+      "typeId": "aui.core/TaskSlot",
+      "kind": "opaque-runtime",
+      "typeArity": 2,
+      "featureGate": "L3",
+      "logicalTraits": [
+        "Affine",
+        "Opaque",
+        "UIOwner"
+      ],
+      "semanticSummary": "Opaque affine UI-owner-bound request slot, never portable persisted value",
+      "unresolvedObligations": [
+        "runtime handle/lifetime proofs"
+      ]
+    },
+    {
+      "typeId": "aui.core/TaskTicket",
+      "kind": "opaque-runtime",
+      "typeArity": 0,
+      "featureGate": "L3",
+      "logicalTraits": [
+        "Affine",
+        "Opaque"
+      ],
+      "semanticSummary": "Opaque affine runtime request identity, never portable persisted value",
+      "unresolvedObligations": [
+        "generation/reclamation and native handle proofs"
+      ]
+    },
+    {
+      "typeId": "aui.core/U32",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Copy",
+        "Immutable",
+        "Send"
+      ],
+      "semanticSummary": "Unsigned integer in [0,4294967295]",
+      "unresolvedObligations": []
+    },
+    {
+      "typeId": "aui.core/U64",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L4",
+      "logicalTraits": [
+        "Copy",
+        "Immutable",
+        "Send"
+      ],
+      "semanticSummary": "Unsigned integer in [0,18446744073709551615], never JS floating-point coercion",
+      "unresolvedObligations": []
+    },
+    {
+      "typeId": "aui.core/Unit",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Copy",
+        "Immutable",
+        "Send"
+      ],
+      "semanticSummary": "Single logical zero-payload value, not a native null pointer",
+      "unresolvedObligations": []
+    }
+  ]
+}
