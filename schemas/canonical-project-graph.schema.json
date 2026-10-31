@@ -1,0 +1,1313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA Canonical Project Graph — single architecture, design proposal",
+  "type": "object",
+  "required": [
+    "format",
+    "projectId",
+    "revision",
+    "targets",
+    "packageDependencies",
+    "nodes",
+    "edges",
+    "coreRegistryFingerprint",
+    "typeExportSetDigest",
+    "workflows",
+    "dataFlows",
+    "retiredIdentities"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.project"
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "triple",
+          "execution"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "triple": {
+            "type": "string",
+            "minLength": 1
+          },
+          "execution": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "packageDependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "packageId",
+          "version"
+        ],
+        "properties": {
+          "packageId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string"
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "direction",
+                "typeRef"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "direction": {
+                  "enum": [
+                    "in",
+                    "out"
+                  ]
+                },
+                "typeRef": {
+                  "$ref": "aui-type-reference.schema.json"
+                }
+              }
+            }
+          },
+          "component": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "packageId",
+              "typeId",
+              "contractDigest"
+            ],
+            "properties": {
+              "packageId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "typeId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "contractDigest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "component-instance"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "component",
+                "ports"
+              ]
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "component"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "from",
+          "to"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Structural format accepts nonempty edge-kind tokens; D2 semantic registry validates known kinds and emits GRAPH_EDGE_KIND_UNKNOWN."
+          },
+          "from": {
+            "type": "object",
+            "required": [
+              "node"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "port": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "to": {
+            "type": "object",
+            "required": [
+              "node"
+            ],
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "port": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dataFlows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "channels"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "channels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "edgeId",
+                "mode",
+                "senderDomain",
+                "receiverDomain",
+                "transfer",
+                "ordering",
+                "errorPolicy"
+              ],
+              "properties": {
+                "edgeId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "mode": {
+                  "enum": [
+                    "stream",
+                    "snapshot"
+                  ]
+                },
+                "senderDomain": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "receiverDomain": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "transfer": {
+                  "enum": [
+                    "copy",
+                    "move",
+                    "borrow"
+                  ]
+                },
+                "ordering": {
+                  "enum": [
+                    "fifo",
+                    "latest"
+                  ]
+                },
+                "errorPolicy": {
+                  "enum": [
+                    "propagate",
+                    "reject-and-report",
+                    "drop-and-report"
+                  ]
+                },
+                "capacity": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "overflow": {
+                  "enum": [
+                    "reject",
+                    "drop-newest",
+                    "drop-oldest",
+                    "block"
+                  ]
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "mode": {
+                        "const": "stream"
+                      }
+                    },
+                    "required": [
+                      "mode"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "capacity",
+                      "overflow"
+                    ],
+                    "properties": {
+                      "ordering": {
+                        "const": "fifo"
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "mode": {
+                        "const": "snapshot"
+                      }
+                    },
+                    "required": [
+                      "mode"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "ordering": {
+                        "const": "latest"
+                      }
+                    },
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "capacity"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "overflow"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "ownerNodeId",
+          "trigger",
+          "initialState",
+          "states",
+          "transitions",
+          "signals",
+          "scheduling",
+          "maxConcurrentInstances",
+          "onLimit",
+          "mailboxCapacity",
+          "mailboxOverflow"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "ownerNodeId": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "trigger": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "edgeId"
+            ],
+            "properties": {
+              "kind": {
+                "const": "data-arrival"
+              },
+              "edgeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              }
+            }
+          },
+          "initialState": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "states": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "terminal": {
+                  "enum": [
+                    "success",
+                    "failure",
+                    "cancelled"
+                  ]
+                }
+              }
+            }
+          },
+          "transitions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "from",
+                "to",
+                "signal",
+                "action"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "from": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "to": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "signal": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "action": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "kind"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "enum": [
+                        "none",
+                        "dispatch",
+                        "publish",
+                        "request-cancel"
+                      ]
+                    },
+                    "nodeId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                    },
+                    "operationId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                    },
+                    "edgeId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                    }
+                  },
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "dispatch"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "nodeId",
+                          "operationId"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "publish"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "edgeId"
+                        ]
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "none"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "nodeId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "operationId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "edgeId"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "if": {
+                        "properties": {
+                          "kind": {
+                            "const": "request-cancel"
+                          }
+                        },
+                        "required": [
+                          "kind"
+                        ]
+                      },
+                      "then": {
+                        "not": {
+                          "anyOf": [
+                            {
+                              "required": [
+                                "nodeId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "operationId"
+                              ]
+                            },
+                            {
+                              "required": [
+                                "edgeId"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "scheduling": {
+            "const": "per-instance-fifo"
+          },
+          "maxConcurrentInstances": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "onLimit": {
+            "const": "reject-and-report"
+          },
+          "mailboxCapacity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "mailboxOverflow": {
+            "const": "reject-and-report"
+          },
+          "signals": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "source"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "source": {
+                  "enum": [
+                    "trigger",
+                    "command-success",
+                    "command-failure",
+                    "control"
+                  ]
+                },
+                "nodeId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "operationId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                },
+                "payloadTypeRef": {
+                  "$ref": "aui-type-reference.schema.json"
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "source": {
+                        "enum": [
+                          "command-success",
+                          "command-failure"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "source"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "payloadTypeRef",
+                      "nodeId",
+                      "operationId"
+                    ]
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "source": {
+                        "const": "trigger"
+                      }
+                    },
+                    "required": [
+                      "source"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "payloadTypeRef"
+                    ],
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "nodeId"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "operationId"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "source": {
+                        "const": "control"
+                      }
+                    },
+                    "required": [
+                      "source"
+                    ]
+                  },
+                  "then": {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "payloadTypeRef"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "nodeId"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "operationId"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "retiredIdentities": {
+      "type": "array",
+      "description": "D2 candidate tombstone ledger; unique tuple (kind,scopeId,id) enforced by semantic validator In the hardware profile, resource-claim tombstones (scopeId=project) preserve non-reuse; pure profile cannot claim hardware IDs.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "scopeId",
+          "id"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "node",
+              "edge",
+              "port",
+              "workflow",
+              "state",
+              "transition",
+              "signal",
+              "data-flow",
+              "resource-claim"
+            ]
+          },
+          "scopeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          }
+        }
+      }
+    },
+    "resourceModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "targetRequirements",
+        "claims"
+      ],
+      "properties": {
+        "profile": {
+          "const": "aui.hardware-resources"
+        },
+        "targetRequirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "targetId",
+              "addressBits",
+              "endian",
+              "privilege",
+              "featureRegistryId",
+              "isaFeatures",
+              "adapterContractId"
+            ],
+            "properties": {
+              "targetId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "addressBits": {
+                "enum": [
+                  32,
+                  64
+                ]
+              },
+              "endian": {
+                "enum": [
+                  "little",
+                  "big"
+                ]
+              },
+              "privilege": {
+                "enum": [
+                  "user",
+                  "kernel",
+                  "bare-metal"
+                ]
+              },
+              "featureRegistryId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "isaFeatures": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                }
+              },
+              "adapterContractId": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "targetId",
+              "ownerNodeId",
+              "resourceNodeId",
+              "edgeId",
+              "addressSpaceId",
+              "sharing",
+              "requiredCapabilities"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "kind": {
+                "enum": [
+                  "mmio",
+                  "irq",
+                  "dma",
+                  "memory"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "ownerNodeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "resourceNodeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "edgeId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "addressSpaceId": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+              },
+              "sharing": {
+                "enum": [
+                  "exclusive",
+                  "shared-read"
+                ]
+              },
+              "requiredCapabilities": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "mmio.read",
+                    "mmio.write",
+                    "irq.handle",
+                    "dma.submit",
+                    "memory.map",
+                    "memory.read",
+                    "memory.write"
+                  ]
+                }
+              },
+              "mmio": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "base",
+                  "length",
+                  "registerWidthBits",
+                  "alignmentBytes",
+                  "endian",
+                  "access",
+                  "ordering"
+                ],
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "length": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "registerWidthBits": {
+                    "enum": [
+                      8,
+                      16,
+                      32,
+                      64
+                    ]
+                  },
+                  "alignmentBytes": {
+                    "type": "integer",
+                    "enum": [
+                      1,
+                      2,
+                      4,
+                      8,
+                      16,
+                      32,
+                      64,
+                      128,
+                      256,
+                      512,
+                      1024,
+                      2048,
+                      4096
+                    ]
+                  },
+                  "endian": {
+                    "enum": [
+                      "little",
+                      "big"
+                    ]
+                  },
+                  "access": {
+                    "enum": [
+                      "read",
+                      "write",
+                      "read-write"
+                    ]
+                  },
+                  "ordering": {
+                    "enum": [
+                      "device",
+                      "strong"
+                    ]
+                  }
+                }
+              },
+              "irq": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "controllerNodeId",
+                  "line",
+                  "trigger",
+                  "ackPolicy"
+                ],
+                "properties": {
+                  "controllerNodeId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "line": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "trigger": {
+                    "enum": [
+                      "edge-rising",
+                      "edge-falling",
+                      "level-high",
+                      "level-low"
+                    ]
+                  },
+                  "ackPolicy": {
+                    "enum": [
+                      "explicit",
+                      "controller-auto"
+                    ]
+                  }
+                }
+              },
+              "dma": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "engineNodeId",
+                  "channelId",
+                  "bufferClaimId",
+                  "direction",
+                  "coherency",
+                  "alignmentBytes",
+                  "maxBytes",
+                  "maxInFlight"
+                ],
+                "properties": {
+                  "engineNodeId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "channelId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "bufferClaimId": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+                  },
+                  "direction": {
+                    "enum": [
+                      "to-device",
+                      "from-device",
+                      "bidirectional"
+                    ]
+                  },
+                  "coherency": {
+                    "enum": [
+                      "coherent",
+                      "explicit-sync"
+                    ]
+                  },
+                  "alignmentBytes": {
+                    "type": "integer",
+                    "enum": [
+                      1,
+                      2,
+                      4,
+                      8,
+                      16,
+                      32,
+                      64,
+                      128,
+                      256,
+                      512,
+                      1024,
+                      2048,
+                      4096
+                    ]
+                  },
+                  "maxBytes": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "maxInFlight": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 65535
+                  }
+                }
+              },
+              "memory": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "base",
+                  "length",
+                  "regionType",
+                  "access"
+                ],
+                "properties": {
+                  "base": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "length": {
+                    "type": "string",
+                    "pattern": "^0x(?:0|[1-9a-f][0-9a-f]*)$"
+                  },
+                  "regionType": {
+                    "enum": [
+                      "ram",
+                      "device",
+                      "reserved"
+                    ]
+                  },
+                  "access": {
+                    "enum": [
+                      "read",
+                      "write",
+                      "read-write",
+                      "execute"
+                    ]
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "mmio"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "mmio"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "irq"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "dma"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "memory"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "irq"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "irq"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "mmio"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "dma"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "memory"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "dma"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "dma"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "mmio"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "irq"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "memory"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "memory"
+                    }
+                  },
+                  "required": [
+                    "kind"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "memory"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "mmio"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "irq"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "dma"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "coreRegistryFingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "typeExportSetDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "additionalProperties": false,
+  "description": "ONE Project Graph contract: typed components/ports, topology, workflows, data flows, retired identities and optional hardware claims. No product/architecture v1/v2 or capability inferred from syntax. Existing frozen snapshots are historical fixtures; no rewriting or invented hash migration."
+}
