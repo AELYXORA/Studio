@@ -85,3 +85,7 @@ Exact Length/TextStyle types, command-handler AUI syntax, generic constraint gra
 ## L4 core List and stable key registry proposal
 
 [L4 Keyed Views](d3-keyed-dynamic-view-lifecycle.md) proposes bounded immutable List<T> and tagged StableKey.String / StableKey.U64 for dynamic ForEach. They are **not** established aui.core/0.1-draft runtime exports; full type IDs, exported-contract digests, exact ownership and binary layouts need later D3/D4 approval. Static L2 view .key(value: ID) is distinct from an item's runtime StableKey; index-position keys are forbidden. [D3/D4/D5 consistency review](d3-d4-d5-lifecycle-consistency-review.md) records required type and resource budgets, not observed tests.
+
+## Extended D3 core registry inventory — PROPOSED
+
+[D3 Core Value Registry](d3-core-registry-value-contract.md) now owns candidate logical types and portable encodings, with a [13-entry structural inventory](../../examples/aui-language/d3-core-registry-proposal.json) and [StableKey byte vectors](../../examples/aui-language/d3-core-value-vectors.json). This **does not** amend the accepted syntax/core registry (none is accepted): the L0/L1 candidate still uses U32 abstract spacing, while the broad visual catalog's Length property is a future separately gated profile, not an implicit conversion. [D4 Value ABI](d4-core-value-abi-contract.md) defines required target-specific layout proof; [D5 budgets](d5-ui-resource-budget-and-publication.md) are capacity proposals rather than observed performance. No new native stdlib exports exist.
