@@ -46,3 +46,6 @@ First: strict schemaVersion/core profile -> exact D6 lock and type registry -> s
 - Old graph/snapshot after migration: preserved and still decoded by **its original** profile, never v2-rehashed.
 
 **P0 remaining:** project format extension and human acceptance, v2 user record/component schema, typed import/export compatibility maps, data migration converters, exact signed approval receipt, D6 new immutable source bundle, Win64 native ABI and end-to-end tests. No claim that L4 List<Row> currently compiles.
+## CP5. Separate TypeReference v2 user-record migration (PROPOSED)
+
+[Versioned TypeReference v2](d2-d6-typeref-v2-resolution.md) defines a future aui.export-contract/v2-record projection with typed fields and a distinct user-record-aware generic v2 profile. Existing v1 record fields/components/Graph schema remain **unchanged and cannot parse new TypeReference objects**; same-name Row does not migrate by renaming. [Reference v2 Row/List<Row> vectors](../../examples/aui-language/d2-typeref-v2-vectors.json) are design arithmetic, not an approved migration. The new [signed-approval receipt proposal](d2-d6-signed-approval-receipt.md) binds reviewed source/typed link/Graph/lock before any new immutable snapshot, and the final D6 snapshot hash is not embedded in its own signature.
