@@ -206,6 +206,17 @@ The [current 15-entry inventory](../../examples/canonical-graph/core-registry-ca
 
 The one current runtime/source type boundary MUST reject `TaskTicket` and `TaskSlot<T,E>` as public graph dataFlow types, record fields or command return payloads. `Event<T>` is a source-facing event value with required origin/generation proofs, not a raw transport capability. `TaskOutcome<T,E>` itself can be a typed UI local result only where the L3 contract admits it; it is not an unqualified D2 hardware stream type.
 
+
+### CR13.4 Candidate logical projection skeleton — not a digest preimage yet
+
+For auditing changes to the **single** current inventory, an implementation-neutral *candidate comparison skeleton* of each entry contains exactly `typeId,kind,typeArity,featureGate,logicalTraits,semanticModel`. Sort the unique `logicalTraits` and `semanticModel.ruleIds` sets by canonical UTF-8 bytes. Retain the exact ordered `semanticModel.typeParameters` and `semanticModel.variants`, and the semantic `category,portableCarrier,ownershipClass,graphPayloadEligible` flags. Compare entries by exact `typeId`, and sort the whole registry by that identity. This derives no new authored source model.
+
+**Explicitly exclude from the skeleton:** `semanticSummary` (human text), `unresolvedObligations` (review ledger), `semanticsOwner` (source navigation), `nativeLayoutStatus` (machine evidence) and `exportStatus` (review status). However, **exclude does not mean trusted**: `exportStatus=UNVERIFIED` is a mandatory *admission blocker*. A release writer MUST reject hashing if any contract remains unapproved, even if the skeleton bytes are identical between two source files.
+
+**Critical missing input:** a `ruleId` is currently only a document reference, not an immutable, versioned definition of its *meaning*. This skeleton is **NOT yet a complete public type-contract digest preimage**. Public type hashing requires each referred rule's normalized complete semantic definition and separately authenticated immutable content identity, plus frozen error/control payload contracts. Hashing only human rule names would permit their normative meaning to change without invalidating the type hash. Until that design is approved, a programmer or AI MUST NOT invent `contractDigest` or `coreRegistryFingerprint` from this candidate.
+
+[Core definition mutation review cases](../../examples/canonical-graph/core-definition-review-cases.json) classify which changes preserve this *review skeleton*, modify its fields, or must be rejected before any public export resolution. The cases are design-only, **NOT-RUN**, and do not stand in for approved cryptographic vectors or qualified native ABI.
+
 ### CR13.3 Design-only verification and still-open questions
 
 The [TaskOutcome control negative/positive matrix](../../examples/canonical-graph/task-control-payload-cases.json) defines strict accepted/rejected **logical shape** expectations, including invalid phase-code combinations, attempts to forge cancellation, open objects, unknown enums and false no-dispatch proof. It never treats a syntactically well-formed value as *runtime proven*; values labeled `shape-accept` still require authenticated origin at runtime.
