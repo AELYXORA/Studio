@@ -18,7 +18,7 @@ Past test files with old field encodings and digests stay immutable. They are hi
 
 TypeReference has nominal ownerPackageId/typeId/contractDigest or generic template/ordered nominal arguments/contractDigest. No displayed name, index, pointer, old TypeID string or different machine layout substitutes for a verified nominal identity. First bounded generic subset allows at most two acyclic nominal arguments. Exact record and generic exports must resolve from pinned packages.
 
-An operation has a stable owner/component/OperationID, ordered typed inputs, success/error types, domain, effects, capabilities, retry policy and targets. A component pins exact verified operation contract digests and typed port exports. Graph node ports are checked mirrors, not editable independent contracts. Win64 native ABI is separate from logical public contract; provider Result and UI TaskOutcome are separate typed concepts.
+An operation has a stable owner/component/OperationID, ordered typed inputs, success/error types, domain, effects, capabilities, retry policy and targets. A verified component public contract incorporates derived, independently checked operation contract digests and typed port exports. Graph node ports are checked mirrors, not editable independent contracts. Win64 native ABI is separate from logical public contract; provider Result and UI TaskOutcome are separate typed concepts.
 
 **Export resolution is fail-closed.** The [canonical package schema](../../schemas/canonical-component-package.schema.json) currently describes authored `components[].commands[]` and typed ports; it does **not** store a trustworthy `operationContractDigest` field for each command. The resolver must compute and verify the logical operation/export closure from an exact offline-locked package, then verify the component's calculated public contract against `nodes[].component.contractDigest`. A workflow's `(nodeId, operationId)` is only a lookup key within that verified component export; a matching name without a verified operation, target, domain, result/error types and capabilities is NOT executable linkage. The exact canonical operation digest framing and component digest composition are **P0 OPEN**, not silently inherited from historical numbered proposals. Never accept placeholder digests as verified exports.
 
@@ -53,7 +53,7 @@ The canonical graph specification and its schema jointly define **one** semantic
 A validator MUST classify each authored field as exactly one of: (a) semantic and included in the projection; (b) presentation or operation metadata deliberately excluded; or (c) unknown, therefore rejected. No field may be silently omitted because an older partial projection did not contain it. Reject a graph whose schema admits an authored meaning-bearing value for which the projection has no rule.
 
 The projection must cover, transitively and deterministically:
-- target identities and execution constraints, exact pinned dependency/public export closure and core-registry identity;
+- target identities and execution constraints, exact declared dependency requirements, verified logical public export closure and core-registry identity (locked implementation bytes remain outside the semantic projection);
 - live node identities, kinds, component exports, typed ports, target bindings and every authorized edge kind/endpoint;
 - workflow trigger, owner, states, typed signals, transitions, actions, scheduling, mailbox bounds and cancellation policy;
 - every dataFlow channel's bound edge, payload type determined through verified ports, domain, transfer, ordering, capacity, overflow and failure policy;
@@ -76,6 +76,77 @@ The graph's semantic digest is distinct from both its immutable storage snapshot
 6. A retired stable identity MUST not collide with a live identity of the same kind and scope, including identities reintroduced by concurrent or imported edits.
 7. The validator MUST reject any semantic change that cannot be represented by the canonical projection; it must not return the previous digest as if no change occurred.
 
-## C8. Open design and proof gates
+## C9. Single canonical graph projection — field-level candidate for D2/D6 review
+
+**Status: PROPOSED / P0 OPEN.** The following is the **only candidate projection for the current unified graph**, not a separate graph edition. Its input contract is the existing [canonical graph schema](../../schemas/canonical-project-graph.schema.json); no new authored source field is introduced. The old `AELYXORA/semantic-graph/v1` reference domain is historical only. A candidate projection is never permission to publish a trusted semanticGraphDigest until the public byte domain, package export closure, independent vectors and human acceptance are completed.
+
+### Projection construction and ownership
+
+Resolve all exact offline dependencies and verify their immutable package bytes **before** resolving public contracts. Compute public logical types and component operation/export identities; verify the authored `coreRegistryFingerprint`, `typeExportSetDigest` and every `node.component.contractDigest` against those results. A 64-hex string's shape is not evidence of a real exported contract. Reject unresolved public identities or unavailable core registry, even when all authored field values conform to JSON Schema.
+
+Construct one closed object with **exactly** these top-level keys:
+
+| Projection key | Content and rule |
+| --- | --- |
+| `format` | Constant `aui.semantic-graph` (not a new authored project format) |
+| `projectId` | Exact input projectId; never derived from label, path or source filename |
+| `coreRegistryFingerprint` | Exact verified logical core-registry identity; input placeholder must match computed closure |
+| `typeExportSetDigest` | Exact verified transitive public type set identity; exclude source/package implementation bytes |
+| `resolvedExports` | Sorted complete public logical **type and component** export identities used transitively by the graph; component export includes its verified operation digests |
+| `targets` | All authored `{id,triple,execution}` objects, sorted by `id` |
+| `packageDependencies` | All authored exact `{packageId,version}` requirements, sorted by `packageId`, then `version`; reject duplicate packageId, even for identical versions |
+| `nodes` | Authored `{id,kind}`, plus `target`, `component` and `ports` **only if present**; **exclude `label`**; sort nodes by `id` and present ports by `id` |
+| `edges` | Every `{id,kind,from,to}`, with each endpoint's exact `node` and optional `port`; sort by edge `id` |
+| `dataFlows` | All `{id,channels}`; sort flows by `id`, channels by `edgeId` |
+| `workflows` | All authored properties including triggers, typed signals, transitions/actions and all scheduler/mailbox limits; sort workflows, states, signals and transitions by their respective `id` |
+| `retiredIdentities` | Every exact `{kind,scopeId,id}`, sorted lexicographically by the complete triple; always present, including `[]` |
+| `resourceModel` | **Only when authored**: full `{profile,targetRequirements,claims}`; sort target requirements by `targetId`, claims by `id`; absent is distinct from present with zero claims |
+
+No `revision`, `label`, view layout, selection, runtime state, source bytes, package-object hashes, operation tickets, approval signatures, test evidence or final snapshot digest is projected. Such data still belongs to its **separate durable/provenance layer**. The authored `format` must equal `aui.project`; the projected `format` is a distinct fixed marker. **Never copy an entire JSON object and merely delete a few familiar keys**; construct a schema-closed projection, rejecting newly introduced semantic fields until formally classified here.
+
+### Nested field completeness (no implicit defaults)
+
+- `nodes[].component` contains exactly `packageId,typeId,contractDigest`. Each authored `nodes[].ports[]` contains exactly `id,direction,typeRef`, where the *entire* canonical nested nominal/generic TypeReference is retained. No port or component may be independently redefined by a graph instance.
+- Every dataFlow channel retains `edgeId,mode,senderDomain,receiverDomain,transfer,ordering,errorPolicy`; stream retains `capacity,overflow`, snapshot MUST omit both. `borrow` has an authored enum spelling but is **semantically forbidden** in both queued stream and retained snapshot in the current model.
+- Every workflow retains exactly `id,ownerNodeId,trigger,initialState,states,transitions,signals,scheduling,maxConcurrentInstances,onLimit,mailboxCapacity,mailboxOverflow`. A state retains `id` and optional `terminal`. A transition retains `id,from,to,signal,action`; action retains its required `kind` plus exactly its permitted `nodeId,operationId` or `edgeId` references. Each signal retains `id,source` and its **source-appropriate** `payloadTypeRef,nodeId,operationId`. Absent optional keys stay absent; they never become null or implicit capabilities.
+- `resourceModel.targetRequirements[]` retains `targetId,addressBits,endian,privilege,featureRegistryId,isaFeatures,adapterContractId`; `isaFeatures` is an unordered unique set sorted by UTF-8 bytes. Every claim retains `id,kind,targetId,ownerNodeId,resourceNodeId,edgeId,addressSpaceId,sharing,requiredCapabilities` and **exactly one** complete `mmio`, `irq`, `dma` or `memory` kind-specific object with all schema-required typed fields. `requiredCapabilities` is a unique sorted set. Preserve canonical hexadecimal numeric strings as typed strings; never silently coerce to floating-point JSON numbers.
+- `resolvedExports[]` is a **derived** set of tuples `{kind,packageId,exportId,contractDigest}`, with `kind` exactly `type` or `component`; `exportId` is the full package-qualified exported type/component identity. Sort by `kind,packageId,exportId,contractDigest`, reject duplicate `kind+packageId+exportId`. Core types and transitive record/generic dependencies must be in the verified closure; operation exports are covered transitively by the component digest, not silently omitted.
+
+Every set-like array is sorted by its indicated identity with **bytewise lexicographic ordering**, after semantic uniqueness checks. Arrays that express meaning-bearing order (public record fields, operation arguments, generic type arguments) are **never sorted**. A set with repeated equal values is rejected, not deduplicated silently. Unicode scalar values retain their exact sequences (no display-driven normalization); reject invalid UTF-8, decoded duplicate JSON keys, noncanonical number tokens and unsupported sizes per D6. All counted bounds, target-dependent registries and project ID scope must be resolved before a current profile can be accepted.
+
+### Change classification, provenance and invalidation
+
+Two valid inputs with identical projected canonical bytes have identical **candidate semantic meaning**, notwithstanding revision counter, node labels or map layout. Changing any meaning-bearing field (including a tombstone, target constraint, channel limit, workflow signal, operation public type/effect or hardware privilege) MUST change the candidate projection; an inability to encode such a field is an error, not a license to reuse the old digest.
+
+**Separate identities remain independent:** `semanticGraphDigest` covers public architecture; `packageContentDigest` covers immutable implementation/package bytes; `sourceLinkBundleDigest` binds source to graph; signed review receipts grant scoped approval; a D6 snapshot references these artifacts and has its own immutable identity. A source-byte-only change can preserve graph semantics but **must** invalidate affected package, build, approval and verification evidence. No permission or hardware access follows from digest equality alone.
+
+### Acceptance blockers specific to this projection
+
+1. Freeze one domain-separated digest framing and interoperable D6 canonical byte encoding for the unified model; historical `/v1` and `/v2` domains are not automatically promoted.
+2. Freeze verified core/type/operation/component digest composition (C10 below), scope and registry identity, including generic/record cycles and absence/empty handling.
+3. Create independently calculated **real** golden hashes from validated non-placeholder exports, with full projected bytes and an ordered set of mutation expectations.
+4. Decide qualified first-host/target registries, semantic limits and signed review/snapshot binding; only subsequent native tests can claim verification.
+
+## C10. Logical operation and component export closure — proposed normalized contracts
+
+**Status: PROPOSED / P0 OPEN, subordinate to C3 and the existing [canonical package schema](../../schemas/canonical-component-package.schema.json).** The current schema does not serialize or prove per-operation hashes. The resolver computes them from verified public declarations; no extra mutable `operationDigest` authority is added to the authored package.
+
+| Derived public projection | Exact included values | Deliberately excluded |
+| --- | --- | --- |
+| Nominal record type | `kind=record`, owner `packageId`, full `typeId`, **ordered** field sequence of `name` plus entire verified `typeRef` | Source path, field memory offset, target ABI layout and code bytes |
+| Bounded generic instance | Verified nominal template identity, ordered 1–2 full verified nominal argument identities, closed logical traits and resulting public contract identity | Compiler's guessed type name, unverified layout or pointer representation |
+| Operation | `packageId,componentTypeId,operationId`, **ordered** input name/full TypeReference pairs, complete `successTypeRef,failureTypeRef`, `domain,sideEffectClass,retryPolicy`, unique sorted `effects,requiredCapabilities,declaredTargets` | Implementation path, exported function address, dispatch ticket, source content digest |
+| Component | `packageId,typeId`, sorted typed `ports` (id/direction/full typeRef), unique sorted `capabilities`, and sorted `{operationId,operationContractDigest}` for **all** declared commands | `sources`, `testFixtures`, build artifacts and visual labels |
+| Type-export set | Exact core-registry identity plus unique, sorted verified transitive public type identities and their computed contracts | Package filesystem locators, source revision and runtime trust token |
+
+Each projected public object is closed and independently domain-separated before calculating its logical digest. Proposed names for distinct future domains are `AELYXORA/type-contract/canonical`, `AELYXORA/operation-contract/canonical`, `AELYXORA/component-contract/canonical`, `AELYXORA/type-export-set/canonical` and `AELYXORA/semantic-graph/canonical`. **These are review candidates, not accepted hash domains or golden values.** The proposed framing is SHA-256 over ASCII domain bytes, one NUL byte, then exact canonical UTF-8 JSON of the corresponding verified projection; hash domains must not be recycled with changed meaning. All linked identities and types must be computed from locked package/core source, **not** adopted from unverified authored digest strings.
+
+For declared target support, match command `declaredTargets` against the project's resolved target **triple**, while graph node `target` references the project's target **ID**; mixing these namespaces is invalid. Check execution domain, effects, capability requirements, target qualification and command result/error types before authorizing a workflow dispatch. The provider's `Result<Success,Failure>` is never an AUI UI-task admission `TaskOutcome`. Each publish transition must bind an actual outgoing port/edge with compatible success payload; a failure signal cannot be silently published as a success value.
+
+The order of public digests is acyclic: verified core registry and nominal leaves -> user record/generic type exports -> operation digests -> component digests -> complete type-export set -> C9 graph projection -> candidate semantic digest. An unsupported recursion, missing type, mismatched authored checksum, duplicate export or unqualified target rejects before hashing. Type exports and component operations are exact public *semantics*, not proof that machine code implements those semantics correctly. Machine layout and runtime authorizations require separate D4/D5/approval verification.
+
+**Open implementation-neutral questions:** exact digest byte vectors, published core registry, normalized operation IDs/namespace rules, contract-declared effect registry and target ABI bridging, stable target/resource registry IDs, and signer/dependency closure. Their absence cannot be treated as a passed design gate.
+
+## C11. Open design and proof gates
 
 Fully approved typed workflow signal contract, data-flow payload/ownership and resource claim interplay; exhaustive semantic projection and deterministic byte normalization; native package export and effect registry; source/Graph signed review and D6 immutable closure; Win64 module/ABI/renderer/IME/NTFS durability; actual Phase III tests and explicit D1–D8 human acceptance. **Only one architecture; its acceptance remains OPEN.**
