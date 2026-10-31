@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA preapproval immutable proposal projection draft",
+  "description": "All fields are meaning-bearing and committed before any receipt signing. Never embed signature, receipt file hash or final enclosing D6 snapshotDigest. Exact source hashes are referenced by pinned source link bundle digest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "profile",
+    "projectId",
+    "graphRevision",
+    "semanticGraphDigest",
+    "lockDigest",
+    "sourceLinkBundleDigest",
+    "coreRegistryFingerprint",
+    "typeExportSetDigest",
+    "targetTriple",
+    "abiLayoutDigest",
+    "capabilities",
+    "effects",
+    "sourceRevision"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.review-proposal"
+    },
+    "profile": {
+      "const": "1-draft"
+    },
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "graphRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "semanticGraphDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "lockDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceLinkBundleDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "coreRegistryFingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "typeExportSetDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "targetTriple": {
+      "type": "string",
+      "minLength": 1
+    },
+    "abiLayoutDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "effects": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sourceRevision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  }
+}
