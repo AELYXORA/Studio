@@ -1,0 +1,227 @@
+{
+  "format": "aui.semantic-projection-change-expectations",
+  "status": "PROPOSED DESIGN-ONLY: not executable tests, not approved byte vectors, no AELYXORA validator run",
+  "referenceProject": "sensor-project.auiproj.json",
+  "referencePackage": "sensor-package.auipkg.json",
+  "preconditions": [
+    "Replace all deliberately synthetic public digests in the reference files with independently computed, verified identities before deriving any authoritative semantic hash",
+    "Use an exact offline locked package/core registry and a fully qualified runtime target, or record REJECT/not-verified",
+    "For each semantic edit classified different, validate/recompute dependent exported contracts, references and permissions before comparing canonical projections",
+    "Do not use these expectations as a released hash-domain decision, cryptographic golden vectors, or evidence of native conformance"
+  ],
+  "outcomeMeaning": {
+    "same": "Both valid, fully resolved candidates have identical normalized semantic-projection bytes, despite potentially different snapshot/package evidence",
+    "different": "Both valid, fully resolved candidates have different normalized semantic-projection bytes; resulting hash difference requires a frozen accepted domain and real independent calculation",
+    "reject": "Schema/semantic/trust/dependency prerequisite rejects; no authoritative candidate semantic digest may be published"
+  },
+  "cases": [
+    {
+      "id": "SEM-01",
+      "category": "nonsemantic",
+      "mutation": "Set node driver.label to a different display caption",
+      "expected": "same",
+      "reason": "Graph labels are not semantic exports",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-02",
+      "category": "nonsemantic",
+      "mutation": "Increment project.revision without changing the accepted semantic model",
+      "expected": "same",
+      "reason": "GraphRevision is CAS/history metadata, not architecture meaning",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-03",
+      "category": "nonsemantic",
+      "mutation": "Reorder the nodes, edges, workflows and dataFlows JSON arrays with exactly the same members",
+      "expected": "same",
+      "reason": "Set-like graph collections sort by stable identity before projection",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-04",
+      "category": "nonsemantic",
+      "mutation": "Reorder JSON object keys while preserving all decoded names and values",
+      "expected": "same",
+      "reason": "Canonical key order is defined independently of authored order",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-05",
+      "category": "nonsemantic",
+      "mutation": "Change the architecture-map coordinates or visual selection in a saved view only",
+      "expected": "same",
+      "reason": "Presentation view bytes are outside semantic graph",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-06",
+      "category": "nonsemantic",
+      "mutation": "Change only Assembly whitespace and update exact package lock while preserving independently verified public exports",
+      "expected": "same",
+      "reason": "Logical graph unchanged; package/build/approval evidence MUST be invalidated",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-07",
+      "category": "semantic",
+      "mutation": "Change dataFlows[sensor-telemetry] channel e3 capacity from 32 to 16, with valid budget",
+      "expected": "different",
+      "reason": "Bounded capacity is architecture meaning",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-08",
+      "category": "semantic",
+      "mutation": "Change e3 overflow from reject to drop-newest with valid reporting contract",
+      "expected": "different",
+      "reason": "Backpressure policy is architecture meaning",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-09",
+      "category": "semantic",
+      "mutation": "Change workflow sample-to-measurement mailboxCapacity from 8 to 12 inside approved budgets",
+      "expected": "different",
+      "reason": "Workflow scheduler bounds are architecture meaning",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-10",
+      "category": "semantic",
+      "mutation": "Add a fresh non-colliding retiredIdentities node tombstone for an otherwise unused stable ID",
+      "expected": "different",
+      "reason": "Retired stable identity ledger participates even when initially empty",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-11",
+      "category": "semantic",
+      "mutation": "Change a validated mmio claim address from 0x10000000 to a distinct permitted and validated address",
+      "expected": "different",
+      "reason": "Hardware address-space resource claim is architecture meaning",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-12",
+      "category": "semantic",
+      "mutation": "Change the linked provider Decode result public record field, recomputing all locked logical digests and references consistently",
+      "expected": "different",
+      "reason": "Transitive public type and operation contract changes semantic export closure",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-13",
+      "category": "semantic",
+      "mutation": "Change workflow action from none to a validated permitted dispatch with a new verified provider operation",
+      "expected": "different",
+      "reason": "Workflow actions are first-class meaning",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-14",
+      "category": "semantic",
+      "mutation": "Change a node component to a different exact verified public component contract with all graph ports revalidated",
+      "expected": "different",
+      "reason": "Public component identity and transitive operation semantics change",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-15",
+      "category": "rejection",
+      "mutation": "Add an unclassified authored semantic field or change accepted schema without an updated complete projection",
+      "expected": "reject",
+      "reason": "Unknown meaning MUST NOT disappear from hash",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-16",
+      "category": "rejection",
+      "mutation": "Remove an export from the verified package while a graph instance still refers to it",
+      "expected": "reject",
+      "reason": "Export resolution fails before projection",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-17",
+      "category": "rejection",
+      "mutation": "Change Decode operation success TypeReference but leave existing command-success signal payloadTypeRef unchanged",
+      "expected": "reject",
+      "reason": "Mismatched verified operation/signal payload fails before hashing",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-18",
+      "category": "rejection",
+      "mutation": "Request transfer=borrow on queued stream e3 with the same io-worker sender/receiver domain",
+      "expected": "reject",
+      "reason": "Same-domain queues do not extend call-scoped borrow lifetime",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-19",
+      "category": "rejection",
+      "mutation": "Request transfer=borrow on snapshot e4 crossing io-worker to ui",
+      "expected": "reject",
+      "reason": "Cross-domain borrow is forbidden",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-20",
+      "category": "rejection",
+      "mutation": "Change an authorized resource edgeId to an unknown graph edgeId",
+      "expected": "reject",
+      "reason": "Claim reference must resolve and match owner/resource",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-21",
+      "category": "rejection",
+      "mutation": "Reorder field definitions inside a verified public record but retain its previous claimed public digest",
+      "expected": "reject",
+      "reason": "Ordered record-field semantics require recomputed public export identity",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-22",
+      "category": "rejection",
+      "mutation": "Change manifest-only source bytes while retaining an obsolete locked packageContentDigest",
+      "expected": "reject",
+      "reason": "Exact offline lock mismatch rejects even if semantic projection could otherwise be unchanged",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-23",
+      "category": "rejection",
+      "mutation": "Insert duplicate IDs into any purportedly unordered graph collection",
+      "expected": "reject",
+      "reason": "Duplicate stable identities cannot be silently deduplicated",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-24",
+      "category": "rejection",
+      "mutation": "Replace a public operation digest with a syntactically valid invented 64-hex value",
+      "expected": "reject",
+      "reason": "Digest shape is not independently verified public identity",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-25",
+      "category": "rejection",
+      "mutation": "Insert a future approval receipt or semanticGraphDigest into its own semantic projection input",
+      "expected": "reject",
+      "reason": "No self-reference or circular approval/snapshot digest",
+      "testResult": "NOT-RUN"
+    },
+    {
+      "id": "SEM-26",
+      "category": "rejection",
+      "mutation": "Add privilege-dependent hardware claims whose target adapter and capabilities have not been qualified",
+      "expected": "reject",
+      "reason": "A typed claim is not permission to execute",
+      "testResult": "NOT-RUN"
+    }
+  ]
+}
