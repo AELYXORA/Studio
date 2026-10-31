@@ -108,3 +108,23 @@ If UI binding state includes only a String status, converting TaskOutcome to Str
 ## L3 portable TaskOutcome versus provider Result — PROPOSED
 
 [D3 Core Type Registry](d3-core-registry-value-contract.md) defines two-branch provider Result<T,E> separately from five-branch UI request TaskOutcome<T,E>; AdmissionRejected and ProviderUnavailable can arise before any provider CommandTicket exists. A cancel request alone cannot form confirmed Cancelled. [D4 ABI](d4-core-value-abi-contract.md) must verify exact native tagged union, ownership and terminal CAS; [D5](d5-ui-resource-budget-and-publication.md) proposes one active task/slot and 256 active root tasks with bounded completion reservation, not an existing measured runtime. An unmounted keyed view cannot revive an old ticket by label or item index.
+
+## T9. Post-dispatch uncertainty, provider loss and irreversible effects — proposed closure
+
+**Status: Phase I proposed consistency refinement, not a tested runtime state machine.** The existing five-case `TaskOutcome<T,E>` remains unchanged; introducing a sixth public branch without complete graph/source/ABI contract is forbidden. Instead the **candidate** `ProviderError` payload of `ProviderUnavailable` must distinguish at least:
+
+1. `never-admitted`: no verified provider dispatch ticket was created and no provider effect was started. This fact requires bounded admission and dispatch proof, not a simple disconnected socket.
+2. `indeterminate-after-admission`: dispatch may have reached a provider, but no trustworthy terminal provider Result or quiescence confirmation exists. This **does not** mean provider `Failure(E)`, cancellation, rollback or safe retry. External effects may already have occurred.
+
+A third internally observed `terminal-known` case is **not** represented as `ProviderUnavailable`: once a verified provider result (or confirmed quiescence) has been safely linearized, the corresponding `Successful`, `Failed` or `Cancelled` wins. An OS communication error after such an event must not overwrite it.
+
+Rules:
+
+- Every dispatched ticket has one immutable owner, generation, source/graph revision, operation export identity and declared side-effect class. A lost transport or deadline does **not** release native buffers, device ownership or outstanding provider resources; keep a bounded indeterminate record until a safe quiescence/compensation decision or explicitly documented recovery boundary.
+- If capacity for retaining indeterminate provider state cannot be reserved, admission **must reject before dispatch**. Once the operation might have run, lack of UI queue capacity must not fabricate `Failed(E)` or `Cancelled`, erase evidence or trigger a repeat.
+- `ProviderUnavailable(indeterminate-after-admission)` can be delivered only with a typed uncertainty flag and owned cleanup/provenance; it is an observation for the original view slot, **not** a claim that the provider completed. The runtime owner of native resources remains live until a separately proven terminal/quiescent release. If original UI view disappears, record owned diagnostics and cleanup without resurrecting the view.
+- `retryPolicy=never` in the current canonical package schema applies to **both** indeterminate and known outcomes. No implicit replay on reconnect, restart, timeout, snapshot recovery, stale view, or receipt refresh. An explicit future architect-reviewed compensation/idempotency contract would be necessary to do otherwise.
+- The five-case TaskOutcome discriminant and provider Result two-case discriminant remain separate; neither `ProviderError` category can be converted silently to a provider `Failure(E)`.
+- Actual native dispatch/terminal CAS, provider acknowledgement trust, bounded indeterminate record retention, OS/scheduler races, load shedding and D6 external-effect recovery are **OPEN D2/D4/D5/D6 proof obligations**.
+
+[Proposed lifecycle cases](../../examples/canonical-graph/task-outcome-lifecycle-cases.json) specify ordering/uncertainty rejection scenarios, all **NOT-RUN**. This design does not claim exactly-once physical effects or safe arbitrary shutdown.
