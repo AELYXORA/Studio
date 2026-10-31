@@ -65,3 +65,7 @@ CPU backend is a functional fallback where supported; GPU backend is capability-
 ## Open decisions
 
 Final numeric layout model, font/text shaping implementation, vector-path representation, shader/color pipeline, GPU backend choices, scene diff strategy, input gesture recognizer and native accessibility bridge APIs. No platform rendering support is verified.
+
+## L4 keyed tree, focus and frame consistency (PROPOSED)
+
+[L4 Keyed Views](d3-keyed-dynamic-view-lifecycle.md) require per-parent tagged StableKey reconciliation instead of positional index identity. Reorder retains existing ViewIdentity/generation/focus, while removal invalidates focus/IME/accessibility target and old-generation input subscriptions before new events may route. D5 must atomically publish a coherent desired tree/StateRevision; rendering/GPU frames may lag but cannot roll back state or replay external commands. Validate all duplicate keys and allocation budgets before unmounting old tree. [D3/D4/D5 review](d3-d4-d5-lifecycle-consistency-review.md) owns cross-layer races, native focus fallback and memory budget proof. Nothing here indicates observed rendering success.
