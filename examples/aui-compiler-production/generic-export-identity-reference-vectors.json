@@ -1,0 +1,89 @@
+{
+  "format": "aui.generic-instance-export-id-candidate-reference",
+  "status": "ARITHMETIC-ONLY / PROPOSED / D2-C9 NOT ACCEPTED; no public TypeReference contract digests or native compiler tests",
+  "owner": "docs/architecture/d2-identity-and-type-resolution.md",
+  "domainAscii": "AELYXORA/generic-export-id/canonical",
+  "preimage": "SHA256(ASCII(domainAscii) || byte(0x00) || D6-canonical UTF-8 JSON of identityTree)",
+  "integrity": "Python hashlib and OpenSSL SHA-256 both computed the two exact outputs on identical byte preimages; AELYXORA compiler and signed package lock NOT-RUN.",
+  "nonGoals": [
+    "This digest binds public *names* only and is not a verified semantic type contractDigest, core registry fingerprint, source trust or native ABI",
+    "Actual core List/Result template definitions and Measurement/SensorError exports remain UNVERIFIED",
+    "Generated exportId namespace and hash domain require architect approval, no implicit D2 migration or signed graph update"
+  ],
+  "vectors": [
+    {
+      "label": "nested-list-result",
+      "identityTree": {
+        "kind": "generic",
+        "template": {
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/List"
+        },
+        "arguments": [
+          {
+            "kind": "generic",
+            "template": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/Result"
+            },
+            "arguments": [
+              {
+                "kind": "nominal",
+                "ownerPackageId": "example.contract",
+                "typeId": "example.contract/Measurement"
+              },
+              {
+                "kind": "nominal",
+                "ownerPackageId": "example.contract",
+                "typeId": "example.contract/SensorError"
+              }
+            ]
+          }
+        ]
+      },
+      "expectedIdDigest": "f6d871a888db3523701ce6b8865ffdcd6db01d011842ebfc3325a2a59fdf0624",
+      "canonicalByteLength": 423,
+      "canonicalUtf8": "{\"arguments\":[{\"arguments\":[{\"kind\":\"nominal\",\"ownerPackageId\":\"example.contract\",\"typeId\":\"example.contract/Measurement\"},{\"kind\":\"nominal\",\"ownerPackageId\":\"example.contract\",\"typeId\":\"example.contract/SensorError\"}],\"kind\":\"generic\",\"template\":{\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/Result\"}}],\"kind\":\"generic\",\"template\":{\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/List\"}}",
+      "proposedExportId": "aui.core/@inst/f6d871a888db3523701ce6b8865ffdcd6db01d011842ebfc3325a2a59fdf0624"
+    },
+    {
+      "label": "nested-list-result-swapped-arguments",
+      "identityTree": {
+        "kind": "generic",
+        "template": {
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/List"
+        },
+        "arguments": [
+          {
+            "kind": "generic",
+            "template": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/Result"
+            },
+            "arguments": [
+              {
+                "kind": "nominal",
+                "ownerPackageId": "example.contract",
+                "typeId": "example.contract/SensorError"
+              },
+              {
+                "kind": "nominal",
+                "ownerPackageId": "example.contract",
+                "typeId": "example.contract/Measurement"
+              }
+            ]
+          }
+        ]
+      },
+      "expectedIdDigest": "66a4c9b0ef15c7b6f5802db6b1d3d0fd8ed5757c0570f99badae23e8d5532206",
+      "canonicalByteLength": 423,
+      "canonicalUtf8": "{\"arguments\":[{\"arguments\":[{\"kind\":\"nominal\",\"ownerPackageId\":\"example.contract\",\"typeId\":\"example.contract/SensorError\"},{\"kind\":\"nominal\",\"ownerPackageId\":\"example.contract\",\"typeId\":\"example.contract/Measurement\"}],\"kind\":\"generic\",\"template\":{\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/Result\"}}],\"kind\":\"generic\",\"template\":{\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"typeId\":\"aui.core/List\"}}",
+      "proposedExportId": "aui.core/@inst/66a4c9b0ef15c7b6f5802db6b1d3d0fd8ed5757c0570f99badae23e8d5532206"
+    }
+  ]
+}
