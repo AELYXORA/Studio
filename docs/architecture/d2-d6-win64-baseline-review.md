@@ -53,3 +53,7 @@ All items remain **OPEN**: the presence of accurate offsets and cryptographic re
 5. Only then Phase II implementation; Phase III native Win64, Unicode/canonical, security, race, memory/IME/accessibility and crash tests; Phase IV fixes and re-verification.
 
 **No phase boundary moved and no Studio product source changed by this documentation effort.**
+
+## G5. Additional exact module/result descriptor proposal (P0 unchanged)
+
+[D4 Module and Result Descriptors](d4-win64-module-and-result-descriptors.md) now propose exact native 80/80/64/80-byte module header, operation entry, typed value and outcome envelope, with [16 design negative cases](../../examples/abi/win64-module-and-outcome-v1.json). This advances **B-04/B-06 at design-shape level only**: canonical module contract-set digest/target-layout digest aggregation, signed origin/trust, actual native generic layout, COFF/unwind verification and operation transport races remain OPEN. Do not mark B-04 or B-06 Accepted solely because field offsets are specified.
