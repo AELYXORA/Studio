@@ -151,3 +151,7 @@ D2 graph CAS cannot claim durable atomicity until these conditions are satisfied
 ## P7. First linked reference and explicit scope
 
 [Semantic Projection](d2-d6-semantic-projection.md) owns the field-by-field canonical graph value; [Offline Dependency Resolution](d6-offline-dependency-resolution.md) owns package-lock closure and logical exports. [Locked Pure Reference](../../examples/locked-pure-reference/README.md) has actual fixture ASM bytes and immutable packageObjects plus project snapshot/index/HEAD, but no D4 ABI linkage or host durability. It must never be mistaken for an executable Studio build or an OS crash-safety result.
+
+## P8. Proposed core registry digest domain and snapshot boundary
+
+[Core Export Contract v2](d2-d3-core-export-digest-contract.md) adds a **separate** proposed type-contract profile without modifying existing v1 public export canonical input or the pure snapshot/index/head fixture. Its [reference vectors](../../examples/aui-language/d2-d3-core-export-digest-vectors.json) are independent arithmetic, not native D6 validation. Before an extended-core graph can be authoritative, D6 must capture exact registry source bytes, approved core logical contract set, source/Graph approval and compatible package lock in a *new* immutable snapshot; changing core/native ABI cannot silently revalidate a previously accepted binary. The Windows [Win64 ABI design](d4-win64-native-component-abi.md) and [first UI host](d5-windows-host-runtime-contract.md) **do not** constitute verified NTFS durability.
