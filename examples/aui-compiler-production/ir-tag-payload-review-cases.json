@@ -1,0 +1,557 @@
+{
+  "format": "aui.full-ir-tag-payload-review-matrix",
+  "status": "DESIGN-ONLY / ALL NOT-RUN / NO VERIFIED NATIVE COMPILER",
+  "owner": "docs/architecture/aui-compiler-ir-payload-contract.md",
+  "catalog": "schemas/aui-compiler-ir-payload-layout-candidate.json",
+  "byteVectors": "examples/aui-compiler-production/ir-payload-template-byte-vectors.json",
+  "meaning": {
+    "accept": "Approved native validator MUST eventually accept only with full semantic and authenticated proof, not based on JSON shape",
+    "reject": "A real native verifier MUST fail closed at correct stage and preserve prior sealed output"
+  },
+  "notes": [
+    "All 139 tag codes need distinct visitor coverage and stage/profile tests; 16 shared templates do not imply interchangeable semantics",
+    "All 85 Ref64 fields require specific pointed-to descriptor kinds, including immutable typed Span16 element refs",
+    "Cases are design descriptions, not materialized source and real compiler PASS/FAIL observations"
+  ],
+  "cases": [
+    {
+      "id": "TAG-001",
+      "group": "TAG",
+      "expected": "accept",
+      "scenario": "All 139 unique tag IDs map to exactly one fixed payload template and stage",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-002",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "Tag 0 accepted as a valid IR instruction",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-003",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "Unrecognized tag 0xffff skipped by a generic visitor",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-004",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "T6 MachineCall tag interpreted as T1 PureCall",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-005",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "Same tag code assigned two different logical operations",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-006",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "T1 source-only EnumConstruct promoted into T2 proof by changing header flags",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-007",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "T7 native binary release represented as a fake T6 machine op",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-008",
+      "group": "TAG",
+      "expected": "reject",
+      "scenario": "Unsupported L4-only KeyedReconcile accepted under L1 profile",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-009",
+      "group": "HEADER",
+      "expected": "accept",
+      "scenario": "IRNodeHeaderV1 tag 337 (EnumMatch) requires 64-byte Enum64 payload at a distinct same-arena aligned offset",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-010",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "Header recordBytes equals 64 rather than 48",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-011",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "PayloadBytes equals 48 for EnumMatch tag that mandates 64",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-012",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "PayloadOffset is interpreted as pointer-relative rather than absolute arena offset",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-013",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "PayloadOffset+payloadBytes overflows 32-bit or exceeds committed arena bytes",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-014",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "Header and payload occur in separate arenas without explicit ownership",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-015",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "Header schemaMajor unsupported or reserved flags nonzero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-016",
+      "group": "HEADER",
+      "expected": "reject",
+      "scenario": "A duplicate compiler-local nodeId is reused in two different nodes of one compilation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-017",
+      "group": "REF",
+      "expected": "accept",
+      "scenario": "All 85 template Ref64 fields have unique expected typed pointee definitions",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-018",
+      "group": "REF",
+      "expected": "accept",
+      "scenario": "Span16 of typed node Ref64s has elementSize=8 and exact source order",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-019",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "An out-of-bounds Ref64 considered valid because its byteOffset is less than capacity but length overflows",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-020",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Stale generation Ref64 dereferenced after a pass retired its arena",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-021",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Ref64 to an SSAValueV1 supplied where ResolvedTypeDescriptor is mandatory",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-022",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Ref64 to a raw OS handle masquerades as QualifiedNativeImportReceipt",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-023",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Span16 elementSize=4 accepted for an eight-byte Ref64 array",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-024",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Span16 element count computed using unchecked byteLength multiplication",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-025",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Missing required Span16 treated as valid empty array without explicit zero-length descriptor",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-026",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "Source string NUL-terminated pointer treated as an immutable typed constant descriptor",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-027",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "A pointer to a mutable ancestor arena retained after output publication",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-028",
+      "group": "REF",
+      "expected": "reject",
+      "scenario": "An arbitrary proof-shaped JSON string turned into a verifier receipt",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-029",
+      "group": "T1",
+      "expected": "accept",
+      "scenario": "Exact zero/one-payload EnumConstruct tag carries enum type, variant ID and optional typed expression",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-030",
+      "group": "T1",
+      "expected": "accept",
+      "scenario": "EnumMatch tag carries typed arms and verified exhaustive logical coverage",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-031",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "EnumConstruct has match arms or exhaustiveness proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-032",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "EnumMatch has a constructor payload or missing coverage proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-033",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "Source-only ResolvedGenericType semanticContractRef fabricated nonzero",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-034",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "Literal constantRef absent, or mutable string/bytes incorrectly retained",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-035",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "ViewConstructor/child/modifier order is sorted instead of preserving source order",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-036",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "Effectful provider operation lowered as pure TypedHIR PureCall",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-037",
+      "group": "T1",
+      "expected": "reject",
+      "scenario": "ServiceDecl contains a native executable body or invented provider operation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-038",
+      "group": "T2",
+      "expected": "reject",
+      "scenario": "Link64 source receipt points at an unauthenticated source string",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-039",
+      "group": "T2",
+      "expected": "reject",
+      "scenario": "Link64 package lock receipt mismatches exact immutable package revision",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-040",
+      "group": "T2",
+      "expected": "reject",
+      "scenario": "GraphOperationLink omits the full type export closure",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-041",
+      "group": "T2",
+      "expected": "reject",
+      "scenario": "Unverified core registry resolves into trusted T2 by setting a numeric trustState",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-042",
+      "group": "T2",
+      "expected": "reject",
+      "scenario": "Target ABI proof from source-only service name accepted without qualified D4 descriptor",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-043",
+      "group": "T2",
+      "expected": "reject",
+      "scenario": "Source symbol provenance silently replaced with a line-number Graph ID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-044",
+      "group": "T3",
+      "expected": "accept",
+      "scenario": "Reactive commit success and rollback remain disjoint, with one bound writer",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-045",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "CandidateCommit publishes renderer state before revision success",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-046",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "Async AdmissionRejected contains a providerTicketProofRef",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-047",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "ProviderIndeterminate drops native ticket before authenticated quiescence",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-048",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "TaskSettled missing the TaskOutcome ProviderUnavailable branch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-049",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "UI keyed detach event reuses a prior incarnation generation on reinsertion",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-050",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "KeyedReconcile uses positional list index instead of full ancestor StableKey path",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-051",
+      "group": "T3",
+      "expected": "reject",
+      "scenario": "Reconcile candidate partially published after resource budget failure",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-052",
+      "group": "T4",
+      "expected": "accept",
+      "scenario": "Move typed SSA operation has exactly one input and one output and explicit linear effect lane",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-053",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "Ownership Move operation has two operands and silently drops extra",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-054",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "Ownership Drop operation produces a new SSA result",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-055",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "Effectful ProviderDispatchOwned operation has missing input or output token",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-056",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "Pure NoOpPure node contains an external effect token",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-057",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "BorrowUnique and BorrowShared tokens coexist on same owner and region",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-058",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "CFG Switch terminator lacks exhaustive case descriptors",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-059",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "T4 owner proof fabricated from OwnerCheck48 stateBeforeRef without real worklist",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-060",
+      "group": "T4",
+      "expected": "reject",
+      "scenario": "Owned resource returned on one path but dropped before return on another branch",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-061",
+      "group": "T5_T6",
+      "expected": "accept",
+      "scenario": "Qualified EnumLayout includes physical tag offsets and D4 ABI proof distinct from logical variant name",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-062",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "RecordLayout typeRef changed without recomputing size and alignment",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-063",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "MachineCall lacks required importProofRef or layoutProofRef",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-064",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "MachineStore loses volatile or atomic effect ordering",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-065",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "MachineSwitch omits physical variant case and relies on source wildcard",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-066",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "Unsupported ISA opcode silently replaced with MachineCopy",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-067",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "MachineReturn emitted without qualified Win64 frame and callee-save proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-068",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "Stack shadow space or unwind ignored because source-only IR was structurally valid",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-069",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "Nonportable TaskTicket passed as plain pointer to native module",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-070",
+      "group": "T5_T6",
+      "expected": "reject",
+      "scenario": "Partial COFF/PE output treated as a completed compiler despite failed T6 proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-071",
+      "group": "HANDOFF",
+      "expected": "accept",
+      "scenario": "Fresh private output arena sealed only after actual stage semantic verifier succeeded",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-072",
+      "group": "HANDOFF",
+      "expected": "reject",
+      "scenario": "T1 source-only analysis output allowed to enter T6 by patching a tag byte",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-073",
+      "group": "HANDOFF",
+      "expected": "reject",
+      "scenario": "Malformed payload detected only after child Ref64 was dereferenced",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-074",
+      "group": "HANDOFF",
+      "expected": "reject",
+      "scenario": "Failed pass publishes partial mutated arena and increments lastVerifiedStage",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-075",
+      "group": "HANDOFF",
+      "expected": "reject",
+      "scenario": "An optimizer strips cleanup/effect barrier while retaining old OwnershipIR proof",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-076",
+      "group": "HANDOFF",
+      "expected": "reject",
+      "scenario": "Debug JSON tag/payload fixture accepted as an authenticated pass ledger",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "TAG-077",
+      "group": "HANDOFF",
+      "expected": "reject",
+      "scenario": "All 139 tags accepted without actual 139-tag visitor and negative test coverage",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
