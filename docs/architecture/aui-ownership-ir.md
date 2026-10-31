@@ -58,3 +58,7 @@ A design review must establish deterministic transfer functions, join semantics,
 ## D3+ async and state lifetime (PROPOSED)
 
 [L3 Task/Result](d3-task-result-lifecycle.md) proposes at most one active TaskTicket per source TaskSlot; [L2 State](d3-state-derived-binding-contract.md) confines atomic state commits to UI owner/generation. Any borrow crossing await must prove retained stable owner under this OwnershipIR, otherwise OWN_ASYNC_ESCAPE. View unmount invalidates its completion subscription but never releases in-flight DMA/resource buffer before provider quiescence. Target atomics, cancellation and cleanup proof are unimplemented.
+
+## L4 dynamic-view ownership gates (PROPOSED)
+
+[L4 Keyed Reconciliation](d3-keyed-dynamic-view-lifecycle.md) must not create a borrowed UI alias from a list item that escapes a valid owner region, Task await or scheduler boundary. A repeated source template owns separate runtime incarnations and result subscriptions per full keyed parent path. Removing/replacing a row marks its generation stale but leaves provider-owned DMA/OS resources attached to their actual D4 owner until safe completion. [D3/D4/D5 review](d3-d4-d5-lifecycle-consistency-review.md) lists mandatory target-native teardown and allocation-failure fixtures; no OwnershipIR implementation is claimed.
