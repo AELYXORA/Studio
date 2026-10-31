@@ -1,0 +1,36 @@
+// D3+ L3 design fixture ONLY. No native parser, provider ABI or TaskOutcome runtime.
+// Explicit graph/provider link, pinned task/result core registry and source revisions required.
+import aui.core;
+import example.locked;
+
+component ReviewPanel(input tick: Tick) {
+  state status: String = "Idle";
+  derived visibleStatus: String = status;
+  bind view.statusLabel.value <- visibleStatus;
+
+  event launch: Event<Unit>;
+  command Accept(tick: Tick) -> Result<Tick, Failure> on io-worker;
+  task Refresh(tick: Tick) -> Result<Tick, Failure> on io-worker {
+    let outcome = await Accept(tick: tick);
+    return outcome;
+  }
+
+  on launch(payload) {
+    submit Refresh(tick: tick) as refreshSlot;
+  }
+
+  on settled refreshSlot(outcome) {
+    match outcome {
+      Successful(value) => commit { set status = "Succeeded"; }
+      Failed(error) => commit { set status = "Provider failed"; }
+      AdmissionRejected(reason) => commit { set status = "Not admitted"; }
+      Cancelled(confirmation) => commit { set status = "Cancellation confirmed"; }
+      ProviderUnavailable(reason) => commit { set status = "Provider unavailable"; }
+    }
+  }
+
+  VStack(spacing: 8) {
+    Text().key(value: statusLabel).accessibilityLabel(value: "Operation status")
+    Button(title: "Run").on(activated: launch).accessibilityLabel(value: "Run review")
+  }
+}
