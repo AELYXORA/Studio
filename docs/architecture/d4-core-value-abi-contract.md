@@ -68,3 +68,7 @@ The existing Linux fixture source bytes are reference inputs, **not** verified D
 ## A6. Blocking design decisions
 
 Native struct offsets, discriminant values, allocator ABI, error payload descriptors, symbolic mangling/cross-module calling conventions, signed/untrusted module admission, per-target security checks, compiled generic layout policy, atomic teardown protocol, ABI feature negotiation, and independently observed native conformance fixtures. D4 and D5 stay **Proposed/Open**.
+
+## A7. First-host proposed native Win64 descriptor layout
+
+[Win64 Native Component ABI](d4-win64-native-component-abi.md) now proposes an exact single-pointer AuiInvokeV1 call with standard Win64 conventions, a 64-byte AuiCallFrameV1, 48-byte AuiSpanV1 and 64-byte AuiAdmissionContextV1, with all offsets documented in [design layout vectors](../../examples/abi/win64-native-layout-v1.json). These are **AELYXORA-owned layout candidates**, not compiled structs, module descriptor or ABI test results. Win64 entrypoint/status transport is independent of D3 provider Result<T,E>/TaskOutcome<T,E> logical variants. Exact module header, operation table, native union discriminants, allocator, COFF/unwind and approval remain P0. [Windows D5 host](d5-windows-host-runtime-contract.md) addresses OS UI behavior separately.
