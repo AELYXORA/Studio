@@ -73,3 +73,7 @@ A committed state revision must be internally consistent even if a later renderi
 ## Runtime acceptance scenarios
 
 A 1,000-event burst into a bounded sensor queue must remain bounded; event loss and latency must be measurable. A stale view instance may not receive a late completion as if it were a new instance. An invalid binding transaction cannot partially publish state. A renderer failure cannot cause an approved driver operation to silently rerun.
+
+## D3+ UI state and async integration — PROPOSED
+
+[L2 State/Derived/Bind](d3-state-derived-binding-contract.md) explicitly bounds atomic local UI StateRevision transactions, pure topological invalidation and one writer per statically keyed view property. A renderer fault after a committed UI revision does not roll back that revision or re-run an external command. [L3 Task/Result](d3-task-result-lifecycle.md) separates UI event ingress (candidate 64 per view), task slot admission, D2 provider command ticket, and bounded completion delivery. Cancellation request != terminal Cancelled; stale ViewIdentity/generation cannot receive a late TaskOutcome. The TaskSlot proposal is limited to one active task per slot and D5 must still prove overall queue limits, fairness, atomics and memory cleanup. [Source snapshot owner](d3-source-snapshot-reconciliation.md) forbids a standalone proposed link-map from granting execution. No runtime implementation is claimed.
