@@ -1,0 +1,343 @@
+{
+  "format": "aui.integrated-grammar-review-design",
+  "status": "PROPOSED / ALL NOT-RUN / no native AUI lexer or parser currently executed",
+  "owner": "docs/architecture/aui-syntax.md#integrated-candidate-grammar-exact-l0l4-composition-for-one-production-parser",
+  "distinctions": {
+    "accept-source": "expected syntactic and local semantic admission given explicitly chosen profile and declared provisional types; not verified Graph or native build",
+    "accept-syntax-only": "parses under proposed structural grammar but may fail unresolved public type/package/runtime contract or absent golden fixture",
+    "reject": "expected lexical/profile/local semantic rejection before successful TypedHIR publication",
+    "reject-link": "syntax may be legal, but exact verified public export/Graph/service provider linking must reject until owner closes it"
+  },
+  "notes": [
+    "Every case is a future test design; unmodified referenced source files are preserved",
+    "A mutation described by prose is not a machine-executable golden fixture; materialize byte-exact inputs and diagnostics before claiming PASS",
+    "Full production compiler acceptance additionally requires qualified PE/COFF/runtime and signed artifacts, not just parsing",
+    "Use one grammar owner and do not make source module kind an implicit token inference"
+  ],
+  "cases": [
+    {
+      "id": "GRAM-01",
+      "profile": "L0",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/status-panel-l0.aui",
+      "expected": "accept-source",
+      "scenario": "Baseline static View, no events or commands",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-02",
+      "profile": "L1",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/linked-consumer-panel.aui",
+      "expected": "accept-source",
+      "scenario": "Exactly one event, handler and request command in L1",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-03",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "accept-source",
+      "scenario": "State, Derived, bind and atomic commit with static Text key",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-04",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "accept-source",
+      "scenario": "Explicit taskSlot, task await/return, submit and five-case settled match",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-05",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "accept-source",
+      "scenario": "One typed List<Row> ForEach using StableKey field (requires verified exports to link)",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-06",
+      "profile": "contract",
+      "moduleKind": "contract",
+      "baseSource": "sensor-contract.aui",
+      "expected": "accept-syntax-only",
+      "scenario": "Records, enum, service interface parse; enum/service export still blocked",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-07",
+      "profile": "L0",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/status-panel-l0.aui",
+      "expected": "reject",
+      "scenario": "Insert event/command/handler in L0; profile unsupported",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-08",
+      "profile": "L1",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/linked-consumer-panel.aui",
+      "expected": "reject",
+      "scenario": "Insert state or bind in L1; profile unsupported",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-09",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Insert taskSlot/submit into L2; profile unsupported",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-10",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "reject",
+      "scenario": "Insert ForEach into L3; profile unsupported",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-11",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "reject",
+      "scenario": "Make ForEach root directly instead of static root View",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-12",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "reject",
+      "scenario": "ForEach key item.foo but item bound under a different name",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-13",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "reject",
+      "scenario": "Nested ForEach with unbounded/duplicate source key or wrong List<T> owner",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-14",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Text() without static .key and matching bind writer",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-15",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Text(value: title).key(value: statusLabel) and bind same value property",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-16",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Two bindings target one static source key property",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-17",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Derived pureCall to unverified effectful native provider",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-18",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Introduce unsupported binary arithmetic operator in pure expression",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-19",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "reject",
+      "scenario": "Remove explicit taskSlot declaration but leave submit and settled",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-20",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "reject",
+      "scenario": "Change TaskSlot<T,E> order, mismatching task Result<T,E>",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-21",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "reject",
+      "scenario": "Duplicate settled match arm or omit ProviderUnavailable",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-22",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "reject",
+      "scenario": "Use settled payload binder outside its branch scope",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-23",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "reject",
+      "scenario": "Use positional integer or mutable item field instead of StableKey",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-24",
+      "profile": "L1",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/linked-consumer-panel.aui",
+      "expected": "reject",
+      "scenario": "Duplicate named arguments or make command send positional",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-25",
+      "profile": "L1",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/linked-consumer-panel.aui",
+      "expected": "reject",
+      "scenario": "Use unknown modifier or wrong Button.on activated signature",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-26",
+      "profile": "contract",
+      "moduleKind": "contract",
+      "baseSource": "sensor-contract.aui",
+      "expected": "reject",
+      "scenario": "Add component View or imperative task body to interface-only contract module",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-27",
+      "profile": "L0",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/status-panel-l0.aui",
+      "expected": "reject",
+      "scenario": "Insert record/enum/service at top level of component source unit",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-28",
+      "profile": "contract",
+      "moduleKind": "contract",
+      "baseSource": "sensor-contract.aui",
+      "expected": "reject",
+      "scenario": "Duplicate record field/enum variant/service command NFC identifier",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-29",
+      "profile": "contract",
+      "moduleKind": "contract",
+      "baseSource": "sensor-contract.aui",
+      "expected": "reject-link",
+      "scenario": "Try to link enum SensorError public export with record-only current canonical package schema",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-30",
+      "profile": "contract",
+      "moduleKind": "contract",
+      "baseSource": "sensor-contract.aui",
+      "expected": "reject-link",
+      "scenario": "Resolve native service by its authored name without approved Graph component/operation mapping",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-31",
+      "profile": "L0",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/status-panel-l0.aui",
+      "expected": "reject",
+      "scenario": "Use a malformed UTF-8, BOM or unpaired surrogate source literal",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-32",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "reject",
+      "scenario": "Use generic template with unverified arity/nested recursive TypeReference",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-33",
+      "profile": "L3",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/review-panel-l3.aui",
+      "expected": "reject",
+      "scenario": "Construct public Cancelled confirmation from user-controlled pureCall",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-34",
+      "profile": "L2",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/feedback-panel-l2.aui",
+      "expected": "reject",
+      "scenario": "Attempt to make source ID static key equal to an unverified GraphNodeID",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-35",
+      "profile": "L4",
+      "moduleKind": "component",
+      "baseSource": "../aui-language/keyed-rows-l4.aui",
+      "expected": "accept-syntax-only",
+      "scenario": "Nested ForEach is syntactically allowed in stack children with reviewed exact item scope; no current runnable nested fixture",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "GRAM-36",
+      "profile": "contract",
+      "moduleKind": "contract",
+      "baseSource": "sensor-contract.aui",
+      "expected": "reject",
+      "scenario": "Emit runnable native service merely from an AUI service interface with no verified provider",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
