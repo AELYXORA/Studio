@@ -106,3 +106,7 @@ Host/compiler runtime implementation; verified operation-table and module signin
 ## W7. Verified load and typed specialization gate
 
 [Module Trust Policy](d4-win64-module-trust-and-admission.md) requires exact PE full-file SHA, OS Authenticode policy, publisher allowlist and independent signed AELYXORA source/Graph receipt before native module admission; actual live capability and generation checks repeat per invocation. [G1 generic identity](d2-d3-generic-instantiation-identity.md) is a logical digest, **not** proof of Win64 native layout; an ABI_LAYOUT_UNVERIFIED generic instance cannot be dispatched even from a valid signed module. [Reproducible build](d6-win64-reproducible-build-contract.md) pins exact source/toolchain and compares unsigned binary bytes; no Win64 native test has been run.
+
+## W8. TypeReference v2 and signed review before typed operation dispatch
+
+[Typed end-to-end trace](d2-d6-typed-win64-end-to-end-trace.md) and [TypeReference v2](d2-d6-typeref-v2-resolution.md) require a separately versioned typed Graph and exact native operation/result type binding before converting logical List<Row>/TaskOutcome<Row,String> into any Win64 layout. [Signed approval](d2-d6-signed-approval-receipt.md) requires architecture reviewer scope plus executable release scope bound to full source/typed-link+signed PE bytes; neither replaces WinVerifyTrust, live capability or module pointer bounds. Existing Win64 ABI offsets are candidates only; no executable type-layout probing was done.
