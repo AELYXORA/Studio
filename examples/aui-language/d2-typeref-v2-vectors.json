@@ -1,0 +1,174 @@
+{
+  "format": "aui.typeref-v2-design-vectors",
+  "status": "reference SHA256 from known-answer-tested pure JS on ASCII canonical projections; no native AELYXORA compiler, Graph or ABI tests performed",
+  "record": {
+    "input": {
+      "profile": "aui.export-contract/v2-record",
+      "exportKind": "type",
+      "packageId": "example.rows",
+      "typeId": "example.rows/Row",
+      "kind": "record",
+      "fields": [
+        {
+          "name": "id",
+          "typeRef": {
+            "profile": "aui.type-ref/v2-draft",
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/U64",
+            "exportProfile": "aui.export-contract/v2-core",
+            "contractDigest": "aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024"
+          }
+        },
+        {
+          "name": "title",
+          "typeRef": {
+            "profile": "aui.type-ref/v2-draft",
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/String",
+            "exportProfile": "aui.export-contract/v2-core",
+            "contractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+          }
+        }
+      ]
+    },
+    "expectedCanonical": "{\"exportKind\":\"type\",\"fields\":[{\"name\":\"id\",\"typeRef\":{\"contractDigest\":\"aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/U64\"}},{\"name\":\"title\",\"typeRef\":{\"contractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/String\"}}],\"kind\":\"record\",\"packageId\":\"example.rows\",\"profile\":\"aui.export-contract/v2-record\",\"typeId\":\"example.rows/Row\"}",
+    "expectedSha256": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+  },
+  "recordTypeReference": {
+    "profile": "aui.type-ref/v2-draft",
+    "kind": "nominal",
+    "ownerPackageId": "example.rows",
+    "typeId": "example.rows/Row",
+    "exportProfile": "aui.export-contract/v2-record",
+    "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+  },
+  "listOfRow": {
+    "input": {
+      "profile": "aui.generic-instantiation/v2-record-args",
+      "exportKind": "generic-instantiation",
+      "template": {
+        "profile": "aui.type-ref/v2-draft",
+        "kind": "nominal",
+        "ownerPackageId": "aui.core",
+        "typeId": "aui.core/List",
+        "exportProfile": "aui.export-contract/v2-core",
+        "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+      },
+      "arguments": [
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "example.rows",
+          "typeId": "example.rows/Row",
+          "exportProfile": "aui.export-contract/v2-record",
+          "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+        }
+      ]
+    },
+    "expectedCanonical": "{\"arguments\":[{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}],\"exportKind\":\"generic-instantiation\",\"profile\":\"aui.generic-instantiation/v2-record-args\",\"template\":{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}}",
+    "expectedSha256": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170",
+    "typeReference": {
+      "profile": "aui.type-ref/v2-draft",
+      "kind": "generic",
+      "instanceProfile": "aui.generic-instantiation/v2-record-args",
+      "template": {
+        "profile": "aui.type-ref/v2-draft",
+        "kind": "nominal",
+        "ownerPackageId": "aui.core",
+        "typeId": "aui.core/List",
+        "exportProfile": "aui.export-contract/v2-core",
+        "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+      },
+      "arguments": [
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "example.rows",
+          "typeId": "example.rows/Row",
+          "exportProfile": "aui.export-contract/v2-record",
+          "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+        }
+      ],
+      "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+    }
+  },
+  "resultU32StringV2": {
+    "input": {
+      "profile": "aui.generic-instantiation/v2-record-args",
+      "exportKind": "generic-instantiation",
+      "template": {
+        "profile": "aui.type-ref/v2-draft",
+        "kind": "nominal",
+        "ownerPackageId": "aui.core",
+        "typeId": "aui.core/Result",
+        "exportProfile": "aui.export-contract/v2-core",
+        "contractDigest": "b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba"
+      },
+      "arguments": [
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/U32",
+          "exportProfile": "aui.export-contract/v2-core",
+          "contractDigest": "2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d"
+        },
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/String",
+          "exportProfile": "aui.export-contract/v2-core",
+          "contractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+        }
+      ]
+    },
+    "expectedCanonical": "{\"arguments\":[{\"contractDigest\":\"2a49ea5ee06019b985c06ff08120644e4b269c5157f7424219fad12940b4744d\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/U32\"},{\"contractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/String\"}],\"exportKind\":\"generic-instantiation\",\"profile\":\"aui.generic-instantiation/v2-record-args\",\"template\":{\"contractDigest\":\"b8838f2e43a2761bcde62822c1a34df3c5773bba4c03684832ac685aa7d491ba\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/Result\"}}",
+    "expectedSha256": "d10e5e621b6fe45e4cdf3e593b06d92f54ff7aea80f378dba18f647aeb999248"
+  },
+  "negativeCases": [
+    {
+      "id": "legacy-v1-row-as-argument",
+      "expected": "CORE_PROFILE_MISMATCH"
+    },
+    {
+      "id": "corrupt-row-contract-digest",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH"
+    },
+    {
+      "id": "list-instance-digest-uses-template-digest",
+      "expected": "TYPE_GENERIC_DIGEST_MISMATCH"
+    },
+    {
+      "id": "duplicate-record-field",
+      "expected": "TYPE_DUPLICATE_FIELD"
+    },
+    {
+      "id": "swap-record-fields-same-digest",
+      "expected": "CORE_CONTRACT_DIGEST_MISMATCH"
+    },
+    {
+      "id": "row-contains-list-row",
+      "expected": "TYPE_RECURSION_UNSUPPORTED"
+    },
+    {
+      "id": "list-list-row",
+      "expected": "TYPE_GENERIC_PROFILE_UNSUPPORTED"
+    },
+    {
+      "id": "changed-package-owner-same-name",
+      "expected": "GRAPH_EXPORT_UNRESOLVED"
+    },
+    {
+      "id": "typeref-v2-inside-v1-package",
+      "expected": "SCHEMA_INVALID"
+    },
+    {
+      "id": "v2-typeref-v1-graph",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED"
+    }
+  ],
+  "scope": "New core/user v2 compatibility and graph profile needed; old project and source hashes unchanged"
+}
