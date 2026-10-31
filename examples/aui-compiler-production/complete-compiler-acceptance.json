@@ -1,0 +1,634 @@
+{
+  "format": "aui.full-production-compiler-acceptance-matrix",
+  "status": "DESIGN-ONLY / NOT ACCEPTED / NOT-RUN / NO NATIVE COMPILER",
+  "owner": "docs/architecture/aui-compiler.md#pc7-production-complete-acceptance-gates-one-testable-definition",
+  "scope": "Complete shipping AUI language L0-L4 + approved record/enum/service surface, verified ONE Canonical Graph linkage and qualified native Win64 target; later targets only after independent acceptance",
+  "notes": [
+    "Every case is a design requirement, not an executable test fixture or observed result",
+    "Existing L0/L1 source-only fixtures cannot satisfy these native runtime expectations",
+    "Full product release requires approved language/core/graph/ABI/runtime schemas, actual native output and independent tests",
+    "Unknown capabilities/features must reject as UNSUPPORTED rather than being silently downgraded to source-only mode"
+  ],
+  "cases": [
+    {
+      "id": "FULL-LANGUAGE-01",
+      "group": "LANGUAGE",
+      "shortName": "L0-static",
+      "expected": "positive",
+      "scenario": "Compile complete StatusPanel L0 module with exact static View semantics and diagnostics",
+      "owner": "D3 L0/L1",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-02",
+      "group": "LANGUAGE",
+      "shortName": "L1-command",
+      "expected": "positive",
+      "scenario": "Compile ConsumerPanel with typed Event<Unit> attachment, handler and command intent",
+      "owner": "D3 event",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-03",
+      "group": "LANGUAGE",
+      "shortName": "L2-state",
+      "expected": "positive",
+      "scenario": "Compile FeedbackPanel with state, derived, exact binding and atomic commit",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-04",
+      "group": "LANGUAGE",
+      "shortName": "L3-task",
+      "expected": "positive",
+      "scenario": "Compile ReviewPanel with declared TaskSlot<T,E>, submit/await, settled five-arm match",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-05",
+      "group": "LANGUAGE",
+      "shortName": "L4-keyed",
+      "expected": "positive",
+      "scenario": "Compile RowList with List<Row>, StableKey field and keyed ForEach",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-06",
+      "group": "LANGUAGE",
+      "shortName": "profile-downgrade",
+      "expected": "reject",
+      "scenario": "Reject any higher-profile construct when compilation context selects a lower source profile",
+      "owner": "D3 grammar",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-07",
+      "group": "LANGUAGE",
+      "shortName": "unsupported-language",
+      "expected": "reject",
+      "scenario": "Reject unapproved general arithmetic, service implementation, raw pointer or ambient OS call syntax",
+      "owner": "D3 grammar",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-01",
+      "group": "TYPE-CORE",
+      "shortName": "exact-core",
+      "expected": "positive",
+      "scenario": "Resolve all approved core TypeIDs against exact content-bound verified registry",
+      "owner": "D3 core",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-02",
+      "group": "TYPE-CORE",
+      "shortName": "record-type",
+      "expected": "positive",
+      "scenario": "Resolve approved authored record fields and nominal exports with declaration order",
+      "owner": "D2 type",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-03",
+      "group": "TYPE-CORE",
+      "shortName": "generic-instantiation",
+      "expected": "positive",
+      "scenario": "Resolve bounded ordered generic arguments and monomorphized instance public identity",
+      "owner": "D3 type",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-04",
+      "group": "TYPE-CORE",
+      "shortName": "duplicate-name",
+      "expected": "reject",
+      "scenario": "Reject Unicode NFC collision or ambiguous import and stale contract digest",
+      "owner": "D3 source",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-05",
+      "group": "TYPE-CORE",
+      "shortName": "core-placeholder",
+      "expected": "reject",
+      "scenario": "Reject synthetic/unverified 15-type core registry in linked and native build modes",
+      "owner": "D2 Graph",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-06",
+      "group": "TYPE-CORE",
+      "shortName": "opaque-leak",
+      "expected": "reject",
+      "scenario": "Reject TaskTicket/TaskSlot as portable record, dataFlow or command payload",
+      "owner": "D3 core",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-REACTIVE-01",
+      "group": "REACTIVE",
+      "shortName": "state-init",
+      "expected": "positive",
+      "scenario": "Create owner/generation bounded StateSlot with deterministic pure initialization",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-REACTIVE-02",
+      "group": "REACTIVE",
+      "shortName": "derived-order",
+      "expected": "positive",
+      "scenario": "Create topologically ordered Derived DAG with verified pure calls",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-REACTIVE-03",
+      "group": "REACTIVE",
+      "shortName": "bind-one-writer",
+      "expected": "positive",
+      "scenario": "Compile an empty Text() only when static-key and exactly one binding writer prove initialization",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-REACTIVE-04",
+      "group": "REACTIVE",
+      "shortName": "atomic-commit",
+      "expected": "positive",
+      "scenario": "Native state commit applies all writes or none on failed revision CAS",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-REACTIVE-05",
+      "group": "REACTIVE",
+      "shortName": "derived-cycle",
+      "expected": "reject",
+      "scenario": "Reject cycles and unverified effectful pure expressions",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-REACTIVE-06",
+      "group": "REACTIVE",
+      "shortName": "duplicate-binding",
+      "expected": "reject",
+      "scenario": "Reject direct Text.value plus binding or competing binding writers",
+      "owner": "D3 L2",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-01",
+      "group": "ASYNC",
+      "shortName": "slot-binder",
+      "expected": "positive",
+      "scenario": "Require explicit taskSlot declaration, matching task Result<T,E> and settled TaskOutcome<T,E>",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-02",
+      "group": "ASYNC",
+      "shortName": "await-result",
+      "expected": "positive",
+      "scenario": "Lower exactly typed await/return with retained owned Result envelope",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-03",
+      "group": "ASYNC",
+      "shortName": "five-branches",
+      "expected": "positive",
+      "scenario": "Exhaustively match Successful/Failed/AdmissionRejected/Cancelled/ProviderUnavailable",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-04",
+      "group": "ASYNC",
+      "shortName": "unknown-effect",
+      "expected": "positive",
+      "scenario": "Handle post-dispatch uncertainty without retry or premature native cleanup",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-05",
+      "group": "ASYNC",
+      "shortName": "cancel-confirmation",
+      "expected": "positive",
+      "scenario": "Confirm same-owner/generation provider quiescence before publishing Cancelled",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-06",
+      "group": "ASYNC",
+      "shortName": "missing-slot",
+      "expected": "reject",
+      "scenario": "Reject submit to undeclared/incorrectly typed task slot",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-07",
+      "group": "ASYNC",
+      "shortName": "forged-cancel",
+      "expected": "reject",
+      "scenario": "Reject user forged Cancelled or contradicted never-admitted proof",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-ASYNC-08",
+      "group": "ASYNC",
+      "shortName": "duplicate-terminal",
+      "expected": "reject",
+      "scenario": "Reject second terminal UI completion and stale generation result dispatch",
+      "owner": "D3 L3",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-KEYED-01",
+      "group": "KEYED",
+      "shortName": "stable-key",
+      "expected": "positive",
+      "scenario": "Compile List<Row> ForEach whose exact immutable record key has approved StableKey type",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-KEYED-02",
+      "group": "KEYED",
+      "shortName": "nested-key",
+      "expected": "positive",
+      "scenario": "Nested ForEach retains full parent key path, template and incarnation generation",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-KEYED-03",
+      "group": "KEYED",
+      "shortName": "reorder",
+      "expected": "positive",
+      "scenario": "Native reorder preserves owner/keyed identity without reusing positional indices",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-KEYED-04",
+      "group": "KEYED",
+      "shortName": "delete-reinsert",
+      "expected": "positive",
+      "scenario": "Deleting then reinserting same key creates a new instance generation and safe cleanup",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-KEYED-05",
+      "group": "KEYED",
+      "shortName": "dup-key",
+      "expected": "reject",
+      "scenario": "Reject duplicate keys in one parent epoch according to accepted runtime policy",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-KEYED-06",
+      "group": "KEYED",
+      "shortName": "wrong-key",
+      "expected": "reject",
+      "scenario": "Reject float/index/pointer/mutable or non-StableKey key expression",
+      "owner": "D3 L4",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-GRAPH-LINK-01",
+      "group": "GRAPH-LINK",
+      "shortName": "verified-link",
+      "expected": "positive",
+      "scenario": "Bind source StableSymbolID to verified graph node, type export and OperationID under immutable snapshot",
+      "owner": "D2 Graph",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-GRAPH-LINK-02",
+      "group": "GRAPH-LINK",
+      "shortName": "target-match",
+      "expected": "positive",
+      "scenario": "Match Graph target ID to independently qualified target triple, effects, domain and ABI",
+      "owner": "D2 Graph",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-GRAPH-LINK-03",
+      "group": "GRAPH-LINK",
+      "shortName": "stale-source",
+      "expected": "reject",
+      "scenario": "Reject source digest changed after signed source-review snapshot",
+      "owner": "D6 source",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-GRAPH-LINK-04",
+      "group": "GRAPH-LINK",
+      "shortName": "stale-operation",
+      "expected": "reject",
+      "scenario": "Reject operation result/error/effect contract mismatch despite matching operation name",
+      "owner": "D2 Graph",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-GRAPH-LINK-05",
+      "group": "GRAPH-LINK",
+      "shortName": "catalogue-only",
+      "expected": "reject",
+      "scenario": "Reject source-only review-catalogue JSON as substitute for verified public exports",
+      "owner": "D2 Graph",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-GRAPH-LINK-06",
+      "group": "GRAPH-LINK",
+      "shortName": "capability-denied",
+      "expected": "reject",
+      "scenario": "Reject graph link or runtime dispatch without declared and live required capability",
+      "owner": "D2 Graph",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OWNERSHIP-01",
+      "group": "OWNERSHIP",
+      "shortName": "owned-lowering",
+      "expected": "positive",
+      "scenario": "Verify explicit retain/move/drop along all success and failure edges",
+      "owner": "OwnershipIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OWNERSHIP-02",
+      "group": "OWNERSHIP",
+      "shortName": "borrow-sync",
+      "expected": "positive",
+      "scenario": "Prove borrow lifetime bounded to a synchronous approved scope",
+      "owner": "OwnershipIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OWNERSHIP-03",
+      "group": "OWNERSHIP",
+      "shortName": "borrow-await",
+      "expected": "reject",
+      "scenario": "Reject borrowed native pointer escaping await, queued channel or provider-owned ticket",
+      "owner": "OwnershipIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OWNERSHIP-04",
+      "group": "OWNERSHIP",
+      "shortName": "double-drop",
+      "expected": "reject",
+      "scenario": "Reject use-after-move, double drop or missing cleanup path",
+      "owner": "OwnershipIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OWNERSHIP-05",
+      "group": "OWNERSHIP",
+      "shortName": "resource-budget",
+      "expected": "reject",
+      "scenario": "Reject overflow and impossible D5 memory/queue reservation before side effects",
+      "owner": "D5 Budget",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-01",
+      "group": "NATIVE-WIN64",
+      "shortName": "real-object",
+      "expected": "positive",
+      "scenario": "Emit real Win64 x86-64 assembly/object/PE module with qualified toolchain and complete imports",
+      "owner": "D4 ABI",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-02",
+      "group": "NATIVE-WIN64",
+      "shortName": "abi-call",
+      "expected": "positive",
+      "scenario": "Validate frame/operation descriptors, register mapping, stack shadow space and return errors",
+      "owner": "D4 ABI",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-03",
+      "group": "NATIVE-WIN64",
+      "shortName": "unwind",
+      "expected": "positive",
+      "scenario": "Inspect nonleaf function .pdata/.xdata, stack alignment/probes and callee-saves",
+      "owner": "D4 ABI",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-04",
+      "group": "NATIVE-WIN64",
+      "shortName": "runtime-ui",
+      "expected": "positive",
+      "scenario": "Run Win32 native window, UIA/text/IME adapter and CPU rendering contract",
+      "owner": "D5 Host",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-05",
+      "group": "NATIVE-WIN64",
+      "shortName": "missing-renderer",
+      "expected": "reject",
+      "scenario": "Reject native module build missing approved D5 renderer entrypoints",
+      "owner": "D5 Host",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-06",
+      "group": "NATIVE-WIN64",
+      "shortName": "bad-symbol",
+      "expected": "reject",
+      "scenario": "Reject unexpected section permission, unapproved import, unresolved relocation or ABI symbol",
+      "owner": "D4 ABI",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-NATIVE-WIN64-07",
+      "group": "NATIVE-WIN64",
+      "shortName": "unsupported-target",
+      "expected": "reject",
+      "scenario": "Reject target without exact OS/CPU/runtime/ABI qualification and report UNSUPPORTED",
+      "owner": "D4 ABI",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OPTIMIZER-01",
+      "group": "OPTIMIZER",
+      "shortName": "o0-baseline",
+      "expected": "positive",
+      "scenario": "Produce correct native output at O0 with no optimization dependency",
+      "owner": "TargetMIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OPTIMIZER-02",
+      "group": "OPTIMIZER",
+      "shortName": "pure-fold",
+      "expected": "positive",
+      "scenario": "Compare O0 and O1 pure expression folding under identical meaning",
+      "owner": "TargetMIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OPTIMIZER-03",
+      "group": "OPTIMIZER",
+      "shortName": "effect-barrier",
+      "expected": "reject",
+      "scenario": "Reject reordering of volatile/MMIO, event ingress, state commit or task terminal effects",
+      "owner": "TargetMIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-OPTIMIZER-04",
+      "group": "OPTIMIZER",
+      "shortName": "ownership-erase",
+      "expected": "reject",
+      "scenario": "Reject optimizer elimination of observable release or cancellation cleanup",
+      "owner": "OwnershipIR",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-01",
+      "group": "BUILD-RELEASE",
+      "shortName": "clean-determinism",
+      "expected": "positive",
+      "scenario": "Two isolated clean builds with identical complete pinned inputs yield byte-identical unsigned target objects",
+      "owner": "D6 Build",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-02",
+      "group": "BUILD-RELEASE",
+      "shortName": "manifest",
+      "expected": "positive",
+      "scenario": "Emit full compiler/Unicode/lock/Graph/ABI/target/source/runtime hashes and source maps",
+      "owner": "D6 Build",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-03",
+      "group": "BUILD-RELEASE",
+      "shortName": "staging-rollback",
+      "expected": "positive",
+      "scenario": "Failed compilation does not mutate previous verified released output",
+      "owner": "D6 FS",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-04",
+      "group": "BUILD-RELEASE",
+      "shortName": "signed-admission",
+      "expected": "positive",
+      "scenario": "Separate signed architecture and executable approval from binary content identity",
+      "owner": "D4 Trust",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-05",
+      "group": "BUILD-RELEASE",
+      "shortName": "malformed-lock",
+      "expected": "reject",
+      "scenario": "Reject missing/duplicate/changed locked object or fake public digest",
+      "owner": "D6 Resolver",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-06",
+      "group": "BUILD-RELEASE",
+      "shortName": "binary-mismatch",
+      "expected": "reject",
+      "scenario": "Reject tampered PE/COFF, unapproved signer, wrong runtime/ABI or stale signed receipt",
+      "owner": "D4 Trust",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-BUILD-RELEASE-07",
+      "group": "BUILD-RELEASE",
+      "shortName": "no-unobserved-pass",
+      "expected": "reject",
+      "scenario": "Reject release report promoting NOT-RUN/UNSUPPORTED to PASS",
+      "owner": "D8 Process",
+      "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
