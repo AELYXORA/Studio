@@ -79,3 +79,7 @@ First GUI OS/backend, precise platform service ABI and dispatch table layout, fo
 ## L4 generation-checked platform input and accessibility (PROPOSED)
 
 [L4 Keyed Lifecycle](d3-keyed-dynamic-view-lifecycle.md) requires OS focus, keyboard, pointer, IME and accessibility event targets to use live ViewIdentity plus generation, not a reusable visual index. Removal/replace closes old subscriptions and focus targets before subsequent event routing; a GPU frame may lag the committed view revision without granting an old node a new owner's action. Native callback unsubscribe/drain, view-owned OS handle generation checks and resource owner retention must be proven per platform. [D3/D4/D5 review](d3-d4-d5-lifecycle-consistency-review.md) specifies test obligations; no platform is yet verified.
+
+## Candidate D5 root and OS adapter quota boundary — PROPOSED
+
+[D5 UI Resource Budget](d5-ui-resource-budget-and-publication.md) proposes a 160 MiB per-root accounting envelope and separate simultaneous limits for view event count/bytes, task/result admissions, scene metadata and detached owner cleanup. This budget explicitly **excludes native GPU/OS/device/DMA bytes**, which require independently bounded platform adapter quotas plus a process-level multi-root ceiling. [D4 Value ABI](d4-core-value-abi-contract.md) requires exact native layout and ownership proof, not inferred ABI from portable core bytes. [D3/D4/D5 core review](d3-d4-d5-core-contract-review.md) tracks unverified target capabilities. No Windows or Linux resource/latency measurement exists.
