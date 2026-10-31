@@ -29,6 +29,12 @@ Use-after-move, overlapping exclusive borrow, use after owner drop, borrow escap
 Open: allocator ABI, full region inference, public descriptor representation, pinning, atomic memory model and exact foreign calling conventions.
 
 
+## Full compiler internal Assembly ABI — exact candidate, not user D4 ABI
+
+The [internal compiler Assembly ABI](aui-compiler-internal-assembly-abi.md) now proposes byte-exact `CompilationContextV1`, `IRNodeHeaderV1`, `SourceSpanV1`, `CFGBlockV1`, `SSAValueV1`, `OwnerRecordV1`, `EffectRecordV1`, `Span16`, `PassRequestV1` and `PassReplyV1` structures for the one T0–T8 pipeline, along with generational `Ref64` arena handles, input-immutable/output-seal pass protocol and bounded compiler process resources. The [machine-readable 10-structure layout](../../schemas/aui-compiler-internal-abi-layout-candidate.json) contains 99 exact fields and 19 proposed resource ceilings; [five Ref64 and five record byte vectors](../../examples/aui-compiler-production/internal-abi-layout-byte-vectors.json) are arithmetic references; [54 proposed rejection/acceptance cases](../../examples/aui-compiler-production/internal-abi-and-arena-review-cases.json) are NOT-RUN.
+
+These fixed *internal* layouts must **not** be substituted for D4's public native component frames or D5 service ABI. A compiler-local `trustState` cannot confer source/Graph approval; real D2/D6 evidence is required. **P0:** every node-tag's individual payload layout, exact native offset probes, fully approved pass budgets, future Win64 target runtime signatures and human D1–D8 approval still remain open.
+
 ## IR0. Full compiler logical pass contract — one production pipeline, design candidate
 
 **Status: PROPOSED / NOT ACCEPTED / NOT IMPLEMENTED / ALL IR/ABI TESTS NOT-RUN.** This section is the *cross-pass integration owner* of the one [full production AUI compiler](aui-compiler.md). The [source TypedHIR owner](aui-ast-semantic-analysis.md) remains authoritative for front-end semantic nodes, [OwnershipIR](aui-ownership-ir.md) for borrow/move/cleanup proofs, [TargetMIR](aui-targetmir-native-codegen.md) for machine operations and Win64 backend, [D2/D3/D6 hash pipeline](d2-d6-public-contract-digest-pipeline.md) for public identity, and [D4 Win64](d4-win64-native-component-abi.md)/[D5 runtime services](aui-platform-runtime-services.md) for actual native ABI and runtime. Nothing here creates a second language, Canonical Graph, type registry, executable ABI, universal IR wire format or compiler branch.
