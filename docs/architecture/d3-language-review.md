@@ -62,3 +62,7 @@ For Phase I D3 acceptance, require explicit reviewed scope selection, unambiguou
 Phase II builds the accepted compiler/parser/runtime in authorized order; Phase III runs the fixtures on actual target/host and captures toolchain/semantic digest/diagnostics; Phase IV corrects and re-verifies. A syntactically accepted document is not a source build; a source build is not a validated renderer; and a renderer is not proof of physical hardware effect safety.
 
 **Recommended next documentation pass:** fully specify D3+ state/derived/bind and Result UI completion without scope creep, plus a versioned core export catalog and exact source-to-Graph reconciliation protocol. Continue D1–D8 design-first until the architect explicitly signs off.
+
+## D3 boundary for typed hardware requests — proposed
+
+[D2 Hardware Resource Contract](d2-hardware-resource-contract.md) and [D2↔D3 Hardware Command Boundary](d2-d3-hardware-command-boundary.md) forbid L0/L1 AUI source from issuing direct MMIO/IRQ/DMA or bypassing GraphNodeID/resource-access/OperationID linking. One verified source-to-graph command link, authorized component provider, target adapter and live resource capability are required. AUI send is an intent, not a physical operation. This resolves **textual authority ambiguity**, not D3 P0 for State/Derived/Bind/Task/await/Result UI updates, D4 ABI, or D5 hardware proof.
