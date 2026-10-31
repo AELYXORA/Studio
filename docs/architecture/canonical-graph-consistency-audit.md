@@ -207,3 +207,24 @@ A limited independent JSON-schema-keyword and source-offset check found the prop
 - **COMP-09:** real locally observed evidence and diagnostic fixture reporting after authorized implementation.
 
 **Conclusion:** first compiler development is now *documented as a bounded staged candidate* but not yet **approved for coding**. A design fixture is not an executed test, and no partial plan hash or source-only check can authorize external effects or physical device access.
+
+
+## First AUI compiler COMP-01–05 engineering handoff review — 2026-10-31
+
+**Scope:** the requested compiler work in this turn remains **Phase I architecture documentation**. We reviewed the existing strict [D3 L0/L1 grammar](d3-first-language-profile.md), first [P00–P10 compiler contract](aui-compiler-first-implementation-contract.md), [AST and TypedHIR](aui-ast-semantic-analysis.md), [D3 source-only typing](d3-type-and-binding-profile.md), [local event semantics](d3-event-delivery-and-command-linkage.md) and [implementation process](design-completion-gates.md).
+
+### Concrete clarified implementation blockers
+
+1. **COMP-01 / host and ownership:** the [front-end closure](aui-compiler-frontend-closure.md) specifies candidate Win64 Assembly CLI, narrow OS adapter, bounded CompilationContext/arena lifecycle, pass-module data flow, no implicit network/process execution and explicit toolchain qualification. The [implementation backlog](aui-compiler-implementation-backlog.md) records future source modules and tasks, but no source was created or compiled.
+2. **COMP-02 / lexical reproducibility:** proposes **Unicode 15.1.0** versioned XID_Start/XID_Continue and NFC, with pinned offline UCD files, future SHA-256 and normalization corpus; includes explicit lexical states, UTF-8/string/number failure handling and proposed 64 MiB compilation budget. No UCD tables have been independently hashed or compiled into ASM.
+3. **COMP-03 / registry trust:** updated the explicit [provisional review catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json) and its [schema](../../schemas/aui-compiler-review-type-catalog.schema.json) to reject undeclared source-only exports without ever granting public type digests or execution. Both `ui` and `io-worker` command-domain atoms are syntactically recognized in L1; exact provider blocking/domain conflict remains a **P07 graph-link** diagnostic.
+4. **COMP-04 / intermediate output:** a successful [source-only plan schema](../../schemas/aui-compiler-source-only-plan.schema.json) stays wholly separate from the [error report schema](../../schemas/aui-compiler-source-only-diagnostics.schema.json). A recovered syntax tree cannot produce successful TypedHIR. Child Views get local preorder IDs, and original AUI byte spans are never treated as persistent Graph IDs.
+5. **COMP-05 / UI/event safety:** explicit first-slice catalog rules require one Button accessibility label, typed visual arguments and children, single activated Event<Unit> attachment, one local handler/send, no unverified effects and no accidental OS-native dispatch. UI accessibility at runtime is still D5, **not** passed by these static rules.
+
+### Reference and check evidence (limited; all native tests NOT-RUN)
+
+The future [45 compiler acceptance cases](../../examples/aui-compiler-first-slice/acceptance-cases.json) are augmented by [35 UTF-8/XID/NFC/number/profile examples](../../examples/aui-compiler-first-slice/unicode-and-diagnostics-cases.json), including precise raw hexadecimal byte sequences for malformed UTF-8. All cases remain explicitly **NOT-RUN** by AELYXORA.
+
+A separate [negative materialized AUI file](../../examples/aui-compiler-first-slice/status-panel-invalid-spacing.aui) has a confirmed 304-byte source, with SHA-256 `1231502beaa755aa1dd4b235621ccf4f10e1aa03cbb72e105875f3f5eca4f96a`. Its [manual expected error report](../../examples/aui-compiler-first-slice/status-panel-invalid-spacing.diagnostics.expected.json) identifies P04 / `AUI_NUMBER_RANGE` / exact original byte span `[153,163)`. The existing positive StatusPanel source is 296 bytes with independently checked source SHA-256. A limited independent schema-subset check of the **proposed** review catalogue, successful plan and error report found no structural contradictions. No AELYXORA lexical/semantic engine, Windows compiler build, Unicode 15.1 table, signed type export or native ABI test executed.
+
+**Remaining gate:** human acceptance of COMP-01–05, authentic Unicode 15.1 UCD input hashes/conformance, exact Win64 toolchain/SDK qualification and complete output byte conventions. COMP-06–08 (verified public registry/Graph source linkage/Win64 ABI/D5 renderer) still block graph-linked and native artifacts. All D1–D8 architect gates are OPEN and no Phase II implementation authorization is inferred.
