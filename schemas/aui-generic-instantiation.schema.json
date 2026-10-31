@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AUI bounded generic instantiation contract projection (proposed)",
+  "description": "Proposed G1 structural shape only; semantic digest/type registry checks and source approval are separate. No release API.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "exportKind",
+    "packageId",
+    "registryId",
+    "templateTypeId",
+    "templateContractDigest",
+    "featureGate",
+    "typeArguments"
+  ],
+  "properties": {
+    "profile": {
+      "const": "aui.generic-instantiation/v1-draft"
+    },
+    "exportKind": {
+      "const": "generic-instantiation"
+    },
+    "packageId": {
+      "const": "aui.core"
+    },
+    "registryId": {
+      "const": "aui.core/extended-0.2-draft"
+    },
+    "templateTypeId": {
+      "enum": [
+        "aui.core/List",
+        "aui.core/Result",
+        "aui.core/TaskOutcome"
+      ]
+    },
+    "templateContractDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "featureGate": {
+      "enum": [
+        "L0/L1",
+        "L3",
+        "L4"
+      ]
+    },
+    "typeArguments": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "typeId",
+          "typeContractDigest"
+        ],
+        "properties": {
+          "typeId": {
+            "type": "string",
+            "pattern": "^aui\\.core/[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "typeContractDigest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "templateTypeId": {
+            "const": "aui.core/List"
+          }
+        },
+        "required": [
+          "templateTypeId"
+        ]
+      },
+      "then": {
+        "properties": {
+          "featureGate": {
+            "const": "L4"
+          },
+          "typeArguments": {
+            "minItems": 1,
+            "maxItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "templateTypeId": {
+            "const": "aui.core/Result"
+          }
+        },
+        "required": [
+          "templateTypeId"
+        ]
+      },
+      "then": {
+        "properties": {
+          "featureGate": {
+            "const": "L0/L1"
+          },
+          "typeArguments": {
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "templateTypeId": {
+            "const": "aui.core/TaskOutcome"
+          }
+        },
+        "required": [
+          "templateTypeId"
+        ]
+      },
+      "then": {
+        "properties": {
+          "featureGate": {
+            "const": "L3"
+          },
+          "typeArguments": {
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    }
+  ]
+}
