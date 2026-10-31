@@ -1,0 +1,76 @@
+{
+  "format": "aui.enum-type-candidate-digest-reference",
+  "status": "REFERENCE ARITHMETIC ONLY; PROPOSED hash domain; no approved enum type contract or core registry; all AELYXORA native tests NOT-RUN",
+  "sourceOwner": "docs/architecture/canonical-project-graph-and-components.md",
+  "domainAscii": "AELYXORA/type-contract/canonical",
+  "preimageFormula": "SHA256(ASCII(domainAscii) || byte(0x00) || exact D6 canonical UTF-8 JSON of projection)",
+  "verifiedArithmetic": "For these three ASCII-only preimages, Python hashlib and OpenSSL sha256 independently returned the same 3 candidate digests; no native AELYXORA parser or semantic type verifier has run.",
+  "cautions": [
+    "These 64-hex values are deliberately NOT public type contractDigests, source review signatures, coreRegistryFingerprint, or executable trust receipts",
+    "No actual approved enum payload semantics, public TypeReference closure, signed package lock or ABI has been accepted",
+    "Domain and field contract are candidates until architect/D2/D3/D6 sign-off; changing meaning without changing domain is prohibited",
+    "Exact canon bytes preserve authored array order; object keys sorted UTF-8; no spaces/trailing newline"
+  ],
+  "vectors": [
+    {
+      "label": "base",
+      "projection": {
+        "exportKind": "type",
+        "kind": "enum",
+        "packageId": "example.contract",
+        "typeId": "example.contract/SensorError",
+        "variants": [
+          {
+            "name": "NoReading"
+          },
+          {
+            "name": "DeviceUnavailable"
+          }
+        ]
+      },
+      "expectedSha256": "e4f6da7026a7c98febf3ab3f1606272c2d68e24bcd60af0719ee7d4af73fa87a",
+      "canonicalBytes": 169,
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"kind\":\"enum\",\"packageId\":\"example.contract\",\"typeId\":\"example.contract/SensorError\",\"variants\":[{\"name\":\"NoReading\"},{\"name\":\"DeviceUnavailable\"}]}"
+    },
+    {
+      "label": "swap-variant-order",
+      "projection": {
+        "exportKind": "type",
+        "kind": "enum",
+        "packageId": "example.contract",
+        "typeId": "example.contract/SensorError",
+        "variants": [
+          {
+            "name": "DeviceUnavailable"
+          },
+          {
+            "name": "NoReading"
+          }
+        ]
+      },
+      "expectedSha256": "1ae87cd924bc51aacfaf361f13369fdd6215cc7d2fe6c3eca887eab2a9f01244",
+      "canonicalBytes": 169,
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"kind\":\"enum\",\"packageId\":\"example.contract\",\"typeId\":\"example.contract/SensorError\",\"variants\":[{\"name\":\"DeviceUnavailable\"},{\"name\":\"NoReading\"}]}"
+    },
+    {
+      "label": "rename-variant",
+      "projection": {
+        "exportKind": "type",
+        "kind": "enum",
+        "packageId": "example.contract",
+        "typeId": "example.contract/SensorError",
+        "variants": [
+          {
+            "name": "NoReading"
+          },
+          {
+            "name": "Disconnected"
+          }
+        ]
+      },
+      "expectedSha256": "3fd836473afe2d235d5f3f8b4b16a1ac9c8cc70e5bda3e9e92f46a941f6340db",
+      "canonicalBytes": 164,
+      "canonicalUtf8": "{\"exportKind\":\"type\",\"kind\":\"enum\",\"packageId\":\"example.contract\",\"typeId\":\"example.contract/SensorError\",\"variants\":[{\"name\":\"NoReading\"},{\"name\":\"Disconnected\"}]}"
+    }
+  ]
+}
