@@ -97,3 +97,7 @@ The [L2 State/Derived/Bind contract](d3-state-derived-binding-contract.md) and [
 ## L4 dynamic feature gate (PROPOSED)
 
 [Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) proposes an explicitly versioned aui.source/l4-keyed/v1 extension with a bounded ForEach view child, typed List<T> and immutable StableKey. It is not part of this L0/L1 grammar: ForEach/List<T>/dynamic view children are rejected as AUI_PROFILE_UNSUPPORTED in the first profile until a later L4 compilation context is explicitly selected. Indexed or implicit row identity must never be used as fallback. [L4 examples](../../examples/aui-language/L4-README.md) are design-only.
+
+## L4 separate source profile (PROPOSED)
+
+[Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) defines aui.source/l4-keyed/v1 with ForEach, typed List<T> and tagged immutable StableKey. The L0/L1 grammar and acceptance boundary remain unchanged: dynamic views are unsupported in a first-profile source and must not be silently accepted. [L4 fixture](../../examples/aui-language/L4-README.md) is design-only, not a working compiler test.
