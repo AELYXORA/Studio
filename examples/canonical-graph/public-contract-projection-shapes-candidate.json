@@ -1,0 +1,214 @@
+{
+  "format": "aui.public-contract-projection-shapes",
+  "status": "UNTRUSTED STRUCTURAL EXAMPLES / UNVERIFIED SOURCE CORE AND SYNTHETIC TYPE DIGESTS / NOT-RUN",
+  "owner": "docs/architecture/d2-d6-public-contract-digest-pipeline.md",
+  "schema": "schemas/canonical-public-contract-projections-candidate.schema.json",
+  "notes": [
+    "All references to historical sensor package's 1/2/3/6/7 repeated type digests and synthetic d/e/f placeholders are intentionally unauthenticated; a full type resolver MUST reject Graph-linked use",
+    "The core example contains exact candidate CR14 rule definitions, all still UNVERIFIED",
+    "The generic nested child public contractDigest is a fake placeholder and cannot act as a proof; this fixture tests closed structure only",
+    "Do not compute or publish semanticGraphDigest from these shapes"
+  ],
+  "examples": [
+    {
+      "name": "Core Bool review type",
+      "projection": {
+        "exportKind": "type",
+        "packageId": "aui.core",
+        "typeId": "aui.core/Bool",
+        "kind": "scalar",
+        "typeArity": 0,
+        "featureGate": "L0/L1",
+        "logicalTraits": [
+          "Copy",
+          "Immutable",
+          "Send"
+        ],
+        "semanticModel": {
+          "category": "scalar",
+          "typeParameters": [],
+          "variants": [],
+          "portableCarrier": "typed-json-bool",
+          "ownershipClass": "immutable-copy",
+          "graphPayloadEligible": true,
+          "ruleIds": [
+            "CR2/Bool/two-values",
+            "CR12/Bool/typed-boolean"
+          ]
+        },
+        "semanticRules": [
+          {
+            "ruleId": "CR2/Bool/two-values",
+            "definition": "Domain exactly {false,true}; integer, string, null and implicit truthiness conversion are invalid."
+          },
+          {
+            "ruleId": "CR12/Bool/typed-boolean",
+            "definition": "With exact Bool TypeReference, portable typed JSON is the token true or false only; numeric 0/1 and string booleans reject."
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sensor Measurement authored record",
+      "projection": {
+        "exportKind": "type",
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/Measurement",
+        "kind": "record",
+        "fields": [
+          {
+            "name": "value",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/F64",
+              "contractDigest": "6666666666666666666666666666666666666666666666666666666666666666"
+            }
+          },
+          {
+            "name": "valid",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/Bool",
+              "contractDigest": "7777777777777777777777777777777777777777777777777777777777777777"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SensorError proposed closed enum",
+      "projection": {
+        "exportKind": "type",
+        "packageId": "example.contract",
+        "typeId": "example.contract/SensorError",
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "NoReading"
+          },
+          {
+            "name": "DeviceUnavailable"
+          }
+        ]
+      }
+    },
+    {
+      "name": "List<Result<Measurement,DecodeError>> derived instance",
+      "projection": {
+        "exportKind": "type",
+        "kind": "generic",
+        "template": {
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/List",
+          "contractDigest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        },
+        "arguments": [
+          {
+            "kind": "generic",
+            "template": {
+              "kind": "nominal",
+              "ownerPackageId": "aui.core",
+              "typeId": "aui.core/Result",
+              "contractDigest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+            },
+            "arguments": [
+              {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/Measurement",
+                "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+              },
+              {
+                "kind": "nominal",
+                "ownerPackageId": "example.sensor",
+                "typeId": "example.sensor/DecodeError",
+                "contractDigest": "3333333333333333333333333333333333333333333333333333333333333333"
+              }
+            ],
+            "contractDigest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sensor Decode command operation",
+      "projection": {
+        "exportKind": "operation",
+        "packageId": "example.sensor",
+        "componentTypeId": "example.sensor/decoder",
+        "operationId": "Decode",
+        "inputs": [
+          {
+            "name": "raw",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "example.sensor",
+              "typeId": "example.sensor/RawSample",
+              "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+            }
+          }
+        ],
+        "successTypeRef": {
+          "kind": "nominal",
+          "ownerPackageId": "example.sensor",
+          "typeId": "example.sensor/Measurement",
+          "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "failureTypeRef": {
+          "kind": "nominal",
+          "ownerPackageId": "example.sensor",
+          "typeId": "example.sensor/DecodeError",
+          "contractDigest": "3333333333333333333333333333333333333333333333333333333333333333"
+        },
+        "effects": [],
+        "domain": "io-worker",
+        "sideEffectClass": "none",
+        "retryPolicy": "never",
+        "requiredCapabilities": [],
+        "declaredTargets": [
+          "aarch64-unknown-linux-gnu"
+        ]
+      }
+    },
+    {
+      "name": "Sensor decoder parent component",
+      "projection": {
+        "exportKind": "component",
+        "packageId": "example.sensor",
+        "typeId": "example.sensor/decoder",
+        "ports": [
+          {
+            "id": "raw",
+            "direction": "in",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "example.sensor",
+              "typeId": "example.sensor/RawSample",
+              "contractDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+            }
+          },
+          {
+            "id": "reading",
+            "direction": "out",
+            "typeRef": {
+              "kind": "nominal",
+              "ownerPackageId": "example.sensor",
+              "typeId": "example.sensor/Measurement",
+              "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+            }
+          }
+        ],
+        "capabilities": [],
+        "commands": [
+          {
+            "id": "Decode",
+            "operationContractDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          }
+        ]
+      }
+    }
+  ]
+}
