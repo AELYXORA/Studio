@@ -40,6 +40,21 @@ The single [15-entry core inventory](../../examples/canonical-graph/core-registr
 
 **Status: COMP-01–05 have specific design candidates, but remain UNAPPROVED** until human review and actual UCD/toolchain input hashes are pinned. P07 linked/Graph and P08–P10 native compile require COMP-06–08 and separate D1–D8/source/target acceptance. All cases NOT-RUN.
 
+## Full production AUI compiler completion gate — not the L0/L1 milestone (2026-10-31)
+
+The architect requires a **complete native AUI compiler**, designed as a whole before coding. Its one [authoritative target architecture](aui-compiler.md) is PC0–PC8: all reviewed shipping L0/L1/L2/L3/L4 plus public record/enum/service contracts, correct verified types and canonical Graph source links, ownership/reactive/async/keyed IR, real machine backend (Win64 first candidate), D5 runtime and renderer, deterministic native build and separate approved execution. [Production acceptance matrix](../../examples/aui-compiler-production/complete-compiler-acceptance.json) has **66 design-only NOT-RUN** cases, none native-executed. The old **47 L0/L1 source-only + 35 Unicode** cases cover only a small implementation milestone.
+
+| Blocker | Owning existing specification | Current review state |
+| --- | --- | --- |
+| One full composed L0–L4 source grammar, profile gates and contract-only record/enum/service modules | [AUI Syntax](aui-syntax.md), [D3 L2](d3-state-derived-binding-contract.md), [L3](d3-task-result-lifecycle.md), [L4](d3-keyed-dynamic-view-lifecycle.md) | **PROPOSED / open**, not freeze/accepted; L3 explicit taskSlot and L2 bound Text now proposed |
+| All 15 core types, public nominal/generic exports and service operation identities | [D3 Core](d3-core-registry-value-contract.md), [Canonical Graph](canonical-project-graph-and-components.md) | **UNVERIFIED** semantics/digest chain; no trusted core fingerprint |
+| Full IR and verifiers (reactive, async, keyed, ownership and codegen) | [AST/TypedHIR](aui-ast-semantic-analysis.md), [OwnershipIR](aui-ownership-ir.md), [TargetMIR](aui-targetmir-native-codegen.md) | **PROPOSED** fields; exact assembler-private layouts and verified transformation proof open |
+| Graph/package/source reconciliation and operation/capability/runtime signature authority | [Canonical Graph](canonical-project-graph-and-components.md), [D6](d6-offline-dependency-resolution.md), [D4 trust](d4-win64-module-trust-and-admission.md) | **NOT VERIFIED** / fake fixture digests cannot pass |
+| Win64 Assembly/COFF linker/ABI + live UI/state/event/task/list service imports | [D4 Win64 ABI](d4-win64-native-component-abi.md), [D5 runtime services](aui-platform-runtime-services.md), [D5 Win32 host](d5-windows-host-runtime-contract.md) | **PROPOSED**; no exact approved runtime service ABI / physical test |
+| Reproducible native build, debugging, signed artifact review, full suite and D1–D8 architect approval | [D6 Win64 build](d6-win64-reproducible-build-contract.md), [Verification](verification-plan.md), [Design Gate](design-completion-gates.md) | **NOT-RUN / OPEN** |
+
+**Architectural stopping rule:** engineering implementation may follow approved incremental workstreams **only after the complete in-scope baseline receives the required review**. A successful source-only TypedHIR, single COFF object or demo window cannot be called a full compiler. The existing [implementation backlog](aui-compiler-implementation-backlog.md) now explicitly includes the complete production workstreams and treats frontend P00–P06 as an early engineering unit only.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
