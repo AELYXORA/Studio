@@ -3,7 +3,7 @@
   "registryId": "aui.core/canonical-candidate",
   "status": "PROPOSED-NOT-ACCEPTED",
   "sourceOfTruth": "docs/architecture/d3-core-registry-value-contract.md",
-  "notes": "Single 15-entry current documentary candidate. semanticModel is a machine-inspectable proposed definition index tied to owning CR2–CR13 rules, NOT independently approved immutable semantic bytes, native layouts, or a trustworthy source for computing production digests. All exportStatus values stay UNVERIFIED; historic 13-entry registry/vectors remain untouched.",
+  "notes": "Single 15-entry current documentary candidate. semanticModel is a machine-inspectable proposed definition index tied to owning CR2–CR13 rules, NOT independently approved immutable semantic bytes, native layouts, or a trustworthy source for computing production digests. All exportStatus values stay UNVERIFIED; historic 13-entry registry/vectors remain untouched. Rule definition text has been attached to each type as an unapproved exact-content candidate; ruleId-only hashing is forbidden.",
   "entries": [
     {
       "typeId": "aui.core/Bool",
@@ -31,7 +31,17 @@
           "CR12/Bool/typed-boolean"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR2/Bool/two-values",
+          "definition": "Domain exactly {false,true}; integer, string, null and implicit truthiness conversion are invalid."
+        },
+        {
+          "ruleId": "CR12/Bool/typed-boolean",
+          "definition": "With exact Bool TypeReference, portable typed JSON is the token true or false only; numeric 0/1 and string booleans reject."
+        }
+      ]
     },
     {
       "typeId": "aui.core/Bytes",
@@ -61,7 +71,21 @@
           "CR12/Bytes/move-on-admission"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR12/Bytes/finite-octets",
+          "definition": "Owned immutable ordered octets, including empty; equality is length and exact octets; typed JSON is lowercase 0x prefix plus two lowercase hex digits per byte."
+        },
+        {
+          "ruleId": "CR12/Bytes/max-1048576",
+          "definition": "The proposed first portable Bytes value contains at most 1048576 decoded octets; validate size and quota with checked arithmetic before allocation."
+        },
+        {
+          "ruleId": "CR12/Bytes/move-on-admission",
+          "definition": "Owned copy duplicates or safely retains immutable storage; move takes effect only after confirmed admission; rejection leaves the original owner responsible."
+        }
+      ]
     },
     {
       "typeId": "aui.core/Event",
@@ -90,7 +114,17 @@
           "CR13/Event/not-native-subscription"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR2/Event/origin-generation",
+          "definition": "Event<T> is one immutable typed occurrence with exact verified originating ViewIdentity and generation, not user-forged source metadata."
+        },
+        {
+          "ruleId": "CR13/Event/not-native-subscription",
+          "definition": "Event<T> supplies neither native subscription, OS callback, transferable Graph dataFlow nor physical provider admission permission."
+        }
+      ]
     },
     {
       "typeId": "aui.core/F64",
@@ -121,7 +155,21 @@
           "CR12/F64/subnormal-preservation"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR12/F64/finite-only",
+          "definition": "F64 is finite IEEE-754 binary64 bit patterns only; reject all exponent 0x7ff patterns before native materialization."
+        },
+        {
+          "ruleId": "CR12/F64/bit-exact-signed-zero",
+          "definition": "Typed JSON F64 uses 0x plus exactly 16 lowercase hex digits encoding unsigned raw binary64 bits MSB-first; positive and negative zero have distinct bit identities."
+        },
+        {
+          "ruleId": "CR12/F64/subnormal-preservation",
+          "definition": "Positive and negative finite subnormals round-trip with every bit intact; no implicit flush-to-zero, arithmetic, rounding, approximate equality or total order."
+        }
+      ]
     },
     {
       "typeId": "aui.core/List",
@@ -151,7 +199,21 @@
           "CR5/List/conditional-send"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR3/List/immutable-snapshot",
+          "definition": "List<T> is a finite ordered immutable owned snapshot; changing elements makes a new revision; no asynchronously mutable borrowed backing store."
+        },
+        {
+          "ruleId": "CR11/List/nominal-only-argument",
+          "definition": "The current admitted L4 List<T> requires verified immutable nominal record T; syntactically nested generic T is not thereby authorized as an L4 value without reviewed specialization."
+        },
+        {
+          "ruleId": "CR5/List/conditional-send",
+          "definition": "List<T> is Send only when T and owned immutable snapshot retention are verified Send; enforce D5 list byte/element/tree quotas and no assumed Copy."
+        }
+      ]
     },
     {
       "typeId": "aui.core/Result",
@@ -184,7 +246,17 @@
           "CR13/Result/two-branches"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR4/Result/provider-only",
+          "definition": "Result<T,E> represents an admitted provider terminal result, never request admission, cancellation or transport ambiguity; Success carries T, Failure carries E."
+        },
+        {
+          "ruleId": "CR13/Result/two-branches",
+          "definition": "Exactly ordered closed variants Success(T) and Failure(E); a provider Result has no TaskOutcome control branches."
+        }
+      ]
     },
     {
       "typeId": "aui.core/StableKey",
@@ -214,7 +286,17 @@
           "CR3/StableKey/framed-binary"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR3/StableKey/exact-tag-and-value",
+          "definition": "Closed union StringKey(String) and U64Key(U64); exact tag and value equality; StringKey UTF-8 byte length is 1..256 with no normalization."
+        },
+        {
+          "ruleId": "CR3/StableKey/framed-binary",
+          "definition": "Portable identity bytes: StringKey tag 0x01 + big-endian 4-byte byte length + strict UTF-8; U64Key tag 0x02 + big-endian 8-byte integer; reject invalid tags, lengths and bytes."
+        }
+      ]
     },
     {
       "typeId": "aui.core/StateRevision",
@@ -243,7 +325,17 @@
           "CR12/StateRevision/not-GraphRevision"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR2/StateRevision/owner-generation",
+          "definition": "StateRevision is a monotonic nonnegative counter bound to one specific UI owner and generation; cross-owner comparison or update is invalid."
+        },
+        {
+          "ruleId": "CR12/StateRevision/not-GraphRevision",
+          "definition": "StateRevision is not GraphRevision, ViewRevision, HEAD epoch, arbitrary U64 or portable Graph payload; it grants no authority to mutate another owner."
+        }
+      ]
     },
     {
       "typeId": "aui.core/String",
@@ -270,7 +362,17 @@
           "CR3/String/no-implicit-normalization"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR3/String/exact-scalars",
+          "definition": "String is an immutable exact Unicode scalar sequence; strict UTF-8 at boundary; embedded U+0000 is content, not native termination."
+        },
+        {
+          "ruleId": "CR3/String/no-implicit-normalization",
+          "definition": "String values preserve exact scalar order without NFC, casefold, grapheme equality, invalid UTF-8 splits or borrowed StringView Send inference."
+        }
+      ]
     },
     {
       "typeId": "aui.core/TaskOutcome",
@@ -309,7 +411,21 @@
           "T9/TaskOutcome/indeterminate-ui-slot"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR4/TaskOutcome/five-branches",
+          "definition": "Exactly five ordered variants: Successful(T), Failed(E), AdmissionRejected(AdmissionError), Cancelled(CancellationConfirmation), ProviderUnavailable(ProviderError); distinct from provider Result<T,E>."
+        },
+        {
+          "ruleId": "CR13/TaskOutcome/closed-control",
+          "definition": "AdmissionError code is one of invalid-arguments, capacity-exceeded, stale-view, capability-denied, unsupported-target with trusted no-dispatch proof. ProviderError phase never-admitted permits provider-unavailable, link-unresolved, abi-unverified, transport-failure only with no-dispatch proof; phase indeterminate-after-admission permits provider-unavailable or transport-failure only. Cancelled requires same owner/ticket/generation confirmed-quiescent proof; source cannot forge control outcomes."
+        },
+        {
+          "ruleId": "T9/TaskOutcome/indeterminate-ui-slot",
+          "definition": "Indeterminate provider admission may settle the original UI slot once as ProviderUnavailable but does not free the native ticket; no fake rollback, replay, auto retry, duplicate completion or premature disposal."
+        }
+      ]
     },
     {
       "typeId": "aui.core/TaskSlot",
@@ -340,7 +456,17 @@
           "T3/TaskSlot/single-active"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR11/TaskSlot/not-Graph-payload",
+          "definition": "TaskSlot<T,E> is opaque affine UI-owner/generation-bound, source-declared, nonportable and forbidden as Graph/record/command dataFlow payload or native pointer."
+        },
+        {
+          "ruleId": "T3/TaskSlot/single-active",
+          "definition": "One TaskSlot owns at most one active request ticket under the exact ViewIdentity/generation; admission, delivery, retirement and cleanup must respect the same owner."
+        }
+      ]
     },
     {
       "typeId": "aui.core/TaskTicket",
@@ -367,7 +493,17 @@
           "T9/TaskTicket/native-ownership"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR11/TaskTicket/not-Graph-payload",
+          "definition": "TaskTicket is an opaque affine runtime operation identity without source constructor, Copy, portable serialization or transferable Graph payload."
+        },
+        {
+          "ruleId": "T9/TaskTicket/native-ownership",
+          "definition": "Native TaskTicket ownership persists after uncertain UI settlement until authenticated provider terminal/quiescence and owner-generation cleanup."
+        }
+      ]
     },
     {
       "typeId": "aui.core/U32",
@@ -395,7 +531,17 @@
           "CR12/U32/exact-integer"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR2/U32/unsigned-32",
+          "definition": "U32 is exactly unsigned integers 0..4294967295 without negatives, saturation, widening or implicit conversions."
+        },
+        {
+          "ruleId": "CR12/U32/exact-integer",
+          "definition": "Typed JSON U32 is a canonical nonnegative integer token 0..4294967295, without fraction, exponent, leading zeros or negative zero."
+        }
+      ]
     },
     {
       "typeId": "aui.core/U64",
@@ -423,7 +569,17 @@
           "CR12/U64/string-without-float"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR2/U64/unsigned-64",
+          "definition": "U64 is exactly unsigned integers 0..18446744073709551615, not a floating-point approximation."
+        },
+        {
+          "ruleId": "CR12/U64/string-without-float",
+          "definition": "Typed JSON U64 is canonical unsigned decimal string 0 or a nonzero-leading digit sequence; signs, whitespace, exponent, JSON numeric tokens and overflow reject."
+        }
+      ]
     },
     {
       "typeId": "aui.core/Unit",
@@ -449,7 +605,17 @@
           "CR12/Unit/not-null-native-pointer"
         ]
       },
-      "exportStatus": "UNVERIFIED"
+      "exportStatus": "UNVERIFIED",
+      "semanticRules": [
+        {
+          "ruleId": "CR2/Unit/single-value",
+          "definition": "Unit has exactly one zero-payload inhabitant; no implicit null, missing field, boolean or provider success state."
+        },
+        {
+          "ruleId": "CR12/Unit/not-null-native-pointer",
+          "definition": "Unit is a typed no-payload logical value, not native null pointer, uninitialized memory, cancellation token or runtime authorization."
+        }
+      ]
     }
   ]
 }
