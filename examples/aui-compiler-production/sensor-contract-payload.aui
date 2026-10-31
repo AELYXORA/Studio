@@ -1,0 +1,17 @@
+// DESIGN ONLY: interface-only AUI contract module; not a signed public type export.
+import aui.core;
+
+record Measurement {
+  value: F64;
+  valid: Bool;
+}
+
+enum SensorError {
+  NoReading;
+  BadReading(Measurement);
+}
+
+service SensorReader {
+  command Read() -> Result<Measurement, SensorError>
+    effects(device-read) on io-worker;
+}
