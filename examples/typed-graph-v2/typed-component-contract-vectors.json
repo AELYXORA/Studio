@@ -1,0 +1,348 @@
+{
+  "format": "aui.v2-typed-graph-contract-vectors",
+  "status": "REFERENCE SHA-256 ONLY. No executable Studio compiler, v2 graph verifier, lock, signed approval, native Win64 ABI or device backing implementation exists.",
+  "sourceProfile": "0.3-typed-slice-draft",
+  "operation": {
+    "input": {
+      "profile": "aui.operation-contract/v2-typed",
+      "exportKind": "operation",
+      "packageId": "example.rows",
+      "componentTypeId": "example.rows/RowProvider",
+      "operationId": "lookup",
+      "inputs": [
+        {
+          "name": "id",
+          "typeRef": {
+            "profile": "aui.type-ref/v2-draft",
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/U64",
+            "exportProfile": "aui.export-contract/v2-core",
+            "contractDigest": "aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024"
+          }
+        }
+      ],
+      "successTypeRef": {
+        "profile": "aui.type-ref/v2-draft",
+        "kind": "nominal",
+        "ownerPackageId": "example.rows",
+        "typeId": "example.rows/Row",
+        "exportProfile": "aui.export-contract/v2-record",
+        "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+      },
+      "failureTypeRef": {
+        "profile": "aui.type-ref/v2-draft",
+        "kind": "nominal",
+        "ownerPackageId": "aui.core",
+        "typeId": "aui.core/String",
+        "exportProfile": "aui.export-contract/v2-core",
+        "contractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+      },
+      "domain": "worker",
+      "effects": [
+        "storage.read"
+      ],
+      "requiredCapabilities": [
+        "storage.read"
+      ],
+      "sideEffectClass": "none",
+      "retryPolicy": "never",
+      "declaredTargets": [
+        "x86_64-pc-windows-msvc"
+      ]
+    },
+    "expectedCanonical": "{\"componentTypeId\":\"example.rows/RowProvider\",\"declaredTargets\":[\"x86_64-pc-windows-msvc\"],\"domain\":\"worker\",\"effects\":[\"storage.read\"],\"exportKind\":\"operation\",\"failureTypeRef\":{\"contractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/String\"},\"inputs\":[{\"name\":\"id\",\"typeRef\":{\"contractDigest\":\"aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/U64\"}}],\"operationId\":\"lookup\",\"packageId\":\"example.rows\",\"profile\":\"aui.operation-contract/v2-typed\",\"requiredCapabilities\":[\"storage.read\"],\"retryPolicy\":\"never\",\"sideEffectClass\":\"none\",\"successTypeRef\":{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}}",
+    "expectedSha256": "8c3fcbf577b75d1784135d156bd4c4e90b8f9624c732079727fd601590dc2ff9"
+  },
+  "components": [
+    {
+      "input": {
+        "profile": "aui.component-contract/v2-typed",
+        "exportKind": "component",
+        "packageId": "example.rows",
+        "typeId": "example.rows/RowProvider",
+        "contractVersion": "2-typed-draft",
+        "declaredTargets": [
+          "x86_64-pc-windows-msvc"
+        ],
+        "ports": [
+          {
+            "id": "rows",
+            "direction": "out",
+            "typeRef": {
+              "profile": "aui.type-ref/v2-draft",
+              "kind": "generic",
+              "instanceProfile": "aui.generic-instantiation/v2-record-args",
+              "template": {
+                "profile": "aui.type-ref/v2-draft",
+                "kind": "nominal",
+                "ownerPackageId": "aui.core",
+                "typeId": "aui.core/List",
+                "exportProfile": "aui.export-contract/v2-core",
+                "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+              },
+              "arguments": [
+                {
+                  "profile": "aui.type-ref/v2-draft",
+                  "kind": "nominal",
+                  "ownerPackageId": "example.rows",
+                  "typeId": "example.rows/Row",
+                  "exportProfile": "aui.export-contract/v2-record",
+                  "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+                }
+              ],
+              "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+            }
+          }
+        ],
+        "capabilities": [
+          "storage.read"
+        ],
+        "commands": [
+          {
+            "id": "lookup",
+            "operationContractDigest": "8c3fcbf577b75d1784135d156bd4c4e90b8f9624c732079727fd601590dc2ff9"
+          }
+        ]
+      },
+      "expectedCanonical": "{\"capabilities\":[\"storage.read\"],\"commands\":[{\"id\":\"lookup\",\"operationContractDigest\":\"8c3fcbf577b75d1784135d156bd4c4e90b8f9624c732079727fd601590dc2ff9\"}],\"contractVersion\":\"2-typed-draft\",\"declaredTargets\":[\"x86_64-pc-windows-msvc\"],\"exportKind\":\"component\",\"packageId\":\"example.rows\",\"ports\":[{\"direction\":\"out\",\"id\":\"rows\",\"typeRef\":{\"arguments\":[{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}],\"instanceDigest\":\"39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170\",\"instanceProfile\":\"aui.generic-instantiation/v2-record-args\",\"kind\":\"generic\",\"profile\":\"aui.type-ref/v2-draft\",\"template\":{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}}}],\"profile\":\"aui.component-contract/v2-typed\",\"typeId\":\"example.rows/RowProvider\"}",
+      "expectedSha256": "1fa208cc763039ece683791f34d32cc9cb5bf34e56f868a64c74516e6750423a"
+    },
+    {
+      "input": {
+        "profile": "aui.component-contract/v2-typed",
+        "exportKind": "component",
+        "packageId": "example.rows",
+        "typeId": "example.rows/RowViewer",
+        "contractVersion": "2-typed-draft",
+        "declaredTargets": [
+          "x86_64-pc-windows-msvc"
+        ],
+        "ports": [
+          {
+            "id": "rows",
+            "direction": "in",
+            "typeRef": {
+              "profile": "aui.type-ref/v2-draft",
+              "kind": "generic",
+              "instanceProfile": "aui.generic-instantiation/v2-record-args",
+              "template": {
+                "profile": "aui.type-ref/v2-draft",
+                "kind": "nominal",
+                "ownerPackageId": "aui.core",
+                "typeId": "aui.core/List",
+                "exportProfile": "aui.export-contract/v2-core",
+                "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+              },
+              "arguments": [
+                {
+                  "profile": "aui.type-ref/v2-draft",
+                  "kind": "nominal",
+                  "ownerPackageId": "example.rows",
+                  "typeId": "example.rows/Row",
+                  "exportProfile": "aui.export-contract/v2-record",
+                  "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+                }
+              ],
+              "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+            }
+          }
+        ],
+        "capabilities": [],
+        "commands": []
+      },
+      "expectedCanonical": "{\"capabilities\":[],\"commands\":[],\"contractVersion\":\"2-typed-draft\",\"declaredTargets\":[\"x86_64-pc-windows-msvc\"],\"exportKind\":\"component\",\"packageId\":\"example.rows\",\"ports\":[{\"direction\":\"in\",\"id\":\"rows\",\"typeRef\":{\"arguments\":[{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}],\"instanceDigest\":\"39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170\",\"instanceProfile\":\"aui.generic-instantiation/v2-record-args\",\"kind\":\"generic\",\"profile\":\"aui.type-ref/v2-draft\",\"template\":{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}}}],\"profile\":\"aui.component-contract/v2-typed\",\"typeId\":\"example.rows/RowViewer\"}",
+      "expectedSha256": "5a62fc8c87daea7b7caa034340128b9ef8d73971855a465d14c115a6b2edd8ec"
+    }
+  ],
+  "typeExportSet": {
+    "input": {
+      "profile": "aui.type-export-set/v2-typed-slice",
+      "types": [
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "generic",
+          "instanceProfile": "aui.generic-instantiation/v2-record-args",
+          "template": {
+            "profile": "aui.type-ref/v2-draft",
+            "kind": "nominal",
+            "ownerPackageId": "aui.core",
+            "typeId": "aui.core/List",
+            "exportProfile": "aui.export-contract/v2-core",
+            "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+          },
+          "arguments": [
+            {
+              "profile": "aui.type-ref/v2-draft",
+              "kind": "nominal",
+              "ownerPackageId": "example.rows",
+              "typeId": "example.rows/Row",
+              "exportProfile": "aui.export-contract/v2-record",
+              "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+            }
+          ],
+          "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+        },
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "example.rows",
+          "typeId": "example.rows/Row",
+          "exportProfile": "aui.export-contract/v2-record",
+          "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+        },
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/String",
+          "exportProfile": "aui.export-contract/v2-core",
+          "contractDigest": "ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505"
+        },
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/U64",
+          "exportProfile": "aui.export-contract/v2-core",
+          "contractDigest": "aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024"
+        },
+        {
+          "profile": "aui.type-ref/v2-draft",
+          "kind": "nominal",
+          "ownerPackageId": "aui.core",
+          "typeId": "aui.core/List",
+          "exportProfile": "aui.export-contract/v2-core",
+          "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+        }
+      ]
+    },
+    "expectedCanonical": "{\"profile\":\"aui.type-export-set/v2-typed-slice\",\"types\":[{\"arguments\":[{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}],\"instanceDigest\":\"39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170\",\"instanceProfile\":\"aui.generic-instantiation/v2-record-args\",\"kind\":\"generic\",\"profile\":\"aui.type-ref/v2-draft\",\"template\":{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}},{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"},{\"contractDigest\":\"ab2a2105f06280d1da9509ebec753883968a22672fd960c2dd1062d62bd1c505\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/String\"},{\"contractDigest\":\"aef1aa29538d1f11c73f28b1f5e35b0bc686727e3b7ddfc6f23ae17ea4462024\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/U64\"},{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}]}",
+    "expectedSha256": "0e3057d62f299e74c3c8277ce75d3d1b49ea5e6d7fdf88532344979ca34c8a6c"
+  },
+  "semanticGraph": {
+    "input": {
+      "profile": "aui.semantic-graph/v2-typed-slice",
+      "projectId": "example.rows.graph",
+      "coreRegistryFingerprint": "155e9a6520e07d6128f80cbcadb5e5d9a38e5ec96f7ac4c28aa775bd5b9777b7",
+      "typeExportSetDigest": "0e3057d62f299e74c3c8277ce75d3d1b49ea5e6d7fdf88532344979ca34c8a6c",
+      "targets": [
+        {
+          "id": "win64",
+          "triple": "x86_64-pc-windows-msvc",
+          "execution": "user"
+        }
+      ],
+      "packageDependencies": [
+        {
+          "packageId": "example.rows",
+          "version": "2-typed-draft"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "provider",
+          "kind": "component-instance",
+          "packageId": "example.rows",
+          "componentTypeId": "example.rows/RowProvider",
+          "componentContractDigest": "1fa208cc763039ece683791f34d32cc9cb5bf34e56f868a64c74516e6750423a",
+          "targetId": "win64",
+          "ports": [
+            {
+              "id": "rows",
+              "direction": "out",
+              "typeRef": {
+                "profile": "aui.type-ref/v2-draft",
+                "kind": "generic",
+                "instanceProfile": "aui.generic-instantiation/v2-record-args",
+                "template": {
+                  "profile": "aui.type-ref/v2-draft",
+                  "kind": "nominal",
+                  "ownerPackageId": "aui.core",
+                  "typeId": "aui.core/List",
+                  "exportProfile": "aui.export-contract/v2-core",
+                  "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+                },
+                "arguments": [
+                  {
+                    "profile": "aui.type-ref/v2-draft",
+                    "kind": "nominal",
+                    "ownerPackageId": "example.rows",
+                    "typeId": "example.rows/Row",
+                    "exportProfile": "aui.export-contract/v2-record",
+                    "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+                  }
+                ],
+                "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+              }
+            }
+          ]
+        },
+        {
+          "id": "viewer",
+          "kind": "component-instance",
+          "packageId": "example.rows",
+          "componentTypeId": "example.rows/RowViewer",
+          "componentContractDigest": "5a62fc8c87daea7b7caa034340128b9ef8d73971855a465d14c115a6b2edd8ec",
+          "targetId": "win64",
+          "ports": [
+            {
+              "id": "rows",
+              "direction": "in",
+              "typeRef": {
+                "profile": "aui.type-ref/v2-draft",
+                "kind": "generic",
+                "instanceProfile": "aui.generic-instantiation/v2-record-args",
+                "template": {
+                  "profile": "aui.type-ref/v2-draft",
+                  "kind": "nominal",
+                  "ownerPackageId": "aui.core",
+                  "typeId": "aui.core/List",
+                  "exportProfile": "aui.export-contract/v2-core",
+                  "contractDigest": "d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a"
+                },
+                "arguments": [
+                  {
+                    "profile": "aui.type-ref/v2-draft",
+                    "kind": "nominal",
+                    "ownerPackageId": "example.rows",
+                    "typeId": "example.rows/Row",
+                    "exportProfile": "aui.export-contract/v2-record",
+                    "contractDigest": "48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c"
+                  }
+                ],
+                "instanceDigest": "39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170"
+              }
+            }
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "rowsFlow",
+          "kind": "data",
+          "from": {
+            "node": "provider",
+            "port": "rows"
+          },
+          "to": {
+            "node": "viewer",
+            "port": "rows"
+          }
+        }
+      ],
+      "workflows": [],
+      "dataFlows": []
+    },
+    "expectedCanonical": "{\"coreRegistryFingerprint\":\"155e9a6520e07d6128f80cbcadb5e5d9a38e5ec96f7ac4c28aa775bd5b9777b7\",\"dataFlows\":[],\"edges\":[{\"from\":{\"node\":\"provider\",\"port\":\"rows\"},\"id\":\"rowsFlow\",\"kind\":\"data\",\"to\":{\"node\":\"viewer\",\"port\":\"rows\"}}],\"nodes\":[{\"componentContractDigest\":\"1fa208cc763039ece683791f34d32cc9cb5bf34e56f868a64c74516e6750423a\",\"componentTypeId\":\"example.rows/RowProvider\",\"id\":\"provider\",\"kind\":\"component-instance\",\"packageId\":\"example.rows\",\"ports\":[{\"direction\":\"out\",\"id\":\"rows\",\"typeRef\":{\"arguments\":[{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}],\"instanceDigest\":\"39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170\",\"instanceProfile\":\"aui.generic-instantiation/v2-record-args\",\"kind\":\"generic\",\"profile\":\"aui.type-ref/v2-draft\",\"template\":{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}}}],\"targetId\":\"win64\"},{\"componentContractDigest\":\"5a62fc8c87daea7b7caa034340128b9ef8d73971855a465d14c115a6b2edd8ec\",\"componentTypeId\":\"example.rows/RowViewer\",\"id\":\"viewer\",\"kind\":\"component-instance\",\"packageId\":\"example.rows\",\"ports\":[{\"direction\":\"in\",\"id\":\"rows\",\"typeRef\":{\"arguments\":[{\"contractDigest\":\"48031e9b4518b2308957e97ae31bfe059f2c9693e5dcf885a1bcdad43ac25e4c\",\"exportProfile\":\"aui.export-contract/v2-record\",\"kind\":\"nominal\",\"ownerPackageId\":\"example.rows\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"example.rows/Row\"}],\"instanceDigest\":\"39d2acd781c5648656c619fec5bd03b7255089477fc1beb015a0c4b87d26e170\",\"instanceProfile\":\"aui.generic-instantiation/v2-record-args\",\"kind\":\"generic\",\"profile\":\"aui.type-ref/v2-draft\",\"template\":{\"contractDigest\":\"d36307cce70e16232c1e14af0b98093b8c58db8fe0b34e8b63115e153d4be54a\",\"exportProfile\":\"aui.export-contract/v2-core\",\"kind\":\"nominal\",\"ownerPackageId\":\"aui.core\",\"profile\":\"aui.type-ref/v2-draft\",\"typeId\":\"aui.core/List\"}}}],\"targetId\":\"win64\"}],\"packageDependencies\":[{\"packageId\":\"example.rows\",\"version\":\"2-typed-draft\"}],\"profile\":\"aui.semantic-graph/v2-typed-slice\",\"projectId\":\"example.rows.graph\",\"targets\":[{\"execution\":\"user\",\"id\":\"win64\",\"triple\":\"x86_64-pc-windows-msvc\"}],\"typeExportSetDigest\":\"0e3057d62f299e74c3c8277ce75d3d1b49ea5e6d7fdf88532344979ca34c8a6c\",\"workflows\":[]}",
+    "expectedSha256": "0ffa6737e697946bd00de776e7530f802e6fa588d809c72d5d5c72f1905c9e4f"
+  },
+  "coreRegistryFingerprint": "155e9a6520e07d6128f80cbcadb5e5d9a38e5ec96f7ac4c28aa775bd5b9777b7",
+  "notes": [
+    "Source node labels and GraphRevision intentionally omitted from semantic projection",
+    "Old v1 graph and pure reference hashes unchanged",
+    "Operations and component public digests are checked before type closure and graph projection",
+    "No source link signature or native PE invocation implied by this fixture",
+    "All example canonical value strings are ASCII-only; Unicode D6 P1 vector gate remains separate"
+  ]
+}
