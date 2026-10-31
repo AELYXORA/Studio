@@ -23,6 +23,14 @@ For L0/L1, only Result<T,E> in a command signature and Event<T> in an event decl
 
 The core registry pin format and contract digests are **still P0**. Do not treat these names as verified native layouts or assign unreviewed ABI offsets.
 
+## First compiler source-only typing clarification
+
+The [COMP-03/05 compiler closure](aui-compiler-frontend-closure.md) uses the [strict provisional review catalogue](../../examples/aui-compiler-first-slice/review-type-catalog.json) for L0/L1 local typing only. It contains no independently verified public digests; a successful local result is always `UNVERIFIED_SOURCE_ONLY`, never a linked component. The [catalogue schema](../../schemas/aui-compiler-review-type-catalog.schema.json) is a shape check, not permission.
+
+Source-only L1 treats `io-worker` and `ui` as recognized declared execution-domain atoms. Incompatible provider domain or blocking operation is rejected **later at exact graph linkage (P07)**, which preserves the existing expected `AUI_COMMAND_CONTRACT` graph-link diagnostic for a mismatched `on ui` declaration. Source-only does not invoke either domain or infer that `ui` is permitted for device/native effects. Command effect set is empty in the provisional first catalog; nonempty unverified effects cannot be silently accepted.
+
+Exactly one explicit nonempty literal (or typed dynamic String) `.accessibilityLabel(value: String)` is required on Button; runtime nonempty accessible-name behavior for dynamic values remains D5, not compiler evidence. Duplicate modifiers/event attachments fail rather than being silently overwritten.
+
 ## T2. Candidate visual export signatures
 
 First-slice visual property APIs:
