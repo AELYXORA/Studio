@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA — one current canonical core registry review inventory",
+  "description": "Strict documentary shape only. This inventory is not an accepted core library, source hash domain, compiled type system or native ABI. Uniqueness and exact arity/trait/semantic constraints require semantic review.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "registryId",
+    "status",
+    "sourceOfTruth",
+    "notes",
+    "entries"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.core-registry-candidate"
+    },
+    "registryId": {
+      "const": "aui.core/canonical-candidate"
+    },
+    "status": {
+      "const": "PROPOSED-NOT-ACCEPTED"
+    },
+    "sourceOfTruth": {
+      "const": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    "notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 15,
+      "maxItems": 15,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "typeId",
+          "kind",
+          "typeArity",
+          "featureGate",
+          "logicalTraits",
+          "semanticSummary",
+          "unresolvedObligations"
+        ],
+        "properties": {
+          "typeId": {
+            "enum": [
+              "aui.core/Bool",
+              "aui.core/Bytes",
+              "aui.core/Event",
+              "aui.core/F64",
+              "aui.core/List",
+              "aui.core/Result",
+              "aui.core/StableKey",
+              "aui.core/StateRevision",
+              "aui.core/String",
+              "aui.core/TaskOutcome",
+              "aui.core/TaskSlot",
+              "aui.core/TaskTicket",
+              "aui.core/U32",
+              "aui.core/U64",
+              "aui.core/Unit"
+            ]
+          },
+          "kind": {
+            "enum": [
+              "scalar",
+              "immutable-value",
+              "generic-value",
+              "tagged-union",
+              "opaque-runtime"
+            ]
+          },
+          "typeArity": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "featureGate": {
+            "enum": [
+              "D2-graph",
+              "L0/L1",
+              "L2",
+              "L3",
+              "L4"
+            ]
+          },
+          "logicalTraits": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "Immutable",
+                "Copy",
+                "SendConditional",
+                "Send",
+                "Affine",
+                "UIOwner",
+                "Opaque"
+              ]
+            }
+          },
+          "semanticSummary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "unresolvedObligations": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}
