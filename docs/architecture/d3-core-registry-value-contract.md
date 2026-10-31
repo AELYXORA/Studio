@@ -73,3 +73,7 @@ A fully typed exported core-registry schema with public contract digest vectors,
 ## CR9. Logical Result versus native Win64 tagged envelope
 
 [Proposed Win64 Outcome Descriptor](d4-win64-module-and-result-descriptors.md) defines one 80-byte native *container* reused under an exact expected logical type identity: two provider Result cases and five distinct UI TaskOutcome cases. The same tag number without its verified expected TypeID is not sufficient to decode a payload. Failure before provider admission never manufactures a Result<T,E>. The native container is a D4 candidate, not part of the D3 exported-contract digest or an approved cross-platform value representation.
+
+## CR10. Bounded G1 instances and no implicit v1/v2 mixing
+
+[Generic Instantiation Identity](d2-d3-generic-instantiation-identity.md) now proposes a separate type identity domain binding template digest + ordered resolved nominal argument/digest pairs. The same List<T> **template digest is not** List<String> instantiated digest, and Result<U32,String> differs from Result<String,U32>. [v1/v2 policy](d2-d6-core-profile-compatibility.md) deliberately blocks List<Row> with v1 user record until explicitly reviewed type-reference schema/migration. [G1 vectors](../../examples/aui-language/d2-generic-instantiation-vectors.json) are design arithmetic only. Native target layout and D4 signature/loader proof still required.
