@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA v2 typed record public export projection (proposal)",
+  "description": "Future versioned public v2 record projection; not valid in existing v1 package manifests or legacy Graph. Field order meaningful; a semantic verifier must reject self/recursive dependency cycles and validate every referenced digest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "exportKind",
+    "packageId",
+    "typeId",
+    "kind",
+    "fields"
+  ],
+  "properties": {
+    "profile": {
+      "const": "aui.export-contract/v2-record"
+    },
+    "exportKind": {
+      "const": "type"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "typeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "const": "record"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "typeRef"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "typeRef": {
+            "$ref": "aui-type-reference-v2.schema.json"
+          }
+        }
+      }
+    }
+  }
+}
