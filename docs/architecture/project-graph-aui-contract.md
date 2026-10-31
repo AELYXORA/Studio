@@ -1,11 +1,11 @@
 # Project Graph ↔ AUI — Formal Integration Contract
 
-**Status: proposed design for D2/D3 review; not accepted, implemented or executable.** [Project Graph](project-graph.md) owns canonical architecture and persistent IDs. [AUI Syntax](aui-syntax.md) owns source grammar. [AST Semantics](aui-ast-semantic-analysis.md) owns resolution/type checking. This document owns the **mapping between** those systems, not competing definitions.
+**Status: proposed D2/D3 integration design; not accepted, implemented or executable.** [ONE Canonical Project Graph](canonical-project-graph-and-components.md) is the sole current owner of architecture, persistent IDs and typed public component/operation contracts. [D3 first language profile](d3-first-language-profile.md) governs bounded initial AUI source grammar; [AUI Syntax](aui-syntax.md) remains an exploratory extended proposal. [AST Semantics](aui-ast-semantic-analysis.md) elaborates resolution and type checking. This document describes **the reconciliation between source and graph**, never a competing identity or type model.
 
 ## 1. Identity and ownership
 
 - ProjectID identifies the project. GraphNodeID identifies a durable architecture instance. PortID is unique in its containing component. EdgeID identifies a relationship.
-- TypeID is a package-qualified exported identity (e.g. `example.sensor/Measurement`), pinned to a resolved package content identity. Same display spelling does not imply same type.
+- A public type is a verified [Canonical TypeReference](../../schemas/aui-type-reference.schema.json): its nominal package-qualified TypeID **and exact logical contractDigest**, or a validated bounded generic with ordered arguments and its own verified contractDigest. Package content digest pins exact source/manifest bytes separately; spelling or native layout equality alone does not establish type identity.
 - AUI declaration identity uses a resolved symbol identity (package/module/declaration), while a **runtime ViewIdentity** tracks an instantiated rendered view. These three identities must not be conflated.
 - AUI source locations (file/byte span) are *references*, never permanent identity. Moving a line or formatting a file cannot reassign GraphNodeID.
 - The canonical graph owns nodes, inter-component edges, permissions, targets and source ownership. [Export Contract Identity](d2-export-contract-identity.md) defines logical type identity separately from locked source bytes. AUI owns its declaration bodies and presentation hierarchy; proposed source changes that affect graph contracts require a graph transaction.
