@@ -89,3 +89,7 @@ The initial parser must record stable diagnostic code, file/source digest, start
 ## L2/L3 versioned extension policy
 
 The [L2 State/Derived/Bind contract](d3-state-derived-binding-contract.md) and [L3 Task/Result contract](d3-task-result-lifecycle.md) are future **versioned source profiles**, NOT extensions admitted by this strict L0/L1 grammar. They do not implicitly relax named-only arguments, strict UTF-8, source IDs, target/effect/capability checks, or Graph source authority. The [source-to-Graph bundle](d3-source-snapshot-reconciliation.md) requires an approved immutable source+lock+graph review. All future profile tests remain NOT-RUN; a token such as state or await in an L0/L1 file is still AUI_PROFILE_UNSUPPORTED.
+
+## L2/L3 source profile separation
+
+[L2 State/Derived/Bind](d3-state-derived-binding-contract.md) and [L3 Task/Result](d3-task-result-lifecycle.md) are **proposed versioned D3+ profiles**. They do not relax this L0/L1 grammar's strict imports/types, named arguments, semantic source/graph checking or command authority. A state/await/submit/settled token remains AUI_PROFILE_UNSUPPORTED in L0/L1. [Source snapshot](d3-source-snapshot-reconciliation.md) must pin exact source bytes/profile/core registry for later linkage. No advanced parser or runtime is implemented.
