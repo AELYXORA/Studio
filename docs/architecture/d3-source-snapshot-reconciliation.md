@@ -58,3 +58,7 @@ If an AUI user edits a public component port/command/effect/target declaration, 
 ## R6. Open review gates
 
 The bundle schema is **a first structural shape**, not a signed authorization system. Stable compiler SymbolID derivation, exact signature/receipt verification, source ownership change approvals, end-to-end D6 immutable snapshot fixtures, versioned core registry, package/target proof, state/result/focus rendering and native D4/D5/Phase III tests all remain uncompleted P0. No design document grants an external provider or raw Assembly execution privilege.
+
+## R7. L4 keyed templates and approved source graph association (PROPOSED)
+
+[L4 Keyed Views](d3-keyed-dynamic-view-lifecycle.md) introduces compiler TemplateSymbolID plus runtime tagged StableKey paths; neither is GraphNodeID or a physical resource permission. The [source-link bundle schema](../../schemas/aui-source-link-bundle.schema.json) now recognizes languageProfile aui.source/l4-keyed/v1 and, for L4 sources, requires a nonempty templateSymbols registry with sourcePath, templateSymbolId, itemTypeId, keyField/keyTypeId and childComponentTypeId. Verifying these declared symbols against a typed AST, approved core registry, exact source hash, package lock and authorizing immutable source snapshot remains mandatory. A changed source digest invalidates any old bundle even if item keys/graph semantics are equal. No native Source/Graph approval proof exists.
