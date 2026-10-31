@@ -221,6 +221,10 @@ The [cross-owner D2/D3/D6 public digest pipeline](d2-d6-public-contract-digest-p
 
 The current C9 top-level `typeExportSetDigest` field remains the same existing authored assertion; no new field is added to the project, Graph or package. The clarified *derived projection* eliminates source ambiguity but is still unapproved (D1–D8 OPEN). Current input synthetic checksum strings are not accepted, and a SHA match alone cannot authorize native dispatch.
 
+### Full candidate C9 digest arithmetic — actual typed reference chain, no trust
+
+[The sensor end-to-end arithmetic fixture](../../examples/canonical-graph/sensor-full-digest-chain-arithmetic.json) now resolves 15 UNVERIFIED content-bearing core definitions into 3 nominal records, one declared operation, 3 components, both typed type-export-set scopes and the entire historical sensor C9 Graph projection including resourceModel and workflow semantics. The derived C9 candidate semantic hash is `bd9e405922174eea539f93417766fb7ec9f98797b99eb24d064f5569f9169afd` for 8,922 canonical bytes. All computed nominal TypeReferences and Graph node component links were checked for exact digest consistency; no mismatches found. This is **untrusted candidate arithmetic**: original authored 1/2/3/aaa/bbb/ddd/... assertions remain fake, 15/15 core exports remain UNVERIFIED, source signing and target/hardware ABI admission are absent. It is neither a replacement signed project nor proof that the historical sensor resource model is fully valid.
+
 ## C13. Open design and proof gates
 
 Fully approved typed workflow signal contract, data-flow payload/ownership and resource claim interplay; exhaustive semantic projection and deterministic byte normalization; native package export and effect registry; source/Graph signed review and D6 immutable closure; Win64 module/ABI/renderer/IME/NTFS durability; actual Phase III tests and explicit D1–D8 human acceptance. **Only one architecture; its acceptance remains OPEN.**
