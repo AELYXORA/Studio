@@ -50,3 +50,7 @@ A valid reference fixture moves an owned sample buffer into a bounded worker cha
 ## Acceptance gate
 
 A design review must establish deterministic transfer functions, join semantics, region/alias representation, async-frame lifetime proof, loop convergence, resource cleanup and stable diagnostic spans. Only then implement a validator and compare golden fixtures. No claim of borrow-checker enforcement exists today.
+
+## D3+ task cancellation and state lifetime proposal
+
+[L3 Task/Result](d3-task-result-lifecycle.md) proposes at-most-one active TaskTicket per source TaskSlot and an exhaustive typed terminal TaskOutcome; [L2 State](d3-state-derived-binding-contract.md) proposes UI-only StateRevision commits. A borrow that survives an await requires explicit proved ownership/pinning as defined in OwnershipIR; without that proof reject OWN_ASYNC_ESCAPE. A canceled UI view invalidates its result subscription, not the provider's DMA/resource lifetime; the provider must finish or confirm quiescence before its buffers are freed. Bounded admission and completion results must be proved by D4/D5. No native safety property is already verified.
