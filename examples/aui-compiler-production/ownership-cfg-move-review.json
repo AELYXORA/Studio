@@ -1,0 +1,48 @@
+{
+  "format": "aui.ownership-cfg-review",
+  "status": "PROPOSED-NOT-RUN",
+  "functionId": "demo.moveOwned",
+  "entryBlockId": "b0",
+  "values": [
+    {
+      "id": "ownedIn",
+      "typeIdentity": "aui.core/Bytes",
+      "ownership": "owned",
+      "origin": "source:input",
+      "ownerId": "res1"
+    },
+    {
+      "id": "ownedOut",
+      "typeIdentity": "aui.core/Bytes",
+      "ownership": "owned",
+      "origin": "derived:move",
+      "ownerId": "res1"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b0",
+      "params": [
+        "ownedIn"
+      ],
+      "instructions": [
+        {
+          "op": "move",
+          "defs": [
+            "ownedOut"
+          ],
+          "uses": [
+            "ownedIn"
+          ],
+          "sourceOrigin": "source:move"
+        }
+      ],
+      "terminator": {
+        "kind": "return",
+        "values": [
+          "ownedOut"
+        ]
+      }
+    }
+  ]
+}
