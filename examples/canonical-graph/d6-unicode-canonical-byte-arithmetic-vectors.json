@@ -1,0 +1,89 @@
+{
+  "format": "aui.d6-unicode-canonical-reference-arithmetic",
+  "status": "D6 BYTE WRITER REVIEW VECTORS ONLY / NO TRUSTED PUBLIC DIGEST / AELYXORA IMPLEMENTATION NOT-RUN",
+  "owner": "docs/architecture/d6-canonical-persistence.md",
+  "domainAscii": "AELYXORA/d6-canonical-reference/candidate",
+  "framing": "SHA256(ASCII(domainAscii) || NUL || exact canonicalUtf8 bytes)",
+  "verification": "Generated with independent Python/json+explicit D6 control escapes, hashed by hashlib and OpenSSL; all pairs agreed. The published exact canonicalUtf8 and byte lengths were independently reconstructed in this tooling pass.",
+  "semanticExpectations": [
+    "Composed U+00E9 and decomposed U+0065 U+0301 stay distinct String values, not NFC-normalized",
+    "U+000A is escaped as lowercase six-byte \\u000a, not a JSON short \\n escape",
+    "Object names are ordered by decoded UTF-8 bytes, not locale collation",
+    "Ordered arrays preserve authored order and therefore hash differently",
+    "No source review, lock, core type or Graph authenticity follows from these reference hashes"
+  ],
+  "vectors": [
+    {
+      "label": "controls-and-unicode",
+      "input": {
+        "note": "line\nbreak",
+        "quote": "\"\\",
+        "value": "é"
+      },
+      "canonicalUtf8": "{\"note\":\"line\\u000abreak\",\"quote\":\"\\\"\\\\\",\"value\":\"é\"}",
+      "canonicalByteLength": 54,
+      "expectedArithmeticSha256": "bad7b7f34bfe811b5a5941c5e65a68f13c7fe4e6ea0837d6c883fc2f359fc8b7"
+    },
+    {
+      "label": "object-key-byte-order",
+      "input": {
+        "é": 3,
+        "z": 2,
+        "Z": 1
+      },
+      "canonicalUtf8": "{\"Z\":1,\"z\":2,\"é\":3}",
+      "canonicalByteLength": 20,
+      "expectedArithmeticSha256": "821bb2a094d276cef5cd878bb9fb2f6fe6443060b4fa6f81a8e872a869485af0"
+    },
+    {
+      "label": "composed-scalar",
+      "input": {
+        "text": "é"
+      },
+      "canonicalUtf8": "{\"text\":\"é\"}",
+      "canonicalByteLength": 13,
+      "expectedArithmeticSha256": "a6ca63f18a81f74ba317135fd0ecd856056d8a347bab16e2327b07a653472691"
+    },
+    {
+      "label": "decomposed-scalars",
+      "input": {
+        "text": "é"
+      },
+      "canonicalUtf8": "{\"text\":\"é\"}",
+      "canonicalByteLength": 14,
+      "expectedArithmeticSha256": "21621b8f0a7b3b8f23666691eaec426f616149d28f704d817e06ac7b678e24ab"
+    },
+    {
+      "label": "ordered-array-A",
+      "input": {
+        "variants": [
+          {
+            "name": "one"
+          },
+          {
+            "name": "two"
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"variants\":[{\"name\":\"one\"},{\"name\":\"two\"}]}",
+      "canonicalByteLength": 44,
+      "expectedArithmeticSha256": "aae09e18827f51078fa1e2e9bcf3511c5b3afd0366f3a726f1ef2f9511d8f065"
+    },
+    {
+      "label": "ordered-array-B",
+      "input": {
+        "variants": [
+          {
+            "name": "two"
+          },
+          {
+            "name": "one"
+          }
+        ]
+      },
+      "canonicalUtf8": "{\"variants\":[{\"name\":\"two\"},{\"name\":\"one\"}]}",
+      "canonicalByteLength": 44,
+      "expectedArithmeticSha256": "925e98fe22a417a57e42c91d9e0216db6d242b3b77c4f2969877f73eca040e1f"
+    }
+  ]
+}
