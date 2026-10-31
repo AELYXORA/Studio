@@ -99,3 +99,7 @@ If UI binding state includes only a String status, converting TaskOutcome to Str
 | User source modifies TaskOutcome without pure mapping | AUI_TYPE_MISMATCH |
 
 **Remaining P0:** exact TaskOutcome and Ticket type registry digests; authorization/link-map persistence; task slot/source grammar and extension compatibility; D5 admission/results queue fairness, StateRevision/cancel atomics; ownership borrow/lifetime proofs; platform ABI and hardware-safe shutdown; native golden fixtures and observed race tests. This text is not a tested async engine.
+
+## T8. L4 keyed task slot lifetime (PROPOSED)
+
+[L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) extends TaskSlot runtime identity with the **full tagged parent item ViewIdentity path and incarnation generation**. The static TaskSlot source symbol may be identical for template clones, but their live tickets, admission capacity and owner cleanup are separate. Reorder within one parent preserves the original slot and its pending result subscriber; delete/reinsert, reparent or component TypeID replacement unmounts and revokes only the old-generation subscriber. Provider CommandTickets remain D2/D4-owned and must not be freed before quiescence. This does not enable arbitrary task fanout or unbounded dynamic tasks. D4/D5 queue/memory proof and actual result routing are still P0.
