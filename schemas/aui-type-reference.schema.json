@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA Canonical TypeReference",
+  "description": "One conceptual type system, no product/architecture edition profiles; nominal or bounded generic. Validate resolved owner, exact digests and acyclic dependencies semantically, not merely from JSON shape.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/nominal"
+    },
+    {
+      "$ref": "#/$defs/generic"
+    }
+  ],
+  "$defs": {
+    "nominal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "ownerPackageId",
+        "typeId",
+        "contractDigest"
+      ],
+      "properties": {
+        "kind": {
+          "const": "nominal"
+        },
+        "ownerPackageId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "typeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "contractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "generic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "template",
+        "arguments",
+        "contractDigest"
+      ],
+      "properties": {
+        "kind": {
+          "const": "generic"
+        },
+        "template": {
+          "$ref": "#/$defs/nominal"
+        },
+        "arguments": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/$defs/nominal"
+          }
+        },
+        "contractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  }
+}
