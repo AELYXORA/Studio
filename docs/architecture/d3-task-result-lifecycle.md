@@ -104,3 +104,7 @@ If UI binding state includes only a String status, converting TaskOutcome to Str
 
 [L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) extends TaskSlot runtime identity with the **full tagged parent item ViewIdentity path and incarnation generation**. The static TaskSlot source symbol may be identical for template clones, but their live tickets, admission capacity and owner cleanup are separate. Reorder within one parent preserves the original slot and its pending result subscriber; delete/reinsert, reparent or component TypeID replacement unmounts and revokes only the old-generation subscriber. Provider CommandTickets remain D2/D4-owned and must not be freed before quiescence. This does not enable arbitrary task fanout or unbounded dynamic tasks. D4/D5 queue/memory proof and actual result routing are still P0.
 
+
+## L3 portable TaskOutcome versus provider Result — PROPOSED
+
+[D3 Core Type Registry](d3-core-registry-value-contract.md) defines two-branch provider Result<T,E> separately from five-branch UI request TaskOutcome<T,E>; AdmissionRejected and ProviderUnavailable can arise before any provider CommandTicket exists. A cancel request alone cannot form confirmed Cancelled. [D4 ABI](d4-core-value-abi-contract.md) must verify exact native tagged union, ownership and terminal CAS; [D5](d5-ui-resource-budget-and-publication.md) proposes one active task/slot and 256 active root tasks with bounded completion reservation, not an existing measured runtime. An unmounted keyed view cannot revive an old ticket by label or item index.
