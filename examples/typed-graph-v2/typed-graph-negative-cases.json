@@ -1,0 +1,259 @@
+{
+  "format": "aui.typed-graph-v2-negative-cases",
+  "status": "DOCUMENTATION/TEST DESIGN ONLY: 35 future schema, semantic, type, ABI, link and runtime cases. No Studio test run.",
+  "base": "typed-graph-project.auiproj.json",
+  "contractVectors": "typed-component-contract-vectors.json",
+  "cases": [
+    {
+      "id": "TG-S01",
+      "mutation": "Remove required graph typeExportSetDigest",
+      "expected": "SCHEMA_INVALID",
+      "stage": "shape",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S02",
+      "mutation": "Change schemaVersion to 0.1-draft while retaining v2 typed ports",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED",
+      "stage": "profile",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S03",
+      "mutation": "Set workflow array to a nonempty state machine",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED",
+      "stage": "profile",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S04",
+      "mutation": "Set dataFlows array to a nonempty channel",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED",
+      "stage": "profile",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S05",
+      "mutation": "Add old hardware resourceModel to v2 slice",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED",
+      "stage": "profile",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S06",
+      "mutation": "Add retiredIdentities without v2 ledger contract",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED",
+      "stage": "profile",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S07",
+      "mutation": "Duplicate GraphNodeID provider",
+      "expected": "GRAPH_NODE_DUPLICATE",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S08",
+      "mutation": "Duplicate EdgeID rowsFlow",
+      "expected": "GRAPH_EDGE_DUPLICATE",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S09",
+      "mutation": "Source endpoint viewer.rows instead of provider.rows",
+      "expected": "GRAPH_EDGE_DIRECTION",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S10",
+      "mutation": "Destination port uses another TypeReference of equal native size",
+      "expected": "GRAPH_EDGE_TYPE_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S11",
+      "mutation": "Graph provider node port differs from verified component port typeRef",
+      "expected": "GRAPH_PORT_TYPE_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S12",
+      "mutation": "Graph provider.componentContractDigest differs from locked export",
+      "expected": "COMPONENT_CONTRACT_DIGEST_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S13",
+      "mutation": "Component lookup.operationContractDigest refers to another public contract",
+      "expected": "OPERATION_CONTRACT_DIGEST_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S14",
+      "mutation": "Operation id lookup duplicated within one component",
+      "expected": "OPERATION_DUPLICATE",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S15",
+      "mutation": "Change operation effects without updating operation/component/graph digests",
+      "expected": "OPERATION_CONTRACT_DIGEST_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S16",
+      "mutation": "Change operation requiredCapabilities but retain old digest",
+      "expected": "OPERATION_CONTRACT_DIGEST_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S17",
+      "mutation": "Operation requiredCapabilities not subset of component declared capabilities",
+      "expected": "CAPABILITY_CONTRACT_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S18",
+      "mutation": "Node targetId has no matching target entry",
+      "expected": "GRAPH_TARGET_UNSUPPORTED",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S19",
+      "mutation": "Component not declared for graph target triple",
+      "expected": "GRAPH_TARGET_UNSUPPORTED",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S20",
+      "mutation": "Type export set closure omits core List template",
+      "expected": "TYPE_EXPORT_SET_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S21",
+      "mutation": "Type export set duplicates two identical canonical TypeReferences",
+      "expected": "TYPE_EXPORT_SET_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S22",
+      "mutation": "Type export set order changes without canonical sorting",
+      "expected": "TYPE_EXPORT_SET_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S23",
+      "mutation": "Graph content changes but semanticGraphDigestV2 is reused",
+      "expected": "GRAPH_DIGEST_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S24",
+      "mutation": "Node UI label changes but expected semanticGraphDigest also changed",
+      "expected": "REVIEW_INCORRECT_PROJECTION",
+      "stage": "review",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S25",
+      "mutation": "Change only source revision and claim a different semanticGraphDigest",
+      "expected": "REVIEW_INCORRECT_PROJECTION",
+      "stage": "review",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S26",
+      "mutation": "Swap command input parameter order but reuse old Operation digest",
+      "expected": "OPERATION_CONTRACT_DIGEST_MISMATCH",
+      "stage": "semantic",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S27",
+      "mutation": "Use v1 nominal type string in v2 component port.typeRef",
+      "expected": "SCHEMA_INVALID",
+      "stage": "type",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S28",
+      "mutation": "Use v1 user Row as v2 List<Row> argument",
+      "expected": "CORE_PROFILE_MISMATCH",
+      "stage": "type",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S29",
+      "mutation": "Reference a recursive user record in List<Row>",
+      "expected": "TYPE_RECURSION_UNSUPPORTED",
+      "stage": "type",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S30",
+      "mutation": "Module operationIndex correct but symbolic OperationID/digest mismatches",
+      "expected": "ABI_OPERATION_CONTRACT_MISMATCH",
+      "stage": "abi",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S31",
+      "mutation": "Signed source link maps lookup to different GraphNodeID",
+      "expected": "AUI_COMMAND_UNLINKED",
+      "stage": "linkage",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S32",
+      "mutation": "Source link payload uses TaskOutcome where provider Result is expected",
+      "expected": "AUI_COMMAND_CONTRACT",
+      "stage": "linkage",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S33",
+      "mutation": "Runtime scope lacks storage.read despite correctly typed graph and signed PE",
+      "expected": "CAPABILITY_DENIED",
+      "stage": "runtime",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S34",
+      "mutation": "Remove/reinsert a keyed viewer while old provider result arrives",
+      "expected": "AUI_TASK_STALE",
+      "stage": "runtime",
+      "testStatus": "NOT-RUN by AELYXORA"
+    },
+    {
+      "id": "TG-S35",
+      "mutation": "Old v1 graph with workflows silently migrated to empty v2 workflows",
+      "expected": "GRAPH_PROFILE_UNSUPPORTED",
+      "stage": "migration",
+      "testStatus": "NOT-RUN by AELYXORA"
+    }
+  ],
+  "notes": [
+    "An independently implemented standards-compliant JSON Schema evaluator and semantic type/graph validator are required.",
+    "Failure stage order may cause an earlier valid diagnostic; each mutation should isolate one intended first error.",
+    "Runtime, Win64 ABI, signature/approval and task cancellation cases require real implementations.",
+    "The first slice intentionally rejects nonempty workflows/dataFlows/resourceModel rather than omit meaning."
+  ]
+}
