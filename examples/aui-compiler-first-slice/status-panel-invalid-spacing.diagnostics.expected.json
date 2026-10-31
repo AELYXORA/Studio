@@ -1,0 +1,31 @@
+{
+  "format": "aui.compiler-source-only-diagnostics",
+  "status": "ERROR",
+  "mode": "check",
+  "profile": "l0",
+  "source": {
+    "path": "examples/aui-compiler-first-slice/status-panel-invalid-spacing.aui",
+    "sha256": "1231502beaa755aa1dd4b235621ccf4f10e1aa03cbb72e105875f3f5eca4f96a",
+    "byteLength": 304
+  },
+  "catalog": {
+    "status": "UNVERIFIED",
+    "sourceFormat": "aui.compiler-source-only-review-catalog",
+    "sourceIdentity": "examples/aui-compiler-first-slice/review-type-catalog.json"
+  },
+  "exitCode": 1,
+  "diagnostics": [
+    {
+      "code": "AUI_NUMBER_RANGE",
+      "stage": "P04",
+      "severity": "error",
+      "sourceFile": "examples/aui-compiler-first-slice/status-panel-invalid-spacing.aui",
+      "sourceSha256": "1231502beaa755aa1dd4b235621ccf4f10e1aa03cbb72e105875f3f5eca4f96a",
+      "startByte": 153,
+      "endByte": 163,
+      "messageKey": "aui.number.range",
+      "expected": "U32 integer in 0..4294967295",
+      "actual": "4294967296"
+    }
+  ]
+}
