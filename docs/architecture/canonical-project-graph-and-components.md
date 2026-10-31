@@ -147,6 +147,40 @@ The order of public digests is acyclic: verified core registry and nominal leave
 
 **Open implementation-neutral questions:** exact digest byte vectors, published core registry, normalized operation IDs/namespace rules, contract-declared effect registry and target ABI bridging, stable target/resource registry IDs, and signer/dependency closure. Their absence cannot be treated as a passed design gate.
 
-## C11. Open design and proof gates
+
+## C12. Exact derived operation/component projection keys — proposed one-model refinement
+
+**Status: PROPOSED; no accepted digest bytes, native implementation or trust authorization.** C10 establishes the logical DAG; this section closes ambiguity between the actual [canonical authored component package schema](../../schemas/canonical-component-package.schema.json) and the derived contract objects. These are **computed projections**, not new user-editable package fields, a second source schema or a numbered architecture.
+
+### Authored-to-derived mapping
+
+| Authored source | Derived operation public projection | Validation |
+| --- | --- | --- |
+| parent `packageId`, parent `components[].typeId` | `packageId`, `componentTypeId` | Fully qualified component belongs to locked package; never take these values from a display label |
+| `components[].commands[].id` | `operationId` | Unique within owning component; exact case-sensitive stable ID |
+| `commands[].inputs[]` | `inputs[]` with exactly `name,typeRef` | Preserve authored input order, require distinct input names, resolve complete TypeReference |
+| `commands[].successTypeRef`, `failureTypeRef` | same named fields | Verify exact type, owner and digest; no guessed `TaskOutcome` substitution |
+| `commands[].domain` | `domain` | Must be registered and meet graph execution restrictions |
+| `commands[].effects`, `requiredCapabilities`, `declaredTargets` | same named fields | Unique string sets in canonical lexical order; exact target triples, never graph target IDs |
+| `commands[].sideEffectClass`, `retryPolicy` | same named fields | Full declared effect and nonreplay policy; `retryPolicy=never` in current schema |
+| all verified operation digests on parent component | `commands[]` of exactly `id,operationContractDigest` | Sorted by operation `id`; reject missing, extra, duplicated or mismatched operations |
+| parent component `ports[]`, `capabilities[]` | same named fields | `ports[]` contain exactly `id,direction,typeRef` and sort by `id`; capabilities unique/sorted |
+| parent component `sources[]` | **excluded** | Source paths, implementation byte hashes and source ownership belong to locked package/build/snapshot, not logical public contract |
+
+An **operation projection** contains exactly the twelve keys: `exportKind` (constant `operation`), `packageId`, `componentTypeId`, `operationId`, `inputs`, `successTypeRef`, `failureTypeRef`, `effects`, `domain`, `sideEffectClass`, `retryPolicy`, `requiredCapabilities`, `declaredTargets`. (**13 keys**; the enumerated names, not a hand-entered key count, govern the contract.) The operation digest, source SHA, component digest and ABI layout are **not** contained in their own operation projection.
+
+A **component projection** contains exactly `exportKind` (constant `component`), `packageId`, `typeId`, `ports`, `capabilities`, `commands`; it contains no source list, `testFixtures`, package target support `status`, or its own digest. Canonical source ports and graph instance-port mirrors are separate checks. A component with no commands contains `commands: []` in the derived projection even though the authored package's optional `commands` property may be absent. This normalization is part of the **proposed** exported public meaning, not permission to rewrite the authored package.
+
+**Important distinction:** the package-wide `targets[].status` (planned/supported/unsupported/unknown) is *qualification evidence*, not a component's public target contract. A command's `declaredTargets[]` IS a meaning-bearing public contract. Setting package status from planned to supported without evidence does not change the logical digest and does not authorize execution; only a separately qualified target/toolchain/ABI and signed executable trust check can do that.
+
+### Nonrecursive hashing and strict diagnostics
+
+After validating exact offline lock bytes, registry and full TypeReference closure, calculate each **derived** operation digest with the current candidate operation domain and D6 canonical byte algorithm; only then calculate the parent component digest from its sorted port/capability/operation-digest projection. Externally supplied placeholder SHA values are **assertions to be checked**, never hash inputs trusted by spelling. The type-export set includes all reachable public nominal/generic type contracts, not only those in ports: also fields, operation inputs, results/failures, and workflow signals.
+
+On first failure, do not publish a trusted digest. Diagnostic candidates include `CORE_REGISTRY_UNRESOLVED`, `GRAPH_EXPORT_UNRESOLVED`, `CORE_CONTRACT_DIGEST_MISMATCH`, `TYPE_EXPORT_SET_MISMATCH`, `OPERATION_CONTRACT_DIGEST_MISMATCH`, `COMPONENT_CONTRACT_DIGEST_MISMATCH`, `WORKFLOW_SIGNAL_TYPE_MISMATCH`, `GRAPH_PORT_TYPE_MISMATCH` and `CAPABILITY_DENIED`; final ordering and native production of these diagnostics remain testable P0. Never signal merely `SCHEMA_VALID` as an approval or proof of identity.
+
+[Operation/component review scenarios](../../examples/canonical-graph/operation-export-review-cases.json) distinguish logical changes from source-only changes, verified-contract rejection and runtime authorization. Their expectations are **NOT-RUN**, and the canonical sensor package's synthetic digest strings cannot yield accepted golden hashes.
+
+## C13. Open design and proof gates
 
 Fully approved typed workflow signal contract, data-flow payload/ownership and resource claim interplay; exhaustive semantic projection and deterministic byte normalization; native package export and effect registry; source/Graph signed review and D6 immutable closure; Win64 module/ABI/renderer/IME/NTFS durability; actual Phase III tests and explicit D1–D8 human acceptance. **Only one architecture; its acceptance remains OPEN.**
