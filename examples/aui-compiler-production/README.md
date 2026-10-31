@@ -15,6 +15,12 @@ The existing [AUI Syntax owner](../../docs/architecture/aui-syntax.md) now conta
 
 The canonical package schema currently supports record type exports only; enum export and service mapping to fully specified component commands need separate architecture approval. The [full AUI type rules](../../docs/architecture/aui-types-and-ownership.md) must be verified before native linking.
 
+## Enum and service export closure (same canonical model)
+
+The original [canonical package schema](../../schemas/canonical-component-package.schema.json) now has a **proposed** strict `enum/variants` alternative to existing `record/fields` entries. The [zero-payload SensorError enum entry](sensor-error-enum-entry.proposed.json) contains no fabricated public hash. The [28 public export scenarios](public-export-closure-review-cases.json) distinguish schema admission, semantic mutation and mandatory rejection when public type identities, provider effects, capabilities, source/target qualifications or signed package review are missing. All 28 remain NOT-RUN.
+
+A `service` interface is **not** a new TypeID or native implementation: it must resolve to the exact reviewed existing `components[].commands`, and the signed package must supply all missing required command/component metadata. Adding an enum branch makes authoring syntax *representable*, but does **not** approve a portable enum codec, TypeReference hash or Win64 layout.
+
 ## Correct release gate
 
 A complete AUI compiler release requires: one human-accepted full grammar/profile and core semantic registry; real locked canonical Graph/TypeReference/OperationID source links; fully verified ReactiveIR/AsyncIR/KeyedIR/OwnershipIR/TargetMIR; a qualified target-native COFF/PE backend and D5 runtime/UI service table; runnable end-to-end examples and negative/hostile-input tests; identical pinned clean-build bytes and actual signed module admission. Every item needs observed evidence. Native codegen for one L0 View alone is insufficient.
