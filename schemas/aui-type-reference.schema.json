@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "AELYXORA Canonical TypeReference",
-  "description": "One conceptual type system, no product/architecture edition profiles; nominal or bounded generic. Validate resolved owner, exact digests and acyclic dependencies semantically, not merely from JSON shape.",
+  "description": "One conceptual TypeReference domain, no new graph model: nominal or candidate bounded recursively nested generic. JSON Schema checks structure only; verified owner/export digest closure, exact template arity, max nesting depth 8, max 128 TypeReference nodes, acyclic public contract dependencies, ownership and target ABI must be enforced semantically. Historical fixtures remain design-only; no approved public fingerprints.",
   "oneOf": [
     {
       "$ref": "#/$defs/nominal"
@@ -59,8 +59,10 @@
           "minItems": 1,
           "maxItems": 2,
           "items": {
-            "$ref": "#/$defs/nominal"
-          }
+            "$ref": "#",
+            "description": "PROPOSED recursive nested generic argument; semantic resolver must enforce exact arity, depth<=8, total nodes<=128, dependency DAG, verified digest and payload restrictions; source-only shape is not trust"
+          },
+          "description": "Generic argument order is meaningful. Arguments may be nominal or nested generic TypeReferences, subject to bounded semantic/type ownership closure. Nested values are not automatically portable across runtime domains."
         },
         "contractDigest": {
           "type": "string",
