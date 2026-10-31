@@ -80,3 +80,7 @@ The source grammar still lacks fully defined event wiring, generic constraint sy
 ## D3+ AST/HIR extension proposal
 
 [L2 grammar](d3-state-derived-binding-contract.md) adds StateDecl, DerivedDecl, BindingDecl with statically keyed ViewPropertyRef, PureCall, CommitBlock and SetStmt. [L3 grammar](d3-task-result-lifecycle.md) adds TaskDecl, TaskSlot, SubmitStmt, AwaitStmt, ReturnResult, SettledHandler, exhaustive OutcomeMatch and typed arm payload bindings. They lower only after exact [source-to-Graph snapshot approval](d3-source-snapshot-reconciliation.md). Proposed TypedHIR carries StateSymbolID, ViewIdentity and generation, ownership/lifetime region, task slot and provider CommandTicket relation, nominal TaskOutcome variant and bounded effects. Source-span IDs never become persistent graph node IDs. No compiler, HIR verifier or native lowering was implemented in Phase I.
+
+## D3+ AST/HIR extended candidate
+
+[L2](d3-state-derived-binding-contract.md) adds StateDecl, DerivedDecl, static ViewPropertyRef, BindingDecl, CommitBlock and SetStmt. [L3](d3-task-result-lifecycle.md) adds TaskDecl, TaskSlot, SubmitStmt, AwaitStmt, SettledHandler and exhaustive typed OutcomeMatch. [Source reconciliation](d3-source-snapshot-reconciliation.md) must verify exact source profiles/hashes and graph bindings before emitting linked TypedHIR. No compiler or OwnershipIR verification is claimed.
