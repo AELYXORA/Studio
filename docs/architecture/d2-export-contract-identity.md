@@ -142,3 +142,7 @@ Error distinctions: GRAPH_EXPORT_UNRESOLVED, WORKFLOW_SIGNAL_TYPE, AUI_CONTRACT_
 ## C9. G1 specialization and v1 public-contract preservation
 
 [Bounded G1 instance contracts](d2-d3-generic-instantiation-identity.md) use a separately domain-separated digest over template identity and ordered argument digests. They are not D2 user type/component export v1 objects, and must not be spliced into v1-only record field names without an accepted typed-reference compatibility profile. [v1/v2 policy](d2-d6-core-profile-compatibility.md) requires a new immutable source/lock/Graph snapshot and explicit review before any migration. Existing zero-field record/component vectors remain byte-identical and are not recomputed.
+
+## C10. Proposed typed v2 references are NOT v1 fields
+
+[TypeReference v2](d2-d6-typeref-v2-resolution.md) proposes separate aui.export-contract/v2-record and aui.generic-instantiation/v2-record-args domains with explicit type-owner/export digests, not silent v1 record/component field substitutions. [Signed review receipts](d2-d6-signed-approval-receipt.md) may authorize a **new** exact source/Graph migration but never rewrite existing v1 exportedContractDigest vectors. The original v1 Project Graph semantic hash has no approved v2 typed node/port projection, so v2 executable linkage fails GRAPH_PROFILE_UNSUPPORTED until a versioned Graph profile is accepted.
