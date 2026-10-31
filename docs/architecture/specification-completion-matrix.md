@@ -75,6 +75,12 @@ The existing [canonical package schema](../../schemas/canonical-component-packag
 
 **Still P0:** approved immutable full 15-type core semantic rule definitions, enum portable payload codec and D4 ABI, generic instance public semantic hash projection and D2 generated export namespace/verification, exhaustive source/Graph link, target service ABI, actual native verification, and explicit architect D1–D8 acceptance.
 
+## CR14 content-bearing current 15-type Core candidate — 2026-10-31
+
+[Current D3 CR14](d3-core-registry-value-contract.md) and the [existing 15-entry registry](../../examples/canonical-graph/core-registry-candidate.json) now require **34 ruleId-to-exact-definition pairs**. This removes the prior structural absence of normative text in the review candidate, **not** the need for independent semantic authority. [Schema](../../schemas/canonical-core-registry-candidate.schema.json) requires `semanticRules`; all entries remain `exportStatus: UNVERIFIED`. [36 content mutation/rejection cases](../../examples/canonical-graph/core-rule-content-review-cases.json) are NOT-RUN. A small independent consistency inspection found 15/15 rule sets matched and 34/34 nonempty text definitions; same-ID content mutation changed the review projection.
+
+**P0 still open:** human acceptance of the **meaning** of all 34 texts and their complete dependency/portable value limits, exact canonical public type/registry hash preimage and separately computed goldens, authentic D2/D6 source/Graph lock and approval, D4/D5 ABI/ownership/runtime qualification. The 66 full native compiler acceptance cases remain NOT-RUN.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
