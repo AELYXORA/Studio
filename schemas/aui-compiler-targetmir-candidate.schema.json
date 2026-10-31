@@ -1,0 +1,502 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA Win64 TargetMIR review envelope — PROPOSED",
+  "description": "Target-specific review schema only. A structurally valid object is not qualified native machine code, correct ABI, COFF object or approved source; ISA selection, stack, liveness, unwind, ownership, imports, true target runtime and signed source checks must be proven independently.",
+  "$defs": {
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "target",
+        "args"
+      ],
+      "properties": {
+        "kind": {
+          "const": "branch"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "conditional": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "condition",
+        "trueTarget",
+        "falseTarget"
+      ],
+      "properties": {
+        "kind": {
+          "const": "conditional"
+        },
+        "condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "trueTarget": {
+          "type": "string",
+          "minLength": 1
+        },
+        "falseTarget": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "switch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "scrutinee",
+        "cases"
+      ],
+      "properties": {
+        "kind": {
+          "const": "switch"
+        },
+        "scrutinee": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tag",
+              "target"
+            ],
+            "properties": {
+              "tag": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "ret": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "values"
+      ],
+      "properties": {
+        "kind": {
+          "const": "ret"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "trap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "errorCode"
+      ],
+      "properties": {
+        "kind": {
+          "const": "trap"
+        },
+        "errorCode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "status",
+    "targetTriple",
+    "abiRevision",
+    "ownershipInputIdentity",
+    "runtimeTableIdentity",
+    "functions",
+    "imports"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.targetmir-review"
+    },
+    "status": {
+      "const": "PROPOSED-NOT-RUN"
+    },
+    "targetTriple": {
+      "const": "x86_64-pc-windows-msvc"
+    },
+    "abiRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ownershipInputIdentity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtimeTableIdentity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "functions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "callingConvention",
+          "args",
+          "returns",
+          "blocks",
+          "frame"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "callingConvention": {
+            "const": "win64"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "valueId",
+                "regClass",
+                "logicalType"
+              ],
+              "properties": {
+                "valueId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "regClass": {
+                  "enum": [
+                    "gpr",
+                    "xmm",
+                    "flags",
+                    "memory",
+                    "effect"
+                  ]
+                },
+                "logicalType": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "allocatedLocation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "returns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "valueId",
+                "regClass",
+                "logicalType"
+              ],
+              "properties": {
+                "valueId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "regClass": {
+                  "enum": [
+                    "gpr",
+                    "xmm",
+                    "flags",
+                    "memory",
+                    "effect"
+                  ]
+                },
+                "logicalType": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "allocatedLocation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "blocks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "params",
+                "instructions",
+                "terminator"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "params": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "instructions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "opcode",
+                      "operands",
+                      "results",
+                      "sourceOrigin",
+                      "memoryEffect"
+                    ],
+                    "properties": {
+                      "opcode": {
+                        "enum": [
+                          "const",
+                          "add",
+                          "compare",
+                          "load",
+                          "store",
+                          "call",
+                          "stack_slot",
+                          "copy",
+                          "atomic",
+                          "fence",
+                          "barrier",
+                          "trap",
+                          "retain",
+                          "release",
+                          "spill",
+                          "reload",
+                          "tag_dispatch",
+                          "checked_cast"
+                        ]
+                      },
+                      "operands": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "valueId",
+                            "regClass",
+                            "logicalType"
+                          ],
+                          "properties": {
+                            "valueId": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "regClass": {
+                              "enum": [
+                                "gpr",
+                                "xmm",
+                                "flags",
+                                "memory",
+                                "effect"
+                              ]
+                            },
+                            "logicalType": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "allocatedLocation": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        }
+                      },
+                      "results": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "valueId",
+                            "regClass",
+                            "logicalType"
+                          ],
+                          "properties": {
+                            "valueId": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "regClass": {
+                              "enum": [
+                                "gpr",
+                                "xmm",
+                                "flags",
+                                "memory",
+                                "effect"
+                              ]
+                            },
+                            "logicalType": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "allocatedLocation": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        }
+                      },
+                      "sourceOrigin": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "memoryEffect": {
+                        "enum": [
+                          "none",
+                          "read",
+                          "write",
+                          "read-write",
+                          "volatile",
+                          "atomic",
+                          "unknown"
+                        ]
+                      },
+                      "addressSpace": {
+                        "enum": [
+                          "normal",
+                          "renderer",
+                          "os-handle",
+                          "mmio",
+                          "dma",
+                          "irq"
+                        ]
+                      },
+                      "alignment": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 1048576
+                      },
+                      "importSymbol": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "relocationId": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "requiredIsa": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  }
+                },
+                "terminator": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/$defs/branch"
+                    },
+                    {
+                      "$ref": "#/$defs/conditional"
+                    },
+                    {
+                      "$ref": "#/$defs/switch"
+                    },
+                    {
+                      "$ref": "#/$defs/ret"
+                    },
+                    {
+                      "$ref": "#/$defs/trap"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "frame": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stackAlignment",
+              "shadowSpaceBytes",
+              "calleeSaved",
+              "unwindRequired"
+            ],
+            "properties": {
+              "stackAlignment": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "shadowSpaceBytes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "calleeSaved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "unwindRequired": {
+                "type": "boolean"
+              },
+              "stackProbeRequired": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}
