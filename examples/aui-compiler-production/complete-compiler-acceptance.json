@@ -629,6 +629,46 @@
       "owner": "D8 Process",
       "proofRequired": "actual production compiler or qualified target/runtime observation, exact fixture bytes and recorded commands/target/toolchain; schematic examples alone are insufficient",
       "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-08",
+      "group": "LANGUAGE",
+      "shortName": "contract-module",
+      "expected": "positive",
+      "scenario": "Parse exact interface-only contract source with record Measurement, enum SensorError, and service SensorReader; produce reviewed candidate exports, not native executable",
+      "owner": "AUI Syntax contract-module",
+      "proofRequired": "actual compiler parsing output, source bytes, TypeRef/service public contract closure and qualified target",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-LANGUAGE-09",
+      "group": "LANGUAGE",
+      "shortName": "contract-mode-reject-view",
+      "expected": "reject",
+      "scenario": "Reject component/View syntax in contract-only mode and record/enum/service definitions embedded in L0 component-only file",
+      "owner": "AUI Syntax contract-module",
+      "proofRequired": "actual compiler diagnostics and complete negative AUI fixtures for both mode directions",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-07",
+      "group": "TYPE-CORE",
+      "shortName": "public-enum-service",
+      "expected": "positive",
+      "scenario": "Derive public enum variant order and service operation signatures from authored contract source, then independently verify exact export hash/Graph linkage",
+      "owner": "AUI Syntax / Canonical Graph",
+      "proofRequired": "accepted logical semantic and canonical export bytes plus exact signed package lock and compiler output",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "FULL-TYPE-CORE-08",
+      "group": "TYPE-CORE",
+      "shortName": "opaque-service-effect",
+      "expected": "reject",
+      "scenario": "Reject unregistered effect/capability or self-declared service native implementation without verified graph/ABI provider",
+      "owner": "AUI Syntax / D2",
+      "proofRequired": "source/target error diagnostics and authorization trace",
+      "observed": "NOT-RUN"
     }
   ]
 }
