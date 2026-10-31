@@ -68,7 +68,8 @@
               "aui.source/l0/v1",
               "aui.source/l1/v1",
               "aui.source/l2-state/v1",
-              "aui.source/l3-async/v1"
+              "aui.source/l3-async/v1",
+              "aui.source/l4-keyed/v1"
             ]
           }
         }
@@ -242,6 +243,84 @@
           }
         ]
       }
+    },
+    "templateSymbols": {
+      "type": "array",
+      "description": "Proposed L4 ForEach source symbol registry. Must be checked against typed AST and the fully verified source bytes; not an execution permission or runtime ViewIdentity.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourcePath",
+          "templateSymbolId",
+          "itemTypeId",
+          "keyField",
+          "keyTypeId",
+          "childComponentTypeId"
+        ],
+        "properties": {
+          "sourcePath": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*$"
+          },
+          "templateSymbolId": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "itemTypeId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "keyField": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "keyTypeId": {
+            "enum": [
+              "aui.core/StableKey.String",
+              "aui.core/StableKey.U64"
+            ]
+          },
+          "childComponentTypeId": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "sourceFiles": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "languageProfile": {
+                  "const": "aui.source/l4-keyed/v1"
+                }
+              },
+              "required": [
+                "languageProfile"
+              ]
+            }
+          }
+        },
+        "required": [
+          "sourceFiles"
+        ]
+      },
+      "then": {
+        "required": [
+          "templateSymbols"
+        ],
+        "properties": {
+          "templateSymbols": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
 }
