@@ -28,6 +28,10 @@ A full compiler verification campaign must include: (a) positive complete AUI so
 
 Future native verifier MUST prove separately: valid enum constructors and exhaustive match HIR, immutable ownership/move/drop across switch arms, exact ABI tag/payload/align/return, full typed nested generic ownership and resource limits, absence of invented public hash authority and correct source/Graph signed locks. A reference digest, a recursively valid JSON shape or successful source-only parse is **never** a production compiler PASS.
 
+## Core rule-content review and digest trust boundary
+
+[D3 CR14](d3-core-registry-value-contract.md) now includes a candidate content-bearing 15-type review projection. The [36 new semantic mutation cases](../../examples/canonical-graph/core-rule-content-review-cases.json) require a future verifier to detect rule-text mutation under unchanged ruleId, missing/duplicate rules, order-only equivalence, stale approved digests, forged TaskOutcome proofs and unapproved core/Graph payload admission. All 36 **NOT-RUN** as AELYXORA tests. Future release verification must independently validate the 15 full rule sets, complete normative meaning and transitive type/export dependencies, then compare approved canonical byte preimages, hash vectors, lock/signature checks and actual D4/D5 native behavior. A manual structural inspection alone is not sufficient.
+
 ## Present baseline
 
 There is a limited Linux x86-64 Assembly JSON lexical preflight, but no complete JSON parser, Project Graph validator, native AUI compiler or general build coordinator. The preflight is **not** a verification baseline for graph semantics. For every future verification fixture, record the exact local invocation, target, expected outcome and observed **not run / pass / fail** result. Do not claim test execution without evidence.
