@@ -81,3 +81,7 @@ Parser precedence and full expression grammar, generic constraints, event orderi
 ## D3+ one-way binding and asynchronous result owner (PROPOSED)
 
 The first precise extended candidate is [L2 State/Derived/Binding](d3-state-derived-binding-contract.md). It requires a statically keyed owned view target, one binding writer and a pure source; an edit event can trigger a separate **atomic UI StateRevision transaction** but never an implicit two-way write. [L3 Task/Result](d3-task-result-lifecycle.md) adds a bounded TaskSlot, request/await, and an exhaustive Successful/Failed/AdmissionRejected/Cancelled/ProviderUnavailable match; a cancel-request alone does NOT mean Cancelled and a stale generation never updates a replacement view. The earlier bindingDecl/memberPath and simple return/await examples remain **broad illustrative D3+ syntax**, not conflicting first-slice authority. Neither document asserts compiler/runtime execution.
+
+## D3+ specific binding/result authority — still proposed
+
+[L2 State/Derived/Bind](d3-state-derived-binding-contract.md) proposes a statically keyed one-way binding target, a single writer, pure sources and atomic UI StateRevision. [L3 Task/Result](d3-task-result-lifecycle.md) proposes bounded TaskSlots, confirmed cancellation and typed exhaustive outcomes. Earlier example memberPaths, return/await and positional modifiers are D3+ **illustrations**, not normative L0/L1 source grammar. Exact source approval is specified in [D3 source snapshot](d3-source-snapshot-reconciliation.md). No compiler/runtime has run.
