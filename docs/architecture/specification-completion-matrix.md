@@ -22,6 +22,12 @@ The [current 15-entry core inventory](../../examples/canonical-graph/core-regist
 
 **Still-open gate conditions:** explicit architect agreement with the finite-only/cap choices, independently frozen core public contract bytes and 15-type registry fingerprint, complete TaskOutcome error/control exports, D4 native F64/Bytes memory and cancellation proof, D5 bounded delivery, D6 nonreplay/retention and full target-specific runtime verification after authorized implementation.
 
+## Current CR13 TaskOutcome and core content identity blocker — 2026-10-31
+
+The single [15-entry core inventory](../../examples/canonical-graph/core-registry-candidate.json) has explicit **UNVERIFIED** semantic model fields. [D3 CR13](d3-core-registry-value-contract.md) proposes strict nested `AdmissionError`, `ProviderError`, `CancellationConfirmation` values, with zero additional current TypeIDs, and separates shape from trusted proof of dispatch/quiescence. [28 shape/trust cases](../../examples/canonical-graph/task-control-payload-cases.json) and [25 core semantic mutation cases](../../examples/canonical-graph/core-definition-review-cases.json) are **NOT-RUN** future tests.
+
+**Gate remains blocked:** content-based immutable semantic rule normalization (not just ruleId), accepted error/control exports, canonical actual core/operation/component/graph digest bytes and independently calculated goldens, per-target D4 ownership/ABI, D5 terminal/retention proof and human D1–D8 acceptance. The 15 inventory model shapes and reference comparisons do not authorize implementation or release.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
