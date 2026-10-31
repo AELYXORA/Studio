@@ -114,3 +114,63 @@ A nested generic `List<Result<Measurement,SensorError>>` needs a **fully admitte
 | Determinism | Independently pinned identical unsigned binary from two clean builds, toolchain/SDK hashes and exact manifest |
 
 **Still OPEN:** exact D4/D5 renderer/state/event/task/reconciliation ABI function signatures, compiler assembler syntax and toolchain versions, native module export/symbol mangling, allocator/drop paths, reloc/unwind/debug fixture bytes, full target import capability mapping, native codegen positive/negative evidence and architecture sign-off. Win64 is a **candidate**, not an observed working backend.
+
+
+## TM0. Exact target-neutral-to-Win64 lowering verifier — production candidate
+
+**Status: PROPOSED / NO NATIVE TARGET QUALIFIED / ALL TESTS NOT-RUN.** This section is the machine-code owner corresponding to the [single T0–T8 full compiler contract](aui-ir-layout.md) and the [OwnershipIR worklist proof](aui-ownership-ir.md). It never authorizes a direct source→Assembly shortcut. TargetMIR is a **verified target-specific internal machine program**, not public TypeReference/Graph identity, an LLVM IR replacement product or a JSON file consumed by the OS. The [review MIR shape](../../schemas/aui-compiler-targetmir-candidate.schema.json) is only a limited inspection example, not ABI bytes.
+
+### TM1. Closed module/function/block/instruction records
+
+- **Module:** exact `targetTriple,abiRevision,requiredIsaFeatures,codegenPolicy,verifiedGraphLinkIdentity,verifiedOwnershipIRIdentity,verifiedLayoutIdentity,qualifiedRuntimeTableIdentity`, ordered functions, data/constants, imports/exports and candidate relocs. The target triple `x86_64-pc-windows-msvc` is the first Win64 *candidate*, not a verified target. Unapproved variants reject.
+- **Function:** one target-specific symbol identity, exact D4 calling convention and typed argument/result classification, frame policy, blocks, address-space/effect summary, unwind strategy, prologue/epilogue constraints, source/Graph origins. Duplicate mangled exports or hidden calling convention coercions reject.
+- **Block:** unique compiler-local ID, explicit typed live-in block args/virtual-register values, zero-or-more checked machine instructions and **one** terminator. Every edge passes matching live-in definitions; no generic textual `phi` fallback.
+- **Machine instruction:** closed target opcode or abstract preselection operation; exact typed operands/results, virtual/assigned register classes, memory address space, access width/alignment, source origin, effect token dependencies, optional relocation/import proof. Unknown opcode or unsupported target ISA **rejects**, it never emits a no-op.
+- **Data layout:** immutable type graph/target layout revision + concrete `size,align,fields,variantTag,perVariantPayloadOffsets,copyMoveDrop` evidence. Physical layout is approved by **D4**, not reconstructed from a source pretty-type name or by omitting a `Result` error arm.
+
+### TM2. Lowering order and machine verifier per pass
+
+| Pass | Required checked inputs | Output + mandatory invariant |
+| --- | --- | --- |
+| M0 — gate and specialization | Verified T4 OwnershipProof, authenticated public type/Graph/source, qualified target/runtime/ABI | Closed monomorphized operation/value set; no untrusted codegen inputs |
+| M1 — type layout | Exact D3 public type and D4 target ABI/classifier, target pointer/endian/ISA | `LayoutIR`: checked aggregate size/align/offsets, enum payload/tag, Result/TaskOutcome tag and cleanup; no overflow |
+| M2 — machine CFG | Owned SSA/block-argument CFG and complete effect/cleanup edges | Target typed MIR with preserved branch/error/cancel/uncertain-result paths, no duplicate drop or forged provider terminal |
+| M3 — instruction selection | Exact permitted target opcode/ISA features/address spaces | Full instruction selection, operand width/sign semantics, volatile/atomic/sync ordering and capability-call barriers |
+| M4 — register and frame | Machine CFG liveness, Win64 ABI, target D4 call frames | Deterministic virtual-register allocation/spills, callee-saved preservation, 32-byte Win64 shadow space where applicable, 16-byte call-site stack alignment, bounds and stack probes |
+| M5 — unwind/import/reloc | Pinned D4 native module/service table and toolchain | Exact `.pdata/.xdata` unwind entries for applicable nonleaf code, versioned import symbols, relocation/section constraints, no unwinding foreign exception into Assembly ABI |
+| M6 — Assembly/COFF | Verified M5 MIR and fixed target assembler version/flags | Readable GAS/Clang-compatible Assembly and real COFF with independently checked symbols, sections, relocs, imports, unwind/debug and codegen/source maps |
+| M7 — link and build | Exact runtime/OS import allowlist and D6 build closure | Real linked PE executable or module, reproducibility manifest, immutable staged output; no fake references or unsupported runtime |
+| M8 — admitted runtime | Native binary qualification plus separately signed source/Graph/release policy | Real D5 L0–L4 UI/event/state/task/keyed scenario tests, live permission and secure teardown evidence; no automatic execution from `M7` success |
+
+Every pass records input/output compiler-local artifact identity, contract revision, exact target/ABI/toolchain identity, effect ordering and drop equivalence, diagnostic origin and **verifier result**. A successful transformation is not proof until its verifier runs on that output. Optimization O1+ is permitted only after O0 semantic equivalence: it must not move provider dispatch, UI commit, volatile/MMIO/atomics, cancellation, quiescence or resource cleanup across observable boundaries.
+
+### TM3. Win64 ABI conformance (first target candidate, no code)
+
+The target classifier must separately handle integer/pointer and floating/vector arguments, by-value versus **indirect aggregate** passing, explicit `Result<T,E>` and enum tagged layout, return buffer ownership, caller shadow space, incoming `RSP` and callee-saved GPR/XMM state, stack probes/alignment, and frame pointer/unwind metadata according to the **qualified D4 revision**. The documented Windows ABI baseline is **not** an approved AELYXORA runtime descriptor. The first user-visible AUI app also needs the D5 native renderer, state/event/task/keyed services and accessibility/IME; a COFF file that links but cannot run these is not a completed compiler.
+
+`AuiCallFrameV1` (if accepted), public module headers, operation descriptors and runtime symbol names come **only** from [D4 Win64 ABI](d4-win64-native-component-abi.md) and [module/result descriptors](d4-win64-module-and-result-descriptors.md); this section does not invent struct bytes. An unresolved descriptor or missing service entry prevents native emission. Address-space provenance is typed: ordinary process memory, renderer-owned buffers, OS handles, MMIO/DMA/IRQ resources are **not interchangeable** even when the machine pointer width is identical.
+
+### TM4. Effect and ownership preservation proof
+
+The backend must have an explicit cross-pass relation from each verified T4 owner/value/effect lane to one or more T6 machine values, memory locations or qualified runtime service obligations:
+
+1. Each owned return/drop/move/retain path remains accounted for after register allocation, helper calls and error/unwind insertion. A spill is not an additional owner; a runtime retain/release is observable and must have exactly the D4-owned contract.
+2. A provider-admitted request with indeterminate final state retains actual native resource owner/ticket until trusted quiescence; codegen cannot turn UI `ProviderUnavailable` into an immediate `free`. Cancellation/late completion/lifecycle remain generation-scoped.
+3. L2 state commit and L4 keyed reconciliation publish only on the verified success branch and must roll back or leave the old UI state authoritative on failure. There is no physical partial-update fallback.
+4. Enum `matchEnum` maps every authenticated logical variant to one target tag with complete tagged-value layout, exhaustive branches and correct payload drop/borrow. A target-chosen numeric tag can never be serialized as public enum identity.
+5. The D2/D6 core/type/operation/Graph digests, source review and package lock are **inputs to trust**, not machine-code optimization constants that can be rewritten, stripped or implicitly inferred. No source-only `UNVERIFIED` context passes M0.
+
+### TM5. Exact rejection and independent object evidence
+
+| Rejection | Candidate class and required proof |
+| --- | --- |
+| Unsupported target/runtime/ABI/ISA import, unqualified D4 layout | `MIR_TARGET_UNSUPPORTED`, no object emitted |
+| Missing/unsupported typed opcode, bad SSA/CFG mapping, illegal effect barrier elision | `MIR_INVALID_LOWERING` / `MIR_EFFECT_REORDER` |
+| Stack/argument/result ABI, shadow space, alignment, stack probe or callee-save mismatch | `MIR_ABI_MISMATCH` |
+| Unwind metadata/relocation/section/import mismatch | `MIR_OBJECT_INVALID` |
+| Public variant tag/payload, ownership cleanup or cross-domain transfer incompatibility | `MIR_LAYOUT_INVALID` / `MIR_OWNER_LOST` |
+| Unverified source/Graph/operation/core, fake signature or stale build input | `MIR_TRUST_UNRESOLVED`; cannot override upstream trust gate |
+| Reproducibility mismatch of unsigned code/manifest across clean pinned builds | `BUILD_NOT_REPRODUCIBLE`; refuse release |
+| Native test failure in L0–L4, source-map, ABI or runtime teardown | `NATIVE_CONFORMANCE_FAILED`; no shipping compiler claim |
+
+The [target MIR inspection schema](../../schemas/aui-compiler-targetmir-candidate.schema.json) and [full IR negative/review cases](../../examples/aui-compiler-production/full-ir-pass-review-cases.json) are **NOT-RUN design cases**. None replaces independent COFF/PE inspection, a real assembler/linker invocation or a running UI/native module. The qualified target, actual D4/D5 service signatures/offsets, assembler directives and complete backend reference machine traces remain **P0**.
