@@ -1,0 +1,254 @@
+{
+  "format": "aui.win64-module-outcome-layout-design",
+  "status": "DOC-ONLY; independent offset/size check, no PE/COFF, native tests or trust verification",
+  "layoutProfile": "aui.native-abi/win64-v1-proposed",
+  "endianness": "little",
+  "layouts": [
+    {
+      "name": "AuiModuleHeaderV1",
+      "size": 80,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "magic",
+          "offset": 0,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "major",
+          "offset": 4,
+          "size": 2,
+          "type": "U16"
+        },
+        {
+          "name": "minor",
+          "offset": 6,
+          "size": 2,
+          "type": "U16"
+        },
+        {
+          "name": "headerSize",
+          "offset": 8,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "operationCount",
+          "offset": 12,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "logicalContractSetDigest",
+          "offset": 16,
+          "size": 32,
+          "type": "BYTES32"
+        },
+        {
+          "name": "targetLayoutDigest",
+          "offset": 48,
+          "size": 32,
+          "type": "BYTES32"
+        }
+      ]
+    },
+    {
+      "name": "AuiOperationEntryV1",
+      "size": 80,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "operationIdDigest",
+          "offset": 0,
+          "size": 32,
+          "type": "BYTES32"
+        },
+        {
+          "name": "operationContractDigest",
+          "offset": 32,
+          "size": 32,
+          "type": "BYTES32"
+        },
+        {
+          "name": "entryRva",
+          "offset": 64,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "flags",
+          "offset": 68,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "reserved",
+          "offset": 72,
+          "size": 8,
+          "type": "U64"
+        }
+      ]
+    },
+    {
+      "name": "AuiValueRefV1",
+      "size": 64,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "logicalTypeContractDigest",
+          "offset": 0,
+          "size": 32,
+          "type": "BYTES32"
+        },
+        {
+          "name": "ownerHandle",
+          "offset": 32,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "ownerGeneration",
+          "offset": 40,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "byteOffset",
+          "offset": 48,
+          "size": 8,
+          "type": "U64"
+        },
+        {
+          "name": "byteLength",
+          "offset": 56,
+          "size": 8,
+          "type": "U64"
+        }
+      ]
+    },
+    {
+      "name": "AuiTaggedOutcomeV1",
+      "size": 80,
+      "alignment": 8,
+      "fields": [
+        {
+          "name": "envelopeSize",
+          "offset": 0,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "discriminant",
+          "offset": 4,
+          "size": 4,
+          "type": "U32"
+        },
+        {
+          "name": "payload",
+          "offset": 8,
+          "size": 64,
+          "type": "AuiValueRefV1"
+        },
+        {
+          "name": "reserved",
+          "offset": 72,
+          "size": 8,
+          "type": "U64"
+        }
+      ]
+    }
+  ],
+  "providerResultDiscriminants": {
+    "Success": 0,
+    "Failure": 1
+  },
+  "taskOutcomeDiscriminants": {
+    "Successful": 0,
+    "Failed": 1,
+    "AdmissionRejected": 2,
+    "Cancelled": 3,
+    "ProviderUnavailable": 4
+  },
+  "transportStatus": {
+    "RESULT_READY": 0,
+    "PENDING": 1,
+    "ADMISSION_REJECTED": 2,
+    "BAD_DESCRIPTOR": 3,
+    "PERMISSION_DENIED": 4,
+    "RESOURCE_EXHAUSTED": 5
+  },
+  "proposedNegativeCases": [
+    {
+      "id": "missing-provider-ticket-on-admission-failure",
+      "expected": "UI AdmissionRejected does not create provider terminal Result"
+    },
+    {
+      "id": "module-target-layout-mismatch",
+      "expected": "ABI_TARGET_MISMATCH pre-dispatch"
+    },
+    {
+      "id": "duplicate-operation-id-digest",
+      "expected": "ABI_OPERATION_DUPLICATE"
+    },
+    {
+      "id": "entry-rva-outside-executable-section",
+      "expected": "ABI_ENTRYPOINT_INVALID"
+    },
+    {
+      "id": "module-opcount-overflow",
+      "expected": "ABI_DESCRIPTOR_BOUNDS"
+    },
+    {
+      "id": "untrusted-image-hash",
+      "expected": "ABI_MODULE_UNTRUSTED"
+    },
+    {
+      "id": "wrong-envelope-size",
+      "expected": "ABI_DESCRIPTOR_SIZE"
+    },
+    {
+      "id": "provider-result-discriminant-2",
+      "expected": "ABI_RESULT_TAG_INVALID"
+    },
+    {
+      "id": "task-outcome-discriminant-5",
+      "expected": "ABI_TASK_OUTCOME_TAG_INVALID"
+    },
+    {
+      "id": "payload-type-contract-mismatch",
+      "expected": "ABI_PAYLOAD_TYPE_MISMATCH"
+    },
+    {
+      "id": "owner-generation-stale",
+      "expected": "ABI_OWNER_STALE"
+    },
+    {
+      "id": "nonzero-reserved",
+      "expected": "ABI_RESERVED_NONZERO"
+    },
+    {
+      "id": "transport-result-ready-without-valid-result-bytes",
+      "expected": "ABI_RESULT_INVALID"
+    },
+    {
+      "id": "pending-without-bounded-ticket-reservation",
+      "expected": "ABI_TICKET_INVALID"
+    },
+    {
+      "id": "cancel-request-alone-tag3",
+      "expected": "ABI_CANCEL_UNCONFIRMED"
+    },
+    {
+      "id": "provider-error-misreported-as-transport-admission-rejection",
+      "expected": "ABI_TRANSPORT_STATUS_INVALID"
+    }
+  ],
+  "knownP0": [
+    "module contract set hash normalization and target layout digest are not finalized",
+    "publisher-signing/trust and approved module source are not verified",
+    "Result/TaskOutcome payload native type layout is not verified",
+    "Win64 external system ABI conformance not tested"
+  ],
+  "independentArithmeticIssues": []
+}
