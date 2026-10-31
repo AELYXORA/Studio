@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA v2 typed component public export projection",
+  "description": "Exact proposed logical component export digest input. A component contains operation IDs and previously computed operationContractDigests, never its own digest; native ABI, package implementation file-set SHA and approved runtime permissions remain separate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "exportKind",
+    "packageId",
+    "typeId",
+    "contractVersion",
+    "declaredTargets",
+    "ports",
+    "capabilities",
+    "commands"
+  ],
+  "properties": {
+    "profile": {
+      "const": "aui.component-contract/v2-typed"
+    },
+    "exportKind": {
+      "const": "component"
+    },
+    "packageId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "typeId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contractVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "declaredTargets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "direction",
+          "typeRef"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "direction": {
+            "enum": [
+              "in",
+              "out"
+            ]
+          },
+          "typeRef": {
+            "$ref": "aui-type-reference-v2.schema.json"
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "operationContractDigest"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$"
+          },
+          "operationContractDigest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  }
+}
