@@ -84,3 +84,7 @@ Dynamic lists, keyed child recycling, task launch-on-state-change and multiwrite
 ## S8. L4 dynamic keyed child compatibility (PROPOSED)
 
 [L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) adds a **new runtime keyed scope beneath each ForEach item**. The L2 rule requiring static .key(value: ID) uniqueness means uniqueness *within the compiled static source template*, not across every runtime instantiation of that template. Repeating the same static child key for different tagged item StableKeys is legal because their complete parent ViewIdentity paths differ. One writer per (full ViewIdentity, static key, property) remains unchanged. Same-parent reorder retains StateRevision/generation; deletion/reinsert or child TypeID/parent change remounts with fresh generation and must never restore an old task subscription. This is a proposed extension only; L2 still rejects ForEach.
+
+## S8. L4 keyed child scope (PROPOSED)
+
+[L4 Keyed Dynamic Views](d3-keyed-dynamic-view-lifecycle.md) permits repeating the same static L2 key in **different keyed runtime item instances**; it remains unique within each compiled static template. The full parent ViewIdentity path and tagged item key prevent collision. Same-parent reorder preserves compatible state/generation, while deletion/reinsert, reparent or TypeID replacement remounts and invalidates old completion targets. L2 source still rejects ForEach and does not gain dynamic lists implicitly.
