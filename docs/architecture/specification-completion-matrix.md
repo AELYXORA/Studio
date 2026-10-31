@@ -4,6 +4,12 @@
 
 **Status: proposed review tracker; no gate accepted by this document.** The original historical ledger baseline was 2026-10-30, main at 4ea0d200. The latest focused documentation reconciliation is dated 2026-10-31: [canonical graph consistency re-audit](canonical-graph-consistency-audit.md). Do not treat the old baseline hash as the current main HEAD. This matrix is a **navigation and closure ledger**, not a duplicate specification. Detailed semantics belong to each listed owning document. A requirement becomes **Accepted** only after an explicit human architecture decision recorded in the owning document. "Verified" is reserved for later observed evidence.
 
+## Current C9/C10 design status — 2026-10-31
+
+[Canonical Graph C9/C10](canonical-project-graph-and-components.md) is the single current candidate for field-by-field semantic projection and derived public type/operation/component export closure. The [26 proposed projection change expectations](../../examples/canonical-graph/semantic-projection-change-matrix.json) identify same/different/reject outcomes but **are not golden hashes or native tests**. [Cross-gate audit](canonical-graph-consistency-audit.md) records the limited coverage checks. Prior standalone typed/numbered graph proposals and old hash vectors are historical evidence only.
+
+**D2/D6 design gate is still OPEN** pending actual verified core/public exports, approved canonical byte/hash domains, complete target/permission semantics, stable source-to-Graph signed review, real locked snapshot inputs and explicit architect acceptance. Do not convert these documentation improvements into Phase II permission.
+
 ## Purpose and sequencing
 
 AELYXORA follows four explicit phases, not an indefinite alternation of prose and implementation:
