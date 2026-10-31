@@ -1,0 +1,391 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "status",
+    "profile",
+    "source",
+    "catalog",
+    "component",
+    "diagnostics"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.compiler-source-only-plan"
+    },
+    "status": {
+      "const": "UNVERIFIED_SOURCE_ONLY"
+    },
+    "profile": {
+      "enum": [
+        "l0",
+        "l1"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "byteLength"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "byteLength": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "sourceFormat",
+        "sourceIdentity"
+      ],
+      "properties": {
+        "status": {
+          "const": "UNVERIFIED"
+        },
+        "sourceFormat": {
+          "const": "aui.compiler-source-only-review-catalog"
+        },
+        "sourceIdentity": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "span",
+        "imports",
+        "inputs",
+        "events",
+        "commands",
+        "handlers",
+        "rootView"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        },
+        "imports": {
+          "type": "array",
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "inputs": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "$ref": "#/$defs/typedParam"
+          }
+        },
+        "events": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "payloadType",
+              "span"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "payloadType": {
+                "const": "aui.core/Unit"
+              },
+              "span": {
+                "$ref": "#/$defs/span"
+              }
+            }
+          }
+        },
+        "commands": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "inputs",
+              "successType",
+              "errorType",
+              "domain",
+              "effects",
+              "span"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "inputs": {
+                "type": "array",
+                "maxItems": 512,
+                "items": {
+                  "$ref": "#/$defs/typedParam"
+                }
+              },
+              "successType": {
+                "type": "string",
+                "minLength": 1
+              },
+              "errorType": {
+                "type": "string",
+                "minLength": 1
+              },
+              "domain": {
+                "type": "string",
+                "minLength": 1
+              },
+              "effects": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "span": {
+                "$ref": "#/$defs/span"
+              }
+            }
+          }
+        },
+        "handlers": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "eventName",
+              "payloadLocalName",
+              "sendCommand",
+              "arguments",
+              "span"
+            ],
+            "properties": {
+              "eventName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "payloadLocalName": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sendCommand": {
+                "type": "string",
+                "minLength": 1
+              },
+              "arguments": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/argument"
+                }
+              },
+              "span": {
+                "$ref": "#/$defs/span"
+              }
+            }
+          }
+        },
+        "rootView": {
+          "$ref": "#/$defs/view"
+        }
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "maxItems": 0,
+      "description": "Success-only emitted plans have no compiler errors. Diagnostics belong to failed check report, never a successful plan."
+    }
+  },
+  "$defs": {
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "startByte",
+        "endByte"
+      ],
+      "properties": {
+        "startByte": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "endByte": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "description": "original source half-open byte span; endByte > startByte checked semantically"
+    },
+    "typedParam": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "logicalType",
+        "span"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "logicalType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        }
+      }
+    },
+    "argument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "valueKind",
+        "typeId",
+        "value",
+        "span"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "valueKind": {
+          "enum": [
+            "literal-string",
+            "literal-bool",
+            "literal-u32",
+            "member-path",
+            "local-event"
+          ]
+        },
+        "typeId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        }
+      }
+    },
+    "modifier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "arguments",
+        "span"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "accessibilityLabel",
+            "on"
+          ]
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/argument"
+          }
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        }
+      }
+    },
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "localId",
+        "kind",
+        "arguments",
+        "children",
+        "modifiers",
+        "span"
+      ],
+      "properties": {
+        "localId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "VStack",
+            "HStack",
+            "Text",
+            "Button"
+          ]
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/argument"
+          }
+        },
+        "children": {
+          "type": "array",
+          "maxItems": 4096,
+          "items": {
+            "$ref": "#/$defs/view"
+          }
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/modifier"
+          }
+        },
+        "span": {
+          "$ref": "#/$defs/span"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA source-only AUI compiler static plan, documentary candidate (NOT an ABI or approved graph)",
+  "description": "Shape only. The source-only status is mandatory; no graph approval, native artifact, runtime module or trusted core export. Exact expression typing, spans/order, hash and budgets are semantic checks beyond JSON Schema."
+}
