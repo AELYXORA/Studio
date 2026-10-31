@@ -20,7 +20,7 @@
     },
     {
       "id": "GRAPH-03",
-      "mutation": "A component-instance has no exact component export contract",
+      "mutation": "Remove the exported example.sensor/app component from the package while graph node app still references it; no unverified component may be inferred",
       "expected": "GRAPH_EXPORT_UNRESOLVED",
       "domain": "component",
       "testResult": "NOT-RUN; design expectation only"
@@ -97,8 +97,8 @@
     },
     {
       "id": "GRAPH-14",
-      "mutation": "Workflow dispatches a command not exported by owner component",
-      "expected": "WORKFLOW_COMMAND_UNLINKED",
+      "mutation": "Workflow dispatch refers to Decode on a node whose exact verified component export has no such operation",
+      "expected": "WORKFLOW_PROVIDER_UNRESOLVED",
       "domain": "workflow",
       "testResult": "NOT-RUN; design expectation only"
     },
@@ -111,8 +111,8 @@
     },
     {
       "id": "GRAPH-16",
-      "mutation": "DataFlow binds an unknown edgeId",
-      "expected": "DATAFLOW_EDGE_UNKNOWN",
+      "mutation": "DataFlow channel binds an EdgeID not present in the canonical graph",
+      "expected": "GRAPH_MISSING_EDGE",
       "domain": "dataflow",
       "testResult": "NOT-RUN; design expectation only"
     },
@@ -125,8 +125,8 @@
     },
     {
       "id": "GRAPH-18",
-      "mutation": "DataFlow cross-domain borrow has no safe pinned ownership proof",
-      "expected": "OWN_ASYNC_ESCAPE",
+      "mutation": "Cross-domain worker-to-UI dataFlow channel requests transfer=borrow",
+      "expected": "FLOW_CROSS_DOMAIN_BORROW",
       "domain": "dataflow",
       "testResult": "NOT-RUN; design expectation only"
     },
@@ -139,8 +139,8 @@
     },
     {
       "id": "GRAPH-20",
-      "mutation": "Snapshot channel uses FIFO stream policy and mutable buffer",
-      "expected": "DATAFLOW_MODE_UNSUPPORTED",
+      "mutation": "Snapshot channel has ordering=fifo or forbidden capacity/overflow fields",
+      "expected": "SCHEMA_INVALID",
       "domain": "dataflow",
       "testResult": "NOT-RUN; design expectation only"
     },
@@ -226,6 +226,27 @@
       "mutation": "A dataFlow snapshot is treated as an unbounded stream with implicit queue",
       "expected": "DATAFLOW_MODE_UNSUPPORTED",
       "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-33",
+      "mutation": "A queued stream/snapshot has senderDomain equal to receiverDomain but transfer=borrow; synchronous call scope is absent",
+      "expected": "FLOW_BORROW_REQUIRES_SYNC",
+      "domain": "dataflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-34",
+      "mutation": "A command-success workflow signal has a payload TypeReference different from the exact locked operation success contract",
+      "expected": "WORKFLOW_SIGNAL_TYPE_MISMATCH",
+      "domain": "workflow",
+      "testResult": "NOT-RUN; design expectation only"
+    },
+    {
+      "id": "GRAPH-35",
+      "mutation": "Claim a placeholder public digest as a verified exported component contract while the lock/export registry cannot prove it",
+      "expected": "GRAPH_EXPORT_UNRESOLVED",
+      "domain": "component",
       "testResult": "NOT-RUN; design expectation only"
     }
   ]
