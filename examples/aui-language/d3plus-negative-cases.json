@@ -202,6 +202,30 @@
       "replace": "Cancelled(confirmation) => commit { set status = \"Requested cancellation\"; }",
       "expected": "REVIEW_CANCEL_SEMANTICS",
       "stage": "review-only"
+    },
+    {
+      "id": "L3-13",
+      "profile": "L3",
+      "search": "taskSlot refreshSlot: TaskSlot<Tick, Failure>;\n",
+      "replace": "",
+      "expected": "AUI_TASK_SLOT_UNDECLARED",
+      "stage": "task-slot"
+    },
+    {
+      "id": "L3-14",
+      "profile": "L3",
+      "search": "taskSlot refreshSlot: TaskSlot<Tick, Failure>;",
+      "replace": "taskSlot refreshSlot: TaskSlot<String, Failure>;",
+      "expected": "AUI_TYPE_MISMATCH",
+      "stage": "task-slot"
+    },
+    {
+      "id": "L3-15",
+      "profile": "L3",
+      "search": "taskSlot refreshSlot: TaskSlot<Tick, Failure>;",
+      "replace": "taskSlot refreshSlot: TaskSlot<Tick, Failure>;\n  taskSlot refreshSlot: TaskSlot<Tick, Failure>;",
+      "expected": "AUI_DUPLICATE_SYMBOL",
+      "stage": "task-slot"
     }
   ],
   "runtimeCases": [
