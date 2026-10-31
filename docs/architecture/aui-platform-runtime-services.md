@@ -75,3 +75,7 @@ These are **integration targets**, not supported platforms today. Native OS APIs
 ## 8. Open design decisions
 
 First GUI OS/backend, precise platform service ABI and dispatch table layout, font shaping library/implementation, rendering backend strategy, memory allocator ABI, scheduler/event-loop policies, JNI/Objective-C integration and per-target security sandbox policy. No CI until release preparation.
+
+## L4 generation-checked platform input and accessibility (PROPOSED)
+
+[L4 Keyed Lifecycle](d3-keyed-dynamic-view-lifecycle.md) requires OS focus, keyboard, pointer, IME and accessibility event targets to use live ViewIdentity plus generation, not a reusable visual index. Removal/replace closes old subscriptions and focus targets before subsequent event routing; a GPU frame may lag the committed view revision without granting an old node a new owner's action. Native callback unsubscribe/drain, view-owned OS handle generation checks and resource owner retention must be proven per platform. [D3/D4/D5 review](d3-d4-d5-lifecycle-consistency-review.md) specifies test obligations; no platform is yet verified.
