@@ -82,6 +82,12 @@ D3 now proposes explicit L3 `taskSlot ID: TaskSlot<T,E>;` ([ReviewPanel fixture]
 
 **Current verdict: production compiler architecture substantially elaborated but NOT FROZEN / NOT ACCEPTED; no AUI compiler source implementation or real native test has been performed.** Remaining D3 language/record/enum/service rule closures, exact verified core/Graph/signatures, private IR/pass verifier definitions, D4 machine/runtime symbol ABI, D5 renderer, reproducibility/native evidence and human D1–D8 sign-off block any claim of complete compiler readiness.
 
+## Full compiler source grammar and type rules — 2026-10-31
+
+The [AUI Syntax owner](aui-syntax.md) now includes one proposed combined L0-L4 component grammar and separately selected record/enum/service contract units. [Full type and ownership admission](aui-types-and-ownership.md) defines profile-scoped type resolution, immutable values, pure function checks and effect/ownership rules. [36 grammar review cases](../../examples/aui-compiler-production/integrated-grammar-cases.json) are NOT-RUN, separate from the 66 full native compiler acceptance cases.
+
+**Confirmed P0:** canonical package `types[].kind` is currently **record-only**. Public AUI enums and service interface-to-component command mapping cannot be trusted until that existing package/Graph owner defines complete export semantics, capability/target/source closure and verified digests. Full grammar and human sign-off remain OPEN; no parser or codegen exists.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
