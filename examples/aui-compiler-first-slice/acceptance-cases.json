@@ -1,0 +1,417 @@
+{
+  "format": "aui.compiler-first-slice-acceptance-design",
+  "status": "DESIGN-ONLY / ALL NOT-RUN. No AELYXORA compiler, lexer, parser, TypedHIR, source-only plan or native backend has executed these cases.",
+  "owner": "docs/architecture/aui-compiler-first-implementation-contract.md",
+  "semantics": "A source-only typed-plan-candidate is not graph-linked and NEVER a signed or native artifact. Cases describe intended behavior, not observed pass/fail.",
+  "baselineSources": [
+    "examples/aui-language/status-panel-l0.aui",
+    "examples/aui-language/linked-consumer-panel.aui"
+  ],
+  "cases": [
+    {
+      "id": "COMP-FX-001",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "none",
+      "expected": "typed-plan-candidate",
+      "meaning": "exactly one component; three static View nodes; two accessibilityLabel modifiers; no GraphOrigin; UNVERIFIED_SOURCE_ONLY",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-002",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "none",
+      "expected": "typed-plan-candidate",
+      "meaning": "one event, one command, one handler; unresolved external Tick/Failure require explicitly pinned provisional import catalog and mark output unverified",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-003",
+      "mode": "linked",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "existing-historical-link-json",
+      "expected": "trust-reject",
+      "meaning": "historical link map alone not accepted current canonical Graph lock/receipt",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-004",
+      "mode": "linked",
+      "source": "status-panel-l0.aui",
+      "mutation": "synthetic-core-fingerprints",
+      "expected": "trust-reject",
+      "meaning": "all current 15 core exports UNVERIFIED; no claimed graph-linked output",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-005",
+      "mode": "native-build",
+      "source": "status-panel-l0.aui",
+      "mutation": "missing-D4-D5-ABI",
+      "expected": "unsupported",
+      "meaning": "no object or executable until Win64 renderer/admission contract approved",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-006",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "UTF8-BOM-prefix",
+      "expected": "lexical-reject",
+      "meaning": "strict UTF-8 without BOM",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-007",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "invalid-UTF8-overlong-token",
+      "expected": "lexical-reject",
+      "meaning": "reject overlong/non-scalar UTF-8 before AST",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-008",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "unterminated-string",
+      "expected": "lexical-reject",
+      "meaning": "no recovery success from invalid strings",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-009",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "unpaired-Unicode-escape-surrogate",
+      "expected": "lexical-reject",
+      "meaning": "reject invalid JSON-style string escapes",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-010",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "block-comment",
+      "expected": "profile-reject",
+      "meaning": "block comments unsupported in first profile",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-011",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "unknown-escape",
+      "expected": "lexical-reject",
+      "meaning": "unknown string escape fails",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-012",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "unsigned-integer-4294967296-as-spacing",
+      "expected": "type-reject",
+      "meaning": "U32 property range checked after integer token recognized",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-013",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "number-with-exponent",
+      "expected": "profile-or-lexical-reject",
+      "meaning": "no exponent literals",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-014",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "accessibilityLabel-positional-argument",
+      "expected": "syntax-reject",
+      "meaning": "all arguments named",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-015",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "duplicate-named-spacing-argument",
+      "expected": "type-reject",
+      "meaning": "duplicate named property labels",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-016",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "unknown-view-constructor",
+      "expected": "type-reject",
+      "meaning": "closed imported L0 visual builtins only",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-017",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "Text-with-child-View",
+      "expected": "type-reject",
+      "meaning": "Text/Button have zero child View expressions",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-018",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "VStack-with-zero-children",
+      "expected": "type-reject",
+      "meaning": "VStack/HStack require at least one child",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-019",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "missing-Button-accessibility-label",
+      "expected": "accessibility-reject",
+      "meaning": "accessible component cannot silently omit required label",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-020",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "second-component-in-same-source",
+      "expected": "syntax-reject",
+      "meaning": "one component per module and EOF",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-021",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "declaration-after-root-view",
+      "expected": "syntax-reject",
+      "meaning": "component body declaration phase precedes final root View",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-022",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "future-state-declaration",
+      "expected": "profile-reject",
+      "meaning": "L2 state not silently admitted in L0/L1",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-023",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "let-await-in-handler",
+      "expected": "profile-reject",
+      "meaning": "unsupported L3 task syntax recognized before generic unknown symbol",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-024",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "ForEach-view",
+      "expected": "profile-reject",
+      "meaning": "L4 dynamic keyed views not allowed",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-025",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "duplicate-event-handler",
+      "expected": "event-reject",
+      "meaning": "one handler per local event",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-026",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "event-unit-retyped-bool",
+      "expected": "event-reject",
+      "meaning": "Button.activated must connect only Event<Unit>",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-027",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "two-send-statements",
+      "expected": "profile-reject",
+      "meaning": "exactly one typed send in handler",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-028",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "duplicate-button-activated-attachment",
+      "expected": "event-reject",
+      "meaning": "no implicit duplicate output fanout",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-029",
+      "mode": "source-only",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "wrong-command-arg-type",
+      "expected": "type-reject",
+      "meaning": "no implicit String→Tick",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-030",
+      "mode": "linked",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "unverified-provider-OperationID",
+      "expected": "trust-reject",
+      "meaning": "operation ID spelling without verified Graph export/lock is insufficient",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-031",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "same-bytes-in-two-independent-runs",
+      "expected": "determinism",
+      "meaning": "normalized plan, token/source spans and diagnostic ordering identical given same pinned catalogue/compiler config",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-032",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "change-line-endings-only",
+      "expected": "source-identity-change",
+      "meaning": "source SHA and byte spans change while view semantic intent may remain equal; never reuse stale link",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-033",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "NFC-equivalent-identifier-collision",
+      "expected": "symbol-reject",
+      "meaning": "same-scope normalized names cannot alias",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-034",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "identifier-over-256-UTF8-bytes",
+      "expected": "limit-reject",
+      "meaning": "bounded source metadata",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-035",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "over-64-nesting-depth",
+      "expected": "limit-reject",
+      "meaning": "no unbounded recursive parser allocation",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-036",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "over-4096-static-views",
+      "expected": "limit-reject",
+      "meaning": "bounded view static plan",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-037",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "over-1MiB-source-bytes",
+      "expected": "limit-reject",
+      "meaning": "reject before full memory allocation where possible",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-038",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "invalid-source-after-previous-successful-emission",
+      "expected": "no-publication",
+      "meaning": "failed compiler never overwrites previously valid staged artifact",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-039",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "malicious-import-with-network-url",
+      "expected": "import-reject",
+      "meaning": "no network fetch or native code execution during source check",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-040",
+      "mode": "linked",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "source-changed-after-signed-link",
+      "expected": "trust-reject",
+      "meaning": "source SHA mismatch invalidates link and approval, even if only whitespace",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-041",
+      "mode": "linked",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "target-id-vs-triple-confusion",
+      "expected": "target-reject",
+      "meaning": "graph target id not source-declared native target triple",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-042",
+      "mode": "native-build",
+      "source": "linked-consumer-panel.aui",
+      "mutation": "unqualified-unsafe-operation",
+      "expected": "capability-reject",
+      "meaning": "no kernel/device access from textually declared command",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-043",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "compiler-internal-error",
+      "expected": "controlled-failure",
+      "meaning": "no partial TypedHIR marked successful; status 5 and safe staging cleanup",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-044",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "recovered-parser-tree-after-syntax-error",
+      "expected": "syntax-reject",
+      "meaning": "diagnostic CST not an accepted TypedHIR",
+      "observed": "NOT-RUN"
+    },
+    {
+      "id": "COMP-FX-045",
+      "mode": "source-only",
+      "source": "status-panel-l0.aui",
+      "mutation": "unknown-tool-option",
+      "expected": "cli-reject",
+      "meaning": "no automatic fallback to another requested mode",
+      "observed": "NOT-RUN"
+    }
+  ]
+}
