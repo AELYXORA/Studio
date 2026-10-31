@@ -1,5 +1,7 @@
 # Project Graph and Component Package Format
 
+**Unified project/package model:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
+
 **Status: proposed schema draft, not implemented.** JSON is selected for the **current inspectable interchange fixtures**; final storage encoding is not frozen. This document owns persistence, package discovery and integrity semantics. The Project Graph owns node/edge meaning; the ABI document owns native calling conventions.
 
 ## Repository layout
