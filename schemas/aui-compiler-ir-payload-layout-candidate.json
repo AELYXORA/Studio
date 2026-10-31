@@ -26,7 +26,10 @@
     "Every Ref64 that owns a span refers to immutable Span16 of typed Ref64/field records in sealed arena after pass acceptance; absent zero only when tag policy permits",
     "Each tag has additional semantic fields/proofs in separate immutable descriptor refs; same-structure reuse is not proof that two tags are semantically interchangeable",
     "No direct source-authored pointer, OS handle, capability or TaskTicket in IR payload bytes",
-    "The concrete per-tag descriptor validation table and accepted lowering proofs remain subject to architect review; this is the candidate full tag inventory, not release-ready executable ABI"
+    "The concrete per-tag descriptor validation table and accepted lowering proofs remain subject to architect review; this is the candidate full tag inventory, not release-ready executable ABI",
+    "Each tag validation descriptor lists required nonzero slots, must-zero slots, and exact stage semantics; fields not covered remain subject to typed callee/owner/liveness verification and bounds.",
+    "All array spans are Ref64 to Span16 with elementSize matching exact array element descriptor and checked total count; a nonzero pointer alone never proves semantic content",
+    "T1 semantic enums, enum exhaustiveness or generic identity may be source-only; authenticated public contracts and machine eligibility only after T2"
   ],
   "payloadTemplates": {
     "Declaration64": {
@@ -1099,7 +1102,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef",
+          "ownerSymbolId"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 257,
@@ -1107,7 +1125,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 258,
@@ -1115,7 +1147,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children",
+          "Fields appear in source declaration order, not sorted"
+        ]
+      }
     },
     {
       "id": 259,
@@ -1123,7 +1170,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId",
+          "declaredTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 260,
@@ -1131,7 +1193,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 261,
@@ -1139,7 +1215,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children",
+          "Exactly zero or one typed payload Ref; unique NFC variant symbol inside enum owner"
+        ]
+      }
     },
     {
       "id": 262,
@@ -1147,7 +1238,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children",
+          "Interface-only; no native provider body or capability inferred"
+        ]
+      }
     },
     {
       "id": 263,
@@ -1155,7 +1261,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children",
+          "Interface-only; no native provider body or capability inferred"
+        ]
+      }
     },
     {
       "id": 264,
@@ -1163,7 +1284,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 265,
@@ -1171,7 +1306,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId",
+          "declaredTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 266,
@@ -1179,7 +1329,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 267,
@@ -1187,7 +1351,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 268,
@@ -1195,7 +1373,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 269,
@@ -1203,7 +1395,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId",
+          "declaredTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 270,
@@ -1211,7 +1418,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId",
+          "declaredTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 271,
@@ -1219,7 +1441,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId",
+          "declaredTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 272,
@@ -1227,7 +1464,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Declaration64",
       "requiredContext": "source-only typing; public link evidence zero until T2",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "symbolId",
+          "declaredTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "contractEvidenceRef"
+        ],
+        "semanticInvariants": [
+          "T1 produces only a source-resolved type/symbol; public Graph proof absent",
+          "orderedMembersRef must decode to correctly typed ordered member Span16 when declaration contains children"
+        ]
+      }
     },
     {
       "id": 288,
@@ -1235,7 +1487,20 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "View64",
       "requiredContext": "verified constructor/named property signatures; immutable source order",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "constructorSymbolId",
+          "resultTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "accessibilityFlags"
+        ],
+        "semanticInvariants": [
+          "one rooted typed View, constructor args/children/modifiers preserve order, immutable static site identity"
+        ]
+      }
     },
     {
       "id": 289,
@@ -1243,7 +1508,20 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "View64",
       "requiredContext": "verified constructor/named property signatures; immutable source order",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "constructorSymbolId",
+          "resultTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "accessibilityFlags"
+        ],
+        "semanticInvariants": [
+          "modifier chain typed and applied in exact source order, never a separate UI node by default"
+        ]
+      }
     },
     {
       "id": 290,
@@ -1251,7 +1529,20 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "View64",
       "requiredContext": "verified constructor/named property signatures; immutable source order",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "constructorSymbolId",
+          "resultTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "accessibilityFlags"
+        ],
+        "semanticInvariants": [
+          "exact named argument symbol and typed expression, reject unknown/duplicate arg"
+        ]
+      }
     },
     {
       "id": 291,
@@ -1259,7 +1550,20 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "View64",
       "requiredContext": "verified constructor/named property signatures; immutable source order",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "constructorSymbolId",
+          "resultTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "accessibilityFlags"
+        ],
+        "semanticInvariants": [
+          "child source order and parent identity validated, no cycles"
+        ]
+      }
     },
     {
       "id": 304,
@@ -1267,7 +1571,17 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef",
+          "constantRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": []
+      }
     },
     {
       "id": 305,
@@ -1275,7 +1589,17 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": []
+      }
     },
     {
       "id": 306,
@@ -1283,7 +1607,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "callee is authenticated pure symbol, no provider operation or allocation via hidden effect"
+        ]
+      }
     },
     {
       "id": 307,
@@ -1291,7 +1627,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "state/bind effects and single writer constraints validated, no direct renderer publication during T1"
+        ]
+      }
     },
     {
       "id": 308,
@@ -1299,7 +1647,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "state/bind effects and single writer constraints validated, no direct renderer publication during T1"
+        ]
+      }
     },
     {
       "id": 309,
@@ -1307,7 +1667,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "L3 TaskOutcome semantic state machine and five-way settled shape proof required"
+        ]
+      }
     },
     {
       "id": 310,
@@ -1315,7 +1687,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "L3 TaskOutcome semantic state machine and five-way settled shape proof required"
+        ]
+      }
     },
     {
       "id": 311,
@@ -1323,7 +1707,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "L3 TaskOutcome semantic state machine and five-way settled shape proof required"
+        ]
+      }
     },
     {
       "id": 312,
@@ -1331,7 +1727,19 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": [
+          "L4 verified immutable List and StableKey template identity, no positional index"
+        ]
+      }
     },
     {
       "id": 313,
@@ -1339,7 +1747,17 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": []
+      }
     },
     {
       "id": 314,
@@ -1347,7 +1765,17 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": []
+      }
     },
     {
       "id": 315,
@@ -1355,7 +1783,17 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Expression48",
       "requiredContext": "precise type + effects and source profile",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "expectedTypeRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "constantRef"
+        ],
+        "semanticInvariants": []
+      }
     },
     {
       "id": 336,
@@ -1363,7 +1801,20 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Enum64",
       "requiredContext": "full exact verified enum type and exhaustiveness proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "enumTypeRef"
+        ],
+        "mustZeroFields": [
+          "reserved",
+          "armsRef",
+          "exhaustivenessProofRef"
+        ],
+        "semanticInvariants": [
+          "variantSymbolId resolves to a unique declared variant; optional payload must match exact zero/one arity"
+        ]
+      }
     },
     {
       "id": 337,
@@ -1371,7 +1822,21 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Enum64",
       "requiredContext": "full exact verified enum type and exhaustiveness proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "enumTypeRef",
+          "armsRef",
+          "exhaustivenessProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved",
+          "payloadValueRef"
+        ],
+        "semanticInvariants": [
+          "scrutinee evaluated once, all variants covered exactly once, arm binders immutable and locally scoped"
+        ]
+      }
     },
     {
       "id": 352,
@@ -1379,7 +1844,22 @@
       "stage": "T1_TYPED_HIR",
       "payloadTemplate": "Generic64",
       "requiredContext": "full template and ordered child TypeReferences, no identity-only trust",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateTypeRef",
+          "orderedArgsRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved",
+          "semanticContractRef"
+        ],
+        "semanticInvariants": [
+          "T1 source-only type resolution cannot supply accepted public semantic contract",
+          "exact template arity, depth <=8, <=128 TypeReference nodes, no unauthorized portable nested ownership"
+        ]
+      }
     },
     {
       "id": 512,
@@ -1387,7 +1867,24 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Link64",
       "requiredContext": "independently authenticated source/lock/core/C9 receipts",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceSymbolId",
+          "sourceReceiptRef",
+          "graphReceiptRef",
+          "typeExportProofRef",
+          "packageLockProofRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "all proof handles must be produced by independently authenticated verifier; numeric nonzero is insufficient",
+          "T2 trust promotion only after complete 15-core and D2/D3/D6 closure"
+        ]
+      }
     },
     {
       "id": 513,
@@ -1395,7 +1892,24 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Link64",
       "requiredContext": "independently authenticated source/lock/core/C9 receipts",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceSymbolId",
+          "sourceReceiptRef",
+          "graphReceiptRef",
+          "typeExportProofRef",
+          "packageLockProofRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "all proof handles must be produced by independently authenticated verifier; numeric nonzero is insufficient",
+          "T2 trust promotion only after complete 15-core and D2/D3/D6 closure"
+        ]
+      }
     },
     {
       "id": 514,
@@ -1403,7 +1917,24 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Link64",
       "requiredContext": "independently authenticated source/lock/core/C9 receipts",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceSymbolId",
+          "sourceReceiptRef",
+          "graphReceiptRef",
+          "typeExportProofRef",
+          "packageLockProofRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "all proof handles must be produced by independently authenticated verifier; numeric nonzero is insufficient",
+          "T2 trust promotion only after complete 15-core and D2/D3/D6 closure"
+        ]
+      }
     },
     {
       "id": 515,
@@ -1411,7 +1942,24 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Link64",
       "requiredContext": "independently authenticated source/lock/core/C9 receipts",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceSymbolId",
+          "sourceReceiptRef",
+          "graphReceiptRef",
+          "typeExportProofRef",
+          "packageLockProofRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "all proof handles must be produced by independently authenticated verifier; numeric nonzero is insufficient",
+          "T2 trust promotion only after complete 15-core and D2/D3/D6 closure"
+        ]
+      }
     },
     {
       "id": 516,
@@ -1419,7 +1967,25 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Link64",
       "requiredContext": "independently authenticated source/lock/core/C9 receipts",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceSymbolId",
+          "sourceReceiptRef",
+          "graphReceiptRef",
+          "typeExportProofRef",
+          "packageLockProofRef",
+          "targetAbiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "all proof handles must be produced by independently authenticated verifier; numeric nonzero is insufficient",
+          "T2 trust promotion only after complete 15-core and D2/D3/D6 closure"
+        ]
+      }
     },
     {
       "id": 544,
@@ -1427,7 +1993,20 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Origin48",
       "requiredContext": "receipts produced only by trusted verifier, not parsed from file",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceUnitId",
+          "sourceSpanRef",
+          "packageLockRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "origin receipt must bind original source bytes and signing evidence; no user-supplied approval flags"
+        ]
+      }
     },
     {
       "id": 545,
@@ -1435,7 +2014,22 @@
       "stage": "T2_GRAPH_LINK",
       "payloadTemplate": "Origin48",
       "requiredContext": "receipts produced only by trusted verifier, not parsed from file",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "sourceUnitId",
+          "sourceSpanRef",
+          "packageLockRef",
+          "graphOriginRef",
+          "approvalReceiptRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "origin receipt must bind original source bytes and signing evidence; no user-supplied approval flags"
+        ]
+      }
     },
     {
       "id": 768,
@@ -1443,7 +2037,19 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 769,
@@ -1451,7 +2057,20 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId",
+          "readSetRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 770,
@@ -1459,7 +2078,20 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId",
+          "readSetRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 771,
@@ -1467,7 +2099,20 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId",
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 772,
@@ -1475,7 +2120,20 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId",
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 773,
@@ -1483,7 +2141,20 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId",
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 774,
@@ -1491,7 +2162,20 @@
       "stage": "T3_REACTIVE",
       "payloadTemplate": "Reactive64",
       "requiredContext": "one owner, immutable reads, atomic commit and rollback",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "stateSymbolId",
+          "ownerSymbolId",
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "one state revision/owner, pure derived DAG and atomic commit success or rollback; no partial publication"
+        ]
+      }
     },
     {
       "id": 832,
@@ -1499,7 +2183,19 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 833,
@@ -1507,7 +2203,19 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 834,
@@ -1515,7 +2223,19 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 835,
@@ -1523,7 +2243,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "providerTicketProofRef"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 836,
@@ -1531,7 +2264,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 837,
@@ -1539,7 +2285,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 838,
@@ -1547,7 +2306,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 839,
@@ -1555,7 +2327,21 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef",
+          "outcomeCasesRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 840,
@@ -1563,7 +2349,19 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 841,
@@ -1571,7 +2369,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 842,
@@ -1579,7 +2390,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 843,
@@ -1587,7 +2411,20 @@
       "stage": "T3_ASYNC",
       "payloadTemplate": "Async80",
       "requiredContext": "verified task owner, five-way outcome and no premature native cleanup",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "taskSlotId",
+          "uiOwnerId",
+          "providerTicketProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "five-way TaskOutcome and exact owner/generation; UI settlement distinct from provider resource quiescence"
+        ]
+      }
     },
     {
       "id": 896,
@@ -1595,7 +2432,19 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 897,
@@ -1603,7 +2452,20 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 898,
@@ -1611,7 +2473,21 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef",
+          "ownershipProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 899,
@@ -1619,7 +2495,21 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef",
+          "ownershipProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 900,
@@ -1627,7 +2517,21 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef",
+          "ownershipProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 901,
@@ -1635,7 +2539,21 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef",
+          "ownershipProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 902,
@@ -1643,7 +2561,21 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef",
+          "ownershipProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 903,
@@ -1651,7 +2583,21 @@
       "stage": "T3_KEYED",
       "payloadTemplate": "Keyed64",
       "requiredContext": "StableKey and owner generation, atomic publication",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "templateSymbolId",
+          "ownerSymbolId",
+          "fullStableKeyPathRef",
+          "ownershipProofRef"
+        ],
+        "mustZeroFields": [
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "full ancestor StableKey path and incarnation generation; no array-index fallback or stale owner reuse"
+        ]
+      }
     },
     {
       "id": 1280,
@@ -1659,7 +2605,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0,
+          "max": 0
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1281,
@@ -1667,7 +2633,26 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1282,
@@ -1675,7 +2660,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1283,
@@ -1683,7 +2688,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1284,
@@ -1691,7 +2716,26 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1285,
@@ -1699,7 +2743,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1286,
@@ -1707,7 +2771,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1287,
@@ -1715,7 +2800,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1288,
@@ -1723,7 +2829,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1289,
@@ -1731,7 +2858,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1290,
@@ -1739,7 +2887,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1291,
@@ -1747,7 +2916,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1292,
@@ -1755,7 +2945,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1293,
@@ -1763,7 +2974,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1294,
@@ -1771,7 +3002,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1295,
@@ -1779,7 +3030,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1296,
@@ -1787,7 +3058,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1297,
@@ -1795,7 +3086,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1298,
@@ -1803,7 +3114,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1299,
@@ -1811,7 +3142,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1300,
@@ -1819,7 +3170,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1301,
@@ -1827,7 +3198,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1302,
@@ -1835,7 +3227,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0,
+          "max": 0
+        },
+        "resultCount": {
+          "min": 1,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1303,
@@ -1843,7 +3256,26 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0
+        },
+        "resultCount": {
+          "min": 0
+        }
+      }
     },
     {
       "id": 1304,
@@ -1851,7 +3283,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1305,
@@ -1859,7 +3311,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 1
+        }
+      }
     },
     {
       "id": 1306,
@@ -1867,7 +3339,28 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "exact checked linear effect token input/output and lane, cannot be treated as pure or reordered",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0,
+          "max": 0
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1307,
@@ -1875,7 +3368,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 1,
+          "max": 1
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1308,
@@ -1883,7 +3396,27 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipInstruction64",
       "requiredContext": "verified SSA, type, owner/region, effect token and callee semantics",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "effectInputRef",
+          "effectOutputRef"
+        ],
+        "semanticInvariants": [
+          "pure only if ownership/allocations/FFI effects verified separately",
+          "operand/result array counts checked after Span16 resolution; block SSA ownership/effect proofs required, counts alone insufficient"
+        ],
+        "operandCount": {
+          "min": 0,
+          "max": 0
+        },
+        "resultCount": {
+          "min": 0,
+          "max": 0
+        }
+      }
     },
     {
       "id": 1376,
@@ -1891,7 +3424,20 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipTerminator64",
       "requiredContext": "all successors, block argument types, no implicit fallthrough",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef",
+          "edgeArgsRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "exact successor IDs, block argument types, all exits owned and effect tokens linear; no hidden fallthrough"
+        ]
+      }
     },
     {
       "id": 1377,
@@ -1899,7 +3445,21 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipTerminator64",
       "requiredContext": "all successors, block argument types, no implicit fallthrough",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef",
+          "edgeArgsRef",
+          "conditionRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "exact successor IDs, block argument types, all exits owned and effect tokens linear; no hidden fallthrough"
+        ]
+      }
     },
     {
       "id": 1378,
@@ -1907,7 +3467,22 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipTerminator64",
       "requiredContext": "all successors, block argument types, no implicit fallthrough",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef",
+          "edgeArgsRef",
+          "conditionRef",
+          "variantCasesRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "exact successor IDs, block argument types, all exits owned and effect tokens linear; no hidden fallthrough"
+        ]
+      }
     },
     {
       "id": 1379,
@@ -1915,7 +3490,19 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipTerminator64",
       "requiredContext": "all successors, block argument types, no implicit fallthrough",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "liveOwnersRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "exact successor IDs, block argument types, all exits owned and effect tokens linear; no hidden fallthrough"
+        ]
+      }
     },
     {
       "id": 1380,
@@ -1923,7 +3510,19 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipTerminator64",
       "requiredContext": "all successors, block argument types, no implicit fallthrough",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "liveOwnersRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "exact successor IDs, block argument types, all exits owned and effect tokens linear; no hidden fallthrough"
+        ]
+      }
     },
     {
       "id": 1381,
@@ -1931,7 +3530,21 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnershipTerminator64",
       "requiredContext": "all successors, block argument types, no implicit fallthrough",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef",
+          "edgeArgsRef",
+          "liveOwnersRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "exact successor IDs, block argument types, all exits owned and effect tokens linear; no hidden fallthrough"
+        ]
+      }
     },
     {
       "id": 1392,
@@ -1939,7 +3552,20 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnerCheck48",
       "requiredContext": "real computed worklist result only; never a proof by stored flag",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "ownerRef",
+          "stateBeforeRef",
+          "stateAfterRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "output proof must be produced by actual ownership fixed-point verifier, not from review fixture or flag"
+        ]
+      }
     },
     {
       "id": 1393,
@@ -1947,7 +3573,20 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnerCheck48",
       "requiredContext": "real computed worklist result only; never a proof by stored flag",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "ownerRef",
+          "stateBeforeRef",
+          "stateAfterRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "output proof must be produced by actual ownership fixed-point verifier, not from review fixture or flag"
+        ]
+      }
     },
     {
       "id": 1394,
@@ -1955,7 +3594,20 @@
       "stage": "T4_OWNERSHIP",
       "payloadTemplate": "OwnerCheck48",
       "requiredContext": "real computed worklist result only; never a proof by stored flag",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "ownerRef",
+          "stateBeforeRef",
+          "stateAfterRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "output proof must be produced by actual ownership fixed-point verifier, not from review fixture or flag"
+        ]
+      }
     },
     {
       "id": 1536,
@@ -1963,7 +3615,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1537,
@@ -1971,7 +3636,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1538,
@@ -1979,7 +3657,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1539,
@@ -1987,7 +3678,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1540,
@@ -1995,7 +3699,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1541,
@@ -2003,7 +3720,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1542,
@@ -2011,7 +3741,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1543,
@@ -2019,7 +3762,20 @@
       "stage": "T5_LAYOUT",
       "payloadTemplate": "Layout64",
       "requiredContext": "exact qualified target ABI/field/tag/ownership layout",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "exactTypeRef",
+          "descriptorRef",
+          "abiProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "size/alignment/offset checked against target D4 ABI and verified types; no public layout guessed"
+        ]
+      }
     },
     {
       "id": 1792,
@@ -2027,7 +3783,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1793,
@@ -2035,7 +3800,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1794,
@@ -2043,7 +3817,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1795,
@@ -2051,7 +3834,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1796,
@@ -2059,7 +3853,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1797,
@@ -2067,7 +3872,20 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "importProofRef",
+          "layoutProofRef",
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1798,
@@ -2075,7 +3893,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1799,
@@ -2083,7 +3910,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1800,
@@ -2091,7 +3927,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1801,
@@ -2099,7 +3946,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1802,
@@ -2107,7 +3965,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1803,
@@ -2115,7 +3984,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1804,
@@ -2123,7 +4003,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1805,
@@ -2131,7 +4022,18 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "effectProofRef"
+        ],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1806,
@@ -2139,7 +4041,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1807,
@@ -2147,7 +4058,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1808,
@@ -2155,7 +4075,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1809,
@@ -2163,7 +4092,16 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineInstruction64",
       "requiredContext": "verified Win64 target ISA, imports, registers, memory and effect preservation",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags"
+        ],
+        "semanticInvariants": [
+          "target ISA/operand class/ABI/effects and machine liveness verified; no source-only trust promotion"
+        ]
+      }
     },
     {
       "id": 1888,
@@ -2171,7 +4109,19 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineTerminator48",
       "requiredContext": "checked liveness, all successors, target frame and relocation proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "machine block liveness and target frame proved; explicit branch/return/trap, no fallthrough"
+        ]
+      }
     },
     {
       "id": 1889,
@@ -2179,7 +4129,20 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineTerminator48",
       "requiredContext": "checked liveness, all successors, target frame and relocation proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef",
+          "predicateRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "machine block liveness and target frame proved; explicit branch/return/trap, no fallthrough"
+        ]
+      }
     },
     {
       "id": 1890,
@@ -2187,7 +4150,21 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineTerminator48",
       "requiredContext": "checked liveness, all successors, target frame and relocation proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [
+          "targetsRef",
+          "predicateRef",
+          "switchTableRef"
+        ],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "machine block liveness and target frame proved; explicit branch/return/trap, no fallthrough"
+        ]
+      }
     },
     {
       "id": 1891,
@@ -2195,7 +4172,17 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineTerminator48",
       "requiredContext": "checked liveness, all successors, target frame and relocation proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "machine block liveness and target frame proved; explicit branch/return/trap, no fallthrough"
+        ]
+      }
     },
     {
       "id": 1892,
@@ -2203,7 +4190,17 @@
       "stage": "T6_TARGET_MIR",
       "payloadTemplate": "MachineTerminator48",
       "requiredContext": "checked liveness, all successors, target frame and relocation proof",
-      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback."
+      "notes": "Tag-specific lowering and semantic invariants mandatory; full type/effect/source/ownership check, no unknown-tag fallback.",
+      "validation": {
+        "requiredNonzeroFields": [],
+        "mustZeroFields": [
+          "flags",
+          "reserved"
+        ],
+        "semanticInvariants": [
+          "machine block liveness and target frame proved; explicit branch/return/trap, no fallthrough"
+        ]
+      }
     }
   ],
   "notes": [
