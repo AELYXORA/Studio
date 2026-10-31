@@ -1,0 +1,170 @@
+{
+  "format": "aui.core-registry-proposal",
+  "registryId": "aui.core/extended-0.2-draft",
+  "status": "proposed-only",
+  "entries": [
+    {
+      "typeId": "aui.core/Bool",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "Copy",
+        "Send"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/Event",
+      "kind": "generic-value",
+      "typeArity": 1,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/List",
+      "kind": "generic-value",
+      "typeArity": 1,
+      "featureGate": "L4",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/Result",
+      "kind": "generic-value",
+      "typeArity": 2,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/StableKey",
+      "kind": "tagged-union",
+      "typeArity": 0,
+      "featureGate": "L4",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/StateRevision",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L2",
+      "logicalTraits": [
+        "Immutable",
+        "Copy",
+        "Send",
+        "UIOwner"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/String",
+      "kind": "immutable-value",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/TaskOutcome",
+      "kind": "generic-value",
+      "typeArity": 2,
+      "featureGate": "L3",
+      "logicalTraits": [
+        "Immutable",
+        "SendConditional"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/TaskSlot",
+      "kind": "opaque-runtime",
+      "typeArity": 2,
+      "featureGate": "L3",
+      "logicalTraits": [
+        "Affine",
+        "UIOwner",
+        "Opaque"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/TaskTicket",
+      "kind": "opaque-runtime",
+      "typeArity": 0,
+      "featureGate": "L3",
+      "logicalTraits": [
+        "Affine",
+        "Opaque"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/U32",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "Copy",
+        "Send"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/U64",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L4",
+      "logicalTraits": [
+        "Immutable",
+        "Copy",
+        "Send"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    },
+    {
+      "typeId": "aui.core/Unit",
+      "kind": "scalar",
+      "typeArity": 0,
+      "featureGate": "L0/L1",
+      "logicalTraits": [
+        "Immutable",
+        "Copy",
+        "Send"
+      ],
+      "nativeLayoutStatus": "unapproved",
+      "semanticsOwner": "docs/architecture/d3-core-registry-value-contract.md"
+    }
+  ]
+}
