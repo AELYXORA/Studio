@@ -44,6 +44,14 @@ The `coreRegistryFingerprint`, type-export-set and component public digests in t
 
 **Design closure still OPEN:** human acceptance of value codecs/limits, full structured core semantic definitions and error-control public exports, independently validated hash vectors, native bit/ownership/terminal ordering, signed approval, qualified targets and D6 durable recovery. All existing Phase I/II/III/IV rules continue to apply.
 
+## Structured core and TaskOutcome public control candidate — 2026-10-31
+
+[CR13](d3-core-registry-value-contract.md) now specifies **three closed nested runtime control payload candidates** for `TaskOutcome` without increasing the single 15-type core registry or claiming three independent public TypeIDs. The [current inventory](../../examples/canonical-graph/core-registry-candidate.json) has machine-checkable `semanticModel` fields and all 15 `exportStatus: UNVERIFIED`; the [schema](../../schemas/canonical-core-registry-candidate.schema.json) constrains type/arity/variant/carrier shapes.
+
+[28 control-payload shape/provenance cases](../../examples/canonical-graph/task-control-payload-cases.json) and [25 core-definition mutation cases](../../examples/canonical-graph/core-definition-review-cases.json) are future designs, **NOT-RUN**. A limited standalone JSON Schema-subset shape check matched the 28 expected shapes and 15 inventory entries; nine independent structural-skeleton comparisons matched same/different expectations. None is native type checking, cryptographic verification or proof of dispatch/quiescence.
+
+**New explicit P0:** document `ruleId` alone cannot serve as a public digest preimage — exact normative semantic rule content must be frozen/verified first. Typed error/control payload semantics and trusted constructors require D3/D4/D5 review. All gates stay OPEN; no production registry fingerprint, real golden hash, compiled ABI, signed approval or running Studio is claimed.
+
 ## Open critical design gates
 
 [Canonical cross-contract audit](canonical-graph-consistency-audit.md) identifies type/export closure, full semantic hash projection (including workflows/channels/hardware/tombstones), runtime cancellation ownership, signed approval, platform ABI and durable persistence as OPEN. [Specification completion matrix](specification-completion-matrix.md) remains a detailed historical work ledger. Older numbered experimental planning documents are superseded as architecture branches; they can inform review but may not silently dictate the active model.
