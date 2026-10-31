@@ -102,6 +102,29 @@
           ]
         }
       ]
+    },
+    {
+      "typeId": "example.sensor/app",
+      "ports": [
+        {
+          "id": "reading",
+          "direction": "in",
+          "typeRef": {
+            "kind": "nominal",
+            "ownerPackageId": "example.sensor",
+            "typeId": "example.sensor/Measurement",
+            "contractDigest": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        }
+      ],
+      "capabilities": [],
+      "sources": [
+        {
+          "path": "src/aarch64/app.S",
+          "target": "aarch64-unknown-linux-gnu",
+          "ownership": "generated"
+        }
+      ]
     }
   ],
   "dependencies": [],
