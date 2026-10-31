@@ -1,0 +1,220 @@
+{
+  "format": "aui.compiler-source-only-plan",
+  "status": "UNVERIFIED_SOURCE_ONLY",
+  "profile": "l1",
+  "source": {
+    "path": "examples/aui-language/linked-consumer-panel.aui",
+    "sha256": "5ad8e28281f0c5c8a4587305ad1f329ecac41478a8adbd5e59e5598e6f273a5d",
+    "byteLength": 579
+  },
+  "catalog": {
+    "status": "UNVERIFIED",
+    "sourceFormat": "aui.compiler-source-only-review-catalog",
+    "sourceIdentity": "examples/aui-compiler-first-slice/review-type-catalog.json",
+    "sha256": "8446fb67384923b0ff4baf6c90509b34a3fd711a1880526034300f66153b22b0"
+  },
+  "component": {
+    "name": "ConsumerPanel",
+    "span": {
+      "startByte": 181,
+      "endByte": 578
+    },
+    "imports": [
+      "aui.core",
+      "example.locked"
+    ],
+    "inputs": [
+      {
+        "name": "tick",
+        "logicalType": "example.locked/Tick",
+        "span": {
+          "startByte": 205,
+          "endByte": 221
+        }
+      }
+    ],
+    "events": [
+      {
+        "name": "submit",
+        "payloadType": "aui.core/Unit",
+        "span": {
+          "startByte": 227,
+          "endByte": 253
+        }
+      }
+    ],
+    "commands": [
+      {
+        "name": "Accept",
+        "inputs": [
+          {
+            "name": "tick",
+            "logicalType": "example.locked/Tick",
+            "span": {
+              "startByte": 211,
+              "endByte": null
+            }
+          }
+        ],
+        "successType": "example.locked/Tick",
+        "errorType": "example.locked/Failure",
+        "domain": "io-worker",
+        "effects": [],
+        "span": {
+          "startByte": 256,
+          "endByte": 321
+        }
+      }
+    ],
+    "handlers": [
+      {
+        "eventName": "submit",
+        "payloadLocalName": "payload",
+        "sendCommand": "Accept",
+        "arguments": [
+          {
+            "name": "tick",
+            "valueKind": "member-path",
+            "typeId": "example.locked/Tick",
+            "value": "tick",
+            "span": {
+              "startByte": 361,
+              "endByte": 371
+            }
+          }
+        ],
+        "span": {
+          "startByte": 324,
+          "endByte": 377
+        }
+      }
+    ],
+    "rootView": {
+      "localId": "v0",
+      "kind": "VStack",
+      "arguments": [
+        {
+          "name": "spacing",
+          "valueKind": "literal-u32",
+          "typeId": "aui.core/U32",
+          "value": "12",
+          "span": {
+            "startByte": 387,
+            "endByte": 398
+          }
+        }
+      ],
+      "children": [
+        {
+          "localId": "v1",
+          "kind": "Text",
+          "arguments": [
+            {
+              "name": "value",
+              "valueKind": "literal-string",
+              "typeId": "aui.core/String",
+              "value": "Tick ready",
+              "span": {
+                "startByte": 411,
+                "endByte": 430
+              }
+            }
+          ],
+          "children": [],
+          "modifiers": [
+            {
+              "name": "accessibilityLabel",
+              "arguments": [
+                {
+                  "name": "value",
+                  "valueKind": "literal-string",
+                  "typeId": "aui.core/String",
+                  "value": "Tick value available",
+                  "span": {
+                    "startByte": 451,
+                    "endByte": 480
+                  }
+                }
+              ],
+              "span": {
+                "startByte": 431,
+                "endByte": 481
+              }
+            }
+          ],
+          "span": {
+            "startByte": 406,
+            "endByte": 481
+          }
+        },
+        {
+          "localId": "v2",
+          "kind": "Button",
+          "arguments": [
+            {
+              "name": "title",
+              "valueKind": "literal-string",
+              "typeId": "aui.core/String",
+              "value": "Accept",
+              "span": {
+                "startByte": 493,
+                "endByte": 508
+              }
+            }
+          ],
+          "children": [],
+          "modifiers": [
+            {
+              "name": "on",
+              "arguments": [
+                {
+                  "name": "activated",
+                  "valueKind": "local-event",
+                  "typeId": "aui.core/Event<aui.core/Unit>",
+                  "value": "submit",
+                  "span": {
+                    "startByte": 513,
+                    "endByte": 530
+                  }
+                }
+              ],
+              "span": {
+                "startByte": 509,
+                "endByte": 531
+              }
+            },
+            {
+              "name": "accessibilityLabel",
+              "arguments": [
+                {
+                  "name": "value",
+                  "valueKind": "literal-string",
+                  "typeId": "aui.core/String",
+                  "value": "Accept tick",
+                  "span": {
+                    "startByte": 551,
+                    "endByte": 571
+                  }
+                }
+              ],
+              "span": {
+                "startByte": 531,
+                "endByte": 572
+              }
+            }
+          ],
+          "span": {
+            "startByte": 486,
+            "endByte": 572
+          }
+        }
+      ],
+      "modifiers": [],
+      "span": {
+        "startByte": 380,
+        "endByte": 576
+      }
+    }
+  },
+  "diagnostics": []
+}
