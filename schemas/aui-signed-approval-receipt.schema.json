@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AELYXORA detached signed approval receipt envelope (draft)",
+  "description": "Structural proposal only. No approved key, real signature or permission is proved by schema. Signature input is domain-separated canonical payload, keys and revocation verified externally. Receipt must not bind enclosing final D6 snapshotDigest or its own bytes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "envelopeVersion",
+    "payload",
+    "signature"
+  ],
+  "properties": {
+    "format": {
+      "const": "aui.signed-approval-receipt"
+    },
+    "envelopeVersion": {
+      "const": "1-draft"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "reviewKind",
+        "decision",
+        "proposalDigest",
+        "sourceLinkBundleDigest",
+        "projectId",
+        "graphRevision",
+        "semanticGraphDigest",
+        "lockDigest",
+        "coreRegistryFingerprint",
+        "targetTriple",
+        "abiLayoutDigest",
+        "capabilities",
+        "signerKeyId",
+        "signerRole",
+        "approvalEpoch",
+        "notBefore",
+        "expiresAt",
+        "nonce"
+      ],
+      "properties": {
+        "profile": {
+          "const": "aui.approval-payload/v1-draft"
+        },
+        "reviewKind": {
+          "enum": [
+            "architecture",
+            "executable"
+          ]
+        },
+        "decision": {
+          "const": "approve"
+        },
+        "proposalDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceLinkBundleDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "projectId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "graphRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "semanticGraphDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "lockDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "coreRegistryFingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "targetTriple": {
+          "type": "string",
+          "minLength": 1
+        },
+        "abiLayoutDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._:-]*$"
+          }
+        },
+        "signerKeyId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signerRole": {
+          "enum": [
+            "architecture-reviewer",
+            "release-approver"
+          ]
+        },
+        "approvalEpoch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "notBefore": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        },
+        "expiresAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+        },
+        "nonce": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{32}$"
+        },
+        "signedPeSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "buildInputDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "operationContractSetDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "reviewKind": {
+                "const": "architecture"
+              }
+            },
+            "required": [
+              "reviewKind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "signerRole": {
+                "const": "architecture-reviewer"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "signedPeSha256"
+                  ]
+                },
+                {
+                  "required": [
+                    "buildInputDigest"
+                  ]
+                },
+                {
+                  "required": [
+                    "operationContractSetDigest"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "reviewKind": {
+                "const": "executable"
+              }
+            },
+            "required": [
+              "reviewKind"
+            ]
+          },
+          "then": {
+            "required": [
+              "signedPeSha256",
+              "buildInputDigest",
+              "operationContractSetDigest"
+            ],
+            "properties": {
+              "signerRole": {
+                "const": "release-approver"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "signatureBase64"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "signatureBase64": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{86}==$"
+        }
+      }
+    }
+  }
+}
