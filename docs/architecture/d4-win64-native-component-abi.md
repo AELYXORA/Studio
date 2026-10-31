@@ -98,3 +98,7 @@ The Linux x86-64 SysV example uses different register/stack/ELF assumptions. It 
 ## W5. P0 not closed by exact proposed offsets
 
 Host/compiler runtime implementation; verified operation-table and module signing/admission; true native layout IDs and registry binding; 32-bit handle-index mapping/versioning; allocator and buffer memory ownership proof; callbacks/unwind/SEH/fault isolation; Windows OS versions/CPU features/COFF toolchain/reproducibility; actual tests and architect acceptance. **This proposal does not create a product ABI implementation or establish Windows compatibility.**
+
+## W6. Proposed module header, operation table and tagged result descriptors
+
+[D4 Win64 Module and Result Descriptors](d4-win64-module-and-result-descriptors.md) extends the above 64/48/64-byte call/span/admission records with a candidate 80-byte AuiModuleHeaderV1, 80-byte AuiOperationEntryV1, 64-byte AuiValueRefV1 and 80-byte AuiTaggedOutcomeV1. [Supplemental layout fixture](../../examples/abi/win64-module-and-outcome-v1.json) records exact offsets and 16 rejection scenarios. The module's native operation ordinal is not the persistent Graph OperationID. A provider Result<T,E> is a two-way typed envelope; UI TaskOutcome<T,E> has five distinct cases, including admission failures before a provider ticket exists. The design is NOT a COFF implementation: module contract-set digest normalization, signature/trust, native generic payload layout, Win64 unwind tests and owner lifetime proof remain P0.
