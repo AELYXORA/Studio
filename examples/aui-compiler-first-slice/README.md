@@ -18,6 +18,12 @@ The [review-type-catalogue schema](../../schemas/aui-compiler-review-type-catalo
 
 The [35 Unicode/lexical design cases](unicode-and-diagnostics-cases.json) cover strict UTF-8, invalid surrogate escapes, NFC-identical source names, typed integers and future-profile rejection. They are **NOT-RUN**; the official UCD 15.1.0 inputs/sha and native source compiler remain outstanding.
 
+## Verified scope of today's source-only reference designs
+
+The [L0 success plan](status-panel-l0.source-only-plan.expected.json), [L1 success plan](linked-consumer-panel-l1.source-only-plan.expected.json) and [invalid U32 failure report](status-panel-invalid-spacing.diagnostics.expected.json) now all bind the **exact current provisional catalogue SHA-256** `8446fb67384923b0ff4baf6c90509b34a3fd711a1880526034300f66153b22b0`. The L1 plan was checked against the 579-byte original, and a bad manually entered command parameter span was corrected. Both success plans have three source-ordered Views; L1 also has one event, one command, one handler and three modifiers. These are **manually constructed design expectations**, NOT compiler-generated artifacts.
+
+[First compiler practical readiness matrix](../../docs/architecture/implementation-readiness.md) distinguishes code handoff from signed acceptance. [47 compiler acceptance cases](acceptance-cases.json) and [35 Unicode cases](unicode-and-diagnostics-cases.json) remain NOT-RUN. Most mutation scenarios are still descriptions and need materialized input/expected diagnostics before executable golden testing.
+
 ## Intended developer workflow after architectural authorization
 
 1. Capture the exact unchanged source bytes and SHA. Reject mutation fixture search/replace unless it matches exactly once; do not accidentally edit fixture baselines.
