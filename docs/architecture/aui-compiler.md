@@ -96,6 +96,10 @@ The same [canonical TypeReference schema](../../schemas/aui-type-reference.schem
 
 [36 enum/generic design cases](../../examples/aui-compiler-production/enum-generic-value-cases.json) with three materialized negative AUI sources, [three enum digest arithmetic vectors](../../examples/aui-compiler-production/enum-logical-digest-reference-vectors.json) and [two generic identity vectors](../../examples/aui-compiler-production/generic-export-identity-reference-vectors.json) are available for future acceptance. All compiler cases remain NOT-RUN; verified core rule contents, signed source/Graph exports, portable enum carrier, native enum ABI and D1–D8 approval remain OPEN.
 
+### Full compiler: content-bearing current core definitions (CR14)
+
+[D3 CR14](d3-core-registry-value-contract.md) now attaches **34 exact candidate semantic rule definitions** to all 15 current core registry entries, with one content-bearing comparison projection and [36 NOT-RUN review cases](../../examples/canonical-graph/core-rule-content-review-cases.json). This resolves the prior **missing text content** in the candidate type registry, but not final meaning approval, public digest preimage, TaskOutcome runtime provenance, source/Graph signing or native ABI proof. TypedHIR/GraphLinkedIR and the production compiler must reject every `UNVERIFIED` core export even when its rule text is structurally complete.
+
 ## PC4. Contract for IR, linking and lowering between modules
 
 1. **CST and AST** contain token boundaries and recovery information. Recovered nodes are diagnostic-only. No error-containing AST may become a successful TypedHIR.
