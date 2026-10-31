@@ -21,6 +21,12 @@ Documenting test plans and expected results belongs to Phase I; **running tests 
 
 [Specification Completion Matrix](specification-completion-matrix.md) lists concrete requirements, owners, unresolved conflicts and required design fixtures. [Architecture-to-Execution Contract](architecture-to-execution-contract.md) describes the intended architecture/workflow/data-flow/AI/native trace. They support the owning documents; neither overrides accepted semantics.
 
+## Entire compiler is the reviewed product baseline
+
+The architect's **product intent is a fully functional native AUI compiler**, designed end-to-end before coding. [Complete compiler PC0–PC8](aui-compiler.md) owns that one target; it includes accepted shipping L0–L4, nominal/service contract source, verified core/Graph and reviewed source locks, complete IR and ownership verifiers, full Win64 machine/link/runtime and reproducible approved artifacts. The [66 production acceptance designs](../../examples/aui-compiler-production/complete-compiler-acceptance.json) are not observed tests. Partial L0/L1 source analysis, an emitted static JSON plan or a single native object cannot be described as the full compiler. The earlier bounded Phase II exception discussion must **not override the user's explicit request to complete and review the full compiler architecture in Phase I first**.
+
+Full architectural acceptance means every in-scope D3 language/IR/graph/ABI/runtime/build edge is explicitly resolved and the human architect records sign-off. Actual tests/native machine proof remain Phase III, but designs for their exact gates must be prepared before Phase II. No implied new acceptance or permission is created by these documents.
+
 ## First compiler scope within the existing process
 
 The requested deliverable at this stage is **compiler architecture documentation, not compiler source**. [First AUI Compiler Contract](aui-compiler-first-implementation-contract.md) proposes separately reviewable P00–P06 (strict L0/L1 front end and deterministic `UNVERIFIED_SOURCE_ONLY` plan), P07 verified Graph linkage and P08–P10 Win64 native backend. COMP-01..05 plus explicit architect review are required for a source-only implementation slice; COMP-06..08 additionally block native/linked outcomes. The default full in-scope D1–D8 sign-off requirement above **still applies** unless the human architect explicitly records a bounded exception. Creating design cases and plan-shaped JSON does not count as Phase II work or observed Phase III tests.
