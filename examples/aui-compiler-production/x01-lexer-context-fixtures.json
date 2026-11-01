@@ -1,0 +1,151 @@
+{
+  "status": "DESIGN_FIXTURES_NOT_RUN",
+  "note": "PASS_STRUCTURE_ONLY is lexical/structural and NOT proof of a type-correct full module",
+  "owner": "docs/architecture/aui-compiler-x01-token-reconciliation.md",
+  "scenarios": [
+    {
+      "id": "X01-001",
+      "sourceSnippet": "on settled slot(x) { match x { ... } }",
+      "context": "L3+ component",
+      "lexerParserAssertion": "token settled=80; settledHandler branch",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-002",
+      "sourceSnippet": "on settled(x) { send Do(); }",
+      "context": "L3 component",
+      "lexerParserAssertion": "no fallback from settled keyword to arbitrary event name",
+      "expectedCandidate": "REJECT_SYNTAX",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-003",
+      "sourceSnippet": "on click(x) { send Do(); }",
+      "context": "L1 component",
+      "lexerParserAssertion": "on=70 followed by Identifier",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-004",
+      "sourceSnippet": "state value: String = \"x\";",
+      "context": "L1 component",
+      "lexerParserAssertion": "state recognized but rejected by profile",
+      "expectedCandidate": "AUI_PROFILE_UNSUPPORTED",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-005",
+      "sourceSnippet": "bind view.title.value <- stateValue;",
+      "context": "L2 component",
+      "lexerParserAssertion": "view/value contextual Identifier",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-006",
+      "sourceSnippet": "taskSlot task: TaskSlot<Result,Error>;",
+      "context": "L3 component",
+      "lexerParserAssertion": "TaskSlot recognized as Identifier in type position",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-007",
+      "sourceSnippet": "effects(device-read) on io-worker;",
+      "context": "L1 component",
+      "lexerParserAssertion": "minus only in effect/domain atoms",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-008",
+      "sourceSnippet": "Text(value: a - b)",
+      "context": "L2 component",
+      "lexerParserAssertion": "minus not arithmetic",
+      "expectedCandidate": "REJECT_SYNTAX",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-009",
+      "sourceSnippet": "ForEach(items: rows, key: item.id) { item in Text(value: item.name) }",
+      "context": "L4 component",
+      "lexerParserAssertion": "key, in and ForEach gated",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-010",
+      "sourceSnippet": "ForEach(items: rows, key: item.id) { item in Text(value: item.name) }",
+      "context": "L3 component",
+      "lexerParserAssertion": "L4 construct rejected",
+      "expectedCandidate": "AUI_PROFILE_UNSUPPORTED",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-011",
+      "sourceSnippet": "Text(value: \"on settled //\")",
+      "context": "L0 component",
+      "lexerParserAssertion": "no keyword/comment inside string",
+      "expectedCandidate": "PASS_STRUCTURE_ONLY",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-012",
+      "sourceSnippet": "a => b",
+      "context": "L0 component",
+      "lexerParserAssertion": "fat arrow accepted token only in owned grammar context",
+      "expectedCandidate": "REJECT_SYNTAX",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-013",
+      "sourceSnippet": "a + b",
+      "context": "L0 component",
+      "lexerParserAssertion": "unowned arithmetic +",
+      "expectedCandidate": "REJECT_LEXICAL_OR_PROFILE",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-014",
+      "sourceSnippet": "import aui.core@1;",
+      "context": "L0 component",
+      "lexerParserAssertion": "import versions not in integrated grammar",
+      "expectedCandidate": "AUI_PROFILE_UNSUPPORTED",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-015",
+      "sourceSnippet": "component Result(input Event: String) { Text(value: Event) }",
+      "context": "L0 component",
+      "lexerParserAssertion": "type-like spellings as identifiers require namespace policy review",
+      "expectedCandidate": "REVIEW_IDENTIFIER_SCOPE",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    },
+    {
+      "id": "X01-016",
+      "sourceSnippet": "on settled userEvent(x) { send Do(); }",
+      "context": "L1 component",
+      "lexerParserAssertion": "settled recognized but L3-specific handler forbidden",
+      "expectedCandidate": "AUI_PROFILE_UNSUPPORTED",
+      "execution": "NOT_RUN",
+      "note": "Fragment only; full legal module fixture must provide imports/declarations and semantic symbols"
+    }
+  ]
+}
