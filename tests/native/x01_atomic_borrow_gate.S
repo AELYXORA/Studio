@@ -18,7 +18,10 @@ x01_borrow_try_acquire:
  shr rdx,32
  cmp edx,-1
  je .acfail
- lea rdx,[rax+0x100000000]
+ mov rdx,rax
+ mov r8,1
+ shl r8,32
+ add rdx,r8
  lock cmpxchg qword ptr [rcx],rdx
  jne .acloop
  mov eax,1
@@ -37,7 +40,9 @@ x01_borrow_release:
  test edx,edx
  jz .relfail
  mov rdx,rax
- sub rdx,0x100000000
+ mov r8,1
+ shl r8,32
+ sub rdx,r8
  lock cmpxchg qword ptr [rcx],rdx
  jne .relloop
  mov eax,1
@@ -54,7 +59,8 @@ x01_borrow_begin_retire:
  cmp eax,1
  jne .retfail
  mov rdx,rax
- and rdx,-4294967296
+ shr rdx,32
+ shl rdx,32
  or rdx,2
  lock cmpxchg qword ptr [rcx],rdx
  jne .retloop
