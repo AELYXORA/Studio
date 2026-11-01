@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 zero-length String / Span16 resolution — candidate
+
+[Empty String and typed Span policy](aui-compiler-x01-zero-length-span-contract.md) plus [32/16-byte vectors](../../examples/aui-compiler-production/x01-zero-length-span-byte-vectors.json) propose canonical zero-length decoded payload and empty Ref64 span representation. These are arithmetic vectors only; real Win64 arena/ABI tests remain NOT-RUN. X01 OPEN.
+
 ## X01 Token/Value/Span/Ref ownership audit
 
 [Memory compatibility audit](aui-compiler-x01-memory-compatibility-audit.md) reviews TokenV1, DecodedValueV1, Span16 and Ref64 together, clarifies token/trivia collections as **Span16 of typed Ref64 elements** (8-byte stride) and records 16 **NOT-RUN** negative mutation cases. Empty decoded String representation and native layout/arena tests still need sign-off. X01 remains OPEN.
