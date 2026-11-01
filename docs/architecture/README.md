@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Grammar checker native Assembly ABI — proposed
+
+[Grammar checker Assembly ABI contract](aui-compiler-grammar-checker-assembly-abi.md) specifies the checker-private 96-byte request / 80-byte reply, Win64 call rules, typed Ref64 arena boundaries, 11 procedure candidates, deterministic bitsets and fail-closed report publication. Reuses existing IAI-v1 context/pass records **without minting T0 PASS or Graph trust**. All ABI probes and checker tests remain NOT-RUN.
+
 ## Reproducible T0 grammar checker — implementation candidate
 
 [Assembly-first grammar checker contract](aui-compiler-grammar-checker-implementation.md) specifies input authority, strict JSON/nested EBNF decoding, token-class normalization, fixed-point nullable/FIRST/FOLLOW, left-corner and nested Predict checks, exact CST/AST/T1/profile coverage, controlled failure and bounded deterministic reports. [Sixteen NOT-RUN candidate acceptance cases](../../examples/aui-compiler-production/t0-grammar-checker-acceptance-candidate.json) define negative gates. No executable checker, native proof, or D1–D8 approval exists yet.
