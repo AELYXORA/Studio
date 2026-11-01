@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 lexer/parser deterministic dispatch — proposed
+
+[Lexer-to-parser policy](aui-compiler-t0-lexer-parser-policy.md) specifies exact UTF-8/token boundaries, contextual TaskOutcome and type-name spellings, longest-match punctuation, explicit module/profile admission and bounded recursive-descent dispatch for the three predict-set overlaps. In particular, qualified-name parsing uses one-token lookahead **after a bounded prefix**, not a universal fixed k-token lookahead. Numeric token reconciliation, proof-oriented fixtures, and native Assembly implementation remain OPEN.
+
 ## T0 nested Predict-Set analysis — review evidence
 
 [Predict-set review](aui-compiler-t0-predict-set-review.md) and [complete decision-site calculation](../../examples/aui-compiler-production/t0-predict-set-review.json) cover **8 choice, 18 optional, 21 repeat** sites of the proposed EBNF AST. Three existing FIRST/FIRST overlaps remain (sourceUnit/import, componentMember/on, pureExpr/ID), with no additional optional/repeat entry-vs-exit overlap under the current literal-token model. This is **not an approved parser, full contextual-token proof, or native Assembly test**.
