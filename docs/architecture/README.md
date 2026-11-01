@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 executed Assembly ResolveRef negative harness
+
+[Observed local runtime evidence](aui-compiler-x01-resolve-ref-runtime-evidence.md) and [Assembly-only test harness](../../tests/native/x01_resolve_ref_runtime_test.S) record **six successfully executed Linux x86-64 cases** invoking the Win64-register-ABI resolver; Windows runtime and real arena manager remain NOT-RUN. X01 and D1–D8 OPEN.
+
 ## X01 third COFF probe — single-entry ResolveRef
 
 [Observed Win64 COFF cross-build](aui-compiler-x01-resolve-ref-one-probe.md) of [Assembly source](../../tests/native/x01_resolve_ref_one.S) now covers generation, seal/lease, checked size/bounds, alignment and pointer-addition overflow on a synthetic pinned arena descriptor. This is **not a complete arena-table ResolveRef or Windows runtime execution**. X01 OPEN.
