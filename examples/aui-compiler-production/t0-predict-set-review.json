@@ -1,0 +1,622 @@
+{
+  "status": "REVIEW_ONLY_NOT_NATIVE",
+  "grammar": "schemas/aui-compiler-ebnf-ast-candidate.json",
+  "decisionCounts": {
+    "choice": 8,
+    "optional": 18,
+    "repeat": 21
+  },
+  "conflictCount": 3,
+  "conflicts": [
+    {
+      "path": "sourceUnit",
+      "kind": "choice",
+      "branches": [
+        1,
+        2
+      ],
+      "overlap": [
+        "import"
+      ]
+    },
+    {
+      "path": "componentMember",
+      "kind": "choice",
+      "branches": [
+        3,
+        9
+      ],
+      "overlap": [
+        "on"
+      ]
+    },
+    {
+      "path": "pureExpr",
+      "kind": "choice",
+      "branches": [
+        1,
+        2
+      ],
+      "overlap": [
+        "<ID>"
+      ]
+    }
+  ],
+  "limitations": [
+    "Terminals are literal spellings, not yet normalized to lexer tokens",
+    "This is LL(1)-style prediction, not a proof of inherent grammar ambiguity",
+    "Some conflicts are resolved through module-mode context or longer lookahead",
+    "No native parser tests"
+  ],
+  "decisions": [
+    {
+      "path": "sourceUnit",
+      "kind": "choice",
+      "predict": [
+        [
+          "component",
+          "import"
+        ],
+        [
+          "enum",
+          "import",
+          "record",
+          "service"
+        ]
+      ]
+    },
+    {
+      "path": "componentModule/s0",
+      "kind": "repeat",
+      "enter": [
+        "import"
+      ],
+      "exit": [
+        "component"
+      ]
+    },
+    {
+      "path": "componentDecl/s6",
+      "kind": "repeat",
+      "enter": [
+        "bind",
+        "command",
+        "derived",
+        "event",
+        "on",
+        "state",
+        "task",
+        "taskSlot"
+      ],
+      "exit": [
+        "<ID>"
+      ]
+    },
+    {
+      "path": "componentDecl/s3",
+      "kind": "optional",
+      "enter": [
+        "input"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "componentMember",
+      "kind": "choice",
+      "predict": [
+        [
+          "event"
+        ],
+        [
+          "command"
+        ],
+        [
+          "on"
+        ],
+        [
+          "state"
+        ],
+        [
+          "derived"
+        ],
+        [
+          "bind"
+        ],
+        [
+          "taskSlot"
+        ],
+        [
+          "task"
+        ],
+        [
+          "on"
+        ]
+      ]
+    },
+    {
+      "path": "inputList/s1",
+      "kind": "repeat",
+      "enter": [
+        ","
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "commandDecl/s12",
+      "kind": "optional",
+      "enter": [
+        "effects"
+      ],
+      "exit": [
+        "on"
+      ]
+    },
+    {
+      "path": "commandDecl/s12/inner/s2",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "commandDecl/s3",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "commandParams/s1",
+      "kind": "repeat",
+      "enter": [
+        ","
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "effectList/s1",
+      "kind": "repeat",
+      "enter": [
+        ","
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "bindDecl/s8",
+      "kind": "optional",
+      "enter": [
+        "using"
+      ],
+      "exit": [
+        ";"
+      ]
+    },
+    {
+      "path": "eventHandler/s6",
+      "kind": "choice",
+      "predict": [
+        [
+          "send"
+        ],
+        [
+          "commit"
+        ],
+        [
+          "submit"
+        ]
+      ]
+    },
+    {
+      "path": "sendStmt/s3",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "stateCommit/s3",
+      "kind": "repeat",
+      "enter": [
+        "set"
+      ],
+      "exit": [
+        "}"
+      ]
+    },
+    {
+      "path": "taskDecl/s3",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "awaitStmt/s6",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "submitStmt/s3",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "staticView/s5",
+      "kind": "repeat",
+      "enter": [
+        "."
+      ],
+      "exit": [
+        "<ID>",
+        "ForEach",
+        "}"
+      ]
+    },
+    {
+      "path": "staticView/s4",
+      "kind": "optional",
+      "enter": [
+        "{"
+      ],
+      "exit": [
+        ".",
+        "<ID>",
+        "ForEach",
+        "}"
+      ]
+    },
+    {
+      "path": "staticView/s4/inner/s2",
+      "kind": "repeat",
+      "enter": [
+        "<ID>",
+        "ForEach"
+      ],
+      "exit": [
+        "}"
+      ]
+    },
+    {
+      "path": "staticView/s2",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "childView",
+      "kind": "choice",
+      "predict": [
+        [
+          "<ID>"
+        ],
+        [
+          "ForEach"
+        ]
+      ]
+    },
+    {
+      "path": "modifier/s4",
+      "kind": "repeat",
+      "enter": [
+        ","
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "modifierName",
+      "kind": "choice",
+      "predict": [
+        [
+          "<ID>"
+        ],
+        [
+          "on"
+        ],
+        [
+          "key"
+        ]
+      ]
+    },
+    {
+      "path": "namedArgs/s1",
+      "kind": "repeat",
+      "enter": [
+        ","
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "pureExpr",
+      "kind": "choice",
+      "predict": [
+        [
+          "<ID>",
+          "<INT>",
+          "<STR>",
+          "false",
+          "true"
+        ],
+        [
+          "<ID>"
+        ],
+        [
+          "matchEnum"
+        ]
+      ]
+    },
+    {
+      "path": "pureCall/s2",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "enumMatchExpr/s8",
+      "kind": "repeat",
+      "enter": [
+        "case"
+      ],
+      "exit": [
+        "}"
+      ]
+    },
+    {
+      "path": "enumMatchArm/s2",
+      "kind": "optional",
+      "enter": [
+        "("
+      ],
+      "exit": [
+        "=>"
+      ]
+    },
+    {
+      "path": "pureAtom",
+      "kind": "choice",
+      "predict": [
+        [
+          "<STR>"
+        ],
+        [
+          "<INT>"
+        ],
+        [
+          "true"
+        ],
+        [
+          "false"
+        ],
+        [
+          "<ID>"
+        ]
+      ]
+    },
+    {
+      "path": "memberPath/s1",
+      "kind": "repeat",
+      "enter": [
+        "."
+      ],
+      "exit": [
+        ")",
+        ",",
+        ";",
+        "using"
+      ]
+    },
+    {
+      "path": "typeRef/s1",
+      "kind": "optional",
+      "enter": [
+        "<"
+      ],
+      "exit": [
+        ")",
+        ",",
+        ";",
+        "=",
+        ">"
+      ]
+    },
+    {
+      "path": "typeRef/s1/inner/s2",
+      "kind": "repeat",
+      "enter": [
+        ","
+      ],
+      "exit": [
+        ">"
+      ]
+    },
+    {
+      "path": "qualifiedName/s1",
+      "kind": "repeat",
+      "enter": [
+        "."
+      ],
+      "exit": [
+        "(",
+        ")",
+        ",",
+        ";",
+        "<",
+        "=",
+        "=>",
+        ">"
+      ]
+    },
+    {
+      "path": "effectAtom/s1",
+      "kind": "repeat",
+      "enter": [
+        "-"
+      ],
+      "exit": [
+        ")",
+        ","
+      ]
+    },
+    {
+      "path": "domainAtom/s1",
+      "kind": "repeat",
+      "enter": [
+        "-"
+      ],
+      "exit": [
+        ";",
+        "{"
+      ]
+    },
+    {
+      "path": "contractModule/s2",
+      "kind": "repeat",
+      "enter": [
+        "enum",
+        "record",
+        "service"
+      ],
+      "exit": [
+        "<EOF>"
+      ]
+    },
+    {
+      "path": "contractModule/s0",
+      "kind": "repeat",
+      "enter": [
+        "import"
+      ],
+      "exit": [
+        "enum",
+        "record",
+        "service"
+      ]
+    },
+    {
+      "path": "contractDecl",
+      "kind": "choice",
+      "predict": [
+        [
+          "record"
+        ],
+        [
+          "enum"
+        ],
+        [
+          "service"
+        ]
+      ]
+    },
+    {
+      "path": "recordDecl/s4",
+      "kind": "repeat",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        "}"
+      ]
+    },
+    {
+      "path": "enumDecl/s4",
+      "kind": "repeat",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        "}"
+      ]
+    },
+    {
+      "path": "enumCase/s1",
+      "kind": "optional",
+      "enter": [
+        "("
+      ],
+      "exit": [
+        ";"
+      ]
+    },
+    {
+      "path": "serviceCommand/s12",
+      "kind": "optional",
+      "enter": [
+        "effects"
+      ],
+      "exit": [
+        "on"
+      ]
+    },
+    {
+      "path": "serviceCommand/s12/inner/s2",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "serviceCommand/s3",
+      "kind": "optional",
+      "enter": [
+        "<ID>"
+      ],
+      "exit": [
+        ")"
+      ]
+    },
+    {
+      "path": "serviceInterface/s4",
+      "kind": "repeat",
+      "enter": [
+        "command"
+      ],
+      "exit": [
+        "}"
+      ]
+    }
+  ]
+}
