@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 TokenV1 field candidate — 2026-11-01
+
+[TokenV1 field layout candidate](aui-compiler-x01-token-field-layout.md) adds draft profile-mask and flag semantics plus 32-byte decoded-value descriptor via Ref64. One [48-byte layout vector](../../examples/aui-compiler-production/x01-token-v1-byte-layout-candidate.json) demonstrates little-endian arithmetic, **not** a successful compiler/ABI probe. Exact profile masks and native validation remain OPEN.
+
 ## X01 native lexer handoff — 2026-11-01
 
 [Lexer ABI handoff](aui-compiler-x01-native-lexer-abi.md) and [13 candidate golden byte vectors](../../examples/aui-compiler-production/x01-lexer-golden-vectors.json) now specify token/trivia byte offsets and failure cases. No native lexer is implemented or tested; flags/profileMask and Ref64 pool layouts are still awaiting review. X01 remains OPEN, as do D1–D8.
