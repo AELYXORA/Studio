@@ -9,7 +9,8 @@ x01_utf8_strict:
  test rcx,rcx
  jz .bad
  mov r8,rcx
- lea r9,[rcx+rdx]
+ mov r9,rcx
+ add r9,rdx
  jc .bad
  cmp rdx,3
  jb .scan
