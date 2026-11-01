@@ -1,0 +1,43 @@
+{
+  "status": "REVIEW_CALCULATION_NOT_NATIVE",
+  "semanticCaveat": "ID:* overlaps any contextual ID:word. Exact spelling guard can resolve some conflicts. Fixed keyword codes may cause grammar ID ambiguity and require lexer mode review.",
+  "productionCount": 57,
+  "conflictCount": 3,
+  "conflicts": [
+    {
+      "path": "sourceUnit",
+      "kind": "choice",
+      "arms": [
+        1,
+        2
+      ],
+      "overlap": [
+        "K64"
+      ]
+    },
+    {
+      "path": "componentMember",
+      "kind": "choice",
+      "arms": [
+        3,
+        9
+      ],
+      "overlap": [
+        "K70"
+      ]
+    },
+    {
+      "path": "pureExpr",
+      "kind": "choice",
+      "arms": [
+        1,
+        2
+      ],
+      "overlap": [
+        "ID:*"
+      ]
+    }
+  ],
+  "lexicalBindingSource": "schemas/aui-compiler-t0-token-binding-candidate.json",
+  "execution": "IN_MEMORY_REVIEW_ONLY"
+}
