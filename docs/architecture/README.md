@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 normalized Predict Sets — review
+
+[Normalized Predict review](aui-compiler-x01-token-normalized-predict.md) and [result JSON](../../examples/aui-compiler-production/x01-token-normalized-predict-review.json) recompute decisions with numeric token IDs and exact contextual Identifier spellings. The same three overlaps remain; **X01 OPEN**, no native test or accepted lexer classification.
+
 ## X01 token binding reconciliation — partial
 
 [Concrete X01 token audit](aui-compiler-x01-token-reconciliation.md) and [machine-readable terminal bindings](../../schemas/aui-compiler-t0-token-binding-candidate.json) enumerate 60 formal EBNF literal spellings, map lexical external symbols, and flag speculative numeric codes and unresolved contextual keyword conflicts. **X01 is still OPEN**, awaiting lexer policy approval and native fixtures.
