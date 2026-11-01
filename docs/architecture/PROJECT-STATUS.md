@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 arena entry lifecycle prototype — 2026-11-01
+
+[Lifecycle source and harness](aui-compiler-x01-arena-lifecycle-prototype.md) were committed; local source retrieval failed due to DNS, so **no compilation or runtime test has occurred for this new prototype**. The implementation remains single-threaded and does not allocate or free backing memory. X01 and D1–D8 OPEN.
+
 ## X01 arena-table execution — 2026-11-01
 
 [Arena-table ResolveRef runtime evidence](aui-compiler-x01-arena-table-runtime-evidence.md) records five executed Linux x86-64 checks (exit code 0), plus successful Win64 COFF cross-assembly. No actual Win64 execution, safe concurrent arena lifecycle or descriptor-kind enforcement. X01 and D1–D8 remain OPEN.
