@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 atomic borrow gate execution — 2026-11-01
+
+[Atomic borrow prototype execution](aui-compiler-x01-atomic-borrow-execution.md) records Linux x86-64 exit 0 for sequential lock-cmpxchg gate transitions and successful Win64 COFF cross-assembly. Concurrency stress, genuine owned pins, Windows execution, actual allocator and descriptor-kind checks are NOT-RUN. X01 and D1–D8 OPEN.
+
 ## X01 borrow-lifetime contract — 2026-11-01
 
 [Borrow-scoped ResolveRef design](aui-compiler-x01-borrow-scoped-resolve.md) identifies the unsafe global-leaseCount/return-raw-pointer boundary, specifies synchronized callback-scoped borrows and retire quiescence, and adds [16 NOT-RUN concurrency/negative cases](../../examples/aui-compiler-production/x01-borrow-race-test-matrix.json). Existing sequential Assembly probes remain only test infrastructure. X01 and D1–D8 OPEN.
