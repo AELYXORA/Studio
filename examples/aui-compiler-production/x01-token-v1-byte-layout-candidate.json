@@ -1,0 +1,18 @@
+{
+  "status": "PROPOSED_NOT_NATIVE_TESTED",
+  "record": "TokenV1",
+  "byteLength": 48,
+  "endianness": "little",
+  "fields": {
+    "tokenId": 1,
+    "sourceUnitId": 1,
+    "startByte": 0,
+    "endByte": 1,
+    "kind": 16,
+    "profileMask": 31,
+    "flags": 0,
+    "valueRef": 0
+  },
+  "expectedHex": "010000000000000001000000000000000000000000000000010000000000000010001f00000000000000000000000000",
+  "note": "No decoded pool for punctuation; single arithmetic fixture only"
+}
