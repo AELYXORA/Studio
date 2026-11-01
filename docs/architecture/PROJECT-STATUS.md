@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 first executed Assembly ResolveRef tests — 2026-11-01
+
+[Local runtime report](aui-compiler-x01-resolve-ref-runtime-evidence.md): six-case Assembly-only harness executed on Linux x86-64 with exit code 0, testing one valid pointer and five invalid Ref64/lease/alignment cases. Win64 COFF cross-build also succeeded. **Not Windows runtime, not a full arena table or certified ResolveRef**; X01/D1–D8 remain OPEN.
+
 ## X01 third actual COFF probe — 2026-11-01
 
 [One-entry ResolveRef COFF probe](aui-compiler-x01-resolve-ref-one-probe.md) cross-assembled successfully on Linux for Win64. It adds candidate sealed-state/lease, checked size, alignment and pointer overflow validation, but **no Windows execution, real arena table, concurrency/lifetime or typed descriptor proof**. X01 and D1–D8 remain OPEN.
