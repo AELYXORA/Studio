@@ -1,3 +1,7 @@
+## T0 ASCII trivia Assembly probe — 2026-11-01
+
+[Observed native trivia checks](aui-compiler-t0-trivia-probe.md) use [GAS implementation](../../tests/native/x01_trivia_ascii.S) and [test](../../tests/native/x01_trivia_ascii_test.S): 18 local assertions pass and both sources cross-assemble to Win64 COFF. Temporary 16-byte records only; no unified LexerScan, full golden acceptance or Windows execution. X01/T0 and D1–D8 OPEN.
+
 ## First executed T0 ASCII token slice — 2026-11-01
 
 [Native scanner and evidence](aui-compiler-t0-first-native-slice.md): GAS [scanner](../../tests/native/x01_lexer_ascii_slice.S) and [test](../../tests/native/x01_lexer_ascii_slice_test.S) executed on Linux x86-64 (exit 0, 14 selected assertions) and Windows x64 COFF cross-assembled. **Not full LX001/LX002 acceptance**: missing trivia, full UTF-8/XID, complete token schema, errors and controlled arena publication. X01/T0 and D1–D8 OPEN.
