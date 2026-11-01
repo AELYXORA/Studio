@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 grammar FIRST/FOLLOW calculation — review evidence
+
+[Computed review report](aui-compiler-t0-first-follow-analysis.md) and [machine-readable results](../../examples/aui-compiler-production/t0-grammar-static-analysis-candidate.json) record a review-environment nullable/FIRST/FOLLOW fixed-point calculation for the 57-production proposed EBNF AST. Three FIRST/FIRST overlaps were found in sourceUnit, componentMember and pureExpr; no named nullable production or left-recursion cycle was detected. **Not an exhaustive LL(1) proof or native Assembly test**; nested optional/repeat prediction and contextual token policies remain OPEN.
+
 ## Formal nested EBNF representation — proposed
 
 [Formal EBNF AST candidate](../../schemas/aui-compiler-ebnf-ast-candidate.json) represents all 57 current component/contract productions using nested sequence/choice/optional/repeat/literal/symbol trees; its [verification gate](aui-compiler-ebnf-formal-verification.md) specifies nullability, FIRST/FOLLOW, recursion, lookahead, numeric kind and CST/AST/T1 coverage checks. A malformed flat `enumCase` entry that accidentally absorbed `serviceInterface` was corrected. **No machine FIRST/FOLLOW results, parser, approval, or native evidence are claimed.**
