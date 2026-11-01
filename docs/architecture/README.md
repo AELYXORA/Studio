@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 integrated lifecycle and arena-table ResolveRef — executed
+
+[Observed integrated Assembly test](aui-compiler-x01-integrated-assembly-test.md) with [harness](../../tests/native/x01_arena_integrated_test.S): Linux x86-64 exit 0, all three Win64 COFF objects compiled. Rejected stale generation across retire/republish. **No concurrent lifetime protection, real allocator, Win64 execution or trusted T0 pass; X01 OPEN.**
+
 ## X01 arena entry lifecycle prototype — NOT-RUN
 
 [Assembly lifecycle prototype and verification limits](aui-compiler-x01-arena-lifecycle-prototype.md) covers publish, acquire, release, generation advance and permanent retirement at wrap with a proposed [Assembly test harness](../../tests/native/x01_arena_lifecycle_test.S). **Build/run could not be completed this turn; NOT-RUN.** No allocator or concurrent lease safety; X01 OPEN.
