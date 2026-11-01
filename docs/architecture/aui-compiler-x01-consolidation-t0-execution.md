@@ -36,3 +36,5 @@ The typed wrapper's initial assembly attempt failed on a 16/32-bit operand misma
 2. Define and run a status-returning callback ABI, including normal and fault cleanup, and a Win64 runnable PE test.
 3. Connect strict UTF-8 validator to a *bounded* LexerScan scanner; compare exact numeric token kinds, original byte offsets and trivia against existing golden vectors LX001+.
 4. Keep X01 and all D1–D8 OPEN until independently verified acceptance; do not expand scope to unnecessary memory frameworks.
+
+**Post-test correction:** the first UTF-8 source used `lea` before `jc` to detect an address overflow; `lea` does not update carry. Replaced with `mov r9,rcx; add r9,rdx; jc .bad` in commit `eb8ce3d`; repeated native tests (exit 0) and Win64 COFF cross-assembly after this correction. The caller is still responsible for presenting an accessible input buffer of the declared length.
