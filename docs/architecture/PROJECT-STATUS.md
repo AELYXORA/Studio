@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 integrated Assembly execution — 2026-11-01
+
+[Lifecycle + table resolver integrated test](aui-compiler-x01-integrated-assembly-test.md) executed on Linux x86-64 (exit 0), with all three Assembly modules cross-assembled to Win64 COFF after removing a Linux-only directive. Stale-generation rejection verified sequentially. **Caller-held lease, concurrent retire, real allocation and Windows execution remain unverified.** X01 / D1–D8 OPEN.
+
 ## X01 arena lifecycle runtime verification — 2026-11-01
 
 The previously NOT-RUN [Assembly lifecycle harness](../../tests/native/x01_arena_lifecycle_test.S) was subsequently **compiled and executed on Linux x86-64**, returning 0 after its complete sequential assertion path. The lifecycle source also cross-assembled successfully to Win64 COFF. [Updated evidence](aui-compiler-x01-arena-lifecycle-prototype.md#follow-up-execution-evidence--2026-11-01). No Windows runtime execution, concurrent safe arena manager, allocator/free or generation-exhaustion test; X01 and D1–D8 remain OPEN. The older section below describes the historical earlier attempted run, not the current test status.
