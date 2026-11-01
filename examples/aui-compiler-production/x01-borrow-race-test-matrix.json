@@ -1,0 +1,118 @@
+{
+  "status": "DESIGN_NOT_RUN",
+  "owner": "docs/architecture/aui-compiler-x01-borrow-scoped-resolve.md",
+  "tests": [
+    {
+      "id": "BR01",
+      "description": "Reader active blocks retire",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR02",
+      "description": "RETIRING blocks new acquire",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR03",
+      "description": "Stale generation after retire",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR04",
+      "description": "Two readers keep allocation",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR05",
+      "description": "Forged or duplicate release",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR06",
+      "description": "Callback error unwind",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR07",
+      "description": "Recursive lock entry",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR08",
+      "description": "Out-of-range request",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR09",
+      "description": "Wrong descriptor class",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR10",
+      "description": "Table count exceeds byte size",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR11",
+      "description": "Generation 65535 exhaustion",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR12",
+      "description": "Unverified mutable publish",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR13",
+      "description": "Allocation/free fault",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR14",
+      "description": "Preemption during callback",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR15",
+      "description": "Pointer escape after callback",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    },
+    {
+      "id": "BR16",
+      "description": "Cancellation during retire",
+      "execution": "NOT_RUN",
+      "required": "fail-closed; no use-after-free, no leaked borrow, no unauthorized pointer exposure",
+      "runtimeTarget": "Win64 multithreaded native harness"
+    }
+  ]
+}
