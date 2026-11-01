@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 gate/table TOCTOU experiment — rejected
+
+[Gate/table experiment audit](aui-compiler-x01-gate-table-toctou-audit.md) records an actual Windows x64 COFF cross-assembly of [experimental code](../../tests/native/x01_gate_table_resolve_experiment.S). The aggregate-count check before resolving returns a raw pointer and is explicitly **unsafe due to TOCTOU and absent caller-held borrow**. Experiment must not be used for production; X01 OPEN.
+
 ## X01 concurrent atomic retirement — 20 local passes
 
 [Four-worker Assembly stress report](aui-compiler-x01-atomic-multithread-evidence.md) and [Linux pthread test harness](../../tests/native/x01_atomic_thread_test.S) record 20/20 successful local multithreaded executions after a test sequencing correction. **No Windows execution or caller-scoped borrow capability**, X01 OPEN.
