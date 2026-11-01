@@ -1,3 +1,7 @@
+## X01 bound ResolveRef concurrent retire test — 2026-11-01
+
+[Observed two-thread test](aui-compiler-x01-bound-ref-thread-evidence.md) using [Assembly pthread harness](../../tests/native/x01_bound_ref_thread_test.S): 30/30 local Linux x86-64 runs exit 0; worker retains a scoped borrow while retire is denied, then cleanup permits retirement. Windows x64 COFF cross-build of resolver passes; **no Windows runtime or real allocator/free**. No full caller-capability, descriptor-kind or lifetime-safe arena manager. X01 and D1–D8 OPEN.
+
 ## X01 per-arena bound gate callback — executed candidate, 2026-11-01
 
 [Executed per-entry gate resolver](aui-compiler-x01-bound-gate-test.md) using [Assembly code](../../tests/native/x01_with_bound_ref.S) and [harness](../../tests/native/x01_with_bound_ref_test.S): Linux x86-64 exit 0 and Win64 COFF cross-assembly PASS. Gate is derived from the indexed arena entry, no longer caller-supplied. **Table lifetime, actual allocation/free, type validation, callback unwind and integrated multithread safety remain unverified.** X01/D1–D8 OPEN.
