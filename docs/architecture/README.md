@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 concurrent atomic retirement — 20 local passes
+
+[Four-worker Assembly stress report](aui-compiler-x01-atomic-multithread-evidence.md) and [Linux pthread test harness](../../tests/native/x01_atomic_thread_test.S) record 20/20 successful local multithreaded executions after a test sequencing correction. **No Windows execution or caller-scoped borrow capability**, X01 OPEN.
+
 ## X01 atomic borrow gate — executed sequential Assembly test
 
 [Executed atomic gate probe](aui-compiler-x01-atomic-borrow-execution.md) and [GAS source](../../tests/native/x01_atomic_borrow_gate.S) with [harness](../../tests/native/x01_atomic_borrow_gate_test.S) show Linux x86-64 exit 0 and Win64 COFF cross-assembly. **No multithreaded race proof or caller-scoped borrow protection**, X01 OPEN.
