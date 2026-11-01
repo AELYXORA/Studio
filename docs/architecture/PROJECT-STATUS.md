@@ -1,3 +1,7 @@
+## X01 real mmap/munmap borrow-retire execution — 2026-11-01
+
+[Observed 30-run allocation/retire test](aui-compiler-x01-mmap-retire-evidence.md) with [Assembly pthread harness](../../tests/native/x01_bound_ref_mmap_test.S): 30/30 Linux x86-64 runs returned 0 with actual mmap/munmap around held callback borrow; existing bound resolver cross-assembled for Windows x64 COFF. No actual Win64 execution or production allocator/ownership, typed descriptor verification or callback escape protection. X01 / D1–D8 OPEN.
+
 ## X01 bound ResolveRef concurrent retire test — 2026-11-01
 
 [Observed two-thread test](aui-compiler-x01-bound-ref-thread-evidence.md) using [Assembly pthread harness](../../tests/native/x01_bound_ref_thread_test.S): 30/30 local Linux x86-64 runs exit 0; worker retains a scoped borrow while retire is denied, then cleanup permits retirement. Windows x64 COFF cross-build of resolver passes; **no Windows runtime or real allocator/free**. No full caller-capability, descriptor-kind or lifetime-safe arena manager. X01 and D1–D8 OPEN.
