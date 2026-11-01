@@ -31,11 +31,6 @@ main:
  call x01_entry_retire
  test eax,eax
  jne .fail3
- mov rcx,0x0007000100000010
- lea rdx,[rip+entry-8]
- mov r8d,8
- mov r9d,8
- /* separate table not supplied: lifecycle logic tested independently */
  lea rcx,[rip+entry]
  call x01_entry_release
  cmp eax,1
