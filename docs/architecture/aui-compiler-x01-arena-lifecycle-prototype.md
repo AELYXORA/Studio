@@ -15,3 +15,19 @@ clang --target=x86_64-pc-windows-msvc -c tests/native/x01_arena_entry_lifecycle.
 ```
 
 Until those commands are executed and independently inspected, both test outcomes are **NOT-RUN** and X01 remains OPEN. Never elevate T0, T2 or D1–D8 evidence from this candidate.
+
+## Follow-up execution evidence — 2026-11-01
+
+A subsequent local verification **actually executed** the previously NOT-RUN source. Exact GitHub contents of `tests/native/x01_arena_entry_lifecycle.S` and `tests/native/x01_arena_lifecycle_test.S` were transcribed into the local build workspace and compiled without modifications to executable statements. Linux host: x86-64; Clang 17.0.0.
+
+```sh
+clang -no-pie lifecycle.S test.S -o test
+./test
+echo $?
+# observed: 0
+clang --target=x86_64-pc-windows-msvc -c lifecycle.S -o lifecycle.obj
+file lifecycle.obj
+# observed: x86-64 COFF object file
+```
+
+The harness has ten distinct failure exit labels; an observed exit 0 confirms all assertions in **that one sequential test run** passed. It exercises publish, acquire, blocked retire while leased, release, retire, generation 7→8, empty-lease failure, and republish. This evidence supersedes the previous **NOT-RUN** status for this specific Linux run and COFF assembly only. Still NOT-RUN: Windows execution, concurrency/races, actual allocator/free, typed descriptor checks, generation wrap, and integration with a pinned arena table. X01 and D1–D8 OPEN.
