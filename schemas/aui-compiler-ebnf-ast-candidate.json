@@ -1,0 +1,2378 @@
+{
+  "status": "PROPOSED_NOT_APPROVED",
+  "format": "aui-ebnf-ast-candidate/1",
+  "authority": "docs/architecture/aui-syntax.md",
+  "scope": "Component and contract module productions; shared productions are reused",
+  "note": "Structural EBNF model only; no proven lookahead, language acceptance, runtime parser, or native tests.",
+  "operators": {
+    "sequence": "ordered terms",
+    "choice": "alternatives",
+    "optional": "zero or one",
+    "repeat": "zero or more",
+    "literal": "exact terminal",
+    "symbol": "production or lexer terminal"
+  },
+  "externalSymbols": [
+    "EOF",
+    "ID",
+    "INT",
+    "STR"
+  ],
+  "literals": [
+    "(",
+    ")",
+    ",",
+    "-",
+    "->",
+    ".",
+    ":",
+    ";",
+    "<",
+    "<-",
+    "=",
+    "=>",
+    ">",
+    "AdmissionRejected",
+    "Cancelled",
+    "Event",
+    "Failed",
+    "ForEach",
+    "ProviderUnavailable",
+    "Result",
+    "Successful",
+    "TaskSlot",
+    "as",
+    "await",
+    "bind",
+    "case",
+    "command",
+    "commit",
+    "component",
+    "derived",
+    "effects",
+    "enum",
+    "event",
+    "false",
+    "import",
+    "in",
+    "input",
+    "item",
+    "items",
+    "key",
+    "let",
+    "match",
+    "matchEnum",
+    "on",
+    "record",
+    "return",
+    "send",
+    "service",
+    "set",
+    "settled",
+    "state",
+    "submit",
+    "task",
+    "taskSlot",
+    "true",
+    "using",
+    "value",
+    "view",
+    "{",
+    "}"
+  ],
+  "productions": [
+    {
+      "id": "P001",
+      "name": "sourceUnit",
+      "moduleKind": "dispatch",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "componentModule"
+          },
+          {
+            "op": "symbol",
+            "name": "contractModule"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P002",
+      "name": "componentModule",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "importDecl"
+            }
+          },
+          {
+            "op": "symbol",
+            "name": "componentDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "EOF"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P003",
+      "name": "componentDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "component"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "inputList"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "componentMember"
+            }
+          },
+          {
+            "op": "symbol",
+            "name": "rootView"
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P004",
+      "name": "componentMember",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "eventDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "commandDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "eventHandler"
+          },
+          {
+            "op": "symbol",
+            "name": "stateDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "derivedDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "bindDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "taskSlotDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "taskDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "settledHandler"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P005",
+      "name": "inputList",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "inputDecl"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": ","
+                },
+                {
+                  "op": "symbol",
+                  "name": "inputDecl"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P006",
+      "name": "inputDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "input"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P007",
+      "name": "importDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "import"
+          },
+          {
+            "op": "symbol",
+            "name": "qualifiedName"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P008",
+      "name": "eventDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "event"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "literal",
+            "value": "Event"
+          },
+          {
+            "op": "literal",
+            "value": "<"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ">"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P009",
+      "name": "commandDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "command"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "commandParams"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "->"
+          },
+          {
+            "op": "literal",
+            "value": "Result"
+          },
+          {
+            "op": "literal",
+            "value": "<"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ","
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ">"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "effects"
+                },
+                {
+                  "op": "literal",
+                  "value": "("
+                },
+                {
+                  "op": "optional",
+                  "item": {
+                    "op": "symbol",
+                    "name": "effectList"
+                  }
+                },
+                {
+                  "op": "literal",
+                  "value": ")"
+                }
+              ]
+            }
+          },
+          {
+            "op": "literal",
+            "value": "on"
+          },
+          {
+            "op": "symbol",
+            "name": "domainAtom"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P010",
+      "name": "commandParams",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "commandParam"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": ","
+                },
+                {
+                  "op": "symbol",
+                  "name": "commandParam"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P011",
+      "name": "commandParam",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P012",
+      "name": "effectList",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "effectAtom"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": ","
+                },
+                {
+                  "op": "symbol",
+                  "name": "effectAtom"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P013",
+      "name": "stateDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "state"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": "="
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P014",
+      "name": "derivedDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "derived"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": "="
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P015",
+      "name": "bindDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "bind"
+          },
+          {
+            "op": "literal",
+            "value": "view"
+          },
+          {
+            "op": "literal",
+            "value": "."
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "."
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "<-"
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "using"
+                },
+                {
+                  "op": "symbol",
+                  "name": "qualifiedName"
+                }
+              ]
+            }
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P016",
+      "name": "eventHandler",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "on"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "choice",
+            "items": [
+              {
+                "op": "symbol",
+                "name": "sendStmt"
+              },
+              {
+                "op": "symbol",
+                "name": "stateCommit"
+              },
+              {
+                "op": "symbol",
+                "name": "submitStmt"
+              }
+            ]
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P017",
+      "name": "sendStmt",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "send"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "namedArgs"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P018",
+      "name": "stateCommit",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "commit"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "setStmt"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "setStmt"
+            }
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P019",
+      "name": "setStmt",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "set"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "="
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P020",
+      "name": "taskSlotDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "taskSlot"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "literal",
+            "value": "TaskSlot"
+          },
+          {
+            "op": "literal",
+            "value": "<"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ","
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ">"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P021",
+      "name": "taskDecl",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "task"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "commandParams"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "->"
+          },
+          {
+            "op": "literal",
+            "value": "Result"
+          },
+          {
+            "op": "literal",
+            "value": "<"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ","
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ">"
+          },
+          {
+            "op": "literal",
+            "value": "on"
+          },
+          {
+            "op": "symbol",
+            "name": "domainAtom"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "awaitStmt"
+          },
+          {
+            "op": "symbol",
+            "name": "returnStmt"
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P022",
+      "name": "awaitStmt",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "let"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "="
+          },
+          {
+            "op": "literal",
+            "value": "await"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "namedArgs"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P023",
+      "name": "returnStmt",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "return"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P024",
+      "name": "submitStmt",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "submit"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "namedArgs"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "as"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P025",
+      "name": "settledHandler",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "on"
+          },
+          {
+            "op": "literal",
+            "value": "settled"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "literal",
+            "value": "match"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "successArm"
+          },
+          {
+            "op": "symbol",
+            "name": "failureArm"
+          },
+          {
+            "op": "symbol",
+            "name": "rejectArm"
+          },
+          {
+            "op": "symbol",
+            "name": "cancelledArm"
+          },
+          {
+            "op": "symbol",
+            "name": "unavailableArm"
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P026",
+      "name": "successArm",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "Successful"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "=>"
+          },
+          {
+            "op": "symbol",
+            "name": "stateCommit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P027",
+      "name": "failureArm",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "Failed"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "=>"
+          },
+          {
+            "op": "symbol",
+            "name": "stateCommit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P028",
+      "name": "rejectArm",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "AdmissionRejected"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "=>"
+          },
+          {
+            "op": "symbol",
+            "name": "stateCommit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P029",
+      "name": "cancelledArm",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "Cancelled"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "=>"
+          },
+          {
+            "op": "symbol",
+            "name": "stateCommit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P030",
+      "name": "unavailableArm",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "ProviderUnavailable"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "=>"
+          },
+          {
+            "op": "symbol",
+            "name": "stateCommit"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P031",
+      "name": "rootView",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "symbol",
+        "name": "staticView"
+      }
+    },
+    {
+      "id": "P032",
+      "name": "staticView",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "viewName"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "namedArgs"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "{"
+                },
+                {
+                  "op": "symbol",
+                  "name": "childView"
+                },
+                {
+                  "op": "repeat",
+                  "min": 0,
+                  "item": {
+                    "op": "symbol",
+                    "name": "childView"
+                  }
+                },
+                {
+                  "op": "literal",
+                  "value": "}"
+                }
+              ]
+            }
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "modifier"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P033",
+      "name": "childView",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "staticView"
+          },
+          {
+            "op": "symbol",
+            "name": "dynamicView"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P034",
+      "name": "dynamicView",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "ForEach"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "literal",
+            "value": "items"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "literal",
+            "value": ","
+          },
+          {
+            "op": "literal",
+            "value": "key"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "literal",
+            "value": "item"
+          },
+          {
+            "op": "literal",
+            "value": "."
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "literal",
+            "value": "item"
+          },
+          {
+            "op": "literal",
+            "value": "in"
+          },
+          {
+            "op": "symbol",
+            "name": "childView"
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P035",
+      "name": "modifier",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "."
+          },
+          {
+            "op": "symbol",
+            "name": "modifierName"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "symbol",
+            "name": "namedArg"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": ","
+                },
+                {
+                  "op": "symbol",
+                  "name": "namedArg"
+                }
+              ]
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P036",
+      "name": "modifierName",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "on"
+          },
+          {
+            "op": "literal",
+            "value": "key"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P037",
+      "name": "namedArgs",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "namedArg"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": ","
+                },
+                {
+                  "op": "symbol",
+                  "name": "namedArg"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P038",
+      "name": "namedArg",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P039",
+      "name": "pureExpr",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "pureAtom"
+          },
+          {
+            "op": "symbol",
+            "name": "pureCall"
+          },
+          {
+            "op": "symbol",
+            "name": "enumMatchExpr"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P040",
+      "name": "pureCall",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "qualifiedName"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "namedArgs"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P041",
+      "name": "enumMatchExpr",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "matchEnum"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "literal",
+            "value": "value"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "enumMatchArm"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "enumMatchArm"
+            }
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P042",
+      "name": "enumMatchArm",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "case"
+          },
+          {
+            "op": "symbol",
+            "name": "qualifiedName"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "("
+                },
+                {
+                  "op": "symbol",
+                  "name": "ID"
+                },
+                {
+                  "op": "literal",
+                  "value": ")"
+                }
+              ]
+            }
+          },
+          {
+            "op": "literal",
+            "value": "=>"
+          },
+          {
+            "op": "symbol",
+            "name": "pureExpr"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P043",
+      "name": "pureAtom",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "STR"
+          },
+          {
+            "op": "symbol",
+            "name": "INT"
+          },
+          {
+            "op": "literal",
+            "value": "true"
+          },
+          {
+            "op": "literal",
+            "value": "false"
+          },
+          {
+            "op": "symbol",
+            "name": "memberPath"
+          }
+        ]
+      }
+    },
+    {
+      "id": "P044",
+      "name": "memberPath",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "."
+                },
+                {
+                  "op": "symbol",
+                  "name": "ID"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P045",
+      "name": "viewName",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "symbol",
+        "name": "ID"
+      }
+    },
+    {
+      "id": "P046",
+      "name": "typeRef",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "qualifiedName"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "<"
+                },
+                {
+                  "op": "symbol",
+                  "name": "typeRef"
+                },
+                {
+                  "op": "repeat",
+                  "min": 0,
+                  "item": {
+                    "op": "sequence",
+                    "items": [
+                      {
+                        "op": "literal",
+                        "value": ","
+                      },
+                      {
+                        "op": "symbol",
+                        "name": "typeRef"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "literal",
+                  "value": ">"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P047",
+      "name": "qualifiedName",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "."
+                },
+                {
+                  "op": "symbol",
+                  "name": "ID"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P048",
+      "name": "effectAtom",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "-"
+                },
+                {
+                  "op": "symbol",
+                  "name": "ID"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "P049",
+      "name": "domainAtom",
+      "moduleKind": "component",
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "-"
+                },
+                {
+                  "op": "symbol",
+                  "name": "ID"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "C001",
+      "name": "contractModule",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "importDecl"
+            }
+          },
+          {
+            "op": "symbol",
+            "name": "contractDecl"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "contractDecl"
+            }
+          },
+          {
+            "op": "symbol",
+            "name": "EOF"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C002",
+      "name": "contractDecl",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "choice",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "recordDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "enumDecl"
+          },
+          {
+            "op": "symbol",
+            "name": "serviceInterface"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C003",
+      "name": "recordDecl",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "record"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "recordField"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "recordField"
+            }
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C004",
+      "name": "recordField",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": ":"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C005",
+      "name": "enumDecl",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "enum"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "enumCase"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "enumCase"
+            }
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C006",
+      "name": "enumCase",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "("
+                },
+                {
+                  "op": "symbol",
+                  "name": "typeRef"
+                },
+                {
+                  "op": "literal",
+                  "value": ")"
+                }
+              ]
+            }
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C007",
+      "name": "serviceCommand",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "command"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "("
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "symbol",
+              "name": "commandParams"
+            }
+          },
+          {
+            "op": "literal",
+            "value": ")"
+          },
+          {
+            "op": "literal",
+            "value": "->"
+          },
+          {
+            "op": "literal",
+            "value": "Result"
+          },
+          {
+            "op": "literal",
+            "value": "<"
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ","
+          },
+          {
+            "op": "symbol",
+            "name": "typeRef"
+          },
+          {
+            "op": "literal",
+            "value": ">"
+          },
+          {
+            "op": "optional",
+            "item": {
+              "op": "sequence",
+              "items": [
+                {
+                  "op": "literal",
+                  "value": "effects"
+                },
+                {
+                  "op": "literal",
+                  "value": "("
+                },
+                {
+                  "op": "optional",
+                  "item": {
+                    "op": "symbol",
+                    "name": "effectList"
+                  }
+                },
+                {
+                  "op": "literal",
+                  "value": ")"
+                }
+              ]
+            }
+          },
+          {
+            "op": "literal",
+            "value": "on"
+          },
+          {
+            "op": "symbol",
+            "name": "domainAtom"
+          },
+          {
+            "op": "literal",
+            "value": ";"
+          }
+        ]
+      }
+    },
+    {
+      "id": "C008",
+      "name": "serviceInterface",
+      "moduleKind": "contract",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "body": {
+        "op": "sequence",
+        "items": [
+          {
+            "op": "literal",
+            "value": "service"
+          },
+          {
+            "op": "symbol",
+            "name": "ID"
+          },
+          {
+            "op": "literal",
+            "value": "{"
+          },
+          {
+            "op": "symbol",
+            "name": "serviceCommand"
+          },
+          {
+            "op": "repeat",
+            "min": 0,
+            "item": {
+              "op": "symbol",
+              "name": "serviceCommand"
+            }
+          },
+          {
+            "op": "literal",
+            "value": "}"
+          }
+        ]
+      }
+    }
+  ]
+}
