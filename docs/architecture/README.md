@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 grammar coverage audit — open gaps
+
+[Production-to-CST/AST/TypedHIR coverage audit](aui-compiler-grammar-coverage-audit.md) maps the integrated component-source grammar families and contract-module obligations, identifies unmapped speculative token kinds, contextual keyword ambiguities and TaskOutcome arm token handling, and sets exact per-alternative closure fields and negative test families. **Partial design mapping only:** the full machine-readable production-alternatives registry, native lexer/parser and acceptance evidence remain OPEN.
+
 ## T0 lexical/CST/AST kind registry — proposed
 
 [T0 kind registry and syntax-to-TypedHIR mapping](aui-compiler-t0-kind-registry.md) proposes numerical token/CST/AST kind inventories with profile-aware contextual identifiers, CST-only recovery, and the cross-stage family mapping. **It is not exhaustive production-level closure yet:** speculative/unmapped entries and remaining grammar choices must be reconciled before acceptance; native tests are NOT-RUN.
