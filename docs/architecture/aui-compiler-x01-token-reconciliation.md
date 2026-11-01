@@ -13,7 +13,7 @@
 
 ## X01.2 Remaining explicit conflicts before closure
 
-1. The [syntax owner](aui-syntax.md) describes `settled` as an L3 contextual dispatch, while the older numeric table and proposed bridge classify it as a fixed keyword (ID 80). Choose one policy, regenerate predictive sets after terminal normalization, and test `on settled` plus ordinary symbol scopes.
+1. **Candidate policy selected, not approved:** `settled` is fixed numeric keyword ID 80 (as in the integrated syntax keyword list). Its *syntactic use* is context-gated to `on settled` at L3+; malformed `on settled` never falls back to an ordinary event handler. Numeric class versus parser-context admission are distinct. Native token tests and normalized Predict Sets are still required.
 2. `key`, `in`, `as`, `items` and `ForEach` require exact scoped keyword policy for L4, particularly named argument labels; grammar literal presence does not imply global reservation.
 3. Unused numeric codes must be **retired or explicitly reserved, not interpreted**; unknown values and unsupported spelling reject. The current `unownedCandidateCodes` list is a review queue, not proof of exhaustive unused-token detection.
 4. Every literal-to-token join must be validated against the actual token encoder and per-profile parser tests. None exist yet.
@@ -24,3 +24,7 @@
 A standalone approved native lexer must emit a token stream whose codes match this table for every literal and contextual use, reject all unsupported codes, preserve exact original byte spans, and demonstrate expected L0–L4 rejection or acceptance in golden fixtures. An independently replayable checker must verify the EBNF literal coverage after token normalization.
 
 **X01 remains OPEN**; this artifact advances the concrete mapping but neither asserts approval nor changes the architecture or D1–D8 gates.
+
+## X01.4 Focused review fixtures (all NOT-RUN)
+
+[16 lexical/context fixtures](../../examples/aui-compiler-production/x01-lexer-context-fixtures.json) cover `on settled`, L0–L4 admission, contextual type/field names, operator rejection and string boundaries. They are fragment scenarios, not full-module successful compiler evidence. The table now makes `settled` fixed keyword 80, while five TaskOutcome arm labels and `Result/Event/TaskSlot` remain Identifier 1 exact-context matches. **X01 stays OPEN** until an independent native lexer verifies this policy and terminal-normalized Predict Sets.
