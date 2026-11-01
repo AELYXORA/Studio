@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 second actual COFF probe — 2026-11-01
+
+[Second COFF cross-build evidence](aui-compiler-x01-ref-bounds-crossbuild.md) confirms successful cross-assembly and disassembly of a candidate Ref64 bounds function. Native Windows execution and arena lifetime validation remain NOT-RUN; X01 and D1–D8 OPEN.
+
 ## X01 first actual COFF probe — 2026-11-01
 
 [Observed Win64 cross-assembly evidence](aui-compiler-x01-actual-coff-probe.md) records successful local Linux-host Clang 17 Windows x64 COFF assembly of [probe](../../tests/native/x01_abi_probe.S). Static 48/32/16-byte fixture assertions passed and `.rdata` measured 0x60 bytes. **Windows runtime tests, arena validation and full ABI approval NOT-RUN**. X01 and D1–D8 remain OPEN.
