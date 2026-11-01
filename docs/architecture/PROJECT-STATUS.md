@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## Cross-gate compiler readiness audit — 2026-11-01
+
+[End-to-end T0–T8 audit](aui-compiler-t0-t8-readiness-audit.md) identifies **14 explicit unresolved cross-stage gaps X01–X14**, ordered into source, public trust, physical/semantic and native/release closure gates. The T0 formal EBNF and grammar checker documentation are candidate designs, not implementation. Core public exports, typed Graph linkage, native IR validators, Win64/ABI qualification and T8 runtime admission remain unverified. Isolated Assembly ABI probes are reasonable engineering experiments; **no production native compiler is ready for release**. D1–D8 remain OPEN.
+
 ## One current architectural direction
 
 [ONE Canonical Project Graph](canonical-project-graph-and-components.md) owns typed components/ports and operation contracts, targets, graph topology, workflows and state machines, typed dataFlow policies, hardware resource claims and retired stable identities. There are **no numbered product/architecture editions**. Project revision is an edit-history counter. Historical experimental source encodings and hashes are not the active architecture.
