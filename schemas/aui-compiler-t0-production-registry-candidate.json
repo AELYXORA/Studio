@@ -1378,14 +1378,34 @@
           "state": "MAPPED_PROPOSED"
         }
       ]
+    },
+    {
+      "productionId": "C008",
+      "name": "serviceInterface",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "serviceInterface.1",
+          "ebnf": "\"service\", ID, \"{\", serviceCommand, { serviceCommand }, \"}\"",
+          "cstKind": "ServiceDecl",
+          "astKind": "ServiceInterface",
+          "t1Consumer": "T1_SERVICE",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
     }
   ],
   "mappingCoverage": {
-    "productionCount": 56,
-    "alternativeCount": 76,
-    "proposedMapped": 65,
+    "productionCount": 57,
+    "alternativeCount": 77,
+    "proposedMapped": 66,
     "needsSemanticReview": 11,
     "unmapped": 0,
-    "meaning": "Documentary mapping only, not grammar approval, parser implementation, or testing"
+    "meaning": "Documentary mapping only; no accepted production/parser/native test"
   }
 }
