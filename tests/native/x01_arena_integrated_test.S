@@ -120,4 +120,3 @@ main:
  add rsp,32
  pop rbx
  ret
-.section .note.GNU-stack,"",@progbits
