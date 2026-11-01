@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 token reconciliation progress — 2026-11-01
+
+The [X01 token reconciliation](aui-compiler-x01-token-reconciliation.md) now binds 60 EBNF literals to proposed lexer codes/contextual Identifier matches and explicitly lists unowned numeric codes. The `settled` classification mismatch and keyword scope still need resolution. This is **review data only**, not an accepted lexer, token tests, or closed X01 gate.
+
 ## Cross-gate compiler readiness audit — 2026-11-01
 
 [End-to-end T0–T8 audit](aui-compiler-t0-t8-readiness-audit.md) identifies **14 explicit unresolved cross-stage gaps X01–X14**, ordered into source, public trust, physical/semantic and native/release closure gates. The T0 formal EBNF and grammar checker documentation are candidate designs, not implementation. Core public exports, typed Graph linkage, native IR validators, Win64/ABI qualification and T8 runtime admission remain unverified. Isolated Assembly ABI probes are reasonable engineering experiments; **no production native compiler is ready for release**. D1–D8 remain OPEN.
