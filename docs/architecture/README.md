@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 arena entry lifecycle prototype — NOT-RUN
+
+[Assembly lifecycle prototype and verification limits](aui-compiler-x01-arena-lifecycle-prototype.md) covers publish, acquire, release, generation advance and permanent retirement at wrap with a proposed [Assembly test harness](../../tests/native/x01_arena_lifecycle_test.S). **Build/run could not be completed this turn; NOT-RUN.** No allocator or concurrent lease safety; X01 OPEN.
+
 ## X01 arena-table ResolveRef — executed five-case harness
 
 [Runtime evidence](aui-compiler-x01-arena-table-runtime-evidence.md) and [Assembly resolver](../../tests/native/x01_resolve_table.S) with [harness](../../tests/native/x01_table_test.S) demonstrate five local Linux x86-64 pass cases and successful Windows x64 COFF cross-assembly. Host-pinned table preconditions, concurrency and allocation remain unverified; X01 OPEN.
