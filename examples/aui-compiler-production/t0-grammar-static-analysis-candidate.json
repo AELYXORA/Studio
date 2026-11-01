@@ -1,0 +1,100 @@
+{
+  "status": "STRUCTURAL_ANALYSIS_EXECUTED_IN_REVIEW_SANDBOX_NOT_NATIVE",
+  "grammar": "schemas/aui-compiler-ebnf-ast-candidate.json",
+  "productions": 57,
+  "nullableFixedPointIterations": 5,
+  "followFixedPointIterations": 3,
+  "nullableProductions": [],
+  "leftRecursiveProductions": [],
+  "firstFirstConflicts": [
+    {
+      "location": "sourceUnit",
+      "type": "FIRST_FIRST",
+      "arms": [
+        1,
+        2
+      ],
+      "terminals": [
+        "import"
+      ]
+    },
+    {
+      "location": "componentMember",
+      "type": "FIRST_FIRST",
+      "arms": [
+        3,
+        9
+      ],
+      "terminals": [
+        "on"
+      ]
+    },
+    {
+      "location": "pureExpr",
+      "type": "FIRST_FIRST",
+      "arms": [
+        1,
+        2
+      ],
+      "terminals": [
+        "<ID>"
+      ]
+    }
+  ],
+  "otherCandidateConflicts": [],
+  "sampleFirst": {
+    "sourceUnit": [
+      "component",
+      "enum",
+      "import",
+      "record",
+      "service"
+    ],
+    "componentMember": [
+      "bind",
+      "command",
+      "derived",
+      "event",
+      "on",
+      "state",
+      "task",
+      "taskSlot"
+    ],
+    "pureExpr": [
+      "<ID>",
+      "<INT>",
+      "<STR>",
+      "false",
+      "matchEnum",
+      "true"
+    ]
+  },
+  "sampleFollow": {
+    "sourceUnit": [
+      "$"
+    ],
+    "componentMember": [
+      "<ID>",
+      "bind",
+      "command",
+      "derived",
+      "event",
+      "on",
+      "state",
+      "task",
+      "taskSlot"
+    ],
+    "pureExpr": [
+      ")",
+      ",",
+      ";",
+      "using"
+    ]
+  },
+  "limitations": [
+    "No contextual keyword resolution",
+    "No full LL(1) nullable optional/repeat decision audit",
+    "No native parser or independent reexecution",
+    "Results are for proposed extracted grammar only"
+  ]
+}
