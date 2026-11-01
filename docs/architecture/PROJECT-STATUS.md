@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 native lexer handoff — 2026-11-01
+
+[Lexer ABI handoff](aui-compiler-x01-native-lexer-abi.md) and [13 candidate golden byte vectors](../../examples/aui-compiler-production/x01-lexer-golden-vectors.json) now specify token/trivia byte offsets and failure cases. No native lexer is implemented or tested; flags/profileMask and Ref64 pool layouts are still awaiting review. X01 remains OPEN, as do D1–D8.
+
 ## X01 normalized Predict review — 2026-11-01
 
 [Token-normalized Predict review](aui-compiler-x01-token-normalized-predict.md) reports the same three overlaps for the 57-production candidate after numeric token/contextual ID conversion. The calculation is in-memory review-only; complete lexical classification, independent replay and native tokenizer evidence remain OPEN. X01 is not closed.
