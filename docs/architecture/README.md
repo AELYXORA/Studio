@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 contract-mode integration and disambiguation review
+
+[T0 disambiguation review](aui-compiler-t0-disambiguation-review.md) records candidate parsing rules for the 11 semantically sensitive alternatives and adds contract-source productions to the [machine-readable grammar registry](../../schemas/aui-compiler-t0-production-registry-candidate.json): **57 productions / 77 top-level alternatives**, 66 proposed mappings, 11 pending semantic review. These are **document counts**, not exhaustive nested EBNF coverage, approved parser behavior or native evidence. Exact numeric kind joins, profile masks, diagnostics and tests remain OPEN.
+
 ## Machine-readable T0 component grammar inventory — proposed
 
 [Candidate EBNF production registry](../../schemas/aui-compiler-t0-production-registry-candidate.json) records **49 component-grammar productions and 67 top-level alternatives**, each with proposed CST/AST/T1 mapping or an explicit semantic conflict state. **56 mappings are documentary candidates and 11 require focused semantic review; no alternative is approved or native-tested.** Contract-module production alternatives, stable diagnostic IDs, profile-specific admission, kind-accurate parser implementations and fixtures remain OPEN; these provisional maps are not a completeness proof.
