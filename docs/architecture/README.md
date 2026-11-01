@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Machine-readable T0 component grammar inventory — proposed
+
+[Candidate EBNF production registry](../../schemas/aui-compiler-t0-production-registry-candidate.json) records **49 component-grammar productions and 67 top-level alternatives**, each with proposed CST/AST/T1 mapping or an explicit semantic conflict state. **56 mappings are documentary candidates and 11 require focused semantic review; no alternative is approved or native-tested.** Contract-module production alternatives, stable diagnostic IDs, profile-specific admission, kind-accurate parser implementations and fixtures remain OPEN; these provisional maps are not a completeness proof.
+
 ## T0 grammar coverage audit — open gaps
 
 [Production-to-CST/AST/TypedHIR coverage audit](aui-compiler-grammar-coverage-audit.md) maps the integrated component-source grammar families and contract-module obligations, identifies unmapped speculative token kinds, contextual keyword ambiguities and TaskOutcome arm token handling, and sets exact per-alternative closure fields and negative test families. **Partial design mapping only:** the full machine-readable production-alternatives registry, native lexer/parser and acceptance evidence remain OPEN.
