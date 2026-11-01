@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 third COFF probe — single-entry ResolveRef
+
+[Observed Win64 COFF cross-build](aui-compiler-x01-resolve-ref-one-probe.md) of [Assembly source](../../tests/native/x01_resolve_ref_one.S) now covers generation, seal/lease, checked size/bounds, alignment and pointer-addition overflow on a synthetic pinned arena descriptor. This is **not a complete arena-table ResolveRef or Windows runtime execution**. X01 OPEN.
+
 ## X01 second COFF Ref64 bounds cross-build
 
 [Observed second cross-build](aui-compiler-x01-ref-bounds-crossbuild.md) of [assembly source](../../tests/native/x01_ref_bounds_probe.S) confirms actual Windows x64 COFF code generation for synthetic Ref64 index, generation and offset checks. This is **not Windows execution**, arena ownership or real ResolveRef; X01 OPEN.
