@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 token binding reconciliation — partial
+
+[Concrete X01 token audit](aui-compiler-x01-token-reconciliation.md) and [machine-readable terminal bindings](../../schemas/aui-compiler-t0-token-binding-candidate.json) enumerate 60 formal EBNF literal spellings, map lexical external symbols, and flag speculative numeric codes and unresolved contextual keyword conflicts. **X01 is still OPEN**, awaiting lexer policy approval and native fixtures.
+
 ## End-to-end compiler T0–T8 readiness audit
 
 [Cross-gate readiness audit](aui-compiler-t0-t8-readiness-audit.md) lists 14 open cross-stage gaps X01–X14 and sequences source, public-trust, native semantic/ABI, and release evidence. No new compiler architecture or accepted ABI is introduced. All trust/Graph and native validation gates remain OPEN.
