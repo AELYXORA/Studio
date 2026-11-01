@@ -1,3 +1,7 @@
+## X01 per-arena bound gate callback — executed candidate, 2026-11-01
+
+[Executed per-entry gate resolver](aui-compiler-x01-bound-gate-test.md) using [Assembly code](../../tests/native/x01_with_bound_ref.S) and [harness](../../tests/native/x01_with_bound_ref_test.S): Linux x86-64 exit 0 and Win64 COFF cross-assembly PASS. Gate is derived from the indexed arena entry, no longer caller-supplied. **Table lifetime, actual allocation/free, type validation, callback unwind and integrated multithread safety remain unverified.** X01/D1–D8 OPEN.
+
 ## X01 scoped-callback Assembly probe — 2026-11-01
 
 [Executed callback-scoped prototype](aui-compiler-x01-scoped-callback-execution.md) tests borrow acquisition before resolve, a synchronous callback that initiates retire, and release after callback completion (Linux x86-64 exit 0; Win64 COFF wrapper assembled). **No validated gate/table identity binding, real allocation, typed lookup, callback unwind safety or Windows execution**; X01 and D1–D8 OPEN.
