@@ -1,0 +1,597 @@
+{
+  "status": "PROPOSED_NOT_APPROVED_NOT_NATIVE_VERIFIED",
+  "source": "schemas/aui-compiler-ebnf-ast-candidate.json",
+  "notes": [
+    "This is a proposed lexical bridge; a grammar literal is not proof that a word is globally reserved.",
+    "Contextual-Identifier spellings are matched only in owning parser context.",
+    "Speculative token IDs below are not enabled by this file.",
+    "Comment delimiter // is recognized by lexer as trivia but / is not an admitted grammar operator.",
+    "Unknown token kind or spelling fails closed."
+  ],
+  "externalTokens": [
+    {
+      "symbol": "ID",
+      "tokenKindId": 1
+    },
+    {
+      "symbol": "INT",
+      "tokenKindId": 2
+    },
+    {
+      "symbol": "STR",
+      "tokenKindId": 3
+    },
+    {
+      "symbol": "EOF",
+      "tokenKindId": 4
+    }
+  ],
+  "literalBindings": [
+    {
+      "spelling": "(",
+      "tokenKindId": 16,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": ")",
+      "tokenKindId": 17,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": ",",
+      "tokenKindId": 23,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "-",
+      "tokenKindId": 28,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "->",
+      "tokenKindId": 29,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": ".",
+      "tokenKindId": 22,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": ":",
+      "tokenKindId": 24,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": ";",
+      "tokenKindId": 25,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "<",
+      "tokenKindId": 20,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "<-",
+      "tokenKindId": 30,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "=",
+      "tokenKindId": 26,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "=>",
+      "tokenKindId": 31,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": ">",
+      "tokenKindId": 21,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "AdmissionRejected",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "Cancelled",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "Event",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "Failed",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "ForEach",
+      "tokenKindId": 94,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "ProviderUnavailable",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "Result",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "Successful",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "TaskSlot",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "as",
+      "tokenKindId": 99,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "await",
+      "tokenKindId": 78,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "bind",
+      "tokenKindId": 74,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "case",
+      "tokenKindId": 83,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "command",
+      "tokenKindId": 69,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "commit",
+      "tokenKindId": 88,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "component",
+      "tokenKindId": 65,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "derived",
+      "tokenKindId": 73,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "effects",
+      "tokenKindId": 71,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "enum",
+      "tokenKindId": 90,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "event",
+      "tokenKindId": 68,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "false",
+      "tokenKindId": 93,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "import",
+      "tokenKindId": 64,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "in",
+      "tokenKindId": 95,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "input",
+      "tokenKindId": 66,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "item",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "items",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "key",
+      "tokenKindId": 96,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "let",
+      "tokenKindId": 86,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "match",
+      "tokenKindId": 81,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "matchEnum",
+      "tokenKindId": 82,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "on",
+      "tokenKindId": 70,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "record",
+      "tokenKindId": 89,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "return",
+      "tokenKindId": 85,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "send",
+      "tokenKindId": 84,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "service",
+      "tokenKindId": 91,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "set",
+      "tokenKindId": 87,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "settled",
+      "tokenKindId": 80,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "state",
+      "tokenKindId": 72,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "submit",
+      "tokenKindId": 79,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "task",
+      "tokenKindId": 76,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "taskSlot",
+      "tokenKindId": 77,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "true",
+      "tokenKindId": 92,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "using",
+      "tokenKindId": 75,
+      "classification": "KEYWORD_CANDIDATE",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "value",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "view",
+      "tokenKindId": 1,
+      "classification": "CONTEXTUAL_IDENTIFIER",
+      "parserMatch": "exact-spelling-in-owning-production",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "{",
+      "tokenKindId": 18,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    },
+    {
+      "spelling": "}",
+      "tokenKindId": 19,
+      "classification": "PUNCTUATION",
+      "parserMatch": "exact-token",
+      "acceptance": "PROPOSED",
+      "owner": "docs/architecture/aui-syntax.md"
+    }
+  ],
+  "unownedCandidateCodes": [
+    {
+      "name": "output",
+      "tokenKindId": 67,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "At",
+      "tokenKindId": 27,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "Plus",
+      "tokenKindId": 32,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "Slash",
+      "tokenKindId": 33,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "Star",
+      "tokenKindId": 34,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "Question",
+      "tokenKindId": 35,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "value-keyword",
+      "tokenKindId": 97,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "item-keyword",
+      "tokenKindId": 98,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "when",
+      "tokenKindId": 100,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "cancel",
+      "tokenKindId": 101,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "Result-keyword",
+      "tokenKindId": 102,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "Event-keyword",
+      "tokenKindId": 103,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "List-keyword",
+      "tokenKindId": 104,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    },
+    {
+      "name": "TaskSlot-keyword",
+      "tokenKindId": 105,
+      "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
+      "reason": "No direct admitted literal production or lexical category requires review"
+    }
+  ]
+}
