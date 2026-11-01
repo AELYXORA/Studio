@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 native lexer ABI and byte-level golden vectors
+
+[Native lexer ABI proposal](aui-compiler-x01-native-lexer-abi.md) reuses IAI-v1 T0 physical records and specifies original-byte token/trivia ownership and failure semantics. [13 UTF-8 hex golden fixtures](../../examples/aui-compiler-production/x01-lexer-golden-vectors.json) give proposed token kinds, byte spans and rejections. These are **NOT-RUN**, not full TokenV1 serialization; X01 remains OPEN.
+
 ## X01 normalized Predict Sets — review
 
 [Normalized Predict review](aui-compiler-x01-token-normalized-predict.md) and [result JSON](../../examples/aui-compiler-production/x01-token-normalized-predict-review.json) recompute decisions with numeric token IDs and exact contextual Identifier spellings. The same three overlaps remain; **X01 OPEN**, no native test or accepted lexer classification.
