@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 normalized Predict review — 2026-11-01
+
+[Token-normalized Predict review](aui-compiler-x01-token-normalized-predict.md) reports the same three overlaps for the 57-production candidate after numeric token/contextual ID conversion. The calculation is in-memory review-only; complete lexical classification, independent replay and native tokenizer evidence remain OPEN. X01 is not closed.
+
 ## X01 token reconciliation progress — 2026-11-01
 
 The `settled` candidate is now explicitly **fixed keyword token 80 with parser-context L3+ admission**, rather than an unresolved token-class ambiguity. [16 fragment-level X01 fixtures](../../examples/aui-compiler-production/x01-lexer-context-fixtures.json) are added and all **NOT-RUN**. X01 remains OPEN pending terminal-normalized Predict Sets and native lexer verification.
