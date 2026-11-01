@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 atomic borrow gate — executed sequential Assembly test
+
+[Executed atomic gate probe](aui-compiler-x01-atomic-borrow-execution.md) and [GAS source](../../tests/native/x01_atomic_borrow_gate.S) with [harness](../../tests/native/x01_atomic_borrow_gate_test.S) show Linux x86-64 exit 0 and Win64 COFF cross-assembly. **No multithreaded race proof or caller-scoped borrow protection**, X01 OPEN.
+
 ## X01 borrow-scoped ResolveRef concurrency design — NOT-RUN
 
 [Borrow-scoped memory safety contract](aui-compiler-x01-borrow-scoped-resolve.md) and [16 race/fault test cases](../../examples/aui-compiler-production/x01-borrow-race-test-matrix.json) specify per-caller protected borrows, retire synchronization, type checks and callback lifetime. **The old 32-byte arena entry and leaseCount-only lookup remain test-only**. No production concurrent implementation or Win64 race test; X01 OPEN.
