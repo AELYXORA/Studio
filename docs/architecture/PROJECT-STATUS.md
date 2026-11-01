@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 first actual COFF probe — 2026-11-01
+
+[Observed Win64 cross-assembly evidence](aui-compiler-x01-actual-coff-probe.md) records successful local Linux-host Clang 17 Windows x64 COFF assembly of [probe](../../tests/native/x01_abi_probe.S). Static 48/32/16-byte fixture assertions passed and `.rdata` measured 0x60 bytes. **Windows runtime tests, arena validation and full ABI approval NOT-RUN**. X01 and D1–D8 remain OPEN.
+
 ## X01 zero-length and Span16 design progress — 2026-11-01
 
 [Zero-length String/Span contract](aui-compiler-x01-zero-length-span-contract.md) specifies candidate empty String descriptor `dataRef=0,byteLength=0` with a real nonzero TokenV1.valueRef, canonical empty typed Ref64 Span16 and synthetic nonempty span. Three [byte arithmetic vectors](../../examples/aui-compiler-production/x01-zero-length-span-byte-vectors.json) are available. No native ABI/layout tests; X01 OPEN.
