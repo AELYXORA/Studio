@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## T0 nested Predict-Set analysis — review evidence
+
+[Predict-set review](aui-compiler-t0-predict-set-review.md) and [complete decision-site calculation](../../examples/aui-compiler-production/t0-predict-set-review.json) cover **8 choice, 18 optional, 21 repeat** sites of the proposed EBNF AST. Three existing FIRST/FIRST overlaps remain (sourceUnit/import, componentMember/on, pureExpr/ID), with no additional optional/repeat entry-vs-exit overlap under the current literal-token model. This is **not an approved parser, full contextual-token proof, or native Assembly test**.
+
 ## T0 grammar FIRST/FOLLOW calculation — review evidence
 
 [Computed review report](aui-compiler-t0-first-follow-analysis.md) and [machine-readable results](../../examples/aui-compiler-production/t0-grammar-static-analysis-candidate.json) record a review-environment nullable/FIRST/FOLLOW fixed-point calculation for the 57-production proposed EBNF AST. Three FIRST/FIRST overlaps were found in sourceUnit, componentMember and pureExpr; no named nullable production or left-recursion cycle was detected. **Not an exhaustive LL(1) proof or native Assembly test**; nested optional/repeat prediction and contextual token policies remain OPEN.
