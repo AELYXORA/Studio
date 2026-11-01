@@ -1,3 +1,7 @@
+## X01 scoped-callback Assembly probe — 2026-11-01
+
+[Executed callback-scoped prototype](aui-compiler-x01-scoped-callback-execution.md) tests borrow acquisition before resolve, a synchronous callback that initiates retire, and release after callback completion (Linux x86-64 exit 0; Win64 COFF wrapper assembled). **No validated gate/table identity binding, real allocation, typed lookup, callback unwind safety or Windows execution**; X01 and D1–D8 OPEN.
+
 # AELYXORA Studio — Current Technical Status
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
