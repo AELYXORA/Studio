@@ -2,7 +2,7 @@
   "status": "PROPOSED_NOT_VERIFIED",
   "source": "docs/architecture/aui-syntax.md",
   "sourceSection": "Unified grammar candidate — component source unit",
-  "scope": "component EBNF only; contractModule imported from separate owner still unresolved",
+  "scope": "Integrated component grammar plus contract-module-specific productions; shared productions reused",
   "generationMethod": "Static extraction of productions; alternatives split on top-level pipe outside quotes/brackets",
   "note": "Fields UNMAPPED intentionally block grammar freeze; family-level audit does not prove per-alternative closure.",
   "productions": [
@@ -20,7 +20,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Module kind is immutable compiler request, not guessed from source"
         },
         {
           "alternativeId": "sourceUnit.2",
@@ -32,7 +34,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Module kind is immutable compiler request, not guessed from source"
         }
       ],
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
@@ -601,7 +605,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Exact five TaskOutcome pattern tags ordered; contextual spelling in this position only"
         }
       ],
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
@@ -813,7 +819,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Resolve modifierName and validate known constructor, named args, exactly one writer and key rules"
         }
       ],
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
@@ -958,7 +966,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Parse syntactically; T1 resolves pure call vs enum payload constructor through verified types"
         }
       ],
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
@@ -1019,7 +1029,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Distinguish literal / member path; enum zero-payload constructor resolved by T1, never capitalization"
         },
         {
           "alternativeId": "pureAtom.2",
@@ -1031,7 +1043,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Distinguish literal / member path; enum zero-payload constructor resolved by T1, never capitalization"
         },
         {
           "alternativeId": "pureAtom.3",
@@ -1043,7 +1057,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Distinguish literal / member path; enum zero-payload constructor resolved by T1, never capitalization"
         },
         {
           "alternativeId": "pureAtom.4",
@@ -1055,7 +1071,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Distinguish literal / member path; enum zero-payload constructor resolved by T1, never capitalization"
         },
         {
           "alternativeId": "pureAtom.5",
@@ -1067,7 +1085,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Distinguish literal / member path; enum zero-payload constructor resolved by T1, never capitalization"
         }
       ],
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
@@ -1128,7 +1148,9 @@
           "state": "CONFLICT_OR_SEMANTIC_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "note": "Disambiguation or external ownership contract requires approval"
+          "note": "Disambiguation or external ownership contract requires approval",
+          "reviewDisposition": "PARSER_DISAMBIGUATION_SPECIFIED_IN_SYNTAX_OWNER_NOT_NATIVE_TESTED",
+          "reviewRule": "Generic angles parsed only in type context; semantic template/arity/depth checked by T1"
         }
       ],
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
@@ -1194,14 +1216,176 @@
       "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
       "moduleKind": "component",
       "status": "PROPOSED"
+    },
+    {
+      "productionId": "C001",
+      "name": "contractModule",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "contractModule.1",
+          "ebnf": "{ importDecl }, contractDecl, { contractDecl }, EOF",
+          "cstKind": "ContractModule",
+          "astKind": "ContractModule",
+          "t1Consumer": "T1_CONTRACT_MODULE",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
+    },
+    {
+      "productionId": "C002",
+      "name": "contractDecl",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "contractDecl.1",
+          "ebnf": "recordDecl",
+          "cstKind": "ContractDeclaration",
+          "astKind": "RecordType|EnumType|ServiceInterface",
+          "t1Consumer": "T1_CONTRACT_DECL",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        },
+        {
+          "alternativeId": "contractDecl.2",
+          "ebnf": "enumDecl",
+          "cstKind": "ContractDeclaration",
+          "astKind": "RecordType|EnumType|ServiceInterface",
+          "t1Consumer": "T1_CONTRACT_DECL",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        },
+        {
+          "alternativeId": "contractDecl.3",
+          "ebnf": "serviceInterface",
+          "cstKind": "ContractDeclaration",
+          "astKind": "RecordType|EnumType|ServiceInterface",
+          "t1Consumer": "T1_CONTRACT_DECL",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
+    },
+    {
+      "productionId": "C003",
+      "name": "recordDecl",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "recordDecl.1",
+          "ebnf": "\"record\", ID, \"{\", recordField, { recordField }, \"}\"",
+          "cstKind": "RecordDecl",
+          "astKind": "RecordType",
+          "t1Consumer": "T1_RECORD",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
+    },
+    {
+      "productionId": "C004",
+      "name": "recordField",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "recordField.1",
+          "ebnf": "ID, \":\", typeRef, \";\"",
+          "cstKind": "FieldDecl",
+          "astKind": "Field",
+          "t1Consumer": "T1_RECORD_FIELD",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
+    },
+    {
+      "productionId": "C005",
+      "name": "enumDecl",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "enumDecl.1",
+          "ebnf": "\"enum\", ID, \"{\", enumCase, { enumCase }, \"}\"",
+          "cstKind": "EnumDecl",
+          "astKind": "EnumType",
+          "t1Consumer": "T1_ENUM",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
+    },
+    {
+      "productionId": "C006",
+      "name": "enumCase",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "enumCase.1",
+          "ebnf": "ID, [ \"(\", typeRef, \")\" ], \";\" ; serviceInterface = \"service\", ID, \"{\", serviceCommand, { serviceCommand }, \"}\"",
+          "cstKind": "EnumVariant",
+          "astKind": "EnumVariant",
+          "t1Consumer": "T1_ENUM_VARIANT",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
+    },
+    {
+      "productionId": "C007",
+      "name": "serviceCommand",
+      "owner": "docs/architecture/aui-syntax.md#native-service-and-nominal-contract-source-units--explicit-shipping-grammar-candidate",
+      "moduleKind": "contract",
+      "status": "PROPOSED",
+      "alternatives": [
+        {
+          "alternativeId": "serviceCommand.1",
+          "ebnf": "\"command\", ID, \"(\", [ commandParams ], \")\", \"->\", \"Result\", \"<\", typeRef, \",\", typeRef, \">\", [ \"effects\", \"(\", [ effectList ], \")\" ], \"on\", domainAtom, \";\"",
+          "cstKind": "CommandDecl",
+          "astKind": "Operation",
+          "t1Consumer": "T1_SERVICE_COMMAND",
+          "profile": "CONTRACT_MODE_REVIEW",
+          "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
+          "fixture": "NOT_RUN",
+          "state": "MAPPED_PROPOSED"
+        }
+      ]
     }
   ],
   "mappingCoverage": {
-    "productionCount": 49,
-    "alternativeCount": 67,
-    "proposedMapped": 56,
+    "productionCount": 56,
+    "alternativeCount": 76,
+    "proposedMapped": 65,
     "needsSemanticReview": 11,
     "unmapped": 0,
-    "meaning": "Documentary candidates only, zero approved or native-tested"
+    "meaning": "Documentary mapping only, not grammar approval, parser implementation, or testing"
   }
 }
