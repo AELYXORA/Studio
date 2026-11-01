@@ -1,3 +1,7 @@
+## X01 scoped-callback Assembly probe — 2026-11-01
+
+[Executed callback-scoped prototype](aui-compiler-x01-scoped-callback-execution.md) tests borrow acquisition before resolve, a synchronous callback that initiates retire, and release after callback completion (Linux x86-64 exit 0; Win64 COFF wrapper assembled). **No validated gate/table identity binding, real allocation, typed lookup, callback unwind safety or Windows execution**; X01 and D1–D8 OPEN.
+
 # AELYXORA Studio — Architecture
 
 **Single canonical Project Graph:** [ONE Project Graph with typed components, workflows, dataFlows, hardware and retired IDs](canonical-project-graph-and-components.md). There are NO numbered architecture/product editions and no separate graph per feature. Older experimental schemas and SHA fixtures are historical artifacts only. The unified design remains PROPOSED, not approved or implemented.
