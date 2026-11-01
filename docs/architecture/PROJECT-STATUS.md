@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 unsafe gate/table approach rejected — 2026-11-01
+
+[Gate/table TOCTOU audit](aui-compiler-x01-gate-table-toctou-audit.md): a gate-aware resolver experiment cross-assembled successfully to Win64 COFF but was rejected as unsafe since global borrow count does not establish caller ownership or protect a returned raw pointer. No runtime execution for this experiment. A borrow-scoped callback/lease interface remains required before safe memory use. X01 and D1–D8 OPEN.
+
 ## X01 concurrent atomic stress — 2026-11-01
 
 [Multithreaded atomic stress report](aui-compiler-x01-atomic-multithread-evidence.md) records 4 Linux pthread workers and twenty successful sequential runs of the concurrent Assembly gate test. Initial nondeterministic harness sequencing was fixed; tests remain limited to the atomic state/count mechanism, not actual pinned arena ownership, allocation, Windows execution or formally proven linearizability. X01 and D1–D8 OPEN.
