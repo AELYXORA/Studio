@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 borrow-lifetime contract — 2026-11-01
+
+[Borrow-scoped ResolveRef design](aui-compiler-x01-borrow-scoped-resolve.md) identifies the unsafe global-leaseCount/return-raw-pointer boundary, specifies synchronized callback-scoped borrows and retire quiescence, and adds [16 NOT-RUN concurrency/negative cases](../../examples/aui-compiler-production/x01-borrow-race-test-matrix.json). Existing sequential Assembly probes remain only test infrastructure. X01 and D1–D8 OPEN.
+
 ## X01 integrated Assembly execution — 2026-11-01
 
 [Lifecycle + table resolver integrated test](aui-compiler-x01-integrated-assembly-test.md) executed on Linux x86-64 (exit 0), with all three Assembly modules cross-assembled to Win64 COFF after removing a Linux-only directive. Stale-generation rejection verified sequentially. **Caller-held lease, concurrent retire, real allocation and Windows execution remain unverified.** X01 / D1–D8 OPEN.
