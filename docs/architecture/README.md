@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Formal nested EBNF representation — proposed
+
+[Formal EBNF AST candidate](../../schemas/aui-compiler-ebnf-ast-candidate.json) represents all 57 current component/contract productions using nested sequence/choice/optional/repeat/literal/symbol trees; its [verification gate](aui-compiler-ebnf-formal-verification.md) specifies nullability, FIRST/FOLLOW, recursion, lookahead, numeric kind and CST/AST/T1 coverage checks. A malformed flat `enumCase` entry that accidentally absorbed `serviceInterface` was corrected. **No machine FIRST/FOLLOW results, parser, approval, or native evidence are claimed.**
+
 ## T0 contract-mode integration and disambiguation review
 
 [T0 disambiguation review](aui-compiler-t0-disambiguation-review.md) records candidate parsing rules for the 11 semantically sensitive alternatives and adds contract-source productions to the [machine-readable grammar registry](../../schemas/aui-compiler-t0-production-registry-candidate.json): **57 productions / 77 top-level alternatives**, 66 proposed mappings, 11 pending semantic review. These are **document counts**, not exhaustive nested EBNF coverage, approved parser behavior or native evidence. Exact numeric kind joins, profile masks, diagnostics and tests remain OPEN.
