@@ -1,3 +1,7 @@
+## X01 typed and bounded arena-table preflight — 2026-11-01
+
+[Executed Assembly test](aui-compiler-x01-bounded-table-preflight-evidence.md) for [table-capacity/type validator](../../tests/native/x01_validate_bound_request.S) and [test harness](../../tests/native/x01_validate_bound_request_test.S): Linux x86-64 exit 0 (five assertions), Windows x64 COFF object built. Trusted pinned table length remains a host obligation; snapshot OPEN gate check does not grant a borrow. Not integrated into production WithResolvedRef. X01 and D1–D8 OPEN.
+
 ## X01 real mmap/munmap borrow-retire execution — 2026-11-01
 
 [Observed 30-run allocation/retire test](aui-compiler-x01-mmap-retire-evidence.md) with [Assembly pthread harness](../../tests/native/x01_bound_ref_mmap_test.S): 30/30 Linux x86-64 runs returned 0 with actual mmap/munmap around held callback borrow; existing bound resolver cross-assembled for Windows x64 COFF. No actual Win64 execution or production allocator/ownership, typed descriptor verification or callback escape protection. X01 / D1–D8 OPEN.
