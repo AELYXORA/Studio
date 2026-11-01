@@ -1348,14 +1348,15 @@
       "alternatives": [
         {
           "alternativeId": "enumCase.1",
-          "ebnf": "ID, [ \"(\", typeRef, \")\" ], \";\" ; serviceInterface = \"service\", ID, \"{\", serviceCommand, { serviceCommand }, \"}\"",
+          "ebnf": "ID, [ \"(\", typeRef, \")\" ], \";\"",
           "cstKind": "EnumVariant",
           "astKind": "EnumVariant",
           "t1Consumer": "T1_ENUM_VARIANT",
           "profile": "CONTRACT_MODE_REVIEW",
           "diagnostic": "REQUIRES_STABLE_DIAGNOSTIC_ID",
           "fixture": "NOT_RUN",
-          "state": "MAPPED_PROPOSED"
+          "state": "MAPPED_PROPOSED",
+          "reviewNote": "Corrected malformed extraction that appended serviceInterface to this production"
         }
       ]
     },
