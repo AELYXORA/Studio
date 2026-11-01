@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Reproducible T0 grammar checker — implementation candidate
+
+[Assembly-first grammar checker contract](aui-compiler-grammar-checker-implementation.md) specifies input authority, strict JSON/nested EBNF decoding, token-class normalization, fixed-point nullable/FIRST/FOLLOW, left-corner and nested Predict checks, exact CST/AST/T1/profile coverage, controlled failure and bounded deterministic reports. [Sixteen NOT-RUN candidate acceptance cases](../../examples/aui-compiler-production/t0-grammar-checker-acceptance-candidate.json) define negative gates. No executable checker, native proof, or D1–D8 approval exists yet.
+
 ## T0 lexer/parser deterministic dispatch — proposed
 
 [Lexer-to-parser policy](aui-compiler-t0-lexer-parser-policy.md) specifies exact UTF-8/token boundaries, contextual TaskOutcome and type-name spellings, longest-match punctuation, explicit module/profile admission and bounded recursive-descent dispatch for the three predict-set overlaps. In particular, qualified-name parsing uses one-token lookahead **after a bounded prefix**, not a universal fixed k-token lookahead. Numeric token reconciliation, proof-oriented fixtures, and native Assembly implementation remain OPEN.
