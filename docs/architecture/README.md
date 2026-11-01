@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 TokenV1 flags and value-pool candidate
+
+[TokenV1 field policy and DecodedValueV1](aui-compiler-x01-token-field-layout.md) proposes 5-bit profile advisory masks, checked decoded Ref64 value descriptors and reserved flags, without changing existing 48-byte TokenV1. [Exact 48-byte punctuation vector](../../examples/aui-compiler-production/x01-token-v1-byte-layout-candidate.json) is arithmetic review evidence only; not a native ABI test. Per-token masks still need approval; X01 OPEN.
+
 ## X01 native lexer ABI and byte-level golden vectors
 
 [Native lexer ABI proposal](aui-compiler-x01-native-lexer-abi.md) reuses IAI-v1 T0 physical records and specifies original-byte token/trivia ownership and failure semantics. [13 UTF-8 hex golden fixtures](../../examples/aui-compiler-production/x01-lexer-golden-vectors.json) give proposed token kinds, byte spans and rejections. These are **NOT-RUN**, not full TokenV1 serialization; X01 remains OPEN.
