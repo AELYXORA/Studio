@@ -1,0 +1,1054 @@
+{
+  "status": "PROPOSED_NOT_VERIFIED",
+  "source": "docs/architecture/aui-syntax.md",
+  "sourceSection": "Unified grammar candidate — component source unit",
+  "scope": "component EBNF only; contractModule imported from separate owner still unresolved",
+  "generationMethod": "Static extraction of productions; alternatives split on top-level pipe outside quotes/brackets",
+  "note": "Fields UNMAPPED intentionally block grammar freeze; family-level audit does not prove per-alternative closure.",
+  "productions": [
+    {
+      "productionId": "P001",
+      "name": "sourceUnit",
+      "alternatives": [
+        {
+          "alternativeId": "sourceUnit.1",
+          "ebnf": "componentModule",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "sourceUnit.2",
+          "ebnf": "contractModule",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "dispatch",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P002",
+      "name": "componentModule",
+      "alternatives": [
+        {
+          "alternativeId": "componentModule.1",
+          "ebnf": "{ importDecl }, componentDecl, EOF",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P003",
+      "name": "componentDecl",
+      "alternatives": [
+        {
+          "alternativeId": "componentDecl.1",
+          "ebnf": "\"component\", ID, \"(\", [ inputList ], \")\", \"{\", { componentMember }, rootView, \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P004",
+      "name": "componentMember",
+      "alternatives": [
+        {
+          "alternativeId": "componentMember.1",
+          "ebnf": "eventDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.2",
+          "ebnf": "commandDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.3",
+          "ebnf": "eventHandler",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.4",
+          "ebnf": "stateDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.5",
+          "ebnf": "derivedDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.6",
+          "ebnf": "bindDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.7",
+          "ebnf": "taskSlotDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.8",
+          "ebnf": "taskDecl",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "componentMember.9",
+          "ebnf": "settledHandler",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P005",
+      "name": "inputList",
+      "alternatives": [
+        {
+          "alternativeId": "inputList.1",
+          "ebnf": "inputDecl, { \",\", inputDecl }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P006",
+      "name": "inputDecl",
+      "alternatives": [
+        {
+          "alternativeId": "inputDecl.1",
+          "ebnf": "\"input\", ID, \":\", typeRef",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P007",
+      "name": "importDecl",
+      "alternatives": [
+        {
+          "alternativeId": "importDecl.1",
+          "ebnf": "\"import\", qualifiedName, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P008",
+      "name": "eventDecl",
+      "alternatives": [
+        {
+          "alternativeId": "eventDecl.1",
+          "ebnf": "\"event\", ID, \":\", \"Event\", \"<\", typeRef, \">\", \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P009",
+      "name": "commandDecl",
+      "alternatives": [
+        {
+          "alternativeId": "commandDecl.1",
+          "ebnf": "\"command\", ID, \"(\", [ commandParams ], \")\", \"->\", \"Result\", \"<\", typeRef, \",\", typeRef, \">\", [ \"effects\", \"(\", [ effectList ], \")\" ], \"on\", domainAtom, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P010",
+      "name": "commandParams",
+      "alternatives": [
+        {
+          "alternativeId": "commandParams.1",
+          "ebnf": "commandParam, { \",\", commandParam }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P011",
+      "name": "commandParam",
+      "alternatives": [
+        {
+          "alternativeId": "commandParam.1",
+          "ebnf": "ID, \":\", typeRef",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P012",
+      "name": "effectList",
+      "alternatives": [
+        {
+          "alternativeId": "effectList.1",
+          "ebnf": "effectAtom, { \",\", effectAtom }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P013",
+      "name": "stateDecl",
+      "alternatives": [
+        {
+          "alternativeId": "stateDecl.1",
+          "ebnf": "\"state\", ID, \":\", typeRef, \"=\", pureExpr, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P014",
+      "name": "derivedDecl",
+      "alternatives": [
+        {
+          "alternativeId": "derivedDecl.1",
+          "ebnf": "\"derived\", ID, \":\", typeRef, \"=\", pureExpr, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P015",
+      "name": "bindDecl",
+      "alternatives": [
+        {
+          "alternativeId": "bindDecl.1",
+          "ebnf": "\"bind\", \"view\", \".\", ID, \".\", ID, \"<-\", pureExpr, [ \"using\", qualifiedName ], \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P016",
+      "name": "eventHandler",
+      "alternatives": [
+        {
+          "alternativeId": "eventHandler.1",
+          "ebnf": "\"on\", ID, \"(\", ID, \")\", \"{\", ( sendStmt | stateCommit | submitStmt ), \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P017",
+      "name": "sendStmt",
+      "alternatives": [
+        {
+          "alternativeId": "sendStmt.1",
+          "ebnf": "\"send\", ID, \"(\", [ namedArgs ], \")\", \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P018",
+      "name": "stateCommit",
+      "alternatives": [
+        {
+          "alternativeId": "stateCommit.1",
+          "ebnf": "\"commit\", \"{\", setStmt, { setStmt }, \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P019",
+      "name": "setStmt",
+      "alternatives": [
+        {
+          "alternativeId": "setStmt.1",
+          "ebnf": "\"set\", ID, \"=\", pureExpr, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P020",
+      "name": "taskSlotDecl",
+      "alternatives": [
+        {
+          "alternativeId": "taskSlotDecl.1",
+          "ebnf": "\"taskSlot\", ID, \":\", \"TaskSlot\", \"<\", typeRef, \",\", typeRef, \">\", \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P021",
+      "name": "taskDecl",
+      "alternatives": [
+        {
+          "alternativeId": "taskDecl.1",
+          "ebnf": "\"task\", ID, \"(\", [ commandParams ], \")\", \"->\", \"Result\", \"<\", typeRef, \",\", typeRef, \">\", \"on\", domainAtom, \"{\", awaitStmt, returnStmt, \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P022",
+      "name": "awaitStmt",
+      "alternatives": [
+        {
+          "alternativeId": "awaitStmt.1",
+          "ebnf": "\"let\", ID, \"=\", \"await\", ID, \"(\", [ namedArgs ], \")\", \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P023",
+      "name": "returnStmt",
+      "alternatives": [
+        {
+          "alternativeId": "returnStmt.1",
+          "ebnf": "\"return\", ID, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P024",
+      "name": "submitStmt",
+      "alternatives": [
+        {
+          "alternativeId": "submitStmt.1",
+          "ebnf": "\"submit\", ID, \"(\", [ namedArgs ], \")\", \"as\", ID, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P025",
+      "name": "settledHandler",
+      "alternatives": [
+        {
+          "alternativeId": "settledHandler.1",
+          "ebnf": "\"on\", \"settled\", ID, \"(\", ID, \")\", \"{\", \"match\", ID, \"{\", successArm, failureArm, rejectArm, cancelledArm, unavailableArm, \"}\", \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P026",
+      "name": "successArm",
+      "alternatives": [
+        {
+          "alternativeId": "successArm.1",
+          "ebnf": "\"Successful\", \"(\", ID, \")\", \"=>\", stateCommit",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P027",
+      "name": "failureArm",
+      "alternatives": [
+        {
+          "alternativeId": "failureArm.1",
+          "ebnf": "\"Failed\", \"(\", ID, \")\", \"=>\", stateCommit",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P028",
+      "name": "rejectArm",
+      "alternatives": [
+        {
+          "alternativeId": "rejectArm.1",
+          "ebnf": "\"AdmissionRejected\", \"(\", ID, \")\", \"=>\", stateCommit",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P029",
+      "name": "cancelledArm",
+      "alternatives": [
+        {
+          "alternativeId": "cancelledArm.1",
+          "ebnf": "\"Cancelled\", \"(\", ID, \")\", \"=>\", stateCommit",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P030",
+      "name": "unavailableArm",
+      "alternatives": [
+        {
+          "alternativeId": "unavailableArm.1",
+          "ebnf": "\"ProviderUnavailable\", \"(\", ID, \")\", \"=>\", stateCommit",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P031",
+      "name": "rootView",
+      "alternatives": [
+        {
+          "alternativeId": "rootView.1",
+          "ebnf": "staticView",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P032",
+      "name": "staticView",
+      "alternatives": [
+        {
+          "alternativeId": "staticView.1",
+          "ebnf": "viewName, \"(\", [ namedArgs ], \")\", [ \"{\", childView, { childView }, \"}\" ], { modifier }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P033",
+      "name": "childView",
+      "alternatives": [
+        {
+          "alternativeId": "childView.1",
+          "ebnf": "staticView",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "childView.2",
+          "ebnf": "dynamicView",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P034",
+      "name": "dynamicView",
+      "alternatives": [
+        {
+          "alternativeId": "dynamicView.1",
+          "ebnf": "\"ForEach\", \"(\", \"items\", \":\", pureExpr, \",\", \"key\", \":\", \"item\", \".\", ID, \")\", \"{\", \"item\", \"in\", childView, \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P035",
+      "name": "modifier",
+      "alternatives": [
+        {
+          "alternativeId": "modifier.1",
+          "ebnf": "\".\", modifierName, \"(\", namedArg, { \",\", namedArg }, \")\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P036",
+      "name": "modifierName",
+      "alternatives": [
+        {
+          "alternativeId": "modifierName.1",
+          "ebnf": "ID",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "modifierName.2",
+          "ebnf": "\"on\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "modifierName.3",
+          "ebnf": "\"key\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P037",
+      "name": "namedArgs",
+      "alternatives": [
+        {
+          "alternativeId": "namedArgs.1",
+          "ebnf": "namedArg, { \",\", namedArg }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P038",
+      "name": "namedArg",
+      "alternatives": [
+        {
+          "alternativeId": "namedArg.1",
+          "ebnf": "ID, \":\", pureExpr",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P039",
+      "name": "pureExpr",
+      "alternatives": [
+        {
+          "alternativeId": "pureExpr.1",
+          "ebnf": "pureAtom",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "pureExpr.2",
+          "ebnf": "pureCall",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "pureExpr.3",
+          "ebnf": "enumMatchExpr",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P040",
+      "name": "pureCall",
+      "alternatives": [
+        {
+          "alternativeId": "pureCall.1",
+          "ebnf": "qualifiedName, \"(\", [ namedArgs ], \")\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P041",
+      "name": "enumMatchExpr",
+      "alternatives": [
+        {
+          "alternativeId": "enumMatchExpr.1",
+          "ebnf": "\"matchEnum\", \"(\", \"value\", \":\", pureExpr, \")\", \"{\", enumMatchArm, { enumMatchArm }, \"}\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P042",
+      "name": "enumMatchArm",
+      "alternatives": [
+        {
+          "alternativeId": "enumMatchArm.1",
+          "ebnf": "\"case\", qualifiedName, [ \"(\", ID, \")\" ], \"=>\", pureExpr, \";\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P043",
+      "name": "pureAtom",
+      "alternatives": [
+        {
+          "alternativeId": "pureAtom.1",
+          "ebnf": "STR",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "pureAtom.2",
+          "ebnf": "INT",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "pureAtom.3",
+          "ebnf": "\"true\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "pureAtom.4",
+          "ebnf": "\"false\"",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        },
+        {
+          "alternativeId": "pureAtom.5",
+          "ebnf": "memberPath",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P044",
+      "name": "memberPath",
+      "alternatives": [
+        {
+          "alternativeId": "memberPath.1",
+          "ebnf": "ID, { \".\", ID }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P045",
+      "name": "viewName",
+      "alternatives": [
+        {
+          "alternativeId": "viewName.1",
+          "ebnf": "ID",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P046",
+      "name": "typeRef",
+      "alternatives": [
+        {
+          "alternativeId": "typeRef.1",
+          "ebnf": "qualifiedName, [ \"<\", typeRef, { \",\", typeRef }, \">\" ]",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P047",
+      "name": "qualifiedName",
+      "alternatives": [
+        {
+          "alternativeId": "qualifiedName.1",
+          "ebnf": "ID, { \".\", ID }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P048",
+      "name": "effectAtom",
+      "alternatives": [
+        {
+          "alternativeId": "effectAtom.1",
+          "ebnf": "ID, { \"-\", ID }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    },
+    {
+      "productionId": "P049",
+      "name": "domainAtom",
+      "alternatives": [
+        {
+          "alternativeId": "domainAtom.1",
+          "ebnf": "ID, { \"-\", ID }",
+          "profile": "REVIEW_REQUIRED",
+          "cstKind": "UNMAPPED",
+          "astKind": "UNMAPPED",
+          "t1Consumer": "UNMAPPED",
+          "state": "UNMAPPED"
+        }
+      ],
+      "owner": "docs/architecture/aui-syntax.md#unified-grammar-candidate--component-source-unit",
+      "moduleKind": "component",
+      "status": "PROPOSED"
+    }
+  ]
+}
