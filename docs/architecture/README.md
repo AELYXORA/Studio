@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 second COFF Ref64 bounds cross-build
+
+[Observed second cross-build](aui-compiler-x01-ref-bounds-crossbuild.md) of [assembly source](../../tests/native/x01_ref_bounds_probe.S) confirms actual Windows x64 COFF code generation for synthetic Ref64 index, generation and offset checks. This is **not Windows execution**, arena ownership or real ResolveRef; X01 OPEN.
+
 ## Actual X01 Win64 COFF cross-assembly probe — observed
 
 [Cross-build evidence](aui-compiler-x01-actual-coff-probe.md) documents real Clang 17 compilation of [Assembly probe](../../tests/native/x01_abi_probe.S) to Windows x64 COFF, observed 48/32/16-byte .rdata fixtures, and compiled limited Ref64 shape check. This was a **Linux-hosted cross-build**, not Win64 execution or memory/arena verification; X01 and approval gates stay OPEN.
