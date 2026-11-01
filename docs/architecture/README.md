@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## End-to-end compiler T0–T8 readiness audit
+
+[Cross-gate readiness audit](aui-compiler-t0-t8-readiness-audit.md) lists 14 open cross-stage gaps X01–X14 and sequences source, public-trust, native semantic/ABI, and release evidence. No new compiler architecture or accepted ABI is introduced. All trust/Graph and native validation gates remain OPEN.
+
 ## Grammar checker native Assembly ABI — proposed
 
 [Grammar checker Assembly ABI contract](aui-compiler-grammar-checker-assembly-abi.md) specifies the checker-private 96-byte request / 80-byte reply, Win64 call rules, typed Ref64 arena boundaries, 11 procedure candidates, deterministic bitsets and fail-closed report publication. Reuses existing IAI-v1 context/pass records **without minting T0 PASS or Graph trust**. All ABI probes and checker tests remain NOT-RUN.
