@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 borrow-scoped ResolveRef concurrency design — NOT-RUN
+
+[Borrow-scoped memory safety contract](aui-compiler-x01-borrow-scoped-resolve.md) and [16 race/fault test cases](../../examples/aui-compiler-production/x01-borrow-race-test-matrix.json) specify per-caller protected borrows, retire synchronization, type checks and callback lifetime. **The old 32-byte arena entry and leaseCount-only lookup remain test-only**. No production concurrent implementation or Win64 race test; X01 OPEN.
+
 ## X01 integrated lifecycle and arena-table ResolveRef — executed
 
 [Observed integrated Assembly test](aui-compiler-x01-integrated-assembly-test.md) with [harness](../../tests/native/x01_arena_integrated_test.S): Linux x86-64 exit 0, all three Win64 COFF objects compiled. Rejected stale generation across retire/republish. **No concurrent lifetime protection, real allocator, Win64 execution or trusted T0 pass; X01 OPEN.**
