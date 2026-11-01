@@ -137,7 +137,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "Cancelled",
@@ -145,7 +146,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "Event",
@@ -153,7 +155,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "Failed",
@@ -161,7 +164,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "ForEach",
@@ -169,7 +173,8 @@
       "classification": "KEYWORD_CANDIDATE",
       "parserMatch": "exact-token",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "FIXED_KEYWORD_PROFILE_GATED"
     },
     {
       "spelling": "ProviderUnavailable",
@@ -177,7 +182,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "Result",
@@ -185,7 +191,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "Successful",
@@ -193,7 +200,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "TaskSlot",
@@ -201,7 +209,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "as",
@@ -209,7 +218,8 @@
       "classification": "KEYWORD_CANDIDATE",
       "parserMatch": "exact-token",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "FIXED_KEYWORD_PROFILE_GATED"
     },
     {
       "spelling": "await",
@@ -313,7 +323,8 @@
       "classification": "KEYWORD_CANDIDATE",
       "parserMatch": "exact-token",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "FIXED_KEYWORD_PROFILE_GATED"
     },
     {
       "spelling": "input",
@@ -329,7 +340,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "items",
@@ -337,7 +349,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "key",
@@ -345,7 +358,8 @@
       "classification": "KEYWORD_CANDIDATE",
       "parserMatch": "exact-token",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "FIXED_KEYWORD_PROFILE_GATED"
     },
     {
       "spelling": "let",
@@ -425,7 +439,9 @@
       "classification": "KEYWORD_CANDIDATE",
       "parserMatch": "exact-token",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "FIXED_KEYWORD_80_CONTEXT_GATED",
+      "parserContext": "Only L3+ after on in settledHandler; malformed prefix does not backtrack"
     },
     {
       "spelling": "state",
@@ -481,7 +497,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "view",
@@ -489,7 +506,8 @@
       "classification": "CONTEXTUAL_IDENTIFIER",
       "parserMatch": "exact-spelling-in-owning-production",
       "acceptance": "PROPOSED",
-      "owner": "docs/architecture/aui-syntax.md"
+      "owner": "docs/architecture/aui-syntax.md",
+      "lexicalDisposition": "IDENTIFIER_EXACT_SPELLING_CONTEXT_ONLY"
     },
     {
       "spelling": "{",
@@ -593,5 +611,11 @@
       "disposition": "UNMAPPED_REJECT_OR_RECLASSIFY",
       "reason": "No direct admitted literal production or lexical category requires review"
     }
-  ]
+  ],
+  "reviewDecisions": {
+    "settled": "Fixed token ID 80; context-gated after on and L3+, not globally usable as declaration identifier",
+    "typeNames": "Result/Event/TaskSlot use Identifier 1 with parser exact-spelling in type context",
+    "outcomeArms": "Five exact arm spellings remain Identifier 1 and are checked in settled match production",
+    "unknownPunctuation": "Reject speculative tokens and unowned arithmetic"
+  }
 }
