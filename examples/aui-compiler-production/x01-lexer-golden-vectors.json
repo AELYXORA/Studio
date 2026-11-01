@@ -1,0 +1,456 @@
+{
+  "status": "DESIGN_GOLDENS_NOT_RUN",
+  "scope": "Numeric token kinds and original UTF-8 byte spans, not full binary record serialization",
+  "notes": [
+    "Expected diagnostics are provisional until stable diagnostic registry is approved",
+    "Source bytes expressed exactly in hex; no host-locale ambiguity",
+    "Full native TokenV1/TriviaV1 byte fixture awaits approved token flags, profileMask and Ref64 pool policy"
+  ],
+  "vectors": [
+    {
+      "id": "LX001",
+      "sourceHex": "696d706f7274206175692e636f72653b",
+      "sourceByteLength": 16,
+      "expectedTokens": [
+        {
+          "kind": 64,
+          "startByte": 0,
+          "endByte": 6
+        },
+        {
+          "kind": 1,
+          "startByte": 7,
+          "endByte": 10
+        },
+        {
+          "kind": 22,
+          "startByte": 10,
+          "endByte": 11
+        },
+        {
+          "kind": 1,
+          "startByte": 11,
+          "endByte": 15
+        },
+        {
+          "kind": 25,
+          "startByte": 15,
+          "endByte": 16
+        },
+        {
+          "kind": 4,
+          "startByte": 16,
+          "endByte": 16
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 1,
+          "startByte": 6,
+          "endByte": 7
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX002",
+      "sourceHex": "6f6e20736574746c6564",
+      "sourceByteLength": 10,
+      "expectedTokens": [
+        {
+          "kind": 70,
+          "startByte": 0,
+          "endByte": 2
+        },
+        {
+          "kind": 80,
+          "startByte": 3,
+          "endByte": 10
+        },
+        {
+          "kind": 4,
+          "startByte": 10,
+          "endByte": 10
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 1,
+          "startByte": 2,
+          "endByte": 3
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX003",
+      "sourceHex": "526573756c74204576656e74205461736b536c6f74",
+      "sourceByteLength": 21,
+      "expectedTokens": [
+        {
+          "kind": 1,
+          "startByte": 0,
+          "endByte": 6
+        },
+        {
+          "kind": 1,
+          "startByte": 7,
+          "endByte": 12
+        },
+        {
+          "kind": 1,
+          "startByte": 13,
+          "endByte": 21
+        },
+        {
+          "kind": 4,
+          "startByte": 21,
+          "endByte": 21
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 1,
+          "startByte": 6,
+          "endByte": 7
+        },
+        {
+          "kind": 1,
+          "startByte": 12,
+          "endByte": 13
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX004",
+      "sourceHex": "612d3e62203c2d2063203d3e2064",
+      "sourceByteLength": 14,
+      "expectedTokens": [
+        {
+          "kind": 1,
+          "startByte": 0,
+          "endByte": 1
+        },
+        {
+          "kind": 29,
+          "startByte": 1,
+          "endByte": 3
+        },
+        {
+          "kind": 1,
+          "startByte": 3,
+          "endByte": 4
+        },
+        {
+          "kind": 30,
+          "startByte": 5,
+          "endByte": 7
+        },
+        {
+          "kind": 1,
+          "startByte": 8,
+          "endByte": 9
+        },
+        {
+          "kind": 31,
+          "startByte": 10,
+          "endByte": 12
+        },
+        {
+          "kind": 1,
+          "startByte": 13,
+          "endByte": 14
+        },
+        {
+          "kind": 4,
+          "startByte": 14,
+          "endByte": 14
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 1,
+          "startByte": 4,
+          "endByte": 5
+        },
+        {
+          "kind": 1,
+          "startByte": 7,
+          "endByte": 8
+        },
+        {
+          "kind": 1,
+          "startByte": 9,
+          "endByte": 10
+        },
+        {
+          "kind": 1,
+          "startByte": 12,
+          "endByte": 13
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX005",
+      "sourceHex": "2f2f68656c6c6f0d0a546578742876616c75653a2022c3a92229",
+      "sourceByteLength": 26,
+      "expectedTokens": [
+        {
+          "kind": 1,
+          "startByte": 9,
+          "endByte": 13
+        },
+        {
+          "kind": 16,
+          "startByte": 13,
+          "endByte": 14
+        },
+        {
+          "kind": 1,
+          "startByte": 14,
+          "endByte": 19
+        },
+        {
+          "kind": 24,
+          "startByte": 19,
+          "endByte": 20
+        },
+        {
+          "kind": 3,
+          "startByte": 21,
+          "endByte": 25
+        },
+        {
+          "kind": 17,
+          "startByte": 25,
+          "endByte": 26
+        },
+        {
+          "kind": 4,
+          "startByte": 26,
+          "endByte": 26
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 2,
+          "startByte": 0,
+          "endByte": 7
+        },
+        {
+          "kind": 1,
+          "startByte": 7,
+          "endByte": 9
+        },
+        {
+          "kind": 1,
+          "startByte": 20,
+          "endByte": 21
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX006",
+      "sourceHex": "737461746520c3a97461743a20537472696e673b",
+      "sourceByteLength": 20,
+      "expectedTokens": [
+        {
+          "kind": 72,
+          "startByte": 0,
+          "endByte": 5
+        },
+        {
+          "kind": 1,
+          "startByte": 6,
+          "endByte": 11
+        },
+        {
+          "kind": 24,
+          "startByte": 11,
+          "endByte": 12
+        },
+        {
+          "kind": 1,
+          "startByte": 13,
+          "endByte": 19
+        },
+        {
+          "kind": 25,
+          "startByte": 19,
+          "endByte": 20
+        },
+        {
+          "kind": 4,
+          "startByte": 20,
+          "endByte": 20
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 1,
+          "startByte": 5,
+          "endByte": 6
+        },
+        {
+          "kind": 1,
+          "startByte": 12,
+          "endByte": 13
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX007",
+      "sourceHex": "466f7245616368286974656d733a20726f77732c206b65793a206974656d2e696429",
+      "sourceByteLength": 34,
+      "expectedTokens": [
+        {
+          "kind": 94,
+          "startByte": 0,
+          "endByte": 7
+        },
+        {
+          "kind": 16,
+          "startByte": 7,
+          "endByte": 8
+        },
+        {
+          "kind": 1,
+          "startByte": 8,
+          "endByte": 13
+        },
+        {
+          "kind": 24,
+          "startByte": 13,
+          "endByte": 14
+        },
+        {
+          "kind": 1,
+          "startByte": 15,
+          "endByte": 19
+        },
+        {
+          "kind": 23,
+          "startByte": 19,
+          "endByte": 20
+        },
+        {
+          "kind": 96,
+          "startByte": 21,
+          "endByte": 24
+        },
+        {
+          "kind": 24,
+          "startByte": 24,
+          "endByte": 25
+        },
+        {
+          "kind": 1,
+          "startByte": 26,
+          "endByte": 30
+        },
+        {
+          "kind": 22,
+          "startByte": 30,
+          "endByte": 31
+        },
+        {
+          "kind": 1,
+          "startByte": 31,
+          "endByte": 33
+        },
+        {
+          "kind": 17,
+          "startByte": 33,
+          "endByte": 34
+        },
+        {
+          "kind": 4,
+          "startByte": 34,
+          "endByte": 34
+        }
+      ],
+      "expectedTrivia": [
+        {
+          "kind": 1,
+          "startByte": 14,
+          "endByte": 15
+        },
+        {
+          "kind": 1,
+          "startByte": 20,
+          "endByte": 21
+        },
+        {
+          "kind": 1,
+          "startByte": 25,
+          "endByte": 26
+        }
+      ],
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX008",
+      "sourceHex": "61202b2062",
+      "sourceByteLength": 5,
+      "expectedReject": {
+        "categoryCandidate": "LEX_UNSUPPORTED_PUNCTUATION",
+        "atByte": 2
+      },
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX009",
+      "sourceHex": "2f2a626c6f636b2a2f",
+      "sourceByteLength": 9,
+      "expectedReject": {
+        "categoryCandidate": "LEX_UNSUPPORTED_COMMENT",
+        "atByte": 0
+      },
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX010",
+      "sourceHex": "efbbbf696d706f7274",
+      "sourceByteLength": 9,
+      "expectedReject": {
+        "categoryCandidate": "LEX_BOM",
+        "atByte": 0
+      },
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX011",
+      "sourceHex": "c0af",
+      "sourceByteLength": 2,
+      "expectedReject": {
+        "categoryCandidate": "LEX_UTF8_INVALID",
+        "atByte": 0
+      },
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX012",
+      "sourceHex": "226261645c754438303022",
+      "sourceByteLength": 11,
+      "expectedReject": {
+        "categoryCandidate": "LEX_INVALID_SURROGATE_PAIR",
+        "atByte": 5
+      },
+      "execution": "NOT_RUN"
+    },
+    {
+      "id": "LX013",
+      "sourceHex": "303031",
+      "sourceByteLength": 3,
+      "expectedReject": {
+        "categoryCandidate": "LEX_NUMBER_FORMAT",
+        "atByte": 0
+      },
+      "execution": "NOT_RUN"
+    }
+  ]
+}
