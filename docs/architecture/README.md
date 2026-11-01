@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## X01 arena-table ResolveRef — executed five-case harness
+
+[Runtime evidence](aui-compiler-x01-arena-table-runtime-evidence.md) and [Assembly resolver](../../tests/native/x01_resolve_table.S) with [harness](../../tests/native/x01_table_test.S) demonstrate five local Linux x86-64 pass cases and successful Windows x64 COFF cross-assembly. Host-pinned table preconditions, concurrency and allocation remain unverified; X01 OPEN.
+
 ## X01 executed Assembly ResolveRef negative harness
 
 [Observed local runtime evidence](aui-compiler-x01-resolve-ref-runtime-evidence.md) and [Assembly-only test harness](../../tests/native/x01_resolve_ref_runtime_test.S) record **six successfully executed Linux x86-64 cases** invoking the Win64-register-ABI resolver; Windows runtime and real arena manager remain NOT-RUN. X01 and D1–D8 OPEN.
