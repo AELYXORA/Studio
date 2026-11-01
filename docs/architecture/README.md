@@ -8,6 +8,10 @@
 
 **Product invariant:** the primary UI is one interactive **Architecture Project Map + contextual AI Chat** for designing and implementing **software close to hardware**. A form designer, file explorer and code editor are subordinate views.
 
+## Actual X01 Win64 COFF cross-assembly probe — observed
+
+[Cross-build evidence](aui-compiler-x01-actual-coff-probe.md) documents real Clang 17 compilation of [Assembly probe](../../tests/native/x01_abi_probe.S) to Windows x64 COFF, observed 48/32/16-byte .rdata fixtures, and compiled limited Ref64 shape check. This was a **Linux-hosted cross-build**, not Win64 execution or memory/arena verification; X01 and approval gates stay OPEN.
+
 ## X01 zero-length String / Span16 resolution — candidate
 
 [Empty String and typed Span policy](aui-compiler-x01-zero-length-span-contract.md) plus [32/16-byte vectors](../../examples/aui-compiler-production/x01-zero-length-span-byte-vectors.json) propose canonical zero-length decoded payload and empty Ref64 span representation. These are arithmetic vectors only; real Win64 arena/ABI tests remain NOT-RUN. X01 OPEN.
