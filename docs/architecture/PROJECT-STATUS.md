@@ -1,3 +1,7 @@
+## First executed T0 ASCII token slice — 2026-11-01
+
+[Native scanner and evidence](aui-compiler-t0-first-native-slice.md): GAS [scanner](../../tests/native/x01_lexer_ascii_slice.S) and [test](../../tests/native/x01_lexer_ascii_slice_test.S) executed on Linux x86-64 (exit 0, 14 selected assertions) and Windows x64 COFF cross-assembled. **Not full LX001/LX002 acceptance**: missing trivia, full UTF-8/XID, complete token schema, errors and controlled arena publication. X01/T0 and D1–D8 OPEN.
+
 ## X01 integrated typed borrow and native T0 UTF-8 start — 2026-11-01
 
 [Observed execution evidence](aui-compiler-x01-consolidation-t0-execution.md): new [bounded typed callback](../../tests/native/x01_with_typed_ref.S) plus [test](../../tests/native/x01_with_typed_ref_test.S) and [strict UTF-8 source validator](../../tests/native/x01_utf8_strict.S) plus [test](../../tests/native/x01_utf8_strict_test.S) executed on Linux x86-64 (both exit 0), both cross-assembled to Win64 COFF. **Still candidate, not complete Arena Manager or LexerScan; Win64 runtime NOT-RUN. X01 and D1–D8 OPEN.**
