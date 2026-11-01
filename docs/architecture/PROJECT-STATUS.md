@@ -4,6 +4,10 @@
 
 ## X01 token reconciliation progress — 2026-11-01
 
+The `settled` candidate is now explicitly **fixed keyword token 80 with parser-context L3+ admission**, rather than an unresolved token-class ambiguity. [16 fragment-level X01 fixtures](../../examples/aui-compiler-production/x01-lexer-context-fixtures.json) are added and all **NOT-RUN**. X01 remains OPEN pending terminal-normalized Predict Sets and native lexer verification.
+
+
+
 The [X01 token reconciliation](aui-compiler-x01-token-reconciliation.md) now binds 60 EBNF literals to proposed lexer codes/contextual Identifier matches and explicitly lists unowned numeric codes. The `settled` classification mismatch and keyword scope still need resolution. This is **review data only**, not an accepted lexer, token tests, or closed X01 gate.
 
 ## Cross-gate compiler readiness audit — 2026-11-01
