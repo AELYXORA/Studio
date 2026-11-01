@@ -1,0 +1,135 @@
+{
+  "status": "PROPOSED_ALL_NOT_RUN",
+  "owner": "docs/architecture/aui-compiler-grammar-checker-implementation.md",
+  "note": "Expected diagnostic names are checker-local candidates, not accepted global diagnostic IDs.",
+  "cases": [
+    {
+      "id": "GC-001",
+      "inputMutationDescription": "baseline extracted EBNF with literal terminals",
+      "expectedOutcome": "NO_APPROVAL",
+      "reason": "Three existing predict overlaps require reviewed dispatch; grammar not approved",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-002",
+      "inputMutationDescription": "duplicate production name",
+      "expectedOutcome": "GC_DUPLICATE_PRODUCTION",
+      "reason": "Reject before fixed-point analysis",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-003",
+      "inputMutationDescription": "symbol references nonexistent production",
+      "expectedOutcome": "GC_SYMBOL_UNBOUND",
+      "reason": "Closed name resolution",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-004",
+      "inputMutationDescription": "repeat(optional(literal x))",
+      "expectedOutcome": "GC_NULLABLE_REPEAT",
+      "reason": "No zero-progress loop",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-005",
+      "inputMutationDescription": "A := A literal x",
+      "expectedOutcome": "GC_LEFT_RECURSION",
+      "reason": "Direct left-corner recursion",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-006",
+      "inputMutationDescription": "A := B; B := optional(A) literal x",
+      "expectedOutcome": "GC_LEFT_RECURSION",
+      "reason": "Indirect nullable-prefix left recursion",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-007",
+      "inputMutationDescription": "choice(literal x,literal x)",
+      "expectedOutcome": "GC_PREDICT_CONFLICT",
+      "reason": "Unreviewed FIRST/FIRST overlap",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-008",
+      "inputMutationDescription": "optional(literal x) followed by literal x",
+      "expectedOutcome": "GC_PREDICT_CONFLICT",
+      "reason": "Entry/exit overlap",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-009",
+      "inputMutationDescription": "token mapping merges contextual literal and identifier",
+      "expectedOutcome": "GC_TERMINAL_MAPPING_REVIEW",
+      "reason": "Recompute predict sets after normalization",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-010",
+      "inputMutationDescription": "missing EOF on contract module root",
+      "expectedOutcome": "GC_ROOT_INCOMPLETE",
+      "reason": "No valid full-source admission",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-011",
+      "inputMutationDescription": "wrong module mode",
+      "expectedOutcome": "GC_MODULE_KIND",
+      "reason": "No auto-selection from source",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-012",
+      "inputMutationDescription": "L0 input with taskSlot",
+      "expectedOutcome": "GC_PROFILE_UNSUPPORTED",
+      "reason": "No silent profile escalation",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-013",
+      "inputMutationDescription": "unmapped CST kind",
+      "expectedOutcome": "GC_COVERAGE_INCOMPLETE",
+      "reason": "All productions must map or mark CST_ONLY",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-014",
+      "inputMutationDescription": "invalid JSON duplicate object property",
+      "expectedOutcome": "GC_JSON_INVALID",
+      "reason": "Reject prior to grammar decode",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-015",
+      "inputMutationDescription": "fixed-point resource limit exhausted",
+      "expectedOutcome": "GC_NONCONVERGENT",
+      "reason": "Never produce success",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    },
+    {
+      "id": "GC-016",
+      "inputMutationDescription": "malformed on settled handler",
+      "expectedOutcome": "GC_SYNTAX_INVALID",
+      "reason": "No fallback to eventHandler",
+      "execution": "NOT_RUN",
+      "kind": "DESIGN_FIXTURE"
+    }
+  ]
+}
