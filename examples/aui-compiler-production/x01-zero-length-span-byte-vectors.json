@@ -1,0 +1,29 @@
+{
+  "status": "REVIEW_ARITHMETIC_ONLY_NOT_NATIVE_TESTED",
+  "endianness": "little",
+  "vectors": [
+    {
+      "id": "ZV01",
+      "name": "Empty decoded string descriptor",
+      "record": "DecodedValueV1",
+      "bytes": 32,
+      "hex": "2000000002000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "id": "ZV02",
+      "name": "Empty immutable typed Ref64 collection",
+      "record": "Span16",
+      "bytes": 16,
+      "hex": "00000000000000000000000008000000"
+    },
+    {
+      "id": "ZV03",
+      "name": "Synthetic nonempty typed Ref64 collection",
+      "record": "Span16",
+      "bytes": 16,
+      "hex": "10000000020001001000000008000100",
+      "syntheticBaseRef": "arenaIndex=2, generation=1, offset=16",
+      "warning": "Not a resolved or allocated arena reference"
+    }
+  ]
+}
