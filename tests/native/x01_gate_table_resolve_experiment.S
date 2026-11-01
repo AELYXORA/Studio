@@ -12,12 +12,7 @@
 x01_gate_table_resolve:
  test rdx,rdx
  jz .bad
- mov r10,qword ptr [rdx-8]
- cmp r10,0x0000000100000001
- jne .bad
  /* The gate count may exceed 1; compare low state and nonzero count */
- jmp .check
-.check:
  mov r10,qword ptr [rdx-8]
  cmp r10d,1
  jne .bad
