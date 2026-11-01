@@ -2,6 +2,10 @@
 
 **Authoritative status: Phase I (design), all D1–D8 architect acceptance gates OPEN.** No native product release, no approved executable ABI and no implementation of the complete Studio. This file reports evidence rather than interpreting design documents as passing tests.
 
+## X01 zero-length and Span16 design progress — 2026-11-01
+
+[Zero-length String/Span contract](aui-compiler-x01-zero-length-span-contract.md) specifies candidate empty String descriptor `dataRef=0,byteLength=0` with a real nonzero TokenV1.valueRef, canonical empty typed Ref64 Span16 and synthetic nonempty span. Three [byte arithmetic vectors](../../examples/aui-compiler-production/x01-zero-length-span-byte-vectors.json) are available. No native ABI/layout tests; X01 OPEN.
+
 ## X01 TokenV1 field candidate — 2026-11-01
 
 [TokenV1 field layout candidate](aui-compiler-x01-token-field-layout.md) adds draft profile-mask and flag semantics plus 32-byte decoded-value descriptor via Ref64. One [48-byte layout vector](../../examples/aui-compiler-production/x01-token-v1-byte-layout-candidate.json) demonstrates little-endian arithmetic, **not** a successful compiler/ABI probe. Exact profile masks and native validation remain OPEN.
