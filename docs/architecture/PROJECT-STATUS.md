@@ -1,3 +1,7 @@
+## X01 integrated typed borrow and native T0 UTF-8 start — 2026-11-01
+
+[Observed execution evidence](aui-compiler-x01-consolidation-t0-execution.md): new [bounded typed callback](../../tests/native/x01_with_typed_ref.S) plus [test](../../tests/native/x01_with_typed_ref_test.S) and [strict UTF-8 source validator](../../tests/native/x01_utf8_strict.S) plus [test](../../tests/native/x01_utf8_strict_test.S) executed on Linux x86-64 (both exit 0), both cross-assembled to Win64 COFF. **Still candidate, not complete Arena Manager or LexerScan; Win64 runtime NOT-RUN. X01 and D1–D8 OPEN.**
+
 ## X01 typed and bounded arena-table preflight — 2026-11-01
 
 [Executed Assembly test](aui-compiler-x01-bounded-table-preflight-evidence.md) for [table-capacity/type validator](../../tests/native/x01_validate_bound_request.S) and [test harness](../../tests/native/x01_validate_bound_request_test.S): Linux x86-64 exit 0 (five assertions), Windows x64 COFF object built. Trusted pinned table length remains a host obligation; snapshot OPEN gate check does not grant a borrow. Not integrated into production WithResolvedRef. X01 and D1–D8 OPEN.
